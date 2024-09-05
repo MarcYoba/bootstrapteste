@@ -51,14 +51,44 @@ require_once("../connexion.php");
                                             <div class="row">
                                                 <p class="btn btn-info btn-user col-md-2" onclick="ajouterLigne('dataTable', 
                                                 5, 10)"><i class="fas fa-check"></i> Ajouter ligne</p>
-                                                <p class="col-md-2" >quantite : <span id="quantitetotal">0</span></p>
-                                                <p class="col-md-2" >prix : <span id="prixtotal">0</span></p>
-                                                <p class="col-md-4" >
+                                                <p class="col-md-2" >Quantite Total  <br> <span id="quantitetotal">0</span></p>
+                                                <p class="col-md-2" >Montant Total  <br> <span id="prixtotal">0</span></p>
+                                                <p class="col-md-3" >
                                                     date vente non enregistrer:
                                                     <input type="date" class="form-control form-control-user"
                                                     name="datevente" id="datevente" placeholder="quantite" required>
                                                 </p>
                                                 <a class="btn btn-warning btn-user col-md-1" href="liste.php">Liste</a>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                
+                                                <p class="col-md-2" >
+                                                    MOM/OM
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="momo" id="momo" placeholder="0 FCFA" required>
+                                                </p>
+                                                <p class="col-md-2" >
+                                                    Cash
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="cash" id="cash" placeholder="0 FCFA" required>
+                                                </p>
+                                                <p class="col-md-2" >
+                                                    Credit
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="credit" id="credit" placeholder="0 FCFA" required>
+                                                </p>
+                                                <p class="col-md-2" >
+                                                    Reduction
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="reduction" id="reduction" placeholder="0 FCFA" required>
+                                                </p>
+                                                <p class="col-md-2" >
+                                                    Net payer
+                                                    <input type="txt" class="form-control form-control-user"
+                                                     name="Total" id="Total" placeholder="0 FCFA"  readonly>
+                                                </p>
+                                                
                                             </div>
                                             <span id="verificatiobDonne"></span>
                                         </div>
@@ -68,12 +98,12 @@ require_once("../connexion.php");
                                                     <thead>
                                                     
                                                         <tr>
-                                                            <th>Client</th>
+                                                            <th>Nom Client</th>
                                                             <th>description</th>
                                                             <th>quantite</th>
                                                             <th>prix_unite</th>
                                                             <th>Mantant</th>
-                                                            <th>Type de paiement</th>
+                                                            <!--<th>Type de paiement</th>-->
                                                         </tr>
                                                     </thead>
                                                     <tfoot>
@@ -135,15 +165,14 @@ require_once("../connexion.php");
                                                                 <span id="resultat"></span> cfa
                                                                 </p>
                                                             </th> 
-                                                            <th  >
+                                                         <!--   <th  >
                                                                 <div class="form-group ">
                                                                     <select id="Typepaiement"  name="Typepaiement"  class="form-control form-select" required>
-                                                                        
                                                                         <option value="CASH" >CASH</option>
                                                                         <option value="CREDIT" >CREDIT</option> 
                                                                     </select>
                                                                 </div>
-                                                            </th>  
+                                                            </th>  -->
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -161,7 +190,7 @@ require_once("../connexion.php");
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="../../index.html">Already have an account? Login!</a>
+                                <a class="small" href="../../index.php">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>

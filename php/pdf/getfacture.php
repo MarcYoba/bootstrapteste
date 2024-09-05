@@ -1,20 +1,43 @@
 <?php
+session_start();
 require_once("../connexion.php");
 require('../../fpdf186/fpdf.php');
 
 $date = date("Y-m-d");
 //var_dump($date);
+$id =  $_GET["id"];
 
-$sql = "SELECT * FROM vente WHERE MONTH(datevente) = MONTH(NOW())  AND datevente ='$date'";
-$result = $conn->query($sql);
+$sqlfacture = "SELECT * FROM facture WHERE  idvente = '$id'";
+$resultfa = $conn->query($sqlfacture); 
+$rowfacture = mysqli_fetch_assoc($resultfa);
+
+$idclient = $rowfacture["idclient"];
+
+$sql = "SELECT * FROM client WHERE  id = '$idclient'";
+$result = $conn->query($sql); 
+$row= mysqli_fetch_assoc($result);
+
+$iduser = $_SESSION["id"];
+$sqluser = "SELECT * FROM user WHERE  id = '$iduser'";
+$resultuser = $conn->query($sqluser); 
+$rowuser= mysqli_fetch_assoc($resultuser);
+
 
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',16);
 
-$titre = "Rapport Provenderie du : " . date("d-m-Y");
+$titre = "Facture ABgroup du : " . date("d-m-Y");
 $pdf->Cell(80);
 $pdf->Cell(30,10,$titre,4,20,'C');
+$pdf->Ln();
+
+$pdf->Cell(60);
+$pdf->Cell(30,10,"Client  :".$row["firstname"]. "  adresse : ".$row["adresse"]." Phone :" .$row["telephone"],4,20,'C');
+$pdf->Ln();
+
+$pdf->Cell(60);
+$pdf->Cell(30,10,"Employer  :".$rowuser["firstname"]. " ".$rowuser["lastname"],4,20,'C');
 $pdf->Ln();
 
 $pdf->Cell(50,40,'nomproduit');
@@ -28,23 +51,16 @@ $formule = 1;
 $quantite = 0;
 $prix = 0;
 $montant = 0;
-$somme = 0;
 
-while ($row = mysqli_fetch_assoc($result)) {
-    $id = $row["id"];
-    $sqlfacture = "SELECT * FROM facture WHERE  idvente = '$id'";
-    $resultfa = $conn->query($sqlfacture); 
 
-    $quantite = 0;
-    $prix = 0;
-    $montant = 0;
-
-    $pdf->Ln();
-    $pdf->Cell(80);
-    $pdf->Cell(30,10,'Formule'.$formule,4,20,'C');
-    $pdf->Ln();
+$sqlfacture = "SELECT * FROM facture WHERE  idvente = '$id'";
+$resultfa = $conn->query($sqlfacture); 
    
     while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
+        $pdf->Ln();
+        $pdf->Cell(80);
+        $pdf->Cell(30,10,'Formule',4,20,'C');
+        $pdf->Ln();
         $nomproduit = substr_replace($rowfacture['nomproduit'],"",strpos($rowfacture['nomproduit'],"provenderie"));
         //$nomproduit = substr_replace($nomproduit,"1",strpos($nomproduit,"TOURTEAUX"));
 
@@ -58,6 +74,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         $quantite += $rowfacture['quantite'];
         $prix += $rowfacture['prix'];
         $montant += $rowfacture['montant'];
+        $formule++;
     } 
     
     $pdf->Cell(50,10,'Total');
@@ -65,10 +82,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     $pdf->Cell(30,10,$prix);
     $pdf->Cell(30,10,$montant);
     $pdf->Cell(30,10,'-');
-    $somme +=$montant;
-
-   $formule++;
-}
 
 $pdf->Output();
 ?>

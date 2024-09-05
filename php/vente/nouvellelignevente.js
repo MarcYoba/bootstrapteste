@@ -2,8 +2,25 @@
 const  inputQuantite = document.getElementById("quantite");
 const  inputPrix = document.getElementById("prixglobal");
 const  inputproduit = document.getElementById("nomProduit");
+const  inputreduction = document.getElementById("reduction");
+
 var quantiteTotal = 0;
 var prixtotal = 0;
+var reduction = 0;
+
+function calculeReductionProduit(){
+    reduction = document.getElementById("prixtotal").textContent; 
+    //console.log();
+
+    if((reduction > 0 ) && (document.getElementById("Total").value > 0)){
+        document.getElementById("Total").value = (document.getElementById("prixtotal").textContent - document.getElementById("reduction").value);
+        document.getElementById("verificatiobDonne").innerHTML ="";
+    }else{
+        document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> verifiez les donnees le montant ne peut pas etre negatif </p>';
+        document.getElementById("Total").value = (document.getElementById("prixtotal").textContent - document.getElementById("reduction").value);
+    }
+
+}
 
 function calculeprixTotalquantitetotal(){
     const tableau = document.getElementById('dataTable');
@@ -28,6 +45,7 @@ function calculeTotal(){
     prixtotal = 0;
     calculeprixTotalquantitetotal();
     document.getElementById("quantitetotal").innerHTML = quantiteTotal + parseFloat(document.getElementById("quantite").value);
+    document.getElementById("Total").value = prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value);
     document.getElementById("prixtotal").textContent = prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value);
     document.getElementById("verificatiobDonne").innerHTML ='';
 }
@@ -76,7 +94,7 @@ function recherchePrix(){
 
 inputQuantite.addEventListener('input',calculeTotal);
 inputPrix.addEventListener('input',calculeTotal);
-//inputproduit.addEventListener('select',recherchePrix)
+inputreduction.addEventListener('input',calculeReductionProduit);
 
 function ajouterLigne(dataTable,...donnees){
 
@@ -84,9 +102,9 @@ function ajouterLigne(dataTable,...donnees){
     const  inputDescrition = document.getElementById("nomProduit").value;
     const  inputQuantite = document.getElementById("quantite").value;
     const  inputPrix = document.getElementById("prixglobal").value;
-    const  Typepaiement = document.getElementById("Typepaiement").value;
+   // const  Typepaiement = document.getElementById("Typepaiement").value;
 
-    if (inputFournisseur !="" && inputDescrition !="" && inputQuantite !=0 && inputPrix !=0 && Typepaiement !="") {
+    if (inputFournisseur !="" && inputDescrition !="" && inputQuantite !=0 && inputPrix !=0 ) {
         const tableau = document.getElementById(dataTable);
         document.getElementById("verificatiobDonne").innerHTML ='';
         //creer une nouvelle ligne
@@ -122,13 +140,13 @@ function ajouterLigne(dataTable,...donnees){
         p5.innerHTML = (inputQuantite * inputPrix);
         p5.classList.add('form-control', 'form-control-user');
         nouvellecellule5.appendChild(p5);
-
+        /*
         const nouvellecellule6 = nouvelleLigne.insertCell();
         const p6 = document.createElement('p');
         p6.innerHTML = Typepaiement;
         p6.classList.add('form-control', 'form-control-user');
         nouvellecellule6.appendChild(p6);
-    
+        */
         quantiteTotal = 0;
         prixtotal = 0;
         calculeprixTotalquantitetotal();
@@ -149,14 +167,13 @@ function ajouterLigne(dataTable,...donnees){
 }
 
 
-
-function enregistrementDonnees(){
+function enregistrementBD(){
     const tableau = document.getElementById('dataTable');
     const datevente = document.getElementById('datevente').value;
     let donnees = [];
     let data = {};
     
-    if (tableau.rows.length>=3) {
+    if (tableau.rows.length >= 3 ) {
         for (let index = 2; index < tableau.rows.length; index++) {
 
             const cellule1 = tableau.rows[index].cells[0];
@@ -164,22 +181,29 @@ function enregistrementDonnees(){
             const cellule3 = tableau.rows[index].cells[2];
             const cellule4 = tableau.rows[index].cells[3];
             const cellule5 = tableau.rows[index].cells[4];
-            const cellule6 = tableau.rows[index].cells[5];
+           // const cellule6 = tableau.rows[index].cells[5];
     
             data.fournisseur = cellule1.textContent;
             data.produit = cellule2.textContent;
             data.quantite = cellule3.textContent;
             data.prix = cellule4.textContent;
             data.total = cellule5.textContent;
-            data.typepaie = cellule6.textContent;
+           // data.typepaie = cellule6.textContent;
             data.date = datevente;
             //console.log(data);
             donnees.push({...data});  //on peut aussi  declarer directement let data = {} dans la boucle pour redure le programme
             data.value++;
-            //donnees.unshift(data);
-            
+
         }
-       // console.log(datevente);
+        data.momo = document.getElementById("momo").value;
+        data.cash = document.getElementById("cash").value;
+        data.credit = document.getElementById("credit").value;
+        data.reduction = document.getElementById("reduction").value;
+        data.Total = document.getElementById("Total").value;
+        data.Qttotal = document.getElementById("quantitetotal").textContent;
+
+        donnees.push({...data});  //on peut aussi  declarer directement let data = {} dans la boucle pour redure le programme
+        data.value++;
         
         fetch('register.php',{
             method:'POST',
@@ -191,8 +215,8 @@ function enregistrementDonnees(){
         .then(response => response.json())
         .then(data => { 
             if (data.success == true) {
-                document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-info"> enregistrement des donne avec success </p>';
-                window.location.href = "vente.php";
+                document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-info"> enregistrement des donne avec success</p>';
+                window.location.href = 'facture.php?id='+ data.message;
                 console.log(data);
             }else if(data.success == false){
                 document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> Verifier que le produit ne sont conforme </p>';
@@ -204,25 +228,25 @@ function enregistrementDonnees(){
             console.error(error);
         });
         
-       /*
-       //console.log(donnees);
-       $.ajax({
-        url:'register.php',
-        type:'POST',
-        data: JSON.stringify(donnees),
-        contentType: 'application/json',
-        success: function(data){
-            console.log("success");
-            console.log(data);
-            //window.location.href="register.php";
-        },
-        error: function(error){
-            console.error(error);
-        }
-       });
-       */
     } else {
         document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning">ajouter la ligne en suite cliquer sur enregistrer  </p>';
     }
     
+}
+
+function enregistrementDonnees(){
+    if(document.getElementById("momo").value == 0){
+        if (document.getElementById("cash").value == 0) {
+            if (document.getElementById("credit").value == 0) {
+                document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH ou Credit</p>';
+            } else {
+                enregistrementBD();
+            }
+        } else {
+            enregistrementBD(); 
+        }
+    }
+    else{
+        enregistrementBD();
+    }
 }

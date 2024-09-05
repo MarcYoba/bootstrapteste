@@ -452,8 +452,8 @@
                                             echo '<td>'.$row["prix"].'</td>';
                                             echo '<td>'.$row["datevente"].'</td>';
                                             echo "<td>";
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                           // echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                            //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             echo "<a href='facture.php?id=" . $row["id"] . "' class='btn btn-info'><i class='fas fa-bars'></i></a>";
                                             echo "</td>";
                                             echo '</tr>';

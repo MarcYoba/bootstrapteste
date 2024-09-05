@@ -442,7 +442,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        <a href="php/pdf/getPdftoday.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
@@ -459,7 +459,7 @@
                                                 ACHAT (MONTANT)</div>
                                             <?php 
                                                 global $conn;
-                                                $sql = "SELECT SUM(montant) as montant FROM achat";
+                                                $sql = "SELECT SUM(montant) as montant FROM achat WHERE MONTH(dateachat) = MONTH(NOW())";
                                                 $result = $conn->query($sql);
                                                 $row = mysqli_fetch_assoc($result);
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$row["montant"].' FCFA'.'</div>'; 
@@ -531,10 +531,10 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                VERSEMENT (MONTANT)</div>
+                                                <a href="php/dette/dette.php">VERSEMENT (MONTANT)</a></div>
                                                 <?php 
                                                 global $conn;
-                                                $sql = "SELECT SUM(montant) as montant FROM versement";
+                                                $sql = "SELECT SUM(montant) as montant FROM versement WHERE MONTH(dateversement) = MONTH(NOW())";
                                                 $result = $conn->query($sql);
                                                 $row = mysqli_fetch_assoc($result);
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
@@ -559,7 +559,7 @@
                                                 CAISSE (MONTANT)</div>
                                             <?php 
                                                 global $conn;
-                                                $sql = "SELECT SUM(montant) as montant FROM caisse";
+                                                $sql = "SELECT SUM(montant) as montant FROM caisse WHERE MONTH(dateoperation) = MONTH(NOW())";
                                                 $result = $conn->query($sql);
                                                 $row = mysqli_fetch_assoc($result);
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
@@ -583,7 +583,7 @@
                                                 DEPENSE (MONTANT)</div>
                                             <?php 
                                                 global $conn;
-                                                $sql = "SELECT SUM(montant) as montant FROM depenses";
+                                                $sql = "SELECT SUM(montant) as montant FROM depenses WHERE MONTH(datedepense) = MONTH(NOW())";
                                                 $result = $conn->query($sql);
                                                 $row = mysqli_fetch_assoc($result);
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
@@ -596,7 +596,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>  
+                       
+                        <!-- Earnings (Monthly) Card Example -->
+                          
 
                       
                     </div>

@@ -157,7 +157,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Login Screens:</h6>
                         <a class="collapse-item" href="login.php">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="../../register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
@@ -409,8 +409,16 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">facture</h6>
+                        <div class="card-header py-3"> 
+                                <div class="row">
+                                    <p class="col-md-0"><h6 class="m-0 font-weight-bold text-primary">facture</h6></p>
+                                    <p class="col-md-2"></p>
+                                    <p class="col-md-2"></p>
+                                    <?php
+                                    echo "<p class='col-md-2 '> <a href='../pdf/getfacture.php?id=" . $_GET["id"] . "' class='btn btn-info btn-user'>Imprimer</a></p>
+";
+                                    ?>
+                                </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -421,7 +429,7 @@
                                             <th>id</th>
                                             <th>Nom</th>
                                             <th>quantite</th>
-                                            <th>prix</th>
+                                            <th>prix unitaire</th>
                                             <th>montant</th>
                                             <th>Typepaiement</th>
                                         </tr>
