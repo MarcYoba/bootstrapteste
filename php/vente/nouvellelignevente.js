@@ -8,6 +8,10 @@ var quantiteTotal = 0;
 var prixtotal = 0;
 var reduction = 0;
 
+function getLigne(dataTable, ligne){
+    
+}
+
 function calculeReductionProduit(){
     reduction = document.getElementById("prixtotal").textContent; 
     //console.log();
@@ -107,6 +111,7 @@ function ajouterLigne(dataTable,...donnees){
     if (inputFournisseur !="" && inputDescrition !="" && inputQuantite !=0 && inputPrix !=0 ) {
         const tableau = document.getElementById(dataTable);
         document.getElementById("verificatiobDonne").innerHTML ='';
+        const nbligne = tableau.rows.length;
         //creer une nouvelle ligne
        const nouvelleLigne = tableau.insertRow();
        
@@ -140,13 +145,14 @@ function ajouterLigne(dataTable,...donnees){
         p5.innerHTML = (inputQuantite * inputPrix);
         p5.classList.add('form-control', 'form-control-user');
         nouvellecellule5.appendChild(p5);
-        /*
+        
         const nouvellecellule6 = nouvelleLigne.insertCell();
         const p6 = document.createElement('p');
-        p6.innerHTML = Typepaiement;
-        p6.classList.add('form-control', 'form-control-user');
+        p6.id = (nbligne +1);
+        p6.innerHTML ="<a class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>  " + (nbligne +1);
+       // p6.classList.add('form-control', 'form-control-user');
         nouvellecellule6.appendChild(p6);
-        */
+        
         quantiteTotal = 0;
         prixtotal = 0;
         calculeprixTotalquantitetotal();
@@ -235,18 +241,27 @@ function enregistrementBD(){
 }
 
 function enregistrementDonnees(){
-    if(document.getElementById("momo").value == 0){
-        if (document.getElementById("cash").value == 0) {
-            if (document.getElementById("credit").value == 0) {
-                document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH ou Credit</p>';
+    
+    // if ((document.getElementById("cash").value +
+    //     document.getElementById("credit").value +
+    //     document.getElementById("momo").value) == (document.getElementById("Total").value)) 
+    // {
+        if(document.getElementById("momo").value == 0){
+            if (document.getElementById("cash").value == 0) {
+                if (document.getElementById("credit").value == 0) {
+                    document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH ou Credit</p>';
+                } else {
+                    enregistrementBD();
+                }
             } else {
-                enregistrementBD();
+                enregistrementBD(); 
             }
-        } else {
-            enregistrementBD(); 
         }
-    }
-    else{
-        enregistrementBD();
-    }
+        else{
+            enregistrementBD();
+        }
+    // } else {
+    //     document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> verifier le total des montants dans differents case</p>';  
+    // }
+    
 }

@@ -103,7 +103,7 @@ require_once("../connexion.php");
                                                             <th>quantite</th>
                                                             <th>prix_unite</th>
                                                             <th>Mantant</th>
-                                                            <!--<th>Type de paiement</th>-->
+                                                            <th>Operation</th>
                                                         </tr>
                                                     </thead>
                                                     <tfoot>
@@ -165,14 +165,10 @@ require_once("../connexion.php");
                                                                 <span id="resultat"></span> cfa
                                                                 </p>
                                                             </th> 
-                                                         <!--   <th  >
-                                                                <div class="form-group ">
-                                                                    <select id="Typepaiement"  name="Typepaiement"  class="form-control form-select" required>
-                                                                        <option value="CASH" >CASH</option>
-                                                                        <option value="CREDIT" >CREDIT</option> 
-                                                                    </select>
-                                                                </div>
-                                                            </th>  -->
+                                                            <th  >
+                                                                <span id="modifierligne"></span>
+                                                                <p class="btn btn-info btn-user" onclick="" id=""><i class="fas fa-check"></i></p>
+                                                            </th> 
                                                         </tr>
                                                     </tbody>
                                                 </table>

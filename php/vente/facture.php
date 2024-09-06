@@ -471,6 +471,8 @@
                                             $montant += $row["montant"];
 
                                         }
+
+                                        
                                         echo '<tr>';
                                             echo '<td>Total</td>';
                                             echo '<td>-</td>';

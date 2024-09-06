@@ -52,15 +52,16 @@ $quantite = 0;
 $prix = 0;
 $montant = 0;
 
+$pdf->Ln();
+        $pdf->Cell(80);
+        $pdf->Cell(30,10,'Formule',4,20,'C');
+        $pdf->Ln();
 
 $sqlfacture = "SELECT * FROM facture WHERE  idvente = '$id'";
 $resultfa = $conn->query($sqlfacture); 
    
     while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
-        $pdf->Ln();
-        $pdf->Cell(80);
-        $pdf->Cell(30,10,'Formule',4,20,'C');
-        $pdf->Ln();
+        
         $nomproduit = substr_replace($rowfacture['nomproduit'],"",strpos($rowfacture['nomproduit'],"provenderie"));
         //$nomproduit = substr_replace($nomproduit,"1",strpos($nomproduit,"TOURTEAUX"));
 
