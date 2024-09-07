@@ -162,12 +162,11 @@ require_once("../connexion.php");
                                                             </th>
                                                             <th>
                                                                 <p class="form-control form-control-user" id="montanttotal">
-                                                                <span id="resultat"></span> cfa
+                                                                <span id="resultat"></span>
                                                                 </p>
                                                             </th> 
                                                             <th  >
                                                                 <span id="modifierligne"></span>
-                                                                <p class="btn btn-info btn-user" onclick="" id=""><i class="fas fa-check"></i></p>
                                                             </th> 
                                                         </tr>
                                                     </tbody>

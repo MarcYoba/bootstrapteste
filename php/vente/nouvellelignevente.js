@@ -8,8 +8,64 @@ var quantiteTotal = 0;
 var prixtotal = 0;
 var reduction = 0;
 
+function resetLigne(){
+    calculeprixTotalquantitetotal();
+    calculeTotal();
+    document.getElementById("quantite").value='';
+        document.getElementById("prixglobal").value='';
+       // document.getElementById("prixtotal").textContent = '';
+        document.getElementById("resultat").innerHTML='';
+        document.getElementById("nomProduit").value='';  
+       // document.getElementById("Typepaiement").value='';
+}
+
 function getLigne(dataTable, ligne){
-    
+    const tableau = document.getElementById('dataTable');
+  
+    for (let index = 2; index <= tableau.rows.length; index++) {
+
+        if (index == ligne) {
+           //const cellule1 = tableau.rows[index-1].cells[0];
+            const cellule2 = tableau.rows[index-1].cells[1];
+            const cellule3 = tableau.rows[index-1].cells[2];
+            const cellule4 = tableau.rows[index-1].cells[3];
+            //const cellule5 = tableau.rows[index-1].cells[4];
+            
+            //document.getElementById("fournisseur").value = cellule1.textContent;
+            document.getElementById("nomProduit").value = cellule2.textContent;
+            document.getElementById("quantite").value = cellule3.textContent;
+            document.getElementById("prixglobal").value = cellule4.textContent;
+           // document.getElementById("").value = cellule5.textContent;
+            document.getElementById("modifierligne").innerHTML = '<p class="btn btn-info btn-user" onclick="Upgateligne('+ligne+')"><i class="fas fa-check"></i></p>';
+           
+        }
+        
+        
+    }
+}
+
+function Upgateligne(ligne){
+     const tableau = document.getElementById('dataTable');
+  
+    for (let index = 2; index <= tableau.rows.length; index++) {
+
+        if (index == ligne) {
+           //const cellule1 = tableau.rows[index-1].cells[0];
+            const cellule2 = tableau.rows[index-1].cells[1];
+            const cellule3 = tableau.rows[index-1].cells[2];
+            const cellule4 = tableau.rows[index-1].cells[3];
+            const cellule5 = tableau.rows[index-1].cells[4];
+            
+            //document.getElementById("fournisseur").value = cellule1.textContent;
+            cellule2.textContent= document.getElementById("nomProduit").value;
+            cellule3.textContent=document.getElementById("quantite").value ;
+            cellule4.textContent= document.getElementById("prixglobal").value ;
+            cellule5.textContent = document.getElementById("resultat").textContent ;
+
+            document.getElementById("modifierligne").innerHTML = ' ';
+        } 
+    }
+    resetLigne();
 }
 
 function calculeReductionProduit(){
@@ -101,7 +157,8 @@ inputPrix.addEventListener('input',calculeTotal);
 inputreduction.addEventListener('input',calculeReductionProduit);
 
 function ajouterLigne(dataTable,...donnees){
-
+    calculeprixTotalquantitetotal();
+    calculeTotal();
     const  inputFournisseur = document.getElementById("fournisseur").value;
     const  inputDescrition = document.getElementById("nomProduit").value;
     const  inputQuantite = document.getElementById("quantite").value;
@@ -149,7 +206,7 @@ function ajouterLigne(dataTable,...donnees){
         const nouvellecellule6 = nouvelleLigne.insertCell();
         const p6 = document.createElement('p');
         p6.id = (nbligne +1);
-        p6.innerHTML ="<a class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>  " + (nbligne +1);
+        p6.innerHTML ='<a class="btn btn-primary" onclick="getLigne(dataTable,'+(nbligne +1)+')"><i class="fas fa-pencil-alt"></i></a>  ' + (nbligne +1);
        // p6.classList.add('form-control', 'form-control-user');
         nouvellecellule6.appendChild(p6);
         
@@ -241,6 +298,9 @@ function enregistrementBD(){
 }
 
 function enregistrementDonnees(){
+
+    calculeprixTotalquantitetotal();
+    calculeTotal();
     
     // if ((document.getElementById("cash").value +
     //     document.getElementById("credit").value +
