@@ -9089,7 +9089,7 @@
 	// Order by the selected column(s)
 	_api_register( [
 		'columns().order()',
-		'column().order()'
+		//'column().order()'
 	], function ( dir ) {
 		var that = this;
 	

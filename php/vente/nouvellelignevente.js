@@ -4,6 +4,8 @@ const  inputPrix = document.getElementById("prixglobal");
 const  inputproduit = document.getElementById("nomProduit");
 const  inputreduction = document.getElementById("reduction");
 
+
+
 var quantiteTotal = 0;
 var prixtotal = 0;
 var reduction = 0;

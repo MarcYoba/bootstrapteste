@@ -410,16 +410,36 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Vente</h6>
+                            <div class="row">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables Vente</h6>
+                            </div>
+                            <div class="row">
+                                <p class="col-md-1"></p>
+                                <p class="col-md-2"> 
+                                        <input class="form-check-input" type="checkbox" id="OM">
+                                        <label class="form-check-label" id="OM">OM</label>
+                                </p>
+                                <p class="col-md-2">
+                                        <input class="form-check-input" type="checkbox" id="credit">
+                                        <label class="form-check-label" id="credit">crédit</label>
+                                </p>
+                                <p class="col-md-2">
+                                        <input class="form-check-input" type="checkbox" id="cash">
+                                        <label class="form-check-label" id="cash">cash</label>
+                                </p>
+                                <p class="col-md-2">
+                                        <input class="form-control form-control-user" type="date" id="date">    
+                                </p>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='50' data-order='[[0, "desc"]]'>
                                     <thead>
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>Nom</th>
+                                            <th>Type paiement </th>
                                             <th>numero facture</th>
                                             <th>Quantite total</th>
                                             <th>Montant total</th>
@@ -438,26 +458,21 @@
                                             <th>Operation</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody>
+                                    <tbody id="liste">
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM vente ORDER BY id DESC";
+                                        $sql = "SELECT * FROM vente";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
-                                            echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["typevente"].'</td>';
-                                            echo '<td>'.$row["numfacture"].'</td>';
-                                            echo '<td>'.$row["quantite"].'</td>';
-                                            echo '<td>'.$row["prix"].'</td>';
-                                            echo '<td>'.$row["datevente"].'</td>';
-                                            echo "<td>";
-                                           // echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
-                                            echo "<a href='facture.php?id=" . $row["id"] . "' class='btn btn-info'><i class='fas fa-bars'></i></a>";
-                                            echo "</td>";
+                                            echo '<th>'.$row["id"].'</th>';
+                                            echo '<th>'.$row["typevente"].'</th>';
+                                            echo '<th>'.$row["numfacture"].'</th>';
+                                            echo '<th>'.$row["quantite"].'</th>';
+                                            echo '<th>'.$row["prix"].'</th>';
+                                            echo '<th>'.$row["datevente"].'</th>';
+                                            echo '<th></th>';
                                             echo '</tr>';
-                                            //var_dump($row);
                                         }
                                     ?>
                                     </tbody>
@@ -529,6 +544,7 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+   <!-- <script src="listeVente.js"></script> -->
 
 </body>
 
