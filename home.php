@@ -118,6 +118,19 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsestock"
+                    aria-expanded="true" aria-controls="collapsestock">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>variation Stock</span>
+                </a>
+                <div id="collapsestock" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Operation des Stock</h6>
+                        <a class="collapse-item" href="php/stock/sctockVente.php">Stock de produit Vendu</a>
+                    </div>
+                </div>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -207,7 +220,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
             </li>
@@ -830,5 +843,4 @@
     <script src="js/demo/chart-bar-semain.js"> </script>
 
 </body>
-
 </html>

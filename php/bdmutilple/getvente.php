@@ -29,14 +29,11 @@ class Vente{
 }
 
 if (empty($donnees)) {
-   //echo json_encode("issete");
     $vente = new Vente("vente");
-    //$donnes = $vente->getAllVente();
    echo json_encode($vente->getAllVente());
     
 } else {
    echo json_encode(" no set issete");
-    //json_encode($vente->getAllVente());
 }
 
 
