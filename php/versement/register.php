@@ -35,7 +35,7 @@ function creerCaisse($montant) {
 }
 
 // Fonction pour créer un compte utilisateur $nom, $type, $prixvente, $prixachat, $quantite
-function creerVersement($iddette, $client, $montant, $montantdette,$dateversement ) {
+function creerVersement($iddette, $client, $montant, $montantdette,$dateversement,$om,$matif ) {
     global $conn;
 
     if (!empty($dateversement )) {
@@ -48,14 +48,14 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO versement (montant, idclient, iddette, iduser,dateversement) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO versement (montant, idclient, iddette, iduser,dateversement,Om,matif) VALUES (?, ?, ?, ?, ?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
         die('Erreur de préparation de la requête : ' . $conn->error);
     }
 
-    $stmt->bind_param('dddds', $montant , $client ,$iddette, $_SESSION['id'], $date);
+    $stmt->bind_param('ddddsds', $montant , $client ,$iddette, $_SESSION['id'], $date,$om,$matif);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
@@ -104,7 +104,7 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
             $sql = "UPDATE client SET versement = '$versement' WHERE id ='$client'" ;
             $result = $conn->query($sql);
         }     
-       creerCaisse($montant);
+       //creerCaisse($montant);
     }
     
 }
@@ -117,6 +117,8 @@ if (isset($_POST['submit'])) {
     $montant = $_POST['montant'];
     $montantdette = $_POST['montantdette'];
     $dateversement = $_POST['dateversement'];
+    $om = $_POST['om'];
+    $matif = $_POST['matif'];
     
     // Vérifier si tous les champs sont remplis
     if (!empty($iddette) || !empty($client) || !empty($montant) || !empty($montantdette)) {
@@ -133,7 +135,7 @@ if (isset($_POST['submit'])) {
             $stmt->store_result();
 
             if ($stmt->num_rows > 0) {
-                creerVersement($iddette, $client, $montant, $montantdette,$dateversement);
+                creerVersement($iddette, $client, $montant, $montantdette,$dateversement,$om,$matif);
                 header("Location:liste.php");
             } else {
                 // Créer le compte utilisateur

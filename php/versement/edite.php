@@ -14,11 +14,12 @@ $tab = array(
     "idclient" =>0,
     "firstname" =>0,
     "dateversement" =>0,
+    "matif" =>0,
 );
 
 // Requête SQL pour récupérer les informations de la vente
 // $sql = "SELECT dette.id as id,client.firstname as nom, dette.montant, client.id AS idclient FROM dette,client WHERE dette.idclient ='$id' AND client.id = '$id' AND dette.status = 'en cour'";
- $sql = "SELECT id, montant, idclient, iddette,dateversement FROM versement WHERE id ='$id'";
+ $sql = "SELECT id, montant, idclient, iddette,dateversement,matif FROM versement WHERE id ='$id'";
  $result = $conn->query($sql);
  $row = $result->fetch_assoc();
  $tab["iddette"] = $row["id"];

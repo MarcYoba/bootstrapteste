@@ -41,7 +41,7 @@ if ($nom == "All") {
 } else {
     if ($periode == "day") {
         if (!empty($datejour)) {
-            $value = $bdstock->GetProduitTodate();
+            $value = $bdstock->GetProduitToDay();
         } else {
             $value = $bdstock->GetProduitToDay();
         } 

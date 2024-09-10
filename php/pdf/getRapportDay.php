@@ -10,21 +10,22 @@ require_once("../bdmutilple/getclient.php");
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
-$date = date("Y-m-d");
+$date = $_POST["date"];
+
 //var_dump($date);
 
 $formule = 1;
 $prix = 0;
 $montant = 0;
 
-$vente = new Vente("vente");
+$vente = new Vente($date);
 $depense = new Depense($date);
 $versement = new Versement($date);
 $achat = new Achat($date);
-$fournisseur = new Fournisseur(0);
-$client = new Client(0);
+$fournisseur = new Fournisseur($date);
+$client = new Client($date);
 
-$value = $vente->getIdVente();
+$value = $vente->getIdVenteByDate($date);
 
 $html = '
 <!DOCTYPE html>
@@ -51,7 +52,7 @@ $html = '
 <body>
     <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.date("d-m-Y").'</th></tr>
+        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$date.'</th></tr>
         </thead>
         <tbody>';
         foreach ($value as $line) {
@@ -83,7 +84,7 @@ $html = '
         
         $html .='<br><br><br> <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="8" align="center""> Resultat vente du : '.date("d-m-Y").'</th></tr>
+        $html .=' <tr><th colspan="8" align="center""> Resultat vente du : '.$date.'</th></tr>
         </thead>
         <tbody>';
             $html .= '<tr>';
@@ -100,14 +101,14 @@ $html = '
                 <th scope="col">Net en Caise</th>
             </tr>';
                 $html .= '<tr>';
-                    $html .= '<td>' .$vente->getSommeVente().'</td>';
-                    $html .= '<td>' .$vente->getSommeCash().'</td>';
-                    $html .= '<td>' .$vente->getSommeOm().'</td>';
-                    $html .= '<td>' .$vente->getSommeCredit().'</td>';
-                    $html .= '<td>' .$vente->getSommeReduction().'</td>';
-                    $html .= '<td>' .$depense->ToDay().'</td>';
-                    $html .= '<td>' .$versement->ToDay().'</td>';
-                    $html .= '<td>' .(((($vente->getSommeVente())-$vente->getSommeCredit())-$vente->getSommeReduction())-$vente->getSommeOm()).'</td>';
+                    $html .= '<td>' .$vente->getSommeVentedate($date).'</td>';
+                    $html .= '<td>' .$vente->getSommeCashDate($date).'</td>';
+                    $html .= '<td>' .$vente->getSommeOmDate($date).'</td>';
+                    $html .= '<td>' .$vente->getSommeCreditDate($date).'</td>';
+                    $html .= '<td>' .$vente->getSommeReductionDate($date).'</td>';
+                    $html .= '<td>' .$depense->ByDateDepense($date).'</td>';
+                    $html .= '<td>' .$versement->ByDateVersement($date).'</td>';
+                    $html .= '<td>' .(((($vente->getSommeVentedate($date))-$vente->getSommeCreditDate($date))-$vente->getSommeReductionDate($date))-$vente->getSommeOmDate($date)).'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>
@@ -126,7 +127,7 @@ $html = '
                 <th scope="col">Quantite</th>
                 <th scope="col">Date</th>
             </tr>';
-            $quantiteproduit = $vente->getSommeProduit();
+            $quantiteproduit = $vente->getSommeProduitDate($date);
             foreach ($quantiteproduit as $key ) {
                 $html .= '<tr>';
                 $html .= '<td>' .$key["nomproduit"].'</td>';
@@ -153,7 +154,7 @@ $html = '
                 <th scope="col">motif</th>
                 <th scope="col">dateversement</th>
             </tr>';
-            $tabversement = $versement->AllVersement();
+            $tabversement = $versement->AllVersementDate();
             foreach ($tabversement as $key ) {
                 $html .= '<tr>';
                 $html .= '<td>' .$client->getByIdClient($key["idclient "]).'</td>';
@@ -180,7 +181,7 @@ $html = '
                     <th scope="col">montant</th>
                     <th scope="col">Date</th>
                 </tr>';
-                $tabdepense = $depense->AllDepense();
+                $tabdepense = $depense->AllDepenseDate($date);
                 foreach ($tabdepense as $key ) {
                     $html .= '<tr>';
                     $html .= '<td>' .$key["description"].'</td>';
@@ -208,7 +209,7 @@ $html = '
                     <th scope="col">fournisseur</th>
                     <th scope="col">date</th>
                 </tr>';
-                $tabachat = $achat->AllAchat();
+                $tabachat = $achat->AllAchatDate($date);
                 foreach ($tabachat as $key ) {
                     $html .= '<tr>';
                     $html .= '<td>' .$key["Nomproduit"].'</td>';

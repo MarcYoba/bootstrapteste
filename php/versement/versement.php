@@ -114,10 +114,27 @@
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="montantdette" id="montantdette" value='.intval($donnees["montant"]).' placeholder="montant" required readonly>';
+                                                name="montantdette" id="montantdette" value='.intval($donnees["montant"]).' placeholder="montant" required>';
                                             }else{
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="montantdette" id="montantdette" placeholder="montant dette" required readonly>';
+                                                name="montantdette" id="montantdette" placeholder="montant dette" required>';
+                                            }
+                                        echo'</div>';
+                                    echo'</div>';
+                                    echo'<div class="form-group row">';
+                                        echo'<div class="col-sm-6 mb-3 mb-sm-0">';
+                                                echo'<input type="number" class="form-control form-control-user"
+                                                name="om" id="on" placeholder="OM" required>'; 
+                                        echo'</div>';
+                                        echo'<div class="col-sm-6 mb-3 mb-sm-0">';
+                                            if(isset($_GET['tableau'])){
+                                                $tabdonne = $_GET['tableau'];
+                                                $donnees = json_decode($tabdonne,true);
+                                                echo'<input type="txt" class="form-control form-control-user"
+                                                name="matif" id="matif" value='.intval($donnees["matif"]).' placeholder="montant" required>';
+                                            }else{
+                                                echo'<input type="txt" class="form-control form-control-user"
+                                                name="matif" id="matif" placeholder="motif" required>';
                                             }
                                         echo'</div>';
                                     echo'</div>';

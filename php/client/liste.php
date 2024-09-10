@@ -441,7 +441,7 @@
                                             <th>Dette</th>
                                             <th>versement</th>
                                             <th>Datte arriver</th>
-                                            <th>option</th>
+                                            <th >option</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
