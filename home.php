@@ -477,17 +477,19 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
+                                            <a href="php/achat/liste.php">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                ACHAT (MONTANT)</div>
-                                            <?php 
-                                                global $conn;
-                                                $sql = "SELECT SUM(montant) as montant FROM achat WHERE MONTH(dateachat) = MONTH(NOW())";
-                                                $result = $conn->query($sql);
-                                                $row = mysqli_fetch_assoc($result);
-                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$row["montant"].' FCFA'.'</div>'; 
-                                                    //var_dump($row);
-                                            ?>
-                                        </div>
+                                                    ACHAT (MONTANT)</div>
+                                                <?php 
+                                                    global $conn;
+                                                    $sql = "SELECT SUM(montant) as montant FROM achat WHERE MONTH(dateachat) = MONTH(NOW())";
+                                                    $result = $conn->query($sql);
+                                                    $row = mysqli_fetch_assoc($result);
+                                                    echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$row["montant"].' FCFA'.'</div>'; 
+                                                        //var_dump($row);
+                                                ?>
+                                            </div>
+                                        </a>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                         </div>
@@ -502,17 +504,19 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
+                                        <a href="php/vente/liste.php">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 VENTE (MONTANT)</div>
-                                                <?php 
-                                                global $conn;
-                                                $sql = "SELECT SUM(prix) as montant FROM vente WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'";
-                                                $result = $conn->query($sql);
-                                                $row = mysqli_fetch_assoc($result);
-                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.($row["montant"]).' FCFA'.'</div>'; 
-                                                    //var_dump($row);
-                                            ?>
-                                        </div>
+                                                    <?php 
+                                                    global $conn;
+                                                    $sql = "SELECT SUM(prix) as montant FROM vente WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'";
+                                                    $result = $conn->query($sql);
+                                                    $row = mysqli_fetch_assoc($result);
+                                                    echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.($row["montant"]).' FCFA'.'</div>'; 
+                                                        //var_dump($row);
+                                                    ?>
+                                            </div>
+                                        </a>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
@@ -527,6 +531,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
+                                        <a href="php/dette/dette.php">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                 DETTE (MONTANT)</div>
                                                 <?php 
@@ -538,6 +543,7 @@
                                                     //var_dump($row);
                                             ?>
                                         </div>
+                                        </a>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
@@ -552,8 +558,9 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
+                                        <a href="php/dette/dette.php">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                <a href="php/dette/dette.php">VERSEMENT (MONTANT)</a></div>
+                                                VERSEMENT (MONTANT)</div>
                                                 <?php 
                                                 global $conn;
                                                 $sql = "SELECT SUM(montant) as montant FROM versement WHERE MONTH(dateversement) = MONTH(NOW())";
@@ -563,6 +570,7 @@
                                                     //var_dump($row);
                                             ?>
                                         </div>
+                                        </a>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
@@ -577,17 +585,19 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-                                                CAISSE (MONTANT)</div>
-                                            <?php 
-                                                global $conn;
-                                                $sql = "SELECT SUM(montant) as montant FROM caisse WHERE MONTH(dateoperation) = MONTH(NOW())";
-                                                $result = $conn->query($sql);
-                                                $row = mysqli_fetch_assoc($result);
-                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
-                                                    //var_dump($row);
-                                            ?>
-                                        </div>
+                                            <a href="php/caisse/liste.php">
+                                                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+                                                    CAISSE (MONTANT)</div>
+                                                    <?php 
+                                                        global $conn;
+                                                        $sql = "SELECT SUM(montant) as montant FROM caisse WHERE MONTH(dateoperation) = MONTH(NOW())";
+                                                        $result = $conn->query($sql);
+                                                        $row = mysqli_fetch_assoc($result);
+                                                        echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
+                                                            //var_dump($row);
+                                                    ?>
+                                                </div>
+                                            </a>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
@@ -601,17 +611,19 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-                                                DEPENSE (MONTANT)</div>
-                                            <?php 
-                                                global $conn;
-                                                $sql = "SELECT SUM(montant) as montant FROM depenses WHERE MONTH(datedepense) = MONTH(NOW())";
-                                                $result = $conn->query($sql);
-                                                $row = mysqli_fetch_assoc($result);
-                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
-                                                    //var_dump($row);
-                                            ?>
-                                        </div>
+                                            <a href="php/depenses/liste.php">
+                                                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+                                                    DEPENSE (MONTANT)</div>
+                                                    <?php 
+                                                        global $conn;
+                                                        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE MONTH(datedepense) = MONTH(NOW())";
+                                                        $result = $conn->query($sql);
+                                                        $row = mysqli_fetch_assoc($result);
+                                                        echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
+                                                            //var_dump($row);
+                                                    ?>
+                                                </div>
+                                            </a>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
