@@ -26,6 +26,14 @@ class Versement{
         return $row["montant"]; 
     }
 
+    public function ByDateVersementOm($date){
+        global $conn;
+        $sql = "SELECT SUM(Om) as Om FROM versement WHERE dateversement= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["Om"]; 
+    }
+
     public function AllVersement(){
         global $conn;
         $data = [];

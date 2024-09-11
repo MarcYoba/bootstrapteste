@@ -48,7 +48,7 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO versement (montant, idclient, iddette, iduser,dateversement,Om,matif) VALUES (?, ?, ?, ?, ?,?,?)";
+    $sql = "INSERT INTO versement (montant, idclient, iddette, iduser,dateversement,Om,motif) VALUES (?, ?, ?, ?, ?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -77,7 +77,7 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
        $sql = "UPDATE client SET versement = '$versement' WHERE id ='$client'" ;
        $result = $conn->query($sql);
 
-       creerCaisse($montant);
+       //creerCaisse($montant);
     }else{
 
         $sql ="SELECT SUM(montant) as somme FROM versement WHERE iddette ='$iddette'";
@@ -139,7 +139,6 @@ if (isset($_POST['submit'])) {
                 header("Location:liste.php");
             } else {
                 // Créer le compte utilisateur
-                
                 header("Location:liste.php");
                 exit();
             }

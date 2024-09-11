@@ -12,6 +12,7 @@ $tab = array(
     "montant" =>0,
     "idclient" =>0,
     "firstname" =>0,
+    "motif" =>0,
 );
 
 // Requête SQL pour récupérer les informations de la vente

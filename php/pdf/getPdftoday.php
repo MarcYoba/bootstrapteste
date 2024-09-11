@@ -7,6 +7,7 @@ require_once("../bdmutilple/getversement.php");
 require_once("../bdmutilple/getachat.php");
 require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
+require_once("../bdmutilple/getcaise.php");
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
@@ -23,6 +24,7 @@ $versement = new Versement($date);
 $achat = new Achat($date);
 $fournisseur = new Fournisseur(0);
 $client = new Client(0);
+$caise = new Caise($date);
 
 $value = $vente->getIdVente();
 
@@ -83,11 +85,11 @@ $html = '
         
         $html .='<br><br><br> <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="8" align="center""> Resultat vente du : '.date("d-m-Y").'</th></tr>
+        $html .=' <tr><th colspan="9" align="center""> Resultat vente du : '.date("d-m-Y").'</th></tr>
         </thead>
         <tbody>';
             $html .= '<tr>';
-            $html .= '<td colspan="8" align="center"> Recapitulatif Vente </td>';
+            $html .= '<td colspan="9" align="center"> Recapitulatif Vente </td>';
             $html .= '</tr>
                 <tr>
                 <th scope="col">Total Vente</th>
@@ -96,22 +98,52 @@ $html = '
                 <th scope="col">Total Credit </th>
                 <th scope="col">Total reduction</th>
                 <th scope="col">Total Depense</th>
+                
                 <th scope="col">Total Versement</th>
+                <th scope="col">Sortie caise</th>
                 <th scope="col">Net en Caise</th>
             </tr>';
                 $html .= '<tr>';
                     $html .= '<td>' .$vente->getSommeVente().'</td>';
                     $html .= '<td>' .$vente->getSommeCash().'</td>';
-                    $html .= '<td>' .$vente->getSommeOm().'</td>';
-                    $html .= '<td>' .$vente->getSommeCredit().'</td>';
+                    $html .= '<td>' .$vente->getSommeOm() + $versement->ByDateVersementOm($date).'</td>';
+                    $html .= '<td>' .(0).'</td>';
                     $html .= '<td>' .$vente->getSommeReduction().'</td>';
                     $html .= '<td>' .$depense->ToDay().'</td>';
                     $html .= '<td>' .$versement->ToDay().'</td>';
-                    $html .= '<td>' .(((($vente->getSommeVente())-$vente->getSommeCredit())-$vente->getSommeReduction())-$vente->getSommeOm()).'</td>';
+                    $html .= '<td>' .(-1*$caise->ToDay()).'</td>';
+                    $html .= '<td>' .((((($vente->getSommeCash())-0)-$vente->getSommeReduction())-$vente->getSommeOm())+$caise->ToDay()).'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>
     </table>';
+
+    $html .='<br><br><br> <table style="width:100%">
+            <thead>';
+            $html .=' <tr><th colspan="4" align="center""> Tableau Caise : '.date("d-m-Y").'</th></tr>
+            </thead>
+            <tbody>';
+                $html .= '<tr>';
+                $html .= '<td colspan="4" align="center"> Recapitulatif Operation caise </td>';
+                $html .= '</tr>
+                    <tr>
+                    <th scope="col">operation</th>
+                    <th scope="col">montant</th>
+                    <th scope="col">date</th>
+                    <th scope="col">motif</th>
+                </tr>';
+                $tabcaise = $caise->AllSortieCaise();
+                foreach ($tabcaise as $key ) {
+                    $html .= '<tr>';
+                    $html .= '<td>' .$key["operation"].'</td>';
+                    $html .= '<td>' .(-1*$key["montant"]).'</td>';
+                    $html .= '<td>' .$key["dateoperation"].'</td>';
+                    $html .= '<td>' .$key["motif"].'</td>';
+                $html .= '</tr>';
+                }   
+            $html .= '
+            </tbody>
+        </table>';
 
     $html .='<br><br><br> <table style="width:100%">
         <thead>';
@@ -156,7 +188,7 @@ $html = '
             $tabversement = $versement->AllVersement();
             foreach ($tabversement as $key ) {
                 $html .= '<tr>';
-                $html .= '<td>' .$client->getByIdClient($key["idclient "]).'</td>';
+                $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
                 $html .= '<td>' .$key["montant"].'</td>';
                 $html .= '<td>' .$key["Om"].'</td>';
                 $html .= '<td>' .$key["motif"].'</td>';

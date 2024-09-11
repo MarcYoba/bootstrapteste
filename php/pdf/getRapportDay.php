@@ -103,7 +103,7 @@ $html = '
                 $html .= '<tr>';
                     $html .= '<td>' .$vente->getSommeVentedate($date).'</td>';
                     $html .= '<td>' .$vente->getSommeCashDate($date).'</td>';
-                    $html .= '<td>' .$vente->getSommeOmDate($date).'</td>';
+                    $html .= '<td>' .$vente->getSommeOmDate($date) + $versement->ByDateVersementOm($date).'</td>';
                     $html .= '<td>' .$vente->getSommeCreditDate($date).'</td>';
                     $html .= '<td>' .$vente->getSommeReductionDate($date).'</td>';
                     $html .= '<td>' .$depense->ByDateDepense($date).'</td>';
@@ -141,26 +141,28 @@ $html = '
 
     $html .='<br><br><br> <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="5" align="center""> Resultat Versement : '.date("d-m-Y").'</th></tr>
+        $html .=' <tr><th colspan="6" align="center""> Resultat Versement : '.date("d-m-Y").'</th></tr>
         </thead>
         <tbody>';
             $html .= '<tr>';
-            $html .= '<td colspan="5" align="center"> Recapitulatif Versement </td>';
+            $html .= '<td colspan="6" align="center"> Recapitulatif Versement </td>';
             $html .= '</tr>
                 <tr>
                 <th scope="col">Nom client</th>
                 <th scope="col">montant</th>
                 <th scope="col">OM</th>
-                <th scope="col">motif</th>
+                <th scope="col">Motif</th>
+                <th scope="col">Montant cash</th>
                 <th scope="col">dateversement</th>
             </tr>';
             $tabversement = $versement->AllVersementDate();
             foreach ($tabversement as $key ) {
                 $html .= '<tr>';
-                $html .= '<td>' .$client->getByIdClient($key["idclient "]).'</td>';
+                $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
                 $html .= '<td>' .$key["montant"].'</td>';
                 $html .= '<td>' .$key["Om"].'</td>';
                 $html .= '<td>' .$key["motif"].'</td>';
+                $html .= '<td>' .$key["montant"] - $key["Om"].'</td>';
                 $html .= '<td>' .$key["dateversement"].'</td>';
             $html .= '</tr>';
             }   

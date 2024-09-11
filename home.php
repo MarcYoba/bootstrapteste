@@ -131,6 +131,21 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#versement"
+                    aria-expanded="true" aria-controls="versement">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Versement</span>
+                </a>
+                <div id="versement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">versement:</h6>
+                        <a class="collapse-item" href="php/versement/versement.php">ajouter versement</a>
+                        <a class="collapse-item" href="php/versement/liste.php">Liste versement</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -153,13 +168,7 @@
                         <!--<a class="collapse-item" href="cards.html">Dette client</a>-->
                     </div>
                 </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">versement:</h6>
-                        <a class="collapse-item" href="php/versement/versement.php">ajouter versement</a>
-                        <a class="collapse-item" href="php/versement/liste.php">Liste versement</a>
-                    </div>
-                </div>
+               
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
