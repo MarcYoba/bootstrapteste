@@ -104,10 +104,10 @@ $html = '
                 <th scope="col">Net en Caise</th>
             </tr>';
                 $html .= '<tr>';
-                    $html .= '<td>' .$vente->getSommeVente().'</td>';
+                    $html .= '<td>' .($vente->getSommeVente() - $vente->getSommeReduction()).'</td>';
                     $html .= '<td>' .$vente->getSommeCash().'</td>';
                     $html .= '<td>' .$vente->getSommeOm() + $versement->ByDateVersementOm($date).'</td>';
-                    $html .= '<td>' .(0).'</td>';
+                    $html .= '<td>' .$vente->getSommeCredit().'</td>';
                     $html .= '<td>' .$vente->getSommeReduction().'</td>';
                     $html .= '<td>' .$depense->ToDay().'</td>';
                     $html .= '<td>' .$versement->ToDay().'</td>';
