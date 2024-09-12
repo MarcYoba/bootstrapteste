@@ -36,7 +36,7 @@ if (isset($_POST['emailcon']) && isset($_POST['Passwordcon'])) {
                     $_SESSION['id'] = $row["id"];
 
                     //echo $_SESSION["id"];
-                    header("Location: ../../home.php");
+                    header("Location: ../../activites.php");
                     exit();
                 }else{
                     header("Location: ../../404.html");
