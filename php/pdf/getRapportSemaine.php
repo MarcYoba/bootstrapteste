@@ -11,7 +11,8 @@ require_once("../bdmutilple/getcaise.php");
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
-$date = $_POST["date"];
+$datedebut = $_POST["datedebutsemain"];
+$datedefin = $_POST["datefinsemain"];
 
 //var_dump($date);
 
@@ -19,15 +20,15 @@ $formule = 1;
 $prix = 0;
 $montant = 0;
 
-$vente = new Vente($date);
-$depense = new Depense($date);
-$versement = new Versement($date);
-$achat = new Achat($date);
-$fournisseur = new Fournisseur($date);
-$client = new Client($date);
-$caise = new Caise($date);
+$vente = new Vente($datedebut);
+$depense = new Depense($datedebut);
+$versement = new Versement($datedebut);
+$achat = new Achat($datedebut);
+$fournisseur = new Fournisseur($datedebut);
+$client = new Client($datedebut);
+$caise = new Caise($datedebut);
 
-$value = $vente->getIdVenteByDate($date);
+$value = $vente->getIdVenteByWeek($datedebut,$datedefin);
 
 $html = '
 <!DOCTYPE html>
@@ -54,7 +55,7 @@ $html = '
 <body>
     <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$date.'</th></tr>
+        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$datedebut."-".$datedefin.'</th></tr>
         </thead>
         <tbody>';
         foreach ($value as $line) {
@@ -86,7 +87,7 @@ $html = '
         
         $html .='<br><br><br> <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="9" align="center""> Resultat vente du : '.$date.'</th></tr>
+        $html .=' <tr><th colspan="9" align="center""> Resultat vente du : '.$datedebut."-".$datedefin.'</th></tr>
         </thead>
         <tbody>';
             $html .= '<tr>';
@@ -104,15 +105,15 @@ $html = '
                 <th scope="col">Net en Caise</th>
             </tr>';
                 $html .= '<tr>';
-                    $html .= '<td>' .$vente->getSommeVentedate($date).'</td>';
-                    $html .= '<td>' .$vente->getSommeVentedate($date)-$vente->getSommeReductionDate($date).'</td>';
-                    $html .= '<td>' .$vente->getSommeCashDate($date).'</td>';
-                    $html .= '<td>' .$vente->getSommeOmDate($date).'</td>';
-                    $html .= '<td>' .$vente->getSommeCreditDate($date).'</td>';
-                    $html .= '<td>' .$vente->getSommeReductionDate($date).'</td>';
-                    $html .= '<td>' .($caise->getByDateSortie($date)).'</td>';
-                    $html .= '<td>' .$versement->ByDateVersement($date).'</td>';
-                    $html .= '<td>' .(((($vente->getSommeCashDate($date))-0)-$caise->getByDateSortie($date))-0).'</td>';
+                    $html .= '<td>' .$vente->getSommeVenteWeek($datedebut,$datedefin).'</td>';
+                    $html .= '<td>' .$vente->getSommeVenteWeek($datedebut,$datedefin)-$vente->getSommeReductionWeek($datedebut,$datedefin).'</td>';
+                    $html .= '<td>' .$vente->getSommeCashWeek($datedebut,$datedefin).'</td>';
+                    $html .= '<td>' .$vente->getSommeOmWeek($datedebut,$datedefin).'</td>';
+                    $html .= '<td>' .$vente->getSommeCreditWeek($datedebut,$datedefin).'</td>';
+                    $html .= '<td>' .$vente->getSommeReductionWeek($datedebut,$datedefin).'</td>';
+                    $html .= '<td>' .($caise->getByWeekSortie($datedebut,$datedefin)).'</td>';
+                    $html .= '<td>' .$versement->ByWeekVersement($datedebut,$datedefin).'</td>';
+                    $html .= '<td>' .(((($vente->getSommeCashWeek($datedebut,$datedefin))-0)-$caise->getByWeekSortie($datedebut,$datedefin))-0).'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>
@@ -120,7 +121,7 @@ $html = '
 
     $html .='<br><br><br> <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="3" align="center""> Tableau caisse : '.$date.'</th></tr>
+        $html .=' <tr><th colspan="3" align="center""> Tableau caisse : '.$datedebut."-".$datedefin.'</th></tr>
         </thead>
         <tbody>';
             $html .= '<tr>';
@@ -131,7 +132,7 @@ $html = '
                 <th scope="col">Montant</th>
                 <th scope="col">date operation</th>
             </tr>';
-            $tabcaisse = $caise->AllSortieCaiseDate($date);
+            $tabcaisse = $caise->AllSortieCaiseWeek($datedebut,$datedefin);
             foreach ($tabcaisse as $key ) {
                 $html .= '<tr>';
                 $html .= '<td>' .$key["operation"].'</td>';
@@ -145,7 +146,7 @@ $html = '
 
     $html .='<br><br><br> <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="3" align="center""> Quantite Pour chaque produit : '.$date.'</th></tr>
+        $html .=' <tr><th colspan="3" align="center""> Quantite Pour chaque produit : '.$datedebut."-".$datedefin.'</th></tr>
         </thead>
         <tbody>';
             $html .= '<tr>';
@@ -156,7 +157,7 @@ $html = '
                 <th scope="col">Quantite</th>
                 <th scope="col">Date</th>
             </tr>';
-            $quantiteproduit = $vente->getSommeProduitDate($date);
+            $quantiteproduit = $vente->getSommeProduitWeek($datedebut,$datedefin);
             foreach ($quantiteproduit as $key ) {
                 $html .= '<tr>';
                 $html .= '<td>' .$key["nomproduit"].'</td>';
@@ -170,7 +171,7 @@ $html = '
 
     $html .='<br><br><br> <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="6" align="center""> Resultat Versement : '.$date.'</th></tr>
+        $html .=' <tr><th colspan="6" align="center""> Resultat Versement : '.$datedebut."-".$datedefin.'</th></tr>
         </thead>
         <tbody>';
             $html .= '<tr>';
@@ -184,7 +185,7 @@ $html = '
                 <th scope="col">Motif</th>
                 <th scope="col">dateversement</th>
             </tr>';
-            $tabversement = $versement->AllVersementDate();
+            $tabversement = $versement->AllVersementWeek($datedebut,$datedefin);
             foreach ($tabversement as $key ) {
                 $html .= '<tr>';
                 $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
@@ -199,9 +200,9 @@ $html = '
             $html .= '
             <tr>
             <th scope="col">Total</th>
-            <th scope="col">'.$versement->ByDateVersement($date).'</th>
-            <th scope="col">'.$versement->ByDateVersementOm($date).'</th>
-            <th scope="col">'.$versement->ByDateVersementCash($date).'</th>
+            <th scope="col">'.$versement->ByWeekVersement($datedebut,$datedefin).'</th>
+            <th scope="col">'.$versement->ByWeekVersementOm($datedebut,$datedefin).'</th>
+            <th scope="col">'.$versement->ByWeekVersementCash($datedebut,$datedefin).'</th>
             <th scope="col">-</th>
             <th scope="col">-</th>
         </tr>';
@@ -212,7 +213,7 @@ $html = '
     
     $html .='<br><br><br> <table style="width:100%">
             <thead>';
-            $html .=' <tr><th colspan="3" align="center""> Tableau depense : '.$date.'</th></tr>
+            $html .=' <tr><th colspan="3" align="center""> Tableau depense : '.$datedebut."-".$datedefin.'</th></tr>
             </thead>
             <tbody>';
                 $html .= '<tr>';
@@ -223,7 +224,7 @@ $html = '
                     <th scope="col">montant</th>
                     <th scope="col">Date</th>
                 </tr>';
-                $tabdepense = $depense->AllDepenseDate($date);
+                $tabdepense = $depense->AllDepenseWeek($datedebut,$datedefin);
                 foreach ($tabdepense as $key ) {
                     $html .= '<tr>';
                     $html .= '<td>' .$key["description"].'</td>';
@@ -235,7 +236,7 @@ $html = '
                 $html .= '</tr>
                     <tr>
                     <th scope="col">Total</th>
-                    <th scope="col">'.$depense->ByDateDepense($date).'</th>
+                    <th scope="col">'.$depense->ByWeekDepense($datedebut,$datedefin).'</th>
                     <th scope="col">-</th>
                 </tr>';
 
@@ -245,7 +246,7 @@ $html = '
 
         $html .='<br><br><br> <table style="width:100%">
             <thead>';
-            $html .=' <tr><th colspan="6" align="center""> Tableau Achat : '.$date.'</th></tr>
+            $html .=' <tr><th colspan="6" align="center""> Tableau Achat : '.$datedebut."-".$datedefin.'</th></tr>
             </thead>
             <tbody>';
                 $html .= '<tr>';
@@ -259,7 +260,7 @@ $html = '
                     <th scope="col">fournisseur</th>
                     <th scope="col">date</th>
                 </tr>';
-                $tabachat = $achat->AllAchatDate($date);
+                $tabachat = $achat->AllAchatWeek($datedebut,$datedefin);
                 foreach ($tabachat as $key ) {
                     $html .= '<tr>';
                     $html .= '<td>' .$key["Nomproduit"].'</td>';
@@ -276,7 +277,7 @@ $html = '
                     <th scope="col">Total</th>
                     <th scope="col">-</th>
                     <th scope="col">-</th>
-                    <th scope="col">'.$achat->getByDate($date).'</th>
+                    <th scope="col">'.$achat->getByWeek($datedebut,$datedefin).'</th>
                     <th scope="col">-</th>
                     <th scope="col">-</th>
                 </tr>';
@@ -288,7 +289,7 @@ $html = '
     </footer>
 </body>
 </html>';
-$nomfichier = $date."pdf";
+
 $dompdf = new Dompdf();
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');

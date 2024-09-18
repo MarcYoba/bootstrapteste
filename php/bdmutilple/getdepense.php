@@ -26,6 +26,13 @@ class Depense{
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
     }
+    public function ByWeekDepense($datedebut,$datefin){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE datedepense BETWEEN '$datedebut'  AND'$datefin'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
 
     public function AllDepense(){
         global $conn;
@@ -43,6 +50,18 @@ class Depense{
         global $conn;
         $data = [];
         $sql = "SELECT * FROM depenses WHERE datedepense= '$date'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+       return $data ;
+        
+    }
+
+    public function AllDepenseWeek($datedebut,$datefin){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM depenses WHERE datedepense BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);

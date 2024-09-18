@@ -19,6 +19,15 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+      .image-container {
+    text-align: center;
+    margin: 20px;
+    background-image: url('img/poul1.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    }
+    </style>
 
 </head>
 
@@ -26,14 +35,14 @@
 
     <br><br><br><br><br>
     <div class="container">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
+        
+        <div class="card o-hidden border-0 shadow-lg my-5 image-container">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <br>
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image">
-                        <img  src="img/poul1.jpg" alt="Responsive image">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image ">
+                        
                 </div>
                     <div class="col-lg-5">
                             <br>
@@ -44,8 +53,8 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 
-                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                        Provenderie</div>
+                                                    <div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">
+                                                       <h3> Provenderie </h3></div>
                                                     </div>
                                                 
                                             </div>
@@ -62,8 +71,8 @@
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-1">
                                                 
-                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                        Phamacie</div>
+                                                    <div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">
+                                                        <h3>Cabinet</h3></div>
                                                     </div>
                                     
                                             </div>

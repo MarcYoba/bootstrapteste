@@ -471,7 +471,9 @@
                                             echo '<th>'.$row["quantite"].'</th>';
                                             echo '<th>'.$row["prix"].'</th>';
                                             echo '<th>'.$row["datevente"].'</th>';
-                                            echo '<th></th>';
+                                            echo '<th>';
+                                            echo "<a href='facture.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fa fa-bars'></i></a>";
+                                            echo'</th>';
                                             echo '</tr>';
                                         }
                                     ?>

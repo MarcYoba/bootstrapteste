@@ -26,12 +26,38 @@ class Versement{
         return $row["montant"]; 
     }
 
+    public function ByWeekVersement($datebedut,$datafin){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement BETWEEN '$datebedut'  AND '$datafin'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
     public function ByDateVersementOm($date){
         global $conn;
         $sql = "SELECT SUM(Om) as Om FROM versement WHERE dateversement= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["Om"]; 
+    }
+
+    public function ByWeekVersementOm($datedebut,$datefin){
+        global $conn;
+        $sql = "SELECT SUM(Om) as Om FROM versement WHERE dateversement BETWEEN '$datedebut'  AND '$datefin'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["Om"]; 
+    }
+
+    public function ByDateVersementCash($date){
+        
+        return ($this->ByDateVersement($date) - $this->ByDateVersementOm($date));
+    }
+
+    public function ByWeekVersementCash($datedebut,$datefin){
+        
+        return ($this->ByWeekVersement($datedebut,$datefin) - $this->ByWeekVersementOm($datedebut,$datefin));
     }
 
     public function AllVersement(){
@@ -52,6 +78,19 @@ class Versement{
         $data = [];
 
         $sql = "SELECT * FROM versement WHERE dateversement= '$this->dateversement'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+
+        return $data; 
+    }
+
+    public function AllVersementWeek($datebedut,$detefin){
+        global $conn;
+        $data = [];
+
+        $sql = "SELECT * FROM versement WHERE dateversement BETWEEN '$datebedut'  AND '$detefin'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);

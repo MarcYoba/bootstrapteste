@@ -42,6 +42,18 @@ class Vente{
         return $this->data; 
     }
 
+    public function getIdVenteByWeek($datedebut ,$datefin) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT id FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data; 
+    }
+
     public function getSommeVente() {
         global $conn;
         $sql = "SELECT SUM(montant) as montant FROM facture WHERE datefacture= CURRENT_DATE";
@@ -52,7 +64,15 @@ class Vente{
 
     public function getSommeVentedate($date) {
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM facture WHERE datefacture= '$date'";
+        $sql = "SELECT SUM(prix) as montant FROM vente WHERE datevente= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function getSommeVenteWeek($datedebut, $datefin) {
+        global $conn;
+        $sql = "SELECT SUM(prix) as montant FROM vente WHERE datevente BETWEEN '$datedebut' AND  '$datefin' ";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -74,6 +94,14 @@ class Vente{
         return $row["cash"]; 
     }
 
+    public function getSommeCashWeek($datedebut,$datefin) {
+        global $conn;
+        $sql = "SELECT SUM(cash) as cash FROM vente WHERE datevente BETWEEN '$datedebut'  AND '$datefin'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["cash"]; 
+    }
+
     public function getSommeCredit() {
         global $conn;
         $sql = "SELECT SUM(credit) as credit FROM vente WHERE datevente= CURRENT_DATE";
@@ -85,6 +113,14 @@ class Vente{
     public function getSommeCreditDate($date) {
         global $conn;
         $sql = "SELECT SUM(credit) as credit FROM vente WHERE datevente= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["credit"]; 
+    }
+
+    public function getSommeCreditWeek($datedebut,$datefin) {
+        global $conn;
+        $sql = "SELECT SUM(credit) as credit FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["credit"]; 
@@ -106,9 +142,24 @@ class Vente{
         return $row["Om"]; 
     }
 
+    public function getSommeOmWeek($datedebut,$datefin) {
+        global $conn;
+        $sql = "SELECT SUM(Om) as Om FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["Om"]; 
+    }
+
     public function getSommeReduction() {
         global $conn;
         $sql = "SELECT SUM(reduction) as reduction FROM vente WHERE datevente= CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["reduction"]; 
+    }
+    public function getReductionForVente($idvente) {
+        global $conn;
+        $sql = "SELECT reduction as reduction FROM vente WHERE id= '$idvente'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["reduction"]; 
@@ -117,6 +168,14 @@ class Vente{
     public function getSommeReductionDate($date) {
         global $conn;
         $sql = "SELECT SUM(reduction) as reduction FROM vente WHERE datevente= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["reduction"]; 
+    }
+
+    public function getSommeReductionWeek($datedebut,$datefin) {
+        global $conn;
+        $sql = "SELECT SUM(reduction) as reduction FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["reduction"]; 
@@ -137,6 +196,17 @@ class Vente{
         global $conn;
         $this->data =[];
         $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE `datefacture`= '$date' GROUP BY nomproduit";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
+
+    public function getSommeProduitWeek($datedebut,$datefin) {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -171,7 +241,11 @@ class Vente{
                 $prix+=$rowfacture["prix"];
             }
             $tab = ["Total",$quantite,$prix,$montant,"-","-"];
+            $tabr = ["Reduction","-","-",$this->getReductionForVente($idfacutre),"-","-"];
+            $tabn = ["Net a payer","-","-",$montant-$this->getReductionForVente($idfacutre),"-","-"];
             array_push($valdata,$tab);
+            array_push($valdata,$tabr);
+            array_push($valdata,$tabn);
         return $valdata;
     }
 }

@@ -3,7 +3,7 @@ const  inputQuantite = document.getElementById("quantite");
 const  inputPrix = document.getElementById("prixglobal");
 const  inputproduit = document.getElementById("nomProduit");
 const  inputreduction = document.getElementById("reduction");
-
+const data = JSON.parse(localStorage.getItem("myData"));
 
 
 var quantiteTotal = 0;
@@ -232,7 +232,7 @@ function ajouterLigne(dataTable,...donnees){
 }
 
 
-function enregistrementBD(){
+function recuperationdonneTable() {
     const tableau = document.getElementById('dataTable');
     const datevente = document.getElementById('datevente').value;
     let donnees = [];
@@ -270,44 +270,54 @@ function enregistrementBD(){
         donnees.push({...data});  //on peut aussi  declarer directement let data = {} dans la boucle pour redure le programme
         data.value++;
         
-        fetch('register.php',{
-            method:'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(donnees)
-        })
-        .then(response => response.json())
-        .then(data => { 
-            if (data.success == true) {
-                document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-info"> enregistrement des donne avec success</p>';
-                window.location.href = 'facture.php?id='+ data.message;
-                console.log(data);
-            }else if(data.success == false){
-                document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> Verifier que le produit ne sont conforme </p>';
-            }else{
-                console.log(data);
-            }     
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        
         
     } else {
         document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning">ajouter la ligne en suite cliquer sur enregistrer  </p>';
     }
+
+
+    return donnees;
+}
+
+
+function enregistrementBD(){
+
+    let donnees =[];
+    donnees = recuperationdonneTable();
+    fetch('register.php',{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(donnees)
+    })
+    .then(response => response.json())
+    .then(data => { 
+        if (data.success == true) {
+            document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-info"> enregistrement des donne avec success</p>';
+            window.location.href = 'facture.php?id='+ data.message;
+            console.log(data);
+        }else if(data.success == false){
+            document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> Verifier que le produit ne sont conforme </p>';
+        }else{
+            console.log(data);
+        }     
+    })
+    .catch(error => {
+        console.error(error);
+    });
     
 }
 
 function enregistrementDonnees(){
-
-    calculeprixTotalquantitetotal();
-    calculeTotal();
+    let cahs = document.getElementById("cash").value;
+    let credit = document.getElementById("credit").value;
+    let momo = document.getElementById("momo").value;
+    somme = parseInt(momo) + parseInt(cahs)+parseInt(credit) ;
+    if ((somme) == (document.getElementById("Total").value)) 
+    {
     
-    // if ((document.getElementById("cash").value +
-    //     document.getElementById("credit").value +
-    //     document.getElementById("momo").value) == (document.getElementById("Total").value)) 
-    // {
         if(document.getElementById("momo").value == 0){
             if (document.getElementById("cash").value == 0) {
                 if (document.getElementById("credit").value == 0) {
@@ -322,8 +332,161 @@ function enregistrementDonnees(){
         else{
             enregistrementBD();
         }
-    // } else {
-    //     document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> verifier le total des montants dans differents case</p>';  
-    // }
+   
+    } else {
+        console.log("Om+CREDI+cash : "+somme);
+        console.log("total : "+(document.getElementById("Total").value));
+        document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> verifier le total des montants dans differents case</p>';  
+    }
     
+}
+
+function LigneventeMofiier(donnees){
+    const tableau = document.getElementById('dataTable');
+
+   // const  Typepaiement = document.getElementById("Typepaiement").value;
+
+        
+        const nbligne = tableau.rows.length;
+        //creer une nouvelle ligne
+       const nouvelleLigne = tableau.insertRow();
+       
+        const nouvellecellule = nouvelleLigne.insertCell();
+        const input = document.createElement('p');
+        input.innerHTML = donnees.idclient ;
+        input.classList.add('form-control', 'form-control-user');
+        nouvellecellule.appendChild(input);
+    
+        
+        const nouvellecellule2 = nouvelleLigne.insertCell();
+        const p2 = document.createElement('p');
+        p2.innerHTML = donnees.nomproduit;
+        p2.classList.add('form-control', 'form-control-user');
+        nouvellecellule2.appendChild(p2);
+    
+        const nouvellecellule3 = nouvelleLigne.insertCell();
+        const p3 = document.createElement('p');
+        p3.innerHTML = donnees.quantite;
+        p3.classList.add('form-control', 'form-control-user');
+        nouvellecellule3.appendChild(p3);
+    
+        const nouvellecellule4 = nouvelleLigne.insertCell();
+        const p4 = document.createElement('p');
+        p4.innerHTML = donnees.prix;
+        p4.classList.add('form-control', 'form-control-user');
+        nouvellecellule4.appendChild(p4);
+    
+        const nouvellecellule5 = nouvelleLigne.insertCell();
+        const p5 = document.createElement('p');
+        p5.innerHTML = (donnees.montant);
+        p5.classList.add('form-control', 'form-control-user');
+        nouvellecellule5.appendChild(p5);
+        
+        const nouvellecellule6 = nouvelleLigne.insertCell();
+        const p6 = document.createElement('p');
+        p6.id = (nbligne +1);
+        p6.innerHTML ='<a class="btn btn-primary" onclick="getLigne(dataTable,'+(nbligne +1)+')"><i class="fas fa-pencil-alt"></i></a>  ' + (nbligne +1);
+       // p6.classList.add('form-control', 'form-control-user');
+        nouvellecellule6.appendChild(p6);
+        
+        quantiteTotal =0;//+= donnees.quantite;
+        prixtotal =0;//+= donnees.prix;
+
+         calculeprixTotalquantitetotal();
+         document.getElementById("quantitetotal").innerHTML = quantiteTotal;
+         document.getElementById("prixtotal").textContent = prixtotal;
+         document.getElementById("Total").value=prixtotal;
+         document.getElementById("TypePaie").innerText = donnees.Typepaiement
+        document.getElementById("TypePaie").style.display="block";
+    //    // document.getElementById("prixtotal").textContent = '';
+    //     document.getElementById("resultat").innerHTML='';
+    //     document.getElementById("nomProduit").value='';  
+    //    // document.getElementById("Typepaiement").value='';
+    document.getElementById("idfacture").textContent = donnees.id;
+    document.getElementById("idvente").textContent = donnees.idvente;
+    
+}
+function editevente(){
+    if (typeof data === 'undefined' || data === null) {
+        console.log("La variable est undefined ou null");
+      }else{
+        
+        data.forEach(element => {
+           // console.log(element);
+            LigneventeMofiier(element);
+        });
+        localStorage.removeItem('myData');
+      
+      document.getElementById("modifiervente").innerHTML = '<button  class="btn btn-warning btn-user btn-block" onclick="saveedite()" >Modifier</button>';
+    }
+      
+
+}
+editevente();// affiche la vente
+
+
+function enregistrementEdite(){
+    let idfacture = document.getElementById("idfacture").textContent;
+    let idvente = document.getElementById("idvente").textContent;
+
+    let donnees =[];
+    donnees = recuperationdonneTable();
+    let data = {idvente,idfacture};
+    donnees.push({...data});  //on peut aussi  declarer directement let data = {} dans la boucle pour redure le programme
+    data.value++;
+    //console.log(donnees);
+    
+    fetch('Edite.php',{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(donnees)
+    })
+    .then(response => response.json())
+    .then(data => { 
+        if (data.success == true) {
+            document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-info"> Modification des donnes avec success</p>';
+            //window.location.href = 'facture.php?id='+ data.message;
+            console.log("edite : "+data);
+        }else if(data.success == false){
+            document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> Verifier que le produit ne sont conforme </p>';
+        }else{
+            console.log(data);
+        }     
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    
+}
+
+function saveedite(){
+   let cahs = document.getElementById("cash").value;
+    let credit = document.getElementById("credit").value;
+    let momo = document.getElementById("momo").value;
+    somme = parseInt(momo) + parseInt(cahs)+parseInt(credit) ;
+    if ((somme) == (document.getElementById("Total").value)) 
+    {
+    
+        if(document.getElementById("momo").value == 0){
+            if (document.getElementById("cash").value == 0) {
+                if (document.getElementById("credit").value == 0) {
+                    document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH ou Credit</p>';
+                } else {
+                    enregistrementEdite()
+                }
+            } else {
+                enregistrementEdite() 
+            }
+        }
+        else{
+            enregistrementEdite()
+        }
+   
+    } else {
+        console.log("Om+CREDI+cash : "+somme);
+        console.log("total : "+(document.getElementById("Total").value));
+        document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> verifier le total des montants dans differents case</p>';  
+    }
 }

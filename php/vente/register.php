@@ -171,7 +171,7 @@ function insertDette($quantite,$prix,$idvente,$idclient) {
     
 }
 
-function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie) {
+function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,$datevente) {
     global $conn;
 
     // Préparer la requête SQL
@@ -187,7 +187,11 @@ function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie)
     }
     $montant = $quantite * $prix;
 
-    $date = date("y/m/d");
+    if ($datevente == "") {
+        $date = date("y/m/d");
+    } else {
+        $date = $datevente;
+    }
     $stmt->bind_param('sdddsddsd',$nomproduit, $quantite, $prix,$montant,$typepaie, $idclient, $_SESSION["id"], $date,$idvente);
 
     // Exécuter la requête
@@ -273,7 +277,7 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
             }
     
         foreach ($donnees as $key => $value) {
-            insertFacture($value["produit"],$value["quantite"],$value["prix"],$tab["idvente"] ,$value["fournisseur"],$tab["typepaiement"]);             
+            insertFacture($value["produit"],$value["quantite"],$value["prix"],$tab["idvente"] ,$value["fournisseur"],$tab["typepaiement"],$datevente);             
         }
         $id = $tab["idvente"];
         $sql = "SELECT id FROM facture WHERE idvente = '$id'";

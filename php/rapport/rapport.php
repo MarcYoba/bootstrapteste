@@ -58,7 +58,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <input type="date" class="form-control form-control-user" id="date"
-                                        name="date" placeholder="telephone client" required>
+                                        name="date" placeholder="telephone client">
                                     </div>
                                     <div class="col-sm-6">
                                     <a href="../pdf/getPdftoday.php">
@@ -68,6 +68,29 @@
                                         </a>
                                     </div>
                                 </div>
+                                <hr>
+                                <hr>  
+                            </form>
+                            <form class="user" action="../pdf/getRapportSemaine.php" method="post">
+                            <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control form-control-user" id="date"
+                                        name="datedebutsemain" placeholder="telephone client" >
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control form-control-user" id="date"
+                                        name="datefinsemain" placeholder="telephone client" >
+                                    </div>
+                                    <div class="col-sm-4">
+                                    <a href="../pdf/getRapportSemaine.php">
+                                            <button type="" name="" id="" class="btn btn-warning btn-user btn-block">
+                                            Rapport part semain / MOI
+                                            </button> 
+                                        </a>
+                                    </div>
+                                </div>
+                                <hr>
+                                <hr>
                             </form>
                             <hr>
                         </div>

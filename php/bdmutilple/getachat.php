@@ -18,6 +18,20 @@ class Achat{
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
     }
+    public function getByDate($date){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM achat WHERE dateachat= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+    public function getByWeek($datedebut,$datefin){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM achat WHERE dateachat BETWEEN '$datedebut' AND '$datefin'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
     public function AllAchat(){
         global $conn;
         $data = [];
@@ -34,6 +48,18 @@ class Achat{
         global $conn;
         $data = [];
         $sql = "SELECT * FROM achat WHERE dateachat= '$date'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+       return $data ;
+        
+    }
+
+    public function AllAchatWeek($datedebut,$datefin){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM achat WHERE dateachat BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
