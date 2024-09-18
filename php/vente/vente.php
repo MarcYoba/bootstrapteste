@@ -24,6 +24,14 @@ require_once("../connexion.php");
 
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .drop{
+            display: none;
+        }
+        #TypePaie {
+            color: red;
+        }
+    </style>
 
 </head>
 
@@ -66,27 +74,30 @@ require_once("../connexion.php");
                                                 <p class="col-md-2" >
                                                     MOM/OM
                                                     <input type="number" class="form-control form-control-user"
-                                                    name="momo" id="momo" placeholder="0 FCFA" required>
+                                                    name="momo" id="momo" value="0" required>
                                                 </p>
                                                 <p class="col-md-2" >
                                                     Cash
                                                     <input type="number" class="form-control form-control-user"
-                                                    name="cash" id="cash" placeholder="0 FCFA" required>
+                                                    name="cash" id="cash" value="0" required>
                                                 </p>
                                                 <p class="col-md-2" >
                                                     Credit
                                                     <input type="number" class="form-control form-control-user"
-                                                    name="credit" id="credit" placeholder="0 FCFA" required>
+                                                    name="credit" id="credit" value="0" required>
                                                 </p>
                                                 <p class="col-md-2" >
                                                     Reduction
                                                     <input type="number" class="form-control form-control-user"
-                                                    name="reduction" id="reduction" placeholder="0 FCFA" required>
+                                                    name="reduction" id="reduction" value="0" required>
                                                 </p>
                                                 <p class="col-md-2" >
                                                     Net payer
                                                     <input type="txt" class="form-control form-control-user"
                                                      name="Total" id="Total" placeholder="0 FCFA"  readonly>
+                                                </p>
+                                                <p class="col-md-2" >
+                                                    <span id="TypePaie" class="drop" ></span>
                                                 </p>
                                                 
                                             </div>
@@ -167,11 +178,14 @@ require_once("../connexion.php");
                                                             </th> 
                                                             <th  >
                                                                 <span id="modifierligne"></span>
+                                                                <span id="idfacture" class="drop"></span>
+                                                                <span id="idvente" class="drop"></span>
                                                             </th> 
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                                 <hr>
+                                                <span id="modifiervente"></span>
                                                 <span id="enregistremet"></span>
                                             </div>
                                         </div>
@@ -205,6 +219,7 @@ require_once("../connexion.php");
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
     <script src="nouvellelignevente.js"></script>
+    <!--<script src="listeVente.js"></script>--->
 
 </body>
 

@@ -1,4 +1,6 @@
-<?php require_once("../connexion.php"); 
+<?php 
+require_once("../connexion.php"); 
+require_once("../bdmutilple/getclient.php");
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +27,11 @@
 
     <!-- Custom styles for this page -->
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+        .cacher{
+            display: none;
+        }
+    </style>
 
 </head>
 
@@ -412,11 +419,17 @@
                         <div class="card-header py-3"> 
                                 <div class="row">
                                     <p class="col-md-0"><h6 class="m-0 font-weight-bold text-primary">facture</h6></p>
-                                    <p class="col-md-2"></p>
-                                    <p class="col-md-2"></p>
+                                    <p class="col-md-2"> </p>;
                                     <?php
-                                    echo "<p class='col-md-2 '> <a href='../pdf/getfacture.php?id=" . $_GET["id"] . "' class='btn btn-info btn-user'>Imprimer</a></p>
-";
+                                        $client = new Client(1);
+                                        $value = $client->getClientByIdVente($_GET["id"]);
+
+                                    echo '<p class="col-md-2"> Nom Client : '.$value["firstname"].'</p>';
+                                    echo '<p class="col-md-2"> Telephone : '.$value["telephone"].'</p>';
+                                    
+                                    echo "<p class='col-md-2 '> <a href='../pdf/getfacture.php?id=" . $_GET["id"] . "' class='btn btn-info btn-user'>Imprimer</a></p>";    
+                                    echo "<p class='col-md-2 '> <buttom  class='btn btn-warning btn-user' onclick='editefacture()'>Edite</buttom></p>"; 
+                                    echo "<span class='cacher' id='id'>".$_GET["id"]."</span>";                            
                                     ?>
                                 </div>
                         </div>
@@ -551,6 +564,7 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="listeVente.js"></script>
 
 </body>
 

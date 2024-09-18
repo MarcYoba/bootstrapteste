@@ -20,6 +20,14 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .start{
+            color: gold;
+        }
+        .amount{
+            display: none;
+        }
+    </style>
 
 </head>
 
@@ -36,7 +44,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                I </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">ABGROUP <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -482,10 +490,17 @@
                                                     ACHAT (MONTANT)</div>
                                                 <?php 
                                                     global $conn;
+                                                    
                                                     $sql = "SELECT SUM(montant) as montant FROM achat WHERE MONTH(dateachat) = MONTH(NOW())";
                                                     $result = $conn->query($sql);
                                                     $row = mysqli_fetch_assoc($result);
-                                                    echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$row["montant"].' FCFA'.'</div>'; 
+                                                    $nbetoile = 10;
+                                                    $etoile = "*";
+                                                    for ($i=0; $i <$nbetoile ; $i++) { 
+                                                        $etoile .= "*";
+                                                    }
+                                                    echo '<span  id="achat">'.$etoile.'</span>';
+                                                    echo '<div class="h5 mb-0 font-weight-bold text-gray-800 amount" id="montantachat">'.round($row["montant"],2).' FCFA'.'</div>'; 
                                                         //var_dump($row);
                                                 ?>
                                             </div>
@@ -512,7 +527,13 @@
                                                     $sql = "SELECT SUM(prix) as montant FROM vente WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'";
                                                     $result = $conn->query($sql);
                                                     $row = mysqli_fetch_assoc($result);
-                                                    echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.($row["montant"]).' FCFA'.'</div>'; 
+                                                    $nbetoile = 10;
+                                                    $etoile = "*";
+                                                    for ($i=0; $i <$nbetoile ; $i++) { 
+                                                        $etoile .= "*";
+                                                    }
+                                                    echo '<span  id="vente">'.$etoile.'</span>';
+                                                    echo '<div class="h5 mb-0 font-weight-bold text-gray-800 amount" id="montantvente">'.round($row["montant"],2).' FCFA'.'</div>'; 
                                                         //var_dump($row);
                                                     ?>
                                             </div>
@@ -539,7 +560,13 @@
                                                 $sql = "SELECT SUM(prix) as montant FROM vente WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CREDIT'";
                                                 $result = $conn->query($sql);
                                                 $row = mysqli_fetch_assoc($result);
-                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
+                                                $nbetoile = 10;
+                                                    $etoile = "*";
+                                                    for ($i=0; $i <$nbetoile ; $i++) { 
+                                                        $etoile .= "*";
+                                                    }
+                                                    echo '<span  id="dette">'.$etoile.'</span>';
+                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount " id="montantdette">'.$row["montant"].' FCFA'.'</div>'; 
                                                     //var_dump($row);
                                             ?>
                                         </div>
@@ -566,7 +593,13 @@
                                                 $sql = "SELECT SUM(montant) as montant FROM versement WHERE MONTH(dateversement) = MONTH(NOW())";
                                                 $result = $conn->query($sql);
                                                 $row = mysqli_fetch_assoc($result);
-                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
+                                                $nbetoile = 10;
+                                                    $etoile = "*";
+                                                    for ($i=0; $i <$nbetoile ; $i++) { 
+                                                        $etoile .= "*";
+                                                    }
+                                                    echo '<span  id="verse">'.$etoile.'</span>';
+                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount" id="monversement">'.round($row["montant"],2).' FCFA'.'</div>'; 
                                                     //var_dump($row);
                                             ?>
                                         </div>
@@ -593,7 +626,13 @@
                                                         $sql = "SELECT SUM(montant) as montant FROM caisse WHERE MONTH(dateoperation) = MONTH(NOW())";
                                                         $result = $conn->query($sql);
                                                         $row = mysqli_fetch_assoc($result);
-                                                        echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
+                                                        $nbetoile = 10;
+                                                        $etoile = "*";
+                                                        for ($i=0; $i <$nbetoile ; $i++) { 
+                                                            $etoile .= "*";
+                                                        }
+                                                        echo '<span  id="caise">'.$etoile.'</span>';
+                                                        echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount"  id="montcaise">'.round($row["montant"],2).' FCFA'.'</div>'; 
                                                             //var_dump($row);
                                                     ?>
                                                 </div>
@@ -619,7 +658,13 @@
                                                         $sql = "SELECT SUM(montant) as montant FROM depenses WHERE MONTH(datedepense) = MONTH(NOW())";
                                                         $result = $conn->query($sql);
                                                         $row = mysqli_fetch_assoc($result);
-                                                        echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger ">'.$row["montant"].' FCFA'.'</div>'; 
+                                                        $nbetoile = 10;
+                                                        $etoile = "*";
+                                                        for ($i=0; $i <$nbetoile ; $i++) { 
+                                                            $etoile .= "*";
+                                                        }
+                                                         echo '<span  id="depense">'.$etoile.'</span>';
+                                                        echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount" id="montdepense">'.$row["montant"].' FCFA'.'</div>'; 
                                                             //var_dump($row);
                                                     ?>
                                                 </div>
@@ -658,8 +703,9 @@
                                             aria-labelledby="dropdownMenuLink">
                                             <div class="dropdown-header">Dropdown Header:</div>
                                             <a class="dropdown-item" href="#">Action</a>
+                                            <button class="dropdown-item" onclick="affichemontant()">affiche</button>
                                             <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
+                                            <div class="dropdown-divider" ></div>
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </div>
@@ -862,6 +908,16 @@
     <script src="js/demo/chart-area-semaine.js"></script>
     <script src="js/demo/chart-pie-semain.js"></script>
     <script src="js/demo/chart-bar-semain.js"> </script>
+    <script>
+        function affichemontant(params) {
+            document.getElementById('achat').innerHTML= document.getElementById('montantachat').innerText;
+            document.getElementById('depense').innerHTML= document.getElementById('montdepense').innerText;
+            document.getElementById('dette').innerHTML= document.getElementById('montantdette').innerText;
+            document.getElementById('caise').innerHTML= document.getElementById('montcaise').innerText;
+            document.getElementById('verse').innerHTML= document.getElementById('monversement').innerText;
+            document.getElementById('vente').innerHTML= document.getElementById('montantvente').innerText;//.style.display='block';
+        }
+    </script>
 
 </body>
 </html>

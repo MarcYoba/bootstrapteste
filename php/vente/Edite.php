@@ -1,28 +1,19 @@
 <?php
- require_once("../connexion.php");
+require_once("../bdmutilple/getfacture.php");
+//header('Content-Type: application/json');
 
- global $conn;
 
-// Récupération de l'ID
-$id = $_GET['id'];
+$json = file_get_contents("php://input");
+$donnees = json_decode($json,true);
 
-// Requête SQL pour récupérer les informations de la vente
-$sql = "SELECT * FROM vente WHERE id = $id";
-$result = $conn->query($sql);
+if (is_array($donnees) == false) {
+    $facture = new Facture($donnees);
+    $result = $facture->getByIdidFacture();
+    echo json_encode($result);
+} 
+elseif (is_array($donnees) == true) {
+    $ligenid = array_pop($donnees);
 
-if ($result->num_rows > 0) {
-    // Affichage des données dans un formulaire (exemple)
-    while($row = $result->fetch_assoc()) {
-        echo "<form>";
-        echo "<label for='typevente'>Type de vente:</label>";
-        echo "<input type='text' name='typevente' value='" . $row["typevente"] . "'><br>";
-        // ... (autres champs)
-        echo "<input type='submit' value='Modifier'>";
-        echo "</form>";
-    }
-} else {
-    echo "Vente non trouvée";
+    echo json_encode($donnees);
 }
-
-$conn->close();
 ?>
