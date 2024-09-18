@@ -413,24 +413,28 @@
                             <div class="row">
                                     <h6 class="m-0 font-weight-bold text-primary">Tables Vente</h6>
                             </div>
-                            <div class="row">
+                            <form  action="../pdf/getTypeVente.php" method="post" class="user row" >
                                 <p class="col-md-1"></p>
                                 <p class="col-md-2"> 
-                                        <input class="form-check-input" type="checkbox" id="OM">
+                                        <input class="form-check-input" type="checkbox" id="OM" name="OM" value="OM">
                                         <label class="form-check-label" id="OM">OM</label>
                                 </p>
                                 <p class="col-md-2">
-                                        <input class="form-check-input" type="checkbox" id="credit">
+                                        <input class="form-check-input" type="checkbox" id="credit" name="credit" value="credit">
                                         <label class="form-check-label" id="credit">crédit</label>
                                 </p>
                                 <p class="col-md-2">
-                                        <input class="form-check-input" type="checkbox" id="cash">
+                                        <input class="form-check-input" type="checkbox" id="cash" name="cash" value="cash">
                                         <label class="form-check-label" id="cash">cash</label>
                                 </p>
                                 <p class="col-md-2">
-                                        <input class="form-control form-control-user" type="date" id="date">    
+                                        <input class="form-control form-control-user" type="date" id="date" name="date" require>    
                                 </p>
-                            </div>
+                                <p class="col-md-2">
+                                    <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                </p>
+                            
+                            </form>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -467,7 +471,7 @@
                                             echo '<tr>';
                                             echo '<th>'.$row["id"].'</th>';
                                             echo '<th>'.$row["typevente"].'</th>';
-                                            echo '<th>'.$row["numfacture"].'</th>';
+                                            echo '<th>'.$row["id"].'</th>';
                                             echo '<th>'.$row["quantite"].'</th>';
                                             echo '<th>'.$row["prix"].'</th>';
                                             echo '<th>'.$row["datevente"].'</th>';

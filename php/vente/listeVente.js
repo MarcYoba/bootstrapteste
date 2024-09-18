@@ -66,4 +66,27 @@ function editefacture(){
   getVenteData(document.getElementById("id").innerText);
 }
 
+function generatePDF() {
+  // Récupérer les données du formulaire
+  var formData = new FormData(document.getElementById("myForm"));
+
+  // Envoyer les données au fichier PHP
+  fetch('../pdf/getTypeVente.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.blob())
+  .then(blob => {
+    // Créer un lien de téléchargement
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'mon_fichier.pdf';
+    link.click();
+  })
+  .catch(error => {
+    console.error('Erreur lors de la génération du PDF:', error);
+  });
+}
+
 //getVenteData();

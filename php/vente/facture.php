@@ -1,4 +1,6 @@
-<?php require_once("../connexion.php"); 
+<?php 
+require_once("../connexion.php"); 
+require_once("../bdmutilple/getclient.php");
 ?>
 
 <!DOCTYPE html>
@@ -417,9 +419,14 @@
                         <div class="card-header py-3"> 
                                 <div class="row">
                                     <p class="col-md-0"><h6 class="m-0 font-weight-bold text-primary">facture</h6></p>
-                                    <p class="col-md-2"></p>
-                                    <p class="col-md-2"></p>
+                                    <p class="col-md-2"> </p>;
                                     <?php
+                                        $client = new Client(1);
+                                        $value = $client->getClientByIdVente($_GET["id"]);
+
+                                    echo '<p class="col-md-2"> Nom Client : '.$value["firstname"].'</p>';
+                                    echo '<p class="col-md-2"> Telephone : '.$value["telephone"].'</p>';
+                                    
                                     echo "<p class='col-md-2 '> <a href='../pdf/getfacture.php?id=" . $_GET["id"] . "' class='btn btn-info btn-user'>Imprimer</a></p>";    
                                     echo "<p class='col-md-2 '> <buttom  class='btn btn-warning btn-user' onclick='editefacture()'>Edite</buttom></p>"; 
                                     echo "<span class='cacher' id='id'>".$_GET["id"]."</span>";                            

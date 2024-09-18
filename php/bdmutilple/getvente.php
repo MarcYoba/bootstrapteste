@@ -42,6 +42,54 @@ class Vente{
         return $this->data; 
     }
 
+    public function getIdVenteByTypeCash($date) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT id FROM vente WHERE datevente= '$date' AND cash <> '0'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data; 
+    }
+
+    public function getIdVenteByTypeOM($date) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT id FROM vente WHERE datevente= '$date' AND Om <> '0'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data; 
+    }
+
+    public function getIdVenteByTypeCredit($date) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT id FROM vente WHERE datevente= '$date' AND credit <> '0'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data; 
+    }
+
+    public function getIdVenteByTypeCreditOM($date) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT id FROM vente WHERE datevente= '$date' AND credit <> '0' AND Om <> '0'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data; 
+    }
+
     public function getIdVenteByWeek($datedebut ,$datefin) {
         global $conn;
         $this->data = [];

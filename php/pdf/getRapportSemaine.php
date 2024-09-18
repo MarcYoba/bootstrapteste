@@ -8,6 +8,7 @@ require_once("../bdmutilple/getachat.php");
 require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
+ini_set('memory_limit', '256M');
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
@@ -55,12 +56,13 @@ $html = '
 <body>
     <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$datedebut."-".$datedefin.'</th></tr>
+        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$datedebut." au ".$datedefin.'</th></tr>
         </thead>
         <tbody>';
         foreach ($value as $line) {
+            $inclient=$client->getClientByIdVente($line["id"]);
             $html .= '<tr>';
-            $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"].'</td>';
+            $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"]." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"].'</td>';
             $html .= '</tr>
                 <tr>
                 <th scope="col">Nom produit</th>
@@ -296,7 +298,7 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 $font = $dompdf->getFontMetrics()->get_font("helvetica", "bold");
 $dompdf->getCanvas()->page_text(72, 18, "page: {PAGE_NUM} sur {PAGE_COUNT}", $font, 10, array(0,0,0));
-$dompdf->stream('mon_fichier.pdf', array('Attachment' => false));
+$dompdf->stream('mon_fichier.pdf', array('Attachment' => 1));
 
 
 ?>
