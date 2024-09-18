@@ -414,7 +414,20 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Tables Vente</h6>
                             </div>
                             <form  action="../pdf/getTypeVente.php" method="post" class="user row" >
-                                <p class="col-md-1"></p>
+
+                                <p class="col-md-2">
+                                <select id="nomProduit"  name="nomProduit"  class="form-control form-select">
+                                    <option value="ALL" selected>ALL</option>
+                                        <?php 
+                                            global $conn;
+                                            $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                            $result = $conn->query($sql);
+                                            while ($row = mysqli_fetch_assoc($result)){               
+                                                echo "<option value='".$row["nom_produit"]." ".$row["cathegorie"]."'>".$row["nom_produit"]."</option>";
+                                            }
+                                        ?>
+                                    </select>
+                                </p>
                                 <p class="col-md-2"> 
                                         <input class="form-check-input" type="checkbox" id="OM" name="OM" value="OM">
                                         <label class="form-check-label" id="OM">OM</label>

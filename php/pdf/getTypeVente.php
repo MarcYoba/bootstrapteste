@@ -8,6 +8,7 @@ require_once("../bdmutilple/getachat.php");
 require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
+
 require '../../vendor/autoload.php';
 ini_set('memory_limit', '256M');
 use Dompdf\Dompdf;
@@ -24,7 +25,7 @@ if (isset($_POST['date'])) {
 } else {
     $date = date("Y-m-d");
 }
-
+$nomPtoduit = ["nomProduit"];
 
 // Récupérer les données POST
 if (!isset($_POST['OM']) || !isset($_POST['credit']) || !isset($_POST['cash'])) {
@@ -36,9 +37,9 @@ if (!isset($_POST['OM']) || !isset($_POST['credit']) || !isset($_POST['cash'])) 
         $value = $vente->getIdVenteByTypeOM($_POST['date']);
     } else if (isset($_POST['OM']) && isset($_POST['credit']) && isset($_POST['cash']) && isset($_POST['date'])) {
         $value = $vente->getIdVenteByDate($_POST['date']);
-    } elseif(isset($_POST['cash'])) {
+    } else if(isset($_POST['cash'])) {
         $value = $vente->getIdVenteByTypeCash($_POST['date']);
-    }else{
+    }    else{
         $value = $vente->getIdVenteByDate($_POST['date']);  
     }
     
@@ -84,6 +85,8 @@ $html = '
         </thead>
         <tbody>';
         foreach ($value as $line) {
+            
+            
             $inclient=$client->getClientByIdVente($line["id"]);
             $html .= '<tr>';
             $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"]." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"].'</td>';
@@ -96,7 +99,13 @@ $html = '
                 <th scope="col">Typepaiement</th>
                 <th scope="col">datevente</th>
             </tr>';
-            $facture = $vente->getFactureVente($line["id"]);
+
+             if ($nomPtoduit != "ALL") {
+                 $facture = $vente->getFactureVenteProduit($line["id"],$_POST["nomProduit"]);
+             } else {
+                $facture = $vente->getFactureVente($line["id"]);
+             }
+            
     //var_dump($facture);
             foreach ($facture as $linefatcture) {
                 $html .= '<tr>';
