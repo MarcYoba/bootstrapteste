@@ -297,14 +297,14 @@ class Vente{
         return $valdata;
     }
 
-    public function getFactureVenteProduit($idfacutre,$nom){
+    public function getFactureVenteTrie($idfacutre){
         global $conn;
             $valdata = [];
             $montant = 0;
             $quantite = 0;
             $prix = 0;
 
-            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre' AND nomproduit='$nom'";
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre'";
             $resultfa = $conn->query($sqlfacture); 
             while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
                 array_push($valdata,$rowfacture);
@@ -319,6 +319,41 @@ class Vente{
             array_push($valdata,$tabr);
             array_push($valdata,$tabn);
         return $valdata;
+    }
+
+    public function getFactureVenteProduit($idfacutre,$nom){
+        global $conn;
+            $valdata = [];
+            $montant = 0;
+            $quantite = 0;
+            $prix = 0;
+
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre' AND nomproduit='$nom'";
+            $resultfa = $conn->query($sqlfacture); 
+            while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
+                
+                    array_push($valdata,$rowfacture);
+                    $montant+=$rowfacture["montant"];
+                    $quantite+=$rowfacture["quantite"];
+                    $prix+=$rowfacture["prix"];
+                
+                
+            }
+            $tab = ["Total",$quantite,$prix,$montant,"-","-"];
+            $tabr = ["Reduction","-","-",$this->getReductionForVente($idfacutre),"-","-"];
+            $tabn = ["Net a payer","-","-",$montant-$this->getReductionForVente($idfacutre),"-","-"];
+            array_push($valdata,$tab);
+            array_push($valdata,$tabr);
+            array_push($valdata,$tabn);
+            if ($montant ==0) {
+                $valdata = [];
+                array_push($valdata);
+                return $valdata ;
+            } else {
+                return $valdata;
+            }
+            
+        
     }
 }
 

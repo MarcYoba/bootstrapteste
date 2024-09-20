@@ -24,6 +24,7 @@ require_once("../connexion.php");
 
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
         .drop{
             display: none;
@@ -31,6 +32,8 @@ require_once("../connexion.php");
         #TypePaie {
             color: red;
         }
+
+        
     </style>
 
 </head>
@@ -101,6 +104,57 @@ require_once("../connexion.php");
                                                 </p>
                                                 
                                             </div>
+                                            <div class="row">
+                                                <p class="col-md-2 btn btn-info">
+                                                    <input type="search" id="recherche" onkeyup="myFunction()"  class="form-control form-control-user" placeholder="recherche"><br>
+                                                    <input type="tel" id="telephone"   class="form-control form-control-user" placeholder="telephone"> <br>
+                                                    <button class="btn btn-primary btn-user" onclick="enregistremetnclient()">enregistrer</button>
+                                                </p>
+                                                <p class="col-md-4" >
+                                                    <select id="fournisseur"  name="fournisseur"   class="form-control form-select"  size="10" multiple aria-label="multiple select " onchange="Client()" required>
+                                                                    
+                                                        <?php 
+                                                            global $conn;
+                                                            $sql = "SELECT id, firstname, adresse FROM client";
+                                                            $result = $conn->query($sql);
+                                                            while ($row = mysqli_fetch_assoc($result)){     
+                                                                echo "<option value='".$row["firstname"]."'>".$row["firstname"]."</option>";       
+                                                                            //var_dump($row);
+                                                            }
+                                                        ?> 
+                                                    </select>
+                                                    <span id="idclient" class="drop"></span>
+                                                </p>
+                                                
+                                                <p class="col-md-2" >
+                                                    <input type="search" id="rechercheP" onkeyup="myFunctionP()"  class="form-control form-control-user" placeholder="recherche"><br>
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="quantite" id="quantite" placeholder="quantite" required><br>
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="prixglobal" id="prixglobal" placeholder="Prix du produit" ><br>
+                                                    <i  id="montanttotal" class="form-control form-control-user"><span id="resultat" ></span></i>
+                                                </p>
+                                                <p class="col-md-4" >
+                                                <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="10"  multiple aria-label="multiple select " required onchange="recherchePrix()">
+                                                                        <option selected> </option>
+                                                                        <?php 
+                                                                        global $conn;
+                                                                        $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                                                        $result = $conn->query($sql);
+                                                                        while ($row = mysqli_fetch_assoc($result)){
+                                                                            
+                                                                            echo "<option value='".$row["nom_produit"]." ".$row["cathegorie"]."'>".$row["nom_produit"]."</option>";
+                                                                            
+                                                                            //var_dump($row);
+                                                                        }
+                                                                    ?>
+                                                                    </select>
+                                                </p>
+                                                <p class="col-md-2" >
+                                                    
+                                                </p>
+                                                
+                                            </div>
                                             <span id="verificatiobDonne"></span>
                                         </div>
                                         <div class="card-body">
@@ -125,20 +179,7 @@ require_once("../connexion.php");
                                                         <tr class="br-primary">
                                                             <th  >
                                                             <div class="form-group ">
-                                                                <select id="fournisseur"  name="fournisseur"  class="form-control form-select" required>
-                                                                    
-                                                                    <?php 
-                                                                        global $conn;
-                                                                        $sql = "SELECT id, firstname, adresse FROM client";
-                                                                        $result = $conn->query($sql);
-                                                                        while ($row = mysqli_fetch_assoc($result)){
-                                                                            
-                                                                            echo "<option value='".$row["id"]."'>".$row["firstname"]." ".$row["adresse"]."</option>";
-                                                                            
-                                                                            //var_dump($row);
-                                                                        }
-                                                                    ?> 
-                                                                </select>
+                                                                
                                                             </div>
                                                             </th>
                                                             <th>
@@ -146,35 +187,18 @@ require_once("../connexion.php");
                                                                 
                                                                 <!-- <input type="text" class="form-control form-control-user" id="Nomproduit"
                                                                     name="Nomproduit" placeholder="Nom produit" required> -->
-                                                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select" required onchange="recherchePrix()">
-                                                                        <option selected> </option>
-                                                                        <?php 
-                                                                        global $conn;
-                                                                        $sql = "SELECT  nom_produit,cathegorie FROM produit";
-                                                                        $result = $conn->query($sql);
-                                                                        while ($row = mysqli_fetch_assoc($result)){
-                                                                            
-                                                                            echo "<option value='".$row["nom_produit"]." ".$row["cathegorie"]."'>".$row["nom_produit"]."</option>";
-                                                                            
-                                                                            //var_dump($row);
-                                                                        }
-                                                                    ?>
-                                                                    </select>
+                                                                    
                                                                 
                                                             </div>
                                                         </th>
                                                             <th> 
-                                                                <input type="number" class="form-control form-control-user"
-                                                                    name="quantite" id="quantite" placeholder="quantite" required>
+                                                                
                                                             </th>
                                                             <th>
-                                                                <input type="number" class="form-control form-control-user"
-                                                                name="prixglobal" id="prixglobal" placeholder="Prix du produit" >   
+                                                                   
                                                             </th>
                                                             <th>
-                                                                <p class="form-control form-control-user" id="montanttotal">
-                                                                <span id="resultat"></span>
-                                                                </p>
+                                                                
                                                             </th> 
                                                             <th  >
                                                                 <span id="modifierligne"></span>
@@ -218,8 +242,8 @@ require_once("../connexion.php");
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-    <script src="nouvellelignevente.js"></script>
-    <!--<script src="listeVente.js"></script>--->
+   <script src="nouvellelignevente.js"></script>
+    <script src="listeVente.js"></script>
 
 </body>
 

@@ -1,8 +1,11 @@
 <?php
 
 // Connexion à la base de données
-session_start();
-require_once("../connexion.php");
+
+require_once("../bdmutilple/getclient.php");
+header('Content-Type: application/json');
+$json = file_get_contents('php://input');
+$donnees = json_decode($json,true);
 
 // Fonction pour créer un compte utilisateur
 function creerClient($nom, $prenom, $email, $mot_de_passe,$phone,$sexe) {
@@ -105,8 +108,14 @@ if (isset($_POST['submit'])) {
         header("Location: ../../404.html");
         exit();
     }
-}else{
-    echo 'non';
+}
+
+
+if (!empty($donnees)) {
+    if (is_array($donnees)) {
+        $client = new Client(1);
+       echo json_encode($client->insertToClient($donnees));
+    }
 }
 
 ?>

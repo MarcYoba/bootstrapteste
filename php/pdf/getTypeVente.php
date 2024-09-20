@@ -25,10 +25,11 @@ if (isset($_POST['date'])) {
 } else {
     $date = date("Y-m-d");
 }
-$nomPtoduit = ["nomProduit"];
+$nomPtoduit = $_POST["nomProduit"];
 
 // Récupérer les données POST
-if (!isset($_POST['OM']) || !isset($_POST['credit']) || !isset($_POST['cash'])) {
+if (!empty($_POST['OM']) || !empty($_POST['credit']) || !empty($_POST['cash'])) {
+
     if (isset($_POST['credit']) && isset($_POST['OM'])) {
         $value = $vente->getIdVenteByTypeCreditOM($_POST['date']);
     } else if (isset($_POST['credit'])) {
@@ -44,7 +45,7 @@ if (!isset($_POST['OM']) || !isset($_POST['credit']) || !isset($_POST['cash'])) 
     }
     
 } else {
-    exit();
+    $value = $vente->getIdVenteByDate($_POST['date']); 
 }
 
 
@@ -81,41 +82,48 @@ $html = '
 <body>
     <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$date.'</th></tr>
+        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$_POST['date'].'</th></tr>
         </thead>
         <tbody>';
         foreach ($value as $line) {
             
-            
-            $inclient=$client->getClientByIdVente($line["id"]);
-            $html .= '<tr>';
-            $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"]." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"].'</td>';
-            $html .= '</tr>
-                <tr>
-                <th scope="col">Nom produit</th>
-                <th scope="col">quantite</th>
-                <th scope="col">prix</th>
-                <th scope="col">montant </th>
-                <th scope="col">Typepaiement</th>
-                <th scope="col">datevente</th>
-            </tr>';
 
-             if ($nomPtoduit != "ALL") {
-                 $facture = $vente->getFactureVenteProduit($line["id"],$_POST["nomProduit"]);
+            if ($nomPtoduit == "ALL") {
+                $facture = $vente->getFactureVenteTrie($line["id"]);
+                
              } else {
-                $facture = $vente->getFactureVente($line["id"]);
+                $facture = $vente->getFactureVenteProduit($line["id"],$_POST["nomProduit"]);
              }
+
+             if (!empty($facture)) {
+                # code...
             
-    //var_dump($facture);
-            foreach ($facture as $linefatcture) {
+                $inclient=$client->getClientByIdVente($line["id"]);
                 $html .= '<tr>';
-                foreach ($linefatcture as $key => $cell) {
-                    $html .= '<td>' .$cell.'</td>';
+                $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"]." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"].'</td>';
+                $html .= '</tr>
+                    <tr>
+                    <th scope="col">Nom produit</th>
+                    <th scope="col">quantite</th>
+                    <th scope="col">prix</th>
+                    <th scope="col">montant </th>
+                    <th scope="col">Typepaiement</th>
+                    <th scope="col">datevente</th>
+                </tr>';
+    //var_dump($facture);
+                foreach ($facture as $linefatcture) {
+                    $html .= '<tr>';
+                    foreach ($linefatcture as $key => $cell) {
+                        $html .= '<td>' .$cell.'</td>';
+                    }
+                    $html .= '</tr>';
                 }
-                $html .= '</tr>';
-            }
+            } 
+
             $formule++;
         }
+
+
         $html .= '
         </tbody>
     </table>';
