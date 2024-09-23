@@ -108,7 +108,7 @@ require_once("../connexion.php");
                                                 <p class="col-md-2 btn btn-info">
                                                     <input type="search" id="recherche" onkeyup="myFunction()"  class="form-control form-control-user" placeholder="recherche"><br>
                                                     <input type="tel" id="telephone"   class="form-control form-control-user" placeholder="telephone"> <br>
-                                                    <button class="btn btn-primary btn-user" onclick="enregistremetnclient()">enregistrer</button>
+                                                    <button class="btn btn-success btn-user" onclick="enregistremetnclient()">enregistrer client</button>
                                                 </p>
                                                 <p class="col-md-4" >
                                                     <select id="fournisseur"  name="fournisseur"   class="form-control form-select"  size="10" multiple aria-label="multiple select " onchange="Client()" required>
@@ -150,8 +150,10 @@ require_once("../connexion.php");
                                                                     ?>
                                                                     </select>
                                                 </p>
-                                                <p class="col-md-2" >
-                                                    
+                                                <p class="col-md-8" ></p>
+                                                <p class="col-md-4" >
+                                                    <span id="modifiervente"></span>
+                                                    <span id="enregistremet"></span>
                                                 </p>
                                                 
                                             </div>
@@ -209,8 +211,7 @@ require_once("../connexion.php");
                                                     </tbody>
                                                 </table>
                                                 <hr>
-                                                <span id="modifiervente"></span>
-                                                <span id="enregistremet"></span>
+                                                
                                             </div>
                                         </div>
                                     </div>

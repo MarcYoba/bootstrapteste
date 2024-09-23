@@ -111,6 +111,8 @@ function calculeTotal(){
     document.getElementById("prixtotal").textContent = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
     document.getElementById("verificatiobDonne").innerHTML ='';
 }
+
+
 function recherchePrix(){
     
     let data = {};
@@ -135,11 +137,11 @@ function recherchePrix(){
                    document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> fin de stock pour ce produit: '+data.quantite+'</p>';  
                    //document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" disabled>Enregistrer</button>'
                 }else if(data.quantite <= 0){
-                    document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer</button>'
+                    document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer vente</button>'
                 }
             } else {
                 document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-info"> stock en cour : '+data.quantite+'</p>';
-                document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer</button>'
+                document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer vente</button>'
             }
             document.getElementById("prixglobal").value = data.message;
             console.log(data);
@@ -417,7 +419,7 @@ function editevente(){
         });
         localStorage.removeItem('myData');
       
-      document.getElementById("modifiervente").innerHTML = '<button  class="btn btn-warning btn-user btn-block" onclick="saveedite()" >Modifier</button>';
+      document.getElementById("modifiervente").innerHTML = '<button  class="btn btn-warning btn-user btn-block" onclick="saveedite()" >Modifier vente</button>';
     }
       
 

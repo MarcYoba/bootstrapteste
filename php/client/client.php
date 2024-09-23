@@ -19,6 +19,11 @@
 
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .drop{
+            display: none;
+        }
+    </style>
 
 </head>
 
@@ -35,6 +40,7 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Creation compte client</h1>
+                                <span id="idclient" class="drop"></span>
                             </div>
                             <form class="user" action="register.php" method="post">
                                 <div class="form-group row">
@@ -75,18 +81,21 @@
                                         </select>
                                     </div>
                                 </div>
+                                <span id="enregistrement">
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
-                                    Register Account
+                                    Enregistrer
                                 </button>
-                                
+                                </span>
                             </form>
                             <hr>
+                            <!--
                             <div class="text-center">
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
                             </div>
                             <div class="text-center">
                                 <a class="small" href="index.html">Already have an account? Login!</a>
-                            </div>
+                            </div> 
+-->
                         </div>
                     </div>
                 </div>
@@ -104,7 +113,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-
+    <script src="client.js"></script>
 </body>
-
+/sb-admin-2.min.js
 </html>

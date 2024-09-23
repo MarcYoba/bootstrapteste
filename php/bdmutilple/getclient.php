@@ -19,12 +19,45 @@ class Client{
         return $row["firstname"]; 
     }
 
+    public function getAllByIdClient($id){
+        global $conn;
+        $sql = "SELECT * FROM client WHERE id= '$id'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row; 
+    }
+
     public function getByNameClient($Name){
         global $conn;
         $sql = "SELECT id FROM client WHERE firstname= '$Name'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["id"]; 
+    }
+
+    public function DeleteClient($id){
+        global $conn;
+        $sql = "DELETE FROM user  WHERE idclient= '$id'";
+        $result = $conn->query($sql);
+
+        if ($result === true) {
+            $sql = "DELETE FROM client  WHERE id= '$id'";
+            $result = $conn->query($sql);
+
+            if ($result === true) {
+                $conn->close();
+                return "OK";
+            } else {
+                $conn->close();
+                return "ECHEC";
+            }
+        } else {
+            $conn->close();
+            return "ECHEC";
+        }
+
+        
+        
     }
 
     public function getClientByIdVente($id){
@@ -46,7 +79,7 @@ class Client{
         $tel = $tableau["tephone"];
         $sql = "INSERT INTO client (firstname, telephone, datecreation) VALUES (?, ?,?)";
 
-    // Lier les paramètres
+        // Lier les paramètres
         if (!$stmt = $conn->prepare($sql)) {
             return "erreur sql";
         }
@@ -58,6 +91,26 @@ class Client{
             return "Echec";
         }else{
             return "OK";
+        }
+    }
+
+    public function UpdateClient($tableau){
+        global $conn;
+        
+        $id = $tableau["id"] ;
+        $nom = $tableau["nom"] ;
+        $adress = $tableau["adress"] ; 
+        $sexe = $tableau["sexe"] ;
+        $tel = $tableau["phone"];
+        
+        $sql = "UPDATE client SET firstname ='$nom',adresse='$adress',telephone='$tel',sexe='$sexe' WHERE id = '$id'";
+        $result = $conn->query($sql); 
+        if ($result === True) {
+            $conn->close(); 
+            return "OK";
+        } else{
+            $conn->close(); 
+            return "ECHEC";
         }
     }
 }
