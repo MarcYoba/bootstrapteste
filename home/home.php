@@ -1,6 +1,6 @@
 <?php 
 session_start(); 
-require_once("./php/connexion.php"); 
+require_once("../php/connexion.php"); 
 //require_once("php/historique/historiqueStock.php");
 
 ?>
@@ -18,13 +18,13 @@ require_once("./php/connexion.php");
     <title>GESTION DE STOCK</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        href="../https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <style>
         .start{
             color: gold;
@@ -274,7 +274,7 @@ require_once("./php/connexion.php");
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="php/achat/liste.php">
+                                            <a href="../php/achat/liste.php">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     ACHAT (MONTANT)</div>
                                                 <?php 
@@ -308,7 +308,7 @@ require_once("./php/connexion.php");
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                        <a href="php/vente/liste.php">
+                                        <a href="../php/vente/liste.php">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 VENTE (MONTANT)</div>
                                                     <?php 
@@ -341,7 +341,7 @@ require_once("./php/connexion.php");
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                        <a href="php/dette/dette.php">
+                                        <a href="../php/dette/dette.php">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                 DETTE (MONTANT)</div>
                                                 <?php 
@@ -374,7 +374,7 @@ require_once("./php/connexion.php");
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                        <a href="php/dette/dette.php">
+                                        <a href="../php/dette/dette.php">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 VERSEMENT (MONTANT)</div>
                                                 <?php 
@@ -407,7 +407,7 @@ require_once("./php/connexion.php");
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="php/caisse/liste.php">
+                                            <a href="../php/caisse/liste.php">
                                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
                                                     CAISSE (MONTANT)</div>
                                                     <?php 
@@ -439,7 +439,7 @@ require_once("./php/connexion.php");
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="php/depenses/liste.php">
+                                            <a href="../php/depenses/liste.php">
                                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
                                                     DEPENSE (MONTANT)</div>
                                                     <?php 
@@ -616,20 +616,7 @@ require_once("./php/connexion.php");
                                 </div>
                             </div>
 
-                            <!-- Approach 
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                                        custom components and custom utility classes.</p>
-                                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                                        Bootstrap framework, especially the utility classes.</p>
-                                </div>
-                            </div>
-                            -->
+                           
                         </div>
                     </div>
 
@@ -681,22 +668,22 @@ require_once("./php/connexion.php");
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="../vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-semaine.js"></script>
-    <script src="js/demo/chart-pie-semain.js"></script>
-    <script src="js/demo/chart-bar-semain.js"> </script>
+    <script src="../js/demo/chart-area-semaine.js"></script>
+    <script src="../js/demo/chart-pie-semain.js"></script>
+    <script src="../js/demo/chart-bar-semain.js"> </script>
     <script>
         function affichemontant(params) {
             document.getElementById('achat').innerHTML= document.getElementById('montantachat').innerText;
