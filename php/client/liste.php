@@ -460,8 +460,8 @@
                                             echo '<td>'.$row["versement"].'</td>';
                                             echo '<td>'.$row["datecreation"].'</td>';
                                             echo "<td>";
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<button class='btn btn-primary' onclick='modifierClient(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
+                                            echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             echo "</td>";
                                             echo '</tr>';
                                             //var_dump($row);
@@ -536,6 +536,7 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="client.js"></script>
 
 </body>
 

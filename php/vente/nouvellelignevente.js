@@ -79,7 +79,7 @@ function calculeReductionProduit(){
         document.getElementById("verificatiobDonne").innerHTML ="";
     }else{
         document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> verifiez les donnees le montant ne peut pas etre negatif </p>';
-        document.getElementById("Total").value = (document.getElementById("prixtotal").textContent - document.getElementById("reduction").value);
+        document.getElementById("Total").value = Math.ceil(document.getElementById("prixtotal").textContent - document.getElementById("reduction").value);
     }
 
 }
@@ -107,10 +107,12 @@ function calculeTotal(){
     prixtotal = 0;
     calculeprixTotalquantitetotal();
     document.getElementById("quantitetotal").innerHTML = quantiteTotal + parseFloat(document.getElementById("quantite").value);
-    document.getElementById("Total").value = prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value);
-    document.getElementById("prixtotal").textContent = prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value);
+    document.getElementById("Total").value = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
+    document.getElementById("prixtotal").textContent = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
     document.getElementById("verificatiobDonne").innerHTML ='';
 }
+
+
 function recherchePrix(){
     
     let data = {};
@@ -135,11 +137,11 @@ function recherchePrix(){
                    document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> fin de stock pour ce produit: '+data.quantite+'</p>';  
                    //document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" disabled>Enregistrer</button>'
                 }else if(data.quantite <= 0){
-                    document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer</button>'
+                    document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer vente</button>'
                 }
             } else {
                 document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-info"> stock en cour : '+data.quantite+'</p>';
-                document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer</button>'
+                document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer vente</button>'
             }
             document.getElementById("prixglobal").value = data.message;
             console.log(data);
@@ -161,7 +163,7 @@ inputreduction.addEventListener('input',calculeReductionProduit);
 function ajouterLigne(dataTable,...donnees){
     calculeprixTotalquantitetotal();
     calculeTotal();
-    const  inputFournisseur = document.getElementById("fournisseur").value;
+    const  inputFournisseur = document.getElementById("idclient").innerText;
     const  inputDescrition = document.getElementById("nomProduit").value;
     const  inputQuantite = document.getElementById("quantite").value;
     const  inputPrix = document.getElementById("prixglobal").value;
@@ -417,7 +419,7 @@ function editevente(){
         });
         localStorage.removeItem('myData');
       
-      document.getElementById("modifiervente").innerHTML = '<button  class="btn btn-warning btn-user btn-block" onclick="saveedite()" >Modifier</button>';
+      document.getElementById("modifiervente").innerHTML = '<button  class="btn btn-warning btn-user btn-block" onclick="saveedite()" >Modifier vente</button>';
     }
       
 
@@ -490,3 +492,52 @@ function saveedite(){
         document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> verifier le total des montants dans differents case</p>';  
     }
 }
+
+function check(params) {
+    
+}
+
+function Client(element){
+    const nomClient  = document.getElementById("fournisseur").value ;
+  
+    fetch('getdata.php',{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(nomClient)
+    })
+    .then(response => response.json())
+    .then(data => { 
+        document.getElementById("idclient").innerText = data.nom;
+    })
+    .catch(error => {
+        console.error(error);
+    });
+       
+  }
+
+  function enregistremetnclient() {
+    var nom = document.getElementById("recherche").value;
+    var tel = document.getElementById("telephone").value;
+    let infoclient ={};
+    infoclient.nom = nom;
+    infoclient.tephone = tel;
+
+    fetch('../client/register.php',{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(infoclient)
+    })
+    .then(response => response.json())
+    .then(data => { 
+        document.getElementById("verificatiobDonne").innerText = data;
+        console.log(data);
+        location.reload();
+    })
+    .catch(error => {
+        console.error(error);
+    });
+  }

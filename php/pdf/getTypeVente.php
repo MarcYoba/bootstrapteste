@@ -8,6 +8,7 @@ require_once("../bdmutilple/getachat.php");
 require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
+
 require '../../vendor/autoload.php';
 ini_set('memory_limit', '256M');
 use Dompdf\Dompdf;
@@ -24,10 +25,11 @@ if (isset($_POST['date'])) {
 } else {
     $date = date("Y-m-d");
 }
-
+$nomPtoduit = $_POST["nomProduit"];
 
 // Récupérer les données POST
-if (!isset($_POST['OM']) || !isset($_POST['credit']) || !isset($_POST['cash'])) {
+if (!empty($_POST['OM']) || !empty($_POST['credit']) || !empty($_POST['cash'])) {
+
     if (isset($_POST['credit']) && isset($_POST['OM'])) {
         $value = $vente->getIdVenteByTypeCreditOM($_POST['date']);
     } else if (isset($_POST['credit'])) {
@@ -36,14 +38,14 @@ if (!isset($_POST['OM']) || !isset($_POST['credit']) || !isset($_POST['cash'])) 
         $value = $vente->getIdVenteByTypeOM($_POST['date']);
     } else if (isset($_POST['OM']) && isset($_POST['credit']) && isset($_POST['cash']) && isset($_POST['date'])) {
         $value = $vente->getIdVenteByDate($_POST['date']);
-    } elseif(isset($_POST['cash'])) {
+    } else if(isset($_POST['cash'])) {
         $value = $vente->getIdVenteByTypeCash($_POST['date']);
-    }else{
+    }    else{
         $value = $vente->getIdVenteByDate($_POST['date']);  
     }
     
 } else {
-    exit();
+    $value = $vente->getIdVenteByDate($_POST['date']); 
 }
 
 
@@ -80,33 +82,48 @@ $html = '
 <body>
     <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$date.'</th></tr>
+        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$_POST['date'].'</th></tr>
         </thead>
         <tbody>';
         foreach ($value as $line) {
-            $inclient=$client->getClientByIdVente($line["id"]);
-            $html .= '<tr>';
-            $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"]." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"].'</td>';
-            $html .= '</tr>
-                <tr>
-                <th scope="col">Nom produit</th>
-                <th scope="col">quantite</th>
-                <th scope="col">prix</th>
-                <th scope="col">montant </th>
-                <th scope="col">Typepaiement</th>
-                <th scope="col">datevente</th>
-            </tr>';
-            $facture = $vente->getFactureVente($line["id"]);
-    //var_dump($facture);
-            foreach ($facture as $linefatcture) {
+            
+
+            if ($nomPtoduit == "ALL") {
+                $facture = $vente->getFactureVenteTrie($line["id"]);
+                
+             } else {
+                $facture = $vente->getFactureVenteProduit($line["id"],$_POST["nomProduit"]);
+             }
+
+             if (!empty($facture)) {
+                # code...
+            
+                $inclient=$client->getClientByIdVente($line["id"]);
                 $html .= '<tr>';
-                foreach ($linefatcture as $key => $cell) {
-                    $html .= '<td>' .$cell.'</td>';
+                $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"]." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"].'</td>';
+                $html .= '</tr>
+                    <tr>
+                    <th scope="col">Nom produit</th>
+                    <th scope="col">quantite</th>
+                    <th scope="col">prix</th>
+                    <th scope="col">montant </th>
+                    <th scope="col">Typepaiement</th>
+                    <th scope="col">datevente</th>
+                </tr>';
+    //var_dump($facture);
+                foreach ($facture as $linefatcture) {
+                    $html .= '<tr>';
+                    foreach ($linefatcture as $key => $cell) {
+                        $html .= '<td>' .$cell.'</td>';
+                    }
+                    $html .= '</tr>';
                 }
-                $html .= '</tr>';
-            }
+            } 
+
             $formule++;
         }
+
+
         $html .= '
         </tbody>
     </table>';
