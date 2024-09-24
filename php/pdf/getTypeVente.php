@@ -26,26 +26,59 @@ if (isset($_POST['date'])) {
     $date = date("Y-m-d");
 }
 $nomPtoduit = $_POST["nomProduit"];
+//$nomclient = $_POST["client"];
 
 // Récupérer les données POST
 if (!empty($_POST['OM']) || !empty($_POST['credit']) || !empty($_POST['cash'])) {
 
-    if (isset($_POST['credit']) && isset($_POST['OM'])) {
-        $value = $vente->getIdVenteByTypeCreditOM($_POST['date']);
-    } else if (isset($_POST['credit'])) {
-        $value = $vente->getIdVenteByTypeCredit($_POST['date']);
+    if (isset($_POST['OM']) && isset($_POST['credit']) && isset($_POST['cash'])) {
+        
+        if(!empty($_POST['date']) && !empty($_POST['date2'])){
+            $value = $vente->getIdVenteByWeek($_POST['date'],$_POST['date2']);
+        }else{
+            $value = $vente->getIdVenteByDate($_POST['date']); 
+        }
+    } else if ( isset($_POST['credit']) && isset($_POST['OM'])) {   
+        if(!empty($_POST['date']) && !empty($_POST['date2'])){
+            $value = $vente->getIdVenteByTypeCreditOMInterval($_POST['date'],$_POST['date2']); 
+        }else{
+            $value = $vente->getIdVenteByTypeCreditOM($_POST['date']); 
+        }
     } else if (isset($_POST['OM'])) {
-        $value = $vente->getIdVenteByTypeOM($_POST['date']);
-    } else if (isset($_POST['OM']) && isset($_POST['credit']) && isset($_POST['cash']) && isset($_POST['date'])) {
-        $value = $vente->getIdVenteByDate($_POST['date']);
+       
+        if(!empty($_POST['date']) && !empty($_POST['date2'])){
+            $value = $vente->getIdVenteByTypeOMIterval($_POST['date'],$_POST['date2']); 
+        }else{
+            $value = $vente->getIdVenteByTypeOM($_POST['date']); 
+        }
+    } else if (isset($_POST['credit'])) {
+        
+        if(!empty($_POST['date']) && !empty($_POST['date2'])){
+            $value = $vente->getIdVenteByTypeCreditInterval($_POST['date'],$_POST['date2']);
+        }else{
+            $value = $vente->getIdVenteByTypeCredit($_POST['date']);
+        }
     } else if(isset($_POST['cash'])) {
-        $value = $vente->getIdVenteByTypeCash($_POST['date']);
+        
+        if(!empty($_POST['date']) && !empty($_POST['date2'])){
+            $value = $vente->getIdVenteByTypeCashIntervel($_POST['date'],$_POST['date2']); 
+        }else{
+            $value = $vente->getIdVenteByTypeCash($_POST['date']); 
+        }
     }    else{
-        $value = $vente->getIdVenteByDate($_POST['date']);  
+        if(!empty($_POST['date']) && !empty($_POST['date2'])){
+            $value = $vente->getIdVenteByWeek($_POST['date'],$_POST['date2']);
+        }else{
+            $value = $vente->getIdVenteByDate($_POST['date']); 
+        } 
     }
     
 } else {
-    $value = $vente->getIdVenteByDate($_POST['date']); 
+    if(!empty($_POST['date']) && !empty($_POST['date2'])){
+        $value = $vente->getIdVenteByWeek($_POST['date'],$_POST['date2']);
+    }else{
+        $value = $vente->getIdVenteByDate($_POST['date']); 
+    }   
 }
 
 
@@ -79,55 +112,125 @@ $html = '
                 }
 </style>
 </head>
-<body>
-    <table style="width:100%">
-        <thead>';
-        $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$_POST['date'].'</th></tr>
-        </thead>
-        <tbody>';
-        foreach ($value as $line) {
-            
+<body>';
 
-            if ($nomPtoduit == "ALL") {
-                $facture = $vente->getFactureVenteTrie($line["id"]);
+        
+        if(isset($_POST["facture"])){
+            $html .= '<table style="width:100%">
+            <thead>';
+            $html .=' <tr><th colspan="6" align="center""> rapport Vente du : '.$_POST['date']." Au ".$_POST['date2'].'</th></tr>
+            </thead>
+            <tbody>';
+            foreach ($value as $line) {
                 
-             } else {
-                $facture = $vente->getFactureVenteProduit($line["id"],$_POST["nomProduit"]);
-             }
-
-             if (!empty($facture)) {
-                # code...
-            
-                $inclient=$client->getClientByIdVente($line["id"]);
-                $html .= '<tr>';
-                $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"]." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"].'</td>';
-                $html .= '</tr>
-                    <tr>
-                    <th scope="col">Nom produit</th>
-                    <th scope="col">quantite</th>
-                    <th scope="col">prix</th>
-                    <th scope="col">montant </th>
-                    <th scope="col">Typepaiement</th>
-                    <th scope="col">datevente</th>
-                </tr>';
-    //var_dump($facture);
-                foreach ($facture as $linefatcture) {
-                    $html .= '<tr>';
-                    foreach ($linefatcture as $key => $cell) {
-                        $html .= '<td>' .$cell.'</td>';
-                    }
-                    $html .= '</tr>';
+                if (($nomPtoduit == "ALL") && ($_POST["client"] == "ALL")) {
+                    $facture = $vente->getFactureVenteTrie($line["id"]);     
+                } elseif(($nomPtoduit != "ALL") &&($_POST["client"] == "ALL")) {
+                    $facture = $vente->getFactureVenteProduit($line["id"],$_POST["nomProduit"]);
+                }elseif(($nomPtoduit == "ALL") && ($_POST["client"] != "ALL")){
+                    $facture = $vente->getFactureVenteClient($line["id"],$_POST["client"]);
+                }elseif(($nomPtoduit != "ALL") && ($_POST["client"] != "ALL")){
+                    $facture = $vente->getFactureVenteClientProduit($line["id"],$_POST["client"],$_POST["nomProduit"]);
+                }else{
+                    $facture = $vente->getFactureVenteTrie($line["id"]); 
                 }
-            } 
 
-            $formule++;
+                if (!empty($facture)) {
+                    # code...
+                
+                    $inclient=$client->getClientByIdVente($line["id"]);
+                    $html .= '<tr>';
+                    $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"]." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"].'</td>';
+                    $html .= '</tr>
+                        <tr>
+                        <th scope="col">Nom produit</th>
+                        <th scope="col">quantite</th>
+                        <th scope="col">prix</th>
+                        <th scope="col">montant </th>
+                        <th scope="col">Typepaiement</th>
+                        <th scope="col">datevente</th>
+                    </tr>';
+                    //var_dump($facture);
+                    foreach ($facture as $linefatcture) {
+                        $html .= '<tr>';
+                        foreach ($linefatcture as $key => $cell) {
+                            $html .= '<td>' .$cell.'</td>';
+                        }
+                        $html .= '</tr>';
+                    }
+                } 
+
+                $formule++;
+            }
+
+      
+
+            $html .= '
+            </tbody>
+            </table>';
         }
-
-
-        $html .= '
-        </tbody>
-    </table>';
-
+    
+        if(isset($_POST["quantite"])){
+                $html .='<br><br><br> <table style="width:100%">
+                <thead>';
+                $html .=' <tr><th colspan="5" align="center""> Quantite Pour chaque produit : '.$_POST['date']." Au ".$_POST['date2'].'</th></tr>
+                </thead>
+                <tbody>';
+                    $html .= '<tr>';
+                    $html .= '<td colspan="5" align="center"> Recapitulatif Quantite Vendue </td>';
+                    $html .= '</tr>
+                        <tr>
+                        <th scope="col">Mon du produit </th>
+                        <th scope="col">Stock debut du jour</th>
+                        <th scope="col">Quantite</th>
+                        <th scope="col">Stock fin du jour</th>
+                        <th scope="col">Date</th>
+                    </tr>';
+                    if (!empty($_POST['date']) && !empty($_POST['date2'])) {
+                        if(($nomPtoduit != "ALL") &&($_POST["client"] == "ALL")){
+                            $quantiteproduit = $vente->getSommeProduitWeekProduit($_POST['date'],$_POST['date2'],$nomPtoduit);
+                        }elseif(($nomPtoduit == "ALL") &&($_POST["client"] != "ALL")){
+                            $quantiteproduit = $vente->getSommeProduitWeekClient($_POST['date'],$_POST['date2'],$_POST["client"]);
+                        }elseif(($nomPtoduit != "ALL") &&($_POST["client"] != "ALL")){
+                            $quantiteproduit = $vente->getSommeProduitWeekClientProduit($_POST['date'],$_POST['date2'],$_POST["client"],$nomPtoduit);
+                        }else{
+                            $quantiteproduit = $vente->getSommeProduitWeek($_POST['date'],$_POST['date2']);
+                        }
+                    } else if(!empty($_POST['date'])) {
+                        if(($nomPtoduit != "ALL") &&($_POST["client"] == "ALL")){
+                            $quantiteproduit = $vente->getSommeProduitDateProduit($_POST['date'],$nomPtoduit);
+                        }elseif(($nomPtoduit == "ALL") &&($_POST["client"] != "ALL")){
+                            $quantiteproduit = $vente->getSommeProduitDateClient($_POST['date'],$_POST["client"]);
+                        }elseif(($nomPtoduit != "ALL") &&($_POST["client"] != "ALL")){
+                            $quantiteproduit = $vente->getSommeProduitDateClientProduit($_POST['date'],$_POST["client"],$nomPtoduit);
+                        }else{
+                            $quantiteproduit = $vente->getSommeProduitDate($_POST['date']);
+                        }
+                    }
+                    
+                    
+                    foreach ($quantiteproduit as $key ) {
+                        $html .= '<tr>';
+                        $html .= '<td>' .$key["nomproduit"].'</td>';
+                        $html .= '<td>' ."0".'</td>';
+                        $html .= '<td>' .round( $key["quantite"],2).'</td>';
+                        $html .= '<td>' ."0".'</td>';
+                        $html .= '<td>' .$key["datefacture"].'</td>';
+                    $html .= '</tr>';
+                    }   
+                $html .= '
+                </tbody>
+            </table>';
+        }
+        
+        if ((!isset($_POST["quantite"])) && (!isset($_POST["facture"]))) {
+            $html .= '<h1>Bienvenue Focntion de trie </h1><br>
+                    <h2> Vous deviez choisir  au moin une option  pour les detailles : </h2>
+                    <h3> 1) Facture </h3>
+                     <h3> 1) Qunatite </h3>
+                    
+                    ';
+        }
     $html .= '
         </body>
     </html>';

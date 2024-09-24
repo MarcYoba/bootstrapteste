@@ -54,10 +54,34 @@ class Vente{
         return $this->data; 
     }
 
+    public function getIdVenteByTypeCashIntervel($date,$date2) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT id FROM vente WHERE datevente BETWEEN '$date' AND '$date2' AND cash <> '0'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data; 
+    }
+
     public function getIdVenteByTypeOM($date) {
         global $conn;
         $this->data = [];
         $sql = "SELECT id FROM vente WHERE datevente= '$date' AND Om <> '0'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data; 
+    }
+
+    public function getIdVenteByTypeOMIterval($date,$datesecond) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT id FROM vente WHERE datevente BETWEEN '$date' AND '$datesecond' AND Om <> '0'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -78,10 +102,34 @@ class Vente{
         return $this->data; 
     }
 
+    public function getIdVenteByTypeCreditInterval($date,$datesecond) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT id FROM vente WHERE datevente BETWEEN  '$date' AND '$datesecond' AND credit <> '0'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data; 
+    }
+
     public function getIdVenteByTypeCreditOM($date) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE datevente= '$date' AND credit <> '0' AND Om <> '0'";
+        $sql = "SELECT id FROM vente WHERE datevente= '$date' AND cash = '0'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data; 
+    }
+
+    public function getIdVenteByTypeCreditOMInterval($date,$date2) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT id FROM vente WHERE  cash = '0' AND datevente BETWEEN  '$date' AND '$date2'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -251,10 +299,76 @@ class Vente{
         return $this->data; 
     }
 
+    public function getSommeProduitDateProduit($date,$produit) {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE nomproduit='$produit' AND `datefacture`= '$date' GROUP BY nomproduit";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
+
+    public function getSommeProduitDateClient($date,$client) {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE idclient='$client' AND `datefacture`= '$date' GROUP BY nomproduit";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
+
+    public function getSommeProduitDateClientProduit($date,$client,$produit) {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE nomproduit='$produit' AND idclient='$client' AND `datefacture`= '$date' GROUP BY nomproduit";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
+
     public function getSommeProduitWeek($datedebut,$datefin) {
         global $conn;
         $this->data =[];
         $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
+
+    public function getSommeProduitWeekProduit($datedebut,$datefin,$produit) {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE nomproduit='$produit' AND  `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
+
+    public function getSommeProduitWeekClient($datedebut,$datefin,$client) {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE idclient='$client' AND  `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
+
+    public function getSommeProduitWeekClientProduit($datedebut,$datefin,$client,$produit) {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE idclient='$client' AND  nomproduit='$produit' AND `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -351,9 +465,73 @@ class Vente{
                 return $valdata ;
             } else {
                 return $valdata;
+            }    
+    }
+
+    public function getFactureVenteClient($idfacutre,$idclient){
+        global $conn;
+            $valdata = [];
+            $montant = 0;
+            $quantite = 0;
+            $prix = 0;
+
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre' AND idclient ='$idclient'";
+            $resultfa = $conn->query($sqlfacture); 
+            while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
+                
+                    array_push($valdata,$rowfacture);
+                    $montant+=$rowfacture["montant"];
+                    $quantite+=$rowfacture["quantite"];
+                    $prix+=$rowfacture["prix"];
+                
+                
             }
-            
-        
+            $tab = ["Total",$quantite,$prix,$montant,"-","-"];
+            $tabr = ["Reduction","-","-",$this->getReductionForVente($idfacutre),"-","-"];
+            $tabn = ["Net a payer","-","-",$montant-$this->getReductionForVente($idfacutre),"-","-"];
+            array_push($valdata,$tab);
+            array_push($valdata,$tabr);
+            array_push($valdata,$tabn);
+            if ($montant ==0) {
+                $valdata = [];
+                array_push($valdata);
+                return $valdata ;
+            } else {
+                return $valdata;
+            }    
+    }
+
+    public function getFactureVenteClientProduit($idfacutre,$idclient,$produit){
+        global $conn;
+            $valdata = [];
+            $montant = 0;
+            $quantite = 0;
+            $prix = 0;
+
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre' AND idclient ='$idclient' AND nomproduit='$produit'";
+            $resultfa = $conn->query($sqlfacture); 
+            while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
+                
+                    array_push($valdata,$rowfacture);
+                    $montant+=$rowfacture["montant"];
+                    $quantite+=$rowfacture["quantite"];
+                    $prix+=$rowfacture["prix"];
+                
+                
+            }
+            $tab = ["Total",$quantite,$prix,$montant,"-","-"];
+            $tabr = ["Reduction","-","-",$this->getReductionForVente($idfacutre),"-","-"];
+            $tabn = ["Net a payer","-","-",$montant-$this->getReductionForVente($idfacutre),"-","-"];
+            array_push($valdata,$tab);
+            array_push($valdata,$tabr);
+            array_push($valdata,$tabn);
+            if ($montant ==0) {
+                $valdata = [];
+                array_push($valdata);
+                return $valdata ;
+            } else {
+                return $valdata;
+            }    
     }
 }
 
