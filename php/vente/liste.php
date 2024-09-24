@@ -416,32 +416,54 @@
                             <form  action="../pdf/getTypeVente.php" method="post" class="user row" >
 
                                 <p class="col-md-2">
-                                <select id="nomProduit"  name="nomProduit"  class="form-control form-select">
-                                    <option value="ALL" selected>ALL</option>
+                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select">
+                                        <option value="ALL" selected>ALL</option>
+                                            <?php 
+                                                global $conn;
+                                                $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                                $result = $conn->query($sql);
+                                                while ($row = mysqli_fetch_assoc($result)){               
+                                                    echo "<option value='".$row["nom_produit"]." ".$row["cathegorie"]."'>".$row["nom_produit"]."</option>";
+                                                }
+                                            ?>
+                                    </select>
+                                    <label class="form-check-label" id="nomProduit">Produit</label>
+                                    <br>
+                                    <select id="client"  name="client"   class="form-control form-select" >   <!-- size="10" multiple aria-label="multiple select " -->
+                                    <option value="ALL" selected>ALL</option>             
                                         <?php 
                                             global $conn;
-                                            $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                            $sql = "SELECT id, firstname, adresse FROM client";
                                             $result = $conn->query($sql);
-                                            while ($row = mysqli_fetch_assoc($result)){               
-                                                echo "<option value='".$row["nom_produit"]." ".$row["cathegorie"]."'>".$row["nom_produit"]."</option>";
-                                            }
-                                        ?>
+                                                while ($row = mysqli_fetch_assoc($result)){     
+                                                    echo "<option value='".$row["id"]."'>".$row["firstname"]."</option>";       
+                                                                            //var_dump($row);
+                                                }
+                                        ?> 
                                     </select>
+                                    <label class="form-check-label" id="client">Cleint</label>
                                 </p>
                                 <p class="col-md-2"> 
                                         <input class="form-check-input" type="checkbox" id="OM" name="OM" value="OM">
                                         <label class="form-check-label" id="OM">OM</label>
+                                        <br><br><br>
+                                        <input class="form-check-input" type="checkbox" id="facture" name="facture" value="facture">
+                                        <label class="form-check-label" id="facture">facture</label>
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-check-input" type="checkbox" id="credit" name="credit" value="credit">
                                         <label class="form-check-label" id="credit">crédit</label>
+                                        <br><br><br>
+                                        <input class="form-check-input" type="checkbox" id="quantite" name="quantite" value="quantite">
+                                        <label class="form-check-label" id="quantite">Qauntite</label>
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-check-input" type="checkbox" id="cash" name="cash" value="cash">
                                         <label class="form-check-label" id="cash">cash</label>
                                 </p>
                                 <p class="col-md-2">
-                                        <input class="form-control form-control-user" type="date" id="date" name="date" require>    
+                                        <input class="form-control form-control-user" type="date" id="date" name="date" require><br>
+                                        <input class="form-control form-control-user" type="date" id="date2" name="date2" require>     
                                 </p>
                                 <p class="col-md-2">
                                     <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
@@ -451,11 +473,12 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='50' data-order='[[0, "desc"]]'>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='70' data-order='[[0, "desc"]]'>
                                     <thead>
                                        
                                         <tr>
                                             <th>id</th>
+                                            <th>Client</th>
                                             <th>Type paiement </th>
                                             <th>numero facture</th>
                                             <th>Quantite total</th>
@@ -467,6 +490,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
+                                            <th>Client</th>
                                             <th>Nom</th>
                                             <th>numero facture</th>
                                             <th>Quantite total</th>
@@ -483,6 +507,11 @@
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
                                             echo '<th>'.$row["id"].'</th>';
+                                            $client = $row["idclient"];
+                                            $sqlclient = "SELECT firstname FROM client WHERE id= '$client'";
+                                            $resultclient = $conn->query($sqlclient);
+                                            $rowclient = mysqli_fetch_assoc($resultclient);
+                                            echo '<th>'.$rowclient["firstname"].'</th>';
                                             echo '<th>'.$row["typevente"].'</th>';
                                             echo '<th>'.$row["id"].'</th>';
                                             echo '<th>'.$row["quantite"].'</th>';
