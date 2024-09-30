@@ -31,8 +31,8 @@ function modifierClient(params) {
     .then(response => response.json())
     .then(data => {
         console.log('Réponse du serveur:', data);
-        localStorage.setItem("dataclient",JSON.stringify(data)); 
-        window.location.href= "client.php";
+        //localStorage.setItem("dataclient",JSON.stringify(data)); 
+       // window.location.href= "client.php";
     })
     .catch(error => {
         console.error('Erreur:',   error);

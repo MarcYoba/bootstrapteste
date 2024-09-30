@@ -12,7 +12,7 @@ var reduction = 0;
 
 function resetLigne(){
     calculeprixTotalquantitetotal();
-    calculeTotal();
+   // calculeTotal();
     document.getElementById("quantite").value='';
         document.getElementById("prixglobal").value='';
        // document.getElementById("prixtotal").textContent = '';
@@ -31,7 +31,7 @@ function getLigne(dataTable, ligne){
             const cellule2 = tableau.rows[index-1].cells[1];
             const cellule3 = tableau.rows[index-1].cells[2];
             const cellule4 = tableau.rows[index-1].cells[3];
-            //const cellule5 = tableau.rows[index-1].cells[4];
+            const cellule5 = tableau.rows[index-1].cells[4];
             
             //document.getElementById("fournisseur").value = cellule1.textContent;
             document.getElementById("nomProduit").value = cellule2.textContent;
@@ -39,7 +39,9 @@ function getLigne(dataTable, ligne){
             document.getElementById("prixglobal").value = cellule4.textContent;
            // document.getElementById("").value = cellule5.textContent;
             document.getElementById("modifierligne").innerHTML = '<p class="btn btn-info btn-user" onclick="Upgateligne('+ligne+')"><i class="fas fa-check"></i></p>';
-           
+            cellule4.textContent = 0;
+            cellule3.textContent = 0
+            cellule5.textContent = 0;
         }
         
         
@@ -86,7 +88,9 @@ function calculeReductionProduit(){
 
 function calculeprixTotalquantitetotal(){
     const tableau = document.getElementById('dataTable');
-  
+
+    quantiteTotal = 0;
+    prixtotal = 0;
     for (let index = 2; index < tableau.rows.length; index++) {
 
         
@@ -137,11 +141,20 @@ function recherchePrix(){
                    document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> fin de stock pour ce produit: '+data.quantite+'</p>';  
                    //document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" disabled>Enregistrer</button>'
                 }else if(data.quantite <= 0){
-                    document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer vente</button>'
+                    if (document.getElementById("modifiervente").textContent == "Modifier vente") {
+                        
+                    } else {
+                        document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer vente</button>';
+                    }
                 }
             } else {
                 document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-info"> stock en cour : '+data.quantite+'</p>';
-                document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer vente</button>'
+                console.log(document.getElementById("modifiervente").textContent);
+                if (document.getElementById("modifiervente").textContent == "Modifier vente") {
+                    
+                } else {
+                    document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer vente</button>'
+                }
             }
             document.getElementById("prixglobal").value = data.message;
             console.log(data);
@@ -268,6 +281,7 @@ function recuperationdonneTable() {
         data.reduction = document.getElementById("reduction").value;
         data.Total = document.getElementById("Total").value;
         data.Qttotal = document.getElementById("quantitetotal").textContent;
+        data.taille = tableau.rows.length;
 
         donnees.push({...data});  //on peut aussi  declarer directement let data = {} dans la boucle pour redure le programme
         data.value++;
@@ -433,9 +447,10 @@ function enregistrementEdite(){
 
     let donnees =[];
     donnees = recuperationdonneTable();
+    
     let data = {idvente,idfacture};
-    donnees.push({...data});  //on peut aussi  declarer directement let data = {} dans la boucle pour redure le programme
-    data.value++;
+    donnees.push(data);  //on peut aussi  declarer directement let data = {} dans la boucle pour redure le programme
+    //data.value++;
     //console.log(donnees);
     
     fetch('Edite.php',{
@@ -489,7 +504,7 @@ function saveedite(){
     } else {
         console.log("Om+CREDI+cash : "+somme);
         console.log("total : "+(document.getElementById("Total").value));
-        document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> verifier le total des montants dans differents case</p>';  
+        document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> corrigier le total des montants dans differents case OM/MOMO ou CASH ou Credit</p>';  
     }
 }
 

@@ -9,6 +9,7 @@ class Facture{
     public $om;
     public $credit;
     public $cash;
+    public $idvente;
     
 
     public function __construct($idfacture)
@@ -18,6 +19,7 @@ class Facture{
         $this->om =0;
         $this->credit =0;
         $this->cash =0;
+        $this->idvente = 0;
     }
 
     public function getByIdidFacture(){
@@ -31,15 +33,17 @@ class Facture{
         return $data; 
     }
 
+
     public function EditFacture($value){
         global $conn;
         $ligenid = array_pop($value);
-        $this->idfacture = $ligenid["idvente"];
+        $this->idvente = $ligenid["idvente"];
         $ligneTotal = array_pop($value);
-
+        
 
         if ($ligneTotal["cash"]>0) {
             $this->TypePaie = "CASH";
+            
             $this->cash =$ligneTotal["cash"];
             if ($ligneTotal["credit"]>0) {
                 $this->TypePaie = "CASH/CREDIT";
@@ -48,6 +52,8 @@ class Facture{
                     $this->TypePaie = "CASH/CREDIT/OM";
                     $this->om =$ligneTotal["momo"];
                 }
+            }elseif($ligneTotal["momo"]>0){
+                $this->TypePaie = "CASH/OM";
             }
         } elseif($ligneTotal["credit"]>0) {
             $this->TypePaie = "CREDIT";
@@ -59,27 +65,109 @@ class Facture{
                     $this->TypePaie = "CREDIT/CASH/OM";
                     $this->om =$ligneTotal["momo"];
                 }
+            }elseif ($ligneTotal["momo"]>0) {
+                $this->TypePaie = "CREDIT/CASH/OM";
+                $this->om =$ligneTotal["momo"];
             }
         }else{
             $this->TypePaie = "OM";
             $this->om =$ligneTotal["momo"];
         }
+        $Mmontant = $ligneTotal["Total"] ;
+        $quantite = $ligneTotal["Qttotal"];
+        $reduction = $ligneTotal["reduction"];
 
-        $sql = "UPDATE vente SET typevente=?, quantite=?, prix='',cash=?, credit=?, Om=?, reduction=? WHERE idvente=? ";
-            $stmt = mysqli_prepare($conn,$sql);
-            mysqli_stmt_bind_param($stmt,"siiiiiii",$this->TypePaie,$ligneTotal["Qttotal"],$ligneTotal["total"],$ligneTotal["cash"],$ligneTotal["credit"],$ligneTotal["momo"],$ligneTotal["reduction"],$this->idfacture);
-        if(mysqli_stmt_execute($stmt)){
-            foreach ($value as $key ) {
-                $sql = "UPDATE facture SET nomproduit=?, quantite=?, prix='',montant=?, Typepaiement=? WHERE idvente=? ";
-                 $stmt = mysqli_prepare($conn,$sql);
-                 mysqli_stmt_bind_param($stmt,"siiisi",$key["nomproduit"],$key["quantite"],$key["prix"],$key["montant"],$this->TypePaie,$this->idfacture);
-                 mysqli_stmt_execute($stmt);
+        $sql = "UPDATE vente SET typevente='$this->TypePaie', quantite ='$quantite',prix='$Mmontant',cash='$this->cash',credit='$this->credit', Om='$this->om',reduction='$reduction' WHERE id = '$this->idvente'";
+        $result = $conn->query($sql); 
+        
+        
+        if ($result == true) {
+
+            
+
+             if(($ligneTotal["taille"]-2) >1){
+                $sql = "SELECT id  FROM facture WHERE idvente = '$this->idvente'";
+                $result = $conn->query($sql);
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $id = $row["id"];
+                   $line = array_shift($value);
+                 
+                        $nomproduit = $line["produit"];
+                        $quantite = $line["quantite"];
+                        $prix = $line["prix"];
+                        $total = $line["total"];
+        
+                        $sql = "UPDATE facture SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE  id='$id'";
+                        $resultup = $conn->query($sql); 
+                        
+                        if ($resultup == true) {
+                           
+                        }
+                    
+                }
+                
+             }else{
+                foreach ($value as $key) {
+                    $nomproduit = $key["produit"];
+                    $quantite = $key["quantite"];
+                    $prix = $key["prix"];
+                    $total = $key["total"];
+    
+                    $sql = "UPDATE facture SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE idvente = '$this->idvente'";
+                    $result = $conn->query($sql); 
+    
+                    if ($result == true) {
+                        
+                    }
+                }
             }
             
-        }else{
+        }
 
-        }   
-        
+
+        $sql = "SELECT id FROM caisse WHERE idvente = '$this->idvente'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows>0) {
+            $Mmontant = $ligneTotal["Total"] - $ligneTotal["credit"];
+            $sql = "UPDATE caisse SET operation='$this->TypePaie', montant ='$Mmontant' WHERE idvente = '$this->idvente'";
+            $result = $conn->query($sql); 
+
+            if ($result == TRUE) {
+                return "caise ok";
+            } else {
+                return "lost edite";
+            }
+        } else {
+            $sql = "SELECT id FROM dette WHERE idvente = '$this->idvente'";
+            $result = $conn->query($sql);
+            if($result->num_rows>0){
+                $this->credit = $ligneTotal["credit"];
+                if ($ligneTotal["credit"] >0 ) {
+                    $quantite = $ligneTotal["Qttotal"];
+                    $sql = "UPDATE dette SET quantite='$quantite', montant ='$this->credit' WHERE idvente = '$this->idvente'";
+                    $result = $conn->query($sql);
+                    if ($result == TRUE) {
+                        return "edite dette ok";
+                    } else {
+                        return "edite dette lost";
+                    }
+                    
+                } else {
+                    $quantite = $ligneTotal["Qttotal"];
+                    $sql = "UPDATE dette SET quantite='$quantite', montant ='$this->credit',status='OK' WHERE idvente = '$this->idvente'";
+                    $result = $conn->query($sql);
+                    if ($result == TRUE) {
+                        return "efface dette ok";
+                    } else {
+                        return "efface dette lost";
+                    }
+                }  
+                
+            }
+        }
+          
     }
 }
 ?>

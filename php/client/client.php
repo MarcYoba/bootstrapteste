@@ -36,50 +36,66 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Creation compte client</h1>
                                 <span id="idclient" class="drop"></span>
                             </div>
-                            <form class="user" action="register.php" method="post">
+                            <form class="user" action="register.php" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="FirstName"
-                                           name="FirstName" placeholder="First Name" required>
+                                           name="FirstName" placeholder="First Name">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="LastName" 
-                                           name="LastName" placeholder="adresse" required>
+                                           name="LastName" placeholder="adresse" >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="InputEmail"
-                                       name="InputEmail" placeholder="Email Address" required>
+                                       name="InputEmail" placeholder="Email Address">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                           name="InputPassword" id="InputPassword" placeholder="Password" required>
+                                           name="InputPassword" id="InputPassword" placeholder="Password" >
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                           name="RepeatPassword" id="RepeatPassword" placeholder="Repeat Password" required>
+                                           name="RepeatPassword" id="RepeatPassword" placeholder="Repeat Password" >
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <input type="tel" class="form-control form-control-user" id="Inputphone"
-                                        name="Inputphone" placeholder="telephone client" required>
+                                        name="Inputphone" placeholder="telephone client" >
                                     </div>
                                     <div class="col-sm-6">
-                                        <select id="sexe"  name="sexe"  class="form-control form-select" required>
+                                        <select id="sexe"  name="sexe"  class="form-control form-select" >
                                             <option ></option>
                                            <option id="femme">femme</option> 
                                            <option id="homme">homme</option> 
                                         </select>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <p>
+                                        <h6>Pour enregistrer une liste des client vous devier telecharger le template suivante.<br>
+                                            1. entregistrer les infomation ccomme les colonne l'indique.<br>
+                                            2. enregistrer le template sur un nom cour sans espace en cas de Modification.<br>
+                                            3. Inporte le model dans l'application.<br>
+                                            4. En fin cliquer sur entregister.<br>
+
+                                        </h6>                                        
+                                            <button type="template" name="template" id="template" class="btn btn-info btn-user btn-block">
+                                                Telecharger le Template
+                                            </button>
+                                    </p>
+                                    <input type="file" class="form-control form-control-user" id="file_excel"
+                                       name="file_excel" >
                                 </div>
                                 <span id="enregistrement">
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">

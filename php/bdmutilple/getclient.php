@@ -37,6 +37,10 @@ class Client{
 
     public function DeleteClient($id){
         global $conn;
+
+        $sql = "DELETE FROM facture  WHERE idclient = '$id'";
+        $result = $conn->query($sql);
+
         $sql = "DELETE FROM user  WHERE idclient= '$id'";
         $result = $conn->query($sql);
 
@@ -85,6 +89,28 @@ class Client{
         }
         $date = date("y/m/d");
         $stmt->bind_param('sds', $nom,  $tel, $date);
+
+        // Exécuter la requête
+        if (!$stmt->execute()) {
+            return "Echec";
+        }else{
+            return "OK";
+        }
+    }
+
+    public function insertToClientFile($tableau){
+        global $conn;
+        $nom = $tableau["NOMS"] ;
+        $tel = $tableau["TELEPHONE"];
+        $sujet  = $tableau["SUJETS"];
+        $sql = "INSERT INTO client (firstname, telephone, datecreation, sujet) VALUES (?,?,?,?)";
+
+        // Lier les paramètres
+        if (!$stmt = $conn->prepare($sql)) {
+            return "erreur sql";
+        }
+        $date = date("y/m/d");
+        $stmt->bind_param('sdss', $nom,  $tel, $date,$sujet);
 
         // Exécuter la requête
         if (!$stmt->execute()) {
