@@ -43,7 +43,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">AB groupe<sup>2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -416,9 +416,43 @@
                         <div class="card-header py-3">
                             <h6 class="m-1 font-weight-bold text-primary">Tables dette</h6>
                             <hr>
+                            <form  action="../pdf/getdettecleint.php" method="post" class="user row" >
                             <div class="row">
-                                <a href="../versement/liste.php"  class="btn btn-info btn-user col-md-2" >versement</a>
+                                <p class="col-md-3" >
+                                    <input type="date" class="form-control form-control-user"
+                                    name="datedette" id="datedette" placeholder="quantite">
+                                </p>
+                                <p class="col-md-2" >
+                                    <input type="date" class="form-control form-control-user"
+                                    name="datedett2" id="datedett2" placeholder="quantite">
+                                </p>
+                                <p class="col-md-3" >
+                                <select id="client"  name="client"   class="form-control form-select" >   <!-- size="10" multiple aria-label="multiple select " -->
+                                    <option value="ALL" selected>ALL</option>             
+                                        <?php 
+                                            global $conn;
+                                            $sql = "SELECT id, firstname, adresse FROM client";
+                                            $result = $conn->query($sql);
+                                                while ($row = mysqli_fetch_assoc($result)){     
+                                                    echo "<option value='".$row["id"]."'>".$row["firstname"]."</option>";       
+                                                                            //var_dump($row);
+                                                }
+                                        ?> 
+                                </select>
+                                </p>
+                            
+                            <p class="col-md-2" >
+                                <a href="../versement/liste.php"  class="btn btn-info btn-user" >Liste</a>
+                            </p>
+
+                            <p class="col-md-2" >
+                            <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                            </p>
+
+
+                                
                             </div>
+                            </form>
                         </div>
                         
                         <div class="card-body">

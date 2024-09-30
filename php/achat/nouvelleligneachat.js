@@ -151,25 +151,21 @@ function enregistrementDonnees(){
             console.error(error);
         });
         
-       /*
-       //console.log(donnees);
-       $.ajax({
-        url:'register.php',
-        type:'POST',
-        data: JSON.stringify(donnees),
-        contentType: 'application/json',
-        success: function(data){
-            console.log("success");
-            console.log(data);
-            //window.location.href="register.php";
-        },
-        error: function(error){
-            console.error(error);
-        }
-       });
-       */ 
+      
     } else {
         document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> ajouter une ligne pour vendre </p>'; 
     }
     
+}
+
+        
+        
+function calculerTotal(ligneIndex){
+    const quantite = document.getElementById(`cellule_dataTable_${ligneIndex * 3}`).textContent;
+    const prix = document.getElementById(`cellule_dataTable_${ligneIndex * 3 + 1}`).textContent;
+    const Totalcellule = document.getElementById(`cellule_dataTable_${ligneIndex * 3 + 2}`);
+
+    const total = quantite * prix;
+
+    Totalcellule.textContent = total;
 }
