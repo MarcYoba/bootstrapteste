@@ -9,11 +9,8 @@ class Stock{
 
     private $data = [];
 
-    public function __construct($produit,$periodedate,$datejour){
-        $this->produit = $produit;
-        $this->periodedate = $periodedate;
-        $this->datejour = $datejour;
-        $this->data;
+    public function __construct(){
+       
     }
   
     public function ToDay(){
@@ -165,8 +162,5 @@ class Stock{
     }
 
 }
-
-
-
 
 ?>

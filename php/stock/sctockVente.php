@@ -417,11 +417,11 @@
                             <form class="user" action="getstock.php" method="post">
                             <div class="row">
                                 
-                                <p class="col-md-1"></p>
-                                <p class="col-md-2"> 
+                                <p class="col-md-0"></p>
+                                <p class="col-md-3"> 
                                     
-                                    <input type="text" id="recherche" onkeyup="myFunction()" class="form-control form-control-user" placeholder="recherche produit">
-                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select">
+                                    <input type="text" id="recherche" onkeyup="myFunction()" class="form-control form-control-user" placeholder="recherche produit"><br>
+                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="4" multiple aria-label="multiple select ">
                                         <option selected value="All">All </option>
                                         <?php 
                                             global $conn;
@@ -434,18 +434,34 @@
                                     </select>
                                 </p>
                                 
-                                <p class="col-md-2">
+                               <!-- <p class="col-md-2">
                                         <select id="periode"  name="periode"  class="form-control form-select">
                                             <option value="day">Aujourd'hui</option>
                                             <option value="semain">Semain</option>
                                             <option value="moi">Moi</option>
                                         </select>
-                                </p>
+                                </p>-->
                                 <p class="col-md-2">
-                                        <input class="form-control form-control-user" type="date" id="date" name="date">    
+                                <input class="form-control form-control-user" type="date" id="date" name="date"><br>
+                                <input class="form-control form-control-user" type="date" id="date2" name="date2">   
                                 </p>
+                                <p class="col-md-2" >
+                                        <input class="form-check-input" type="checkbox" id="reel" name="reel" value="reel">
+                                            <label class="form-check-label" id="reel">Stock reel</label><br>
+                                        
+                                        <input class="form-check-input" type="checkbox" id="Achat" name="Achat" value="Achat" onclick="rediriger()">
+                                            <label class="form-check-label" id="credit">Achat</label>
+                                    </p>
+
+                                    <p class="col-md-2" >
+                                        <input class="form-check-input" type="checkbox" id="Intentaire" name="Intentaire" value="Intentaire">
+                                        <label class="form-check-label" id="Intentaire">Intentaire</label><br>
+
+                                        <input class="form-check-input" type="checkbox" id="vente" name="vente" value="vente">
+                                        <label class="form-check-label" id="vente">vente</label>
+                                    </p>
                                 <p class="col-md-2">
-                                    <button class='btn btn-info btn-user'">Affichier</button>
+                                    <button class='btn btn-info btn-user'>Affichier</button>
                                 </p>
                             </div>
                             </form>

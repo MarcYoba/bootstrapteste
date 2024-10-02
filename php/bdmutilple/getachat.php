@@ -44,6 +44,30 @@ class Achat{
         
     }
 
+    public function getAllAchat(){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM achat";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+       return $data ;
+        
+    }
+
+    public function getAllAchatProduit($produit){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM achat WHERE Nomproduit='$produit'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+       return $data ;
+        
+    }
+
     public function AllAchatDate($date){
         global $conn;
         $data = [];
@@ -56,10 +80,34 @@ class Achat{
         
     }
 
+    public function AllAchatDateProduit($date,$produit){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM achat WHERE dateachat= '$date' AND Nomproduit='$produit'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+       return $data ;
+        
+    }
+
     public function AllAchatWeek($datedebut,$datefin){
         global $conn;
         $data = [];
         $sql = "SELECT * FROM achat WHERE dateachat BETWEEN '$datedebut' AND '$datefin'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+       return $data ;
+        
+    }
+
+    public function AllAchatWeekProduit($datedebut,$datefin,$produit){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM achat WHERE dateachat BETWEEN '$datedebut' AND '$datefin' AND Nomproduit='$produit'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);

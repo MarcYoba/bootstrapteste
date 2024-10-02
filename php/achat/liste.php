@@ -415,6 +415,37 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Tables Achat</h6>
+
+                            
+                            <form  action="../pdf/getAchat.php" method="post" class="user row" >
+                                <div class="row">
+                                    <p class="col-md-3" >
+                                        <input type="date" class="form-control form-control-user"
+                                        name="datedette" id="datedette" placeholder="quantite">
+                                    </p>
+                                    <p class="col-md-3" >
+                                        <input type="date" class="form-control form-control-user"
+                                        name="datedett2" id="datedett2" placeholder="quantite">
+                                    </p>
+                                    <p class="col-md-3" >
+                                    <select id="produit"  name="produit"   class="form-control form-select" >   <!-- size="10" multiple aria-label="multiple select " -->
+                                        <option value="ALL" selected>ALL</option>             
+                                            <?php 
+                                                global $conn;
+                                                $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                                $result = $conn->query($sql);
+                                                while ($row = mysqli_fetch_assoc($result)){               
+                                                    echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
+                                                }
+                                            ?>  
+                                    </select>
+                                    </p>
+
+                                <p class="col-md-2" >
+                                <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                </p>  
+                                </div>
+                            </form>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
