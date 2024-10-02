@@ -2,21 +2,55 @@
 require_once("../connexion.php"); 
 require '../../vendor/autoload.php';
 require_once("../bdmutilple/getstock.php");
-
-
-
-
-//header('Content-Type: application/json');
+require_once("../bdmutilple/getproduit.php");
 use Dompdf\Dompdf;
 
+
 $nom = $_POST['nomProduit'];
-$periode = $_POST['periode'];
-$datejour = $_POST['date'];
+$datefirst = $_POST['date'];
+$datesecon = $_POST['date2'];
 $date = date("Y-m-d");
 $value = [];
-$bdstock = new Stock($nom,$periode,$datejour);
+$bdstock = new Stock($nom,1,$datefirst);
+$produit = new Produit();
 
-if ($nom == "All") {
+if ((!empty($_POST["Achat"]))) {
+    header('Location: ../achat/liste.php');
+    exit;
+}
+
+if ((!empty($_POST["vente"]))) {
+    header('Location: ../vente/liste.php');
+    exit;
+}
+
+if ((!empty($_POST["reel"]))&& ($nom == "All") && ((!empty($datefirst)) || (empty($datefirst)) )) {
+    $value = $produit->getAllProduit();
+} else if ((!empty($_POST["reel"]))&& ($nom != "All") && (empty($datefirst)))  {
+    $value = $produit->getAllProduitName($nom);
+} else if ((!empty($_POST["reel"]))&& ($nom != "All") && (!empty($datefirst)) && (empty($datesecon)))  {
+   $value = $bdstock->DayofMonthHitorique($nom);
+}else if ((!empty($_POST["reel"]))&& ($nom != "All") && (!empty($datefirst)) && (!empty($datesecon)))  {
+    $value = $bdstock->getHitoriqueIntervale($nom,$datesecon);
+}else if ((!empty($_POST["reel"]))&& ($nom == "All") && (!empty($datefirst)) && (!empty($datesecon)))  {
+    $value = $bdstock->HitoriqueIntervale($datesecon);
+}
+
+if ((!empty($_POST["Intentaire"]))&& ($nom == "All") && (empty($datefirst)) ) {
+    $value = $produit->getAllProduit();
+} else if ((!empty($_POST["Intentaire"]))&& ($nom != "All") && (empty($datefirst)))  {
+    $value = $produit->getAllProduitName($nom);
+} else if ((!empty($_POST["Intentaire"]))&& ($nom != "All") && (!empty($datefirst)) && (empty($datesecon)))  {
+   $value = $bdstock->DayofMonthHitorique($nom);
+}else if ((!empty($_POST["Intentaire"]))&& ($nom != "All") && (!empty($datefirst)) && (!empty($datesecon)))  {
+    $value = $bdstock->getHitoriqueIntervale($nom,$datesecon);
+}else if ((!empty($_POST["Intentaire"]))&& ($nom == "All") && (!empty($datefirst)) && (!empty($datesecon)))  {
+    $value = $bdstock->HitoriqueIntervale($datesecon);
+}
+
+
+/*
+if ($nom == "All") { && (empty($datesecon))
     if ($periode == "day") {
         if (!empty($datejour)) {
             $value = $bdstock->DayofMonth();
@@ -49,7 +83,7 @@ if ($nom == "All") {
 
     }
 }
-
+*/
 
 
 $html = '
@@ -81,8 +115,6 @@ $html = '
                 <th scope="col">numero</th>
                 <th scope="col">quantite</th>
                 <th scope="col">produit</th>
-                <th scope="col">idvente </th>
-                <th scope="col">iduser</th>
                 <th scope="col">Qtdate</th>
             </tr>
         </thead>

@@ -53,4 +53,11 @@ async function fetchStockPDF() {
       console.error('Error fetching data:', error);
     }
   }
+  function rediriger() {
+    // Vérifie si la checkbox est cochée
+    if (document.getElementById('Achat').checked) {
+      // Redirige vers la page souhaitée
+      window.location.href = "../achat/liste.php";
+    }
+  }
   

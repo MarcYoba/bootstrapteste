@@ -1,7 +1,7 @@
 <?php 
 session_start(); 
-require_once("./php/connexion.php"); 
-//require_once("php/historique/historiqueStock.php");
+
+require_once("php/historique/historiqueStock.php");
 
 ?>
 <!DOCTYPE html>
@@ -283,13 +283,18 @@ require_once("./php/connexion.php");
                                                     $sql = "SELECT SUM(montant) as montant FROM achat WHERE MONTH(dateachat) = MONTH(NOW())";
                                                     $result = $conn->query($sql);
                                                     $row = mysqli_fetch_assoc($result);
+                                                    
                                                     $nbetoile = 10;
                                                     $etoile = "*";
                                                     for ($i=0; $i <$nbetoile ; $i++) { 
                                                         $etoile .= "*";
                                                     }
+                                                    $montant = 0;
+                                                    if (!empty($row["montant"])) {
+                                                        $montant = $row["montant"];
+                                                    }
                                                     echo '<span  id="achat">'.$etoile.'</span>';
-                                                    echo '<div class="h5 mb-0 font-weight-bold text-gray-800 amount" id="montantachat">'.round($row["montant"],2).' FCFA'.'</div>'; 
+                                                    echo '<div class="h5 mb-0 font-weight-bold text-gray-800 amount" id="montantachat">'.ceil($montant).' FCFA'.'</div>'; 
                                                         //var_dump($row);
                                                 ?>
                                             </div>
@@ -321,8 +326,12 @@ require_once("./php/connexion.php");
                                                     for ($i=0; $i <$nbetoile ; $i++) { 
                                                         $etoile .= "*";
                                                     }
+                                                    $montant = 0;
+                                                    if (!empty($row["montant"])) {
+                                                        $montant = $row["montant"];
+                                                    }
                                                     echo '<span  id="vente">'.$etoile.'</span>';
-                                                    echo '<div class="h5 mb-0 font-weight-bold text-gray-800 amount" id="montantvente">'.round($row["montant"],2).' FCFA'.'</div>'; 
+                                                    echo '<div class="h5 mb-0 font-weight-bold text-gray-800 amount" id="montantvente">'.ceil($montant).' FCFA'.'</div>'; 
                                                         //var_dump($row);
                                                     ?>
                                             </div>
@@ -354,6 +363,7 @@ require_once("./php/connexion.php");
                                                     for ($i=0; $i <$nbetoile ; $i++) { 
                                                         $etoile .= "*";
                                                     }
+                                                    
                                                     echo '<span  id="dette">'.$etoile.'</span>';
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount " id="montantdette">'.$row["montant"].' FCFA'.'</div>'; 
                                                     //var_dump($row);
@@ -387,8 +397,12 @@ require_once("./php/connexion.php");
                                                     for ($i=0; $i <$nbetoile ; $i++) { 
                                                         $etoile .= "*";
                                                     }
+                                                    $montant = 0;
+                                                    if (!empty($row["montant"])) {
+                                                        $montant = $row["montant"];
+                                                    }
                                                     echo '<span  id="verse">'.$etoile.'</span>';
-                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount" id="monversement">'.round($row["montant"],2).' FCFA'.'</div>'; 
+                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount" id="monversement">'.ceil($montant).' FCFA'.'</div>'; 
                                                     //var_dump($row);
                                             ?>
                                         </div>
@@ -420,8 +434,12 @@ require_once("./php/connexion.php");
                                                         for ($i=0; $i <$nbetoile ; $i++) { 
                                                             $etoile .= "*";
                                                         }
+                                                        $montant = 0;
+                                                    if (!empty($row["montant"])) {
+                                                        $montant = $row["montant"];
+                                                    }
                                                         echo '<span  id="caise">'.$etoile.'</span>';
-                                                        echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount"  id="montcaise">'.round($row["montant"],2).' FCFA'.'</div>'; 
+                                                        echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount"  id="montcaise">'.ceil($montant).' FCFA'.'</div>'; 
                                                             //var_dump($row);
                                                     ?>
                                                 </div>
@@ -696,7 +714,8 @@ require_once("./php/connexion.php");
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-semaine.js"></script>
     <script src="js/demo/chart-pie-semain.js"></script>
-    <script src="js/demo/chart-bar-semain.js"> </script>
+    <script src="js/demo/chart-bar-semain.js"></script>
+   
     <script>
         function affichemontant(params) {
             document.getElementById('achat').innerHTML= document.getElementById('montantachat').innerText;
@@ -707,6 +726,6 @@ require_once("./php/connexion.php");
             document.getElementById('vente').innerHTML= document.getElementById('montantvente').innerText;//.style.display='block';
         }
     </script>
-
+    <?php ;?>
 </body>
 </html>

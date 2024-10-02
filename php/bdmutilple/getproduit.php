@@ -15,6 +15,28 @@ class Produit{
         return $tableau; 
     }
 
+    public function getAllProduit(){
+        global $conn;
+        $tableau = [];
+        $sql = "SELECT id, quantite_produit , nom_produit ,date_ajout_produit FROM produit";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($tableau,$row);
+        }    
+        return $tableau; 
+    }
+
+    public function getAllProduitName($produit){
+        global $conn;
+        $tableau = [];
+        $sql = "SELECT id, quantite_produit , nom_produit ,date_ajout_produit FROM produit WHERE nom_produit= '$produit'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($tableau,$row);
+        }    
+        return $tableau; 
+    }
+
     public function getHistoriqueStockDate($idate){
         global $conn;
         

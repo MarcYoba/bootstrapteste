@@ -1,6 +1,7 @@
 <?php
 
-require_once("../bdmutilple/getproduit.php");
+require_once("php/historique/getproduit.php");
+
 
 $produit = new Produit();
 
@@ -15,10 +16,10 @@ $date_hier = $hier->format('Y-m-d');
 $date_jour = date('Y-m-d');
 
     if (!empty($produit->getHistoriqueStockDate($date_jour))) {
-        
+       
     }else {
         $produit->InsertHistoriqueStock($produit->getByIdProduit());
-
-    }   
+        
+    }  
 
 ?>

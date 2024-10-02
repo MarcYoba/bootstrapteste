@@ -415,7 +415,39 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Tables Caisse</h6>
+                            <form  action="recapCaisse.php" method="post" class="user row" >
+                                <div class="row">
+                                    <p class="col-md-3" >
+                                        <input type="date" class="form-control form-control-user"
+                                        name="datedette" id="datedette" placeholder="quantite">
+                                    </p>
+                                    <p class="col-md-3" >
+                                        <input type="date" class="form-control form-control-user"
+                                        name="datedett2" id="datedett2" placeholder="quantite">
+                                    </p>
+                                    <p class="col-md-2" >
+                                        <input class="form-check-input" type="checkbox" id="OM" name="OM" value="OM">
+                                            <label class="form-check-label" id="OM">OM</label><br>
+                                        
+                                        <input class="form-check-input" type="checkbox" id="credit" name="credit" value="credit">
+                                            <label class="form-check-label" id="credit">crédit</label>
+                                    </p>
+
+                                    <p class="col-md-3" >
+                                        <input class="form-check-input" type="checkbox" id="cash" name="cash" value="cash">
+                                        <label class="form-check-label" id="cash">cash</label><br>
+
+                                        <input class="form-check-input" type="checkbox" id="vente" name="vente" value="vente">
+                                        <label class="form-check-label" id="vente">Total vente</label>
+                                    </p>
+
+                                <p class="col-md-1" >
+                                <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                </p>  
+                                </div>
+                            </form>
                         </div>
+                        
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>

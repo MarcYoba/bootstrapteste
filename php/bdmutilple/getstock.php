@@ -27,16 +27,46 @@ class Stock{
         return $this->data;
     }
 
-    public function DayofMonth(){
+    public function DayofMonth($produit){
         global $conn;
-        $sql = "SELECT * FROM quantiteproduit WHERE Qtdate = '$this->datejour'";
+        $sql = "SELECT id ,quantite, Nomproduit, datet FROM quantiteproduit WHERE Qtdate = '$this->datejour' AND Nomproduit ='$produit'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
         }
-
         return $this->data;
     }
+
+    public function DayofMonthHitorique($produit){
+        global $conn;
+        $sql = "SELECT id ,quantite, Nomproduit, datet FROM historiquestock WHERE datet = '$this->datejour' AND Nomproduit ='$produit'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+               array_push($this->data,$row);  
+        }
+        return $this->data;
+    }
+
+    public function getHitoriqueIntervale($produit,$date){
+        global $conn;
+        $sql = "SELECT id ,quantite, Nomproduit, datet FROM historiquestock WHERE datet BETWEEN  '$this->datejour' AND '$date' AND Nomproduit ='$produit'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+               array_push($this->data,$row);  
+        }
+        return $this->data;
+    }
+
+    public function HitoriqueIntervale($date){
+        global $conn;
+        $sql = "SELECT id ,quantite, Nomproduit, datet FROM historiquestock WHERE datet BETWEEN  '$this->datejour' AND '$date'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+               array_push($this->data,$row);  
+        }
+        return $this->data;
+    }
+
 
     public function ToWeek(){
         global $conn;

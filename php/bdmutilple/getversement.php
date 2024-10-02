@@ -26,6 +26,14 @@ class Versement{
         return $row["montant"]; 
     }
 
+    public function ByVersementClient($dette){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM versement WHERE iddette = '$dette'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
     public function ByWeekVersement($datebedut,$datafin){
         global $conn;
         $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement BETWEEN '$datebedut'  AND '$datafin'";

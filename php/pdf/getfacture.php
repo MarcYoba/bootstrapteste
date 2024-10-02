@@ -1,88 +1,100 @@
 <?php
-session_start();
-require_once("../connexion.php");
+
 require('../../fpdf186/fpdf.php');
+require_once("../bdmutilple/getvente.php");
+require_once("../bdmutilple/getdepense.php");
+require_once("../bdmutilple/getversement.php");
+require_once("../bdmutilple/getachat.php");
+require_once("../bdmutilple/getfournisseur.php");
+require_once("../bdmutilple/getclient.php");
+require_once("../bdmutilple/getcaise.php");
+require_once("../bdmutilple/getdette.php");
+
+require '../../vendor/autoload.php';
+ini_set('memory_limit', '256M');
+use Dompdf\Dompdf;
 
 $date = date("Y-m-d");
+
+$vente = new Vente(0);
+$client = new Client(0);
+$formule = 1;
+
+$dette = new Dette();
+$versement = new Versement(1);
+
 //var_dump($date);
 $id =  $_GET["id"];
 
-$sqlfacture = "SELECT * FROM facture WHERE  idvente = '$id'";
-$resultfa = $conn->query($sqlfacture); 
-$rowfacture = mysqli_fetch_assoc($resultfa);
+$facture = $vente->getFactureVente($id);
 
-$idclient = $rowfacture["idclient"];
+// Créer une instance de Dompdf
+$dompdf = new Dompdf();
 
-$sql = "SELECT * FROM client WHERE  id = '$idclient'";
-$result = $conn->query($sql); 
-$row= mysqli_fetch_assoc($result);
+// Créer le contenu HTML du PDF
+$html = '
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facture</title>
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+        @Page {
+                    footer {
+                       position: fixed;
+                        bottom: 0cm;
+                        left: 0cm;
+                        right: 0cm;
+                        height: 2cm;
+                        text-align: center;
+                    }
+                }
+</style>
+</head>
+<body>';
 
-$iduser = $_SESSION["id"];
-$sqluser = "SELECT * FROM user WHERE  id = '$iduser'";
-$resultuser = $conn->query($sqluser); 
-$rowuser= mysqli_fetch_assoc($resultuser);
-
-
-$pdf = new FPDF();
-$pdf->AddPage();
-$pdf->SetFont('Arial','B',16);
-
-$titre = "Facture ABgroup du : " . date("d-m-Y");
-$pdf->Cell(80);
-$pdf->Cell(30,10,$titre,4,20,'C');
-$pdf->Ln();
-
-$pdf->Cell(60);
-$pdf->Cell(30,10,"Client  :".$row["firstname"]. "  adresse : ".$row["adresse"]." Phone :" .$row["telephone"],4,20,'C');
-$pdf->Ln();
-
-$pdf->Cell(60);
-$pdf->Cell(30,10,"Employer  :".$rowuser["firstname"]. " ".$rowuser["lastname"],4,20,'C');
-$pdf->Ln();
-
-$pdf->Cell(50,40,'nomproduit');
-$pdf->Cell(50,40,'quantite');
-$pdf->Cell(30,40,'prix');
-$pdf->Cell(30,40,'montant');
-$pdf->Cell(30,40,'Typepaiement');
-
-$nomproduit = '';
-$formule = 1;
-$quantite = 0;
-$prix = 0;
-$montant = 0;
-
-$pdf->Ln();
-        $pdf->Cell(80);
-        $pdf->Cell(30,10,'Formule',4,20,'C');
-        $pdf->Ln();
-
-$sqlfacture = "SELECT * FROM facture WHERE  idvente = '$id'";
-$resultfa = $conn->query($sqlfacture); 
-   
-    while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
+$html .='<br><br><br> <table style="width:100%">
+        <thead>';
+        $inclient=$client->getClientByIdVente($id);
+        $html .=' <tr><th colspan="6" align="center"">AFRICA BELIEVE GROUP SARL : '.$date." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' Cabinet veterinaire-provenderie
+         N cont: M0822175619296A NRCCM:RC/YAE2022/B/2852 YDE-SOA FIN GOUDRON +237 655 271506
+        </th></tr>
+        </thead>
+        <tbody>';
+        $html .= '<tr>';
         
-        $nomproduit = substr_replace($rowfacture['nomproduit'],"",strpos($rowfacture['nomproduit'],"provenderie"));
-        //$nomproduit = substr_replace($nomproduit,"1",strpos($nomproduit,"TOURTEAUX"));
+        $html .= '</tr>
+            <tr>
+            <th scope="col">Nom produit</th>
+            <th scope="col">quantite</th>
+            <th scope="col">prix</th>
+            <th scope="col">montant </th>
+            <th scope="col">Typepaiement</th>
+            <th scope="col">datevente</th>
+        </tr>';
+        $facture = $vente->getFactureVente($id);
+            foreach ($facture as $linefatcture) {
+                $html .= '<tr>';
+                foreach ($linefatcture as $key => $cell) {
+                    $html .= '<td>' .$cell.'</td>';
+                }
+                $html .= '</tr>';
+            }
+        $html .= '
+        </tbody>
+    </table>';
 
-        $pdf->Cell(50,10, $nomproduit);
-        $pdf->Cell(50,10,$rowfacture['quantite']);
-        $pdf->Cell(30,10,$rowfacture['prix']);
-        $pdf->Cell(30,10,$rowfacture['montant']);
-        $pdf->Cell(30,10,$rowfacture['Typepaiement']);
-        $pdf->Ln();
+$html .= '
+</body>
+</html>';
 
-        $quantite += $rowfacture['quantite'];
-        $prix += $rowfacture['prix'];
-        $montant += $rowfacture['montant'];
-        $formule++;
-    } 
-    
-    $pdf->Cell(50,10,'Total');
-    $pdf->Cell(50,10,$quantite);
-    $pdf->Cell(30,10,$prix);
-    $pdf->Cell(30,10,$montant);
-    $pdf->Cell(30,10,'-');
+// Charger le contenu HTML dans Dompdf
+$dompdf->loadHtml($html);
+$dompdf->setPaper('A4', 'portrait');
+$dompdf->render();
+$dompdf->stream("mon_fichier.pdf", array("Attachment" => 0));
 
-$pdf->Output();
 ?>
