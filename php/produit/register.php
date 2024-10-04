@@ -100,6 +100,8 @@ if (isset($_POST['modifier'])) {
                 $sql = "UPDATE produit set nom_produit ='$nom',type_produit ='$type', prix_produit_vente ='$prixvente',
                 	prix_achat_produit ='$prixachat', quantite_produit ='$quantite',cathegorie ='$cathegorie' WHERE id = '$id'";
                 $result = $conn->query($sql);
+                $sql = "UPDATE historiquestock set Nomproduit ='$nom' WHERE idproduit  = '$id'";
+                $result = $conn->query($sql);
                 header("Location: liste.php");
 
             } else {

@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 require_once("../connexion.php");
 
 class Stock{
@@ -25,6 +25,50 @@ class Stock{
         }
 
         return $this->data;
+    }
+
+    public function getLogsProduit($produit){
+        global $conn;
+        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE datet = CURRENT_DATE() AND Nomproduit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["quantites"];
+    }
+
+    public function getLogsProduitDate($produit,$date){
+        global $conn;
+        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE datet = '$date' AND Nomproduit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["quantites"];
+    }
+
+    public function getLogsSuivant($produit,$date){
+        global $conn;
+
+        $sql = "SELECT DATE_ADD('$date', INTERVAL 1 DAY) as datete FROM historiquestock;";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        
+        // $datefour = date('Y-m-d');
+        // if ($datefour == $date) {
+        //     $datesuivate = $date;
+        // } else {
+            
+        // }
+        
+        $datesuivate = $row["datete"];
+
+        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE Nomproduit='$produit' AND datet ='$datesuivate' ";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        
+        if (empty($row["quantites"])) {
+            return 0;
+        }
+        return $row["quantites"];
     }
 
     public function DayofMonth($produit){

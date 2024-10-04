@@ -15,6 +15,16 @@ class Produit{
         return $tableau; 
     }
 
+    public function getQuantiteProduit($produit){
+        global $conn;
+        $sql = "SELECT quantite_produit AS quantites FROM produit WHERE  nom_produit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["quantites"];
+    }
+
+
     public function getAllProduit(){
         global $conn;
         $tableau = [];

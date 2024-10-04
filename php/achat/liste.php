@@ -301,8 +301,8 @@
                                             <th>id</th>
                                             <th>Nom</th>
                                             <th>Prix vente</th>
-                                            <th>Prix achat</th>
                                             <th>Quantite</th>
+                                            <th>Montant</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
@@ -311,8 +311,8 @@
                                             <th>id</th>
                                             <th>Nom</th>
                                             <th>Prix vente</th>
-                                            <th>Prix achat</th>
                                             <th>Quantite</th>
+                                            <th>Montant</th>
                                             <th>Date</th>
                                         </tr>
                                     </tfoot>

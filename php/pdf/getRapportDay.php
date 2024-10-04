@@ -8,13 +8,18 @@ require_once("../bdmutilple/getachat.php");
 require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
+require_once("../bdmutilple/trievalue.php");
+require_once("../bdmutilple/getstock.php");
+require_once("../bdmutilple/getproduit.php");
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
 $date = $_POST["date"];
 
 //var_dump($date);
-
+if (empty($date)) {
+   exit;
+}
 $formule = 1;
 $prix = 0;
 $montant = 0;
@@ -26,8 +31,11 @@ $achat = new Achat($date);
 $fournisseur = new Fournisseur($date);
 $client = new Client($date);
 $caise = new Caise($date);
-
+$trie = new TrieValue();
+$produit = new Produit();
+$stock = new Stock(1,$date,$date);
 $value = $vente->getIdVenteByDate($date);
+
 
 $html = '
 <!DOCTYPE html>
@@ -112,7 +120,7 @@ $html = '
                     $html .= '<td>' .$vente->getSommeReductionDate($date).'</td>';
                     $html .= '<td>' .($caise->getByDateSortie($date)).'</td>';
                     $html .= '<td>' .$versement->ByDateVersement($date).'</td>';
-                    $html .= '<td>' .(((($vente->getSommeCashDate($date))-0)-$caise->getByDateSortie($date))-0).'</td>';
+                    $html .= '<td>' .(((($vente->getSommeCashDate($date))-0)+$caise->getByDateSortie($date))-0).'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>
@@ -145,22 +153,26 @@ $html = '
 
     $html .='<br><br><br> <table style="width:100%">
         <thead>';
-        $html .=' <tr><th colspan="3" align="center""> Quantite Pour chaque produit : '.$date.'</th></tr>
+        $html .=' <tr><th colspan="5" align="center""> Quantite Pour chaque produit : '.$date.'</th></tr>
         </thead>
         <tbody>';
             $html .= '<tr>';
-            $html .= '<td colspan="3" align="center"> Recapitulatif Quantite Vendue </td>';
+            $html .= '<td colspan="5" align="center"> Recapitulatif Quantite Vendue </td>';
             $html .= '</tr>
                 <tr>
                 <th scope="col">Mon du produit </th>
+                <th scope="col">Quantite debut</th>
                 <th scope="col">Quantite</th>
+                <th scope="col">Quantite fin</th>
                 <th scope="col">Date</th>
             </tr>';
             $quantiteproduit = $vente->getSommeProduitDate($date);
             foreach ($quantiteproduit as $key ) {
                 $html .= '<tr>';
-                $html .= '<td>' .$key["nomproduit"].'</td>';
-                $html .= '<td>' .$key["quantite"].'</td>';
+                $html .= '<td>' . $trie->RemoveChaine("provenderie",$key["nomproduit"]).'</td>';
+                $html .= '<td>' .$stock->getLogsProduitDate($trie->RemoveChaine("provenderie",$key["nomproduit"]),$date).'</td>';
+                $html .= '<td>' .round($key["quantite"],2).'</td>';
+                $html .= '<td>' .$stock->getLogsSuivant($trie->RemoveChaine("provenderie",$key["nomproduit"]),$date).'</td>';
                 $html .= '<td>' .$key["datefacture"].'</td>';
             $html .= '</tr>';
             }   

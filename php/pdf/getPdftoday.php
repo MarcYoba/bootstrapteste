@@ -8,6 +8,11 @@ require_once("../bdmutilple/getachat.php");
 require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
+require_once("../bdmutilple/trievalue.php");
+require_once("../bdmutilple/getstock.php");
+require_once("../bdmutilple/getproduit.php");
+require_once("../bdmutilple/getclient.php");
+
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
@@ -25,6 +30,10 @@ $achat = new Achat($date);
 $fournisseur = new Fournisseur(0);
 $client = new Client(0);
 $caise = new Caise($date);
+$trie = new TrieValue();
+$stok = new Stock(1,$date,$date);
+$produit = new Produit();
+$client = new Client($date);
 
 $value = $vente->getIdVente();
 
@@ -57,8 +66,9 @@ $html = '
         </thead>
         <tbody>';
         foreach ($value as $line) {
+            $inclient=$client->getClientByIdVente($line["id"]);
             $html .= '<tr>';
-            $html .= '<td colspan="6" align="center"> Formule ' . $formule. '</td>';
+            $html .= '<td colspan="6" align="center"> Formule ' . $formule. " Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]. '</td>';
             $html .= '</tr>
                 <tr>
                 <th scope="col">nom produit</th>
@@ -104,7 +114,7 @@ $html = '
                 <th scope="col">Net en Caise</th>
             </tr>';
                 $html .= '<tr>';
-                    $html .= '<td>' .($vente->getSommeVente() - $vente->getSommeReduction()).'</td>';
+                    $html .= '<td>' .($vente->getSommeCash() + $vente->getSommeOm()+ $vente->getSommeCredit()).'</td>';
                     $html .= '<td>' .$vente->getSommeCash().'</td>';
                     $html .= '<td>' .$vente->getSommeOm() + $versement->ByDateVersementOm($date).'</td>';
                     $html .= '<td>' .$vente->getSommeCredit().'</td>';
@@ -163,10 +173,11 @@ $html = '
             $quantiteproduit = $vente->getSommeProduit();
             foreach ($quantiteproduit as $key ) {
                 $html .= '<tr>';
-                $html .= '<td>' .$key["nomproduit"].'</td>';
-                $html .= '<td>' ."0".'</td>';
-                $html .= '<td>' .$key["quantite"].'</td>';
-                $html .= '<td>' ."0".'</td>';
+                $html .= '<td>' . $trie->RemoveChaine("provenderie",$key["nomproduit"]) .'</td>';
+                $html .= '<td>' .$stok->getLogsProduit($trie->RemoveChaine("provenderie",$key["nomproduit"])).'</td>';
+                $html .= '<td>' .round($key["quantite"],2).'</td>';
+                $html .= '<td>' .$stok->getLogsProduit($trie->RemoveChaine("provenderie",$key["nomproduit"])) - round($key["quantite"],2).'</td>';
+               // $html .= '<td>' .$produit->getQuantiteProduit($trie->RemoveChaine("provenderie",$key["nomproduit"])).'</td>';
                 $html .= '<td>' .$key["datefacture"].'</td>';
             $html .= '</tr>';
             }   
