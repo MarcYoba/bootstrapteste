@@ -131,7 +131,7 @@ require_once("../connexion.php");
                                                     <input type="number" class="form-control form-control-user"
                                                     name="quantite" id="quantite" placeholder="quantite" required><br>
                                                     <input type="number" class="form-control form-control-user"
-                                                    name="prixglobal" id="prixglobal" placeholder="Prix du produit" ><br>
+                                                    name="prixglobal" id="prixglobal" placeholder="Prix du produit" readonly><br>
                                                     <i  id="montanttotal" class="form-control form-control-user"><span id="resultat" ></span></i>
                                                 </p>
                                                 <p class="col-md-4" >

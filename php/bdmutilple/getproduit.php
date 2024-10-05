@@ -36,6 +36,17 @@ class Produit{
         return $tableau; 
     }
 
+    public function getHistoriqueProduit($date){
+        global $conn;
+        $tableau = [];
+        $sql = "SELECT id, quantite , Nomproduit ,datet FROM historiquestock WHERE datet='$date'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($tableau,$row);
+        }    
+        return $tableau; 
+    }
+
     public function getAllProduitName($produit){
         global $conn;
         $tableau = [];

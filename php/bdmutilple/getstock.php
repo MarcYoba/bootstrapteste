@@ -36,6 +36,31 @@ class Stock{
         return $row["quantites"];
     }
 
+    public function getLogsDate(){
+        global $conn;
+        $data = [];
+        $sql = "SELECT
+            hs.Nomproduit,
+            hs.quantite AS quantite_stock,
+            p.quantite_produit,
+            (SELECT SUM(a2.quantite) FROM achat a2 WHERE a2.idproduit = hs.idproduit AND YEAR(a2.dateachat) = YEAR(CURDATE()) AND 					MONTH(a2.dateachat) = MONTH(CURDATE())) AS quantite_achetee,
+            (SELECT SUM(f2.quantite) FROM facture f2 WHERE f2.idproduit = hs.idproduit AND YEAR(f2.datefacture) = YEAR(CURDATE()) AND 				MONTH(f2.datefacture) = MONTH(CURDATE())) AS somme_facture,
+            (SELECT SUM(f.quantite) FROM facture f WHERE f.idproduit = hs.idproduit AND  f.datefacture = CURRENT_DATE) AS quantite_facturee
+            FROM
+                historiquestock hs
+            LEFT JOIN produit p ON p.id = hs.idproduit
+            GROUP BY
+                hs.Nomproduit
+            ORDER BY
+                hs.Nomproduit DESC";
+
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }          
+        return $data;
+    }
+
     public function getLogsProduitDate($produit,$date){
         global $conn;
         $sql = "SELECT quantite AS quantites FROM historiquestock WHERE datet = '$date' AND Nomproduit='$produit'";

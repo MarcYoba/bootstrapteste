@@ -33,6 +33,23 @@ class Facture{
         return $data; 
     }
 
+    public function setIdFacture($produit,$idproduit){
+        global $conn;
+        $sql = "SELECT idproduit,nomproduit  FROM facture WHERE nomproduit= '$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        if (!empty($row)) {
+            $sql = "UPDATE facture SET idproduit='$idproduit' WHERE nomproduit= '$produit'";
+            $result = $conn->query($sql); 
+            if ($result === TRUE) {
+                //return $row; 
+            }
+            return "Trouver : "; 
+        }else{
+            return "nom trouver : ".$produit;
+        }
+    }
+
 
     public function EditFacture($value){
         global $conn;

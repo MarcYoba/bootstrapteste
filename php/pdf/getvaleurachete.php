@@ -128,3 +128,5 @@ $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 $dompdf->stream("mon_fichier.pdf", array("Attachment" => 0));
+
+?>

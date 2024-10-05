@@ -96,8 +96,9 @@
         <div id="collapsestock" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Stock</h6>
-                <a class="collapse-item" href="../stock/sctockVente.php">Stock Reel </a>
+                <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
                 <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
+                <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
             </div>
         </div>
     </li>
