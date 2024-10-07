@@ -36,6 +36,26 @@ class Stock{
         return $row["quantites"];
     }
 
+    public function getLogsDateProduit($produit,$date){
+        global $conn;
+        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE datet = '$date' AND Nomproduit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["quantites"];
+    }
+
+    
+
+    public function getQuantiteProduit($produit){
+        global $conn;
+        $sql = "SELECT quantite_produit AS quantites FROM produit WHERE nom_produit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["quantites"];
+    }
+
     public function getLogsDate(){
         global $conn;
         $data = [];

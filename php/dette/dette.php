@@ -273,6 +273,7 @@
                                     <input type="date" class="form-control form-control-user"
                                     name="datedett2" id="datedett2" placeholder="quantite">
                                 </p>
+                                
                                 <p class="col-md-3" >
                                 <select id="client"  name="client"   class="form-control form-select" >   <!-- size="10" multiple aria-label="multiple select " -->
                                     <option value="ALL" selected>ALL</option>             
@@ -438,7 +439,26 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
+    <script >
+        function myFunction() {
+            // Récupérer l'input et la liste déroulante
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("recherche");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("client");
+            li = ul.getElementsByTagName("option");
 
+            // Boucler sur toutes les options
+            for (i = 0; i < li.length; i++) {
+                a = li[i];
+                if (a.value.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+                } else {
+                li[i].style.display = "none";
+                }
+            }
+            }
+    </script>
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>

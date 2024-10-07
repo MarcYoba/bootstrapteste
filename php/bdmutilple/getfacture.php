@@ -33,6 +33,14 @@ class Facture{
         return $data; 
     }
 
+    public function getIdClientFacture($id){
+        global $conn;
+        $sql = "SELECT idclient  FROM facture WHERE idvente= '$id'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["idclient "]; 
+    }
+
     public function setIdFacture($produit,$idproduit){
         global $conn;
         $sql = "SELECT idproduit,nomproduit  FROM facture WHERE nomproduit= '$produit'";
@@ -48,6 +56,72 @@ class Facture{
         }else{
             return "nom trouver : ".$produit;
         }
+    }
+
+    public function produitstock($idvente,$quantite,$nomproduit){
+        global $conn;
+        
+        $sql = "INSERT INTO quantiteproduit (quantiteRestant,produit,idvente,iduser,Qtdate) VALUES (?, ?, ?, ?, ?)";
+        if (!$stmt = $conn->prepare($sql)) {
+            die('Erreur de préparation de la requête : ' . $conn->error);
+        }
+        $date = date("y/m/d");
+        $stmt->bind_param('dsdds', $quantiteRestant,$produit, $idvente, $_SESSION["id"], $date);
+        if (!$stmt->execute()) {
+            die('Erreur d\'exécution de la requête : ' . $stmt->error);
+        }
+        $stmt->close();
+    }
+
+    public function InsertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,$datevente){
+        global $conn;
+        $nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
+    
+        $sqlproduit = "SELECT id as id  FROM produit  WHERE nom_produit = '$nomproduit'";
+        $resultproduit = $conn->query($sqlproduit);
+        $row = mysqli_fetch_assoc($resultproduit);
+        $id = $row["id"];
+
+
+        $sql = "INSERT INTO facture (nomproduit,quantite,prix,montant,Typepaiement,idclient,iduser,datefacture,idvente,idproduit) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+
+        // Lier les paramètres
+        if (!$stmt = $conn->prepare($sql)) {
+            die('Erreur de préparation de la requête : ' . $conn->error);
+        }
+        $montant = $quantite * $prix;
+
+        if ($datevente == "") {
+            $date = date("y/m/d");
+        } else {
+            $date = $datevente;
+        }
+        $stmt->bind_param('sdddsddsdd',$nomproduit, $quantite, $prix,$montant,$typepaie, $idclient, $_SESSION["id"], $date,$idvente,$id);
+
+        // Exécuter la requête
+        if (!$stmt->execute()) {
+            die('Erreur d\'exécution de la requête : ' . $stmt->error);
+        }
+
+        // Fermer la requête su
+        $stmt->close(); 
+
+        $nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
+        
+        $sqlproduit = "SELECT  quantite_produit as quantite  FROM produit  WHERE nom_produit = '$nomproduit'";
+        $resultproduit = $conn->query($sqlproduit);
+        $row = mysqli_fetch_assoc($resultproduit);
+        $quantitestock = $row["quantite"];
+        $quantite = $quantitestock - $quantite;
+
+        
+
+        $sql = "UPDATE produit SET quantite_produit ='$quantite' WHERE nom_produit = '$nomproduit'";
+        $result = $conn->query($sql); 
+        if ($result === True) {
+            produitstock($idvente,$quantite,$nomproduit);
+        }
+        
     }
 
 
@@ -106,22 +180,62 @@ class Facture{
                 $sql = "SELECT id  FROM facture WHERE idvente = '$this->idvente'";
                 $result = $conn->query($sql);
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $id = $row["id"];
-                   $line = array_shift($value);
-                 
-                        $nomproduit = $line["produit"];
-                        $quantite = $line["quantite"];
-                        $prix = $line["prix"];
-                        $total = $line["total"];
-        
-                        $sql = "UPDATE facture SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE  id='$id'";
-                        $resultup = $conn->query($sql); 
-                        
-                        if ($resultup == true) {
-                           
-                        }
+                if ($result->num_rows<($ligneTotal["taille"]-2)) {
+                    $nblignebd = $result->num_rows;
+                    $ndligneFac = ($ligneTotal["taille"]-2);
+
+                    while (($row = mysqli_fetch_assoc($result)) && $nblignebd >0) {
+                        $id = $row["id"];
+                       $line = array_shift($value);
+                     
+                            $nomproduit = $line["produit"];
+                            $quantite = $line["quantite"];
+                            $prix = $line["prix"];
+                            $total = $line["total"];
+            
+                            $sql = "UPDATE facture SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE  id='$id'";
+                            $resultup = $conn->query($sql); 
+                            
+                            if ($resultup == true) {      
+                            }  
+                            $nblignebd--; 
+                            $ndligneFac--;
+                    }
                     
+                    while ($ndligneFac > 0) {
+                            $line = array_shift($value);
+                            $nomproduit = $line["produit"];
+                            $quantite = $line["quantite"];
+                            $prix = $line["prix"];
+                            $total = $line["total"];
+
+                            $this->InsertFacture($nomproduit,$quantite,$prix,$this->idvente,$this->getIdClientFacture($this->idvente),$this->TypePaie,date("Y-m-d"));
+                            $ndligneFac--;
+                    }
+                    // $reponse = [
+                    //     'success' => true,
+                    //     'message' =>  $this->idvente
+                    //  ];
+                    // return "ligne superire";
+
+                } else if($result->num_rows==($ligneTotal["taille"]-2)) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $id = $row["id"];
+                       $line = array_shift($value);
+                     
+                            $nomproduit = $line["produit"];
+                            $quantite = $line["quantite"];
+                            $prix = $line["prix"];
+                            $total = $line["total"];
+            
+                            $sql = "UPDATE facture SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE  id='$id'";
+                            $resultup = $conn->query($sql); 
+                            
+                            if ($resultup == true) {      
+                            }    
+                    }
+                } else if($result->num_rows>($ligneTotal["taille"]-2)) {
+                    return "ligne inferieur";
                 }
                 
              }else{
@@ -152,7 +266,11 @@ class Facture{
             $result = $conn->query($sql); 
 
             if ($result == TRUE) {
-                return "caise ok";
+                $reponse = [
+                    'success' => true,
+                    'message' =>  $this->idvente
+                 ];
+                return $reponse;
             } else {
                 return "lost edite";
             }
@@ -166,7 +284,11 @@ class Facture{
                     $sql = "UPDATE dette SET quantite='$quantite', montant ='$this->credit' WHERE idvente = '$this->idvente'";
                     $result = $conn->query($sql);
                     if ($result == TRUE) {
-                        return "edite dette ok";
+                        $reponse = [
+                            'success' => true,
+                            'message' =>  $this->idvente
+                         ];
+                        return $reponse;
                     } else {
                         return "edite dette lost";
                     }
@@ -176,7 +298,11 @@ class Facture{
                     $sql = "UPDATE dette SET quantite='$quantite', montant ='$this->credit',status='OK' WHERE idvente = '$this->idvente'";
                     $result = $conn->query($sql);
                     if ($result == TRUE) {
-                        return "efface dette ok";
+                        $reponse = [
+                            'success' => true,
+                            'message' =>  $this->idvente
+                         ];
+                        return $reponse;
                     } else {
                         return "efface dette lost";
                     }

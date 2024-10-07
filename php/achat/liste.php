@@ -300,7 +300,7 @@
                                         <tr>
                                             <th>id</th>
                                             <th>Nom</th>
-                                            <th>Prix vente</th>
+                                            
                                             <th>Quantite</th>
                                             <th>Montant</th>
                                             <th>Date</th>
@@ -310,7 +310,7 @@
                                         <tr>
                                             <th>id</th>
                                             <th>Nom</th>
-                                            <th>Prix vente</th>
+                                            
                                             <th>Quantite</th>
                                             <th>Montant</th>
                                             <th>Date</th>
@@ -325,7 +325,7 @@
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
                                             echo '<td>'.$row["Nomproduit"].'</td>';
-                                            echo '<td>'.$row["prixAcaht"].'</td>';
+                                            //echo '<td>'.$row["prixAcaht"].'</td>';
                                             echo '<td>'.$row["quantite"].'</td>';
                                             echo '<td>'.$row["montant"].'</td>';
                                             echo '<td>'.$row["dateachat"].'</td>';
