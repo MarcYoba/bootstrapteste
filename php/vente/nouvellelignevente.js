@@ -360,7 +360,8 @@ function enregistrementDonnees(){
 function LigneventeMofiier(donnees){
     const tableau = document.getElementById('dataTable');
 
-   // const  Typepaiement = document.getElementById("Typepaiement").value;
+   // const  Typepaiement = document.getElementById("Typepaiement").value; 
+   // ajutement nom terminer.       
 
         
         const nbligne = tableau.rows.length;
