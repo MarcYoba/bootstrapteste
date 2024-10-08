@@ -15,10 +15,50 @@ class Produit{
         return $tableau; 
     }
 
+    public function getQuantiteProduit($produit){
+        global $conn;
+        $sql = "SELECT quantite_produit AS quantites FROM produit WHERE  nom_produit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["quantites"];
+    }
+
+    public function UpdateProduit($idproduit,$quantite){
+        global $conn;
+        $sql = "UPDATE produit SET quantite_produit = '$quantite' WHERE id = '$idproduit'";
+        $result = $conn->query($sql);
+        if($result === true){
+            //return "Edite OK";
+        }else{
+            return "Edite false";
+        }  
+    }
+
+    public function getIdProduit($produit){
+        global $conn;
+        $sql = "SELECT id AS id FROM produit WHERE  nom_produit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);              
+        return $row["id"];
+    }
+
+
     public function getAllProduit(){
         global $conn;
         $tableau = [];
         $sql = "SELECT id, quantite_produit , nom_produit ,date_ajout_produit FROM produit";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($tableau,$row);
+        }    
+        return $tableau; 
+    }
+
+    public function getHistoriqueProduit($date){
+        global $conn;
+        $tableau = [];
+        $sql = "SELECT id, quantite , Nomproduit ,datet FROM historiquestock WHERE datet='$date'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($tableau,$row);

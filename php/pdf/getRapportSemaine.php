@@ -8,6 +8,7 @@ require_once("../bdmutilple/getachat.php");
 require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
+require_once("../bdmutilple/trievalue.php");
 ini_set('memory_limit', '256M');
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
@@ -28,6 +29,7 @@ $achat = new Achat($datedebut);
 $fournisseur = new Fournisseur($datedebut);
 $client = new Client($datedebut);
 $caise = new Caise($datedebut);
+$trie = new TrieValue();
 
 $value = $vente->getIdVenteByWeek($datedebut,$datedefin);
 
@@ -115,7 +117,7 @@ $html = '
                     $html .= '<td>' .$vente->getSommeReductionWeek($datedebut,$datedefin).'</td>';
                     $html .= '<td>' .($caise->getByWeekSortie($datedebut,$datedefin)).'</td>';
                     $html .= '<td>' .$versement->ByWeekVersement($datedebut,$datedefin).'</td>';
-                    $html .= '<td>' .(((($vente->getSommeCashWeek($datedebut,$datedefin))-0)-$caise->getByWeekSortie($datedebut,$datedefin))-0).'</td>';
+                    $html .= '<td>' .(((($vente->getSommeCashWeek($datedebut,$datedefin))-0)+$caise->getByWeekSortie($datedebut,$datedefin))-0).'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>
@@ -162,8 +164,8 @@ $html = '
             $quantiteproduit = $vente->getSommeProduitWeek($datedebut,$datedefin);
             foreach ($quantiteproduit as $key ) {
                 $html .= '<tr>';
-                $html .= '<td>' .$key["nomproduit"].'</td>';
-                $html .= '<td>' .$key["quantite"].'</td>';
+                $html .= '<td>' . $trie->RemoveChaine("provenderie",$key["nomproduit"]).'</td>';
+                $html .= '<td>' .round($key["quantite"],2).'</td>';
                 $html .= '<td>' .$key["datefacture"].'</td>';
             $html .= '</tr>';
             }   

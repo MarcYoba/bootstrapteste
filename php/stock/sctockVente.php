@@ -34,158 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../index.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="../../home.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsevente"
-                    aria-expanded="true" aria-controls="collapsevente">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Vente</span>
-                </a>
-                <div id="collapsevente" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Operation de vente</h6>
-                        <a class="collapse-item" href="../vente/vente.php"> ajouter une vente</a>
-                        <a class="collapse-item" href="../vente/liste.php">liste vente</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseahcat"
-                    aria-expanded="true" aria-controls="collapseahcat">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Achat</span>
-                </a>
-                <div id="collapseahcat" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Operation des Achat</h6>
-                        <a class="collapse-item" href="../achat/achat.php">ajouter un Achat</a>
-                        <a class="collapse-item" href="../achat/liste.php">liste Achat</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseclient"
-                    aria-expanded="true" aria-controls="collapseclient">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Client</span>
-                </a>
-                <div id="collapseclient" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Operation des clients</h6>
-                        <a class="collapse-item" href="../client/client.php">ajouter un client</a>
-                        <a class="collapse-item" href="../client/liste.php">liste client</a>
-                    </div>
-                </div>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Compsant vente</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Composant vente:</h6>
-                        <a class="collapse-item" href="../dette/dette.php">liste dette</a>
-                        <a class="collapse-item" href="cards.html">dette client</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.php">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="../../charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Statistique</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
+        <?php require_once("../../headerInterface.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -404,14 +253,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Raport stock</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Historique stock</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div class="row">
-                                    <h6 class="m-0 font-weight-bold text-primary">Raport stock</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Historique stock</h6>
                             </div>
                             <br>
                             <form class="user" action="getstock.php" method="post">
@@ -440,6 +289,8 @@
                                             <option value="semain">Semain</option>
                                             <option value="moi">Moi</option>
                                         </select>
+
+                                        UPDATE historiquestock hs INNER JOIN produit p ON hs.idproduit = p.id SET hs.Nomproduit = p.nom_produit WHERE hs.idproduit BETWEEN 1 AND 60;
                                 </p>-->
                                 <p class="col-md-2">
                                 <input class="form-control form-control-user" type="date" id="date" name="date"><br>
@@ -475,7 +326,7 @@
                                             <th>id</th>
                                             <th>Produit</th>
                                             <th>Quantite</th>
-                                            <th>numero Vente</th>
+                                            
                                             <th>Date</th>
                                         </tr>
                                     </thead>
@@ -484,22 +335,22 @@
                                             <th>id</th>
                                             <th>Produit</th>
                                             <th>Quantite</th>
-                                            <th>numero Vente</th>
+                                            
                                             <th>Date</th>
                                         </tr>
                                     </tfoot>
                                     <tbody id="liste">
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM quantiteproduit";
+                                        $sql = "SELECT * FROM historiquestock";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
                                             echo '<th>'.$row["id"].'</th>';
-                                            echo '<th>'.$row["produit"].'</th>';
-                                            echo '<th>'.$row["quantiteRestant"].'</th>';
-                                            echo '<th>'.$row["idvente"].'</th>';
-                                            echo '<th>'.$row["Qtdate"].'</th>'; 
+                                            echo '<th>'.$row["Nomproduit"].'</th>';
+                                            echo '<th>'.$row["quantite"].'</th>';
+                                            
+                                            echo '<th>'.$row["datet"].'</th>'; 
                                             echo '</tr>';
                                         }
                                     ?>

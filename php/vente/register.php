@@ -178,8 +178,16 @@ function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
+    $nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
+    
+    $sqlproduit = "SELECT id as id , quantite_produit AS quantite  FROM produit  WHERE nom_produit = '$nomproduit'";
+    $resultproduit = $conn->query($sqlproduit);
+    $row = mysqli_fetch_assoc($resultproduit);
+    $id = $row["id"];
+    $quantitestock = $row["quantite"];
 
-    $sql = "INSERT INTO facture (nomproduit,quantite,prix,montant,Typepaiement,idclient,iduser,datefacture,idvente) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+
+    $sql = "INSERT INTO facture (nomproduit,quantite,prix,montant,Typepaiement,idclient,iduser,datefacture,idvente,idproduit) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -192,7 +200,7 @@ function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,
     } else {
         $date = $datevente;
     }
-    $stmt->bind_param('sdddsddsd',$nomproduit, $quantite, $prix,$montant,$typepaie, $idclient, $_SESSION["id"], $date,$idvente);
+    $stmt->bind_param('sdddsddsdd',$nomproduit, $quantite, $prix,$montant,$typepaie, $idclient, $_SESSION["id"], $date,$idvente,$id);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
@@ -201,18 +209,10 @@ function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,
 
     // Fermer la requête su
     $stmt->close(); 
-
-    $nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
     
-    $sqlproduit = "SELECT quantite_produit as quantite  FROM produit  WHERE nom_produit = '$nomproduit'";
-    $resultproduit = $conn->query($sqlproduit);
-    $row = mysqli_fetch_assoc($resultproduit);
-    $quantitestock = $row["quantite"];
     $quantite = $quantitestock - $quantite;
 
-    
-
-     $sql = "UPDATE produit SET quantite_produit ='$quantite' WHERE nom_produit = '$nomproduit'";
+    $sql = "UPDATE produit SET quantite_produit ='$quantite' WHERE id = '$id'";
     $result = $conn->query($sql); 
     if ($result === True) {
         produitstock($idvente,$quantite,$nomproduit);
@@ -280,21 +280,22 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
             insertFacture($value["produit"],$value["quantite"],$value["prix"],$tab["idvente"] ,$value["fournisseur"],$tab["typepaiement"],$datevente);             
         }
         $id = $tab["idvente"];
-        $sql = "SELECT id FROM facture WHERE idvente = '$id'";
-        $result = $conn->query($sql);
-        $idfacture =0 ;
+        // $sql = "SELECT id FROM facture WHERE idvente = '$id'";
+        // $result = $conn->query($sql);
+        // $idfacture =0 ;
         
-        while ($row = mysqli_fetch_assoc($result)) {
-            if ($idfacture==0) {
-                $idfacture = $row["id"];
-            } else {
-                $idfacture = $idfacture.$row["id"];
-            }
-            $idfacture++;
-        }
+        // while ($row = mysqli_fetch_assoc($result)) {
+        //     if ($idfacture==0) {
+        //         $idfacture = $row["id"];
+        //     } else {
+        //         $idfacture = $idfacture.$row["id"];
+        //     }
+        //     $idfacture++;
+        // }
 
-        $sql = "UPDATE vente set numfacture ='$idfacture' WHERE id = '$id'";
-        $result = $conn->query($sql);
+        // $sql = "UPDATE vente set numfacture ='$id' WHERE id = '$id'";
+        // $result = $conn->query($sql);
+        
     }
 }
 

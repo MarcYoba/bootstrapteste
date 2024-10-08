@@ -8,6 +8,8 @@ require_once("../bdmutilple/getachat.php");
 require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
+require_once("../bdmutilple/getstock.php");
+require_once("../bdmutilple/trievalue.php");
 
 require '../../vendor/autoload.php';
 ini_set('memory_limit', '256M');
@@ -15,6 +17,9 @@ use Dompdf\Dompdf;
 
 $vente = new Vente(0);
 $client = new Client(0);
+$trie = new TrieValue();
+$stok = new Stock(1,$_POST['date'],$_POST['date2']);
+
 $formule = 1;
 $date = date("Y/m/d");
 
@@ -25,6 +30,8 @@ if (isset($_POST['date'])) {
 } else {
     $date = date("Y-m-d");
 }
+
+
 $nomPtoduit = $_POST["nomProduit"];
 //$nomclient = $_POST["client"];
 
@@ -182,8 +189,8 @@ $html = '
                         <tr>
                         <th scope="col">Mon du produit </th>
                         <th scope="col">Stock debut du jour</th>
-                        <th scope="col">Quantite</th>
-                        <th scope="col">Stock fin du jour</th>
+                        <th scope="col">Quantite vendu</th>
+                        <th scope="col">Reste en stock</th>
                         <th scope="col">Date</th>
                     </tr>';
                     if (!empty($_POST['date']) && !empty($_POST['date2'])) {
@@ -211,10 +218,10 @@ $html = '
                     
                     foreach ($quantiteproduit as $key ) {
                         $html .= '<tr>';
-                        $html .= '<td>' .$key["nomproduit"].'</td>';
-                        $html .= '<td>' ."0".'</td>';
+                        $html .= '<td>' .$trie->RemoveChaine("provenderie",$key["nomproduit"]).'</td>';
+                        $html .= '<td>' .$stok->getLogsDateProduit($trie->RemoveChaine("provenderie",$key["nomproduit"]),$_POST['date']).'</td>';
                         $html .= '<td>' .round( $key["quantite"],2).'</td>';
-                        $html .= '<td>' ."0".'</td>';
+                        $html .= '<td>' .$stok->getQuantiteProduit($trie->RemoveChaine("provenderie",$key["nomproduit"])).'</td>';
                         $html .= '<td>' .$key["datefacture"].'</td>';
                     $html .= '</tr>';
                     }   

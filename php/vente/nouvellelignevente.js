@@ -360,7 +360,8 @@ function enregistrementDonnees(){
 function LigneventeMofiier(donnees){
     const tableau = document.getElementById('dataTable');
 
-   // const  Typepaiement = document.getElementById("Typepaiement").value;
+   // const  Typepaiement = document.getElementById("Typepaiement").value; 
+   // ajutement nom terminer.       
 
         
         const nbligne = tableau.rows.length;
@@ -464,7 +465,7 @@ function enregistrementEdite(){
     .then(data => { 
         if (data.success == true) {
             document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-info"> Modification des donnes avec success</p>';
-            //window.location.href = 'facture.php?id='+ data.message;
+            window.location.href = 'facture.php?id='+ data.message;
             console.log("edite : "+data);
         }else if(data.success == false){
             document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> Verifier que le produit ne sont conforme </p>';

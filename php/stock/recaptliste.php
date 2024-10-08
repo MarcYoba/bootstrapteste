@@ -1,4 +1,7 @@
-<?php require_once("../connexion.php"); 
+<?php 
+    require_once("../connexion.php");
+    require_once("../bdmutilple/getstock.php");
+    require_once("../bdmutilple/getfacture.php");
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gestion de stock</title>
+    <title>GESTION DE STOCK</title>
 
     <!-- Custom fonts for this template -->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -253,65 +256,103 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Versement</h1>
+                    <h1 class="h3 mb-2 text-gray-800">RECAPITULATIF  GENERALE</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div class="row">
-                                <p class="col-md-0"><h6 class="m-0 font-weight-bold text-primary">Tables Versement</h6></p>
+                                    <h6 class="m-0 font-weight-bold text-primary">RECAPITULATIF GENERALE</h6>
                             </div>
-                            
+                            <br>
+                            <form class="user" action="../pdf/Recapitulatif.php" method="post">
+                            <div class="row">
+                                
+                                <p class="col-md-3">
+                                <input type="text" id="recherche" onkeyup="myFunction()" class="form-control form-control-user" placeholder="recherche produit"><br>
+                                </p>
+                                <p class="col-md-3"> 
+                                    
+                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="4" multiple aria-label="multiple select ">
+                                        <option selected value="All">All </option>
+                                        <?php 
+                                            global $conn;
+                                            $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                            $result = $conn->query($sql);
+                                            while ($row = mysqli_fetch_assoc($result)){               
+                                                echo "<option value='".$row["nom_produit"]." "."'>".$row["nom_produit"]."</option>";
+                                            }
+                                        ?>
+                                    </select>
+                                </p>
+               
+                                <p class="col-md-2">
+                                    <button class='btn btn-info btn-user'>Imprimer</button>
+                                </p>
+                            </div>
+                            </form>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
-                                    <thead>
-                                       
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='80' data-order='[[0, "desc"]]'>
+                                    <thead>  
                                         <tr>
-                                            <th>id</th>
-                                            <th>montant</th>
-                                            <th>client</th>
-                                            <th>Numero dette</th>
-                                            <th>date versement</th>
-                                            <th>operation</th>
+                                            <th>Produit</th>
+                                            <th>Stock Initial KG</th>
+                                            <th>Som Achat KG</th>
+                                            <th>Total KG</th>
+                                            <th>vente du jour KG</th>
+                                            <th>Total Vente KG</th>
+                                            <th>Stock REEL KG</th>
+                                            <th>Date</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>id</th>
-                                            <th>montant</th>
-                                            <th>client</th>
-                                            <th> Numero dette </th>
-                                            <th>date versement</th>
-                                            <th>operation</th>
+                                            <th>Produit</th>
+                                            <th>Stock Initial KG</th>
+                                            <th>Som Achat KG</th>
+                                            <th>Total KG</th>
+                                            <th>vente du Jour KG</th>
+                                            <th>Total Vente KG</th>
+                                            <th>Stock REEL KG</th>
+                                            <th>Date</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody>
+                                    <tbody id="liste">
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM versement";
-                                        $result = $conn->query($sql);
-                                        while ($row = mysqli_fetch_assoc($result)){
+                                        $stock = new Stock(1,1,1);
+                                        $facture = new Facture(1);
+                                        $date =  date("Y-m-d");
+                                        // $sqlp = "SELECT  id,nom_produit,cathegorie FROM produit"; 
+                                        // $resultp = $conn->query($sqlp);
+                                        // while ($rowt = mysqli_fetch_assoc($resultp)){ 
+                                        //     var_dump($facture->setIdFacture($rowt["nom_produit"]." ".$rowt["cathegorie"] ,$rowt["id"]));
+                                        // }
+                                        $variable = $stock->getLogsDate();
+                                        foreach ($variable as $key => $value) {
                                             echo '<tr>';
-                                            echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["montant"].'</td>';
-                                            $idclient = $row["idclient"];
-                                            $sqlclient = "SELECT firstname FROM client WHERE id = '$idclient'";
-                                            $value = $conn->query($sqlclient);
-                                            $nom = mysqli_fetch_assoc($value);
-
-                                            echo '<td>'.$nom["firstname"].'</td>';
-                                            echo '<td>'.$row["iddette"].'</td>';
-                                            echo '<td>'.$row["dateversement"].'</td>';
-                                            echo "<td>";
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
-                                            echo "</td>";
+                                            echo '<th>'.$value["Nomproduit"].'</th>';
+                                            echo '<th>'.round($value["quantite_stock"],2).'</th>';
+                                            echo '<th>'.$value["quantite_achetee"].'</th>';
+                                            echo '<th>'.round($value["quantite_stock"],2) + $value["quantite_achetee"].'</th>';
+                                            if (empty($value["quantite_facturee"])) {
+                                                echo '<th>'.$value["quantite_facturee"].'</th>'; 
+                                            } else {
+                                                echo '<th>'.round($value["quantite_facturee"],2).'</th>'; 
+                                            }
+                                            if (empty($value["somme_facture"])) {
+                                                echo '<th>'.$value["somme_facture"].'</th>'; 
+                                            } else {
+                                                echo '<th>'.round($value["somme_facture"],2).'</th>'; 
+                                            } 
+                                            echo '<th>'.$value["quantite_produit"].'</th>';
+                                            echo '<th>'.$date.'</th>';
                                             echo '</tr>';
-                                            //var_dump($row);
                                         }
+                                        
                                     ?>
                                     </tbody>
                                 </table>
@@ -329,7 +370,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>vestion test &copy; Your Website 2024</span>
                     </div>
                 </div>
             </footer>
@@ -382,6 +423,7 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="../stock/stockVente.js"></script>
 
 </body>
 

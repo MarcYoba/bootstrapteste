@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 require_once("../connexion.php");
 
 class Stock{
@@ -25,6 +25,116 @@ class Stock{
         }
 
         return $this->data;
+    }
+
+    public function getLogsProduit($produit){
+        global $conn;
+        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE datet = CURRENT_DATE() AND Nomproduit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["quantites"];
+    }
+
+    public function getLogsDateProduit($produit,$date){
+        global $conn;
+        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE datet = '$date' AND Nomproduit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["quantites"];
+    }
+
+    public function getHistorique($id){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM historiquestock WHERE idproduit='$id'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }       
+        return $data;
+    }
+
+
+    public function getQuantiteProduit($produit){
+        global $conn;
+        $sql = "SELECT quantite_produit AS quantites FROM produit WHERE nom_produit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["quantites"];
+    }
+
+    public function getLogsDate(){
+        global $conn;
+        $data = [];
+        $sql = "SELECT
+            hs.Nomproduit,
+            hs.quantite AS quantite_stock,
+            p.quantite_produit,
+            (SELECT SUM(a2.quantite) FROM achat a2 WHERE a2.idproduit = hs.idproduit AND YEAR(a2.dateachat) = YEAR(CURDATE()) AND 					MONTH(a2.dateachat) = MONTH(CURDATE())) AS quantite_achetee,
+            (SELECT SUM(f2.quantite) FROM facture f2 WHERE f2.idproduit = hs.idproduit AND YEAR(f2.datefacture) = YEAR(CURDATE()) AND 				MONTH(f2.datefacture) = MONTH(CURDATE())) AS somme_facture,
+            (SELECT SUM(f.quantite) FROM facture f WHERE f.idproduit = hs.idproduit AND  f.datefacture = CURRENT_DATE) AS quantite_facturee
+            FROM
+                historiquestock hs
+            LEFT JOIN produit p ON p.id = hs.idproduit
+            GROUP BY
+                hs.Nomproduit
+            ORDER BY
+                hs.Nomproduit DESC";
+
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }          
+        return $data;
+    }
+
+    public function getLogsProduitDate($produit,$date){
+        global $conn;
+        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE datet = '$date' AND Nomproduit='$produit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["quantites"];
+    }
+
+    public function UpdateHistorique($idproduit,$date,$quantite){
+        global $conn;
+        $sql = "UPDATE historiquestock SET quantite = '$quantite' WHERE idproduit = '$idproduit' AND datet='$date'";
+        $result = $conn->query($sql);
+        if($result === true){
+            //return "Edite OK";
+        }else{
+            return "Edite false";
+        }  
+    }
+
+    public function getLogsSuivant($produit,$date){
+        global $conn;
+
+        $sql = "SELECT DATE_ADD('$date', INTERVAL 1 DAY) as datete FROM historiquestock;";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        
+        // $datefour = date('Y-m-d');
+        // if ($datefour == $date) {
+        //     $datesuivate = $date;
+        // } else {
+            
+        // }
+        
+        $datesuivate = $row["datete"];
+
+        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE Nomproduit='$produit' AND datet ='$datesuivate' ";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        
+        if (empty($row["quantites"])) {
+            return 0;
+        }
+        return $row["quantites"];
     }
 
     public function DayofMonth($produit){

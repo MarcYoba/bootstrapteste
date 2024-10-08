@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.php">
+        <a class="nav-link" href="../../home.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -26,8 +26,8 @@
         <div id="collapsevente" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation de vente</h6>
-                <a class="collapse-item" href="php/vente/vente.php"> ajouter une vente</a>
-                <a class="collapse-item" href="php/vente/liste.php">liste vente</a>
+                <a class="collapse-item" href="../vente/vente.php"> ajouter une vente</a>
+                <a class="collapse-item" href="../vente/liste.php">liste vente</a>
             </div>
         O</div>
     </li>
@@ -40,8 +40,8 @@
         <div id="collapseahcat" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Achat</h6>
-                <a class="collapse-item" href="php/achat/teste.php">ajouter un Achat</a>
-                <a class="collapse-item" href="php/achat/liste.php">liste Achat</a>
+                <a class="collapse-item" href="../achat/teste.php">ajouter un Achat</a>
+                <a class="collapse-item" href="../achat/liste.php">liste Achat</a>
             </div>
         </div>
     </li>
@@ -54,8 +54,8 @@
         <div id="collapseclient" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des clients</h6>
-               <a class="collapse-item" href="php/client/client.php">ajouter un client</a>
-                <a class="collapse-item" href="php/client/liste.php">liste client</a>
+               <a class="collapse-item" href="../client/client.php">ajouter un client</a>
+                <a class="collapse-item" href="../client/liste.php">liste client</a>
             </div>
         </div>
     </li>
@@ -68,8 +68,8 @@
         <div id="collapseproduit" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des produit</h6>
-                <a class="collapse-item" href="php/produit/produit.php">ajouter un produit</a>
-                <a class="collapse-item" href="php/produit/liste.php">liste produit</a>
+                <a class="collapse-item" href="../produit/produit.php">ajouter un produit</a>
+                <a class="collapse-item" href="../produit/liste.php">liste produit</a>
             </div>
         </div>
     </li>
@@ -82,8 +82,8 @@
         <div id="collapsefournisseur" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des produit</h6>
-                <a class="collapse-item" href="php/fournisseur/fourniseur.php">ajouter un Fournisseur</a>
-                <a class="collapse-item" href="php/fournisseur/liste.php">liste Fournisseur</a>
+                <a class="collapse-item" href="../fournisseur/fourniseur.php">ajouter un Fournisseur</a>
+                <a class="collapse-item" href="../fournisseur/liste.php">liste Fournisseur</a>
             </div>
         </div>
     </li>
@@ -96,10 +96,10 @@
         <div id="collapsestock" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Stock</h6>
-                <a class="collapse-item" href="php/stock/sctockVente.php">Historique </a>
-                <a class="collapse-item" href="php/achat/liste.php">Stock Achat </a>
-                <a class="collapse-item" href="php/stock/recaptliste.php">Stock Reel </a>
-                <a class="collapse-item" href="php/stock/editeStock.php">Edite Stock </a>
+                <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
+                <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
+                <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
+                <a class="collapse-item" href="../stock/editeStock.php">Edite Stock </a>
             </div>
         </div>
     </li>
@@ -112,8 +112,8 @@
         <div id="versement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">versement:</h6>
-                <a class="collapse-item" href="php/versement/versement.php">ajouter versement</a>
-                <a class="collapse-item" href="php/versement/liste.php">Liste versement</a>
+                <a class="collapse-item" href="../versement/versement.php">ajouter versement</a>
+                <a class="collapse-item" href="../versement/liste.php">Liste versement</a>
             </div>
         </div>
     </li>
@@ -126,7 +126,7 @@
         <div id="dette" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette:</h6>
-                <a class="collapse-item" href="php/dette/dette.php">Liste credit</a>
+                <a class="collapse-item" href="../dette/dette.php">Liste credit</a>
             </div>
         </div>
     </li>
@@ -140,8 +140,8 @@
         <div id="caisse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette:</h6>
-                <a class="collapse-item" href="php/caisse/caisse.php">Caisse</a>
-                <a class="collapse-item" href="php/caisse/liste.php">liste caisse</a>
+                <a class="collapse-item" href="../caisse/caisse.php">Caisse</a>
+                <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
             </div>
         </div>
     </li>
@@ -156,7 +156,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">utilisateur:</h6>
                 <a class="collapse-item" href="../../register.html">ajouter utilisateur</a>
-                <a class="collapse-item" href="php/userCon/liste.php">Liste</a>
+                <a class="collapse-item" href="../userCon/liste.php">Liste</a>
             </div>
         </div>
     </li>
@@ -179,7 +179,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette :</h6>
-                <a class="collapse-item" href="php/dette/dette.php">Liste dette</a>
+                <a class="collapse-item" href="../dette/dette.php">Liste dette</a>
                 <!--<a class="collapse-item" href="cards.html">Dette client</a>-->
             </div>
         </div>
@@ -191,16 +191,16 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
-            <span>Utilities</span>
+            <span>Uotils</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="php/caisse/caisse.php">Caisse</a>
-                <a class="collapse-item" href="php/caise/liste.php">liste caisse</a>
-                <a class="collapse-item" href="php/depenses/depense.php">Depenses</a>
-                <a class="collapse-item" href="php/depenses/liste.php">Liste Depense</a>
+                <a class="collapse-item" href="../caisse/caisse.php">Caisse</a>
+                <a class="collapse-item" href="../caise/liste.php">liste caisse</a>
+                <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
+                <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
             </div>
         </div>
     </li>
@@ -223,14 +223,14 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="index.php">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="php/userCon/liste.php">Liste</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                <a class="collapse-item" href="../../index.php">Login</a>
+                <a class="collapse-item" href="../../register.html">ajouter utilisateur</a>
+                <a class="collapse-item" href="../userCon/liste.php">Liste</a>
+                <a class="collapse-item" href="../../forgot-password.html">Forgot Password</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+                <a class="collapse-item" href="../../404.html">404 Page</a>
+                <a class="collapse-item" href="../../blank.html">Blank Page</a>
             </div>
         </div>
     </li>

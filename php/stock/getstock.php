@@ -24,7 +24,7 @@ if ((!empty($_POST["vente"]))) {
     exit;
 }
 
-if ((!empty($_POST["reel"]))&& ($nom == "All") && ((!empty($datefirst)) || (empty($datefirst)) )) {
+if ((!empty($_POST["reel"]))&& ($nom == "All") && ((empty($datefirst)) )) {
     $value = $produit->getAllProduit();
 } else if ((!empty($_POST["reel"]))&& ($nom != "All") && (empty($datefirst)))  {
     $value = $produit->getAllProduitName($nom);
@@ -34,6 +34,8 @@ if ((!empty($_POST["reel"]))&& ($nom == "All") && ((!empty($datefirst)) || (empt
     $value = $bdstock->getHitoriqueIntervale($nom,$datesecon);
 }else if ((!empty($_POST["reel"]))&& ($nom == "All") && (!empty($datefirst)) && (!empty($datesecon)))  {
     $value = $bdstock->HitoriqueIntervale($datesecon);
+}else if ((!empty($_POST["reel"]))&& ($nom == "All") && ((!empty($datefirst)))) {
+    $value = $produit->getHistoriqueProduit($datefirst);
 }
 
 if ((!empty($_POST["Intentaire"]))&& ($nom == "All") && (empty($datefirst)) ) {
