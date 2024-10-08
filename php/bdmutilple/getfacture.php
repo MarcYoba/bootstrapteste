@@ -41,6 +41,14 @@ class Facture{
         return $row["idclient "]; 
     }
 
+    public function getSommeProduit($idproduit,$dateProduit){
+        global $conn;
+        $sql = "SELECT SUM(quantite) AS quantites FROM facture WHERE idproduit='$idproduit' AND datefacture='$dateProduit';";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["quantites"]; 
+    }
+
     public function setIdFacture($produit,$idproduit){
         global $conn;
         $sql = "SELECT idproduit,nomproduit  FROM facture WHERE nomproduit= '$produit'";

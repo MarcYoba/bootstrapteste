@@ -102,7 +102,7 @@ session_start();
                                                                     <option selected></option>
                                                                     <?php 
                                                                         global $conn;
-                                                                        $sql = "SELECT  nom_produit FROM produit";
+                                                                        $sql = "SELECT  nom_produit FROM produit ORDER BY nom_produit ASC";
                                                                         $result = $conn->query($sql);
                                                                         while ($row = mysqli_fetch_assoc($result)){
                                                                             

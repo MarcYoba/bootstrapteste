@@ -99,6 +99,7 @@
                 <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
                 <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
                 <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
+                <a class="collapse-item" href="../stock/editeStock.php">Edite Stock </a>
             </div>
         </div>
     </li>

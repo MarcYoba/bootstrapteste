@@ -45,7 +45,17 @@ class Stock{
         return $row["quantites"];
     }
 
-    
+    public function getHistorique($id){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM historiquestock WHERE idproduit='$id'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }       
+        return $data;
+    }
+
 
     public function getQuantiteProduit($produit){
         global $conn;
@@ -88,6 +98,17 @@ class Stock{
         $row = mysqli_fetch_assoc($result);
                  
         return $row["quantites"];
+    }
+
+    public function UpdateHistorique($idproduit,$date,$quantite){
+        global $conn;
+        $sql = "UPDATE historiquestock SET quantite = '$quantite' WHERE idproduit = '$idproduit' AND datet='$date'";
+        $result = $conn->query($sql);
+        if($result === true){
+            //return "Edite OK";
+        }else{
+            return "Edite false";
+        }  
     }
 
     public function getLogsSuivant($produit,$date){

@@ -56,6 +56,16 @@ class Achat{
         
     }
 
+    public function getSommeAchat($idproduit,$date){
+        global $conn;
+        
+        $sql = "SELECT SUM(quantite) AS quantite FROM achat WHERE idproduit = '$idproduit' AND dateachat = '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+       return $row["quantite"] ;
+        
+    }
+
     public function getAllAchatProduit($produit){
         global $conn;
         $data = [];
