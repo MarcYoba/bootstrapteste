@@ -47,7 +47,7 @@
                     <div class="col-lg-5">
                             <br>
                             <div class="col-xl-5 col-md-5 mb-4">
-                            <a href="home.php">
+                            <a href="home/home.php">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">

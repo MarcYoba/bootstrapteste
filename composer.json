@@ -1,6 +1,10 @@
 {
     "require": {
         "dompdf/dompdf": "^3.0",
+<<<<<<< HEAD
         "phpoffice/phpspreadsheet": "^2.1"
+=======
+        "slim/http": "^1.4"
+>>>>>>> entete
     }
 }
