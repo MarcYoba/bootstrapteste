@@ -2,7 +2,7 @@
 session_start(); 
 
 require_once("php/historique/historiqueStock.php");
-
+// require_once("php/activesaision.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

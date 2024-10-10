@@ -18,6 +18,23 @@ class Achat{
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
     }
+
+    public function DeleteAchat($id){
+        global $conn;
+
+        $sql = "DELETE  FROM prix WHERE idachat= '$id'";
+        $result = $conn->query($sql);
+        
+        $sql = "DELETE  FROM achat WHERE id= '$id'";
+        $result = $conn->query($sql);
+        if ($result===true) {
+            return  true;
+        } else {
+            return  false;
+        }
+         
+    }
+
     public function getByDate($date){
         global $conn;
         $sql = "SELECT SUM(montant) as montant FROM achat WHERE dateachat= '$date'";
@@ -31,6 +48,32 @@ class Achat{
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
+    }
+
+    public function UpdateAchat($idachat,$quantite,$nomProdit,$quatproduit,$fournisseur,$prix){
+
+        global $conn;
+
+        $sql = "SELECT id,quantite_produit FROM produit WHERE nom_produit='$nomProdit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        $idproduit= $row["id"]; 
+        $somme = $row["quantite_produit"] + $quatproduit;
+
+        $sql = "UPDATE produit SET quantite_produit = '$somme' WHERE id = '$idproduit'";
+        $result = $conn->query($sql);
+        if($result === true){
+            $somme = $quantite*$prix;
+            $sql = "UPDATE achat SET quantite = '$quantite', prixAcaht = '$prix', idfournisseur  = '$fournisseur',montant='$somme'  WHERE id = '$idachat'";
+            $result = $conn->query($sql);
+            if ($result === true) {
+                return true;
+            } else {
+                return false;
+            }  
+        }else{
+            return false;
+        }  
     }
     public function AllAchat(){
         global $conn;
@@ -48,6 +91,18 @@ class Achat{
         global $conn;
         $data = [];
         $sql = "SELECT * FROM achat";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+       return $data ;
+        
+    }
+
+    public function getAchatById($id){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM achat WHERE id='$id'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);

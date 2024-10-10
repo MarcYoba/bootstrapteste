@@ -224,9 +224,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Login Screens:</h6>
                 <a class="collapse-item" href="../../index.php">Login</a>
-                <a class="collapse-item" href="../../register.html">ajouter utilisateur</a>
+                <a class="collapse-item" href="../userCon/page.php">ajouter utilisateur</a>
                 <a class="collapse-item" href="../userCon/liste.php">Liste</a>
-                <a class="collapse-item" href="../../forgot-password.html">Forgot Password</a>
+                <a class="collapse-item" href="../userCon/forgot-password.html">Forgot Password</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Other Pages:</h6>
                 <a class="collapse-item" href="../../404.html">404 Page</a>

@@ -304,6 +304,7 @@
                                             <th>Quantite</th>
                                             <th>Montant</th>
                                             <th>Date</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -314,6 +315,7 @@
                                             <th>Quantite</th>
                                             <th>Montant</th>
                                             <th>Date</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -329,6 +331,8 @@
                                             echo '<td>'.$row["quantite"].'</td>';
                                             echo '<td>'.$row["montant"].'</td>';
                                             echo '<td>'.$row["dateachat"].'</td>';
+                                            echo "<td><a href='modifie.php?id=" .$row["id"]. "' class='btn btn-primary'><i class='fas fa-pencil-alt '></i></a>";
+                                            echo "<a href='edite.php?delete=" .$row["id"]. "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cet Achat ? si vous suprimer cet achat elle sera supprimer du stock\");'><i class='fas fa-trash-alt'></i></a></td>";
                                             echo '</tr>';
                                             //var_dump($row);
                                         }

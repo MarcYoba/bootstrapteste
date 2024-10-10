@@ -273,7 +273,7 @@
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th>Datte arriver</th>
-                                            <th>Reference client</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -284,7 +284,7 @@
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th>Datte arriver</th>
-                                            <th>Reference client</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -300,7 +300,8 @@
                                             echo '<td>'.$row["email"].'</td>';
                                             echo '<td>'.$row["roles"].'</td>';
                                             echo '<td>'.$row["datecreate"].'</td>';
-                                            echo '<td>'.$row["idclient"].'</td>';
+                                            echo "<td><a href='page.php?id=" .$row["id"]. "' class='btn btn-primary'><i class='fas fa-pencil-alt '></i></a>";
+                                            echo "<a href='edite.php?delete=" .$row["id"]. "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cet Achat ? si vous suprimer cet achat elle sera supprimer du stock\");'><i class='fas fa-trash-alt'></i></a></td>";
                                             echo '</tr>';
                                             //var_dump($row);
                                         }

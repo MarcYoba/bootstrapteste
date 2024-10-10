@@ -1,7 +1,14 @@
 
 <?php
 session_start();
+$_SESSION['last_activity'] = time();
+$_SESSION['id']= 0;
 require_once("../connexion.php");
+// ini_set('session.gc_maxlifetime', 1800);
+// ini_set('session.cookie_lifetime', 1800);
+
+// // Ou bien, en utilisant session_set_cookie_params()
+// session_set_cookie_params(1800);
 
 // Validate login credentials
 
@@ -20,7 +27,7 @@ if (isset($_POST['emailcon']) && isset($_POST['Passwordcon'])) {
 
     if ($result->num_rows > 0) {
         
-        $sql = "SELECT id,password FROM user WHERE email = '$username'";
+        $sql = "SELECT id,password,roles FROM user WHERE email = '$username'";
         $result = $conn->query($sql);
        
         if ($result === false) {
@@ -34,9 +41,18 @@ if (isset($_POST['emailcon']) && isset($_POST['Passwordcon'])) {
                     // Login successful
                     $_SESSION['name'] = $username;
                     $_SESSION['id'] = $row["id"];
+                    $_SESSION['roles'] = $row["roles"];
+                    $_SESSION['last_activity'] = time();
 
-                    //echo $_SESSION["id"];
-                    header("Location: ../../activites.php");
+                    if (isset($_SESSION['id']) && isset($_SESSION['roles'])) {
+                        header("Location: ../../activites.php"); 
+                        exit();
+                    } else {
+                        header("Location: ../../index.php"); 
+                        exit();
+                    }
+                    
+                    
                     exit();
                 }else{
                     header("Location: ../../404.html");
