@@ -15,7 +15,7 @@ if (is_array($donnees) == false) {
 } 
 elseif (is_array($donnees) == true) {
     // $ligenid = array_pop($donnees);
-   //$facture->EditFacture($donnees);
+    //echo json_encode($donnees);
     echo json_encode($facture->EditFacture($donnees));
 }
 

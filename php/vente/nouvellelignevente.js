@@ -422,6 +422,7 @@ function LigneventeMofiier(donnees){
     document.getElementById("idfacture").textContent = donnees.id;
     document.getElementById("idvente").textContent = donnees.idvente;
     
+    
 }
 function editevente(){
     if (typeof data === 'undefined' || data === null) {
@@ -433,7 +434,7 @@ function editevente(){
             LigneventeMofiier(element);
         });
         localStorage.removeItem('myData');
-      
+        document.getElementById("enregistremet").style.display="none";
       document.getElementById("modifiervente").innerHTML = '<button  class="btn btn-warning btn-user btn-block" onclick="saveedite()" >Modifier vente</button>';
     }
       
@@ -471,6 +472,7 @@ function enregistrementEdite(){
             document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> Verifier que le produit ne sont conforme </p>';
         }else{
             console.log(data);
+            window.location.href = 'liste.php';
         }     
     })
     .catch(error => {
