@@ -35,6 +35,23 @@ class Produit{
         }  
     }
 
+    public function UgradeProduit($idproduit,$quantite){
+        global $conn;
+
+        $sql = "SELECT quantite_produit AS quantite FROM produit WHERE  id='$idproduit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result); 
+        $quantite = $row["quantite"] + $quantite;
+
+        $sql = "UPDATE produit SET quantite_produit = '$quantite' WHERE id = '$idproduit'";
+        $result = $conn->query($sql);
+        if($result === true){
+            //return "Edite OK";
+        }else{
+            return "Edite false";
+        }  
+    }
+
     public function getIdProduit($produit){
         global $conn;
         $sql = "SELECT id AS id FROM produit WHERE  nom_produit='$produit'";

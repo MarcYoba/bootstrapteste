@@ -32,6 +32,23 @@ class Facture{
         return $data; 
     }
 
+    public function UgradeProduitFacture($idproduit,$quantite){
+        global $conn;
+
+        $sql = "SELECT quantite_produit AS quantite FROM produit WHERE  id='$idproduit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result); 
+        $quantite = $row["quantite"] + $quantite;
+
+        $sql = "UPDATE produit SET quantite_produit = '$quantite' WHERE id = '$idproduit'";
+        $result = $conn->query($sql);
+        if($result === true){
+            //return "Edite OK";
+        }else{
+            return "Edite false";
+        }  
+    }
+
     public function getIdClientFacture($id){
         global $conn;
         $sql = "SELECT idclient  FROM facture WHERE idvente= '$id'";
@@ -229,7 +246,7 @@ class Facture{
             
 
              if(($ligneTotal["taille"]-2) >1){
-                $sql = "SELECT id,idclient  FROM facture WHERE idvente = '$this->idvente'";
+                $sql = "SELECT id,idclient,quantite,idproduit  FROM facture WHERE idvente = '$this->idvente'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows<($ligneTotal["taille"]-2)) {
@@ -239,10 +256,24 @@ class Facture{
                     while (($row = mysqli_fetch_assoc($result)) && $nblignebd >0) {
                         $id = $row["id"];
                         $idclient = $row["idclient"];
+                        $stockFacture = $row["quantite"];
+                        $idproduit = $row["idproduit"];
                        $line = array_shift($value);
                      
                             $nomproduit = $line["produit"];
                             $quantite = $line["quantite"];
+                            $position = strpos($nomproduit, "provenderie");
+
+                            if ($position !== false) {
+                                // Si le mot est trouvé, le supprimer
+                                $nouveauTexte = substr_replace($nomproduit, "", $position, strlen("provenderie"));
+                                $nomproduit = $nouveauTexte;
+                            } 
+                            if ($stockFacture!=$quantite) {
+                                $autre = $stockFacture-$quantite;
+                                $this->UgradeProduitFacture($idproduit,$autre);
+                            }
+                            
                             $prix = $line["prix"];
                             $total = $line["total"];
                             //$nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
@@ -270,10 +301,24 @@ class Facture{
                 } else if($result->num_rows==($ligneTotal["taille"]-2)) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         $id = $row["id"];
+                        $stockFacture = $row["quantite"];
+                        $idproduit = $row["idproduit"];
                        $line = array_shift($value);
                      
                             $nomproduit = $line["produit"];
                             $quantite = $line["quantite"];
+
+                            $position = strpos($nomproduit, "provenderie");
+
+                            if ($position !== false) {
+                                // Si le mot est trouvé, le supprimer
+                                $nouveauTexte = substr_replace($nomproduit, "", $position, strlen("provenderie"));
+                                $nomproduit = $nouveauTexte;
+                            } 
+                            if ($stockFacture!=$quantite) {
+                                $autre = $stockFacture-$quantite;
+                                $this->UgradeProduitFacture($idproduit,$autre);
+                            }
                             $prix = $line["prix"];
                             $total = $line["total"];
                             //$nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));

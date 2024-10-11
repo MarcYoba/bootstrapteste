@@ -330,6 +330,7 @@ function enregistrementDonnees(){
     let cahs = document.getElementById("cash").value;
     let credit = document.getElementById("credit").value;
     let momo = document.getElementById("momo").value;
+    let teste = document.getElementById("teste").textContent;
     somme = parseInt(momo) + parseInt(cahs)+parseInt(credit) ;
     if ((somme) == (document.getElementById("Total").value)) 
     {
@@ -339,13 +340,30 @@ function enregistrementDonnees(){
                 if (document.getElementById("credit").value == 0) {
                     document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH ou Credit</p>';
                 } else {
+                    
+                    if (teste == 0) {
+                        document.getElementById("teste").innerText = 1;
+                    }else{
+                        window.location.href = 'liste.php'
+                    }
                     enregistrementBD();
                 }
             } else {
+                
+                    if (teste == 0) {
+                        document.getElementById("teste").innerText = 1;
+                    }else{
+                        window.location.href = 'liste.php'
+                    }
                 enregistrementBD(); 
             }
         }
         else{
+                    if (teste == 0) {
+                        document.getElementById("teste").innerText = 1;
+                    }else{
+                        window.location.href = 'liste.php'
+                    }
             enregistrementBD();
         }
    
@@ -485,6 +503,7 @@ function saveedite(){
    let cahs = document.getElementById("cash").value;
     let credit = document.getElementById("credit").value;
     let momo = document.getElementById("momo").value;
+    let teste = document.getElementById("teste").textContent;
     somme = parseInt(momo) + parseInt(cahs)+parseInt(credit) ;
     if ((somme) == (document.getElementById("Total").value)) 
     {
@@ -493,6 +512,14 @@ function saveedite(){
             if (document.getElementById("cash").value == 0) {
                 if (document.getElementById("credit").value == 0) {
                     document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH ou Credit</p>';
+                    
+                    if (teste == 0) {
+                        document.getElementById("teste").innerText = 1;
+                    }else{
+                        alert("Voullez - Vous Vraiment modifier cette facture ?");
+                        document.getElementById("teste").innerText = 0;
+                        enregistrementEdite()
+                    }
                 } else {
                     enregistrementEdite()
                 }

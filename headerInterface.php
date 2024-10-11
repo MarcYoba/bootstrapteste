@@ -1,10 +1,14 @@
+<?php
+session_start(); 
+require_once("php/activesaision.php");
+?>
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
-       I </div>
+        </div>
         <div class="sidebar-brand-text mx-3">ABGROUP <sup>2</sup></div>
     </a>
 
@@ -29,7 +33,7 @@
                 <a class="collapse-item" href="../vente/vente.php"> ajouter une vente</a>
                 <a class="collapse-item" href="../vente/liste.php">liste vente</a>
             </div>
-        O</div>
+        </div>
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseahcat"

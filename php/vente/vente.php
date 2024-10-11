@@ -101,6 +101,7 @@ require_once("../connexion.php");
                                                 </p>
                                                 <p class="col-md-2" >
                                                     <span id="TypePaie" class="drop" ></span>
+                                                    <span id="teste" class="drop" >0</span>
                                                 </p>
                                                 
                                             </div>

@@ -6,10 +6,6 @@ if ((!isset($_SESSION['id'])) && (!isset($_SESSION['roles']))) {
     $_SESSION['id']= 0;
     exit();
 } 
-if ((empty($_SESSION['id'])) && (session_status() != PHP_SESSION_ACTIVE)) {
-    header("Location: ../../index.php"); 
-    exit();
-} 
 
 if (!isset($_SESSION['last_activity'])) {
     $_SESSION['last_activity'] = time();
