@@ -513,6 +513,7 @@ require_once("php/historique/historiqueStock.php");
     <script src="js/demo/chart-area-semaine.js"></script>
     <script src="js/demo/chart-pie-semain.js"></script>
     <script src="js/demo/chart-bar-semain.js"></script>
+    <script src="header.js"></script>
    
     <script>
         function affichemontant(params) {
@@ -523,6 +524,7 @@ require_once("php/historique/historiqueStock.php");
             document.getElementById('verse').innerHTML= document.getElementById('monversement').innerText;
             document.getElementById('vente').innerHTML= document.getElementById('montantvente').innerText;//.style.display='block';
         }
+        
     </script>
     <?php ;?>
 </body>

@@ -30,7 +30,7 @@ require_once("php/activesaision.php");
         <div id="collapsevente" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation de vente</h6>
-                <a class="collapse-item" href="../vente/vente.php"> ajouter une vente</a>
+                <a class="collapse-item" href="../vente/vente.php" id="ajouterVente"> ajouter une vente</a>
                 <a class="collapse-item" href="../vente/liste.php">liste vente</a>
             </div>
         </div>
@@ -44,7 +44,7 @@ require_once("php/activesaision.php");
         <div id="collapseahcat" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Achat</h6>
-                <a class="collapse-item" href="../achat/teste.php">ajouter un Achat</a>
+                <a class="collapse-item" href="../achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
                 <a class="collapse-item" href="../achat/liste.php">liste Achat</a>
             </div>
         </div>
@@ -58,7 +58,7 @@ require_once("php/activesaision.php");
         <div id="collapseclient" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des clients</h6>
-               <a class="collapse-item" href="../client/client.php">ajouter un client</a>
+               <a class="collapse-item" href="../client/client.php" id="ajouterClient">ajouter un client</a>
                 <a class="collapse-item" href="../client/liste.php">liste client</a>
             </div>
         </div>
@@ -72,7 +72,7 @@ require_once("php/activesaision.php");
         <div id="collapseproduit" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des produit</h6>
-                <a class="collapse-item" href="../produit/produit.php">ajouter un produit</a>
+                <a class="collapse-item" href="../produit/produit.php" id="ajouterProduit">ajouter un produit</a>
                 <a class="collapse-item" href="../produit/liste.php">liste produit</a>
             </div>
         </div>
@@ -85,8 +85,8 @@ require_once("php/activesaision.php");
         </a>
         <div id="collapsefournisseur" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Operation des produit</h6>
-                <a class="collapse-item" href="../fournisseur/fourniseur.php">ajouter un Fournisseur</a>
+                <h6 class="collapse-header">Operation des Fourniseurs</h6>
+                <a class="collapse-item" href="../fournisseur/fourniseur.php" id="ajouterFourniseur">ajouter un Fournisseur</a>
                 <a class="collapse-item" href="../fournisseur/liste.php">liste Fournisseur</a>
             </div>
         </div>
@@ -103,7 +103,7 @@ require_once("php/activesaision.php");
                 <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
                 <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
                 <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
-                <a class="collapse-item" href="../stock/editeStock.php">Edite Stock </a>
+                <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Edite Stock </a>
             </div>
         </div>
     </li>
@@ -116,7 +116,7 @@ require_once("php/activesaision.php");
         <div id="versement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">versement:</h6>
-                <a class="collapse-item" href="../versement/versement.php">ajouter versement</a>
+                <a class="collapse-item" href="../versement/versement.php" id="ajouterVersement">ajouter versement</a>
                 <a class="collapse-item" href="../versement/liste.php">Liste versement</a>
             </div>
         </div>
@@ -144,7 +144,7 @@ require_once("php/activesaision.php");
         <div id="caisse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette:</h6>
-                <a class="collapse-item" href="../caisse/caisse.php">Caisse</a>
+                <a class="collapse-item" href="../caisse/caisse.php" id="ajouterCaise">Caisse</a>
                 <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
             </div>
         </div>
@@ -159,7 +159,7 @@ require_once("php/activesaision.php");
         <div id="utilisateur" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">utilisateur:</h6>
-                <a class="collapse-item" href="../../register.html">ajouter utilisateur</a>
+                <a class="collapse-item" href="../../register.html" id="ajouterUtilisateur">ajouter utilisateur</a>
                 <a class="collapse-item" href="../userCon/liste.php">Liste</a>
             </div>
         </div>
@@ -201,7 +201,7 @@ require_once("php/activesaision.php");
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="../caisse/caisse.php">Caisse</a>
+              <!--  <a class="collapse-item" href="../caisse/caisse.php" id="ajoutCaise">Caisse</a> -->
                 <a class="collapse-item" href="../caise/liste.php">liste caisse</a>
                 <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
                 <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
@@ -228,7 +228,7 @@ require_once("php/activesaision.php");
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Login Screens:</h6>
                 <a class="collapse-item" href="../../index.php">Login</a>
-                <a class="collapse-item" href="../userCon/page.php">ajouter utilisateur</a>
+               <!-- <a class="collapse-item" href="../userCon/page.php" id="ajouteruser">ajouter utilisateur</a> -->
                 <a class="collapse-item" href="../userCon/liste.php">Liste</a>
                 <a class="collapse-item" href="../userCon/forgot-password.html">Forgot Password</a>
                 <div class="collapse-divider"></div>
@@ -265,3 +265,4 @@ require_once("php/activesaision.php");
     
 
 </ul>
+

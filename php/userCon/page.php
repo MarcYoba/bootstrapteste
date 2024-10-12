@@ -95,9 +95,9 @@ if (isset($_GET["id"])) {
                                         <option selected>role utilisateur</option>
                                         <option value="client">clients</option>
                                         <option value="Lecture">lecture</option>
-                                        <option value="Lecture_ecriture">Lecture ecriture</option>
-                                        <option value="Lecture_ecriture_modification">Lecture ecriture Modification</option>
-                                        <option value="administrateur">administrateur</option>
+                                        <option value="Ecriture">Lecture ecriture</option>
+                                        <option value="semiadmin">Lecture ecriture Modification</option>
+                                        <option value="administrateur">Tous les droits</option>
                                     </select>
                                 </div>
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">

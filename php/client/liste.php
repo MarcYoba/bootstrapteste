@@ -105,8 +105,14 @@
                                             echo '<td>'.$row["versement"].'</td>';
                                             echo '<td>'.$row["datecreation"].'</td>';
                                             echo "<td>";
+                                            if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
+                                                # code...
+                                            }elseif ($_SESSION['roles'] == "semiadmin"){
+                                                echo "<button class='btn btn-primary' onclick='modifierClient(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
+                                            }else{
                                             echo "<button class='btn btn-primary' onclick='modifierClient(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
                                             echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            }
                                             echo "</td>";
                                             echo '</tr>';
                                             //var_dump($row);
@@ -178,6 +184,7 @@
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../../header.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>

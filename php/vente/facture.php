@@ -74,10 +74,17 @@ require_once("../bdmutilple/getclient.php");
                                     echo '<p class="col-md-2"> Nom Client : '.$value["firstname"].'</p>';
                                     echo '<p class="col-md-2"> Telephone : '.$value["telephone"].'</p>';
                                     
-                                    echo "<p class='col-md-2 '> <a href='../pdf/getfacture.php?id=" . $_GET["id"] . "' class='btn btn-info btn-user'>Imprimer</a></p>";    
+                                    echo "<p class='col-md-2 '> <a href='../pdf/getfacture.php?id=" . $_GET["id"] . "' class='btn btn-info btn-user'>Imprimer</a></p>";  
+                                    if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
+                                        # code...
+                                    }else if(($_SESSION['roles'] == "semiadmin")){
+                                        echo "<p class='col-md-1 '> <buttom  class='btn btn-warning btn-user' onclick='editefacture()'>Edite</buttom></p>";
+                                    }else{  
                                     echo "<p class='col-md-1 '> <buttom  class='btn btn-warning btn-user' onclick='editefacture()'>Edite</buttom></p>"; 
                                     echo "<p class='col-md-2 '> <buttom  class='btn btn-danger btn-user' onclick=''>Supprimer</buttom></p>";
-                                    echo "<span class='cacher' id='id'>".$_GET["id"]."</span>";                            
+                                    }
+                                    echo "<span class='cacher' id='id'>".$_GET["id"]."</span>";  
+
                                     ?>
                                 </div>
                         </div>
@@ -213,6 +220,7 @@ require_once("../bdmutilple/getclient.php");
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
     <script src="listeVente.js"></script>
+    <script src="../../header.js"></script>
 
 </body>
 
