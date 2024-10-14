@@ -155,7 +155,7 @@
         <div id="utilisateur" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">utilisateur:</h6>
-                <a class="collapse-item" href="../../register.html" id="ajouterUtilisateur">ajouter utilisateur</a>
+                <a class="collapse-item" href="php/userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
                 <a class="collapse-item" href="php/userCon/liste.php">Liste</a>
             </div>
         </div>

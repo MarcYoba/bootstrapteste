@@ -47,38 +47,67 @@
                     <div class="col-lg-5">
                             <br>
                             <div class="col-xl-5 col-md-5 mb-4">
-                            <a href="home.php">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                
-                                                    <div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">
-                                                       <h3> Provenderie </h3></div>
+                            <?php        
+                                                session_start();
+                                                 if (($_SESSION['zonetravail'] == "provenderie") || ($_SESSION["zonetravail"] == "Tous")) {
+                                                    echo '<a href="home.php">
+                                                    <div class="card border-left-primary shadow h-100 py-2">
+                                                        <div class="card-body">
+                                                            <div class="row no-gutters align-items-center">
+                                                                <div class="col mr-2">';
+                                                   
+                                                    echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
+                                                    echo  '<h3> Provenderie </h3></div>';
+                                                 
+                                                    echo '</div>
                                                     </div>
-                                                
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    </a>
+                                            </a>';
+                                            }          
+                                    ?>
                                 </div>
 
                                 <br>
                                 <div class="col-xl-5 col-md-4 mb-4">
-                                    <a href="#">
+                                <?php           
+                                    if (($_SESSION["zonetravail"] == "cabinet") || ($_SESSION["zonetravail"] == "Tous")) {
+                                    echo '<a href="home.php">
                                     <div class="card border-left-success shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
-                                                <div class="col mr-1">
-                                                
-                                                    <div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">
-                                                        <h3>Cabinet</h3></div>
+                                                <div class="col mr-1">';
+                                                    echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
+                                                    echo '<h3>Cabinet</h3></div>';
+                                                    echo' </div>
                                                     </div>
-                                    
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    </a>
+                                            </a>';
+                                                   
+                                    }   
+                                    ?>
+                                </div>
+
+                                <br>
+                                <div class="col-xl-5 col-md-4 mb-4">
+                                <?php           
+                                    if (($_SESSION["zonetravail"] == "spaceclie") || ($_SESSION["zonetravail"] == "Tous")) {
+                                    echo '<a href="#">
+                                    <div class="card border-left-success shadow h-100 py-4">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-3">';
+                                                    echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
+                                                    echo  '<h3> Space Clients </h3></div>';
+                                                    echo' </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </a>';
+                                                   
+                                    }   
+                                    ?>
                                 </div>
                             </div> 
                     </div>

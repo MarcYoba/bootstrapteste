@@ -41,17 +41,29 @@ class User{
         }  
     }
 
-    public function UpdateUser($nom,$prenom,$email,$password,$role,$id){
+    public function UpdateUser($nom,$prenom,$email,$password,$role,$id,$travaile){
         global $conn;
-        $hash= password_hash($password, PASSWORD_DEFAULT, [
-            'cost' => 12, // Ajuster le coût selon vos besoins
-        ]);
-        $sql = "UPDATE user SET email='$email',roles='$role',password ='$hash',firstname='$nom',lastname='$prenom' WHERE id = '$id'";
-        $result = $conn->query($sql);
-        if ($result ==true) {
-            return true;
+
+        if ($password == "0") {
+            $sql = "UPDATE user SET email='$email',roles='$role',firstname='$nom',lastname='$prenom',zonetravail='$travaile' WHERE id = '$id'";
+            $result = $conn->query($sql);
+            if ($result ==true) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
-        }  
+            $hash= password_hash($password, PASSWORD_DEFAULT, [
+                'cost' => 12, // Ajuster le coût selon vos besoins
+            ]);
+            $sql = "UPDATE user SET email='$email',roles='$role',password ='$hash',firstname='$nom',lastname='$prenom',zonetravail='$travaile' WHERE id = '$id'";
+            $result = $conn->query($sql);
+            if ($result ==true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+          
     }
 }

@@ -14,7 +14,7 @@ if (!isset($_SESSION['last_activity'])) {
 }
 $time_elapsed = time() - $_SESSION['last_activity'];
     
-    if ($time_elapsed > 28800) {
+    if ($time_elapsed > 7200) {
         session_unset();
         session_destroy();
         header("Location: ../../index.php");  

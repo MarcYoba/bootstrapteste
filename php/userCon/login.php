@@ -27,7 +27,7 @@ if (isset($_POST['emailcon']) && isset($_POST['Passwordcon'])) {
 
     if ($result->num_rows > 0) {
         
-        $sql = "SELECT id,password,roles FROM user WHERE email = '$username'";
+        $sql = "SELECT id,password,roles,zonetravail FROM user WHERE email = '$username'";
         $result = $conn->query($sql);
        
         if ($result === false) {
@@ -42,6 +42,7 @@ if (isset($_POST['emailcon']) && isset($_POST['Passwordcon'])) {
                     $_SESSION['name'] = $username;
                     $_SESSION['id'] = $row["id"];
                     $_SESSION['roles'] = $row["roles"];
+                    $_SESSION['zonetravail'] = $row["zonetravail"];
                     $_SESSION['last_activity'] = time();
 
                     if (isset($_SESSION['id']) && isset($_SESSION['roles'])) {

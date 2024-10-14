@@ -70,6 +70,7 @@
                                             <th>Prenom</th>
                                             <th>Email</th>
                                             <th>Role</th>
+                                            <th>Zone de travail</th>
                                             <th>Datte arriver</th>
                                             <th>Operation</th>
                                         </tr>
@@ -81,6 +82,7 @@
                                             <th>Prenom</th>
                                             <th>Email</th>
                                             <th>Role</th>
+                                            <th>Zone de travail</th>
                                             <th>Datte arriver</th>
                                             <th>Operation</th>
                                         </tr>
@@ -97,6 +99,7 @@
                                             echo '<td>'.$row["lastname"].'</td>';
                                             echo '<td>'.$row["email"].'</td>';
                                             echo '<td>'.$row["roles"].'</td>';
+                                            echo '<td>'.$row["zonetravail"].'</td>';
                                             echo '<td>'.$row["datecreate"].'</td>';
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                                 # code...

@@ -176,9 +176,10 @@
                                 </span><br>
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="role">
                                     <?php 
-                                    echo $_SESSION["roles"];
+                                    echo $_SESSION["roles"]; 
                                     ?>
                                 </span>
+                                
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -187,7 +188,9 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    <?php 
+                                    echo $_SESSION["zonetravail"]; 
+                                    ?>
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>

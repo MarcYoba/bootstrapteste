@@ -1,5 +1,13 @@
+function Provenderie() {
+    
+}
+function Cabinet() {
+    
+}
+
 let infouser = JSON.parse(localStorage.getItem("saission"));
     
+
 if (infouser.roles.includes("Lecture")) {
     document.getElementById("ajouterVente").style.display = "none";
     document.getElementById("ajouterAcaht").style.display = "none";

@@ -40,7 +40,15 @@ require_once("php/historique/historiqueStock.php");
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("header.html"); ?>
+         
+        <?php 
+        if (($_SESSION["zonetravail"] == "cabinet") || ($_SESSION["zonetravail"] == "Tous") || ($_SESSION["zonetravail"] == "spaceclie")) {
+            require_once("header.php"); 
+        } else {
+            require_once("header.php"); 
+        }
+        
+        ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->

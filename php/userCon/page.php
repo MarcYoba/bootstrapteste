@@ -92,12 +92,21 @@ if (isset($_GET["id"])) {
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control form-select" id="roleuser" name="roleuser" required>
-                                        <option selected>role utilisateur</option>
+                                        <option selected disabled>role utilisateur</option>
                                         <option value="client">clients</option>
                                         <option value="Lecture">lecture</option>
                                         <option value="Ecriture">Lecture ecriture</option>
                                         <option value="semiadmin">Lecture ecriture Modification</option>
                                         <option value="administrateur">Tous les droits</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control form-select" id="travaile" name="travaile" required>
+                                        <option selected disabled>Zone de travails</option>
+                                        <option value="provenderie">Provenderie</option>
+                                        <option value="cabinet">Cabinet</option>
+                                        <option value="spaceclie">Space client</option>
+                                        <option value="Tous">Cabinet et Provenderie</option>
                                     </select>
                                 </div>
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
@@ -112,12 +121,7 @@ if (isset($_GET["id"])) {
                                 </a>
                             </form>
                             <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="index.php">Already have an account? Login!</a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
