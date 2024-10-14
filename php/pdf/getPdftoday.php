@@ -171,13 +171,15 @@ $html = '
                 <th scope="col">Date</th>
             </tr>';
             $quantiteproduit = $vente->getSommeProduit();
+            
             foreach ($quantiteproduit as $key ) {
+                
                 $html .= '<tr>';
                 $html .= '<td>' . $trie->RemoveChaine("provenderie",$key["nomproduit"]) .'</td>';
                 $html .= '<td>' .$stok->getLogsProduit($trie->RemoveChaine("provenderie",$key["nomproduit"])).'</td>';
                 $html .= '<td>' .round($key["quantite"],2).'</td>';
-                $html .= '<td>' .$stok->getLogsProduit($trie->RemoveChaine("provenderie",$key["nomproduit"])) - round($key["quantite"],2).'</td>';
-               // $html .= '<td>' .$produit->getQuantiteProduit($trie->RemoveChaine("provenderie",$key["nomproduit"])).'</td>';
+                //$html .= '<td>' .$stok->getLogsProduit($trie->RemoveChaine("provenderie",$key["nomproduit"])) - round($key["quantite"],2).'</td>';
+                $html .= '<td>' .$produit->getQuantiteProduit($key["nomproduit"]).'</td>';
                 $html .= '<td>' .$key["datefacture"].'</td>';
             $html .= '</tr>';
             }   

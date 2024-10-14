@@ -103,7 +103,7 @@ require_once("php/activesaision.php");
                 <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
                 <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
                 <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
-                <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Edite Stock </a>
+                <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire </a>
             </div>
         </div>
     </li>

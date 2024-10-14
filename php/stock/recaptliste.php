@@ -133,7 +133,7 @@
                                         foreach ($variable as $key => $value) {
                                             echo '<tr>';
                                             echo '<th>'.$value["Nomproduit"].'</th>';
-                                            echo '<th>'.round($value["quantite_stock"],2).'</th>';
+                                            echo '<th>'.round($value["stock_start_produit"],2).'</th>';
                                             echo '<th>'.$value["quantite_achetee"].'</th>';
                                             echo '<th>'.round($value["quantite_stock"],2) + $value["quantite_achetee"].'</th>';
                                             if (empty($value["quantite_facturee"])) {
