@@ -2,8 +2,17 @@
 session_start(); 
 require_once("php/activesaision.php");
 ?>
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+ <?php 
+        if (!isset($_SESSION["route"])) {
+            header('Location:../../index.php');
+        }
+        if (($_SESSION["zonetravail"] == "Tous") && ($_SESSION["route"] == "cabinet")) {
+            echo '<ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">';
+        } else {
+            echo '<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">';
+        }
+        
+        ?>
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
         <div class="sidebar-brand-icon rotate-n-15">
@@ -30,8 +39,17 @@ require_once("php/activesaision.php");
         <div id="collapsevente" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation de vente</h6>
-                <a class="collapse-item" href="../vente/vente.php" id="ajouterVente"> ajouter une vente</a>
-                <a class="collapse-item" href="../vente/liste.php">liste vente</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                            <a class="collapse-item" href="../vente/vente.php" id="ajouterVente"> ajouter une vente</a>
+                            <a class="collapse-item" href="../vente/liste.php">liste vente</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -44,8 +62,17 @@ require_once("php/activesaision.php");
         <div id="collapseahcat" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Achat</h6>
-                <a class="collapse-item" href="../achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
-                <a class="collapse-item" href="../achat/liste.php">liste Achat</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
+                        <a class="collapse-item" href="../achat/liste.php">liste Achat</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -58,8 +85,17 @@ require_once("php/activesaision.php");
         <div id="collapseclient" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des clients</h6>
-               <a class="collapse-item" href="../client/client.php" id="ajouterClient">ajouter un client</a>
-                <a class="collapse-item" href="../client/liste.php">liste client</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../client/client.php" id="ajouterClient">ajouter un client</a>
+                        <a class="collapse-item" href="../client/liste.php">liste client</a>
+                        ';
+                    }
+                ?>
+               
             </div>
         </div>
     </li>
@@ -72,8 +108,20 @@ require_once("php/activesaision.php");
         <div id="collapseproduit" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des produit</h6>
-                <a class="collapse-item" href="../produit/produit.php" id="ajouterProduit">ajouter un produit</a>
-                <a class="collapse-item" href="../produit/liste.php">liste produit</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                        <a class="collapse-item" href="../produit/produit.php" id="ajouterProduit">ajouter un produit</a>
+                        <a class="collapse-item" href="../produit/liste.php">liste produit</a>
+                        ';
+                    } else {
+                        echo '
+                            <a class="collapse-item" href="../produit/produit.php" id="ajouterProduit">ajouter un produit</a>
+                            <a class="collapse-item" href="../produit/liste.php">liste produit</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -86,8 +134,17 @@ require_once("php/activesaision.php");
         <div id="collapsefournisseur" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Fourniseurs</h6>
-                <a class="collapse-item" href="../fournisseur/fourniseur.php" id="ajouterFourniseur">ajouter un Fournisseur</a>
-                <a class="collapse-item" href="../fournisseur/liste.php">liste Fournisseur</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                            <a class="collapse-item" href="../fournisseur/fourniseur.php" id="ajouterFourniseur">ajouter un Fournisseur</a>
+                            <a class="collapse-item" href="../fournisseur/liste.php">liste Fournisseur</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -100,10 +157,19 @@ require_once("php/activesaision.php");
         <div id="collapsestock" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Stock</h6>
-                <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
-                <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
-                <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
-                <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire </a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
+                        <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
+                        <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
+                        <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire </a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -116,8 +182,17 @@ require_once("php/activesaision.php");
         <div id="versement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">versement:</h6>
-                <a class="collapse-item" href="../versement/versement.php" id="ajouterVersement">ajouter versement</a>
-                <a class="collapse-item" href="../versement/liste.php">Liste versement</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                            <a class="collapse-item" href="../versement/versement.php" id="ajouterVersement">ajouter versement</a>
+                            <a class="collapse-item" href="../versement/liste.php">Liste versement</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -130,7 +205,16 @@ require_once("php/activesaision.php");
         <div id="dette" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette:</h6>
-                <a class="collapse-item" href="../dette/dette.php">Liste credit</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                            <a class="collapse-item" href="../dette/dette.php">Liste credit</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -144,8 +228,17 @@ require_once("php/activesaision.php");
         <div id="caisse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette:</h6>
-                <a class="collapse-item" href="../caisse/caisse.php" id="ajouterCaise">Caisse</a>
-                <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../caisse/caisse.php" id="ajouterCaise">Caisse</a>
+                        <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -159,8 +252,17 @@ require_once("php/activesaision.php");
         <div id="utilisateur" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">utilisateur:</h6>
-                <a class="collapse-item" href="../userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
-                <a class="collapse-item" href="../userCon/liste.php">Liste</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
+                        <a class="collapse-item" href="../userCon/liste.php">Liste</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -183,7 +285,16 @@ require_once("php/activesaision.php");
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette :</h6>
-                <a class="collapse-item" href="../dette/dette.php">Liste dette</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../dette/dette.php">Liste dette</a>
+                        ';
+                    }
+                ?>
+                
                 <!--<a class="collapse-item" href="cards.html">Dette client</a>-->
             </div>
         </div>
@@ -201,10 +312,19 @@ require_once("php/activesaision.php");
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../caise/liste.php">liste caisse</a>
+                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
+                        <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                        ';
+                    }
+                ?>
               <!--  <a class="collapse-item" href="../caisse/caisse.php" id="ajoutCaise">Caisse</a> -->
-                <a class="collapse-item" href="../caise/liste.php">liste caisse</a>
-                <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
-                <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                
             </div>
         </div>
     </li>

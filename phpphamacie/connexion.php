@@ -1,0 +1,21 @@
+<?php
+
+// Define database connection parameters
+$dbHost = "localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbName = "stockabgroup";
+
+// $dbHost = "sql304.infinityfree.com";
+// $dbUsername = "if0_37303745";
+// $dbPassword = "csumj8haa7jBT";
+// $dbName = "if0_37303745_stockabgroup";
+// Create database connection
+$conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+    echo "Echec de connoixin";
+}
+?>

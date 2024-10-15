@@ -1,5 +1,4 @@
-<?php 
-require_once("../connexion.php"); 
+<?php require_once("../connexion.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -52,122 +51,104 @@ require_once("../connexion.php");
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Liste vente</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Historique stock</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div class="row">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tables Vente</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Historique stock</h6>
                             </div>
-                            <form  action="../pdf/getTypeVente.php" method="post" class="user row" >
-
-                                <p class="col-md-2">
-                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select">
-                                        <option value="ALL" selected>ALL</option>
-                                            <?php 
-                                                global $conn;
-                                                $sql = "SELECT  nom_produit,cathegorie FROM produit";
-                                                $result = $conn->query($sql);
-                                                while ($row = mysqli_fetch_assoc($result)){               
-                                                    echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
-                                                }
-                                            ?>
-                                    </select>
-                                    <label class="form-check-label" id="nomProduit">Produit</label>
-                                    <br>
-                                    <select id="client"  name="client"   class="form-control form-select" >   <!-- size="10" multiple aria-label="multiple select " -->
-                                    <option value="ALL" selected>ALL</option>             
+                            <br>
+                            <form class="user" action="getstock.php" method="post">
+                            <div class="row">
+                                
+                                <p class="col-md-0"></p>
+                                <p class="col-md-3"> 
+                                    
+                                    <input type="text" id="recherche" onkeyup="myFunction()" class="form-control form-control-user" placeholder="recherche produit"><br>
+                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="4" multiple aria-label="multiple select ">
+                                        <option selected value="All">All </option>
                                         <?php 
                                             global $conn;
-                                            $sql = "SELECT id, firstname, adresse FROM client";
+                                            $sql = "SELECT  nom_produit,cathegorie FROM produit";
                                             $result = $conn->query($sql);
-                                                while ($row = mysqli_fetch_assoc($result)){     
-                                                    echo "<option value='".$row["id"]."'>".$row["firstname"]."</option>";       
-                                                                            //var_dump($row);
-                                                }
-                                        ?> 
+                                            while ($row = mysqli_fetch_assoc($result)){               
+                                                echo "<option value='".$row["nom_produit"]." "."'>".$row["nom_produit"]."</option>";
+                                            }
+                                        ?>
                                     </select>
-                                    <label class="form-check-label" id="client">Cleint</label>
                                 </p>
-                                <p class="col-md-2"> 
-                                        <input class="form-check-input" type="checkbox" id="OM" name="OM" value="OM">
-                                        <label class="form-check-label" id="OM">OM</label>
-                                        <br><br><br>
-                                        <input class="form-check-input" type="checkbox" id="facture" name="facture" value="facture">
-                                        <label class="form-check-label" id="facture">facture</label>
-                                </p>
+                                
+                               <!-- <p class="col-md-2">
+                                        <select id="periode"  name="periode"  class="form-control form-select">
+                                            <option value="day">Aujourd'hui</option>
+                                            <option value="semain">Semain</option>
+                                            <option value="moi">Moi</option>
+                                        </select>
+
+                                        UPDATE historiquestock hs INNER JOIN produit p ON hs.idproduit = p.id SET hs.Nomproduit = p.nom_produit WHERE hs.idproduit BETWEEN 1 AND 60;
+                                </p>-->
                                 <p class="col-md-2">
-                                        <input class="form-check-input" type="checkbox" id="credit" name="credit" value="credit">
-                                        <label class="form-check-label" id="credit">crédit</label>
-                                        <br><br><br>
-                                        <input class="form-check-input" type="checkbox" id="quantite" name="quantite" value="quantite">
-                                        <label class="form-check-label" id="quantite">Qauntite</label>
+                                <input class="form-control form-control-user" type="date" id="date" name="date"><br>
+                                <input class="form-control form-control-user" type="date" id="date2" name="date2">   
                                 </p>
+                                <p class="col-md-2" >
+                                        <input class="form-check-input" type="checkbox" id="reel" name="reel" value="reel">
+                                            <label class="form-check-label" id="reel">Stock reel</label><br>
+                                        
+                                        <input class="form-check-input" type="checkbox" id="Achat" name="Achat" value="Achat" onclick="rediriger()">
+                                            <label class="form-check-label" id="credit">Achat</label>
+                                    </p>
+
+                                    <p class="col-md-2" >
+                                        <input class="form-check-input" type="checkbox" id="Intentaire" name="Intentaire" value="Intentaire">
+                                        <label class="form-check-label" id="Intentaire">Intentaire</label><br>
+
+                                        <input class="form-check-input" type="checkbox" id="vente" name="vente" value="vente">
+                                        <label class="form-check-label" id="vente">vente</label>
+                                    </p>
                                 <p class="col-md-2">
-                                        <input class="form-check-input" type="checkbox" id="cash" name="cash" value="cash">
-                                        <label class="form-check-label" id="cash">cash</label>
+                                    <button class='btn btn-info btn-user'>Affichier</button>
                                 </p>
-                                <p class="col-md-2">
-                                        <input class="form-control form-control-user" type="date" id="date" name="date" require><br>
-                                        <input class="form-control form-control-user" type="date" id="date2" name="date2" require>     
-                                </p>
-                                <p class="col-md-2">
-                                    <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
-                                </p>
-                            
+                            </div>
                             </form>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='70' data-order='[[0, "desc"]]'>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='50' data-order='[[0, "desc"]]'>
                                     <thead>
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>Client</th>
-                                            <th>Type paiement </th>
-                                            <th>numero facture</th>
-                                            <th>Quantite total</th>
-                                            <th>Montant total</th>
+                                            <th>Produit</th>
+                                            <th>Quantite</th>
+                                            
                                             <th>Date</th>
-                                            <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>Client</th>
-                                            <th>Nom</th>
-                                            <th>numero facture</th>
-                                            <th>Quantite total</th>
-                                            <th>Montant total</th>
+                                            <th>Produit</th>
+                                            <th>Quantite</th>
+                                            
                                             <th>Date</th>
-                                            <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody id="liste">
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM vente";
+                                        $sql = "SELECT * FROM historiquestock";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
                                             echo '<th>'.$row["id"].'</th>';
-                                            $client = $row["idclient"];
-                                            $sqlclient = "SELECT firstname FROM client WHERE id= '$client'";
-                                            $resultclient = $conn->query($sqlclient);
-                                            $rowclient = mysqli_fetch_assoc($resultclient);
-                                            echo '<th>'.$rowclient["firstname"].'</th>';
-                                            echo '<th>'.$row["typevente"].'</th>';
-                                            echo '<th>'.$row["id"].'</th>';
+                                            echo '<th>'.$row["Nomproduit"].'</th>';
                                             echo '<th>'.$row["quantite"].'</th>';
-                                            echo '<th>'.$row["prix"].'</th>';
-                                            echo '<th>'.$row["datevente"].'</th>';
-                                            echo '<th>';
-                                            echo "<a href='facture.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fa fa-bars'></i></a>";
-                                            echo'</th>';
+                                            
+                                            echo '<th>'.$row["datet"].'</th>'; 
                                             echo '</tr>';
                                         }
                                     ?>
@@ -233,15 +214,15 @@ require_once("../connexion.php");
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-    <script src="../../header.js"></script>
 
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../../header.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-   <!-- <script src="listeVente.js"></script> -->
+    <script src="stockVente.js"></script>
 
 </body>
 

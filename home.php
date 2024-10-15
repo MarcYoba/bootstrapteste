@@ -42,7 +42,7 @@ require_once("php/historique/historiqueStock.php");
         <!-- Sidebar -->
          
         <?php 
-        if (($_SESSION["zonetravail"] == "cabinet") || ($_SESSION["zonetravail"] == "Tous") || ($_SESSION["zonetravail"] == "spaceclie")) {
+        if (($_SESSION["route"] == "cabinet")) {
             require_once("header.php"); 
         } else {
             require_once("header.php"); 
@@ -52,7 +52,7 @@ require_once("php/historique/historiqueStock.php");
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column ">
 
             <!-- Main Content -->
             <div id="content">
@@ -85,8 +85,12 @@ require_once("php/historique/historiqueStock.php");
                                                     ACHAT (MONTANT)</div>
                                                 <?php 
                                                     global $conn;
+                                                    if (($_SESSION["route"] == "cabinet")) {
+                                                        $sql = "SELECT SUM(montant) as montant FROM achatphamacie WHERE MONTH(dateachat) = MONTH(NOW())";
+                                                    } else {
+                                                        $sql = "SELECT SUM(montant) as montant FROM achat WHERE MONTH(dateachat) = MONTH(NOW())";
+                                                    }
                                                     
-                                                    $sql = "SELECT SUM(montant) as montant FROM achat WHERE MONTH(dateachat) = MONTH(NOW())";
                                                     $result = $conn->query($sql);
                                                     $row = mysqli_fetch_assoc($result);
                                                     
@@ -119,12 +123,18 @@ require_once("php/historique/historiqueStock.php");
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                        <a href="php/vente/liste.php">
+                                        <a href="php/vente/liste.php" >
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 VENTE (MONTANT)</div>
                                                     <?php 
                                                     global $conn;
-                                                    $sql = "SELECT SUM(prix) as montant FROM vente WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'";
+                                                    if (($_SESSION["route"] == "cabinet")) {
+                                                        $sql = "SELECT SUM(prix) as montant FROM ventephamacie  WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'";
+
+                                                    } else {
+                                                        $sql = "SELECT SUM(prix) as montant FROM vente WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'";
+
+                                                    }
                                                     $result = $conn->query($sql);
                                                     $row = mysqli_fetch_assoc($result);
                                                     $nbetoile = 10;
@@ -161,7 +171,13 @@ require_once("php/historique/historiqueStock.php");
                                                 DETTE (MONTANT)</div>
                                                 <?php 
                                                 global $conn;
-                                                $sql = "SELECT SUM(prix) as montant FROM vente WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CREDIT'";
+                                                if (($_SESSION["route"] == "cabinet")) {
+                                                    $sql = "SELECT SUM(prix) as montant FROM ventephamacie WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CREDIT'";
+
+                                                } else {
+                                                    $sql = "SELECT SUM(prix) as montant FROM vente WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CREDIT'";
+
+                                                }
                                                 $result = $conn->query($sql);
                                                 $row = mysqli_fetch_assoc($result);
                                                 $nbetoile = 10;
@@ -195,7 +211,13 @@ require_once("php/historique/historiqueStock.php");
                                                 VERSEMENT (MONTANT)</div>
                                                 <?php 
                                                 global $conn;
-                                                $sql = "SELECT SUM(montant) as montant FROM versement WHERE MONTH(dateversement) = MONTH(NOW())";
+                                                if (($_SESSION["route"] == "cabinet")) {
+                                                    $sql = "SELECT SUM(montant) as montant FROM versementphamacie  WHERE MONTH(dateversement) = MONTH(NOW())";
+
+                                                } else {
+                                                    $sql = "SELECT SUM(montant) as montant FROM versement WHERE MONTH(dateversement) = MONTH(NOW())";
+
+                                                }
                                                 $result = $conn->query($sql);
                                                 $row = mysqli_fetch_assoc($result);
                                                 $nbetoile = 10;
@@ -232,7 +254,13 @@ require_once("php/historique/historiqueStock.php");
                                                     CAISSE (MONTANT)</div>
                                                     <?php 
                                                         global $conn;
-                                                        $sql = "SELECT SUM(montant) as montant FROM caisse WHERE MONTH(dateoperation) = MONTH(NOW())";
+                                                        if (($_SESSION["route"] == "cabinet")) {
+                                                            $sql = "SELECT SUM(montant) as montant FROM caissePhamacie WHERE MONTH(dateoperation) = MONTH(NOW())";
+
+                                                        } else {
+                                                            $sql = "SELECT SUM(montant) as montant FROM caisse WHERE MONTH(dateoperation) = MONTH(NOW())";
+
+                                                        }
                                                         $result = $conn->query($sql);
                                                         $row = mysqli_fetch_assoc($result);
                                                         $nbetoile = 10;
@@ -268,7 +296,13 @@ require_once("php/historique/historiqueStock.php");
                                                     DEPENSE (MONTANT)</div>
                                                     <?php 
                                                         global $conn;
-                                                        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE MONTH(datedepense) = MONTH(NOW())";
+                                                        if (($_SESSION["route"] == "cabinet")) {
+                                                            $sql = "SELECT SUM(montant) as montant FROM depensephamacie  WHERE MONTH(datedepense) = MONTH(NOW())";
+
+                                                        } else {
+                                                            $sql = "SELECT SUM(montant) as montant FROM depenses WHERE MONTH(datedepense) = MONTH(NOW())";
+
+                                                        }
                                                         $result = $conn->query($sql);
                                                         $row = mysqli_fetch_assoc($result);
                                                         $nbetoile = 10;
@@ -399,8 +433,13 @@ require_once("php/historique/historiqueStock.php");
                                             "success"=>""
 
                                         );
-                                
-                                        $sql = "SELECT nom_produit as nom, quantite_produit as quantite FROM `produit` WHERE cathegorie='provenderie'";
+                                        if (($_SESSION["route"] == "cabinet")) {
+                                            $sql = "SELECT nom_produit as nom, quantite_produit as quantite FROM produitphamacie WHERE cathegorie='provenderie'";
+
+                                        } else {
+                                            $sql = "SELECT nom_produit as nom, quantite_produit as quantite FROM `produit` WHERE cathegorie='provenderie'";
+
+                                        }
                                         $result = $conn->query($sql);
                                         while($row = mysqli_fetch_assoc($result)){
                                             if($row["quantite"]<100){

@@ -1,8 +1,36 @@
 function Provenderie() {
-    
+    console.log("send");
+    fetch('route/route.php',{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify("provenderie")
+    })
+    .then(response => response.json())
+    .then(data => { 
+        console.log(data); 
+        window.location.href= 'home.php';
+    })
+    .catch(error => {
+        console.error(error);
+    });
 }
 function Cabinet() {
-    
+    fetch('route/route.php',{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify("cabinet")
+    })
+    .then(response => response.json())
+    .then(data => { 
+        console.log(data); 
+    })
+    .catch(error => {
+        console.error(error);
+    });
 }
 
 let infouser = JSON.parse(localStorage.getItem("saission"));
