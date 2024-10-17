@@ -159,7 +159,7 @@
                                             if ($_SESSION['roles'] == "Lecture") {
                                                 # code...
                                             }else{
-                                                if (($_SESSION['roles'] == "Ecriture")) {
+                                                if (($_SESSION['roles'] == "Ecriture") || ($_SESSION['roles'] == "administrateur")) {
                                                     if($row["status"] == "en cour"){
                                                     
                                                         echo "<td>";

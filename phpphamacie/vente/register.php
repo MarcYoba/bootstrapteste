@@ -25,7 +25,7 @@ $credit = 0;
         "reduction" => 0,
     );
 
-    $donneVente = 0;
+    $donneVente = 1;
    /* 
         $reponse = [
             'success' => true,
@@ -40,7 +40,7 @@ $credit = 0;
     // Préparer la requête SQL
     // --------------------------------------------------------------------------------
 
-    $sql = "INSERT INTO quantiteproduit (quantiteRestant,produit,idvente,iduser,Qtdate) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO quantiteproduitphamacie(quantiteRestant,produit,idvente,iduser,Qtdate) VALUES (?, ?, ?, ?, ?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -64,7 +64,7 @@ $credit = 0;
     // Préparer la requête SQL
     // --------------------------------------------------------------------------------
 
-    $sql = "INSERT INTO cash (montant,idvente ,idclient ,iduser,datacash) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO cashphamacie(montant,idvente ,idclient ,iduser,datacash) VALUES (?, ?, ?, ?, ?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -88,7 +88,7 @@ function OM_momo($om) {
     // Préparer la requête SQL
     // --------------------------------------------------------------------------------
 
-    $sql = "INSERT INTO om_momo (montamt,idvente ,idclient ,iduser,dateOM) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO om_momophamacie (montamt,idvente ,idclient ,iduser,dateOM) VALUES (?, ?, ?, ?, ?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -113,7 +113,7 @@ function insertCaisse($operation,$montant,$idvente) {
     // Préparer la requête SQL
     // --------------------------------------------------------------------------------
 
-    $sql = "INSERT INTO caisse (operation,montant,idvente,iduser,dateoperation,motif) VALUES (?, ?, ?, ?, ?,?)";
+    $sql = "INSERT INTO caissePhamacie (operation,montant,idvente,iduser,dateoperation,motif) VALUES (?, ?, ?, ?, ?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -142,7 +142,7 @@ function insertDette($quantite,$prix,$idvente,$idclient) {
     // Creation du client (insertion de donne) 
 
 
-    $sql = "INSERT INTO dette (quantite,prix,montant,idclient,iduser,datedette,idvente,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO dettephamacie (quantite,prix,montant,idclient,iduser,datedette,idvente,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -178,16 +178,16 @@ function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
+   // $nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
     
-    $sqlproduit = "SELECT id as id , quantite_produit AS quantite  FROM produit  WHERE nom_produit = '$nomproduit'";
+    $sqlproduit = "SELECT id as id , quantite_produit AS quantite  FROM produitphamacie  WHERE nom_produit = '$nomproduit'";
     $resultproduit = $conn->query($sqlproduit);
     $row = mysqli_fetch_assoc($resultproduit);
     $id = $row["id"];
     $quantitestock = $row["quantite"];
 
 
-    $sql = "INSERT INTO facture (nomproduit,quantite,prix,montant,Typepaiement,idclient,iduser,datefacture,idvente,idproduit) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+    $sql = "INSERT INTO facturephamacie (nomproduit,quantite,prix,montant,Typepaiement,idclient,iduser,datefacture,idvente,idproduit) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -212,7 +212,7 @@ function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,
     
     $quantite = $quantitestock - $quantite;
 
-    $sql = "UPDATE produit SET quantite_produit ='$quantite' WHERE id = '$id'";
+    $sql = "UPDATE produitphamacie SET quantite_produit ='$quantite' WHERE id = '$id'";
     $result = $conn->query($sql); 
     if ($result === True) {
         produitstock($idvente,$quantite,$nomproduit);
@@ -231,7 +231,7 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
     // Creation du prix (insertion de donne) 
 
     if ($type != " ") {
-        $sql = "INSERT INTO vente (typevente,quantite,prix,idclient,iduser,datevente,typeprduit,cash,credit,Om,reduction) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
+        $sql = "INSERT INTO ventephamacie (typevente,quantite,prix,idclient,iduser,datevente,typeprduit,cash,credit,Om,reduction) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
 
     // Lier les paramètres
         if (!$stmt = $conn->prepare($sql)) {
@@ -257,7 +257,7 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
 
         // selection la id dans la table d'achat
 
-        $sql = "SELECT id FROM vente WHERE datevente = '$date' ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente = '$date' ORDER BY id DESC LIMIT 1";
             $result = $conn->query($sql);
             $row = mysqli_fetch_assoc($result);
             $id = $row["id"];
@@ -308,10 +308,10 @@ try {
             $tab["idclient"] = $value["fournisseur"];
         } 
         */
-        if((str_contains($value["produit"],$tab["provende"])) == true) {
+        
             $tab["provend"] = 1; 
             $tab["idclient"] = $value["fournisseur"]; 
-        }
+        
         
         if ($tab["provend"] == 1 && $tab["phamac"] == 1 ) {
             $reponse = [

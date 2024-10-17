@@ -18,7 +18,7 @@ class Stock{
   
     public function ToDay(){
         global $conn;
-        $sql = "SELECT * FROM quantiteproduit WHERE Qtdate = CURRENT_DATE()";
+        $sql = "SELECT * FROM quantiteproduitphamacie WHERE Qtdate = CURRENT_DATE()";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
@@ -29,7 +29,7 @@ class Stock{
 
     public function getLogsProduit($produit){
         global $conn;
-        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE datet = CURRENT_DATE() AND Nomproduit='$produit'";
+        $sql = "SELECT quantite AS quantites FROM historiquestockphamacie WHERE datet = CURRENT_DATE() AND Nomproduit='$produit'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
                  
@@ -38,7 +38,7 @@ class Stock{
 
     public function getLogsDateProduit($produit,$date){
         global $conn;
-        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE datet = '$date' AND Nomproduit='$produit'";
+        $sql = "SELECT quantite AS quantites FROM historiquestockphamacie WHERE datet = '$date' AND Nomproduit='$produit'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
                  
@@ -48,7 +48,7 @@ class Stock{
     public function getHistorique($id){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM historiquestock WHERE idproduit='$id'";
+        $sql = "SELECT * FROM historiquestockphamacie WHERE idproduit='$id'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);
@@ -59,7 +59,7 @@ class Stock{
 
     public function getQuantiteProduit($produit){
         global $conn;
-        $sql = "SELECT quantite_produit AS quantites FROM produit WHERE nom_produit='$produit'";
+        $sql = "SELECT quantite_produit AS quantites FROM produitphamacie WHERE nom_produit='$produit'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
                  
@@ -73,12 +73,12 @@ class Stock{
             hs.Nomproduit,
             hs.quantite AS quantite_stock,
             p.quantite_produit,p.stock_start_produit,
-            (SELECT SUM(a2.quantite) FROM achat a2 WHERE a2.idproduit = hs.idproduit AND YEAR(a2.dateachat) = YEAR(CURDATE()) AND 					MONTH(a2.dateachat) = MONTH(CURDATE())) AS quantite_achetee,
-            (SELECT SUM(f2.quantite) FROM facture f2 WHERE f2.idproduit = hs.idproduit AND YEAR(f2.datefacture) = YEAR(CURDATE()) AND 				MONTH(f2.datefacture) = MONTH(CURDATE())) AS somme_facture,
-            (SELECT SUM(f.quantite) FROM facture f WHERE f.idproduit = hs.idproduit AND  f.datefacture = CURRENT_DATE) AS quantite_facturee
+            (SELECT SUM(a2.quantite) FROM achatphamacie a2 WHERE a2.idproduit = hs.idproduit AND YEAR(a2.dateachat) = YEAR(CURDATE()) AND 					MONTH(a2.dateachat) = MONTH(CURDATE())) AS quantite_achetee,
+            (SELECT SUM(f2.quantite) FROM facturephamacie f2 WHERE f2.idproduit = hs.idproduit AND YEAR(f2.datefacture) = YEAR(CURDATE()) AND 				MONTH(f2.datefacture) = MONTH(CURDATE())) AS somme_facture,
+            (SELECT SUM(f.quantite) FROM facturephamacie f WHERE f.idproduit = hs.idproduit AND  f.datefacture = CURRENT_DATE) AS quantite_facturee
             FROM
-                historiquestock hs
-            LEFT JOIN produit p ON p.id = hs.idproduit
+                historiquestockphamacie hs
+            LEFT JOIN produitphamacie p ON p.id = hs.idproduit
             GROUP BY
                 hs.Nomproduit
             ORDER BY
@@ -93,7 +93,7 @@ class Stock{
 
     public function getLogsProduitDate($produit,$date){
         global $conn;
-        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE datet = '$date' AND Nomproduit='$produit'";
+        $sql = "SELECT quantite AS quantites FROM historiquestockphamacie WHERE datet = '$date' AND Nomproduit='$produit'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
                  
@@ -102,7 +102,7 @@ class Stock{
 
     public function UpdateHistorique($idproduit,$date,$quantite){
         global $conn;
-        $sql = "UPDATE historiquestock SET quantite = '$quantite' WHERE idproduit = '$idproduit' AND datet='$date'";
+        $sql = "UPDATE historiquestockphamacie SET quantite = '$quantite' WHERE idproduit = '$idproduit' AND datet='$date'";
         $result = $conn->query($sql);
         if($result === true){
             //return "Edite OK";
@@ -114,7 +114,7 @@ class Stock{
     public function getLogsSuivant($produit,$date){
         global $conn;
 
-        $sql = "SELECT DATE_ADD('$date', INTERVAL 1 DAY) as datete FROM historiquestock;";
+        $sql = "SELECT DATE_ADD('$date', INTERVAL 1 DAY) as datete FROM historiquestockphamacie;";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         
@@ -127,7 +127,7 @@ class Stock{
         
         $datesuivate = $row["datete"];
 
-        $sql = "SELECT quantite AS quantites FROM historiquestock WHERE Nomproduit='$produit' AND datet ='$datesuivate' ";
+        $sql = "SELECT quantite AS quantites FROM historiquestockphamacie WHERE Nomproduit='$produit' AND datet ='$datesuivate' ";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         
@@ -139,7 +139,7 @@ class Stock{
 
     public function DayofMonth($produit){
         global $conn;
-        $sql = "SELECT id ,quantite, Nomproduit, datet FROM quantiteproduit WHERE Qtdate = '$this->datejour' AND Nomproduit ='$produit'";
+        $sql = "SELECT id ,quantite, Nomproduit, datet FROM quantiteproduitphamacie WHERE Qtdate = '$this->datejour' AND Nomproduit ='$produit'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
@@ -149,7 +149,7 @@ class Stock{
 
     public function DayofMonthHitorique($produit){
         global $conn;
-        $sql = "SELECT id ,quantite, Nomproduit, datet FROM historiquestock WHERE datet = '$this->datejour' AND Nomproduit ='$produit'";
+        $sql = "SELECT id ,quantite, Nomproduit, datet FROM historiquestockphamacie WHERE datet = '$this->datejour' AND Nomproduit ='$produit'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
@@ -159,7 +159,7 @@ class Stock{
 
     public function getHitoriqueIntervale($produit,$date){
         global $conn;
-        $sql = "SELECT id ,quantite, Nomproduit, datet FROM historiquestock WHERE datet BETWEEN  '$this->datejour' AND '$date' AND Nomproduit ='$produit'";
+        $sql = "SELECT id ,quantite, Nomproduit, datet FROM historiquestockphamacie WHERE datet BETWEEN  '$this->datejour' AND '$date' AND Nomproduit ='$produit'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
@@ -169,7 +169,7 @@ class Stock{
 
     public function HitoriqueIntervale($date){
         global $conn;
-        $sql = "SELECT id ,quantite, Nomproduit, datet FROM historiquestock WHERE datet BETWEEN  '$this->datejour' AND '$date'";
+        $sql = "SELECT id ,quantite, Nomproduit, datet FROM historiquestockphamacie WHERE datet BETWEEN  '$this->datejour' AND '$date'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
@@ -190,7 +190,7 @@ class Stock{
         }
         $fin_semain = $dateval->modify('sunday')->format("Y-m-d");
 
-        $sql = "SELECT * FROM quantiteproduit WHERE Qtdate BETWEEN '$debur_semain' AND '$fin_semain'";
+        $sql = "SELECT * FROM quantiteproduitphamacie WHERE Qtdate BETWEEN '$debur_semain' AND '$fin_semain'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
@@ -206,7 +206,7 @@ class Stock{
         $debur_semain = $dateval->modify('monday')->format("Y-m-d");
         $fin_semain = $dateval->modify('sunday')->format("Y-m-d");
 
-        $sql = "SELECT * FROM quantiteproduit WHERE Qtdate BETWEEN '$debur_semain' AND '$fin_semain'";
+        $sql = "SELECT * FROM quantiteproduitphamacie WHERE Qtdate BETWEEN '$debur_semain' AND '$fin_semain'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
@@ -222,7 +222,7 @@ class Stock{
         //$debur_semain = $dateval->modify('monday')->format("Y-m-d");
         $fin_moi = $dateval->modify('last day of this month')->format("Y-m-d");
 
-        $sql = "SELECT * FROM quantiteproduit WHERE Qtdate BETWEEN '$this->datejour' AND '$fin_moi'";
+        $sql = "SELECT * FROM quantiteproduitphamacie WHERE Qtdate BETWEEN '$this->datejour' AND '$fin_moi'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
@@ -241,7 +241,7 @@ class Stock{
         $date_debut = $date_debut->format("Y-m-d");
         $fin_moi =$fin_moi->modify('last day of this month')->format("Y-m-d");
 
-        $sql = "SELECT * FROM quantiteproduit WHERE Qtdate BETWEEN '$date_debut' AND '$fin_moi'";
+        $sql = "SELECT * FROM quantiteproduitphamacie WHERE Qtdate BETWEEN '$date_debut' AND '$fin_moi'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
@@ -253,7 +253,7 @@ class Stock{
     public function GetProduitToDay() {
         global $conn;
 
-        $sql = "SELECT * FROM quantiteproduit WHERE Qtdate = CURRENT_DATE AND produit = '$this->produit' ";
+        $sql = "SELECT * FROM quantiteproduitphamacie WHERE Qtdate = CURRENT_DATE AND produit = '$this->produit' ";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
@@ -265,7 +265,7 @@ class Stock{
     public function GetProduitTodate() {
         global $conn;
 
-        $sql = "SELECT * FROM quantiteproduit WHERE Qtdate = '$this->datejour' AND produit = '$this->produit'";
+        $sql = "SELECT * FROM quantiteproduitphamacie WHERE Qtdate = '$this->datejour' AND produit = '$this->produit'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  

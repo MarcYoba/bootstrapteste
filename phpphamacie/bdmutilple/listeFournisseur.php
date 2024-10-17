@@ -2,7 +2,7 @@
 require_once("../connexion.php"); 
 
 global $conn;
-$sql = "SELECT * FROM fournisseur";
+$sql = "SELECT * FROM fournisseurphamacie ";
 $result = $conn->query($sql);
     while ($row = mysqli_fetch_assoc($result)){
         echo '<tr>';

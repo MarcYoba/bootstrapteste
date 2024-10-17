@@ -14,7 +14,7 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>Gestion de Stock</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -83,7 +83,7 @@ session_start();
                                                                     <option selected> </option>
                                                                     <?php 
                                                                         global $conn;
-                                                                        $sql = "SELECT id, nom FROM fournisseur";
+                                                                        $sql = "SELECT id, nom FROM fournisseurphamacie";
                                                                         $result = $conn->query($sql);
                                                                         while ($row = mysqli_fetch_assoc($result)){
                                                                             echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";
@@ -102,7 +102,7 @@ session_start();
                                                                     <option selected></option>
                                                                     <?php 
                                                                         global $conn;
-                                                                        $sql = "SELECT  nom_produit FROM produit ORDER BY nom_produit ASC";
+                                                                        $sql = "SELECT  nom_produit FROM produitphamacie ORDER BY nom_produit ASC";
                                                                         $result = $conn->query($sql);
                                                                         while ($row = mysqli_fetch_assoc($result)){
                                                                             

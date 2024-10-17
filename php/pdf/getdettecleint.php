@@ -88,16 +88,31 @@ $html .='<br><br><br> <table style="width:100%">
             </tr>';
             $somdette = 0; 
             $sommversement = 0;
-
-            foreach ($tabledette as $key ) {
-                $html .= '<tr>';
-                $html .= '<td>' .$key["datedette"].'</td>';
-                $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
-                $html .= '<td>' .$key["montant"].'</td>';
-                $somdette = $somdette + $key["montant"];
-                $sommversement = $sommversement +  $versement->ByVersementClient($key["id"]);
-                $html .= '<td>' .$versement->ByVersementClient($key["id"]).'</td>';
-                $html .= '</tr>';
+            
+            if (empty($tabledette)) {
+                $tabledette = $versement->getVersementByClientBydate($_POST['datedette'],$nomclient);
+                
+                foreach ($tabledette as $key=>$value ) {
+                    $html .= '<tr>';
+                    $html .= '<td>' .$value["dateversement"].'</td>';
+                    $html .= '<td>' .$client->getByIdClient($value["idclient"]).'</td>';
+                    $html .= '<td></td>';
+                    
+                    $sommversement = $sommversement +  $versement->ByVersementClientdate($value["iddette"]);
+                    $html .= '<td>' .$versement->ByVersementClientdate($value["iddette"]).'</td>';
+                    $html .= '</tr>';
+                }
+            } else {
+                foreach ($tabledette as $key ) {
+                    $html .= '<tr>';
+                    $html .= '<td>' .$key["datedette"].'</td>';
+                    $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
+                    $html .= '<td>' .$key["montant"].'</td>';
+                    $somdette = $somdette + $key["montant"];
+                    $sommversement = $sommversement +  $versement->ByVersementClient($key["id"]);
+                    $html .= '<td>' .$versement->ByVersementClient($key["id"]).'</td>';
+                    $html .= '</tr>';
+                }
             }
                 $html .= '<tr>';
                     $html .= '<td>Total</td>';
@@ -113,7 +128,11 @@ $html .='<br><br><br> <table style="width:100%">
                     if ($somdette>$sommversement) {
                         $html .= '<td style="color: #FF3300;">client doit comme argent</td>';
                         $html .= '<td style="color: #FF3300;">'.$somdette-$sommversement.'</td>';
-                    } else {
+                    }else if($somdette == 0){
+                        $html .= '<td style="color: #F6CC01;">versement</td>';
+                        $html .= '<td style="color: #F6CC01;">'.$sommversement.'</td>';
+                    }
+                     else {
                         $html .= '<td style="color: #66CC00;">Provenderie doit comme argent</td>';
                         $html .= '<td style="color: #66CC00;">'.$somdette-$sommversement.'</td>';
                     }

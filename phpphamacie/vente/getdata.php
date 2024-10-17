@@ -13,9 +13,9 @@ if (is_array($donnees)){
     $tab = array("provende" => "provenderie");
     
     
-        if((str_contains($donnees["nom"],$tab["provende"])) == true) {    
+         
             
-            $sql = "SELECT CONCAT(nom_produit,' ',cathegorie) as nom, prix_produit_vente as prix, quantite_produit as quantite FROM produit WHERE cathegorie = 'provenderie'";
+            $sql = "SELECT nom_produit as nom, prix_produit_vente as prix, quantite_produit as quantite FROM produitphamacie";
             $result = $conn->query($sql);
     
             while ($row = mysqli_fetch_assoc($result)) {
@@ -28,8 +28,7 @@ if (is_array($donnees)){
                     
                 }     
             }
-            
-        }   
+         
             
     $reponse = [
         'success' => true,

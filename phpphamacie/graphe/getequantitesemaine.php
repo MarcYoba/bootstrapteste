@@ -16,7 +16,7 @@ $data = array(
     "dimanche" =>0,
 );
 
-$sql = "SELECT quantite , CASE WEEKDAY(datevente) WHEN 0 THEN 'Lundi' WHEN 1 THEN 'mardi' WHEN 2 THEN 'mercredi' WHEN 3 THEN 'jeudi' WHEN 4 THEN 'vendredi' WHEN 5 THEN 'samedi' ELSE 'dimanche' END AS jourSemaine FROM vente WHERE datevente BETWEEN DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) AND CURDATE();";
+$sql = "SELECT quantite , CASE WEEKDAY(datevente) WHEN 0 THEN 'Lundi' WHEN 1 THEN 'mardi' WHEN 2 THEN 'mercredi' WHEN 3 THEN 'jeudi' WHEN 4 THEN 'vendredi' WHEN 5 THEN 'samedi' ELSE 'dimanche' END AS jourSemaine FROM ventephamacie WHERE datevente BETWEEN DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) AND CURDATE();";
  $result = $conn->query($sql);
  while ($row = mysqli_fetch_assoc($result)) {
    switch ($row["jourSemaine"]) {

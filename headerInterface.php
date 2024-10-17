@@ -25,11 +25,23 @@ require_once("php/activesaision.php");
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="../../home.php">
+     <?php
+    if (($_SESSION["route"] == "cabinet")) {
+        echo '
+        <li class="nav-item active">
+            <a class="nav-link" href="../../homepahamacie.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
-    </li>
+        </li>';
+    }else{
+        echo '
+        <li class="nav-item active">
+            <a class="nav-link" href="../../home.php">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>';
+    }
+    ?>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsevente"
             aria-expanded="true" aria-controls="collapsevente">
@@ -41,7 +53,10 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Operation de vente</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
-                            
+                        echo '
+                            <a class="collapse-item" href="../vente/vente.php" id="ajouterVente"> ajouter une vente</a>
+                            <a class="collapse-item" href="../vente/liste.php">liste vente</a>
+                        '; 
                     } else {
                         echo '
                             <a class="collapse-item" href="../vente/vente.php" id="ajouterVente"> ajouter une vente</a>
@@ -64,7 +79,10 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Operation des Achat</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
-                            
+                        echo '
+                        <a class="collapse-item" href="../achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
+                        <a class="collapse-item" href="../achat/liste.php">liste Achat</a>
+                      ';     
                     } else {
                         echo '
                         <a class="collapse-item" href="../achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
@@ -87,6 +105,11 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Operation des clients</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
+
+                        echo '
+                        <a class="collapse-item" href="../client/client.php" id="ajouterClient">ajouter un client</a>
+                        <a class="collapse-item" href="../client/liste.php">liste client</a>
+                        ';
                             
                     } else {
                         echo '
@@ -136,7 +159,10 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Operation des Fourniseurs</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
-                            
+                        echo '
+                        <a class="collapse-item" href="../fournisseur/fourniseur.php" id="ajouterFourniseur">ajouter un Fournisseur</a>
+                        <a class="collapse-item" href="../fournisseur/liste.php">liste Fournisseur</a>
+                    ';
                     } else {
                         echo '
                             <a class="collapse-item" href="../fournisseur/fourniseur.php" id="ajouterFourniseur">ajouter un Fournisseur</a>
@@ -159,7 +185,12 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Operation des Stock</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
-                            
+                        echo '
+                        <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
+                        <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
+                        <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
+                        <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire </a>
+                        ';    
                     } else {
                         echo '
                         <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
@@ -184,7 +215,10 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">versement:</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
-                            
+                        echo '
+                            <a class="collapse-item" href="../versement/versement.php" id="ajouterVersement">ajouter versement</a>
+                            <a class="collapse-item" href="../versement/liste.php">Liste versement</a>
+                        ';
                     } else {
                         echo '
                             <a class="collapse-item" href="../versement/versement.php" id="ajouterVersement">ajouter versement</a>
@@ -207,6 +241,10 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Dette:</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
+
+                        echo '
+                            <a class="collapse-item" href="../dette/dette.php">Liste credit</a>
+                        ';
                             
                     } else {
                         echo '
@@ -230,7 +268,10 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Dette:</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
-                            
+                        echo '
+                        <a class="collapse-item" href="../caisse/caisse.php" id="ajouterCaise">Caisse</a>
+                        <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
+                        ';    
                     } else {
                         echo '
                         <a class="collapse-item" href="../caisse/caisse.php" id="ajouterCaise">Caisse</a>
@@ -254,7 +295,10 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">utilisateur:</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
-                            
+                        echo '
+                        <a class="collapse-item" href="../userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
+                        <a class="collapse-item" href="../userCon/liste.php">Liste</a>
+                        ';    
                     } else {
                         echo '
                         <a class="collapse-item" href="../userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
@@ -287,7 +331,9 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Dette :</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
-                            
+                        echo '
+                        <a class="collapse-item" href="../dette/dette.php">Liste dette</a>
+                        ';   
                     } else {
                         echo '
                         <a class="collapse-item" href="../dette/dette.php">Liste dette</a>
@@ -314,10 +360,14 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Custom Utilities:</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
-                            
+                        echo '
+                        <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
+                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
+                        <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                        ';    
                     } else {
                         echo '
-                        <a class="collapse-item" href="../caise/liste.php">liste caisse</a>
+                        <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
                         <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
                         <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
                         ';

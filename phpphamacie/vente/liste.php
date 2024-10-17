@@ -68,7 +68,7 @@ require_once("../connexion.php");
                                         <option value="ALL" selected>ALL</option>
                                             <?php 
                                                 global $conn;
-                                                $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                                $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie";
                                                 $result = $conn->query($sql);
                                                 while ($row = mysqli_fetch_assoc($result)){               
                                                     echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
@@ -150,7 +150,7 @@ require_once("../connexion.php");
                                     <tbody id="liste">
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM vente";
+                                        $sql = "SELECT * FROM ventephamacie";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

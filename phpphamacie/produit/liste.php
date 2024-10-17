@@ -88,7 +88,7 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM produitphamacie ORDER BY id DESC";
+                                        $sql = "SELECT * FROM produitphamacie ";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

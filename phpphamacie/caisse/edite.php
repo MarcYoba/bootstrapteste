@@ -7,7 +7,7 @@ session_start();
 // Récupération de l'ID
 $id = $_GET['id'];
 // Requête SQL pour ";
- $sql = "SELECT * FROM caisse WHERE id ='$id'";
+ $sql = "SELECT * FROM caissePhamacie WHERE id ='$id'";
  $result = $conn->query($sql);
 
 if ($result->num_rows > 0 ) {

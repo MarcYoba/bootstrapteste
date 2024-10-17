@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
    
     $sql = "DELETE  FROM historiquestock WHERE idproduit = $id";
     if($conn->query($sql) === TRUE){
-        $sql = "DELETE  FROM produit WHERE id = $id";
+        $sql = "DELETE  FROM produitphamacie WHERE id = $id";
         if($conn->query($sql) === TRUE){
             
             header("Location:liste.php");

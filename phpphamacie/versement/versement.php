@@ -131,10 +131,10 @@
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="txt" class="form-control form-control-user"
-                                                name="matif" id="matif" value='.intval($donnees["motif"]).' placeholder="montant" required>';
+                                                name="matif" id="matif" value='.intval($donnees["motif"]).' placeholder="motif" required>';
                                             }else{
                                                 echo'<input type="txt" class="form-control form-control-user"
-                                                name="matif" id="matif" placeholder="motif" required>';
+                                                name="matif" id="motif" placeholder="motif" required>';
                                             }
                                         echo'</div>';
                                     echo'</div>';
@@ -162,12 +162,7 @@
                                 ?>
                             </form>
                             <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="../../index.html">Already have an account? Login!</a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

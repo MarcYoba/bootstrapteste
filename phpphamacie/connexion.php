@@ -1,6 +1,6 @@
 <?php
 
-// Define database connection parameters
+//Define database connection parameters
 $dbHost = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
@@ -10,7 +10,7 @@ $dbName = "stockabgroup";
 // $dbUsername = "if0_37303745";
 // $dbPassword = "csumj8haa7jBT";
 // $dbName = "if0_37303745_stockabgroup";
-// Create database connection
+//Create database connection
 $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 
 // Check connection

@@ -131,7 +131,7 @@
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="txt" class="form-control form-control-user"
-                                                name="matif" id="matif" value='.intval($donnees["motif"]).' placeholder="montant" required>';
+                                                name="matif" id="matif" value='.intval($donnees["motif"]).' placeholder="Motif" required>';
                                             }else{
                                                 echo'<input type="txt" class="form-control form-control-user"
                                                 name="matif" id="matif" placeholder="motif" required>';

@@ -133,7 +133,7 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM dette ";
+                                        $sql = "SELECT * FROM dettephamacie ";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
@@ -148,7 +148,7 @@
                                             echo '<td>'.$row["datedette"].'</td>';
 
                                             $iddette = $row["id"];
-                                            $sqldette ="SELECT SUM(montant) as somme FROM versement WHERE iddette ='$iddette'";
+                                            $sqldette ="SELECT SUM(montant) as somme FROM versementphamacie WHERE iddette ='$iddette'";
                                             $resultdette = $conn->query($sqldette);
                                             $value = mysqli_fetch_assoc($resultdette);
 
@@ -159,7 +159,7 @@
                                             if ($_SESSION['roles'] == "Lecture") {
                                                 # code...
                                             }else{
-                                                if (($_SESSION['roles'] == "Ecriture")) {
+                                                if (($_SESSION['roles'] == "Ecriture") || ($_SESSION['roles'] == "administrateur")) {
                                                     if($row["status"] == "en cour"){
                                                     
                                                         echo "<td>";

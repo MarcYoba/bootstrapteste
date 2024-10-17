@@ -12,7 +12,7 @@ function creerClient($nom, $adress, $email, $telephone,$numerofacture,$datefactu
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO fournisseur (nom, adresse, telephone, email,datecreation,numerofacature,dateachat) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO fournisseurphamacie (nom, adresse, telephone, email,datecreation,numerofacature,dateachat) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
     if (!empty($nom) || !empty($adress) || !empty($email) || !empty($telephone)) {
         
             // Vérifier si l'adresse e-mail existe déjà
-            $sql = "SELECT * FROM fournisseur WHERE email = ?";
+            $sql = "SELECT * FROM fournisseurphamacie WHERE email = ?";
 
             if (!$stmt = $conn->prepare($sql)) {
                 die('Erreur de préparation de la requête : ' . $conn->error);

@@ -13,7 +13,7 @@ class Achat{
 
     public function ToDay(){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM achat WHERE dateachat= CURRENT_DATE";
+        $sql = "SELECT SUM(montant) as montant FROM achatphamacie WHERE dateachat= CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -22,10 +22,10 @@ class Achat{
     public function DeleteAchat($id){
         global $conn;
 
-        $sql = "DELETE  FROM prix WHERE idachat= '$id'";
+        $sql = "DELETE  FROM prixphamacie WHERE idachat= '$id'";
         $result = $conn->query($sql);
         
-        $sql = "DELETE  FROM achat WHERE id= '$id'";
+        $sql = "DELETE  FROM achatphamacie WHERE id= '$id'";
         $result = $conn->query($sql);
         if ($result===true) {
             return  true;
@@ -37,14 +37,14 @@ class Achat{
 
     public function getByDate($date){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM achat WHERE dateachat= '$date'";
+        $sql = "SELECT SUM(montant) as montant FROM achatphamacie WHERE dateachat= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
     }
     public function getByWeek($datedebut,$datefin){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM achat WHERE dateachat BETWEEN '$datedebut' AND '$datefin'";
+        $sql = "SELECT SUM(montant) as montant FROM achatphamacie WHERE dateachat BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -54,17 +54,17 @@ class Achat{
 
         global $conn;
 
-        $sql = "SELECT id,quantite_produit FROM produit WHERE nom_produit='$nomProdit'";
+        $sql = "SELECT id,quantite_produit FROM produitphamacie WHERE nom_produit='$nomProdit'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         $idproduit= $row["id"]; 
         $somme = $row["quantite_produit"] + $quatproduit;
 
-        $sql = "UPDATE produit SET quantite_produit = '$somme' WHERE id = '$idproduit'";
+        $sql = "UPDATE produitphamacie SET quantite_produit = '$somme' WHERE id = '$idproduit'";
         $result = $conn->query($sql);
         if($result === true){
             $somme = $quantite*$prix;
-            $sql = "UPDATE achat SET quantite = '$quantite', prixAcaht = '$prix', idfournisseur  = '$fournisseur',montant='$somme'  WHERE id = '$idachat'";
+            $sql = "UPDATE achatphamacie SET quantite = '$quantite', prixAcaht = '$prix', idfournisseur  = '$fournisseur',montant='$somme'  WHERE id = '$idachat'";
             $result = $conn->query($sql);
             if ($result === true) {
                 return true;
@@ -78,7 +78,7 @@ class Achat{
     public function AllAchat(){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM achat WHERE dateachat= CURRENT_DATE";
+        $sql = "SELECT * FROM achatphamacie WHERE dateachat= CURRENT_DATE";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -90,7 +90,7 @@ class Achat{
     public function getAllAchat(){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM achat";
+        $sql = "SELECT * FROM achatphamacie";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -102,7 +102,7 @@ class Achat{
     public function getAchatById($id){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM achat WHERE id='$id'";
+        $sql = "SELECT * FROM achatphamacie WHERE id='$id'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -114,7 +114,7 @@ class Achat{
     public function getSommeAchat($idproduit,$date){
         global $conn;
         
-        $sql = "SELECT SUM(quantite) AS quantite FROM achat WHERE idproduit = '$idproduit' AND dateachat = '$date'";
+        $sql = "SELECT SUM(quantite) AS quantite FROM achatphamacie WHERE idproduit = '$idproduit' AND dateachat = '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
        return $row["quantite"] ;
@@ -124,7 +124,7 @@ class Achat{
     public function getAllAchatProduit($produit){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM achat WHERE Nomproduit='$produit'";
+        $sql = "SELECT * FROM achatphamacie WHERE Nomproduit='$produit'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -136,7 +136,7 @@ class Achat{
     public function AllAchatDate($date){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM achat WHERE dateachat= '$date'";
+        $sql = "SELECT * FROM achatphamacie WHERE dateachat= '$date'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -148,7 +148,7 @@ class Achat{
     public function AllAchatDateProduit($date,$produit){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM achat WHERE dateachat= '$date' AND Nomproduit='$produit'";
+        $sql = "SELECT * FROM achatphamacie WHERE dateachat= '$date' AND Nomproduit='$produit'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -160,7 +160,7 @@ class Achat{
     public function AllAchatWeek($datedebut,$datefin){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM achat WHERE dateachat BETWEEN '$datedebut' AND '$datefin'";
+        $sql = "SELECT * FROM achatphamacie WHERE dateachat BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -172,7 +172,7 @@ class Achat{
     public function AllAchatWeekProduit($datedebut,$datefin,$produit){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM achat WHERE dateachat BETWEEN '$datedebut' AND '$datefin' AND Nomproduit='$produit'";
+        $sql = "SELECT * FROM achatphamacie WHERE dateachat BETWEEN '$datedebut' AND '$datefin' AND Nomproduit='$produit'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);

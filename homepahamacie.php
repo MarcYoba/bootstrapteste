@@ -1,7 +1,7 @@
 <?php 
 session_start(); 
 require_once("php/historique/historiqueStock.php");
-$_SESSION["route"] = "provenderie";
+$_SESSION["route"] = "cabinet";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,12 +43,7 @@ $_SESSION["route"] = "provenderie";
         <!-- Sidebar -->
          
         <?php 
-        if (($_SESSION["route"] == "cabinet")) {
-            require_once("header.php"); 
-        } else {
-            require_once("header.php"); 
-        }
-        
+            require_once("headerphamacie.php"); 
         ?>
         <!-- End of Sidebar -->
 
@@ -558,9 +553,9 @@ $_SESSION["route"] = "provenderie";
     <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-semaine.js"></script>
-    <script src="js/demo/chart-pie-semain.js"></script>
-    <script src="js/demo/chart-bar-semain.js"></script>
+    <script src="js/demophamacie/chart-area-semaine.js"></script>
+    <script src="js/demophamacie/chart-bar-semain.js"></script>
+    <script src="js/demophamacie/chart-pie-semain.js"></script>
     <script src="header.js"></script>
    
     <script>

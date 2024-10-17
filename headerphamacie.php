@@ -3,12 +3,7 @@
         if (!isset($_SESSION["route"])) {
             header('Location: index.php');
         }
-        if (($_SESSION["zonetravail"] == "Tous") && ($_SESSION["route"] == "cabinet")) {
             echo '<ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">';
-        } else {
-            echo '<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">';
-        }
-        
         ?>
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
@@ -37,17 +32,12 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation de vente</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
+                    
                         echo '
                         <a class="collapse-item" href="phpphamacie/vente/vente.php" id="ajouterVente"> ajouter une vente</a>
                         <a class="collapse-item" href="phpphamacie/vente/liste.php">liste vente</a>
                         ';
-                    } else {
-                        echo '
-                        <a class="collapse-item" href="php/vente/vente.php" id="ajouterVente"> ajouter une vente</a>
-                        <a class="collapse-item" href="php/vente/liste.php">liste vente</a>
-                        ';
-                    }
+                    
                 ?>
                 
             </div>
@@ -63,14 +53,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Achat</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
-                            
-                    } else {
                       echo '
-                        <a class="collapse-item" href="php/achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
-                        <a class="collapse-item" href="php/achat/liste.php">liste Achat</a>
-                      ';   
-                    }
+                        <a class="collapse-item" href="phpphamacie/achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
+                        <a class="collapse-item" href="phpphamacie/achat/liste.php">liste Achat</a>
+                      ';       
                 ?>
                 
             </div>
@@ -86,19 +72,14 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des clients</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
+                    
 
                         echo '
                             <a class="collapse-item" href="php/client/client.php" id="ajouterClient">ajouter un client</a>
                             <a class="collapse-item" href="php/client/liste.php">liste client</a>
                         ';
                             
-                    } else {
-                        echo '
-                            <a class="collapse-item" href="php/client/client.php" id="ajouterClient">ajouter un client</a>
-                            <a class="collapse-item" href="php/client/liste.php">liste client</a>
-                        ';
-                    }
+                    
                 ?>
                
             </div>
@@ -114,17 +95,12 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des produit</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
+                    
                         echo '
                         <a class="collapse-item" href="phpphamacie/produit/produit.php" id="ajouterProduit">ajouter un produit</a>
                         <a class="collapse-item" href="phpphamacie/produit/liste.php">liste produit</a>
                         ';    
-                    } else {
-                        echo '
-                        <a class="collapse-item" href="php/produit/produit.php" id="ajouterProduit">ajouter un produit</a>
-                        <a class="collapse-item" href="php/produit/liste.php">liste produit</a>
-                        ';
-                    }
+                    
                 ?>
                 
             </div>
@@ -140,14 +116,12 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des produit</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
-                            
-                    } else {
+                    
                        echo '
-                        <a class="collapse-item" href="php/fournisseur/fourniseur.php" id="ajouterFourniseur">ajouter un Fournisseur</a>
-                        <a class="collapse-item" href="php/fournisseur/liste.php">liste Fournisseur</a>
+                        <a class="collapse-item" href="phpphamacie/fournisseur/fourniseur.php" id="ajouterFourniseur">ajouter un Fournisseur</a>
+                        <a class="collapse-item" href="phpphamacie/fournisseur/liste.php">liste Fournisseur</a>
                        ' ;
-                    }
+                    
                 ?>
                 
             </div>
@@ -163,16 +137,14 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Stock</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
-                            
-                    } else {
+                    
                         echo '
-                            <a class="collapse-item" href="php/stock/sctockVente.php">Historique </a>
-                            <a class="collapse-item" href="php/achat/liste.php">Stock Achat </a>
-                            <a class="collapse-item" href="php/stock/recaptliste.php">Recapitulatif</a>
-                            <a class="collapse-item" href="php/stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire</a>
+                            <a class="collapse-item" href="phpphamacie/stock/sctockVente.php">Historique </a>
+                            <a class="collapse-item" href="phpphamacie/achat/liste.php">Stock Achat </a>
+                            <a class="collapse-item" href="phpphamacie/stock/recaptliste.php">Recapitulatif</a>
+                            <a class="collapse-item" href="phpphamacie/stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire</a>
                         ';
-                    }
+                    
                 ?>
                 
             </div>
@@ -188,14 +160,12 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">versement:</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
-                            
-                    } else {
+                    
                         echo '
-                            <a class="collapse-item" href="php/versement/versement.php" id="ajouterVersement">ajouter versement</a>
-                            <a class="collapse-item" href="php/versement/liste.php">Liste versement</a>
+                            <a class="collapse-item" href="phpphamacie/versement/versement.php" id="ajouterVersement">ajouter versement</a>
+                            <a class="collapse-item" href="phpphamacie/versement/liste.php">Liste versement</a>
                         ';
-                    }
+                    
                 ?>
                 
             </div>
@@ -211,13 +181,11 @@
             <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Dette:</h6>
             <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
-                            
-                    } else {
+                    
                         echo '
-                            <a class="collapse-item" href="php/dette/dette.php">Liste credit</a>
+                            <a class="collapse-item" href="phpphamacie/dette/dette.php">Liste credit</a>
                         ';
-                    }
+                    
                 ?>
                 
                 
@@ -235,14 +203,12 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Caisse:</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
-                            
-                    } else {
+                    
                         echo '
-                        <a class="collapse-item" href="php/caisse/caisse.php" id="ajouterCaise">Caisse</a>
-                        <a class="collapse-item" href="php/caisse/liste.php">liste caisse</a>
+                        <a class="collapse-item" href="phpphamacie/caisse/caisse.php" id="ajouterCaise">Caisse</a>
+                        <a class="collapse-item" href="phpphamacie/caisse/liste.php">liste caisse</a>
                         ';
-                    }
+                    
                 ?>
                 
             </div>
@@ -259,14 +225,12 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">utilisateur:</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
-                            
-                    } else {
+                    
                         echo '
-                        <a class="collapse-item" href="php/userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
-                        <a class="collapse-item" href="php/userCon/liste.php">Liste</a>
+                        <a class="collapse-item" href="phpphamacie/userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
+                        <a class="collapse-item" href="phpphamacie/userCon/liste.php">Liste</a>
                         ';
-                    }
+                    
                 ?>
                 
             </div>
@@ -292,13 +256,11 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette :</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
-                            
-                    } else {
+                    
                         echo '
-                        <a class="collapse-item" href="php/dette/dette.php">Liste dette</a>
+                        <a class="collapse-item" href="phpphamacie/dette/dette.php">Liste dette</a>
                         ';
-                    }
+                    
                 ?>
                 
                 <!--<a class="collapse-item" href="cards.html">Dette client</a>-->
@@ -319,14 +281,12 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
                 <?php 
-                    if (($_SESSION["route"] == "cabinet")) {
-                            
-                    } else {
+                    
                         echo '
-                        <a class="collapse-item" href="php/caise/liste.php">liste caisse</a>
-                        <a class="collapse-item" href="php/depenses/liste.php">Liste Depense</a>
+                        <a class="collapse-item" href="phpphamacie/caisse/liste.php">liste caisse</a>
+                        <a class="collapse-item" href="phpphamacie/depenses/liste.php">Liste Depense</a>
                         ';
-                    }
+                    
                 ?>
               <!--  <a class="collapse-item" href="php/caisse/caisse.php">Caisse</a> -->
                 

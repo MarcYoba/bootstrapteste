@@ -16,7 +16,7 @@ function creerCaisse($description, $motif, $montant) {
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO caisse (operation, montant, iduser, dateoperation, motif) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO caissePhamacie (operation, montant, iduser, dateoperation, motif) VALUES (?, ?, ?, ?, ?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -67,7 +67,7 @@ if (isset($_POST['modifier'])) {
     if (!empty($description) || !empty($motif) || !empty($montant)) {
         
                 // Créer le compte utilisateur
-            $sql = "UPDATE caisse SET operation='$description', montant ='$montant', motif='$motif' WHERE id='$reference'";
+            $sql = "UPDATE caissePhamacie SET operation='$description', montant ='$montant', motif='$motif' WHERE id='$reference'";
             $result = $conn->query($sql);
             
                 header("Location:liste.php");

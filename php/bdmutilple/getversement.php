@@ -34,6 +34,26 @@ class Versement{
         return $row["montant"]; 
     }
 
+    public function ByVersementClientdate($dette){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM versement WHERE iddette = '$dette' AND dateversement= CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function getVersementByClientBydate($date,$client){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM versement WHERE dateversement = '$date' AND idclient ='$client'";
+        $result = $conn->query($sql);
+
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
     public function ByWeekVersement($datebedut,$datafin){
         global $conn;
         $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement BETWEEN '$datebedut'  AND '$datafin'";

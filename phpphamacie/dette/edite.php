@@ -17,7 +17,7 @@ $tab = array(
 
 // Requête SQL pour récupérer les informations de la vente
 // $sql = "SELECT dette.id as id,client.firstname as nom, dette.montant, client.id AS idclient FROM dette,client WHERE dette.idclient ='$id' AND client.id = '$id' AND dette.status = 'en cour'";
- $sql = "SELECT id, montant, idclient FROM dette WHERE id ='$id'";
+ $sql = "SELECT id, montant, idclient FROM dettephamacie WHERE id ='$id'";
  $result = $conn->query($sql);
  $row = $result->fetch_assoc();
  $tab["iddette"] = $row["id"];

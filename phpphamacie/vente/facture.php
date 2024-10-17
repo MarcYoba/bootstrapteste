@@ -121,7 +121,7 @@ require_once("../bdmutilple/getclient.php");
                                         $prix = 0;
                                         $montant = 0;
 
-                                        $sql = "SELECT * FROM facture WHERE idvente = '$id'";
+                                        $sql = "SELECT * FROM facturephamacie WHERE idvente = '$id'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

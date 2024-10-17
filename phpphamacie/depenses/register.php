@@ -18,7 +18,7 @@ function creerDepense($description, $montant,$datedepense) {
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO depenses (description, montant, iduser, datedepense) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO depensesphamacie  (description, montant, iduser, datedepense) VALUES (?, ?, ?, ?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -71,7 +71,7 @@ if (isset($_POST['modifier'])) {
     if (!empty($description) || !empty($motif) || !empty($montant)) {
         
                 // Créer le compte utilisateur
-            $sql = "UPDATE depenses SET operation='$description', montant ='$montant' WHERE id='$reference'";
+            $sql = "UPDATE depensesphamacie SET operation='$description', montant ='$montant' WHERE id='$reference'";
             $result = $conn->query($sql);
             
                 header("Location:liste.php");

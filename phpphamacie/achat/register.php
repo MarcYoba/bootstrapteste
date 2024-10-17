@@ -22,7 +22,7 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "SELECT * FROM produit WHERE nom_produit = '$produit'";
+    $sql = "SELECT * FROM produitphamacie WHERE nom_produit = '$produit'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         $idproduit = $row["id"];
@@ -34,7 +34,7 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
         $row = mysqli_fetch_assoc($result);
         $idfournisseur = $row["id"];
     */
-    $sql = "INSERT INTO achat (Nomproduit,prixAcaht,quantite,montant,idproduit,idfournisseur,dateachat,iduser) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+    $sql = "INSERT INTO achatphamacie (Nomproduit,prixAcaht,quantite,montant,idproduit,idfournisseur,dateachat,iduser) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -59,10 +59,10 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
     $stock = $stock + $quantite;
     $gain = $prixvente - $prix;
     // selection la id dans la table d'achat
-    $sql = "UPDATE produit SET quantite_produit = '$stock',prix_achat_produit='$prix',gain_produit='$gain' WHERE nom_produit = '$produit' ";
+    $sql = "UPDATE produitphamacie SET quantite_produit = '$stock',prix_achat_produit='$prix',gain_produit='$gain' WHERE nom_produit = '$produit' ";
     $result = $conn->query($sql);
     
-    $sql = "SELECT id FROM achat WHERE dateachat = '$date' ORDER BY id DESC LIMIT 1";
+    $sql = "SELECT id FROM achatphamacie WHERE dateachat = '$date' ORDER BY id DESC LIMIT 1";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         $id = $row["id"];
@@ -79,7 +79,7 @@ function insertPrix($nom,$prix,$id) {
     // --------------------------------------------------------------------------------
     // Creation du prix (insertion de donne) 
 
-    $sql = "INSERT INTO prix (produit,prixAcaht,prixVente,idachat,iduser,dateprix) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO prixphamacie  (produit,prixAcaht,prixVente,idachat,iduser,dateprix) VALUES (?, ?, ?, ?, ?, ?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {

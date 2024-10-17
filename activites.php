@@ -49,9 +49,9 @@
                             <div class="col-xl-5 col-md-5 mb-4">
                             <?php        
                                                 session_start();
-                                                
+
                                                  if (($_SESSION['zonetravail'] == "provenderie") || ($_SESSION["zonetravail"] == "Tous")) {
-                                                    echo '<button class="btn btn-primary btn-user btn-block" onclick="Provenderie()">
+                                                    echo '<a  href="home.php" class="btn btn-primary btn-user btn-block" >
                                                     <div class="card border-left-primary shadow h-100 py-2">
                                                         <div class="card-body">
                                                             <div class="row no-gutters align-items-center">
@@ -64,7 +64,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            </button>';
+                                            </a>';
                                             }          
                                     ?>
                                 </div>
@@ -73,7 +73,7 @@
                                 <div class="col-xl-5 col-md-4 mb-4">
                                 <?php           
                                     if (($_SESSION["zonetravail"] == "cabinet") || ($_SESSION["zonetravail"] == "Tous")) {
-                                    echo '<a href="home.php" onclick="Cabinet()">
+                                    echo '<a href="homepahamacie.php">
                                     <div class="card border-left-success shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
@@ -124,8 +124,7 @@
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="header.js"></script>
-    <!-- Custom scripts for all pages-->
+    <!-- Custom scripts for all pages  homepahamacie.php -->
     <script src="js/sb-admin-2.min.js"></script>
 
 </body>

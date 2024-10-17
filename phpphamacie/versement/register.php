@@ -7,7 +7,7 @@ require_once("../connexion.php");
 function creerCaisse($montant) {
     global $conn;
     $date = date("y/m/d");
-    $sql = "SELECT id FROM versement ORDER BY id DESC";
+    $sql = "SELECT id FROM versementphamacie ORDER BY id DESC";
             $result = $conn->query($sql);
             $row = mysqli_fetch_assoc($result);
             $idversement = $row["id"];
@@ -15,7 +15,7 @@ function creerCaisse($montant) {
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO caisse (operation, montant,idversement, iduser, dateoperation, motif) VALUES (?, ?, ?, ?, ?,?)";
+    $sql = "INSERT INTO caissePhamacie (operation, montant,idversement, iduser, dateoperation, motif) VALUES (?, ?, ?, ?, ?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -48,7 +48,7 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO versement (montant, idclient, iddette, iduser,dateversement,Om,motif) VALUES (?, ?, ?, ?, ?,?,?)";
+    $sql = "INSERT INTO versementphamacie (montant, idclient, iddette, iduser,dateversement,Om,motif) VALUES (?, ?, ?, ?, ?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -66,7 +66,7 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
     $stmt->close();
 
     if($montant == $montantdette){
-       $sql = "UPDATE dette SET status = 'OK' WHERE id ='$iddette'" ;
+       $sql = "UPDATE dettephamacie SET status = 'OK' WHERE id ='$iddette'" ;
        $result = $conn->query($sql);
 
        $sql ="SELECT SUM(versement) as somme FROM client WHERE id='$client'";
@@ -80,12 +80,12 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
        //creerCaisse($montant);
     }else{
 
-        $sql ="SELECT SUM(montant) as somme FROM versement WHERE iddette ='$iddette'";
+        $sql ="SELECT SUM(montant) as somme FROM versementphamacie WHERE iddette ='$iddette'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
 
         if ($row["somme"]>=$montantdette) {
-            $sql = "UPDATE dette SET status = 'OK' WHERE id ='$iddette'" ;
+            $sql = "UPDATE dettephamacie SET status = 'OK' WHERE id ='$iddette'" ;
             $result = $conn->query($sql);
 
             $sql ="SELECT SUM(versement) as somme FROM client WHERE id='$client'";
@@ -124,7 +124,7 @@ if (isset($_POST['submit'])) {
     if (!empty($iddette) || !empty($client) || !empty($montant) || !empty($montantdette)) {
         
             // Vérifier si l'adresse e-mail existe déjà
-            $sql = "SELECT * FROM dette WHERE id = ? AND status = 'en cour'";
+            $sql = "SELECT * FROM dettephamacie WHERE id = ? AND status = 'en cour'";
 
             if (!$stmt = $conn->prepare($sql)) {
                 die('Erreur de préparation de la requête : ' . $conn->error);
@@ -169,7 +169,7 @@ if (isset($_POST['modification'])) {
     if (!empty($iddette) || !empty($client) || !empty($montant) || !empty($montantdette)) {
         
             // Vérifier si l'adresse e-mail existe déjà
-            $sql = "SELECT * FROM versement WHERE id = ? ";
+            $sql = "SELECT * FROM versementphamacie WHERE id = ? ";
 
             if (!$stmt = $conn->prepare($sql)) {
                 die('Erreur de préparation de la requête : ' . $conn->error);

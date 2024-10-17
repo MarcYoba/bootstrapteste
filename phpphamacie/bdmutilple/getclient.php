@@ -66,7 +66,7 @@ class Client{
 
     public function getClientByIdVente($id){
         global $conn;
-        $sql = "SELECT idclient  FROM vente WHERE id= '$id'";
+        $sql = "SELECT idclient  FROM ventephamacie WHERE id= '$id'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         $idclient = $row["idclient"];

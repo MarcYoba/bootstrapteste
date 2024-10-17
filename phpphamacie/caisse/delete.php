@@ -7,11 +7,11 @@
 $id = $_GET['id'];
 
 // Requête SQL pour récupérer les informations de la vente
-$sql = "SELECT * FROM caisse WHERE id = $id";
+$sql = "SELECT * FROM caissePhamacie WHERE id = $id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    $sql = "DELETE  FROM caisse WHERE id = $id";
+    $sql = "DELETE  FROM caissePhamacie WHERE id = $id";
 
     if($conn->query($sql) === TRUE){
         header("Location:liste.php");

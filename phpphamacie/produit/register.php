@@ -44,7 +44,7 @@ if (isset($_POST['enregistrement'])) {
     if (!empty($nom) || !empty($type) || !empty($prixvente) || !empty($prixachat) || !empty($quantite) || !empty($cathegorie)) {
         
             // Vérifier si l'adresse e-mail existe déjà
-            $sql = "SELECT * FROM produit WHERE nom_produit = ?";
+            $sql = "SELECT * FROM produitphamacie WHERE nom_produit = ?";
 
             if (!$stmt = $conn->prepare($sql)) {
                 die('Erreur de préparation de la requête : ' . $conn->error);

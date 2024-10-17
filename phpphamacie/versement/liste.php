@@ -89,7 +89,7 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM versement";
+                                        $sql = "SELECT * FROM versementphamacie";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

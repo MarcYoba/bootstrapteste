@@ -18,7 +18,7 @@ $tab = array(
 );
 
 
- $sql = "SELECT id, montant, idclient, iddette,dateversement,motif FROM versement WHERE id ='$id'";
+ $sql = "SELECT id, montant, idclient, iddette,dateversement,motif FROM versementphamacie WHERE id ='$id'";
  $result = $conn->query($sql);
  $row = $result->fetch_assoc();
  $tab["iddette"] = $row["id"];

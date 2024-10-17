@@ -7,7 +7,7 @@
 $id = $_GET['id'];
 
 // Requête SQL pour récupérer les informations de la vente
-$sql = "SELECT * FROM produit WHERE id = $id";
+$sql = "SELECT * FROM produitphamacie WHERE id = $id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

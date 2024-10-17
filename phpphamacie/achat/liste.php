@@ -119,7 +119,7 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM achat";
+                                        $sql = "SELECT * FROM achatphamacie";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
