@@ -145,8 +145,12 @@
                                                 echo '<th>'.$value["somme_facture"].'</th>'; 
                                             } else {
                                                 echo '<th>'.round($value["somme_facture"],2).'</th>'; 
-                                            } 
-                                            echo '<th>'.$value["quantite_produit"].'</th>';
+                                            }
+                                            if (empty($value["quantite_produit"])) {
+                                                echo '<th>'.$value["quantite_produit"].'</th>';
+                                            } else {
+                                                echo '<th>'.round($value["quantite_produit"],2).'</th>';
+                                            }
                                             echo '<th>'.$date.'</th>';
                                             echo '</tr>';
                                         }

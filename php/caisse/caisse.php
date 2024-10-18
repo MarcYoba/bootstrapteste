@@ -37,6 +37,12 @@
                                 <h1 class="h4 text-gray-900 mb-4">Caisse</h1>
                             </div>
                             <form class="user" action="register.php" method="post" >
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <input type="date" class="form-control form-control-user"
+                                    name="date" id="date" placeholder="quantite" required>
+                                    </div>
+                                </div>
                                 <?php 
                                     
                                     if(isset($_GET['tableau'])){
