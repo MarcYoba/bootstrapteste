@@ -13,7 +13,7 @@ class Fournisseur{
 
     public function getByIdFournisseur($id){
         global $conn;
-        $sql = "SELECT nom FROM fournisseur WHERE id= '$id'";
+        $sql = "SELECT nom FROM fournisseurphamacie WHERE id= '$id'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["nom"]; 

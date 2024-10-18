@@ -21,7 +21,7 @@ class Vente{
 
     public function getIdVente() {
         global $conn;
-        $sql = "SELECT id FROM vente WHERE datevente= CURRENT_DATE";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente= CURRENT_DATE";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -33,7 +33,7 @@ class Vente{
     public function getIdVenteByDate($date) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE datevente= '$date'";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente= '$date'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -45,7 +45,7 @@ class Vente{
     public function getIdVenteByTypeCash($date) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE datevente= '$date' AND cash <> '0'";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente= '$date' AND cash <> '0'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -57,7 +57,7 @@ class Vente{
     public function getIdVenteByTypeCashIntervel($date,$date2) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE datevente BETWEEN '$date' AND '$date2' AND cash <> '0'";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente BETWEEN '$date' AND '$date2' AND cash <> '0'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -69,7 +69,7 @@ class Vente{
     public function getIdVenteByTypeOM($date) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE datevente= '$date' AND Om <> '0'";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente= '$date' AND Om <> '0'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -81,7 +81,7 @@ class Vente{
     public function getIdVenteByTypeOMIterval($date,$datesecond) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE datevente BETWEEN '$date' AND '$datesecond' AND Om <> '0'";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente BETWEEN '$date' AND '$datesecond' AND Om <> '0'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -93,7 +93,7 @@ class Vente{
     public function getIdVenteByTypeCredit($date) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE datevente= '$date' AND credit <> '0'";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente= '$date' AND credit <> '0'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -105,7 +105,7 @@ class Vente{
     public function getIdVenteByTypeCreditInterval($date,$datesecond) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE datevente BETWEEN  '$date' AND '$datesecond' AND credit <> '0'";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente BETWEEN  '$date' AND '$datesecond' AND credit <> '0'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -117,7 +117,7 @@ class Vente{
     public function getIdVenteByTypeCreditOM($date) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE datevente= '$date' AND cash = '0'";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente= '$date' AND cash = '0'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -129,7 +129,7 @@ class Vente{
     public function getIdVenteByTypeCreditOMInterval($date,$date2) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE  cash = '0' AND datevente BETWEEN  '$date' AND '$date2'";
+        $sql = "SELECT id FROM ventephamacie WHERE  cash = '0' AND datevente BETWEEN  '$date' AND '$date2'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -141,7 +141,7 @@ class Vente{
     public function getIdVenteByWeek($datedebut ,$datefin) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
+        $sql = "SELECT id FROM ventephamacie WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -152,7 +152,7 @@ class Vente{
 
     public function getSommeVente() {
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM facture WHERE datefacture= CURRENT_DATE";
+        $sql = "SELECT SUM(montant) as montant FROM facturephamacie WHERE datefacture= CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -160,7 +160,7 @@ class Vente{
 
     public function getSommeVentedate($date) {
         global $conn;
-        $sql = "SELECT SUM(prix) as montant FROM vente WHERE datevente= '$date'";
+        $sql = "SELECT SUM(prix) as montant FROM ventephamacie WHERE datevente= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -168,7 +168,7 @@ class Vente{
 
     public function getSommeVenteWeek($datedebut, $datefin) {
         global $conn;
-        $sql = "SELECT SUM(prix) as montant FROM vente WHERE datevente BETWEEN '$datedebut' AND  '$datefin' ";
+        $sql = "SELECT SUM(prix) as montant FROM ventephamacie WHERE datevente BETWEEN '$datedebut' AND  '$datefin' ";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -176,7 +176,7 @@ class Vente{
 
     public function getSommeCash() {
         global $conn;
-        $sql = "SELECT SUM(cash) as cash FROM vente WHERE datevente= CURRENT_DATE";
+        $sql = "SELECT SUM(cash) as cash FROM ventephamacie WHERE datevente= CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["cash"]; 
@@ -184,7 +184,7 @@ class Vente{
 
     public function getSommeCashDate($date) {
         global $conn;
-        $sql = "SELECT SUM(cash) as cash FROM vente WHERE datevente= '$date'";
+        $sql = "SELECT SUM(cash) as cash FROM ventephamacie WHERE datevente= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["cash"]; 
@@ -192,7 +192,7 @@ class Vente{
 
     public function getSommeCashWeek($datedebut,$datefin) {
         global $conn;
-        $sql = "SELECT SUM(cash) as cash FROM vente WHERE datevente BETWEEN '$datedebut'  AND '$datefin'";
+        $sql = "SELECT SUM(cash) as cash FROM ventephamacie WHERE datevente BETWEEN '$datedebut'  AND '$datefin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["cash"]; 
@@ -200,7 +200,7 @@ class Vente{
 
     public function getSommeCredit() {
         global $conn;
-        $sql = "SELECT SUM(credit) as credit FROM vente WHERE datevente= CURRENT_DATE";
+        $sql = "SELECT SUM(credit) as credit FROM ventephamacie WHERE datevente= CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["credit"]; 
@@ -208,7 +208,7 @@ class Vente{
 
     public function getSommeCreditDate($date) {
         global $conn;
-        $sql = "SELECT SUM(credit) as credit FROM vente WHERE datevente= '$date'";
+        $sql = "SELECT SUM(credit) as credit FROM ventephamacie WHERE datevente= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["credit"]; 
@@ -216,7 +216,7 @@ class Vente{
 
     public function getSommeCreditWeek($datedebut,$datefin) {
         global $conn;
-        $sql = "SELECT SUM(credit) as credit FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
+        $sql = "SELECT SUM(credit) as credit FROM ventephamacie WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["credit"]; 
@@ -224,7 +224,7 @@ class Vente{
 
     public function getSommeOm() {
         global $conn;
-        $sql = "SELECT SUM(Om) as Om FROM vente WHERE datevente= CURRENT_DATE";
+        $sql = "SELECT SUM(Om) as Om FROM ventephamacie WHERE datevente= CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["Om"]; 
@@ -232,7 +232,7 @@ class Vente{
 
     public function getSommeOmDate($date) {
         global $conn;
-        $sql = "SELECT SUM(Om) as Om FROM vente WHERE datevente= '$date'";
+        $sql = "SELECT SUM(Om) as Om FROM ventephamacie WHERE datevente= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["Om"]; 
@@ -240,7 +240,7 @@ class Vente{
 
     public function getSommeOmWeek($datedebut,$datefin) {
         global $conn;
-        $sql = "SELECT SUM(Om) as Om FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
+        $sql = "SELECT SUM(Om) as Om FROM ventephamacie WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["Om"]; 
@@ -248,14 +248,14 @@ class Vente{
 
     public function getSommeReduction() {
         global $conn;
-        $sql = "SELECT SUM(reduction) as reduction FROM vente WHERE datevente= CURRENT_DATE";
+        $sql = "SELECT SUM(reduction) as reduction FROM ventephamacie WHERE datevente= CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["reduction"]; 
     }
     public function getReductionForVente($idvente) {
         global $conn;
-        $sql = "SELECT reduction as reduction FROM vente WHERE id= '$idvente'";
+        $sql = "SELECT reduction as reduction FROM ventephamacie WHERE id= '$idvente'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["reduction"]; 
@@ -263,7 +263,7 @@ class Vente{
 
     public function getSommeReductionDate($date) {
         global $conn;
-        $sql = "SELECT SUM(reduction) as reduction FROM vente WHERE datevente= '$date'";
+        $sql = "SELECT SUM(reduction) as reduction FROM ventephamacie WHERE datevente= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["reduction"]; 
@@ -271,7 +271,7 @@ class Vente{
 
     public function getSommeReductionWeek($datedebut,$datefin) {
         global $conn;
-        $sql = "SELECT SUM(reduction) as reduction FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
+        $sql = "SELECT SUM(reduction) as reduction FROM ventephamacie WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["reduction"]; 
@@ -280,7 +280,7 @@ class Vente{
     public function getSommeProduit() {
         global $conn;
         $this->data =[];
-        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE `datefacture`= CURRENT_DATE GROUP BY nomproduit";
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facturephamacie WHERE `datefacture`= CURRENT_DATE GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -291,7 +291,7 @@ class Vente{
     public function getSommeProduitDate($date) {
         global $conn;
         $this->data =[];
-        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE `datefacture`= '$date' GROUP BY nomproduit";
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facturephamacie WHERE `datefacture`= '$date' GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -302,7 +302,7 @@ class Vente{
     public function getSommeProduitDateProduit($date,$produit) {
         global $conn;
         $this->data =[];
-        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE nomproduit='$produit' AND `datefacture`= '$date' GROUP BY nomproduit";
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facturephamacie WHERE nomproduit='$produit' AND `datefacture`= '$date' GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -313,7 +313,7 @@ class Vente{
     public function getSommeProduitDateClient($date,$client) {
         global $conn;
         $this->data =[];
-        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE idclient='$client' AND `datefacture`= '$date' GROUP BY nomproduit";
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facturephamacie WHERE idclient='$client' AND `datefacture`= '$date' GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -324,7 +324,7 @@ class Vente{
     public function getSommeProduitDateClientProduit($date,$client,$produit) {
         global $conn;
         $this->data =[];
-        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE nomproduit='$produit' AND idclient='$client' AND `datefacture`= '$date' GROUP BY nomproduit";
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facturephamacie WHERE nomproduit='$produit' AND idclient='$client' AND `datefacture`= '$date' GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -335,7 +335,7 @@ class Vente{
     public function getSommeProduitWeek($datedebut,$datefin) {
         global $conn;
         $this->data =[];
-        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facturephamacie WHERE `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -346,7 +346,7 @@ class Vente{
     public function getSommeProduitWeekProduit($datedebut,$datefin,$produit) {
         global $conn;
         $this->data =[];
-        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE nomproduit='$produit' AND  `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facturephamacie WHERE nomproduit='$produit' AND  `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -357,7 +357,7 @@ class Vente{
     public function getSommeProduitWeekClient($datedebut,$datefin,$client) {
         global $conn;
         $this->data =[];
-        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE idclient='$client' AND  `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facturephamacie WHERE idclient='$client' AND  `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -368,7 +368,7 @@ class Vente{
     public function getSommeProduitWeekClientProduit($datedebut,$datefin,$client,$produit) {
         global $conn;
         $this->data =[];
-        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facture WHERE idclient='$client' AND  nomproduit='$produit' AND `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
+        $sql = "SELECT  nomproduit,SUM(quantite) as quantite,datefacture FROM facturephamacie WHERE idclient='$client' AND  nomproduit='$produit' AND `datefacture` BETWEEN '$datedebut' AND '$datefin' GROUP BY nomproduit";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -379,7 +379,7 @@ class Vente{
     public function getAllVente(){
         global $conn;
 
-        $sql = "SELECT id,typevente,numfacture,quantite,prix,datevente FROM vente ";
+        $sql = "SELECT id,typevente,numfacture,quantite,prix,datevente FROM ventephamacie ";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($this->data,$row);
@@ -394,7 +394,7 @@ class Vente{
             $quantite = 0;
             $prix = 0;
 
-            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre'";
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facturephamacie WHERE  idvente = '$idfacutre'";
             $resultfa = $conn->query($sqlfacture); 
             while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
                 array_push($valdata,$rowfacture);
@@ -418,7 +418,7 @@ class Vente{
             $quantite = 0;
             $prix = 0;
 
-            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre'";
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facturephamacie WHERE  idvente = '$idfacutre'";
             $resultfa = $conn->query($sqlfacture); 
             while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
                 array_push($valdata,$rowfacture);
@@ -442,7 +442,7 @@ class Vente{
             $quantite = 0;
             $prix = 0;
 
-            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre' AND nomproduit='$nom'";
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facturephamacie WHERE  idvente = '$idfacutre' AND nomproduit='$nom'";
             $resultfa = $conn->query($sqlfacture); 
             while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
                 
@@ -475,7 +475,7 @@ class Vente{
             $quantite = 0;
             $prix = 0;
 
-            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre' AND idclient ='$idclient'";
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facturephamacie WHERE  idvente = '$idfacutre' AND idclient ='$idclient'";
             $resultfa = $conn->query($sqlfacture); 
             while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
                 
@@ -508,7 +508,7 @@ class Vente{
             $quantite = 0;
             $prix = 0;
 
-            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre' AND idclient ='$idclient' AND nomproduit='$produit'";
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facturephamacie WHERE  idvente = '$idfacutre' AND idclient ='$idclient' AND nomproduit='$produit'";
             $resultfa = $conn->query($sqlfacture); 
             while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
                 

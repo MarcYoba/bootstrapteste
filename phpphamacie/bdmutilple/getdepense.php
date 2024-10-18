@@ -13,7 +13,7 @@ class Depense{
 
     public function ToDay(){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE datedepense= CURRENT_DATE";
+        $sql = "SELECT SUM(montant) as montant FROM depensesphamacie WHERE datedepense= CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -21,14 +21,14 @@ class Depense{
 
     public function ByDateDepense($date){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE datedepense= '$date'";
+        $sql = "SELECT SUM(montant) as montant FROM depensesphamacie WHERE datedepense= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
     }
     public function ByWeekDepense($datedebut,$datefin){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE datedepense BETWEEN '$datedebut'  AND'$datefin'";
+        $sql = "SELECT SUM(montant) as montant FROM depensesphamacie WHERE datedepense BETWEEN '$datedebut'  AND'$datefin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -37,7 +37,7 @@ class Depense{
     public function AllDepense(){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM depenses WHERE datedepense= CURRENT_DATE";
+        $sql = "SELECT * FROM depensesphamacie WHERE datedepense= CURRENT_DATE";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -49,7 +49,7 @@ class Depense{
     public function AllDepenseDate($date){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM depenses WHERE datedepense= '$date'";
+        $sql = "SELECT * FROM depensesphamacie WHERE datedepense= '$date'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -61,7 +61,7 @@ class Depense{
     public function AllDepenseWeek($datedebut,$datefin){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM depenses WHERE datedepense BETWEEN '$datedebut' AND '$datefin'";
+        $sql = "SELECT * FROM depensesphamacie WHERE datedepense BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);

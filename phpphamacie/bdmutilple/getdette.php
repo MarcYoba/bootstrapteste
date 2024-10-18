@@ -13,7 +13,7 @@ class Dette{
     public function getDetteByIdClient($id){
         global $conn;
         $data = [];
-        $sql = "SELECT montant FROM dette WHERE idclient = '$id'";
+        $sql = "SELECT montant FROM dettephamacie WHERE idclient = '$id'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -25,7 +25,7 @@ class Dette{
     public function getAllDette(){
         global $conn;
         $data = [];
-        $sql = "SELECT* FROM dette";
+        $sql = "SELECT* FROM dettephamacie";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);    
@@ -36,7 +36,7 @@ class Dette{
     public function getAllDetteIntervall($date1,$date2){
         global $conn;
         $data = [];
-        $sql = "SELECT* FROM dette WHERE datedette BETWEEN '$date1' AND '$date2'";
+        $sql = "SELECT* FROM dettephamacie WHERE datedette BETWEEN '$date1' AND '$date2'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);    
@@ -46,7 +46,7 @@ class Dette{
     public function getAllDetteIntervallClient($date1,$date2,$client){
         global $conn;
         $data = [];
-        $sql = "SELECT* FROM dette WHERE datedette BETWEEN '$date1' AND '$date2' AND idclient ='$client'";
+        $sql = "SELECT* FROM dettephamacie WHERE datedette BETWEEN '$date1' AND '$date2' AND idclient ='$client'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);    
@@ -57,7 +57,7 @@ class Dette{
     public function getAllDetteId($id){
         global $conn;
         $data = [];
-        $sql = "SELECT* FROM dette WHERE idclient ='$id'";
+        $sql = "SELECT* FROM dettephamacie WHERE idclient ='$id'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);    
@@ -68,7 +68,7 @@ class Dette{
     public function getAllDetteDate($date){
         global $conn;
         $data = [];
-        $sql = "SELECT* FROM dette WHERE datedette ='$date'";
+        $sql = "SELECT* FROM dettephamacie WHERE datedette ='$date'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);    
@@ -79,7 +79,7 @@ class Dette{
     public function getAllDetteDateClient($date,$id){
         global $conn;
         $data = [];
-        $sql = "SELECT* FROM dette WHERE datedette ='$date' AND idclient ='$id'";
+        $sql = "SELECT* FROM dettephamacie WHERE datedette ='$date' AND idclient ='$id'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);    

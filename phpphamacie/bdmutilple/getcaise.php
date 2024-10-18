@@ -13,7 +13,7 @@ class Caise{
 
     public function ToDay(){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM `caisse` WHERE operation ='sortie en caisse' and dateoperation = CURRENT_DATE";
+        $sql = "SELECT SUM(montant) as montant FROM `caissePhamacie` WHERE operation ='sortie en caisse' and dateoperation = CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -21,7 +21,7 @@ class Caise{
 
     public function getByDateSortie($date){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM `caisse` WHERE operation ='sortie en caisse' and dateoperation = '$date'";
+        $sql = "SELECT SUM(montant) as montant FROM `caissePhamacie` WHERE operation ='sortie en caisse' and dateoperation = '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -29,7 +29,7 @@ class Caise{
 
     public function getByWeekSortie($datedebut,$datefin){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM `caisse` WHERE operation ='sortie en caisse' and dateoperation BETWEEN '$datedebut'  AND '$datefin'";
+        $sql = "SELECT SUM(montant) as montant FROM `caissePhamacie` WHERE operation ='sortie en caisse' and dateoperation BETWEEN '$datedebut'  AND '$datefin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -38,7 +38,7 @@ class Caise{
     public function AllSortieCaise(){
         global $conn;
         $data=[];
-        $sql = "SELECT * FROM `caisse` WHERE operation ='sortie en caisse' and dateoperation = CURRENT_DATE";
+        $sql = "SELECT * FROM `caissePhamacie` WHERE operation ='sortie en caisse' and dateoperation = CURRENT_DATE";
         $result = $conn->query($sql);
 
         while($row = mysqli_fetch_assoc($result)){
@@ -50,7 +50,7 @@ class Caise{
     public function AllSortieCaiseDate($date){
         global $conn;
         $data=[];
-        $sql = "SELECT * FROM `caisse` WHERE operation ='sortie en caisse' and dateoperation = '$date'";
+        $sql = "SELECT * FROM `caissePhamacie` WHERE operation ='sortie en caisse' and dateoperation = '$date'";
         $result = $conn->query($sql);
 
         while($row = mysqli_fetch_assoc($result)){
@@ -62,7 +62,7 @@ class Caise{
     public function AllSortieCaiseWeek($datedebut,$datefin){
         global $conn;
         $data=[];
-        $sql = "SELECT * FROM `caisse` WHERE operation ='sortie en caisse' and dateoperation BETWEEN '$datedebut'  AND '$datefin'";
+        $sql = "SELECT * FROM `caissePhamacie` WHERE operation ='sortie en caisse' and dateoperation BETWEEN '$datedebut'  AND '$datefin'";
         $result = $conn->query($sql);
 
         while($row = mysqli_fetch_assoc($result)){

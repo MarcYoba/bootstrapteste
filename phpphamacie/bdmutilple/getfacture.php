@@ -24,7 +24,7 @@ class Facture{
     public function getByIdidFacture(){
         global $conn;
         $data =[];
-        $sql = "SELECT id,nomproduit,quantite,prix,montant,idvente,idclient,Typepaiement  FROM facture WHERE idvente= '$this->idfacture'";
+        $sql = "SELECT id,nomproduit,quantite,prix,montant,idvente,idclient,Typepaiement  FROM facturephamacie WHERE idvente= '$this->idfacture'";
         $result = $conn->query($sql);
        while($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -35,12 +35,12 @@ class Facture{
     public function UgradeProduitFacture($idproduit,$quantite){
         global $conn;
 
-        $sql = "SELECT quantite_produit AS quantite FROM produit WHERE  id='$idproduit'";
+        $sql = "SELECT quantite_produit AS quantite FROM produitphamacie WHERE  id='$idproduit'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result); 
         $quantite = $row["quantite"] + $quantite;
 
-        $sql = "UPDATE produit SET quantite_produit = '$quantite' WHERE id = '$idproduit'";
+        $sql = "UPDATE produitphamacie SET quantite_produit = '$quantite' WHERE id = '$idproduit'";
         $result = $conn->query($sql);
         if($result === true){
             //return "Edite OK";
@@ -51,7 +51,7 @@ class Facture{
 
     public function getIdClientFacture($id){
         global $conn;
-        $sql = "SELECT idclient  FROM facture WHERE idvente= '$id'";
+        $sql = "SELECT idclient  FROM facturephamacie WHERE idvente= '$id'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["idclient"]; 
@@ -59,7 +59,7 @@ class Facture{
 
     public function getIdQuantite($nomproduit){
         global $conn;
-        $sqlproduit = "SELECT id as id ,quantite_produit as quantite   FROM produit  WHERE nom_produit = '$nomproduit'";
+        $sqlproduit = "SELECT id as id ,quantite_produit as quantite   FROM produitphamacie  WHERE nom_produit = '$nomproduit'";
         $resultproduit = $conn->query($sqlproduit);
         $row = mysqli_fetch_assoc($resultproduit);
         return $row; 
@@ -67,7 +67,7 @@ class Facture{
 
     public function getSommeProduit($idproduit,$dateProduit){
         global $conn;
-        $sql = "SELECT SUM(quantite) AS quantites FROM facture WHERE idproduit='$idproduit' AND datefacture='$dateProduit';";
+        $sql = "SELECT SUM(quantite) AS quantites FROM facturephamacie WHERE idproduit='$idproduit' AND datefacture='$dateProduit';";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["quantites"]; 
@@ -75,11 +75,11 @@ class Facture{
 
     public function setIdFacture($produit,$idproduit){
         global $conn;
-        $sql = "SELECT idproduit,nomproduit  FROM facture WHERE nomproduit= '$produit'";
+        $sql = "SELECT idproduit,nomproduit  FROM facturephamacie WHERE nomproduit= '$produit'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         if (!empty($row)) {
-            $sql = "UPDATE facture SET idproduit='$idproduit' WHERE nomproduit= '$produit'";
+            $sql = "UPDATE facturephamacie SET idproduit='$idproduit' WHERE nomproduit= '$produit'";
             $result = $conn->query($sql); 
             if ($result === TRUE) {
                 //return $row; 
@@ -117,14 +117,14 @@ class Facture{
 
         
 
-        $sql = "UPDATE produit SET quantite_produit ='$quantitef' WHERE id = '$id'";
+        $sql = "UPDATE produitphamacie SET quantite_produit ='$quantitef' WHERE id = '$id'";
         $result = $conn->query($sql); 
         if ($result === True) {
           // $this->produitstock($idvente,$quantite,$nomproduit);
         }
         
         
-        $sql = "INSERT INTO facture (nomproduit,quantite,prix,montant,Typepaiement,idclient,iduser,datefacture,idvente,idproduit) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+        $sql = "INSERT INTO facturephamacie (nomproduit,quantite,prix,montant,Typepaiement,idclient,iduser,datefacture,idvente,idproduit) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
         // Lier les paramètres
         if (!$stmt = $conn->prepare($sql)) {
@@ -195,16 +195,16 @@ class Facture{
         $quantite = $ligneTotal["Qttotal"];
         $reduction = $ligneTotal["reduction"];
 
-        $sql = "UPDATE vente SET typevente='$this->TypePaie', quantite ='$quantite',prix='$Mmontant',cash='$this->cash',credit='$this->credit', Om='$this->om',reduction='$reduction' WHERE id = '$this->idvente'";
+        $sql = "UPDATE ventephamacie SET typevente='$this->TypePaie', quantite ='$quantite',prix='$Mmontant',cash='$this->cash',credit='$this->credit', Om='$this->om',reduction='$reduction' WHERE id = '$this->idvente'";
         $result = $conn->query($sql); 
         
 
-        $sql = "SELECT id FROM caisse WHERE idvente = '$this->idvente'";
+        $sql = "SELECT id FROM caissePhamacie WHERE idvente = '$this->idvente'";
         $result = $conn->query($sql);
 
         if ($result->num_rows>0) {
             $Mmontant = $ligneTotal["Total"] - $ligneTotal["credit"];
-            $sql = "UPDATE caisse SET operation='$this->TypePaie', montant ='$Mmontant' WHERE idvente = '$this->idvente'";
+            $sql = "UPDATE caissePhamacie SET operation='$this->TypePaie', montant ='$Mmontant' WHERE idvente = '$this->idvente'";
             $result = $conn->query($sql); 
 
             if ($result == TRUE) {
@@ -213,13 +213,13 @@ class Facture{
                 
             }
         } else {
-            $sql = "SELECT id FROM dette WHERE idvente = '$this->idvente'";
+            $sql = "SELECT id FROM dettephamacie WHERE idvente = '$this->idvente'";
             $result = $conn->query($sql);
             if($result->num_rows>0){
                 $this->credit = $ligneTotal["credit"];
                 if ($ligneTotal["credit"] >0 ) {
                     $quantite = $ligneTotal["Qttotal"];
-                    $sql = "UPDATE dette SET quantite='$quantite', montant ='$this->credit' WHERE idvente = '$this->idvente'";
+                    $sql = "UPDATE dettephamacie SET quantite='$quantite', montant ='$this->credit' WHERE idvente = '$this->idvente'";
                     $result = $conn->query($sql);
                     if ($result == TRUE) {
                        
@@ -229,7 +229,7 @@ class Facture{
                     
                 } else {
                     $quantite = $ligneTotal["Qttotal"];
-                    $sql = "UPDATE dette SET quantite='$quantite', montant ='$this->credit',status='OK' WHERE idvente = '$this->idvente'";
+                    $sql = "UPDATE dettephamacie SET quantite='$quantite', montant ='$this->credit',status='OK' WHERE idvente = '$this->idvente'";
                     $result = $conn->query($sql);
                     if ($result == TRUE) {
                         
@@ -246,7 +246,7 @@ class Facture{
             
 
              if(($ligneTotal["taille"]-2) >1){
-                $sql = "SELECT id,idclient,quantite,idproduit  FROM facture WHERE idvente = '$this->idvente'";
+                $sql = "SELECT id,idclient,quantite,idproduit  FROM facturephamacie WHERE idvente = '$this->idvente'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows<($ligneTotal["taille"]-2)) {
@@ -277,7 +277,7 @@ class Facture{
                             $prix = $line["prix"];
                             $total = $line["total"];
                             //$nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
-                            $sql = "UPDATE facture SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE  id='$id'";
+                            $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE  id='$id'";
                             $resultup = $conn->query($sql); 
                             
                             if ($resultup == true) {      
@@ -322,7 +322,7 @@ class Facture{
                             $prix = $line["prix"];
                             $total = $line["total"];
                             //$nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
-                            $sql = "UPDATE facture SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE  id='$id'";
+                            $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE  id='$id'";
                             $resultup = $conn->query($sql); 
                             
                             if ($resultup == true) {      
@@ -339,7 +339,7 @@ class Facture{
                     $prix = $key["prix"];
                     $total = $key["total"];
     
-                    $sql = "UPDATE facture SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE idvente = '$this->idvente'";
+                    $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE idvente = '$this->idvente'";
                     $result = $conn->query($sql); 
     
                     if ($result == true) {
