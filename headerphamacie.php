@@ -237,6 +237,26 @@
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#volaille"
+            aria-expanded="true" aria-controls="volaille">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Volaille </span>
+        </a>
+        <div id="volaille" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Volaille :</h6>
+                <?php 
+                        echo '
+                        <a class="collapse-item" href="phpphamacie/volaille/volaille.php" id="ajouterUtilisateur">Commande</a>
+                        <a class="collapse-item" href="phpphamacie/volaille/liste.php">Liste</a>
+                        '; 
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 

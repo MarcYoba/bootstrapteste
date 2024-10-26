@@ -19,6 +19,17 @@ class Client{
         return $row["firstname"]; 
     }
 
+    public function getClientNoNumber(){
+        global $conn;
+        $data =[];
+        $sql = "SELECT id,`firstname`,`adresse`,`telephone`,`sexe` FROM `client` WHERE `telephone`=0 OR `telephone`=NULL";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
     public function getAllByIdClient($id){
         global $conn;
         $sql = "SELECT * FROM client WHERE id= '$id'";

@@ -503,10 +503,10 @@ $_SESSION["route"] = "provenderie";
                                                 LIMIT 20";
 
                                         } else {
-                                            $sql = "SELECT c.firstname, SUM(f.montant) AS somme, COUNT(f.idclient) as sommeFacture FROM facture f 
-                                                INNER JOIN client c WHERE c.id = f.idclient and MONTH(f.datefacture) = MONTH(NOW()) 
+                                            $sql = "SELECT c.firstname, SUM(v.prix) AS somme, COUNT(v.id) as sommeFacture FROM vente v
+                                                INNER JOIN client c WHERE c.id = v.idclient and MONTH(v.datevente) = MONTH(NOW()) 
                                                 GROUP BY c.firstname 
-                                                ORDER by SUM(f.montant) DESC 
+                                                ORDER by SUM(v.prix) DESC 
                                                 LIMIT 20";
 
                                         }

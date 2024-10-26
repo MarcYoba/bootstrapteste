@@ -44,27 +44,20 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php require_once("../../Topbar.php"); ?>
+                <?php require_once("../../Topbar.php"); ?> 
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Client</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Produit</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Tables Client</h6> <br>
-                            <form method="post" action="../pdf/getClient.php">
-                                <div class="row">
-                                    <p class="col-md-2" >
-                                        <input type="submit" class="btn btn-warning btn-user"  value="Client sans numero" >                      
-                                    </p>     
-                                </div>
-                            </form>
+                            <h6 class="m-0 font-weight-bold text-primary">Tables Produit</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -73,52 +66,67 @@
                                        
                                         <tr>
                                             <th>id</th>
+                                            <th>Date</th>
                                             <th>Nom</th>
-                                            <th>Adresse</th>
-                                            <th>Telephone</th>
-                                            <th>Achat</th>
-                                            <th>Dette</th>
-                                            <th>versement</th>
-                                            <th>Datte arriver</th>
-                                            <th>option</th>
+                                            <th>QuaT</th>
+                                            <th>P/unit</th>
+                                            <th>Montant</th>
+                                            <th>Avance</th>
+                                            <th>Reste/paie</th>
+                                            <th>Status</th>
+                                            <th>Date/Li</th>
+                                            <th>Valider</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
+                                            <th>Date</th>
                                             <th>Nom</th>
-                                            <th>Adresse</th>
-                                            <th>Telephone</th>
-                                            <th>Achat</th>
-                                            <th>Dette</th>
-                                            <th>versement</th>
-                                            <th>Datte arriver</th>
-                                            <th >option</th>
+                                            <th>QuaT</th>
+                                            <th>P/unit</th>
+                                            <th>Montant</th>
+                                            <th>Avance</th>
+                                            <th>Reste/paie</th>
+                                            <th>Status</th>
+                                            <th>Date/Li</th>
+                                            <th>Valider</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM client";
+                                        $sql = "SELECT * FROM poussin ";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["firstname"].'</td>';
-                                            echo '<td>'.$row["adresse"].'</td>';
-                                            echo '<td>'.$row["telephone"].'</td>';
-                                            echo '<td>'.$row["totalachat"].'</td>';
-                                            echo '<td>'.$row["dette"].'</td>';
-                                            echo '<td>'.$row["versement"].'</td>';
-                                            echo '<td>'.$row["datecreation"].'</td>';
+                                            echo '<td>'.$row["dateCommande"].'</td>';
+                                            echo '<td>'.$row["Nomclient"].'</td>';
+                                            echo '<td>'.$row["quantite"].'</td>';
+                                            echo '<td>'.$row["prixUnite"].'</td>';
+                                            echo '<td>'.$row["montant"].'</td>';
+                                            if ($row["montantCash"] > 0) {
+                                                echo '<td>'.$row["montantCash"].'</td>';
+                                            } else if ($row["montantOm"] > 0) {
+                                                echo '<td>'.$row["montantOm"].'</td>';
+                                            }else{
+                                                echo '<td>'.$row["montantCredit"].'</td>';
+                                            }
+                                            
+                                            echo '<td>'.$row["reste"].'</td>';
+                                            echo '<td>'.$row["statusCommande"].'</td>';
+                                            echo '<td>'.$row["dateLivraison"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                                 # code...
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                echo "<button class='btn btn-primary' onclick='modifierClient(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
+                                                //echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             }else{
-                                            echo "<button class='btn btn-primary' onclick='modifierClient(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
-                                            echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            //echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                            //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';
@@ -141,7 +149,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>vestion test &copy; Your Website 2024</span>
                     </div>
                 </div>
             </footer>
@@ -195,7 +203,6 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-    <script src="client.js"></script>
 
 </body>
 
