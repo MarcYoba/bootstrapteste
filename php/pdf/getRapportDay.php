@@ -121,7 +121,7 @@ $html = '
                     $html .= '<td>' .$vente->getSommeReductionDate($date).'</td>';
                     $html .= '<td>' .($caise->getByDateSortie($date)).'</td>';
                     $html .= '<td>' .$versement->ByDateVersement($date).'</td>';
-                    $html .= '<td>' .(((($vente->getSommeCashDate($date))-0)+$caise->getByDateSortie($date))-0).'</td>';
+                    $html .= '<td>' .(((($vente->getSommeCashDate($date))-0)+$caise->getByDateSortie($date))+$caise->RetourCaisse($date)).'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>

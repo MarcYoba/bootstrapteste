@@ -9,7 +9,7 @@ require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
 require_once("../bdmutilple/trievalue.php");
-ini_set('memory_limit', '256M');
+ini_set('memory_limit', '556M');
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
@@ -117,7 +117,7 @@ $html = '
                     $html .= '<td>' .$vente->getSommeReductionWeek($datedebut,$datedefin).'</td>';
                     $html .= '<td>' .($caise->getByWeekSortie($datedebut,$datedefin)).'</td>';
                     $html .= '<td>' .$versement->ByWeekVersement($datedebut,$datedefin).'</td>';
-                    $html .= '<td>' .(((($vente->getSommeCashWeek($datedebut,$datedefin))-0)+$caise->getByWeekSortie($datedebut,$datedefin))-0).'</td>';
+                    $html .= '<td>' .(((($vente->getSommeCashWeek($datedebut,$datedefin))-0)+$caise->getByWeekSortie($datedebut,$datedefin))+$caise->RetourCaisse($datedebut,$datedefin)).'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>

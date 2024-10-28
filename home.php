@@ -456,7 +456,62 @@ $_SESSION["route"] = "provenderie";
                                 </div>
                             </div>
 
-                        </div>    
+                            
+
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Top 20 des Produits les plus Venduent</h6>
+                                </div>
+                                <div class="card-body">
+                                    <?php 
+                                        global $conn;
+                                        
+                                        $tab = array("rouge"=>"",
+                                            "jaune"=>"",
+                                            "info"=>"",
+                                            "success"=>""
+
+                                        );
+                                        if (($_SESSION["route"] == "cabinet")) {
+                                            $sql = "SELECT COUNT(f.idproduit) , f.nomproduit, p.quantite_produit 
+                                                    FROM facture f 
+                                                    INNER JOIN produit p
+                                                    WHERE month(f.datefacture) = month(now()) AND f.idproduit = p.id
+                                                    GROUP BY f.nomproduit
+                                                    ORDER BY COUNT(f.idproduit) DESC 
+                                                    LIMIT 20";
+
+                                        } else {
+                                            $sql = "SELECT COUNT(f.idproduit) , f.nomproduit, p.quantite_produit 
+                                                    FROM facture f 
+                                                    INNER JOIN produit p
+                                                    WHERE month(f.datefacture) = month(now()) AND f.idproduit = p.id
+                                                    GROUP BY f.nomproduit
+                                                    ORDER BY COUNT(f.idproduit) DESC 
+                                                    LIMIT 20";
+
+                                        }
+                                        $result = $conn->query($sql);
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            
+                                                echo '<h4 class="small font-weight-bold">'.$row["nomproduit"].'<span class="float-right">'.$row["quantite_produit"].'</span></h4>';
+                                                echo '<div class="progress mb-4">';
+                                                echo '<div class="progress-bar bg-danger" role="progressbar" style="width:'.$row["quantite_produit"].'%"
+                                                aria-valuenow="3" aria-valuemin="0" aria-valuemax="100">'.'</div>';
+                                                echo '</div>';
+                                            
+                                        }
+                                                    //var_dump($row);
+                                    ?>
+                                </div>
+                            </div>
+
+                       
+
+                        </div>
+                        
+                        
                         <div class="col-lg-6 mb-4">
 
                             <!-- Illustrations -->
@@ -496,10 +551,10 @@ $_SESSION["route"] = "provenderie";
 
                                         );
                                         if (($_SESSION["route"] == "cabinet")) {
-                                            $sql = "SELECT c.firstname, SUM(f.montant) AS somme, COUNT(f.idclient) as sommeFacture FROM facture f 
-                                                INNER JOIN client c WHERE c.id = f.idclient and MONTH(f.datefacture) = MONTH(NOW()) 
+                                            $sql = "SELECT c.firstname, SUM(v.prix) AS somme, COUNT(v.id) as sommeFacture FROM vente v
+                                                INNER JOIN client c WHERE c.id = v.idclient and MONTH(v.datevente) = MONTH(NOW()) 
                                                 GROUP BY c.firstname 
-                                                ORDER by SUM(f.montant) DESC 
+                                                ORDER by SUM(v.prix) DESC 
                                                 LIMIT 20";
 
                                         } else {
@@ -535,6 +590,7 @@ $_SESSION["route"] = "provenderie";
                             </div>
                             
                         </div>
+                        
                     </div>
 
                 </div>

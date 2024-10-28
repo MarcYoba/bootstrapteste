@@ -122,7 +122,7 @@ $html = '
                     $html .= '<td>' .$depense->ToDay().'</td>';
                     $html .= '<td>' .$versement->ToDay().'</td>';
                     $html .= '<td>' .(-1*$caise->ToDay()).'</td>';
-                    $html .= '<td>' .((((($vente->getSommeCash())-0)-0)-0)+$caise->ToDay()).'</td>';
+                    $html .= '<td>' .((((($vente->getSommeCash())-0)-0)+$caise->ToRetourCaisse())+$caise->ToDay()).'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>
