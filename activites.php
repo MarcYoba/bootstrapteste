@@ -22,40 +22,68 @@
     <style>
       .image-container {
     text-align: center;
-    margin: 20px;
+    margin: 0px;
     background-image: url('img/active.jpeg'); 
     background-size: cover; 
     background-position: center; 
     
     }
+    .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+    
     </style>
 
 </head>
 
 <body class="bg-gradient-white image-container">
+    
+    
+    <div class="container">  
 
-    <br><br><br><br><br>
-    <div class="container">
-        
-       
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <br>
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image ">
-                        
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-5 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <div class="row">
+                        <li class="nav-item col-sm-3">
+                        <a class="nav-link active" aria-current="page" href="#"></a>
+                        </li>
+                        <li class="nav-item col-sm-2">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item col-sm-2">
+                        <a class="nav-link" href="#">Produit</a>
+                        </li>
+
+                        <form class="d-flex col-sm-5" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </ul>
                 </div>
-                    <div class="col-lg-5">
-                    <div class="card shadow mb-4">
-                    <div class="card-header py-3">
+            </div>
+        </nav>
+        <br><br><br><br><br>
+            <div class=" row">
+                <!-- Nested Row within Card Body -->
+                    
+                    
                             <br>
-                            <div class="col-xl-5 col-md-5 mb-4">
-                            <?php        
+                            <div class="col-md-3 mb-4 ">
+                                <?php        
                                                 session_start();
 
                                                  if (($_SESSION['zonetravail'] == "provenderie") || ($_SESSION["zonetravail"] == "Tous")) {
                                                     echo '<a  href="home.php" class="btn btn-primary btn-user btn-block" >
-                                                    <div class="card border-left-primary shadow h-100 py-2">
+                                                    <div class="card border-left-primary shadow h-100 py-2 rounded-circle">
                                                         <div class="card-body">
                                                             <div class="row no-gutters align-items-center">
                                                                 <div class="col mr-2">';
@@ -70,18 +98,15 @@
                                             </a>';
                                             }          
                                     ?>
-                                </div>
-                    </div>
-                    </div>
-                                <br>
-                                <div class="col-xl-5 col-md-4 mb-4">
+                            </div>
+                                <div class="col-md-3 mb-4">
                                 <?php           
                                     if (($_SESSION["zonetravail"] == "cabinet") || ($_SESSION["zonetravail"] == "Tous")) {
                                     echo '<a href="homepahamacie.php">
-                                    <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card border-left-success shadow h-100 py-2 rounded-circle">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
-                                                <div class="col mr-1">';
+                                                <div class="col mr-2">';
                                                     echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
                                                     echo '<h3>Cabinet</h3></div>';
                                                     echo' </div>
@@ -95,14 +120,14 @@
                                 </div>
 
                                 <br>
-                                <div class="col-xl-5 col-md-4 mb-4">
+                                <div class="col-md-3 mb-4">
                                 <?php           
                                     if (($_SESSION["zonetravail"] == "spaceclie") || ($_SESSION["zonetravail"] == "Tous")) {
                                     echo '<a href="#">
-                                    <div class="card border-left-success shadow h-100 py-4">
+                                    <div class="card border-left-success shadow h-100 py-2 rounded-circle">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
-                                                <div class="col mr-3">';
+                                                <div class="col mr-2">';
                                                     echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
                                                     echo  '<h3> Space Clients </h3></div>';
                                                     echo' </div>
@@ -115,13 +140,43 @@
                                     ?>
                                 </div>
                             </div> 
-                    </div>
+                    
                 </div>
             </div>
         
 
     </div>
-
+    
+    <footer class="footer bg-dark text-light">
+        
+            <div class="row">
+            <div class="col-md-6">
+                <h5>About Us</h5>
+                <p>L'entreprise AB GROUP met a votre disposition un cabinet vétérinaire et une provenderie avec les services suivants: <br>
+                 - clinique( vaccination, hospitalisation)<br>
+                  - pharmacie ( vente en détail et en gros des produits vétérinaires)</p>
+            </div>
+            <div class="col-md-2">
+                <h5>Contact Us</h5>
+                <ul class="list-unstyled">
+                <li><i class="fas fa-map-marker-alt"></i> Yaounde</li>
+                <li><i class="fas fa-phone"></i> 237 676359056<br>
+                655271506<br> YAOUNDE, Soa</li>
+                <li><i class="fas fa-envelope"></i> me@gmail.coms</li>
+                </ul>
+            </div>
+            </div>
+            <div class="row">
+            <!--<div class="col-md-12 text-center">
+                
+                <ul class="list-inline">
+                <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div> -->
+            </div>
+    </footer>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
