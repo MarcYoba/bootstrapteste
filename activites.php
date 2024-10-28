@@ -23,20 +23,21 @@
       .image-container {
     text-align: center;
     margin: 20px;
-    background-image: url('img/poul1.jpg'); 
+    background-image: url('img/active.jpeg'); 
     background-size: cover; 
     background-position: center; 
+    
     }
     </style>
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-white image-container">
 
     <br><br><br><br><br>
     <div class="container">
         
-        <div class="card o-hidden border-0 shadow-lg my-5 image-container">
+       
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
@@ -45,6 +46,8 @@
                         
                 </div>
                     <div class="col-lg-5">
+                    <div class="card shadow mb-4">
+                    <div class="card-header py-3">
                             <br>
                             <div class="col-xl-5 col-md-5 mb-4">
                             <?php        
@@ -68,7 +71,8 @@
                                             }          
                                     ?>
                                 </div>
-
+                    </div>
+                    </div>
                                 <br>
                                 <div class="col-xl-5 col-md-4 mb-4">
                                 <?php           
@@ -114,7 +118,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
 
     </div>
 

@@ -36,7 +36,18 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Rapport</h1>
                              </div>
-                           
+                            
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                <div class="form-group row">
+                                    <div class="col-sm-10 ">
+                                    <h6 class="m-0 font-weight-bold text-primary">Impression des rapports</h6>
+                                    </div>
+                                    <div class="col-sm-2 ">
+                                    <a class="m-0 font-weight-bold text-warning" href="../../home.php">Retour</a>
+                                    </div>
+                                </div>
+                                </div>
                                 <div class="form-group">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <p>     </p>
@@ -92,6 +103,8 @@
                                 <hr>
                                 <hr>
                             </form>
+                            </div>
+                            
                             <hr>
                         </div>
                     </div>
