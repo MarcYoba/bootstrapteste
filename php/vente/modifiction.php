@@ -58,7 +58,16 @@ require_once("../bdmutilple/getclient.php");
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">facture Numero : <?php echo $_GET["id"];?> </h1>
+                    <h1 class="h3 mb-2 text-gray-800">Modification facture : <?php 
+                    if (isset($_GET["id"])) {
+                        echo $_GET["id"];
+                    } else {
+                        echo $_GET["edite"];
+                    }
+                    
+                    
+                    
+                    ?> </h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
@@ -67,31 +76,51 @@ require_once("../bdmutilple/getclient.php");
                                 <div class="row">
                                     <p class="col-md-0"><h6 class="m-0 font-weight-bold text-primary">facture</h6></p>
                                     <p class="col-md-0"> </p>;
+                                    <form method="post" action="editefacture.php">
                                     <?php
-                                        $client = new Client(1);
-                                        $value = $client->getClientByIdVente($_GET["id"]);
-
-                                    echo '<p class="col-md-2"> Nom Client : '.$value["firstname"].'</p>';
-                                    echo '<p class="col-md-2"> Telephone : '.$value["telephone"].'</p>';
+                                    $id = 0;
+                                    if (isset($_GET["id"])) {
+                                        echo $_GET["id"];
+                                        $id = $_GET["id"];
+                                    } else {
+                                        echo $_GET["edite"];
+                                        $id = $_GET["edite"];
+                                    }
+                                        // $client = new Client(1);
+                                        // $value = $client->getClientByIdVente($_GET["id"]);
+                                        echo ' <p class="col-md-8"><input type="search" id="recherche" onkeyup="myFunction()"  class="form-control form-control-user" placeholder="recherche"><br>
+                                        <input type="search" id="idvente" name="idvente"  class="form-control form-control-user" placeholder="recherche" value="'.$id.'" readonly>
+                                        </p>';
+                                        echo ' <p class="col-md-8"><select id="fournisseur"  name="fournisseur"   class="form-control form-select"  size="5" multiple aria-label="multiple select "required>';
+                                                            global $conn;
+                                                            $sql = "SELECT id, firstname, adresse FROM client";
+                                                            $result = $conn->query($sql);
+                                                            while ($row = mysqli_fetch_assoc($result)){     
+                                                                echo "<option value='".$row["firstname"]."'>".$row["firstname"]."</option>";       
+                                                                            //var_dump($row);
+                                                            }
+                                                        
+                                        echo ' </p></select>';
                                     
-                                    echo "<p class='col-md-2 '> <a href='../pdf/getfacture.php?id=" . $_GET["id"] . "' class='btn btn-info btn-user'>Imprimer</a></p>";  
+                                    
+                                     
                                     if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                         # code...
                                     }else if(($_SESSION['roles'] == "semiadmin")){
                                         echo "<p class='col-md-1 '> <buttom  class='btn btn-warning btn-user' onclick='editefacture()'>Edite</buttom></p>";
                                     }else{  
-                                    echo "<p class='col-md-1 '> <buttom  class='btn btn-warning btn-user' onclick='editefacture()'>Edite</buttom></p>"; 
-                                    echo "<p class='col-md-2 '> <buttom  class='btn btn-danger btn-user' onclick=''>Supprimer</buttom></p>";
-                                    echo "<p class='col-md-2 '> <a href='modifiction.php?id=" . $_GET["id"] . "' class='btn btn-secondary btn-user'>changer client</a></p>";
+                                    
+                                    echo "<p class='col-md-2 '><button  class='btn btn-secondary btn-user'>changer client</button></p>";
                                     }
-                                    echo "<span class='cacher' id='id'>".$_GET["id"]."</span>";  
+                                      
 
                                     ?>
+                                </form>
                                 </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                               <!---  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                        
                                         <tr>
@@ -104,7 +133,7 @@ require_once("../bdmutilple/getclient.php");
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                        <!--- <tr>
+                                        <tr>
                                             <th>id</th>
                                             <th>Nom</th>
                                             <th>quantite</th>
@@ -112,47 +141,12 @@ require_once("../bdmutilple/getclient.php");
                                             <th>montant</th>
                                             <th>Typepaiement</th>
                                         </tr>
-                                        --->
+                                        
                                     </tfoot>
                                     <tbody>
-                                    <?php 
-                                        global $conn;
-                                        $id = $_GET["id"];
-                                        $quantite = 0;
-                                        $prix = 0;
-                                        $montant = 0;
-
-                                        $sql = "SELECT * FROM facture WHERE idvente = '$id'";
-                                        $result = $conn->query($sql);
-                                        while ($row = mysqli_fetch_assoc($result)){
-                                            echo '<tr>';
-                                            echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["nomproduit"].'</td>';
-                                            echo '<td>'.$row["quantite"].'</td>';
-                                            echo '<td>'.$row["prix"].'</td>';
-                                            echo '<td>'.$row["montant"].'</td>';
-                                            echo '<td>'.$row["Typepaiement"].'</td>';
-                                            echo '</tr>';
-                                            //var_dump($row);
-
-                                            $quantite += $row["quantite"];
-                                            $prix += $row["prix"];
-                                            $montant += $row["montant"];
-
-                                        }
-
-                                        
-                                        echo '<tr>';
-                                            echo '<td>Total</td>';
-                                            echo '<td>-</td>';
-                                            echo '<td>'.$quantite.'</td>';
-                                            echo '<td>'.$prix.'</td>';
-                                            echo '<td>'.$montant.'</td>';
-                                            echo '<td>-</td>';
-                                            echo '</tr>';
-                                    ?>
+                                    
                                     </tbody>
-                                </table>
+                                </table>--->
                             </div>
                         </div>
                     </div>

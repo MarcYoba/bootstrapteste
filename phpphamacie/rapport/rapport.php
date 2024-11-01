@@ -48,6 +48,9 @@
                                             </button> 
                                         </a>
                                     </div>
+                                    <div class="col-sm-2 ">
+                                    <a class="m-0 font-weight-bold text-warning" href="../../homepahamacie.php">Retour</a>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                 <p></p>

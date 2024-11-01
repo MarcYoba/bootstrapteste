@@ -1,4 +1,7 @@
 <?php
+
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Month;
+
  require_once("../connexion.php");
  header('Content-Type: application/json');
 
@@ -7,8 +10,13 @@ $json = file_get_contents('php://input');
 $donnees = json_decode($json,true);
 global $conn;
 
+if($donnees == "Janvier"){
+  $day = 1;
+}else{
+  $day = date('m');
+}
 
-$sql = "SELECT DATE(datevente) AS jour, SUM(prix) AS prix FROM vente WHERE Year(datevente) = 2024 AND MONTH(datevente) = '8' AND typevente ='CASH' GROUP BY DATE(datevente) ORDER BY jour";
+$sql = "SELECT DATE(datevente) AS jour, SUM(prix) AS prix FROM vente WHERE Year(datevente) = 2024 AND MONTH(datevente) = '$day' AND typevente ='CASH' GROUP BY DATE(datevente) ORDER BY jour";
 $result = $conn->query($sql);
 //$data = mysqli_fetch_assoc($result);
 $data = [];

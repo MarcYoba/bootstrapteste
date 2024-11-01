@@ -158,6 +158,9 @@ if (isset($_POST['modification'])) {
     $montant = $_POST['montant'];
     $montantdette = $_POST['montantdette'];
     $dateversement = $_POST['dateversement'];
+    $om = $_POST['om'];
+    $matif = $_POST['matif'];
+    $idversement = $_POST["idverse"];
     
     if (!empty($dateversement )) {
         $date = $dateversement ;
@@ -169,19 +172,18 @@ if (isset($_POST['modification'])) {
     if (!empty($iddette) || !empty($client) || !empty($montant) || !empty($montantdette)) {
         
             // Vérifier si l'adresse e-mail existe déjà
-            $sql = "SELECT * FROM versement WHERE id = ? ";
-
-            if (!$stmt = $conn->prepare($sql)) {
-                die('Erreur de préparation de la requête : ' . $conn->error);
-            }
-            
-            $stmt->bind_param('d', $iddette);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows > 0) {
+            $sql = "UPDATE versement SET montant='$montant',dateversement='$dateversement', Om='$om',idclient ='$client' WHERE id='$idversement'";
+            $result = $conn->query($sql); 
+            if ($result === True) {
+                if (($montant == 0) || ($montant < $montantdette)) {
+                    $status = "en cour";
+                    $sql = "UPDATE dette SET status='$status' WHERE id='$iddette'";
+                    $result = $conn->query($sql); 
+                    if ($result === True) {
+                        header("Location:liste.php");
+                    }
+                }  
                 
-                header("Location:liste.php");
             } else {
                 // Créer le compte utilisateur
                 

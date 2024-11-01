@@ -8,6 +8,7 @@ session_start();
 $id = $_GET['id'];
 $tab = array(
     "role" =>"modification",
+    "idversme" => $id,
     "iddette" =>0,
     "iddette" =>0,
     "montant" =>0,

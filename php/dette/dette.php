@@ -169,10 +169,10 @@
                                                     }else{
                                                         
                                                         echo '<td class="px-1 py-2 bg-gradient-primary text-white">'.$row["status"].'</td>';
-                                                        echo "<td>";
-                                                        //echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'>versement</i></a>";
-                                                        //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
-                                                        echo "</td>";
+                                                        // echo "<td>";
+                                                        // //echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'>versement</i></a>";
+                                                        // //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                                        // echo "</td>";
                                                     }
                                                 } else {
                                                     # code...

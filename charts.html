@@ -35,7 +35,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Situation Comptable </div>
             </a>
 
             <!-- Divider -->
@@ -356,52 +356,53 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Statistique des stocks</h1>
-                    <div class="row">
-                        <p class="col-md-2" ><button type=" " name="Janvier" id="Janvier" class="btn btn-primary btn-user btn-block">
-                            Janvier
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="Frevier" id="Frevier" class="btn btn-primary btn-user btn-block">
-                            Frevier
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="Mars" id="Mars" class="btn btn-primary btn-user btn-block">
-                            Mars
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="Avril" id="Avril" class="btn btn-primary btn-user btn-block">
-                            Avril
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="Mais" id="Mais" class="btn btn-primary btn-user btn-block">
-                            Mais
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="Juin" id="Juin" class="btn btn-primary btn-user btn-block">
-                            Juin
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="juiellet" id="juiellet" class="btn btn-primary btn-user btn-block">
-                            juiellet
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="aout" id="aout" class="btn btn-primary btn-user btn-block">
-                            aout
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="Septembre" id="Septembre" class="btn btn-primary btn-user btn-block">
-                            Septembre
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="Octobre" id="Octobre" class="btn btn-primary btn-user btn-block">
-                            Octobre
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="Novembre" id="Novembre" class="btn btn-primary btn-user btn-block">
-                            Novembre
-                        </button></p>
-                        <p class="col-md-2" ><button type="" name="Decembre" id="Decembre" class="btn btn-primary btn-user btn-block">
-                            Decembre
-                        </button></p>
-                        
-                    </div>
+                    
+                        <div class="row">
+                            <p class="col-md-2" ><button type="" name="Janvier" id="Janvier" class="btn btn-primary btn-user btn-block" onclick="RechargeGraphe()">
+                                Janvier
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="Frevier" id="Frevier" class="btn btn-primary btn-user btn-block">
+                                Frevier
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="Mars" id="Mars" class="btn btn-primary btn-user btn-block">
+                                Mars
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="Avril" id="Avril" class="btn btn-primary btn-user btn-block">
+                                Avril
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="Mais" id="Mais" class="btn btn-primary btn-user btn-block">
+                                Mais
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="Juin" id="Juin" class="btn btn-primary btn-user btn-block">
+                                Juin
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="juiellet" id="juiellet" class="btn btn-primary btn-user btn-block">
+                                juiellet
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="aout" id="aout" class="btn btn-primary btn-user btn-block">
+                                aout
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="Septembre" id="Septembre" class="btn btn-primary btn-user btn-block">
+                                Septembre
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="Octobre" id="Octobre" class="btn btn-primary btn-user btn-block">
+                                Octobre
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="Novembre" id="Novembre" class="btn btn-primary btn-user btn-block">
+                                Novembre
+                            </button></p>
+                            <p class="col-md-2" ><button type="" name="Decembre" id="Decembre" class="btn btn-primary btn-user btn-block">
+                                Decembre
+                            </button></p>
+                            
+                        </div>
                     
 
                     <hr>
                     <!-- Content Row -->
                     <div class="row">
 
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-12 col-lg-10">
 
                             <!-- Area Chart -->
                             <div class="card shadow mb-4">
@@ -428,47 +429,14 @@
                                     </div>
                                     <hr>
                                     
-                                    <code>Quantite</code> file.
+                                    <code>Quantite</code>.
                                 </div>
                             </div>
 
                         </div>
 
                         <!-- Donut Chart -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Donut </h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <hr>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Achat
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> vente
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> dette
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-warning"></i> versement
-                                        </span>
-                                    </div>
-                                    
-                                    <code>Donut</code> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                    </div> 
                 <!-- /.container-fluid -->
 
             </div>
@@ -530,7 +498,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-moi.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    
     <script src="js/demo/chart-bar-moi.js"></script>
 
 </body>

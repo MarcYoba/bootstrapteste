@@ -533,8 +533,33 @@ class Vente{
                 return $valdata;
             }    
     }
-}
 
+
+    public function UPDATEClient($idclient,$idvente){
+        global $conn;
+
+        $sql = "UPDATE vente SET idclient ='$idclient' WHERE id = '$idvente'";
+        $result = $conn->query($sql);
+        if ($result==true) {
+            $sql = "UPDATE facture SET idclient ='$idclient' WHERE idvente = '$idvente'";
+            $result = $conn->query($sql);
+
+            if ($result==true) {
+                $sql = "SELECT * FROM dette WHERE idvente = '$idvente'";
+                $result = $conn->query($sql);
+                if ($result->num_rows>0) {
+                    $sql = "UPDATE dette SET idclient ='$idclient' WHERE idvente = '$idvente'";
+                    $result = $conn->query($sql);
+                    if ($result == true) {
+                        header("Location:liste.php");
+                    }
+                }else{
+                    header("Location:liste.php");
+                }  
+            }
+        }
+    }
+}
 
 
 

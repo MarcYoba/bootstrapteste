@@ -69,7 +69,11 @@
                                         }else{
                                             echo'<option value="retour en caisse" > retour en caisse </option>';
                                             echo'<option value="sortie en caisse" > sortie en caisse</option>';
-                                            echo'<option value="Entrer OM MOMO" > Entrer OM MOMO</option>';
+                                            echo'<option value="sortie OM MOMO" > sortie OM MOMO</option>';
+                                            echo'<option value="sortie Dr Toukam" >sortie Dr Toukam</option>';
+                                            echo'<option value="sortie Mr Abdel" >sortie Mr Abdel</option>';
+                                            echo'<option value="sortie SKAB" >sortie SKAB</option>';
+                                            echo'<option value="sortie Banque" >sortie Banque</option>';
                                         }
                                         echo '</select>';
                                         echo'</div>'; 
