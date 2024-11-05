@@ -4,7 +4,97 @@ Chart.defaults.global.defaultFontColor = '#858796';
 
 var tabQTmoi = new Array(32);
 var tabDatemoi = new Array(32);
+var varmoi  = 1;
+const  inputQuantite = document.getElementById("Quantite");
+//const  inputnombre = document.getElementById("nombre");
 
+function funQuantite() {
+  
+  RechargeGrapheQuantite();
+}
+
+inputQuantite.addEventListener('input',funQuantite);
+//inputnombre.addEventListener('input',funQuantite);
+
+function EtudeEvolutive() {
+  console.log("Evolution : ");
+  let evolution= document.getElementById("nombre3").value;
+  
+  fetch('php/graphe/getevolution.php',{
+      method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(evolution)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data); 
+      
+      document.getElementById("montant1").innerText = data.montantN
+      document.getElementById("client1").innerText = data.ClientN
+      document.getElementById("montant2").innerText = data.montantN1
+      document.getElementById("client2").innerText = data.ClientN1
+      document.getElementById("Total").innerText = Math.round((data.montantN1 - data.montantN)/data.montantN);
+      document.getElementById("Poucentage").innerText = (Math.round((data.montantN1 - data.montantN)/data.montantN))*100;
+      document.getElementById("Totalclient").innerText = Math.round((data.ClientN1 - data.ClientN)/data.ClientN);
+      document.getElementById("Poucentageclient").innerText = (Math.round((data.ClientN1 - data.ClientN)/data.ClientN))*100;
+      
+    })
+    .catch(error => {
+      console.error(error);
+  });
+
+//Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+//Chart.defaults.global.defaultFontColor = '#858796'; 
+}
+
+
+function RechargeGrapheQuantite() {
+  console.log("QUANTITE du moi");
+  varmoi = document.getElementById("nombre2").value;
+  console.log(varmoi);
+  for (let index = 0; index < tabQTmoi.length; index++) {
+    tabQTmoi[index] = 0; 
+    tabDatemoi[index] = 0;  
+  }
+
+  fetch('php/graphe/getquantitemoi.php',{
+      method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(varmoi)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data); 
+      // Parcours des données et affichage
+      index = 0;
+        data.forEach(element => {
+          for(let proriete in element){
+           // console.log(element[proriete]); 
+            result = element[proriete];
+            tabQTmoi[index] = result.quantite;
+            tabDatemoi[index] = result.jour;
+            //console.log(result.quantite); 
+            //console.log(result.jour); 
+              index +=1  
+          }
+        });
+        creationBard();
+    })
+    .catch(error => {
+      console.error(error);
+  });
+
+//Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+//Chart.defaults.global.defaultFontColor = '#858796'; 
+}
 for (let index = 0; index < tabDatemoi.length; index++) {
   tabDatemoi[index] = 0;
   tabQTmoi[index] = 0;
@@ -104,7 +194,7 @@ var myBarChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 4000,
+          max: 7000,
           maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks

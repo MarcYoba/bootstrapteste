@@ -1,4 +1,6 @@
-<?php require_once("../connexion.php"); 
+<?php 
+require_once("../connexion.php"); 
+require_once("../bdmutilple/getclient.php");
 ?>
 
 <!DOCTYPE html>
@@ -66,41 +68,42 @@
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>Nom</th>
-                                            <th>Prix vente</th>
-                                            <th>Prix achat</th>
-                                            <th>Quantite</th>
-                                            <th>Date entrer</th>
-                                            <th>Date Peremtion</th>
-                                            <th>operation</th>
+                                            <th>Nom Sujet</th>
+                                            <th>Age</th>
+                                            <th>Race</th>
+                                            <th>Client</th>
+                                            <th>date Vacin</th>
+                                            <th>date rappel</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>Nom</th>
-                                            <th>Prix vente</th>
-                                            <th>Prix achat</th>
-                                            <th>Quantite</th>
-                                            <th>Date entrer</th>
-                                            <th>Date Peremtion</th>
-                                            <th>operation1</th>
+                                            <th>Nom Sujet</th>
+                                            <th>Age</th>
+                                            <th>Race</th>
+                                            <th>Client</th>
+                                            <th>date Vacin</th>
+                                            <th>date rappel</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM produitphamacie ";
+                                        $client = new Client(1);
+                                        $sql = "SELECT * FROM animale ";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["nom_produit"].'</td>';
-                                            echo '<td>'.$row["prix_produit_vente"].'</td>';
-                                            echo '<td>'.$row["prix_achat_produit"].'</td>';
-                                            echo '<td>'.$row["quantite_produit"].'</td>';
-                                            echo '<td>'.$row["date_ajout_produit"].'</td>';
-                                            echo '<td>'.$row["datePeramtion"].'</td>'; 
+                                            echo '<td>'.$row["nomSujet"].'</td>';
+                                            echo '<td>'.$row["age"].'</td>';
+                                            echo '<td>'.$row["typesujet"].'</td>';
+                                            echo '<td>'.$client->getByIdClient($row["idclient"]).'</td>';
+                                            echo '<td>'.$row["datevacin"].'</td>';
+                                            echo '<td>'.$row["daterappel"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                                 # code...

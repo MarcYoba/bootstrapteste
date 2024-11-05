@@ -1,6 +1,6 @@
 <?php
 
-require_once("php/historique/getproduit.php");
+require_once("phpphamacie/historique/getproduit.php");
 
 
 $produit = new Produit();

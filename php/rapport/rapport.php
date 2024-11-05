@@ -103,6 +103,23 @@
                                 <hr>
                                 <hr>
                             </form>
+
+                            <form action="../pdf/getannuel.php" method="post">
+                            <div class="form-group row">
+                                    <div class="col-sm-4">
+                                       Entrer le numeros Moi <input type="number" class="form-control form-control-user" id="mois"
+                                        name="mois" placeholder="numero du moi" require>
+                                    </div>
+                                    <div class="col-sm-4">
+                                            <button type="" name="" id="" class="btn btn-warning btn-user btn-block">
+                                            Rapport Mensuelle
+                                            </button> 
+                                    </div>
+                                </div>
+                                <hr>
+                                <hr>
+
+                            </form>
                             </div>
                             
                             <hr>

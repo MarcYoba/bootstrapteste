@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container" >
         
@@ -85,19 +85,19 @@
                                                 echo'<option value="ANTTISTRESS VOLAILLE" >ANTTISTRESS VOLAILLE"</option>';
                                                 echo'<option value="DESINFINTANT" > DESINFINTANT</option>';
                                                 echo'<option value="ANTIBIOTIQUE INJECTABLE" > ANTIBIOTIQUE INJECTABLE</option>';
-                                                echo'<option value="AUTRE" > AUTRE</option>';
                                                 echo'<option value="PRODUIT POISSON" > PRODUIT POISSON</option>';
                                                 echo'<option value="ANTIBIOTIQUE USAGE EXTERNE" > ANTIBIOTIQUE USAGE EXTERNE</option>';
                                                 echo'<option value="COMPLEMENT ALIMENTAIRE" > COMPLEMENT ALIMENTAIRE</option>';
                                                 echo'<option value="VITAMINE INJECTABLE" > VITAMINE INJECTABLE</option>';
                                                 echo'<option value="MINERAUX INJECTABLE" > MINEREAU INJECTABLE</option>';
                                                 echo'<option value="PRODUIT NETOILLAGE" > PRODUIT NETOILLAGE</option>';
-                                                echo'<option value="VACCIN VOLAILLE" > VACIN VOLAILLE</option>';
-                                                echo'<option value="VACCIN PORC" >VACIN PORC</option>';
-                                                echo'<option value="VACNIN CHIEN" >VACNIN CHIEN</option>';
+                                                echo'<option value="VACCIN VOLAILLE" > VACCIN VOLAILLE</option>';
+                                                echo'<option value="VACCIN PORCIN" >VACCIN PORCIN</option>';
+                                                echo'<option value="VACCIN CANIN" >VACCIN CANIN</option>';
                                                 echo'<option value="ACCESSOIRES CHIEN" >ACCESSOIRES CHIEN</option>';
                                                 echo'<option value="ACCESSOIRES INCUBATEUR" >ACCESSOIRES INCUBATEUR</option>';
                                                 echo'<option value="EQUIPEMENT ELEVAGE" >EQUIPEMENT ELEVAGE</option>';
+                                                echo'<option value="AUTRE" > AUTRE</option>';
                                             echo'</select>';
                                         echo'</div>';
                                     echo'</div>';
@@ -152,17 +152,23 @@
                                                     echo'<option selected> reference provenderie ou pharmacie</option>';;
                                                 }
                                                 
-                                                echo'<option value="provenderie" >provenderie</option>';
+                                                
                                                 echo'<option value="pharmacie" > pharmacie</option>';
                                             echo'</select>';
                                         echo'</div>';
                                     echo'</div>';
                                     if(isset($_GET['tableau'])){
-                                        echo'<button type="submit" name="modifier" id="modifier" class="btn btn-primary btn-user btn-block">
+                                        echo'<label for="dateperam">Date de Peramtion :</label>
+                                            <input type="date" class="form-control form-control-user" id="dateperam"
+                                                name="dateperam" placeholder="Quantite de demmarage" required> <br>';
+                                        echo'<button type="submit" name="modifier" id="modifier" class="btn btn-success btn-user btn-block">
                                         Modifier
                                     </button>';
                                     }else{
-                                        echo'<button type="submit" name="enregistrement" id="enregistrement" class="btn btn-primary btn-user btn-block">
+                                        echo'<label for="dateperam">Date de Peramtion :</label>
+                                            <input type="date" class="form-control form-control-user" id="dateperam"
+                                                name="dateperam" placeholder="Quantite de demmarage" required> <br>';
+                                        echo'<button type="submit" name="enregistrement" id="enregistrement" class="btn btn-success btn-user btn-block">
                                         Enregistrement
                                     </button>';
                                     }
@@ -170,12 +176,7 @@
                                 ?>
                             </form>
                             <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="../../index.html">Already have an account? Login!</a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

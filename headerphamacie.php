@@ -3,7 +3,7 @@
         if (!isset($_SESSION["route"])) {
             header('Location: index.php');
         }
-            echo '<ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">';
+            echo '<ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">';
         ?>
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
@@ -241,7 +241,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#volaille"
             aria-expanded="true" aria-controls="volaille">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Volaille </span>
+            <span>Poussin </span>
         </a>
         <div id="volaille" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -250,6 +250,26 @@
                         echo '
                         <a class="collapse-item" href="phpphamacie/volaille/volaille.php" id="ajouterUtilisateur">Commande</a>
                         <a class="collapse-item" href="phpphamacie/volaille/liste.php">Liste</a>
+                        '; 
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#vacin"
+            aria-expanded="true" aria-controls="cavin">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Clinique </span>
+        </a>
+        <div id="vacin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Vacin :</h6>
+                <?php 
+                        echo '
+                        <a class="collapse-item" href="phpphamacie/vacin/vacin.php" id="ajouterUtilisateur">Ajouter un sujet</a>
+                        <a class="collapse-item" href="phpphamacie/vacin/liste.php">Liste</a>
                         '; 
                 ?>
                 

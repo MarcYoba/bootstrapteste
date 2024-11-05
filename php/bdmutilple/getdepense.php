@@ -69,5 +69,38 @@ class Depense{
        return $data ;
         
     }
+
+    public function DepenseMensuelle($mois){
+        global $conn;
+        $data = [];
+        $sql = "SELECT datedepense, 
+            GROUP_CONCAT(montant,',') AS listMontant,
+            ROUND(SUM(montant)) AS nomtant,
+            GROUP_CONCAT(description,',') AS motif 
+            FROM depenses
+            WHERE Month(datedepense) = '$mois'
+            GROUP BY datedepense";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+
+        $sql = "SELECT datedepense, 
+            GROUP_CONCAT(montant,',') AS listMontant,
+            ROUND(SUM(montant)) AS nomtant,
+            GROUP_CONCAT(description,',') AS motif 
+            FROM depenses
+            WHERE Month(datedepense) = '$mois'
+            ";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $row["datedepense"] = "TOTAL";
+            $row["listMontant"] = $row["nomtant"] ;
+            $row["datedepense"] = "-";
+            array_push($data,$row);
+        }
+       return $data ;
+        
+    }
 }
 ?>

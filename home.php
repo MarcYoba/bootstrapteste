@@ -71,7 +71,10 @@ $_SESSION["route"] = "provenderie";
                         <a href="php/rapport/rapport.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
-
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <a href="homepahamacie.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                        Pharmacie</a>
+                    </div>
                     <!-- Content Row -->
                     <div class="row">
 

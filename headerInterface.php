@@ -7,7 +7,7 @@ require_once("php/activesaision.php");
             header('Location:../../index.php');
         }
         if (($_SESSION["zonetravail"] == "Tous") && ($_SESSION["route"] == "cabinet")) {
-            echo '<ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">';
+            echo '<ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">';
         } else {
             echo '<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">';
         }
@@ -315,7 +315,7 @@ require_once("php/activesaision.php");
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#volaille"
             aria-expanded="true" aria-controls="volaille">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Volaille </span>
+            <span>Poussin </span>
         </a>
         <div id="volaille" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -326,6 +326,27 @@ require_once("php/activesaision.php");
                         <a class="collapse-item" href="../volaille/volaille.php" id="ajouterUtilisateur">Commande</a>
                         <a class="collapse-item" href="../volaille/liste.php">Liste</a>
                         '; 
+                    }
+                ?>
+                
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Vacin"
+            aria-expanded="true" aria-controls="Vacin">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Clinique </span>
+        </a>
+        <div id="Vacin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Vacin :</h6>
+                <?php
+                    if (($_SESSION["route"] == "cabinet")) { 
+                        echo '
+                        <a class="collapse-item" href="../vacin/vacin.php" id="ajouterUtilisateur">Ajouter un sujet</a>
+                        <a class="collapse-item" href="../vacin/liste.php">Liste</a>
+                        ';  
                     }
                 ?>
                 

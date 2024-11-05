@@ -238,6 +238,14 @@ class Vente{
         return $row["Om"]; 
     }
 
+    public function SommeOmMensuel($date) {
+        global $conn;
+        $sql = "SELECT SUM(Om) as Om FROM vente WHERE MONTH(datevente)= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["Om"]; 
+    }
+
     public function getSommeOmWeek($datedebut,$datefin) {
         global $conn;
         $sql = "SELECT SUM(Om) as Om FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
@@ -558,6 +566,43 @@ class Vente{
                 }  
             }
         }
+    }
+
+    public function SommeAnnuel($idmois) {
+        global $conn;
+        $don=[];
+        $sql = "SELECT datevente,
+                    ROUND(SUM(quantite),2) AS quantite , 
+                    ROUND(SUM(prix),2) AS montant, 
+                    ROUND(SUM(cash),2) AS MontantCash, 
+                    ROUND(SUM(credit),2) AS dette, 
+                    ROUND(SUM(Om),2) AS OM, 
+                    ROUND(SUM(reduction),2) AS reduction  
+                FROM vente 
+                WHERE month(datevente) = '$idmois'
+                GROUP BY datevente";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($don,$row);    
+        }
+        $sql = "SELECT datevente as TOTAL,
+                    ROUND(SUM(quantite),2) AS quantite , 
+                    ROUND(SUM(prix),2) AS montant, 
+                    ROUND(SUM(cash),2) AS MontantCash, 
+                    ROUND(SUM(credit),2) AS dette, 
+                    ROUND(SUM(Om),2) AS OM, 
+                    ROUND(SUM(reduction),2) AS reduction  
+                FROM vente 
+                WHERE month(datevente) = '$idmois'
+                ";
+                
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            $row["TOTAL"] = "TOTAL";
+            array_push($don,$row);    
+        }
+        return $don; 
     }
 }
 

@@ -17,7 +17,7 @@ if ($result->num_rows > 0) {
     $tableaujson = json_encode($row);
     header("Location:produit.php?tableau=$tableaujson");
 } else {
-    echo "Vente non trouvée";
+    echo"prduit non trouvée";
 }
 $conn->close();
 ?>

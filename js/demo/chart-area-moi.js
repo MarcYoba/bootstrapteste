@@ -1,20 +1,27 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 var tabMontantMoi = new Array(32);
 var tabJourMoi = new Array(32);
-var varmois  = "Janvier";
-const  inputJanvier = document.getElementById("Janvier");
+var varmois  = 1;
 
-function javier() {
-  varmois = "Janvier";
-  console.log(varmois);
+const  inputMars = document.getElementById("Mars");
+//const  nombre = document.getElementById("nombre");
+function funMars() {
+  
   RechargeGraphe();
-
 }
-inputJanvier.addEventListener('button',javier);
+
+inputMars.addEventListener('input',funMars);
+//nombre.addEventListener('input',funMars);
 
 function RechargeGraphe() {
+  console.log("Valeur du moi");
+  varmois = document.getElementById("nombre").value;
   console.log(varmois);
- 
+  for (let index = 0; index < tabMontantMoi.length; index++) {
+    tabMontantMoi[index] = 0; 
+    tabJourMoi[index] = 0;  
+  }
+
   fetch('php/graphe/getdatamoi.php',{
       method:'POST',
         headers:{
@@ -25,12 +32,11 @@ function RechargeGraphe() {
     .then(response => {
       return response.json();
     })
-    .then(data => {
-      //console.log(mois);
-      console.log(data); 
+    .then(dat => {
+      console.log(dat); 
       // Parcours des données et affichage
-      const ind = 0;
-      data.forEach(element => {
+      let ind = 0;
+      dat.forEach(element => {
         for(let proriete in element){
            // console.log(element[proriete]); 
             result = element[proriete];
@@ -55,18 +61,6 @@ for (let index = 0; index < tabMontantMoi.length; index++) {
 }
 
 $(document).ready(function() {
-  
-
-  /**
-    ,{
-      method:'POST',
-      headers:{
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(donnees)
-  }
-   */
-
 
   fetch('php/graphe/getdatamoi.php')
     .then(response => {
