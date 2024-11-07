@@ -6,16 +6,44 @@ header('Content-Type: application/json');
 
  $json = file_get_contents('php://input');
     $donnees = json_decode($json,true);
-    /*
-    $reponse = [
-        'success' => true,
-        'message' => "enregistrement avec success"
-     ];
-    echo json_encode($reponse);
-     */
+
+function calculer_date_rappel($date_expiration, $marge_en_mois) {
+        // Convertit la date d'expiration en objet DateTime
+        $date_exp = new DateTime($date_expiration);
+      
+        // Calcule la date de rappel en soustrayant le nombre de mois de marge
+        $date_rappel = $date_exp->modify('-' . $marge_en_mois . ' months');
+      
+        // Retourne la date de rappel formatée
+        return $date_rappel->format('Y/m/d');
+}
+
+function insertLots($datperantion, $idachat,$idproduit){
+
+    global $conn;
+    
+    $sql = "INSERT INTO lots(idproduit,date_expiration,dateRapelle,idachat) VALUES (?, ?, ?, ?)";
+
+    // Lier les paramètres
+    if (!$stmt = $conn->prepare($sql)) {
+        die('Erreur de préparation de la requête : ' . $conn->error);
+    }
+
+    $date = calculer_date_rappel($datperantion,1);
+
+    $stmt->bind_param('dssd', $idproduit , $datperantion, $date,$idachat);
+
+    // Exécuter la requête
+    if (!$stmt->execute()) {
+        die('Erreur d\'exécution de la requête : ' . $stmt->error);
+    }
+
+    // Fermer la requête
+    $stmt->close();
+}
 
  // Fonction pour créer un compte utilisateur $nom, $type, $prixvente, $prixachat, $quantite
-function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue) {
+function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue,$dateperantion) {
     global $conn;
 
     // Préparer la requête SQL
@@ -62,12 +90,14 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
     $sql = "UPDATE produitphamacie SET quantite_produit = '$stock',prix_achat_produit='$prix',gain_produit='$gain' WHERE nom_produit = '$produit' ";
     $result = $conn->query($sql);
     
-    $sql = "SELECT id FROM achatphamacie WHERE dateachat = '$date' ORDER BY id DESC LIMIT 1";
+    $sql = "SELECT id,idproduit FROM achatphamacie WHERE dateachat = '$date' ORDER BY id DESC LIMIT 1";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         $id = $row["id"];
+        $idproduit = $row["idproduit"];
 
         insertPrix($produit, $prix,$id);
+        insertLots($dateperantion,$id,$idproduit);
     
 }
 
@@ -102,7 +132,7 @@ function insertPrix($nom,$prix,$id) {
 
 try {
     foreach ($donnees as $key => $value) {
-        insertAchat($value["fournisseur"],$value["produit"],$value["quantite"],$value["prix"],$value["total"],$value['datevalue']);  
+        insertAchat($value["fournisseur"],$value["produit"],$value["quantite"],$value["prix"],$value["total"],$value['datevalue'],$value['datepera']);  
     }
    
 } catch (\Throwable $th) {

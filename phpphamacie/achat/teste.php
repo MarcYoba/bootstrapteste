@@ -27,7 +27,7 @@ session_start();
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container">
 
@@ -49,12 +49,14 @@ session_start();
                                             <h6 class="m-0 font-weight-bold text-primary">Tables des Achats</h6>
                                             <br>
                                             <div class="row">
-                                                <p class="btn btn-warning btn-user col-md-4" onclick="ajouterLigne('dataTable', 
-                                                5, 10)">ajouter ligne d'achat</p>
+                                                <p class="btn btn-warning btn-user col-md-2" onclick="ajouterLigne('dataTable', 
+                                                5, 10)">ajouter achat</p>
                                                 <p class="col-md-2" >quantite : <span id="quantitetotal">0</span></p>
                                                 <p class="col-md-2" >prix : <span id="prixtotal">0</span></p>
-                                                <p class="col-md-3" ><input type="date" class="form-control form-control-user" id="datefacture"
+                                                <p class="col-md-2" > Achat:<input type="date" class="form-control form-control-user" id="datefacture"
                                                 name="datefacture" placeholder="date achat"></p>
+                                                <p class="col-md-2" >Perantion:<input type="date" class="form-control form-control-user" id="peramtion"
+                                                name="peramtion" placeholder="date achat"></p>
                                             </div>
                                             <span id="verificatiobDonne"></span>
                                         </div>
@@ -131,7 +133,7 @@ session_start();
                                                     </tbody>
                                                 </table>
                                                 <hr>
-                                                <button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('dataTable')">
+                                                <button  class="btn btn-success btn-user btn-block" onclick="enregistrementDonnees('dataTable')">
                                                     Enregistrer
                                                 </button>
                                             </div>
@@ -165,7 +167,7 @@ session_start();
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-    <script src="achat.js"></script>
+    <!--<script src="achat.js"></script>-->
     <script>
         function calculerTotal(ligneIndex){
             const quantite = document.getElementById(`cellule_dataTable_${ligneIndex * 3}`).textContent;
@@ -280,6 +282,7 @@ function ajouterLigne(dataTable,...donnees){
 function enregistrementDonnees(){
     const tableau = document.getElementById('dataTable');
     const datevar = document.getElementById('datefacture').value;
+    const datepremtion = document.getElementById('peramtion').value;
     console.log(datevar);
 
     let donnees = [];
@@ -299,7 +302,7 @@ function enregistrementDonnees(){
             data.prix = cellule4.textContent;
             data.total = cellule5.textContent;
             data.datevalue = datevar;
-
+            data.datepera = datepremtion;
             //console.log(data);
             donnees.push({...data});  //on peut aussi  declarer directement let data = {} dans la boucle pour redure le programme
             data.value++;
