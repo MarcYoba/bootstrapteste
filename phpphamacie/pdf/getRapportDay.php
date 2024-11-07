@@ -66,8 +66,9 @@ $html = '
         </thead>
         <tbody>';
         foreach ($value as $line) {
+            $inclient=$client->getClientByIdVente($line["id"]);
             $html .= '<tr>';
-            $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"].'</td>';
+            $html .= '<td colspan="6" align="center"> Facture ' . $formule." Vente N= ".$line["id"].$inclient["firstname"]." Tel: ".$inclient["telephone"]. '</td>';
             $html .= '</tr>
                 <tr>
                 <th scope="col">Nom produit</th>

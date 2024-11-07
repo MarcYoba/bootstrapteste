@@ -367,11 +367,16 @@
     </li>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <?php 
+        
+            echo '
+            <li class="nav-item">
+            <a class="nav-link" href="comptaPhamacie.html">
             <i class="fas fa-fw fa-chart-area"></i>
             Statistique<span></span></a>
-    </li>
+            </li>';    
+        
+    ?>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">

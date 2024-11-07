@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container">
 
@@ -33,9 +33,16 @@
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Rapport</h1>
-                             </div>
+                            
+                                <div class="form-group row">
+                                        <div class="col-sm-10 ">
+                                        <h6 class="m-0 font-weight-bold text-success">Rapport</h6>
+                                        </div>
+                                        <div class="col-sm-2 ">
+                                        <a class="m-0 font-weight-bold text-success" href="../../homepahamacie.php">Retour</a>
+                                        </div>
+                                </div>
+                            
                            
                                 <div class="form-group">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -43,14 +50,12 @@
                                 </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <a href="../pdf/getPdftoday.php">
-                                            <button type="" name="" id="" class="btn btn-warning btn-user btn-block">
+                                            <button type="" name="" id="" class="btn btn-success btn-user btn-block">
                                             Rapport du jour
                                             </button> 
                                         </a>
                                     </div>
-                                    <div class="col-sm-2 ">
-                                    <a class="m-0 font-weight-bold text-warning" href="../../homepahamacie.php">Retour</a>
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                 <p></p>
@@ -65,7 +70,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                     <a href="../pdf/getPdftoday.php">
-                                            <button type="" name="" id="" class="btn btn-warning btn-user btn-block">
+                                            <button type="" name="" id="" class="btn btn-success btn-user btn-block">
                                             Rapport pour chaque Date
                                             </button> 
                                         </a>
@@ -86,7 +91,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                     <a href="../pdf/getRapportSemaine.php">
-                                            <button type="" name="" id="" class="btn btn-warning btn-user btn-block">
+                                            <button type="" name="" id="" class="btn btn-success btn-user btn-block">
                                             Rapport part semain / MOI
                                             </button> 
                                         </a>

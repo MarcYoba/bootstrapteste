@@ -63,11 +63,11 @@ $_SESSION["route"] = "cabinet";
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="phpphamacie/rapport/rapport.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        <a href="phpphamacie/rapport/rapport.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <a href="home.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                        <a href="home.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                  Provenderie</a>
                     </div>
 
@@ -433,16 +433,12 @@ $_SESSION["route"] = "cabinet";
                                             "success"=>""
 
                                         );
-                                        if (($_SESSION["route"] == "cabinet")) {
-                                            $sql = "SELECT nom_produit as nom, quantite_produit as quantite FROM produitphamacie WHERE cathegorie='provenderie'";
+                                         
+                                            $sql = "SELECT nom_produit as nom, quantite_produit as quantite FROM produitphamacie ORDER BY nom_produit ASC";
 
-                                        } else {
-                                            $sql = "SELECT nom_produit as nom, quantite_produit as quantite FROM `produit` WHERE cathegorie='provenderie'";
-
-                                        }
                                         $result = $conn->query($sql);
                                         while($row = mysqli_fetch_assoc($result)){
-                                            if($row["quantite"]<100){
+                                            if($row["quantite"]<2){
                                                 echo '<h4 class="small font-weight-bold">'.$row["nom"].'<span class="float-right">'.$row["quantite"].'</span></h4>';
                                                 echo '<div class="progress mb-4">';
                                                 echo '<div class="progress-bar bg-danger" role="progressbar" style="width:'.$row["quantite"].'%"
@@ -452,6 +448,52 @@ $_SESSION["route"] = "cabinet";
                                         }
                                                     //var_dump($row);
                                     ?>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Liste des 20 premiers clients</h6>
+                                </div>
+                                <div class="card-body">
+                                <?php 
+                                        global $conn;
+                                        
+                                        $tab = array("rouge"=>"",
+                                            "jaune"=>"",
+                                            "info"=>"",
+                                            "success"=>""
+
+                                        );
+                                        
+                                            $sql = "SELECT c.firstname, SUM(v.prix) AS somme, COUNT(v.id) as sommeFacture FROM ventephamacie v
+                                                INNER JOIN client c WHERE c.id = v.idclient and MONTH(v.datevente) = MONTH(NOW()) 
+                                                GROUP BY c.firstname 
+                                                ORDER by SUM(v.prix) DESC 
+                                                LIMIT 20";
+
+                                         
+                                        $result = $conn->query($sql);
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            
+                                                echo '<h4 class="small font-weight-bold me-5"><hr></h4>';
+                                                echo '<div class="row">';
+                                                    echo '<div class="col-lg-3 mb-2">';
+                                                    echo $row["firstname"];
+                                                    echo '</div>';
+                                                    echo '<div class="col-lg-5 mb-3">';
+                                                    echo 'Montant : '.$row["somme"].'FCFA';
+                                                    echo '</div>';
+
+                                                    echo '<div class="col-lg-4 mb-4">';
+                                                    echo 'NB Achat : '.$row["sommeFacture"];
+                                                    echo '</div>';
+                                                echo '</div>';
+                                            
+                                        }
+                                                    //var_dump($row);
+                                    ?>
+                                    
                                 </div>
                             </div>
 
@@ -479,20 +521,44 @@ $_SESSION["route"] = "cabinet";
                                 </div>
                             </div>
 
-                            <!-- Approach 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Top 20 des Produits les plus Venduent</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                                        custom components and custom utility classes.</p>
-                                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                                        Bootstrap framework, especially the utility classes.</p>
+                                    <?php 
+                                        global $conn;
+                                        
+                                        $tab = array("rouge"=>"",
+                                            "jaune"=>"",
+                                            "info"=>"",
+                                            "success"=>""
+
+                                        );
+                                        
+                                            $sql = "SELECT COUNT(f.idproduit) , f.nomproduit, p.quantite_produit 
+                                                    FROM facturephamacie f 
+                                                    INNER JOIN produitphamacie p
+                                                    WHERE month(f.datefacture) = month(now()) AND f.idproduit = p.id
+                                                    GROUP BY f.nomproduit
+                                                    ORDER BY COUNT(f.idproduit) DESC 
+                                                    LIMIT 20";
+
+                                        
+                                        $result = $conn->query($sql);
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            
+                                                echo '<h4 class="small font-weight-bold">'.$row["nomproduit"].'<span class="float-right">'.$row["quantite_produit"].'</span></h4>';
+                                                echo '<div class="progress mb-4">';
+                                                echo '<div class="progress-bar bg-danger" role="progressbar" style="width:'.$row["quantite_produit"].'%"
+                                                aria-valuenow="3" aria-valuemin="0" aria-valuemax="100">'.'</div>';
+                                                echo '</div>';
+                                            
+                                        }
+                                                    //var_dump($row);
+                                    ?>
                                 </div>
                             </div>
-                            -->
                         </div>
                     </div>
 

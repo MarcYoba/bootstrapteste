@@ -453,11 +453,24 @@ require_once("php/activesaision.php");
     </li>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+
+    <?php 
+        if (($_SESSION["route"] == "cabinet")) {
+            echo '
+            <li class="nav-item">
+            <a class="nav-link" href="../../comptaPhamacie.html">
             <i class="fas fa-fw fa-chart-area"></i>
             Statistique<span></span></a>
-    </li>
+            </li>';    
+        } else {
+            echo '
+            <li class="nav-item">
+            <a class="nav-link" href="../../charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                Statistique<span></span></a>
+            </li>';
+        }
+    ?>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
