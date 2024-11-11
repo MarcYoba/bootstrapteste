@@ -269,7 +269,9 @@
                 <?php 
                         echo '
                         <a class="collapse-item" href="phpphamacie/vacin/vacin.php" id="ajouterUtilisateur">Ajouter un sujet</a>
-                        <a class="collapse-item" href="phpphamacie/vacin/liste.php">Liste</a>
+                        <a class="collapse-item" href="phpphamacie/vacin/consultation.php" id="ajouterUtilisateur">Consultation</a> 
+                        <a class="collapse-item" href="phpphamacie/vacin/listeconsultation.php" id="ajouterUtilisateur">liste Consultation</a> 
+                        <a class="collapse-item" href="phpphamacie/vacin/liste.php">Liste Vaccin</a>
                         '; 
                 ?>
                 

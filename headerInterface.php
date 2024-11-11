@@ -345,8 +345,34 @@ require_once("php/activesaision.php");
                     if (($_SESSION["route"] == "cabinet")) { 
                         echo '
                         <a class="collapse-item" href="../vacin/vacin.php" id="ajouterUtilisateur">Ajouter un sujet</a>
+                        <a class="collapse-item" href="../vacin/consultation.php" id="ajouterUtilisateur">Consultation</a>
+                        <a class="collapse-item" href="../vacin/listeconsultation.php" id="ajouterUtilisateur">liste Consultation</a>
                         <a class="collapse-item" href="../vacin/liste.php">Liste</a>
                         ';  
+                    }
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#depense"
+            aria-expanded="true" aria-controls="depense">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Depense</span>
+        </a>
+        <div id="depense" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Depense:</h6>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
+                        <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                        ';
                     }
                 ?>
                 

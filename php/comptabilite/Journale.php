@@ -12,13 +12,13 @@
     <title>GESTION DE STOCK</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        href="../../https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -31,7 +31,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="home.php">
+                <a class="nav-link" href="../../home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -61,24 +61,10 @@
                 <div id="jounale" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Journal Comptable:</h6>
-                        <a class="collapse-item" href="php/comptabilite/Journale.php">Jounale</a> 
+                        <a class="collapse-item" href="../comptabilite/Journale.php">Jounal</a>
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#etatresultat"
-                    aria-expanded="true" aria-controls="etatresultat">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Etat des resultats</span>
-                </a>
-                <div id="etatresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Etat des resultats:</h6>
-                        <a class="collapse-item" href="php/comptabilite/etatresultat.php">marge beneficiere</a> 
-                    </div>
-                </div>
-            </li>
-            
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -127,7 +113,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item active">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="../../charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Statistique</span></a>
             </li>
@@ -321,36 +307,7 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-
+                        
                     </ul>
 
                 </nav>
@@ -360,24 +317,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Statistique des stocks</h1>
-                    
-                        <div class="row">
-                            
-                            <p class="col-md-5 btn btn-user btn-block">
-                               Entrez le numero du moi <input type="number" name="nombre" id="nombre" value="1"> 
-                            </p>
-                           
-                            <p class="col-md-2" >
-                                Montant :<input type="checkbox" name="Mars" id="Mars" class="btn btn-primary btn-user btn-block">
-                            </p>
-                            
-                            
-                            
-                            
-                        </div>
-                    
-
+                    <h1 class="h3 mb-2 text-gray-800">Journal comptable</h1>
                     <hr>
                     <!-- Content Row -->
                     <div class="row">
@@ -387,43 +327,208 @@
                             <!-- Area Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Graphe de vente</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Journal des Achats</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+                                    
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Janvier</th>
+                                                        <th>Fevrier</th>
+                                                        <th>Mars</th>
+                                                        <th>Avril</th>
+                                                        <th>Mai</th>
+                                                        <th>Jun</th>
+                                                        <th>Juillet</th>
+                                                        <th>Aout</th>
+                                                        <th>Septembre</th>
+                                                        <th>Octobre</th>
+                                                        <th>Novembre</th>
+                                                        <th>Decembre</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Janvier</th>
+                                                        <th>Fevrier</th>
+                                                        <th>Mars</th>
+                                                        <th>Avril</th>
+                                                        <th>Mai</th>
+                                                        <th>Jun</th>
+                                                        <th>Juillet</th>
+                                                        <th>Aout</th>
+                                                        <th>Septembre</th>
+                                                        <th>Octobre</th>
+                                                        <th>Novembre</th>
+                                                        <th>Decembre</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <tr>
+                                                    <?php 
+                                                        require_once("../bdmutilple/comptabilite.php");
+                                                        $compta = new Comptabilite();
+                                                        $somme = $compta->AcahAnuelle();
+                                                        
+                                                        foreach ($somme as $key=> $element) {
+                                                            foreach ($element as $ke => $value) {
+                                                                if (empty($value)) {
+                                                                    echo '<td>0</td>';
+                                                                } else {
+                                                                    echo '<td>'.$value.'</td>';
+                                                                }
+                                                                
+                                                                
+                                                            }
+                                                           
+                                                        }
+                                                    ?>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Trimestre 1</th>
+                                                        <th>Trimestre 2</th>
+                                                        <th>Trimestre 3</th>
+                                                        <th>Trimestre 4</th>
+                                                        <th>Semestre 1</th>
+                                                        <th>Semestre 2</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Trimestre 1</th>
+                                                        <th>Trimestre 2</th>
+                                                        <th>Trimestre 3</th>
+                                                        <th>Trimestre 4</th>
+                                                        <th>Semestre 1</th>
+                                                        <th>Semestre 2</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <?php
+                                                        $compta = new Comptabilite();
+                                                        $Trimestre = $compta->TrimestreSemestre();
+
+                                                        foreach ($Trimestre as $key => $value) {
+                                                            echo '<td>'.$value.'</td>';
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div> 
+                                        </div> 
                                     </div>
                                     <hr> 
-                                    <code> Vente</code> 
-                                </div>
+                                
                             </div>
 
                             <!-- Bar Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Quantite</h6>
-                                    <div class="row">
-                            
-                                        <p class="col-md-5 btn btn-user btn-block">
-                                           Entrez le numero du moi <input type="number" name="nombre2" id="nombre2" value="1"> 
-                                        </p>
-                                        <p class="col-md-2" >
-                                            Quantite :<input type="checkbox" name="Quantite" id="Quantite" class="btn btn-primary btn-user btn-block">
-                                            
-                                        </p>
-                                    </div>
+                                    <h6 class="m-0 font-weight-bold text-primary">Journal des Vents</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
-                                    </div>
+                                <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Janvier</th>
+                                                        <th>Fevrier</th>
+                                                        <th>Mars</th>
+                                                        <th>Avril</th>
+                                                        <th>Mai</th>
+                                                        <th>Jun</th>
+                                                        <th>Juillet</th>
+                                                        <th>Aout</th>
+                                                        <th>Septembre</th>
+                                                        <th>Octobre</th>
+                                                        <th>Novembre</th>
+                                                        <th>Decembre</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Janvier</th>
+                                                        <th>Fevrier</th>
+                                                        <th>Mars</th>
+                                                        <th>Avril</th>
+                                                        <th>Mai</th>
+                                                        <th>Jun</th>
+                                                        <th>Juillet</th>
+                                                        <th>Aout</th>
+                                                        <th>Septembre</th>
+                                                        <th>Octobre</th>
+                                                        <th>Novembre</th>
+                                                        <th>Decembre</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <tr>
+                                                    <?php 
+                                                        require_once("../bdmutilple/comptabilite.php");
+                                                        $compta = new Comptabilite();
+                                                        $somme = $compta->VentesAnuelle();
+                                                        
+                                                        foreach ($somme as $key=> $element) {
+                                                            foreach ($element as $ke => $value) {
+                                                                if (empty($value)) {
+                                                                    echo '<td>0</td>';
+                                                                } else {
+                                                                    echo '<td>'.$value.'</td>';
+                                                                }
+                                                                
+                                                                
+                                                            }
+                                                           
+                                                        }
+                                                    ?>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Trimestre 1</th>
+                                                        <th>Trimestre 2</th>
+                                                        <th>Trimestre 3</th>
+                                                        <th>Trimestre 4</th>
+                                                        <th>Semestre 1</th>
+                                                        <th>Semestre 2</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Trimestre 1</th>
+                                                        <th>Trimestre 2</th>
+                                                        <th>Trimestre 3</th>
+                                                        <th>Trimestre 4</th>
+                                                        <th>Semestre 1</th>
+                                                        <th>Semestre 2</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <?php
+                                                        $compta = new Comptabilite();
+                                                        $Trimestre = $compta->TrimestreSemestreVente();
+
+                                                        foreach ($Trimestre as $key => $value) {
+                                                            echo '<td>'.$value.'</td>';
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     <hr>
-                                    
-                                    <code>Quantite</code>.
                                 </div>
                             </div>
 
-                            <div class="card shadow mb-4">
+                            <!--<div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Etude Evolutive</h6>
                                     <div class="row">
@@ -521,7 +626,7 @@
                                     
                                     <code>Evolution</code>.
                                 </div>
-                            </div>
+                            </div>-->
 
                         </div>
 
@@ -574,22 +679,21 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../../js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../../header.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-moi.js"></script>
-    
-    <script src="js/demo/chart-bar-moi.js"></script>
+    <script src="../../js/demo/datatables-demo.js"></script>
 
 </body>
 

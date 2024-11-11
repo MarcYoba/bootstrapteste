@@ -273,6 +273,30 @@
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#depense"
+            aria-expanded="true" aria-controls="depense">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Depense</span>
+        </a>
+        <div id="depense" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Depense:</h6>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                            
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="php/depenses/depense.php">Depenses</a>
+                        <a class="collapse-item" href="php/depenses/liste.php">Liste Depense</a>
+                        ';
+                    }
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 
