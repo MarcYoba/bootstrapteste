@@ -51,87 +51,78 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Commande</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Peramtion</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Commende</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Tables date de Peramtion</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
-                                    <thead>
-                                       
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='100' data-order='[[1, "desc"]]'>
+                                    <thead> 
                                         <tr>
                                             <th>id</th>
-                                            <th>Date</th>
                                             <th>Nom</th>
-                                            <th>QuaT</th>
-                                            <th>P/unit</th>
-                                            <th>Montant</th>
-                                            <th>Avance</th>
-                                            <th>Reste/paie</th>
-                                            <th>Status</th>
-                                            <th>Date/Livr</th>
-                                            <th>Date/Rape</th>
-                                            <th>Valider</th>
+                                            <th>Date peremation</th>
+                                            <th>Date rapelle</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>Date</th>
                                             <th>Nom</th>
-                                            <th>QuaT</th>
-                                            <th>P/unit</th>
-                                            <th>Montant</th>
-                                            <th>Avance</th>
-                                            <th>Reste/paie</th>
-                                            <th>Status</th>
-                                            <th>Date/Livr</th>
-                                            <th>Date/Rape</th>
-                                            <th>Valider</th>
+                                            <th>Date peremation</th>
+                                            <th>Date rapelle</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM poussin ";
+                                        require_once("../bdmutilple/getproduit.php");
+                                        $sql = "SELECT id,nom_produit FROM produitphamacie ORDER BY nom_produit DESC";
                                         $result = $conn->query($sql);
+
+                                        $produit = new Produit(0);
+                                        
+                                        
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["dateCommande"].'</td>';
-                                            echo '<td>'.$row["Nomclient"].'</td>';
-                                            echo '<td>'.$row["quantite"].'</td>';
-                                            echo '<td>'.$row["prixUnite"].'</td>';
-                                            echo '<td>'.$row["montant"].'</td>';
-                                            if ($row["montantCash"] > 0) {
-                                                echo '<td>'.$row["montantCash"].'</td>';
-                                            } else if ($row["montantOm"] > 0) {
-                                                echo '<td>'.$row["montantOm"].'</td>';
-                                            }else{
-                                                echo '<td>'.$row["montantCredit"].'</td>';
+                                            echo '<td>'.$row["nom_produit"].'</td>';
+                                            $lots = 1;
+                                            $date = 0;
+                                            echo '<td>';
+                                            $perantion = $produit->PeramtionProduit($row["id"]);
+                                            foreach ($perantion as $key => $value) {
+                                                
+                                                foreach ($value as $key => $val) {
+                                                    if ($val!=$date) {
+                                                        $date=$val;
+                                                        echo 'lots:'.$lots.' '.$val.'<br>';
+                                                    $lots++;
+                                                    }
+                                                    
+                                                }
+                                                
                                             }
-                                            
-                                            echo '<td>'.$row["reste"].'</td>';
-                                            echo '<td>'.$row["statusCommande"].'</td>';
-                                            echo '<td>'.$row["dateLivraison"].'</td>';
-                                            echo '<td>'.$row["daterappelle"].'</td>';
-                                            echo "<td>";
-                                            if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                //echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            }else{
-                                            //echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                            echo'</td>';
+                                            $lots = 1;
+
+                                            $daterapelle = $produit->RappellePerantion($row["id"]);
+                                            echo '<td>';
+                                            foreach ($daterapelle as $key => $value) {
+                                                
+                                                foreach ($value as $key => $val) {
+                                                    echo 'lots:'.$lots.' '.$val.'<br>';
+                                                    $lots++;
+                                                }
+                                                
                                             }
-                                            echo "</td>";
+                                            echo '</td>';
                                             echo '</tr>';
                                             //var_dump($row);
                                         }

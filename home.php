@@ -441,7 +441,7 @@ $_SESSION["route"] = "provenderie";
                                             $sql = "SELECT nom_produit as nom, quantite_produit as quantite FROM produitphamacie WHERE cathegorie='provenderie'";
 
                                         } else {
-                                            $sql = "SELECT nom_produit as nom, quantite_produit as quantite FROM `produit` WHERE cathegorie='provenderie'";
+                                            $sql = "SELECT nom_produit as nom, quantite_produit as quantite FROM `produit` WHERE cathegorie='provenderie'  ORDER BY nom_produit ASC";
 
                                         }
                                         $result = $conn->query($sql);
@@ -491,7 +491,7 @@ $_SESSION["route"] = "provenderie";
                                                     INNER JOIN produit p
                                                     WHERE month(f.datefacture) = month(now()) AND f.idproduit = p.id
                                                     GROUP BY f.nomproduit
-                                                    ORDER BY COUNT(f.idproduit) DESC 
+                                                    ORDER BY p.quantite_produit DESC 
                                                     LIMIT 20";
 
                                         }

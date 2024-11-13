@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container">
 
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" name="client" id="client" class="btn btn-info btn-user btn-block">
+                                    <button type="submit" name="client" id="client" class="btn btn-success btn-user btn-block">
                                         Enregister
                                     </button>
                                 </div>
@@ -62,8 +62,11 @@
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        <input type="date" class="form-control form-control-user" id="dateCommande"
-                                           name="dateCommande" placeholder="date achat" required>date commande
+                                        <input type="text" class="form-control form-control-user" id="recherche"
+                                        name="recherche" placeholder="recherche client" onkeyup="myFunctionP()">
+                                    date commande:<input type="date" class="form-control form-control-user" id="dateCommande"
+                                           name="dateCommande" placeholder="date achat" required>
+                                           
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         <select id="fournisseur"  name="fournisseur"   class="form-control form-select"  size="4" multiple aria-label="multiple select " onchange="Client()" required>
@@ -87,14 +90,17 @@
                                     </div>
                                     <div class="col-sm-2">
                                         <input type="number" class="form-control form-control-user" id="prixunite" 
-                                           name="prixunite" placeholder="Prix unitaire" required><br>
+                                           name="prixunite" placeholder="Prix unitaire" required>
                                         
-                                        <input type="date" class="form-control form-control-user" id="datelivraison"
-                                           name="datelivraison" placeholder="date achat" required> date livraison
+                                           date livraison<input type="date" class="form-control form-control-user" id="datelivraison"
+                                           name="datelivraison" placeholder="date achat" required> 
+                                            
                                     </div>
                                     <div class="col-sm-2">
                                         <input type="number" class="form-control form-control-user" id="quantitetotale" 
                                            name="quantitetotale" placeholder="Montant" readonly>
+                                           date rappelle <input type="date" class="form-control form-control-user" id="daterapel"
+                                           name="daterapel" placeholder="date achat" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -116,7 +122,7 @@
                                     </div>
                                 </div>
                                 
-                                <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
+                                <button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
                                     Enregister
                                 </button>  
                             </form>
@@ -149,6 +155,26 @@
 
         inputQuantite.addEventListener('input',calculeTotal);
         inputPrix.addEventListener('input',calculeTotal);
+
+function myFunctionP() {
+  // Récupérer l'input et la liste déroulante
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("recherche");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("fournisseur");
+  li = ul.getElementsByTagName("option");
+
+  // Boucler sur toutes les options
+  for (i = 0; i < li.length; i++) {
+    a = li[i];
+    if (a.value.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+  
+}
 
 
     </script>

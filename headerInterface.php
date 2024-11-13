@@ -109,12 +109,14 @@ require_once("php/activesaision.php");
                         echo '
                         <a class="collapse-item" href="../client/client.php" id="ajouterClient">ajouter un client</a>
                         <a class="collapse-item" href="../client/liste.php">liste client</a>
+                        <a class="collapse-item" href="../client/clientInactif.php">liste des client Inactif client</a>
                         ';
                             
                     } else {
                         echo '
                         <a class="collapse-item" href="../client/client.php" id="ajouterClient">ajouter un client</a>
                         <a class="collapse-item" href="../client/liste.php">liste client</a>
+                        <a class="collapse-item" href="../client/clientInactif.php">liste des client Inactif</a>
                         ';
                     }
                 ?>
@@ -141,6 +143,7 @@ require_once("php/activesaision.php");
                         echo '
                             <a class="collapse-item" href="../produit/produit.php" id="ajouterProduit">ajouter un produit</a>
                             <a class="collapse-item" href="../produit/liste.php">liste produit</a>
+                            <a class="collapse-item" href="../produit/Peramtion.php">Date Peramtion<</a>
                         ';
                     }
                 ?>

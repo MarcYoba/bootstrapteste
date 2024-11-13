@@ -44,97 +44,66 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php require_once("../../Topbar.php"); ?> 
+                <?php require_once("../../Topbar.php"); ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Commande</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Client</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Commende</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Tables Client Inactif</h6>
+                        <div class="form-group row">
+                            <?php
+                                require_once("../bdmutilple/getclient.php");
+                                $client = new Client(0);
+                                $row = $client->ClientPasAchat();
+                                $doublon = $client->DoublonClient();
+                                echo '<div class="col-sm-3">nombre de cient : '.count($row).'</div>';
+                                echo '<div class="col-sm-3">nombre de doublons : '.$doublon.'</div>';
+                                echo '<div class="col-sm-3">nombre Total de client reel inactif : '.count($row)- $doublon.'</div>';
+                            ?>
+                            
+                        </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='100' ><!--data-order='[[0, "desc"]]'-->
                                     <thead>
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>Date</th>
                                             <th>Nom</th>
-                                            <th>QuaT</th>
-                                            <th>P/unit</th>
-                                            <th>Montant</th>
-                                            <th>Avance</th>
-                                            <th>Reste/paie</th>
-                                            <th>Status</th>
-                                            <th>Date/Livr</th>
-                                            <th>Date/Rape</th>
-                                            <th>Valider</th>
+                                            <th>Adresse</th>
+                                            <th>Telephone</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>Date</th>
                                             <th>Nom</th>
-                                            <th>QuaT</th>
-                                            <th>P/unit</th>
-                                            <th>Montant</th>
-                                            <th>Avance</th>
-                                            <th>Reste/paie</th>
-                                            <th>Status</th>
-                                            <th>Date/Livr</th>
-                                            <th>Date/Rape</th>
-                                            <th>Valider</th>
+                                            <th>Adresse</th>
+                                            <th>Telephone</th>
+                                            
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
-                                        global $conn;
-                                        $sql = "SELECT * FROM poussin ";
-                                        $result = $conn->query($sql);
-                                        while ($row = mysqli_fetch_assoc($result)){
+                                       
+                                        foreach ($row as $key => $value) {
                                             echo '<tr>';
-                                            echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["dateCommande"].'</td>';
-                                            echo '<td>'.$row["Nomclient"].'</td>';
-                                            echo '<td>'.$row["quantite"].'</td>';
-                                            echo '<td>'.$row["prixUnite"].'</td>';
-                                            echo '<td>'.$row["montant"].'</td>';
-                                            if ($row["montantCash"] > 0) {
-                                                echo '<td>'.$row["montantCash"].'</td>';
-                                            } else if ($row["montantOm"] > 0) {
-                                                echo '<td>'.$row["montantOm"].'</td>';
-                                            }else{
-                                                echo '<td>'.$row["montantCredit"].'</td>';
+                                            foreach ($value as $key => $val) { 
+                                                echo '<td>'.$val.'</td>';     
                                             }
-                                            
-                                            echo '<td>'.$row["reste"].'</td>';
-                                            echo '<td>'.$row["statusCommande"].'</td>';
-                                            echo '<td>'.$row["dateLivraison"].'</td>';
-                                            echo '<td>'.$row["daterappelle"].'</td>';
-                                            echo "<td>";
-                                            if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                //echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            }else{
-                                            //echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            }
-                                            echo "</td>";
                                             echo '</tr>';
-                                            //var_dump($row);
                                         }
+                                        
                                     ?>
                                     </tbody>
                                 </table>
@@ -152,7 +121,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
             </footer>
@@ -206,6 +175,7 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="client.js"></script>
 
 </body>
 

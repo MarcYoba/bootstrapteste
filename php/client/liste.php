@@ -59,10 +59,19 @@
                         <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Tables Client</h6> <br>
                             <form method="post" action="../pdf/getClient.php">
-                                <div class="row">
-                                    <p class="col-md-2" >
+                                <div class="form-group row">
+                                    <div class="col-md-3" >
                                         <input type="submit" class="btn btn-warning btn-user"  value="Client sans numero" >                      
-                                    </p>     
+                                    </div>
+                                    <?php
+                                        require_once("../bdmutilple/getclient.php");
+                                        $client = new Client(0);
+                                        $nbclient = $client->SellectAll();
+                                        $doublon = $client->DoublonClient();
+                                        echo '<div class="col-md-2"> Nombre de client : '.$nbclient.'</div> ';
+                                        echo '<div class="col-md-2">Nombre de doublon  : '.$doublon.'</div> ';
+                                        echo '<div class="col-md-2">Total reel client  : '.$nbclient - $doublon.'</div> ';
+                                    ?>
                                 </div>
                             </form>
                         </div>

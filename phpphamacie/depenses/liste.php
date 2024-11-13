@@ -68,7 +68,7 @@
                                             <th>id</th>
                                             <th>description</th>
                                             <th>montant</th>
-                                            <!---<th>perseonne </th> --> 
+                                            <th>Cathegorie </th>
                                             <th>Date</th>
                                             <th>operation</th>
                                         </tr>
@@ -78,7 +78,7 @@
                                             <th>id</th>
                                             <th>description</th>
                                             <th>montant</th>
-                                           <!---<th>perseonne </th> --> 
+                                           <th>Cathegorie </th>
                                             <th>Date</th>
                                             <th>operation</th>
                                         </tr>
@@ -93,7 +93,7 @@
                                             echo '<td>'.$row["id"].'</td>';
                                             echo '<td>'.$row["description"].'</td>';
                                             echo '<td>'.$row["montant"].'</td>';
-                                            //echo '<td>'.$row["iduser"].'</td>';
+                                            echo'<td>'.$row["cathegorie"].'</td>';
                                             echo '<td>'.$row["datedepense"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {

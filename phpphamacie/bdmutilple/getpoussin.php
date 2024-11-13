@@ -5,7 +5,18 @@ class Poussin{
 
     public function InsertPoussin($tableau){
         global $conn;
-        $sql = "INSERT INTO poussin (Nomclient, quantite, prixUnite, montant,souche,montantOm,montantCredit,montantCash,reste,statusCommande,dateCommande,dateLivraison) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        $dateDuJour = $tableau["datelivraison"];
+        $nb_jours = 30;
+        $timestamp_depart = strtotime($dateDuJour);
+        $timestamp_arrivee = $timestamp_depart + ($nb_jours * 86400);
+        $Daterap = date('Y-m-d', $timestamp_arrivee);
+
+        if ($tableau["daterapel"] != '0001-01-01') {
+            $Daterap = $tableau["daterapel"];
+        } 
+        
+
+        $sql = "INSERT INTO poussin (Nomclient, quantite, prixUnite, montant,souche,montantOm,montantCredit,montantCash,reste,statusCommande,dateCommande,dateLivraison,daterappelle) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         // Lier les paramètres
         if (!$stmt = $conn->prepare($sql)) {
@@ -15,7 +26,7 @@ class Poussin{
         $status = "EN COUR";
         $tableau["quantitetotale"] = $tableau["quantite"] * $tableau["prixunite"];
 
-        $stmt->bind_param('sdddsddddsss',$tableau["fournisseur"],$tableau["quantite"],$tableau["prixunite"],$tableau["quantitetotale"],$tableau["souche"],$tableau["OM"],$tableau["CREDIT"],$tableau["CASH"],$tableau["RESTE"],$status, $datedebut ,$tableau["datelivraison"]);
+        $stmt->bind_param('sdddsddddssss',$tableau["fournisseur"],$tableau["quantite"],$tableau["prixunite"],$tableau["quantitetotale"],$tableau["souche"],$tableau["OM"],$tableau["CREDIT"],$tableau["CASH"],$tableau["RESTE"],$status, $datedebut ,$tableau["datelivraison"],$Daterap);
 
         // Exécuter la requête
         if (!$stmt->execute()) {
@@ -28,7 +39,7 @@ class Poussin{
     public function InsertLivraison($tableau){
         global $conn;
         $id = $tableau["reference"];
-        $status = "Livree";
+        $status = $tableau["status"];
         $qt = $tableau["quantite"];
         $prix = $tableau["prixunite"];
         $montant = $tableau["quantitetotale"];

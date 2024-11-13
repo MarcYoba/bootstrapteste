@@ -91,12 +91,14 @@
                         echo '
                             <a class="collapse-item" href="php/client/client.php" id="ajouterClient">ajouter un client</a>
                             <a class="collapse-item" href="php/client/liste.php">liste client</a>
+                            <a class="collapse-item" href="php/client/clientInactif.php">liste des client Inactif </a>
                         ';
                             
                     } else {
                         echo '
                             <a class="collapse-item" href="php/client/client.php" id="ajouterClient">ajouter un client</a>
                             <a class="collapse-item" href="php/client/liste.php">liste client</a>
+                            <a class="collapse-item" href="php/client/clientInactif.php">liste des client Inactif </a>
                         ';
                     }
                 ?>

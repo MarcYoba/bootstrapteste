@@ -421,11 +421,12 @@ $_SESSION["route"] = "cabinet";
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Stock de produit</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Stock de produit et date peramtion</h6>
                                 </div>
                                 <div class="card-body">
                                     <?php 
                                         global $conn;
+                                        
                                         
                                         $tab = array("rouge"=>"",
                                             "jaune"=>"",
@@ -434,7 +435,7 @@ $_SESSION["route"] = "cabinet";
 
                                         );
                                          
-                                            $sql = "SELECT nom_produit as nom, quantite_produit as quantite FROM produitphamacie ORDER BY nom_produit ASC";
+                                            $sql = "SELECT id,nom_produit as nom, quantite_produit as quantite FROM produitphamacie ORDER BY nom_produit ASC";
 
                                         $result = $conn->query($sql);
                                         while($row = mysqli_fetch_assoc($result)){
@@ -443,6 +444,29 @@ $_SESSION["route"] = "cabinet";
                                                 echo '<div class="progress mb-4">';
                                                 echo '<div class="progress-bar bg-danger" role="progressbar" style="width:'.$row["quantite"].'%"
                                                 aria-valuenow="3" aria-valuemin="0" aria-valuemax="100">'.'</div>';
+                                                echo '</div>';
+                                                $preamtion = $row["id"];
+                                                echo '<div class="form-group row"';
+
+                                                $data=[];
+
+                                                $sql1 = " SELECT p.datePeramtion FROM produitphamacie p WHERE p.id = '$preamtion'";
+                                                $result1 =$conn->query($sql1);
+                                                $row1 = mysqli_fetch_assoc($result1);
+                                                array_push($data,$row1);
+
+                                                $sql1 = " SELECT l.date_expiration FROM lots l WHERE l.idproduit = '$preamtion'";
+                                                $result1 =$conn->query($sql1);
+                                                $row1 = mysqli_fetch_assoc($result1);
+                                                array_push($data,$row1);
+                                                $lots = 1;
+
+                                                foreach ($data as $key => $value) {
+                                                    foreach ($value as $key => $val) {
+                                                        echo '<a href="phpphamacie/produit/Peramtion.php" class="col-sm-3 ">lots:'.$lots.' '.$val.'</a><hr>';
+                                                        $lots++;
+                                                    }
+                                                }
                                                 echo '</div>';
                                             }
                                         }
@@ -540,8 +564,8 @@ $_SESSION["route"] = "cabinet";
                                                     FROM facturephamacie f 
                                                     INNER JOIN produitphamacie p
                                                     WHERE month(f.datefacture) = month(now()) AND f.idproduit = p.id
-                                                    GROUP BY f.nomproduit
-                                                    ORDER BY COUNT(f.idproduit) DESC 
+                                                    GROUP BY f.nomproduit 
+                                                    ORDER BY p.quantite_produit  DESC 
                                                     LIMIT 20";
 
                                         

@@ -126,7 +126,36 @@ class Produit{
        }
 
 
-    }  
+    } 
+    
+    public function PeramtionProduit($id_produit){
+        global $conn;
+
+        $data=[];
+
+        $sql = " SELECT p.datePeramtion FROM produitphamacie p  WHERE p.id = '$id_produit'";
+        $result =$conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        array_push($data,$row);
+
+        $sql = " SELECT l.date_expiration FROM lots l WHERE l.idproduit = '$id_produit'";
+        $result =$conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        array_push($data,$row);
+
+        return $data;
+    }
+
+    public function RappellePerantion($id_produit){
+        global $conn;
+        $data = [];
+        $sql = " SELECT l.dateRapelle FROM lots l WHERE l.idproduit = '$id_produit'";
+        $result =$conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data;
+    }
 
 
 }

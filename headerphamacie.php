@@ -77,6 +77,7 @@
                         echo '
                             <a class="collapse-item" href="php/client/client.php" id="ajouterClient">ajouter un client</a>
                             <a class="collapse-item" href="php/client/liste.php">liste client</a>
+                            <a class="collapse-item" href="php/client/clientInactif.php">liste des client Inactif</a>
                         ';
                             
                     
@@ -99,6 +100,7 @@
                         echo '
                         <a class="collapse-item" href="phpphamacie/produit/produit.php" id="ajouterProduit">ajouter un produit</a>
                         <a class="collapse-item" href="phpphamacie/produit/liste.php">liste produit</a>
+                        <a class="collapse-item" href="phpphamacie/produit/Peramtion.php">Date Peramtion</a>
                         ';    
                     
                 ?>
@@ -207,6 +209,28 @@
                         echo '
                         <a class="collapse-item" href="phpphamacie/caisse/caisse.php" id="ajouterCaise">Caisse</a>
                         <a class="collapse-item" href="phpphamacie/caisse/liste.php">liste caisse</a>
+                        ';
+                    
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Depense"
+            aria-expanded="true" aria-controls="Depense">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Depense</span>
+        </a>
+        <div id="Depense" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Depense:</h6>
+                <?php 
+                    
+                        echo '
+                        <a class="collapse-item" href="phpphamacie/depenses/depense.php">Depense</a>
+                        <a class="collapse-item" href="phpphamacie/depenses/liste.php">Liste Depense</a>
                         ';
                     
                 ?>

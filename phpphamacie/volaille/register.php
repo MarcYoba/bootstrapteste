@@ -29,7 +29,8 @@ if (isset($_POST["client"])) {
         "OM"=>$_POST["OM"],
         "CREDIT"=>$_POST["CREDIT"],
         "CASH" => $_POST["CASH"],
-        "RESTE" => $_POST["RESTE"]
+        "RESTE" => $_POST["RESTE"],
+        "daterapel" => $_POST["daterapel"],
     ];
 
     if (($poussin->InsertPoussin($tableaux)) == "OK") {
@@ -47,7 +48,8 @@ if (isset($_POST["client"])) {
         "OM"=>$_POST["OM"],
         "CREDIT"=>$_POST["CREDIT"],
         "CASH" => $_POST["CASH"],
-        "RESTE" => $_POST["RESTE"]
+        "RESTE" => $_POST["RESTE"],
+        "status" => $_POST["status"]
     ];
 
     if (($poussin->InsertLivraison($tableaux)) == "OK") {

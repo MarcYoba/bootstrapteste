@@ -5,7 +5,7 @@ session_start();
 require_once("../connexion.php");
 
 // Fonction pour créer un compte utilisateur $nom, $type, $prixvente, $prixachat, $quantite
-function creerDepense($description, $montant,$datedepense) {
+function creerDepense($description, $montant,$datedepense,$type) {
     global $conn;
 
     if (!empty($datedepense)) {
@@ -18,14 +18,14 @@ function creerDepense($description, $montant,$datedepense) {
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO depenses (description, montant, iduser, datedepense) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO depenses (description, montant, iduser, datedepense,cathegorie ) VALUES (?,?, ?, ?, ?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
         die('Erreur de préparation de la requête : ' . $conn->error);
     }
 
-    $stmt->bind_param('sdss', $description , $montant ,$_SESSION['id'], $date);
+    $stmt->bind_param('sdsss', $description , $montant ,$_SESSION['id'], $date,$type);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
@@ -40,7 +40,7 @@ function creerDepense($description, $montant,$datedepense) {
 if (isset($_POST['enregistrement'])) {
 
     $description = $_POST['description'];
-    //$motif = $_POST['motif'];
+    $type = $_POST['type'];
     $montant = $_POST['montant'];
     $datedepense = $_POST['datedepense'];
     
@@ -48,7 +48,7 @@ if (isset($_POST['enregistrement'])) {
     if (!empty($description) || !empty($montant)) {
         
                 // Créer le compte utilisateur
-                creerDepense($description, $montant,$datedepense);
+                creerDepense($description, $montant,$datedepense,$type);
                 header("Location:liste.php");
                 exit();
 
@@ -62,7 +62,7 @@ if (isset($_POST['enregistrement'])) {
 if (isset($_POST['modifier'])) {
 
     $description = $_POST['description'];
-   // $motif = $_POST['motif'];
+    $type = $_POST['type'];
     $montant = $_POST['montant'];
     $reference = $_POST['reference'];
     $datedepense = $_POST['datedepense'];
@@ -71,7 +71,7 @@ if (isset($_POST['modifier'])) {
     if (!empty($description) || !empty($motif) || !empty($montant)) {
         
                 // Créer le compte utilisateur
-            $sql = "UPDATE depenses SET operation='$description', montant ='$montant' WHERE id='$reference'";
+            $sql = "UPDATE depenses SET description='$description', montant ='$montant',cathegorie='$type' WHERE id='$reference'";
             $result = $conn->query($sql);
             
                 header("Location:liste.php");

@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container">
 
@@ -56,7 +56,22 @@
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         <select id="fournisseur"  name="fournisseur"   class="form-control form-select"  size="4" multiple aria-label="multiple select " onchange="Client()" readonly>   
-                                                        <option value="'.$row["Nomclient"].'">'.$row["Nomclient"].'</option>        
+                                                        <option value="'.$row["Nomclient"].'">'.$row["Nomclient"].'</option> 
+                                                        ';
+                                                        $sql = "SELECT id, firstname, adresse FROM client";
+                                                        $result = $conn->query($sql);
+                                                            while ($rows = mysqli_fetch_assoc($result)){     
+                                                                echo "<option value='".$rows["firstname"]."'>".$rows["firstname"]."</option>";       
+                                                            }
+                                                                  
+                                        echo'</select>
+                                       satuts <select id="status"  name="status"   class="form-control form-select">   
+                                                        <option value="LIVREE">Livree</option>
+                                                        <option value="Versement">Versement</option>
+                                                        <option value="Modifier">Modifier</option> 
+                                                        <option value="Rembourser">Rembourser</option>   
+                                                        <option value="Annuler">Annuler</option>
+                                                        <option value="EN COUR">EN COUR</option>       
                                         </select>
                                     </div>    
                                     <div class="col-sm-2">
@@ -97,8 +112,8 @@
                                     </div>
                                 </div>';
                                 ?>
-                                <button type="submit" name="livraison" id="livraison" class="btn btn-warning btn-user btn-block">
-                                    Livraison effectuer
+                                <button type="submit" name="livraison" id="livraison" class="btn btn-success btn-user btn-block">
+                                    Modifier/Livrer/versement/Rembourser
                                 </button>  
                             </form>
                             <hr>
