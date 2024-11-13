@@ -10,12 +10,8 @@ $donnees = json_decode($json,true);
 if (is_array($donnees)){
     $data = 0;
     $quantite = 0;
-    $tab = array("provende" => "provenderie");
-    
-    
-        if((str_contains($donnees["nom"],$tab["provende"])) == true) {    
             
-            $sql = "SELECT CONCAT(nom_produit,' ',cathegorie) as nom, prix_produit_vente as prix, quantite_produit as quantite FROM produit WHERE cathegorie = 'provenderie'";
+            $sql = "SELECT nom_produit as nom, prix_produit_vente as prix, quantite_produit as quantite FROM produit WHERE cathegorie = 'provenderie'";
             $result = $conn->query($sql);
     
             while ($row = mysqli_fetch_assoc($result)) {
@@ -29,7 +25,7 @@ if (is_array($donnees)){
                 }     
             }
             
-        }   
+          
             
     $reponse = [
         'success' => true,

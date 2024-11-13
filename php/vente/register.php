@@ -178,7 +178,7 @@ function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
+    //$nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
     
     $sqlproduit = "SELECT id as id , quantite_produit AS quantite  FROM produit  WHERE nom_produit = '$nomproduit'";
     $resultproduit = $conn->query($sqlproduit);
@@ -308,10 +308,10 @@ try {
             $tab["idclient"] = $value["fournisseur"];
         } 
         */
-        if((str_contains($value["produit"],$tab["provende"])) == true) {
+        
             $tab["provend"] = 1; 
             $tab["idclient"] = $value["fournisseur"]; 
-        }
+        
         
         if ($tab["provend"] == 1 && $tab["phamac"] == 1 ) {
             $reponse = [

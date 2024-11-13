@@ -144,7 +144,7 @@ require_once("../connexion.php");
                                                                         $result = $conn->query($sql);
                                                                         while ($row = mysqli_fetch_assoc($result)){
                                                                             
-                                                                            echo "<option value='".$row["nom_produit"]." ".$row["cathegorie"]."'>".$row["nom_produit"]."</option>";
+                                                                            echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
                                                                             
                                                                             //var_dump($row);
                                                                         }
