@@ -282,19 +282,39 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#vacin"
-            aria-expanded="true" aria-controls="cavin">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Clinique"
+            aria-expanded="true" aria-controls="Clinique">
             <i class="fas fa-fw fa-folder"></i>
             <span>Clinique </span>
         </a>
-        <div id="vacin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="Clinique" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Vacin :</h6>
+                <h6 class="collapse-header">Clinique :</h6>
                 <?php 
                         echo '
-                        <a class="collapse-item" href="phpphamacie/vacin/vacin.php" id="ajouterUtilisateur">Ajouter un sujet</a>
+                        
                         <a class="collapse-item" href="phpphamacie/vacin/consultation.php" id="ajouterUtilisateur">Consultation</a> 
-                        <a class="collapse-item" href="phpphamacie/vacin/listeconsultation.php" id="ajouterUtilisateur">liste Consultation</a> 
+                        <a class="collapse-item" href="phpphamacie/vacin/tableconsultation.php" id="ajouterUtilisateur">liste Consultation</a> 
+                        
+                        '; 
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#vaccin"
+            aria-expanded="true" aria-controls="vaccin">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Vaccin </span>
+        </a>
+        <div id="vaccin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Vaccin :</h6>
+                <?php 
+                        echo '
+                        <a class="collapse-item" href="phpphamacie/vacin/vacin.php" id="ajouterUtilisateur">Adminitrer un Vaccin</a>
                         <a class="collapse-item" href="phpphamacie/vacin/liste.php">Liste Vaccin</a>
                         '; 
                 ?>

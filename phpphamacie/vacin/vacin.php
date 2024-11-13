@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container">
 
@@ -31,7 +31,7 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Enregistrer un sujet</h1>
@@ -81,7 +81,7 @@
                                            name="secondvacin" placeholder="date achat" required>
                                     </div>
                                 </div>
-                                <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
+                                <button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
                                     Enregister
                                 </button>
                                 
