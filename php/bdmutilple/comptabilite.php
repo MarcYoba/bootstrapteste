@@ -187,5 +187,14 @@ class Comptabilite{
         return $tab;
     }
 }
+// selectionner les donnes par trimestre pour chaque client
 
+// SELECT DISTINCT c.firstname, YEAR(v.datevente) AS year, 
+//                 QUARTER(v.prix) AS trimestre, 
+//                 ROUND(SUM(v.prix), 2) AS prix_total
+// FROM vente v
+// INNER JOIN client c ON v.idclient = c.id
+// WHERE MONTH(c.datecreation) < '10'
+// GROUP BY c.firstname, YEAR(v.datevente), QUARTER(v.prix)
+// ORDER BY c.firstname, year, trimestre;
 ?>

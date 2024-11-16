@@ -464,7 +464,7 @@ $_SESSION["route"] = "provenderie";
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Top 20 des Produits les plus Venduent</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Top 20 des Produits les plus Venduent mois</h6>
                                 </div>
                                 <div class="card-body">
                                     <?php 
@@ -486,12 +486,12 @@ $_SESSION["route"] = "provenderie";
                                                     LIMIT 20";
 
                                         } else {
-                                            $sql = "SELECT COUNT(f.idproduit) , f.nomproduit, p.quantite_produit 
+                                            $sql = "SELECT COUNT(f.idproduit) , f.nomproduit, ROUND(SUM(f.quantite),2) as quantite_produit
                                                     FROM facture f 
                                                     INNER JOIN produit p
                                                     WHERE month(f.datefacture) = month(now()) AND f.idproduit = p.id
                                                     GROUP BY f.nomproduit
-                                                    ORDER BY p.quantite_produit DESC 
+                                                    ORDER BY SUM(f.quantite)  DESC 
                                                     LIMIT 20";
 
                                         }

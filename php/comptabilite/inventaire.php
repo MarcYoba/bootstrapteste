@@ -28,14 +28,14 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Situation Comptable Pharmacie </div>
+                <div class="sidebar-brand-text mx-3">Situation Comptable </div>
             </a>
 
             <!-- Divider -->
@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="../../homepahamacie.php">
+                <a class="nav-link" href="../../home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -61,24 +61,24 @@
                 <div id="jounale" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Journal Comptable:</h6>
-                        <a class="collapse-item" href="../comptabilite/Journale.php">Jounal</a>
+                        <a class="collapse-item" href="../comptabilite/Journale.php">Jounale</a> 
                     </div>
                 </div>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#inventaire"
-                    aria-expanded="true" aria-controls="inventaire">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#etatresultat"
+                    aria-expanded="true" aria-controls="etatresultat">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Inventaite</span>
+                    <span>Etat des resultats</span>
                 </a>
-                <div id="inventaire" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="etatresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Inventaite:</h6>
-                        <a class="collapse-item" href="../comptabilite/inventaire.php">inventaite</a> 
+                        <h6 class="collapse-header">Etat des resultats:</h6>
+                        <a class="collapse-item" href="../comptabilite/etatresultat.php">marge beneficiere</a> 
                     </div>
                 </div>
             </li>
+            
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -91,7 +91,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
                         <a class="collapse-item" href="../vente/liste.php">Vente</a>
-                        <a class="collapse-item" href="./achat/liste.php">Achat</a>
+                        <a class="collapse-item" href="../achat/liste.php">Achat</a>
                     </div>
                 </div>
             </li>
@@ -127,7 +127,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item active">
-                <a class="nav-link" href="../../charts.html">
+                <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Statistique</span></a>
             </li>
@@ -321,7 +321,36 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
-                        
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
                     </ul>
 
                 </nav>
@@ -331,228 +360,31 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Journal comptable</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Invantaire</h1>
+                    
+                        <div class="row">
+                            
+                            <p class="col-md-5 btn btn-user btn-block">
+                               Entrez le numero du moi <input type="number" name="nombre" id="nombre" value="1"> 
+                            </p>
+                           
+                            <p class="col-md-2" >
+                                <button class="btn btn-info btn-user btn-block" onclick="invantaire()">afficher</button>
+                            </p>
+                              
+                        </div>
+                    
+
                     <hr>
                     <!-- Content Row -->
                     <div class="row">
 
                         <div class="col-xl-12 col-lg-10">
 
-                            <!-- Area Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Journal des Achats</h6>
-                                </div>
-                                <div class="card-body">
+                                    <h6 class="m-0 font-weight-bold text-primary">Etude Evolutive des Ventes et Cleints de l'entreprise</h6>
                                     
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Janvier</th>
-                                                        <th>Fevrier</th>
-                                                        <th>Mars</th>
-                                                        <th>Avril</th>
-                                                        <th>Mai</th>
-                                                        <th>Jun</th>
-                                                        <th>Juillet</th>
-                                                        <th>Aout</th>
-                                                        <th>Septembre</th>
-                                                        <th>Octobre</th>
-                                                        <th>Novembre</th>
-                                                        <th>Decembre</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Janvier</th>
-                                                        <th>Fevrier</th>
-                                                        <th>Mars</th>
-                                                        <th>Avril</th>
-                                                        <th>Mai</th>
-                                                        <th>Jun</th>
-                                                        <th>Juillet</th>
-                                                        <th>Aout</th>
-                                                        <th>Septembre</th>
-                                                        <th>Octobre</th>
-                                                        <th>Novembre</th>
-                                                        <th>Decembre</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <tr>
-                                                    <?php 
-                                                        require_once("../bdmutilple/comptabilite.php");
-                                                        $compta = new Comptabilite();
-                                                        $somme = $compta->AcahAnuelle();
-                                                        
-                                                        foreach ($somme as $key=> $element) {
-                                                            foreach ($element as $ke => $value) {
-                                                                if (empty($value)) {
-                                                                    echo '<td>0</td>';
-                                                                } else {
-                                                                    echo '<td>'.$value.'</td>';
-                                                                }
-                                                                
-                                                                
-                                                            }
-                                                           
-                                                        }
-                                                    ?>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Trimestre 1</th>
-                                                        <th>Trimestre 2</th>
-                                                        <th>Trimestre 3</th>
-                                                        <th>Trimestre 4</th>
-                                                        <th>Semestre 1</th>
-                                                        <th>Semestre 2</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Trimestre 1</th>
-                                                        <th>Trimestre 2</th>
-                                                        <th>Trimestre 3</th>
-                                                        <th>Trimestre 4</th>
-                                                        <th>Semestre 1</th>
-                                                        <th>Semestre 2</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <?php
-                                                        $compta = new Comptabilite();
-                                                        $Trimestre = $compta->TrimestreSemestre();
-
-                                                        foreach ($Trimestre as $key => $value) {
-                                                            echo '<td>'.$value.'</td>';
-                                                        }
-                                                    ?>
-                                                </tbody>
-                                            </table>
-                                        </div> 
-                                        </div> 
-                                    </div>
-                                    <hr> 
-                                
-                            </div>
-
-                            <!-- Bar Chart -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Journal des Ventes</h6>
-                                </div>
-                                <div class="card-body">
-                                <div class="table-responsive">
-                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Janvier</th>
-                                                        <th>Fevrier</th>
-                                                        <th>Mars</th>
-                                                        <th>Avril</th>
-                                                        <th>Mai</th>
-                                                        <th>Jun</th>
-                                                        <th>Juillet</th>
-                                                        <th>Aout</th>
-                                                        <th>Septembre</th>
-                                                        <th>Octobre</th>
-                                                        <th>Novembre</th>
-                                                        <th>Decembre</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Janvier</th>
-                                                        <th>Fevrier</th>
-                                                        <th>Mars</th>
-                                                        <th>Avril</th>
-                                                        <th>Mai</th>
-                                                        <th>Jun</th>
-                                                        <th>Juillet</th>
-                                                        <th>Aout</th>
-                                                        <th>Septembre</th>
-                                                        <th>Octobre</th>
-                                                        <th>Novembre</th>
-                                                        <th>Decembre</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <tr>
-                                                    <?php 
-                                                        require_once("../bdmutilple/comptabilite.php");
-                                                        $compta = new Comptabilite();
-                                                        $somme = $compta->VenteAnuelle();
-                                                        
-                                                        foreach ($somme as $key=> $element) {
-                                                            foreach ($element as $ke => $value) {
-                                                                if (empty($value)) {
-                                                                    echo '<td>0</td>';
-                                                                } else {
-                                                                    echo '<td>'.$value.'</td>';
-                                                                }
-                                                                
-                                                                
-                                                            }
-                                                           
-                                                        }
-                                                    ?>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Trimestre 1</th>
-                                                        <th>Trimestre 2</th>
-                                                        <th>Trimestre 3</th>
-                                                        <th>Trimestre 4</th>
-                                                        <th>Semestre 1</th>
-                                                        <th>Semestre 2</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Trimestre 1</th>
-                                                        <th>Trimestre 2</th>
-                                                        <th>Trimestre 3</th>
-                                                        <th>Trimestre 4</th>
-                                                        <th>Semestre 1</th>
-                                                        <th>Semestre 2</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <?php
-                                                        $compta = new Comptabilite();
-                                                        $Trimestre = $compta->TrimestreSemestreVente();
-
-                                                        foreach ($Trimestre as $key => $value) {
-                                                            echo '<td>'.$value.'</td>';
-                                                        }
-                                                    ?>
-                                                </tbody>
-                                            </table>
-                                        </div> 
-                                </div>
-                            </div>
-
-                            <!--<div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Etude Evolutive</h6>
-                                    <div class="row">
-                            
-                                        <p class="col-md-5 btn btn-user btn-block">
-                                           Entrez le numero du moi <input type="number" name="nombre3" id="nombre3" value="1"> 
-                                        </p>
-                                        <p class="col-md-2" >
-                                            Analyse Evolutive :<input type="checkbox" name="Evolution" id="Evolution" class="btn btn-primary btn-user btn-block" onclick="EtudeEvolutive()">
-                                        </p>
-                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
@@ -560,7 +392,7 @@
                                             <div class="col-lg-6">
                                                 <div class="card shadow mb-1">
                                                     <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Valeur du moi N</h6>
+                                                        <h6 class="m-0 font-weight-bold text-primary">Evolution Des Ventes</h6>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-5">
@@ -583,17 +415,19 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-5">
-                                                            Montant du moi N :
+                                                            Montant du moi N+1 :
                                                             <span id="montant2"> </span>
                                                         </div>
 
                                                         <div class="col-lg-5">
-                                                            Nombre client du moi N :
+                                                            Nombre client du moi N+1 :
                                                             <span id="client2"> </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <br>
+                                            <hr>
 
                                             <div class="col-lg-12">
                                                 <div class="card shadow mb-1">
@@ -613,11 +447,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <br>
+                                            <hr>
                                             <div class="col-lg-12">
                                                 <div class="card shadow mb-1">
                                                     <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Calcule Generale Client</h6>
+                                                        <h6 class="m-0 font-weight-bold text-primary">Evolution Generale Client</h6>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-5">
@@ -637,9 +472,291 @@
                                     </div>
                                     <hr>
                                     
-                                    <code>Evolution</code>.
+                                    <code>Evolution de l'entreprise</code>.
                                 </div>
-                            </div>-->
+                            </div>
+                            <!-------------------------------------------------->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Etude Evolutive des Prospections</h6>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <div class="card shadow mb-1">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Nombre de vente sur acien client</h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        
+                                                        <div class="col-lg-5">
+                                                            Nombre ancien :
+                                                            <span id="ancienclient1"> </span>
+                                                        </div>
+
+                                                        <div class="col-lg-5">
+                                                            Montant realiser sur ancien client :
+                                                            <span id="montantancien"> </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="card shadow mb-1">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Nombres de ventes sur nouveaux clients</h6>
+                                                    </div>
+                                                    <div class="row">
+                                                    <div class="col-lg-5">
+                                                            Nombre nouveau client :
+                                                            <span id="nouclient"> </span>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            Montant sur nouveau client :
+                                                            <span id="monnoucli"> </span>
+                                                        </div>
+
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <hr>
+
+                                            <div class="col-lg-12">
+                                                <div class="card shadow mb-1">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Pourcentage de protection en montant</h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-5">
+                                                            Total en FCFA:
+                                                            <span id="Totalprospet"> </span>
+                                                        </div>
+
+                                                        <div class="col-lg-5">
+                                                            Total en % :
+                                                            <span id="Poucentageprospect"> </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <hr>
+                                            <div class="col-lg-12">
+                                                <div class="card shadow mb-1">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Pourcentage de protection en client</h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-5">
+                                                            Total en Client:
+                                                            <span id="Totalclient1"> </span>
+                                                        </div>
+
+                                                        <div class="col-lg-5">
+                                                            Total en % :
+                                                            <span id="Poucentageclient1"> </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <hr>
+                                    
+                                    <code>Evolution Prospection</code>.
+                                </div>
+                            </div>
+
+                            <!----------------------------------------------------------------->
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Diminution des ventes sur aciens client</h6>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <div class="form-group row">
+                                            
+
+                                            <div class="col-lg-12">
+                                                <div class="card shadow mb-1">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Tableau de vente part acnien clients</h6>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
+                                                <thead>
+                                                    <tr>
+                                                        <th>/\</th>
+                                                        <th>Janvier</th>
+                                                        <th>Fevrier</th>
+                                                        <th>Mars</th>
+                                                        <th>Avril</th>
+                                                        <th>Mai</th>
+                                                        <th>Jun</th>
+                                                        <th>Juillet</th>
+                                                        <th>Aout</th>
+                                                        <th>Septembre</th>
+                                                        <th>Octobre</th>
+                                                        <th>Novembre</th>
+                                                        <th>Decembre</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>/\</th>
+                                                        <th>Janvier</th>
+                                                        <th>Fevrier</th>
+                                                        <th>Mars</th>
+                                                        <th>Avril</th>
+                                                        <th>Mai</th>
+                                                        <th>Jun</th>
+                                                        <th>Juillet</th>
+                                                        <th>Aout</th>
+                                                        <th>Septembre</th>
+                                                        <th>Octobre</th>
+                                                        <th>Novembre</th>
+                                                        <th>Decembre</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <tr>
+                                                    <?php 
+                                                        require_once("../bdmutilple/etudeEvolutive.php");
+                                                        $evolution = new EtudeEvolution();
+                                                        echo "<tr>";
+                                                        $trimestre1 = 0;
+                                                        $trimestre2 = 0;
+                                                        $trimestre3 = 0;
+                                                        $trimestre4 = 0;
+                                                        $semetre1 = 0;
+                                                        $semetre2 = 0;
+                                                        echo '<td>Montant</td>';
+                                                        for ($i=1; $i <=12 ; $i++) { 
+                                                            $somme = $evolution->VenteAncienClient($i);
+                                                                if (empty($somme["montant"])) {
+                                                                    echo '<td>0</td>'; 
+                                                                } else {
+                                                                    if ($i>=1 && $i<=3) {
+                                                                        $trimestre1 += $somme["montant"];
+                                                                    }elseif ($i>=4 && $i<=6){
+                                                                        $trimestre2 += $somme["montant"];
+                                                                    }elseif ($i>=7 && $i<=9){
+                                                                        $trimestre3 += $somme["montant"];
+                                                                    }elseif ($i>=10 && $i<=12){
+                                                                        $trimestre4 += $somme["montant"];
+                                                                    }
+
+                                                                    if ($i>=1 && $i<=6) {
+                                                                        $semetre1 +=$somme["montant"];
+                                                                    }else{
+                                                                        $semetre2 +=$somme["montant"];  
+                                                                    }
+                                                                    echo '<td>'.$somme["montant"].'</td>';
+                                                                }      
+                                                        }
+                                                        echo "</tr>";
+                                                        
+                                                        $t1 = 0;
+                                                        $t2 = 0;
+                                                        $t3 = 0;
+                                                        $t4 = 0;
+                                                        echo "<tr>";
+                                                        echo '<td>Nombre Client</td>';
+                                                        for ($i=1; $i <=12 ; $i++) { 
+                                                            $somme = $evolution->VenteAncienClient($i);
+                                                                    if (empty($somme["nbclient"])) {
+                                                                        echo '<td>0</td>';
+                                                                    }else{
+                                                                        if ($i>=1 && $i<=3) {
+                                                                            $t1 += $somme["nbclient"];
+                                                                        }elseif ($i>=4 && $i<=6){
+                                                                            $t2 += $somme["nbclient"];
+                                                                        }elseif ($i>=7 && $i<=9){
+                                                                            $t3 += $somme["nbclient"];
+                                                                        }elseif ($i>=10 && $i<=12){
+                                                                            $t4 += $somme["nbclient"];
+                                                                        }
+                                                                        echo '<td>'.$somme["nbclient"].'</td>';
+                                                                    }     
+                                                        }
+                                                        echo "</tr>";
+                                                    ?>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
+                                                <thead>
+                                                    <tr>
+                                                        <th>/\</th>
+                                                        <th>Trimestre 1</th>
+                                                        <th>Trimestre 2</th>
+                                                        <th>Trimestre 3</th>
+                                                        <th>Trimestre 4</th>
+                                                        <th>Semestre 1</th>
+                                                        <th>Semestre 2</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>/\</th>
+                                                        <th>Trimestre 1</th>
+                                                        <th>Trimestre 2</th>
+                                                        <th>Trimestre 3</th>
+                                                        <th>Trimestre 4</th>
+                                                        <th>Semestre 1</th>
+                                                        <th>Semestre 2</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <?php
+                                                            echo '<tr>';
+                                                            echo '<td>/\</td>';
+                                                            echo '<td>'.$trimestre1.'</td>';
+                                                            echo '<td>'.$trimestre2.'</td>';
+                                                            echo '<td>'.$trimestre3.'</td>';
+                                                            echo '<td>'.$trimestre4.'</td>';
+                                                            echo '<td>'.$semetre1.'</td>';
+                                                            echo '<td>'.$semetre2.'</td>';
+                                                            echo '</tr>';
+
+                                                            echo '<tr>';
+                                                            echo '<td>/\</td>';
+                                                            echo '<td>'.$t1.'</td>';
+                                                            echo '<td>'.$t2.'</td>';
+                                                            echo '<td>'.$t3.'</td>';
+                                                            echo '<td>'.$t4.'</td>';
+                                                            echo '<td>'.$t1+$t2.'</td>';
+                                                            echo '<td>'.$t3+$t4.'</td>';
+                                                            echo '</tr>';
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <br>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <hr>
+                                    
+                                    <code>Evaluation des ventes su ancien client</code>.
+                                </div>
+                            </div>
+
+
+
+                            
 
                         </div>
 
@@ -685,7 +802,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="index.php">Logout</a>
+                    <a class="btn btn-primary" href="../../index.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -700,13 +817,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-
-    <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="../../header.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="invantaire.js"></script>
+    <!-- Page level plugins -->
 
 </body>
 

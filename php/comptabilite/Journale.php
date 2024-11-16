@@ -66,6 +66,34 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#inventaire"
+                    aria-expanded="true" aria-controls="inventaire">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Inventaite</span>
+                </a>
+                <div id="inventaire" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Inventaite:</h6>
+                        <a class="collapse-item" href="../comptabilite/inventaire.php">inventaite</a> 
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#etatresultat"
+                    aria-expanded="true" aria-controls="etatresultat">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Etat des resultats</span>
+                </a>
+                <div id="etatresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Etat des resultats:</h6>
+                        <a class="collapse-item" href="../comptabilite/etatresultat.php">marge beneficiere</a> 
+                    </div>
+                </div>
+            </li>
+
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -76,8 +104,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="php/vente/liste.php">Vente</a>
-                        <a class="collapse-item" href="php/achat/liste.php">Achat</a>
+                        <a class="collapse-item" href="../vente/liste.php">Vente</a>
+                        <a class="collapse-item" href="../achat/liste.php">Achat</a>
                     </div>
                 </div>
             </li>
@@ -93,10 +121,10 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="php/versement/liste.php">versement</a>
-                        <a class="collapse-item" href="php/dette/dette.php">Dette</a>
-                        <a class="collapse-item" href="php/depenses/liste.php">Depense</a>
-                        <a class="collapse-item" href="php/produit/liste.php">Produit</a>
+                        <a class="collapse-item" href="../versement/liste.php">versement</a>
+                        <a class="collapse-item" href="../dette/dette.php">Dette</a>
+                        <a class="collapse-item" href="../depenses/liste.php">Depense</a>
+                        <a class="collapse-item" href="../produit/liste.php">Produit</a>
                     </div>
                 </div>
             </li>
