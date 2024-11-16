@@ -348,7 +348,9 @@ require_once("php/activesaision.php");
                     if (($_SESSION["route"] == "cabinet")) { 
                         echo '
                         <a class="collapse-item" href="../vacin/consultation.php" id="ajouterUtilisateur">Consultation</a>
+                        <a class="collapse-item" href="../vacin/fichesuivi.php" >fiche suivi </a>
                         <a class="collapse-item" href="../vacin/tableconsultation.php">liste Consultation</a>
+                        <a class="collapse-item" href="../vacin/listesuivi.php" >liste des suivi</a>
                         
                         ';  
                     }
