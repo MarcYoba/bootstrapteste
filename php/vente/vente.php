@@ -140,13 +140,13 @@ require_once("../connexion.php");
                                                                         <option selected> </option>
                                                                         <?php 
                                                                         global $conn;
-                                                                        $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                                                        $sql = "SELECT  nom_produit,cathegorie,quantite_produit FROM produit";
                                                                         $result = $conn->query($sql);
                                                                         while ($row = mysqli_fetch_assoc($result)){
-                                                                            
-                                                                            echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
-                                                                            
-                                                                            //var_dump($row);
+                                                                           // if($row["quantite_produit"]>0){
+                                                                                echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
+                                                                            //}
+                                                                              //var_dump($row);
                                                                         }
                                                                     ?>
                                                                     </select>

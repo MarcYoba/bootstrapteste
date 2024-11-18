@@ -38,7 +38,7 @@ require_once("../connexion.php");
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container">
 
@@ -57,10 +57,10 @@ require_once("../connexion.php");
                                     <!-- DataTales Example -->
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Tables des ventes</h6>
+                                            <h6 class="m-0 font-weight-bold text-success">Tables des ventes</h6>
                                             <br>
                                             <div class="row">
-                                                <p class="btn btn-info btn-user col-md-2" onclick="ajouterLigne('dataTable', 
+                                                <p class="btn btn-success btn-user col-md-2" onclick="ajouterLigne('dataTable', 
                                                 5, 10)"><i class="fas fa-check"></i> Ajouter ligne</p>
                                                 <p class="col-md-2" >Quantite Total  <br> <span id="quantitetotal">0</span></p>
                                                 <p class="col-md-2" >Montant Total  <br> <span id="prixtotal">0</span></p>
@@ -69,7 +69,7 @@ require_once("../connexion.php");
                                                     <input type="date" class="form-control form-control-user"
                                                     name="datevente" id="datevente" placeholder="quantite" required>
                                                 </p>
-                                                <a class="btn btn-warning btn-user col-md-1" href="liste.php">Liste</a>
+                                                <a class="btn btn-success btn-user col-md-1" href="liste.php">Liste</a>
                                             </div>
                                             <br>
                                             <div class="row">
@@ -140,12 +140,13 @@ require_once("../connexion.php");
                                                                         <option selected> </option>
                                                                         <?php 
                                                                         global $conn;
-                                                                        $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie";
+                                                                        $sql = "SELECT  nom_produit,cathegorie,quantite_produit FROM produitphamacie";
                                                                         $result = $conn->query($sql);
                                                                         while ($row = mysqli_fetch_assoc($result)){
-                                                                            
-                                                                            echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
-                                                                            
+                                                                            if ($row["quantite_produit"]>0) {
+                                                                                echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
+
+                                                                            }                                                                            
                                                                             //var_dump($row);
                                                                         }
                                                                     ?>

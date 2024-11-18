@@ -106,5 +106,39 @@ class Versement{
 
         return $data; 
     }
+
+    public function VersementMensuel($idmois){
+        global $conn;
+        $data = [];
+
+        $sql = "SELECT dateversement, 
+            GROUP_CONCAT(montant,',') AS listMontant,
+            ROUND(SUM(montant)) AS nomtant,
+            GROUP_CONCAT(motif,',') AS motif 
+            FROM versementphamacie
+            WHERE Month(dateversement) = '$idmois'
+            GROUP BY dateversement";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+
+        $sql = "SELECT dateversement, 
+            GROUP_CONCAT(montant,',') AS listMontant,
+            ROUND(SUM(montant)) AS nomtant,
+            GROUP_CONCAT(motif,',') AS motif 
+            FROM versementphamacie
+            WHERE Month(dateversement) = '$idmois'
+            ";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            $row["dateversement"] = "TOTAL";
+            $row["listMontant"] = $row["nomtant"];
+            $row["motif"] = "-";
+            array_push($data,$row);
+        }
+
+        return $data; 
+    }
 }
 ?>

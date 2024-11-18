@@ -21,7 +21,7 @@ class Vente{
 
     public function getIdVente() {
         global $conn;
-        $sql = "SELECT id FROM ventephamacie WHERE datevente= CURRENT_DATE";
+        $sql = "SELECT id,iduser FROM ventephamacie WHERE datevente= CURRENT_DATE";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -33,7 +33,7 @@ class Vente{
     public function getIdVenteByDate($date) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM ventephamacie WHERE datevente= '$date'";
+        $sql = "SELECT id,iduser FROM ventephamacie WHERE datevente= '$date'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -141,7 +141,7 @@ class Vente{
     public function getIdVenteByWeek($datedebut ,$datefin) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id FROM ventephamacie WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
+        $sql = "SELECT id,iduser FROM ventephamacie WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -532,6 +532,43 @@ class Vente{
             } else {
                 return $valdata;
             }    
+    }
+
+    public function SommeAnnuel($idmois) {
+        global $conn;
+        $don=[];
+        $sql = "SELECT datevente,
+                    ROUND(SUM(quantite),2) AS quantite , 
+                    ROUND(SUM(prix),2) AS montant, 
+                    ROUND(SUM(cash),2) AS MontantCash, 
+                    ROUND(SUM(credit),2) AS dette, 
+                    ROUND(SUM(Om),2) AS OM, 
+                    ROUND(SUM(reduction),2) AS reduction  
+                FROM ventephamacie 
+                WHERE month(datevente) = '$idmois'
+                GROUP BY datevente";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($don,$row);    
+        }
+        $sql = "SELECT datevente as TOTAL,
+                    ROUND(SUM(quantite),2) AS quantite , 
+                    ROUND(SUM(prix),2) AS montant, 
+                    ROUND(SUM(cash),2) AS MontantCash, 
+                    ROUND(SUM(credit),2) AS dette, 
+                    ROUND(SUM(Om),2) AS OM, 
+                    ROUND(SUM(reduction),2) AS reduction  
+                FROM ventephamacie 
+                WHERE month(datevente) = '$idmois'
+                ";
+                
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            $row["TOTAL"] = "TOTAL";
+            array_push($don,$row);    
+        }
+        return $don; 
     }
 }
 

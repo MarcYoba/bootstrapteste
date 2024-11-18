@@ -338,13 +338,35 @@ class Facture{
                     $quantite = $key["quantite"];
                     $prix = $key["prix"];
                     $total = $key["total"];
-    
-                    $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE idvente = '$this->idvente'";
-                    $result = $conn->query($sql); 
-    
-                    if ($result == true) {
-                        
+
+                    $sql = "SELECT id,idclient,quantite,idproduit,nomproduit  FROM facturephamacie WHERE idvente = '$this->idvente'";
+                    $result = $conn->query($sql);
+                    $row = mysqli_fetch_assoc($result);
+
+                    if ($nomproduit != $row["nomproduit"]) {
+                        $n = $row["idproduit"];
+                        $q = $row["quantite"];
+                        $v = $this->UgradeProduitFacture($n,$q);
+
+                        $sql = "SELECT id  FROM produitphamacie WHERE nom_produit = '$nomproduit'";
+                        $result = $conn->query($sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $n = $row["id"];
+                        $q = $quantite*-1;
+
+                       $v = $this->UgradeProduitFacture($n,$q);
+                        $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total',idproduit='$n' WHERE idvente = '$this->idvente'";
+                        $result = $conn->query($sql); 
+                        if ($result == true) {
+                        }
+                    } else {
+                        $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE idvente = '$this->idvente'";
+                        $result = $conn->query($sql); 
+                        if ($result == true) {
+                        }
                     }
+                    
+                    
                 }
             }
             
