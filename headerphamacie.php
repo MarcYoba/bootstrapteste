@@ -325,6 +325,26 @@
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#service"
+            aria-expanded="true" aria-controls="service">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Service </span>
+        </a>
+        <div id="service" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Service :</h6>
+                <?php 
+                        echo '
+                        <a class="collapse-item" href="phpphamacie/service/service.php" id="ajouterUtilisateur">Descente sur terrain</a>
+                        <a class="collapse-item" href="phpphamacie/service/liste.php">Liste </a>
+                        '; 
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 

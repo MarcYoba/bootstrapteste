@@ -393,13 +393,39 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Depense:</h6>
                 <?php 
                     if (($_SESSION["route"] == "cabinet")) {
-                            
+                        echo '
+                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
+                        <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                        ';
                     } else {
                         echo '
                         <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
                         <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
                         ';
                     }
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#service"
+            aria-expanded="true" aria-controls="service">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Service </span>
+        </a>
+        <div id="service" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Service :</h6>
+                <?php 
+                if (($_SESSION["route"] == "cabinet")) {
+                    echo '
+                    <a class="collapse-item" href="../service/service.php" id="ajouterUtilisateur">Descente sur terrain</a>
+                    <a class="collapse-item" href="../service/liste.php">Liste </a>
+                    ';       
+                }
+                        
                 ?>
                 
             </div>
