@@ -58,11 +58,11 @@ if (isset($_GET["id"])) {
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Creation de compte!</h1>
-                            </div>
+                            <div class="card-header py-3">
+                                <h1 class="m-0 font-weight-bold text-primary">Creation de compte!</h1>
+                            </div><br>
                             <form class="user" action="register.php" method="post">
                                 <input type="number" class="form-control form-control-user drop" id="iduser"
                                 name="iduser" value="0" required>
@@ -109,16 +109,18 @@ if (isset($_GET["id"])) {
                                         <option value="Tous">Cabinet et Provenderie</option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <select class="form-control form-select" id="cathegorie" name="cathegorie" required>
+                                        <option selected disabled>Cathegorie</option>
+                                        <option value="employer">Employer</option>
+                                        <option value="client">Client</option>
+                                    </select>
+                                </div>
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
                                     Enregistrer
                                 </button>
                                 <hr>
-                                <a href="index.php" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.php" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
+                                
                             </form>
                             <hr>
                             

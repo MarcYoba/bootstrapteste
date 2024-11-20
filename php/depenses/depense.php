@@ -46,10 +46,11 @@
                                     <div class="col-sm-6">
                                         <select id="type" name="type" class="form-control form-select" required>
                                             <option value="Autres achats"> Autres achats ( Tami, marteau, ralonge, etc.)</option>
-                                            <option value="charges generales"> charges générales ( Loyer, eau, electricite, etc.)</option>
+                                            <option value="service exterieur"> charges générales ( Loyer, eau, electricite, etc.)</option>
                                             <option value="impots et taxes">  impôts et taxes </option>
-                                            <option value="Salaires et traitements">  Salaires et traitements (salaires de base, heures supplémentaires, primes, etc.) </option>
-                                            <option value="Voyages">  Voyages et déplacements. </option>
+                                            <option value="charge personnel">  charges de personnel(Salaires)  </option>
+                                            <option value="autre charge"> (Heures supplémentaires, primes,Motivation,Miting etc.) </option>
+                                            <option value="Voyages">  Voyages et déplacements, deplacement pour versement,seminaire, autre depense </option>
                                         </select>  
                                     </div>
                                     

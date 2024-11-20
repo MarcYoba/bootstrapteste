@@ -41,11 +41,11 @@ class User{
         }  
     }
 
-    public function UpdateUser($nom,$prenom,$email,$password,$role,$id,$travaile){
+    public function UpdateUser($nom,$prenom,$email,$password,$role,$id,$travaile,$cathegorie){
         global $conn;
 
         if ($password == "0") {
-            $sql = "UPDATE user SET email='$email',roles='$role',firstname='$nom',lastname='$prenom',zonetravail='$travaile' WHERE id = '$id'";
+            $sql = "UPDATE user SET email='$email',roles='$role',firstname='$nom',lastname='$prenom',zonetravail='$travaile',cathegorie='$cathegorie' WHERE id = '$id'";
             $result = $conn->query($sql);
             if ($result ==true) {
                 return true;

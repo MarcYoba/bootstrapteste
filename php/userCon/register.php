@@ -46,6 +46,7 @@ if (isset($_POST['submit'])) {
     $roles = $_POST["roleuser"];
     $iduser = $_POST["iduser"];
     $travaile = $_POST["travaile"];
+    $cathegorie = $_POST["cathegorie"];
     // Vérifier si tous les champs sont remplis
     if (!empty($nom) || !empty($prenom) || !empty($email) || !empty($mot_de_passe) || !empty($mot_de_passe_verifi) || !empty($travaile)) {
         if ($mot_de_passe_verifi == $mot_de_passe){
@@ -72,7 +73,7 @@ if (isset($_POST['submit'])) {
                 $stmt->close();
             } else {
                 if ($mot_de_passe == $mot_de_passe_verifi) {
-                    if ($user->UpdateUser($nom,$prenom,$email,$mot_de_passe,$roles,$iduser,$travaile)) 
+                    if ($user->UpdateUser($nom,$prenom,$email,$mot_de_passe,$roles,$iduser,$travaile,$cathegorie)) 
                     {
                         header("location:liste.php");
                     } else {
