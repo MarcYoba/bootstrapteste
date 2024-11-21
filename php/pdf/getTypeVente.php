@@ -188,7 +188,7 @@ $html = '
                     $html .= '</tr>
                         <tr>
                         <th scope="col">Mon du produit </th>
-                        <th scope="col">Stock debut du jour</th>
+                        <th scope="col">Stock debut periode</th>
                         <th scope="col">Quantite vendu</th>
                         <th scope="col">Reste en stock</th>
                         <th scope="col">Date</th>

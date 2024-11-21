@@ -2,7 +2,12 @@
 
 class TrieValue{
     public function RemoveChaine($Mots,$phrase){
-
-        return str_replace($Mots,'',$phrase);
+        if (str_contains($phrase,$Mots)) {
+            return str_replace($Mots,'',$phrase);
+        } else {
+            return $phrase;
+        }
+        
+        
     }
 }
