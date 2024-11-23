@@ -272,8 +272,10 @@
                 <h6 class="collapse-header">Volaille :</h6>
                 <?php 
                         echo '
-                        <a class="collapse-item" href="phpphamacie/volaille/volaille.php" id="ajouterUtilisateur">Commande</a>
+                        <a class="collapse-item" href="phpphamacie/volaille/volaille.php">Commande</a>
                         <a class="collapse-item" href="phpphamacie/volaille/liste.php">Liste</a>
+                        <a class="collapse-item" href="phpphamacie/volaille/comandefourniseur.php">Commande fourniseur</a>
+                        <a class="collapse-item" href="phpphamacie/volaille/listecommande.php">Liste fourniseur</a>
                         '; 
                 ?>
                 

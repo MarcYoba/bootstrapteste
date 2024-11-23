@@ -327,7 +327,9 @@ require_once("php/activesaision.php");
                     if (($_SESSION["route"] == "cabinet")) { 
                         echo '
                         <a class="collapse-item" href="../volaille/volaille.php" id="ajouterUtilisateur">Commande</a>
+                        <a class="collapse-item" href="../volaille/comandefourniseur.php">Commande fourniseur</a>
                         <a class="collapse-item" href="../volaille/liste.php">Liste</a>
+                        <a class="collapse-item" href="../volaille/listecommande.php">Liste fourniseur</a>
                         '; 
                     }
                 ?>

@@ -39,3 +39,14 @@ function invantaire() {
   });
 
 }
+
+function semaine() {
+  let evolution = document.getElementById("nombre").value;
+  let evoluseme = {};
+
+  console.log("Evolution semaine: ");
+  evoluseme.datatrie = "semain"
+  evoluseme.datavalue = evolution;
+
+  window.location.href = 'invantairesemaine.php?id='+ evolution;
+}

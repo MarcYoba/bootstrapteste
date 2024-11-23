@@ -53,6 +53,20 @@
 
             <!-- Heading -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#inventaire"
+                    aria-expanded="true" aria-controls="inventaire">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Analyse Evolutive</span>
+                </a>
+                <div id="inventaire" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Analyse Evolutive:</h6>
+                        <a class="collapse-item" href="../comptabilite/inventaire.php">Analyse Evolutive Moi</a> 
+                        <a class="collapse-item" href="../comptabilite/invantairesemaine.php">Analyse Evolutive Semaine</a> 
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#jounale"
                     aria-expanded="true" aria-controls="jounale">
                     <i class="fas fa-fw fa-folder"></i>
@@ -364,14 +378,13 @@
                     
                         <div class="row">
                             
-                            <p class="col-md-5 btn btn-user btn-block">
+                            <p class="col-md-3 btn btn-user btn-block">
                                Entrez le numero du moi <input type="number" name="nombre" id="nombre" value="1"> 
                             </p>
                            
                             <p class="col-md-2" >
-                                <button class="btn btn-info btn-user btn-block" onclick="invantaire()">afficher</button>
+                                <button class="btn btn-info btn-user btn-block" onclick="invantaire()">Evolurion moi</button>
                             </p>
-                              
                         </div>
                     
 
