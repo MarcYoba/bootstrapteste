@@ -24,14 +24,14 @@ function invantaire() {
       document.getElementById("monnoucli").innerText = data.Moclient
       document.getElementById("ancienclient1").innerText = data.Nbaclient
       document.getElementById("montantancien").innerText = data.MoAclient
-      document.getElementById("Total").innerText = Math.round((data.montantN1 - data.montantN)/data.montantN);
-      document.getElementById("Totalprospet").innerText = Math.round((data.Moclient - data.MoAclient)/data.MoAclient);
-      document.getElementById("Poucentage").innerText = (Math.round((data.montantN1 - data.montantN)/data.montantN))*100;
-      document.getElementById("Poucentageprospect").innerText = (Math.round((data.Moclient - data.MoAclient)/data.MoAclient))*100;
-      document.getElementById("Totalclient").innerText = Math.round((data.ClientN1 - data.ClientN)/data.ClientN);
-      document.getElementById("Poucentageclient").innerText = (Math.round((data.ClientN1 - data.ClientN)/data.ClientN))*100;
-      document.getElementById("Totalclient1").innerText = Math.round((data.Nbuclient - data.Nbaclient)/data.Nbaclient);
-      document.getElementById("Poucentageclient1").innerText = (Math.round((data.Nbuclient - data.Nbaclient)/data.Nbaclient))*100;
+      document.getElementById("Total").innerText = ((data.montantN1 - data.montantN));
+      document.getElementById("Totalprospet").innerText =((data.Moclient - data.MoAclient));
+      document.getElementById("Poucentage").innerText = (((data.montantN1 - data.montantN))/data.montantN)*100;
+      document.getElementById("Poucentageprospect").innerText = (((data.Moclient - data.MoAclient))/data.MoAclient)*100;
+      document.getElementById("Totalclient").innerText = ((data.ClientN1 - data.ClientN));
+      document.getElementById("Poucentageclient").innerText = (((data.ClientN1 - data.ClientN))/data.ClientN)*100;
+      document.getElementById("Totalclient1").innerText = ((data.Nbuclient - data.Nbaclient));
+      document.getElementById("Poucentageclient1").innerText = (((data.Nbuclient - data.Nbaclient))/data.Nbaclient)*100;
       
     })
     .catch(error => {

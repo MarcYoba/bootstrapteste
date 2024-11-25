@@ -21,7 +21,7 @@ class Vente{
 
     public function getIdVente() {
         global $conn;
-        $sql = "SELECT id,iduser FROM vente WHERE datevente= CURRENT_DATE";
+        $sql = "SELECT id,iduser,heure,aliment FROM vente WHERE datevente= CURRENT_DATE";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -33,7 +33,7 @@ class Vente{
     public function getIdVenteByDate($date) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id,iduser FROM vente WHERE datevente= '$date'";
+        $sql = "SELECT id,iduser,heure,aliment FROM vente WHERE datevente= '$date'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
@@ -141,7 +141,7 @@ class Vente{
     public function getIdVenteByWeek($datedebut ,$datefin) {
         global $conn;
         $this->data = [];
-        $sql = "SELECT id,iduser FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
+        $sql = "SELECT id,iduser,heure,aliment FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];

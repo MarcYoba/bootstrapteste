@@ -26,12 +26,12 @@ function invantaire() {
       document.getElementById("montantancien").innerText = data.MoAclient
       document.getElementById("Total").innerText = Math.round((data.montantN1 - data.montantN));
       document.getElementById("Totalprospet").innerText = Math.round((data.Moclient - data.MoAclient));
-      document.getElementById("Poucentage").innerText = (Math.round((data.montantN1 - data.montantN)/data.montantN))*100;
-      document.getElementById("Poucentageprospect").innerText = (Math.round((data.Moclient - data.MoAclient)/data.MoAclient))*100;
+      document.getElementById("Poucentage").innerText = (((data.montantN1 - data.montantN))/data.montantN)*100;
+      document.getElementById("Poucentageprospect").innerText = (((data.Moclient - data.MoAclient))/data.MoAclient)*100;
       document.getElementById("Totalclient").innerText = Math.round((data.ClientN1 - data.ClientN));
-      document.getElementById("Poucentageclient").innerText = (Math.round((data.ClientN1 - data.ClientN)/data.ClientN))*100;
+      document.getElementById("Poucentageclient").innerText = (((data.ClientN1 - data.ClientN))/data.ClientN)*100;
       document.getElementById("Totalclient1").innerText = Math.round((data.Nbuclient - data.Nbaclient));
-      document.getElementById("Poucentageclient1").innerText = (Math.round((data.Nbuclient - data.Nbaclient)/data.Nbaclient))*100;
+      document.getElementById("Poucentageclient1").innerText = (((data.Nbuclient - data.Nbaclient))/data.Nbaclient)*100;
       
     })
     .catch(error => {

@@ -529,7 +529,7 @@
                                             <div class="col-lg-12">
                                                 <div class="card shadow mb-1">
                                                     <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Pourcentage de protection en montant</h6>
+                                                        <h6 class="m-0 font-weight-bold text-primary">Pourcentage de Prospections en montant</h6>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-5">
@@ -549,7 +549,7 @@
                                             <div class="col-lg-12">
                                                 <div class="card shadow mb-1">
                                                     <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Pourcentage de protection en client</h6>
+                                                        <h6 class="m-0 font-weight-bold text-primary">Pourcentage de Prospections en client</h6>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-5">

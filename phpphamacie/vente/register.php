@@ -9,7 +9,7 @@ $donnees = json_decode($json,true);
 $credit = 0;
     $cash = 0;
     $tab = array(
-        "typepaiement" => " ",
+        "typepaiement" => "Banque",
         "provende" => "provenderie",
         "pharmacie" => "pharmacie",
         "provend" => 0,
@@ -20,6 +20,8 @@ $credit = 0;
         "cash" => 0,
         "credit" => 0,
         "om" => 0,
+        "Banque" => 0,
+        "status" => 0,
         "montant" => 0,
         "quantite" => 0,
         "reduction" => 0,
@@ -231,7 +233,7 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
     // Creation du prix (insertion de donne) 
 
     if ($type != " ") {
-        $sql = "INSERT INTO ventephamacie (typevente,quantite,prix,idclient,iduser,datevente,typeprduit,cash,credit,Om,reduction) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
+        $sql = "INSERT INTO ventephamacie (typevente,quantite,prix,idclient,iduser,datevente,typeprduit,cash,credit,Om,reduction,banque,heure,statusvente) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?)";
 
     // Lier les paramètres
         if (!$stmt = $conn->prepare($sql)) {
@@ -244,8 +246,10 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
         } else {
             $date = $datevente;
         }
-        
-        $stmt->bind_param('sddddssdddd', $type , $quntite, $prix,$idclient,$_SESSION["id"], $date,$typeproduit,$tab["cash"],$tab["credit"],$tab["om"],$tab["reduction"]);
+        date_default_timezone_set('Africa/Douala');
+        $timestamp = new DateTime();
+        $timestamp = $timestamp->format('H:i:s');
+        $stmt->bind_param('sddddssdddddss', $type , $quntite, $prix,$idclient,$_SESSION["id"], $date,$typeproduit,$tab["cash"],$tab["credit"],$tab["om"],$tab["reduction"],$tab["Banque"],$timestamp,$tab["status"]);
 
         // Exécuter la requête
         if (!$stmt->execute()) {
@@ -280,21 +284,7 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
             insertFacture($value["produit"],$value["quantite"],$value["prix"],$tab["idvente"] ,$value["fournisseur"],$tab["typepaiement"],$datevente);             
         }
         $id = $tab["idvente"];
-        // $sql = "SELECT id FROM facture WHERE idvente = '$id'";
-        // $result = $conn->query($sql);
-        // $idfacture =0 ;
         
-        // while ($row = mysqli_fetch_assoc($result)) {
-        //     if ($idfacture==0) {
-        //         $idfacture = $row["id"];
-        //     } else {
-        //         $idfacture = $idfacture.$row["id"];
-        //     }
-        //     $idfacture++;
-        // }
-
-        // $sql = "UPDATE vente set numfacture ='$id' WHERE id = '$id'";
-        // $result = $conn->query($sql);
         
     }
 }
@@ -302,12 +292,7 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
 try {
     
     foreach ($donnees as $key => $value) {
-        /*
-        if ((str_contains($value["produit"],$tab["pharmacie"])) == true) {
-            $tab["phamac"] = 1;
-            $tab["idclient"] = $value["fournisseur"];
-        } 
-        */
+        
         
             $tab["provend"] = 1; 
             $tab["idclient"] = $value["fournisseur"]; 
@@ -344,8 +329,13 @@ try {
                 $tab["credit"] = $denierligne["credit"];
             }
         } else {
-            $tab["typepaiement"] = "CREDIT";
-            $tab["credit"] = $denierligne["credit"];
+            if ($denierligne["credit"]>0) {
+                $tab["typepaiement"] = "CREDIT";
+                $tab["credit"] = $denierligne["credit"];
+            } else {
+                $tab["typepaiement"] = "BANQUE";
+                $tab["Banque"] = $denierligne["Banque"];
+            }
         }   
     }
     $tab["montant"] = $denierligne["Total"];
@@ -353,6 +343,8 @@ try {
     $tab["reduction"] = $denierligne["reduction"];
     $tab["idclient"] = $denierligne["fournisseur"];
     $tab["date"] = $denierligne["date"];
+    $tab["Banque"] = $denierligne["Banque"];
+    $tab["status"] = $denierligne["statusvente"];
 
     array_pop($donnees);
 

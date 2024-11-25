@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // Connexion à la base de données
 require_once("../connexion.php");
 
@@ -11,14 +11,14 @@ function creerClient($nom, $type, $prixvente, $prixachat,$quantite,$cathegorie,$
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO produitphamacie  (nom_produit, prix_produit_vente,quantite_produit, prix_achat_produit, stock_start_produit,type_produit,date_ajout_produit,cathegorie,datePeramtion) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
+    $sql = "INSERT INTO produitphamacie  (nom_produit, prix_produit_vente,quantite_produit, prix_achat_produit, stock_start_produit,type_produit,date_ajout_produit,cathegorie,datePeramtion,iduser) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
         die('Erreur de préparation de la requête : ' . $conn->error);
     }
     $date = date("y/m/d");
-    $stmt->bind_param('sddddssss', $nom, $prixvente,$quantite,  $prixachat,$quantite,$type, $date,$cathegorie,$dateperam);
+    $stmt->bind_param('sddddssssd', $nom, $prixvente,$quantite,  $prixachat,$quantite,$type, $date,$cathegorie,$dateperam,$_SERVER["id"]);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
@@ -99,8 +99,9 @@ if (isset($_POST['modifier'])) {
             $stmt->store_result();
 
             if ($stmt->num_rows > 0) {
+                $sesion = $_SESSION["id"];
                 $sql = "UPDATE produitphamacie  set nom_produit ='$nom',type_produit ='$type', prix_produit_vente ='$prixvente',
-                	prix_achat_produit ='$prixachat', quantite_produit ='$quantite',cathegorie ='$cathegorie',datePeramtion ='$dateperam' WHERE id = '$id'";
+                	prix_achat_produit ='$prixachat', quantite_produit ='$quantite',cathegorie ='$cathegorie',datePeramtion ='$dateperam',iduser ='$sesion' WHERE id = '$id'";
                 $result = $conn->query($sql);
                 $sql = "UPDATE historiquestockphamacie set Nomproduit ='$nom' WHERE idproduit  = '$id'";
                 $result = $conn->query($sql);

@@ -70,6 +70,12 @@ require_once("../connexion.php");
                                                     name="datevente" id="datevente" placeholder="quantite" required>
                                                 </p>
                                                 <a class="btn btn-success btn-user col-md-1" href="liste.php">Liste</a>
+                                                <p class="col-md-2" >
+                                                    <span id="TypePaie" class="drop" ></span>
+                                                    <span id="teste" class="drop" >0</span>
+                                                    Total reduction <input type="number" class="form-control form-control-user"
+                                                name="caculelreduction" id="caculelreduction" placeholder="reduction produit" readonly value="0">
+                                                </p>
                                             </div>
                                             <br>
                                             <div class="row">
@@ -90,6 +96,11 @@ require_once("../connexion.php");
                                                     name="credit" id="credit" value="0" required>
                                                 </p>
                                                 <p class="col-md-2" >
+                                                    Banque
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="Banque" id="Banque" value="0" required>
+                                                </p>
+                                                <p class="col-md-2" >
                                                     Reduction
                                                     <input type="number" class="form-control form-control-user"
                                                     name="reduction" id="reduction" value="0" required>
@@ -99,10 +110,6 @@ require_once("../connexion.php");
                                                     <input type="txt" class="form-control form-control-user"
                                                      name="Total" id="Total" placeholder="0 FCFA"  readonly>
                                                 </p>
-                                                <p class="col-md-2" >
-                                                    <span id="TypePaie" class="drop" ></span>
-                                                    <span id="teste" class="drop" >0</span>
-                                                </p>
                                                 
                                             </div>
                                             <div class="row">
@@ -111,7 +118,7 @@ require_once("../connexion.php");
                                                     <input type="tel" id="telephone"   class="form-control form-control-user" placeholder="telephone"> <br>
                                                     <button class="btn btn-success btn-user" onclick="enregistremetnclient()">enregistrer client</button>
                                                 </p>
-                                                <p class="col-md-4" >
+                                                <p class="col-md-3" >
                                                     <select id="fournisseur"  name="fournisseur"   class="form-control form-select"  size="10" multiple aria-label="multiple select " onchange="Client()" required>
                                                                     
                                                         <?php 
@@ -135,7 +142,7 @@ require_once("../connexion.php");
                                                     name="prixglobal" id="prixglobal" placeholder="Prix du produit" readonly><br>
                                                     <i  id="montanttotal" class="form-control form-control-user"><span id="resultat" ></span></i>
                                                 </p>
-                                                <p class="col-md-4" >
+                                                <p class="col-md-3" >
                                                 <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="10"  multiple aria-label="multiple select " required onchange="recherchePrix()">
                                                                         <option selected> </option>
                                                                         <?php 
@@ -152,7 +159,16 @@ require_once("../connexion.php");
                                                                     ?>
                                                                     </select>
                                                 </p>
-                                                <p class="col-md-8" ></p>
+                                                <p class="col-md-2" >
+                                                    <select id="statusvente" name="statusvente" class="form-control form-select">
+                                                        <option value="livree">livree</option>
+                                                        <option value="non livree">non livree</option>
+                                                    </select>
+                                                    reduction produit:
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="rp" id="rp" placeholder="reduction produit" required value="0"><br>
+                                                    <button class="btn btn-primary btn-user" onclick="caculeReduction()">Calculer</button>
+                                                </p>
                                                 <p class="col-md-4" >
                                                     <span id="modifiervente"></span>
                                                     <span id="enregistremet"></span>

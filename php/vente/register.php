@@ -9,7 +9,7 @@ $donnees = json_decode($json,true);
 $credit = 0;
     $cash = 0;
     $tab = array(
-        "typepaiement" => " ",
+        "typepaiement" => "",
         "provende" => "provenderie",
         "pharmacie" => "pharmacie",
         "provend" => 0,
@@ -20,9 +20,13 @@ $credit = 0;
         "cash" => 0,
         "credit" => 0,
         "om" => 0,
+        "banque" => 0,
+        "esperce" => 0,
+        "aliment" => 0,
         "montant" => 0,
         "quantite" => 0,
         "reduction" => 0,
+        "status" => ''
     );
 
     $donneVente = 0;
@@ -231,7 +235,7 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
     // Creation du prix (insertion de donne) 
 
     if ($type != " ") {
-        $sql = "INSERT INTO vente (typevente,quantite,prix,idclient,iduser,datevente,typeprduit,cash,credit,Om,reduction) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
+        $sql = "INSERT INTO vente (typevente,quantite,prix,idclient,iduser,datevente,typeprduit,cash,credit,Om,reduction,banque,esperce,aliment,heure,statusvente) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?)";
 
     // Lier les paramètres
         if (!$stmt = $conn->prepare($sql)) {
@@ -244,8 +248,10 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
         } else {
             $date = $datevente;
         }
-        
-        $stmt->bind_param('sddddssdddd', $type , $quntite, $prix,$idclient,$_SESSION["id"], $date,$typeproduit,$tab["cash"],$tab["credit"],$tab["om"],$tab["reduction"]);
+        date_default_timezone_set('Africa/Douala');
+        $timestamp = new DateTime();
+        $timestamp = $timestamp->format('H:i:s');
+        $stmt->bind_param('sddddssdddddssss', $type , $quntite, $prix,$idclient,$_SESSION["id"], $date,$typeproduit,$tab["cash"],$tab["credit"],$tab["om"],$tab["reduction"],$tab["banque"],$tab["esperce"],$tab["aliment"],$timestamp,$tab["status"]);
 
         // Exécuter la requête
         if (!$stmt->execute()) {
@@ -280,21 +286,6 @@ function insertVente($type,$quntite,$prix,$idclient,$typeproduit,$donnees,$datev
             insertFacture($value["produit"],$value["quantite"],$value["prix"],$tab["idvente"] ,$value["fournisseur"],$tab["typepaiement"],$datevente);             
         }
         $id = $tab["idvente"];
-        // $sql = "SELECT id FROM facture WHERE idvente = '$id'";
-        // $result = $conn->query($sql);
-        // $idfacture =0 ;
-        
-        // while ($row = mysqli_fetch_assoc($result)) {
-        //     if ($idfacture==0) {
-        //         $idfacture = $row["id"];
-        //     } else {
-        //         $idfacture = $idfacture.$row["id"];
-        //     }
-        //     $idfacture++;
-        // }
-
-        // $sql = "UPDATE vente set numfacture ='$id' WHERE id = '$id'";
-        // $result = $conn->query($sql);
         
     }
 }
@@ -344,15 +335,25 @@ try {
                 $tab["credit"] = $denierligne["credit"];
             }
         } else {
-            $tab["typepaiement"] = "CREDIT";
-            $tab["credit"] = $denierligne["credit"];
+            if ($denierligne["credit"]>0) {
+                $tab["typepaiement"] = "CREDIT";
+                $tab["credit"] = $denierligne["credit"];
+            } else {
+                $tab["typepaiement"] = "BANQUE";
+                $tab["status"] = $denierligne["statusvente"];
+            }
         }   
     }
+
     $tab["montant"] = $denierligne["Total"];
     $tab["quantite"] = $denierligne["Qttotal"];
     $tab["reduction"] = $denierligne["reduction"];
     $tab["idclient"] = $denierligne["fournisseur"];
     $tab["date"] = $denierligne["date"];
+    $tab["banque"] = $denierligne["Banque"];
+    $tab["esperce"] = $denierligne["esperce"];
+    $tab["aliment"] = $denierligne["aliment"];
+    $tab["status"] = $denierligne["statusvente"];
 
     array_pop($donnees);
 

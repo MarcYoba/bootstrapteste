@@ -131,6 +131,7 @@ require_once("../connexion.php");
                                             <th>numero facture</th>
                                             <th>Quantite total</th>
                                             <th>Montant total</th>
+                                            <th>Status</th>
                                             <th>Date</th>
                                             <th>Operation</th>
                                         </tr>
@@ -143,6 +144,7 @@ require_once("../connexion.php");
                                             <th>numero facture</th>
                                             <th>Quantite total</th>
                                             <th>Montant total</th>
+                                            <th>Status</th>
                                             <th>Date</th>
                                             <th>Operation</th>
                                         </tr>
@@ -164,6 +166,7 @@ require_once("../connexion.php");
                                             echo '<th>'.$row["id"].'</th>';
                                             echo '<th>'.$row["quantite"].'</th>';
                                             echo '<th>'.$row["prix"].'</th>';
+                                            echo '<th>'.$row["statusvente"].'</th>';
                                             echo '<th>'.$row["datevente"].'</th>';
                                             echo '<th>';
                                             echo "<a href='facture.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fa fa-bars'></i></a>";

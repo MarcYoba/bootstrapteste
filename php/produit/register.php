@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // Connexion à la base de données
 require_once("../connexion.php");
 
@@ -11,14 +11,14 @@ function creerClient($nom, $type, $prixvente, $prixachat,$quantite,$cathegorie) 
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO produit (nom_produit, prix_produit_vente,quantite_produit, prix_achat_produit, stock_start_produit,type_produit,date_ajout_produit,cathegorie) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+    $sql = "INSERT INTO produit (nom_produit, prix_produit_vente,quantite_produit, prix_achat_produit, stock_start_produit,type_produit,date_ajout_produit,cathegorie,iduser) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
         die('Erreur de préparation de la requête : ' . $conn->error);
     }
     $date = date("y/m/d");
-    $stmt->bind_param('sddddsss', $nom, $prixvente,$quantite,  $prixachat,$quantite,$type, $date,$cathegorie);
+    $stmt->bind_param('sddddsssd', $nom, $prixvente,$quantite,  $prixachat,$quantite,$type, $date,$cathegorie,$_SESSION["id"]);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
@@ -97,9 +97,11 @@ if (isset($_POST['modifier'])) {
             $stmt->store_result();
 
             if ($stmt->num_rows > 0) {
+                $sesion = $_SESSION["id"];
                 $sql = "UPDATE produit set nom_produit ='$nom',type_produit ='$type', prix_produit_vente ='$prixvente',
-                	prix_achat_produit ='$prixachat', quantite_produit ='$quantite',cathegorie ='$cathegorie' WHERE id = '$id'";
+                	prix_achat_produit ='$prixachat', quantite_produit ='$quantite',cathegorie ='$cathegorie',iduser ='$sesion' WHERE id = '$id'";
                 $result = $conn->query($sql);
+                
                 $sql = "UPDATE historiquestock set Nomproduit ='$nom' WHERE idproduit  = '$id'";
                 $result = $conn->query($sql);
                 header("Location: liste.php");
