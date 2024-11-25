@@ -62,16 +62,35 @@
                                             ?>
                                     </select>
                                     </div>
-                                </div>
-                                <div class="form-group">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Type"
                                         name="Type" placeholder="Race de sujet" required>
                                     </div>
-                                    
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        Type vaccin :<select class="form-control form-select" id="typevaccin" name="typevaccin" placeholder="Race de sujet" required>
+                                            <Option value="Complet">Vaccin Complet</Option>
+                                            <Option value="antirabique">Vaccin antirabique</Option>
+                                            <Option value="parvovirose">Vaccin parvovirose</Option>
+                                            <Option value="L">Vaccin L</Option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 mb-3 mb-sm-0">
+                                        montant <input type="number" class="form-control form-control-user" id="montant"
+                                           name="montant" placeholder="montant" required>
+                                    </div>
+                                    <div class="col-sm-2 mb-3 mb-sm-0">
+                                        montant payer<input type="number" class="form-control form-control-user" id="montantpayer"
+                                           name="montantpayer" placeholder="montant payer" required>
+                                    </div>
+                                    <div class="col-sm-2 mb-3 mb-sm-0">
+                                        Reste<input type="number" class="form-control form-control-user" id="Reste"
+                                           name="Reste" placeholder="Reste" required>
+                                    </div>
                                 </div>
                                 <hr>
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         date vacin <input type="date" class="form-control form-control-user" id="premiervacin"
                                            name="premiervacin" placeholder="date achat" required>

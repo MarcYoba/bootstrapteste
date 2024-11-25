@@ -72,6 +72,9 @@ require_once("../bdmutilple/getclient.php");
                                             <th>Age</th>
                                             <th>Race</th>
                                             <th>Client</th>
+                                            <th>montant</th>
+                                            <th>Avance</th>
+                                            <th>Type vacin</th>
                                             <th>date Vacin</th>
                                             <th>date rappel</th>
                                             <th>Operation</th>
@@ -84,6 +87,9 @@ require_once("../bdmutilple/getclient.php");
                                             <th>Age</th>
                                             <th>Race</th>
                                             <th>Client</th>
+                                            <th>montant</th>
+                                            <th>Avance</th>
+                                            <th>Type vacin</th>
                                             <th>date Vacin</th>
                                             <th>date rappel</th>
                                             <th>Operation</th>
@@ -102,6 +108,9 @@ require_once("../bdmutilple/getclient.php");
                                             echo '<td>'.$row["age"].'</td>';
                                             echo '<td>'.$row["typesujet"].'</td>';
                                             echo '<td>'.$client->getByIdClient($row["idclient"]).'</td>';
+                                            echo '<td>'.$row["montant"].'</td>';
+                                            echo '<td>'.$row["netpayer"].'</td>';
+                                            echo '<td>'.$row["typeVacin"].'</td>';
                                             echo '<td>'.$row["datevacin"].'</td>';
                                             echo '<td>'.$row["daterappel"].'</td>';
                                             echo "<td>";

@@ -2,21 +2,21 @@
 require_once("../connexion.php");
 
 
-function creerClient($Name, $age, $nomclient, $Type, $premiervacin,$secondvacin) {
+function creerClient($Name, $age, $nomclient, $Type, $premiervacin,$secondvacin,$typevaccin,$montant,$montantpayer,$Reste) {
     global $conn;
 
     // Préparer la requête SQL
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO animale (nomSujet, age, typesujet, idclient, datevacin, daterappel, dateenregistrement) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO animale (nomSujet, age, typesujet, idclient, datevacin, daterappel, dateenregistrement,typeVacin,montant,netpayer,restemontant) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
         die('Erreur de préparation de la requête : ' . $conn->error);
     }
     $date = date("y/m/d");
-    $stmt->bind_param('sdsdsss', $Name, $age,$Type,$nomclient,$premiervacin,$secondvacin, $date);
+    $stmt->bind_param('sdsdssssddd', $Name, $age,$Type,$nomclient,$premiervacin,$secondvacin, $date,$typevaccin,$montant,$montantpayer,$Reste);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
@@ -37,7 +37,10 @@ if (isset($_POST['submit'])) {
     $Type = $_POST['Type'];
     $premiervacin = $_POST['premiervacin'];
     $secondvacin = $_POST['secondvacin'];
-    
+    $typevaccin = $_POST["typevaccin"];
+    $montant = $_POST["montant"];
+    $montantpayer = $_POST["montantpayer"];
+    $Reste = $_POST["Reste"];
     // Vérifier si tous les champs sont remplis
     if (!empty($Name) || !empty($age) || !empty($nomclient) || !empty($Type) || !empty($premiervacin) || !empty($secondvacin)) {
         
@@ -57,7 +60,7 @@ if (isset($_POST['submit'])) {
                 //exit();
             } else {
                 // Créer le compte utilisateur
-                creerClient($Name, $age, $nomclient, $Type, $premiervacin,$secondvacin);
+                creerClient($Name, $age, $nomclient, $Type, $premiervacin,$secondvacin,$typevaccin,$montant,$montantpayer,$Reste);
                 header("Location:liste.php");
                 exit();
             }
