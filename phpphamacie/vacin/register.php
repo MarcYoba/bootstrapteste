@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("../connexion.php");
 
 
@@ -9,14 +10,14 @@ function creerClient($Name, $age, $nomclient, $Type, $premiervacin,$secondvacin,
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO animale (nomSujet, age, typesujet, idclient, datevacin, daterappel, dateenregistrement,typeVacin,montant,netpayer,restemontant) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
+    $sql = "INSERT INTO animale (nomSujet, age, typesujet, idclient, datevacin, daterappel, dateenregistrement,typeVacin,montant,netpayer,restemontant,iduser) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
         die('Erreur de préparation de la requête : ' . $conn->error);
     }
     $date = date("y/m/d");
-    $stmt->bind_param('sdsdssssddd', $Name, $age,$Type,$nomclient,$premiervacin,$secondvacin, $date,$typevaccin,$montant,$montantpayer,$Reste);
+    $stmt->bind_param('sdsdssssdddd', $Name, $age,$Type,$nomclient,$premiervacin,$secondvacin, $date,$typevaccin,$montant,$montantpayer,$Reste,$_SESSION["id"]);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
@@ -55,15 +56,12 @@ if (isset($_POST['submit'])) {
             $stmt->execute();
             $stmt->store_result();
 
-            if ($stmt->num_rows > 0) {
-                echo 'Cette animale est déjà utilisée.';
-                //exit();
-            } else {
+            
                 // Créer le compte utilisateur
                 creerClient($Name, $age, $nomclient, $Type, $premiervacin,$secondvacin,$typevaccin,$montant,$montantpayer,$Reste);
                 header("Location:liste.php");
                 exit();
-            }
+            
 
             $stmt->close(); 
     }else {

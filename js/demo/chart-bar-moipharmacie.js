@@ -2,8 +2,8 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
-var tabQTmoi = new Array(32);
-var tabDatemoi = new Array(32);
+var tabQTm = new Array(32);
+var tabDatem = new Array(32);
 var varmoi  = 1;
 const  inputQuantite = document.getElementById("Quantite");
 //const  inputnombre = document.getElementById("nombre");
@@ -56,9 +56,9 @@ function RechargeGrapheQuantite() {
   console.log("QUANTITE du moi");
   varmoi = document.getElementById("nombre2").value;
   console.log(varmoi);
-  for (let index = 0; index < tabQTmoi.length; index++) {
-    tabQTmoi[index] = 0; 
-    tabDatemoi[index] = 0;  
+  for (let index = 0; index < tabQTm.length; index++) {
+    tabQTm[index] = 0; 
+    tabDatem[index] = 0;  
   }
 
   fetch('phpphamacie/graphe/getquantitemoi.php',{
@@ -79,8 +79,8 @@ function RechargeGrapheQuantite() {
           for(let proriete in element){
            // console.log(element[proriete]); 
             result = element[proriete];
-            tabQTmoi[index] = result.quantite;
-            tabDatemoi[index] = result.jour;
+            tabQTm[index] = result.quantite;
+            tabDatem[index] = result.jour;
             //console.log(result.quantite); 
             //console.log(result.jour); 
               index +=1  
@@ -95,9 +95,9 @@ function RechargeGrapheQuantite() {
 //Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 //Chart.defaults.global.defaultFontColor = '#858796'; 
 }
-for (let index = 0; index < tabDatemoi.length; index++) {
-  tabDatemoi[index] = 0;
-  tabQTmoi[index] = 0;
+for (let index = 0; index < tabDatem.length; index++) {
+  tabDatem[index] = 0;
+  tabQTm[index] = 0;
 }
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
@@ -125,7 +125,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 $(function() {
-  fetch('php/graphe/getquantitemoi.php')
+  fetch('phpphamacie/graphe/getquantitemoi.php')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -138,8 +138,8 @@ $(function() {
           for(let proriete in element){
            // console.log(element[proriete]); 
             result = element[proriete];
-            tabQTmoi[index] = result.quantite;
-            tabDatemoi[index] = result.jour;
+            tabQTm[index] = result.quantite;
+            tabDatem[index] = result.jour;
             //console.log(result.quantite); 
             //console.log(result.jour); 
               index +=1  
@@ -158,13 +158,13 @@ function creationBard(){
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: tabDatemoi,
+    labels: tabDatem,
     datasets: [{
       label: "Quantite",
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: tabQTmoi,
+      data: tabQTm,
     }],
   },
   options: {
@@ -187,14 +187,14 @@ var myBarChart = new Chart(ctx, {
           drawBorder: false
         },
         ticks: {
-          maxTicksLimit: tabQTmoi.length
+          maxTicksLimit: tabQTm.length
         },
         maxBarThickness: 25,
       }],
       yAxes: [{
         ticks: {
           min: 0,
-          max: 7000,
+          max: 200,
           maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks

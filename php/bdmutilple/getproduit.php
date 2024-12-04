@@ -120,7 +120,6 @@ class Produit{
             if (!$stmt->execute()) {
                 die('Erreur d\'exécution de la requête : ' . $stmt->error);
             }
-
             // Fermer la requête
             $stmt->close();
        }

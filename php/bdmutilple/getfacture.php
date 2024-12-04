@@ -21,6 +21,19 @@ class Facture{
         $this->idvente = 0;
     }
 
+    public function sommeVenteProduitFabriquer(){
+        global $conn;
+        
+        $sql = "SELECT ROUND(SUM(montant),2) AS montant 
+        FROM facture 
+        WHERE YEAR(datefacture) = YEAR(CURRENT_DATE) 
+        AND (nomproduit LIKE 'PREDEMARRAGE%' OR nomproduit LIKE 'FONOTION%' OR nomproduit LIKE 'CROISSANCE%' OR nomproduit LIKE 'DEMARRAGE%' OR nomproduit LIKE 'ALIMENT%' OR nomproduit LIKE 'dechet%')";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+
+        return $row["montant"]; 
+    }
+
     public function getByIdidFacture(){
         global $conn;
         $data =[];
@@ -364,9 +377,7 @@ class Facture{
                         $result = $conn->query($sql); 
                         if ($result == true) {
                         }
-                    }
-                    
-                    
+                    } 
                 }
             }
             
@@ -377,6 +388,30 @@ class Facture{
             "message" => $this->idvente
         ];
        return $reponse;
+    }
+
+    public function HistoriqueVente($datedebut, $datefin,$nomProduit){
+        global $conn;
+        $data =[];
+        $sql = "SELECT c.firstname ,f.nomproduit,f.quantite,f.datefacture, v.datevente
+        FROM facture f 
+        LEFT JOIN client c ON c.id = f.idclient
+        INNER JOIN vente v ON v.id = f.idvente
+        WHERE (MONTH(f.datefacture) BETWEEN MONTH($datedebut) AND MONTH($datefin)) OR f.nomproduit='$nomProduit'";
+        $result = $conn->query($sql);
+       while($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+       }
+
+       $sql = "SELECT ROUND(SUM(f.quantite),2) AS quantite_total
+        FROM facture f 
+        WHERE (MONTH(f.datefacture) BETWEEN MONTH($datedebut) AND MONTH($datefin)) OR f.nomproduit='$nomProduit'";
+        $result = $conn->query($sql);
+       $row = mysqli_fetch_assoc($result);
+
+            array_push($data,["TOTAL",$nomProduit,$row["quantite_total"],$datedebut."au".$datefin,$datedebut."au".$datefin]);
+    
+        return $data; 
     }
 }
 ?>

@@ -124,6 +124,12 @@ $html = '
                     $html .= '<td>' .(-1*$caise->ToDay()).'</td>';
                     $html .= '<td>' .((((($vente->getSommeCash())-0)-0)-0)+$caise->ToDay()).'</td>';
                 $html .= '</tr>';
+                $html .= '<tr>';
+                    $html .= '<td colspan="3"> Argent en main du 01-12-2024 au '.date("d-m-Y").'</td>';
+                    $html .= '<td colspan="2">' .$vente->getSommeTotalCaisse().'</td>';
+                    $html .= '<td colspan="3"> Total credit du 01-12-2024 au '.date("d-m-Y").'</td>';
+                    $html .= '<td colspan="1">' .$vente->getSommeCreditCaisse()-$versement->TotalVersement().'</td>';
+                $html .= '</tr>';
         $html .= '
         </tbody>
     </table>';

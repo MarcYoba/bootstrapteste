@@ -106,23 +106,31 @@ $html = '
                 <th scope="col">Total Cash</th>
                 <th scope="col">Total OM</th>
                 <th scope="col">Total Credit </th>
+                <th scope="col">Total Banque </th>
                 <th scope="col">Total reduction</th>
                 <th scope="col">Total Depense</th>
-                
                 <th scope="col">Total Versement</th>
                 <th scope="col">Sortie caise</th>
                 <th scope="col">Net en Caise</th>
+                
             </tr>';
                 $html .= '<tr>';
-                    $html .= '<td>' .($vente->getSommeCash() + $vente->getSommeOm()+ $vente->getSommeCredit()).'</td>';
+                    $html .= '<td>' .($vente->getSommeCash() + $vente->getSommeOm()+ $vente->getSommeCredit()+$vente->getSommeBanque()).'</td>';
                     $html .= '<td>' .$vente->getSommeCash().'</td>';
                     $html .= '<td>' .$vente->getSommeOm() .'</td>'; //$versement->ByDateVersementOm($date)
                     $html .= '<td>' .$vente->getSommeCredit().'</td>';
+                    $html .= '<td>' .$vente->getSommeBanque().'</td>';
                     $html .= '<td>' .$vente->getSommeReduction().'</td>';
                     $html .= '<td>' .$depense->ToDay().'</td>';
                     $html .= '<td>' .$versement->ToDay().'</td>';
                     $html .= '<td>' .(-1*$caise->ToDay()).'</td>';
-                    $html .= '<td>' .((((($vente->getSommeCash())-0)-0)+$caise->ToRetourCaisse())+$caise->ToDay()).'</td>';
+                    $html .= '<td>' .((((($vente->getSommeCash())-0)-0)+$caise->ToRetourCaisse())+$caise->ToDay()+$vente->getSommeBanque()).'</td>';
+                $html .= '</tr>';
+                $html .= '<tr>';
+                    $html .= '<td colspan="4"> Argent en main du 01-12-2024 au '.date("d-m-Y").'</td>';
+                    $html .= '<td colspan="2">' .$vente->getSommeTotalCaisse().'</td>';
+                    $html .= '<td colspan="3"> Total credit du 01-12-2024 au '.date("d-m-Y").'</td>';
+                    $html .= '<td colspan="1">' .$vente->getSommeCreditCaisse()-$versement->TotalVersement().'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>

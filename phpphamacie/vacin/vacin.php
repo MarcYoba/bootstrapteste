@@ -50,7 +50,8 @@
                                 <div class="form-group row">
                                     
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <select id="idclient"  name="idclient"  class="form-control form-select">
+                                    <input type="search" id="rechercheP" onkeyup="myFunctionP()"  class="form-control form-control-user" placeholder="recherche en utilisant le numero client"><br>
+                                    <select id="idclient"  name="idclient"  class="form-control form-select" size="5"  multiple aria-label="multiple select ">
                                             <?php 
                                             require_once("../connexion.php");
                                                 global $conn;
@@ -73,6 +74,7 @@
                                             <Option value="Complet">Vaccin Complet</Option>
                                             <Option value="antirabique">Vaccin antirabique</Option>
                                             <Option value="parvovirose">Vaccin parvovirose</Option>
+                                            <Option value="eurican">Vaccin eurican LR</Option>
                                             <Option value="L">Vaccin L</Option>
                                         </select>
                                     </div>
@@ -124,6 +126,27 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
+    <script>
+        function myFunctionP() {
+        // Récupérer l'input et la liste déroulante
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("rechercheP");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("idclient");
+        li = ul.getElementsByTagName("option");
+
+        // Boucler sur toutes les options
+        for (i = 0; i < li.length; i++) {
+            a = li[i];
+            if (a.value.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+            } else {
+            li[i].style.display = "none";
+            }
+        }
+        
+        }
+    </script>
 
 </body>
 

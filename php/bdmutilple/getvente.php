@@ -30,6 +30,24 @@ class Vente{
         return $this->data; 
     }
 
+    public function SommeVente(){
+        global $conn;
+        $sql = "SELECT ROUND(SUM(prix),2) as montant FROM vente WHERE YEAR(datevente)= YEAR(CURRENT_DATE)";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function SommeVenteAnnePasse(){
+        global $conn;
+        $anne = date("Y");
+        $anne = $anne-1;
+        $sql = "SELECT ROUND(SUM(prix),2) as montant FROM vente WHERE YEAR(datevente)= '$anne'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
     public function getIdVenteByDate($date) {
         global $conn;
         $this->data = [];
@@ -182,6 +200,32 @@ class Vente{
         return $row["cash"]; 
     }
 
+    public function getSommeTotalCaisse() {
+        global $conn;
+        $sql = "SELECT SUM(cash) as cash FROM vente WHERE datevente BETWEEN '2024-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+
+        $totalCash = $row["cash"];
+
+        $sql = "SELECT SUM(montant) as montant FROM caisse WHERE operation ='sortie en caisse' and dateoperation BETWEEN '2024-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        $totalSorti =  $row["montant"];
+        
+        $sql = "SELECT SUM(montant) as montant FROM `caisse` WHERE operation ='retour en caisse' and dateoperation BETWEEN '2024-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        $totalRetou=  $row["montant"]; 
+
+        $sql = "SELECT SUM(banque) as montnat FROM vente WHERE datevente BETWEEN '2024-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        $totalBanque= $row["montnat"]; 
+
+        return ($totalCash+$totalBanque+$totalRetou)+$totalSorti; 
+    }
+
     public function getSommeCashDate($date) {
         global $conn;
         $sql = "SELECT SUM(cash) as cash FROM vente WHERE datevente= '$date'";
@@ -201,6 +245,14 @@ class Vente{
     public function getSommeCredit() {
         global $conn;
         $sql = "SELECT SUM(credit) as credit FROM vente WHERE datevente= CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["credit"]; 
+    }
+
+    public function getSommeCreditCaisse() {
+        global $conn;
+        $sql = "SELECT SUM(credit) as credit FROM vente WHERE datevente BETWEEN '2024-12-01' AND CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["credit"]; 
@@ -252,6 +304,35 @@ class Vente{
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["Om"]; 
+    }
+
+    public function getSommeBanque() {
+        global $conn;
+        $sql = "SELECT SUM(banque) as montnat FROM vente WHERE datevente= CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montnat"]; 
+    }
+    public function getSommeBanqueDate($date) {
+        global $conn;
+        $sql = "SELECT SUM(banque) as banque FROM vente WHERE datevente= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["banque"]; 
+    }
+    public function getSommeBanqueWeek($datedebut,$datefin) {
+        global $conn;
+        $sql = "SELECT SUM(banque) as banque FROM vente WHERE datevente BETWEEN '$datedebut' AND '$datefin'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["banque"]; 
+    }
+    public function SommeBanqueMensuel($date) {
+        global $conn;
+        $sql = "SELECT SUM(banque) as banque FROM vente WHERE MONTH(datevente)= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["banque"]; 
     }
 
     public function getSommeReduction() {

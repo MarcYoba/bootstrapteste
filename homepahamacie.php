@@ -560,21 +560,21 @@ $_SESSION["route"] = "cabinet";
 
                                         );
                                         
-                                            $sql = "SELECT COUNT(f.idproduit) , f.nomproduit, p.quantite_produit 
+                                            $sql = "SELECT COUNT(f.idproduit) , f.nomproduit, p.quantite_produit,SUM(f.quantite) as quantite_vendu 
                                                     FROM facturephamacie f 
                                                     INNER JOIN produitphamacie p
                                                     WHERE month(f.datefacture) = month(now()) AND f.idproduit = p.id
                                                     GROUP BY f.nomproduit 
-                                                    ORDER BY p.quantite_produit  DESC 
+                                                    ORDER BY quantite_vendu DESC 
                                                     LIMIT 20";
 
                                         
                                         $result = $conn->query($sql);
                                         while($row = mysqli_fetch_assoc($result)){
                                             
-                                                echo '<h4 class="small font-weight-bold">'.$row["nomproduit"].'<span class="float-right">'.$row["quantite_produit"].'</span></h4>';
+                                                echo '<h4 class="small font-weight-bold">'.$row["nomproduit"].'<span class="float-right">'.$row["quantite_vendu"].'</span></h4>';
                                                 echo '<div class="progress mb-4">';
-                                                echo '<div class="progress-bar bg-danger" role="progressbar" style="width:'.$row["quantite_produit"].'%"
+                                                echo '<div class="progress-bar bg-danger" role="progressbar" style="width:'.$row["quantite_vendu"].'%"
                                                 aria-valuenow="3" aria-valuemin="0" aria-valuemax="100">'.'</div>';
                                                 echo '</div>';
                                             

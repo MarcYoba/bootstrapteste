@@ -66,20 +66,26 @@
                             <br>
                             <form class="user" action="../pdf/Recapitulatif.php" method="post">
                             <div class="row">
-                                
+                                <p class="col-md-2" >
+                                        <input type="date" class="form-control form-control-user"
+                                        name="datedebut" id="datedebut" placeholder="quantite" require>
+                                    </p>
+                                    <p class="col-md-2" >
+                                        <input type="date" class="form-control form-control-user"
+                                        name="datefin" id="datefin" placeholder="quantite" require>
+                                    </p>
                                 <p class="col-md-3">
                                 <input type="text" id="recherche" onkeyup="myFunction()" class="form-control form-control-user" placeholder="recherche produit"><br>
                                 </p>
                                 <p class="col-md-3"> 
                                     
                                     <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="4" multiple aria-label="multiple select ">
-                                        <option selected value="All">All </option>
                                         <?php 
                                             global $conn;
                                             $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie";
                                             $result = $conn->query($sql);
                                             while ($row = mysqli_fetch_assoc($result)){               
-                                                echo "<option value='".$row["nom_produit"]." "."'>".$row["nom_produit"]."</option>";
+                                                echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
                                             }
                                         ?>
                                     </select>

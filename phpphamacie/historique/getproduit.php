@@ -48,16 +48,23 @@ class Produit{
 
     public function InsertHistoriqueStock($tableau){
         global $conn;
+
+        $timestam = new DateTime();
+        $timestam = $timestam->format('H:i:s');
+
+        date_default_timezone_set('Africa/Douala');
+        $timestamp = new DateTime();
+        $timecameroune= $timestamp->format('H:i:s');
         
        foreach ($tableau as $key => $value) {
-            $sql = "INSERT INTO historiquestockphamacie (Nomproduit, quantite,datet, idproduit) VALUES (?, ?, ?,?)";
+            $sql = "INSERT INTO historiquestockphamacie (Nomproduit, quantite,datet, idproduit,heurecamroun,heureserveur) VALUES (?, ?, ?,?,?,?)";
 
         // Lier les paramètres
             if (!$stmt = $conn->prepare($sql)) {
                 die('Erreur de préparation de la requête : ' . $conn->error);
             }
             $date = date("y/m/d");
-            $stmt->bind_param('sdsd', $value["produit"], $value["quantite"],$date,  $value["id"]);
+            $stmt->bind_param('sdsdss', $value["produit"], $value["quantite"],$date,  $value["id"],$timecameroune,$timestam);
 
             // Exécuter la requête
             if (!$stmt->execute()) {

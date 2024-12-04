@@ -18,6 +18,14 @@ class Versement{
         return $row["montant"]; 
     }
 
+    public function TotalVersement(){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement BETWEEN '2025-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
     public function ByDateVersement($date){
         global $conn;
         $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement= '$date'";

@@ -1,6 +1,4 @@
-<?php 
-require_once("../connexion.php"); 
-require_once("../bdmutilple/getclient.php");
+<?php require_once("../connexion.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +12,7 @@ require_once("../bdmutilple/getclient.php");
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gestion de stock</title>
+    <title>gestion de stock</title>
 
     <!-- Custom fonts for this template -->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,89 +44,96 @@ require_once("../bdmutilple/getclient.php");
             <div id="content">
 
                 <!-- Topbar -->
-                <?php require_once("../../Topbar.php"); ?> 
+                <?php 
+                    require_once("../../Topbar.php");
+                    global $conn;
+                    require_once("../bdmutilple/getbilan.php");
+                    $bilan = new Bilan();
+
+                    if (isset($_GET["anne"])) {
+                        //echo $_GET["anne"];
+                        $actif = $bilan->GetPassif($_GET["anne"]);
+                    } else {
+                        $actif = $bilan->GetPassif(2022);
+                    }  
+                ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Vaccin</h1>
+                    <h1 class="h3 mb-2 text-gray-800">passif bilan</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success">Liste des Vaccins</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Structure du Passif</h6>
+                            <br>
+                            <div class=" form-group row">
+                            <p class="col-md-2" >
+                                <button class="btn btn-info btn-user btn-block" onclick="AnnePassif()">Bilan au </button>
+                            </p>
+                            <p class="col-md-3">
+                               Entrez annee <input type="number" name="nombre" id="nombre" value="2022"> 
+                            </p>
+                            <p class="col-md-5"> 
+                            </p>
+                            <p class="col-md-2"> 
+                                <a href="../../charts.html" class="btn btn-info btn-user btn-block">Comptabilite </a>
+                            </p>
+                        </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
+                                <table class="table table-bordered" id="tableactif" width="100%" cellspacing="0" data-page-length='50' >
                                     <thead>
                                        
                                         <tr>
-                                            <th>id</th>
-                                            <th>Nom Sujet</th>
-                                            <th>Age</th>
-                                            <th>Race</th>
-                                            <th>Client</th>
-                                            <th>telephone</th>
-                                            <th>montant</th>
-                                            <th>Avance</th>
-                                            <th>Type vacin</th>
-                                            <th>date Vacin</th>
-                                            <th>date rappel</th>
+                                            <th rowspan="2" style="text-align: center;">Passif</th>
+                                            <?php 
+                                             if (isset($_GET["anne"])) {
+                                                echo '<th colspan="2" style="text-align: center;">'.$_GET["anne"].'</th>';
+                                             } else {
+                                                echo '<th colspan="2" style="text-align: center;">2022</th>';
+                                             }
+                                            ?>
+                                        </tr>
+                                        <tr>
+                                            <th>Montant</th>
                                             <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>id</th>
-                                            <th>Nom Sujet</th>
-                                            <th>Age</th>
-                                            <th>Race</th>
-                                            <th>Client</th>
-                                            <th>telephone</th>
-                                            <th>montant</th>
-                                            <th>Avance</th>
-                                            <th>Type vacin</th>
-                                            <th>date Vacin</th>
-                                            <th>date rappel</th>
+                                            <th>Passif</th>
+                                            <th>Montant</th>
                                             <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
-                                        global $conn;
-                                        $client = new Client(1);
-                                        $sql = "SELECT * FROM animale ";
-                                        $result = $conn->query($sql);
-                                        while ($row = mysqli_fetch_assoc($result)){
-                                            $dataclient = $client->getAllByIdClient($row["idclient"]);
+                                        
+                                        // var_dump($actif);
+                                        foreach ($actif as $key => $value) {
                                             echo '<tr>';
-                                            echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["nomSujet"].'</td>';
-                                            echo '<td>'.$row["age"].'</td>';
-                                            echo '<td>'.$row["typesujet"].'</td>';
-                                            echo '<td>'.$dataclient["firstname"].'</td>';
-                                            echo '<td>'.$dataclient["telephone"].'</td>';
-                                            echo '<td>'.$row["montant"].'</td>';
-                                            echo '<td>'.$row["netpayer"].'</td>';
-                                            echo '<td>'.$row["typeVacin"].'</td>';
-                                            echo '<td>'.$row["datevacin"].'</td>';
-                                            echo '<td>'.$row["daterappel"].'</td>';
-                                            echo "<td>";
-                                            if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                # code...
-                                            }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            }else{
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            if (strpos($value["libelle"], "Totale") !== false) {
+                                                echo '<td style="color: blue;">'.$value["libelle"].'</td>';
+                                                echo '<td style="color: blue;">'.$value["montant"].'</td>';
+                                            } else {
+                                                echo '<td>'.$value["libelle"].'</td>';
+                                                echo '<td>'.$value["montant"].'</td>';
+
+                                                if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
+                                                    # code...
+                                                }else if(($_SESSION['roles'] == "semiadmin")){
+                                                    echo "<td><a href='passif.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                                }else{
+                                                    echo "<td><a href='passif.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                                }
                                             }
-                                            echo "</td>";
                                             echo '</tr>';
-                                            //var_dump($row);
                                         }
                                     ?>
                                     </tbody>
@@ -193,14 +198,14 @@ require_once("../bdmutilple/getclient.php");
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-
+    <script src="bilan.js"></script>
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="../../header.js"></script>
-
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="bilan.js"></script>
 
 </body>
 

@@ -126,6 +126,40 @@ class Vente{
         return $this->data; 
     }
 
+    public function getSommeTotalCaisse() {
+        global $conn;
+        $sql = "SELECT SUM(cash) as cash FROM ventephamacie WHERE datevente BETWEEN '2024-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+
+        $totalCash = $row["cash"];
+
+        $sql = "SELECT SUM(montant) as montant FROM caissePhamacie WHERE operation ='sortie en caisse' and dateoperation BETWEEN '2024-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        $totalSorti =  $row["montant"];
+        
+        $sql = "SELECT SUM(montant) as montant FROM `caissePhamacie` WHERE operation ='retour en caisse' and dateoperation BETWEEN '2024-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        $totalRetou=  $row["montant"]; 
+
+        $sql = "SELECT SUM(banque) as montnat FROM ventephamacie WHERE datevente BETWEEN '2024-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        $totalBanque= $row["montnat"]; 
+
+        return ($totalCash+$totalBanque+$totalRetou)+$totalSorti; 
+    }
+
+    public function getSommeCreditCaisse() {
+        global $conn;
+        $sql = "SELECT SUM(credit) as credit FROM ventephamacie WHERE datevente BETWEEN '2024-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["credit"]; 
+    }
+
     public function getIdVenteByTypeCreditOMInterval($date,$date2) {
         global $conn;
         $this->data = [];

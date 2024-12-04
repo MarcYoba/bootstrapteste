@@ -43,10 +43,7 @@ if (isset($_POST['submit'])) {
             $stmt->execute();
             $stmt->store_result();
 
-            if ($stmt->num_rows > 0) {
-                echo 'Cette animale est déjà utilisée.';
-                //exit();
-            } else {
+            
                
                 // Créer le compte utilisateur
                 $sql = "INSERT INTO consultation (Nom, age, sexe, poid, esperce, robe, race, idclient, vaccin, vermufuge, regime, moticconsultation, temperature, symtome, dianostique , traitement , Pronostique , Prophylaxe , Indication , montant,dateArrive) 
@@ -70,7 +67,7 @@ if (isset($_POST['submit'])) {
 
                 header("Location:liste.php");
                 exit();
-            }
+            
 
             $stmt->close(); 
     }else {

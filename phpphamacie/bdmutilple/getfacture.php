@@ -378,5 +378,29 @@ class Facture{
         ];
        return $reponse;
     }
+
+    public function HistoriqueVente($datedebut, $datefin,$nomProduit){
+        global $conn;
+        $data =[];
+        $sql = "SELECT c.firstname ,f.nomproduit,f.quantite,f.datefacture, v.datevente
+        FROM facturephamacie f 
+        LEFT JOIN client c ON c.id = f.idclient
+        INNER JOIN ventephamacie v ON v.id = f.idvente
+        WHERE (MONTH(f.datefacture) BETWEEN MONTH($datedebut) AND MONTH($datefin)) OR f.nomproduit='$nomProduit'";
+        $result = $conn->query($sql);
+       while($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+       }
+
+       $sql = "SELECT ROUND(SUM(f.quantite),2) AS quantite_total
+        FROM facturephamacie f 
+        WHERE (MONTH(f.datefacture) BETWEEN MONTH($datedebut) AND MONTH($datefin)) OR f.nomproduit='$nomProduit'";
+        $result = $conn->query($sql);
+       $row = mysqli_fetch_assoc($result);
+
+            array_push($data,["TOTAL",$nomProduit,$row["quantite_total"],$datedebut."au".$datefin,$datedebut."au".$datefin]);
+    
+        return $data; 
+    }
 }
 ?>

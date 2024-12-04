@@ -7,7 +7,7 @@
   $day = $donnees;
 }
 
-$sql = "SELECT DATE(datevente) AS jour, SUM(quantite) AS quantite FROM ventephamacie WHERE Year(datevente) = Year(NOW()) AND MONTH(datevente) = '$day' AND typevente ='CASH' GROUP BY DATE(datevente) ORDER BY jour";
+$sql = "SELECT DATE(datevente) AS jour, SUM(quantite) AS quantite FROM ventephamacie WHERE Year(datevente) = Year(NOW()) AND MONTH(datevente) = '$day' GROUP BY DATE(datevente) ORDER BY jour";
 $result = $conn->query($sql);
 //$data = mysqli_fetch_assoc($result);
 $data = [];

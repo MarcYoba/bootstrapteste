@@ -186,6 +186,86 @@ class Comptabilite{
             
         return $tab;
     }
+    public function SommeImmobilisationCorporel(){
+       global $conn;
+       $sql = "SELECT SUM(brut) AS montant FROM actif WHERE cathegorie ='corporelles' AND ( YEAR(datebilan) =YEAR(CURRENT_DATE))";
+       $resulte= $conn->query($sql);
+       $row = mysqli_fetch_assoc($resulte);
+
+       return $row["montant"];
+
+    }
+    public function SommeImmobilisationCorporelexercice(){
+        global $conn;
+        $anne = date("Y");
+        $anne = $anne -1;
+        $sql = "SELECT SUM(brut) AS montant FROM actif WHERE cathegorie ='corporelles' AND ( YEAR(datebilan) =$anne)";
+        $resulte= $conn->query($sql);
+        $row = mysqli_fetch_assoc($resulte);
+ 
+        return $row["montant"];
+ 
+     }
+
+    public function SommeSubvention(){
+        global $conn;
+        $sql = "SELECT SUM(montant) AS montant FROM passif WHERE libelle='Subvention%' AND ( YEAR(datepassif) =YEAR(CURRENT_DATE))";
+        $resulte= $conn->query($sql);
+        $row = mysqli_fetch_assoc($resulte);
+ 
+        return $row["montant"];
+    }
+
+    public function SommeSubventionexercice(){
+        global $conn;
+        $anne = date("Y");
+        $anne = $anne -1;
+        $sql = "SELECT SUM(montant) AS montant FROM passif WHERE libelle='Subvention%' AND ( YEAR(datepassif) ='$anne')";
+        $resulte= $conn->query($sql);
+        $row = mysqli_fetch_assoc($resulte);
+ 
+        return $row["montant"];
+    }
+
+    public function SommeAutreAprovision(){
+        global $conn;
+        $sql = "SELECT SUM(brut) AS montant FROM actif WHERE libelle='Materiel%' AND ( YEAR(datebilan) =YEAR(CURRENT_DATE))";
+        $resulte= $conn->query($sql);
+        $row = mysqli_fetch_assoc($resulte);
+ 
+        return $row["montant"];
+    }
+
+    public function SommeAutreAprovisionExercice(){
+        global $conn;
+        $anne = date("Y");
+        $anne = $anne -1;
+        $sql = "SELECT SUM(brut) AS montant FROM actif WHERE libelle='Materiel%' AND ( YEAR(datebilan) ='$anne')";
+        $resulte= $conn->query($sql);
+        $row = mysqli_fetch_assoc($resulte);
+ 
+        return $row["montant"];
+    }
+
+    public function SommeAmortise(){
+        global $conn;
+        $sql = "SELECT SUM(amortisement) AS montant FROM actif WHERE ( YEAR(datebilan) =YEAR(CURRENT_DATE))";
+        $resulte= $conn->query($sql);
+        $row = mysqli_fetch_assoc($resulte);
+ 
+        return $row["montant"];
+    }
+
+    public function SommeExerciceAmortise(){
+        global $conn;
+        $anne = date("Y");
+        $anne = $anne -1;
+        $sql = "SELECT SUM(amortisement) AS montant FROM actif WHERE  ( YEAR(datebilan) ='$anne')";
+        $resulte= $conn->query($sql);
+        $row = mysqli_fetch_assoc($resulte);
+ 
+        return $row["montant"];
+    }
 }
 // selectionner les donnes par trimestre pour chaque client
 

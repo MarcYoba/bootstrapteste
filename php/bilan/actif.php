@@ -12,14 +12,18 @@
     <title>GESTION DE STOCK</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        href="../../https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .drop{
+            display: none;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -43,7 +47,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="home.php">
+                <a class="nav-link" href="../../home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -53,19 +57,6 @@
 
             <!-- Heading -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#jounale"
-                    aria-expanded="true" aria-controls="jounale">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Journal Comptable</span>
-                </a>
-                <div id="jounale" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Journal Comptable:</h6>
-                        <a class="collapse-item" href="php/comptabilite/Journale.php">Jounale</a> 
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#inventaire"
                     aria-expanded="true" aria-controls="inventaire">
                     <i class="fas fa-fw fa-folder"></i>
@@ -74,8 +65,21 @@
                 <div id="inventaire" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Analyse Evolutive:</h6>
-                        <a class="collapse-item" href="php/comptabilite/inventaire.php">Analyse Evolutive Moi</a> 
-                        <a class="collapse-item" href="php/comptabilite/invantairesemaine.php">Analyse Evolutive Semaine</a> 
+                        <a class="collapse-item" href="../comptabilite/inventaire.php">Analyse Evolutive Moi</a> 
+                        <a class="collapse-item" href="../comptabilite/invantairesemaine.php">Analyse Evolutive Semaine</a> 
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#jounale"
+                    aria-expanded="true" aria-controls="jounale">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Journal Comptable</span>
+                </a>
+                <div id="jounale" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Journal Comptable:</h6>
+                        <a class="collapse-item" href="../comptabilite/Journale.php">Jounale</a> 
                     </div>
                 </div>
             </li>
@@ -88,7 +92,7 @@
                 <div id="etatresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Etat des resultats:</h6>
-                        <a class="collapse-item" href="php/comptabilite/etatresultat.php">marge beneficiere</a> 
+                        <a class="collapse-item" href="../comptabilite/etatresultat.php">marge beneficiere</a> 
                     </div>
                 </div>
             </li>
@@ -101,13 +105,14 @@
                 <div id="bilan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"> Bilan :</h6>
-                        <a class="collapse-item" href="php/bilan/actif.php">Actif Bilan</a>
-                        <a class="collapse-item" href="php/bilan/liste.php">liste Actif</a>
-                        <a class="collapse-item" href="php/bilan/passif.php">Passif Bilan</a>
-                        <a class="collapse-item" href="php/bilan/listepasif.php">liste Passif</a>
+                        <a class="collapse-item" href="../bilan/actif.php">Actif Bilan</a>
+                        <a class="collapse-item" href="../bilan/liste.php">liste Actif</a>
+                        <a class="collapse-item" href="../bilan/passif.php">Passif Bilan</a>
+                        <a class="collapse-item" href="../bilan/listepasif.php">liste Passif</a>
                     </div>
                 </div>
             </li>
+            
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -119,8 +124,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="php/vente/liste.php">Vente</a>
-                        <a class="collapse-item" href="php/achat/liste.php">Achat</a>
+                        <a class="collapse-item" href="../vente/liste.php">Vente</a>
+                        <a class="collapse-item" href="../achat/liste.php">Achat</a>
                     </div>
                 </div>
             </li>
@@ -136,10 +141,10 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="php/versement/liste.php">versement</a>
-                        <a class="collapse-item" href="php/dette/dette.php">Dette</a>
-                        <a class="collapse-item" href="php/depenses/liste.php">Depense</a>
-                        <a class="collapse-item" href="php/produit/liste.php">Produit</a>
+                        <a class="collapse-item" href="../versement/liste.php">versement</a>
+                        <a class="collapse-item" href="../dette/dette.php">Dette</a>
+                        <a class="collapse-item" href="../depenses/liste.php">Depense</a>
+                        <a class="collapse-item" href="../produit/liste.php">Produit</a>
                     </div>
                 </div>
             </li>
@@ -389,169 +394,89 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Statistique des stocks</h1>
-                    
-                        <div class="row">
-                            
-                            <p class="col-md-5 btn btn-user btn-block">
-                               Entrez le numero du moi <input type="number" name="nombre" id="nombre" value="1"> 
-                            </p>
-                           
-                            <p class="col-md-2" >
-                                Montant :<input type="checkbox" name="Mars" id="Mars" class="btn btn-primary btn-user btn-block">
-                            </p> 
-                            <p class="col-md-3">
-
-                            </p>
-                            <p class="col-md-2">
-                                <a href="php/rapport/rapportComptable.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-download fa-sm text-white-50"></i>Rapport comptable</a>
-                            </p>
-                        </div>
+                    <h1 class="h3 mb-2 text-gray-800">Actif du bilan</h1>
                     <hr>
                     <!-- Content Row -->
                     <div class="row">
 
                         <div class="col-xl-12 col-lg-10">
 
-                            <!-- Area Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Graphe de vente</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                    <hr> 
-                                    <code> Vente</code> 
-                                </div>
-                            </div>
-
-                            <!-- Bar Chart -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Quantite</h6>
-                                    <div class="row">
-                            
-                                        <p class="col-md-5 btn btn-user btn-block">
-                                           Entrez le numero du moi <input type="number" name="nombre2" id="nombre2" value="1"> 
-                                        </p>
-                                        <p class="col-md-2" >
-                                            Quantite :<input type="checkbox" name="Quantite" id="Quantite" class="btn btn-primary btn-user btn-block">
-                                            
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
-                                    </div>
-                                    <hr>
+                                    <h6 class="m-0 font-weight-bold text-primary">Constitution Actif</h6>
                                     
-                                    <code>Quantite</code>.
                                 </div>
-                            </div>
-
-                            <!--<div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Etude Evolutive</h6>
-                                    <div class="row">
+                                <br>
+                                
+                                <form class="user" action="registerbilan.php" method="post" enctype="multipart/form-data">
+                                <?php 
+                                   if (isset($_GET["id"])) {
+                                    require_once("../bdmutilple/getbilan.php");
+                                    $bilan = new Bilan();
+                                    $element = $bilan->getElement($_GET["id"]);
+                                    echo '<div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <input type="text" class="form-control form-control-user"
+                                                name="id" id="id" value="'.$element["id"].'" readonly>
+                                            </div>
+                                            </div>';
+                                    echo '<span class="drop" id="label">'.$element["libelle"].'</span>';
+                                    echo '<span class="drop" id="mbrut">'.$element["brut"].'</span>';
+                                    echo '<span class="drop" id="momort">'.$element["amortisement"].'</span>';
+                                    echo '<span class="drop" id="mnet">'.$element["net"].'</span>';
+                                    echo '<span class="drop" id="dt">'.$element["datebilan"].'</span>';
+                                   }
+                                ?>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user"
+                                           name="Libelle" id="Libelle" placeholder="Libelle Actif" >
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select id="groupe"  name="groupe"  class="form-control form-select" >
+                                            <option value="Incorporelles">Immobilisations Incorporelles</option>
+                                            <option value="corporelles">Immobilisations corporelles</option>
+                                            <option value="financieres">Immobilisations financières</option>
+                                            <option value="circulant">ACTIF CIRCULANT</option>
+                                            <option value="trsorerieactif">TRESORERIE-ACTIF</option>
+                                            <option value="differentiels">produits différentiels</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control form-control-user"
+                                           name="brut" id="brut" placeholder="Montant Brut" >
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control form-control-user"
+                                           name="amortisement" id="amortisement" placeholder="amortisement/ prov" >
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control form-control-user"
+                                           name="net" id="net" placeholder="NET" >
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="date" class="form-control form-control-user"
+                                           name="date" id="date" placeholder="date" >
+                                    </div>
+                                </div>    
                             
-                                        <p class="col-md-5 btn btn-user btn-block">
-                                           Entrez le numero du moi <input type="number" name="nombre3" id="nombre3" value="1"> 
-                                        </p>
-                                        <p class="col-md-2" >
-                                            Analyse Evolutive :<input type="checkbox" name="Evolution" id="Evolution" class="btn btn-primary btn-user btn-block" onclick="EtudeEvolutive()">
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-bar">
-                                        <div class="form-group row">
-                                            <div class="col-lg-6">
-                                                <div class="card shadow mb-1">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Valeur du moi N</h6>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            Montant du moi N :
-                                                            <span id="montant1"> </span>
-                                                        </div>
+                                <hr>
+                                <span id="enregistrement">
+                                <button type="submit" name="enregistrement" id="enregistrement" class="btn btn-primary btn-user btn-block">
+                                    Enregistrer
+                                </button>
+                                </span>
+                            </form>
 
-                                                        <div class="col-lg-5">
-                                                            Nombre client du moi N :
-                                                            <span id="client1"> </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            </div>
+                            <!-------------------------------------------------->
+                            
 
-                                            <div class="col-lg-6">
-                                                <div class="card shadow mb-1">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Valeur du moi N+1</h6>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            Montant du moi N :
-                                                            <span id="montant2"> </span>
-                                                        </div>
-
-                                                        <div class="col-lg-5">
-                                                            Nombre client du moi N :
-                                                            <span id="client2"> </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-12">
-                                                <div class="card shadow mb-1">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Calcule Generale Moi</h6>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            Total en FCFA:
-                                                            <span id="Total"> </span>
-                                                        </div>
-
-                                                        <div class="col-lg-5">
-                                                            Total en % :
-                                                            <span id="Poucentage"> </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-12">
-                                                <div class="card shadow mb-1">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Calcule Generale Client</h6>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            Total en Client:
-                                                            <span id="Totalclient"> </span>
-                                                        </div>
-
-                                                        <div class="col-lg-5">
-                                                            Total en % :
-                                                            <span id="Poucentageclient"> </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <hr>
-                                    
-                                    <code>Evolution</code>.
-                                </div>
-                            </div>-->
+                            <!----------------------------------------------------------------->    
 
                         </div>
 
@@ -597,30 +522,31 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="index.php">Logout</a>
+                    <a class="btn btn-primary" href="../../index.php">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
+    <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="invantaire.js"></script>
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-moi.js"></script>
-    
-    <script src="js/demo/chart-bar-moi.js"></script>
-
+    <script>
+        document.getElementById("Libelle").value = document.getElementById("label").innerText;
+        document.getElementById("brut").value = document.getElementById("mbrut").innerText;
+        document.getElementById("amortisement").value = document.getElementById("momort").innerText;
+        document.getElementById("net").value = document.getElementById("mnet").innerText;
+        document.getElementById("date").value = document.getElementById("dt").innerText;
+        document.getElementById("enregistrement").innerHTML = '<button type="submit" name="modifier" id="modifier" class="btn btn-primary btn-user btn-block">modifier</button>'
+    </script>
 </body>
 
 </html>

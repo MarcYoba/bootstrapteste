@@ -99,7 +99,7 @@ $html = '
         </thead>
         <tbody>';
             $html .= '<tr>';
-            $html .= '<td colspan="9" align="center"> Recapitulatif Vente </td>';
+            $html .= '<td colspan="10" align="center"> Recapitulatif Vente </td>';
             $html .= '</tr>
                 <tr>
                 <th scope="col">Total Vente Net</th>
@@ -107,6 +107,7 @@ $html = '
                 <th scope="col">Total Cash</th>
                 <th scope="col">Total OM</th>
                 <th scope="col">Total Credit </th>
+                <th scope="col">Total Banque </th>
                 <th scope="col">Total reduction</th>
                 <th scope="col">Total sortie caise</th>
                 <th scope="col">Total Versement</th>
@@ -118,10 +119,11 @@ $html = '
                     $html .= '<td>' .$vente->getSommeCashDate($date).'</td>';
                     $html .= '<td>' .$vente->getSommeOmDate($date).'</td>';
                     $html .= '<td>' .$vente->getSommeCreditDate($date).'</td>';
+                    $html .= '<td>' .$vente->getSommeBanqueDate($date).'</td>';
                     $html .= '<td>' .$vente->getSommeReductionDate($date).'</td>';
                     $html .= '<td>' .($caise->getByDateSortie($date)).'</td>';
                     $html .= '<td>' .$versement->ByDateVersement($date).'</td>';
-                    $html .= '<td>' .(((($vente->getSommeCashDate($date))-0)+$caise->getByDateSortie($date))+$caise->RetourCaisse($date)).'</td>';
+                    $html .= '<td>' .((((($vente->getSommeCashDate($date))-0)+$caise->getByDateSortie($date))+$caise->RetourCaisse($date))+$vente->getSommeBanqueDate($date)).'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>
