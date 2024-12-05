@@ -528,7 +528,7 @@ function saveedite(){
                     if (document.getElementById("Banque").value ==0) {
                         document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH ou Credit</p>';
 
-                    } else {
+                    
                         if (teste == 0) {
                             document.getElementById("teste").innerText = 1;
                         }else{

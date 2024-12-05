@@ -45,7 +45,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container">
 
@@ -57,14 +57,20 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Modifier Achat</h1>
                              </div>
-                           
+                            <div class="form-group row">
+                                    <div class="col-sm-10 ">
+                                    <h6 class="m-0 font-weight-bold text-primary">Modifier Achat</h6>
+                                    </div>
+                                    <div class="col-sm-2 ">
+                                    <a class="m-0 font-weight-bold text-warning" href="../achat/liste.php">Retour</a>
+                                    </div>
+                            </div>
                                 <div class="form-group">
                                 
                                 <hr>
                                     <form class="user" action="edite.php" method="post">
-                                        <hr>
+                                        
                                         <div class="form-group row">
                                         
                                             <div class="col-sm-3">
@@ -83,14 +89,6 @@
                                                 </select>
                                                 <hr>
                                             </div>
-                                        </div> 
-                                        <hr> 
-                                        <div class="form-group row">
-                                        <div class="col-sm-2">
-                                        <input type="text" id="recherche" onkeyup="myFunction()" class="form-control form-control-user" placeholder="recherche produit"><br>
-                                         Q: <input type="text" id="quantiteStock" name="quantiteStock" readonly class="form-control form-control-user">
-                                         R :<input type="text"  id="idachat" name="idachat" class="form-control form-control-user"> 
-                                        </div>
                                             <div class="col-sm-3">
                                                 <p> Produit</p>
                                                 <select id="nomProduit"  name="nomProduit"  class="form-control form-select" required size="6" multiple aria-label="multiple select ">
@@ -105,19 +103,48 @@
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-2">
+                                                Recherche Produit<input type="text" id="recherche" onkeyup="myFunction()" class="form-control form-control-user" placeholder="recherche produit"><br>
+                                                Quantite <input type="text" id="quantiteStock" name="quantiteStock" readonly class="form-control form-control-user">
+                                                Reference du produit :<input type="text"  id="idachat" name="idachat" readonly class="form-control form-control-user"> 
+                                            </div>
+                                            <div class="col-sm-3">
                                                     <input type="number" class="form-control form-control-user"
                                                     name="quantite" id="quantite" placeholder="quantite" required><br>
                                                     <input type="number" class="form-control form-control-user"
                                                     name="prix" id="prix" placeholder="prix unitaire" required><br>
-                                                    <button type="submit" name="enregistrer" id="enregistrer" class="btn btn-warning btn-user btn-block">
+                                            </div>
+
+                                        </div> 
+                                        <button type="submit" name="enregistrer" id="enregistrer" class="btn btn-warning btn-user btn-block">
                                                     Modifeir
                                                     </button> 
-                                                
+                                    </form>
+                                    <hr><hr>
+                                        <p>
+                                            Modification de facture
+                                        </p>
+                                    <hr>
+                                    <form action="../bond/upload.php" method="post" enctype="multipart/form-data">
+                                        <div class="form-group row">
+                                            <div class="col-sm-4 mb-3 mb-sm-0">
+                                            Photo de la facture : <input type="file" class="form-control form-control-user" id="images"
+                                                name="images" placeholder="Ima de la facture" required>
+                                            </div>
+                                            <div class="col-sm-4">
+                                            date Achat :<input type="date" class="form-control form-control-user" id="date" 
+                                                name="date" placeholder="" required>
+                                            </div>
+                                            <div class="col-sm-4">
+                                            Numero iamge :<input type="number" class="form-control form-control-user" id="idimage" 
+                                                name="idimage" placeholder="numero reference image" required>
                                             </div>
                                         </div>
-                                        <hr>
-                                        <hr>  
+                                        <span id="enregistrement">
+                                        <button type="submit" name="edite" id="edite" class="btn btn-info btn-user btn-block">
+                                           Modifier facture
+                                        </button>
+                                        </span>
                                     </form>
                             
                             <hr>

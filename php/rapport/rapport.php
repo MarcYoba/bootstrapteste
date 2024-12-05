@@ -120,6 +120,23 @@
                                 <hr>
 
                             </form>
+
+                            <form class="user" action="../pdf/getannuel.php" method="post">
+                            <div class="form-group row">
+                                    <div class="col-sm-4">
+                                    Entrez l'année<input type="number" class="form-control form-control-user" id="mois"
+                                        name="mois" placeholder="numero du moi" require>
+                                    </div>
+                                    <div class="col-sm-4">
+                                            <button type="" name="" id="" class="btn btn-warning btn-user btn-block">
+                                            rapport Trimestriele et Semestrielle 
+                                            </button> 
+                                    </div>
+                                </div>
+                                <hr>
+                                <hr>
+
+                            </form>
                             </div>
                             
                             <hr>

@@ -62,11 +62,11 @@
                             
                             <form  action="../pdf/getvaleurachete.php" method="post" class="user row" >
                                 <div class="row">
-                                    <p class="col-md-3" >
+                                    <p class="col-md-2" >
                                         <input type="date" class="form-control form-control-user"
                                         name="datedette" id="datedette" placeholder="quantite">
                                     </p>
-                                    <p class="col-md-3" >
+                                    <p class="col-md-2" >
                                         <input type="date" class="form-control form-control-user"
                                         name="datedett2" id="datedett2" placeholder="quantite">
                                     </p>
@@ -84,9 +84,14 @@
                                     </select>
                                     </p>
 
-                                <p class="col-md-2" >
-                                <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
-                                </p>  
+                                    <p class="col-md-2" >
+                                        <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                    </p>
+                                    <p class="col-md-2" >
+                                        <a href="../bond/bon.php" class="btn btn-info btn-user">
+                                            Bon Commande
+                                    </a>
+                                    </p>  
                                 </div>
                             </form>
                         </div>
@@ -103,6 +108,7 @@
                                             <th>Montant</th>
                                             <th>Date</th>
                                             <th>Operation</th>
+                                            <th>Bon</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -114,6 +120,7 @@
                                             <th>Montant</th>
                                             <th>Date</th>
                                             <th>Operation</th>
+                                            <th>Bon</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -130,12 +137,15 @@
                                             echo '<td>'.$row["montant"].'</td>';
                                             echo '<td>'.$row["dateachat"].'</td>';
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                # code...
+                                                echo "<td><a href='../bond/liste.php?date=" .$row["dateachat"]. "' class='btn btn-primary' id='modification'><i class='far fa-file-image'></i></a>";
                                             }else if(($_SESSION['roles'] == "semiadmin")){
                                                 echo "<td><a href='modifie.php?id=" .$row["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                                echo "<td><a href='../bond/liste.php?date=" .$row["dateachat"]. "' class='btn btn-primary' id='modification'><i class='far fa-file-image'></i></a>";
+
                                             }else{
                                                 echo "<td><a href='modifie.php?id=" .$row["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
                                                 echo "<a href='edite.php?delete=" .$row["id"]. "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cet Achat ? si vous suprimer cet achat elle sera supprimer du stock\");' id='suppresioner'><i class='fas fa-trash-alt'></i></a></td>";
+                                                echo "<td><a href='../bond/liste.php?date=" .$row["dateachat"]. "' class='btn btn-primary' id='modification'><i class='far fa-file-image'></i></a>";
                                             }
                                             
                                             echo '</tr>';
