@@ -396,12 +396,12 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-5">
-                                                            Montant du moi N :
+                                                            Montant du mois N :
                                                             <span id="montant1"> </span>
                                                         </div>
 
                                                         <div class="col-lg-5">
-                                                            Nombre client du moi N :
+                                                            Nombre client du mois N :
                                                             <span id="client1"> </span>
                                                         </div>
                                                     </div>
@@ -411,16 +411,16 @@
                                             <div class="col-lg-6">
                                                 <div class="card shadow mb-1">
                                                     <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Valeur du moi N+1</h6>
+                                                        <h6 class="m-0 font-weight-bold text-primary">Valeur du mois N+1</h6>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-5">
-                                                            Montant du moi N+1 :
+                                                            Montant du mois N+1 :
                                                             <span id="montant2"> </span>
                                                         </div>
 
                                                         <div class="col-lg-5">
-                                                            Nombre client du moi N+1 :
+                                                            Nombre client du mois N+1 :
                                                             <span id="client2"> </span>
                                                         </div>
                                                     </div>
@@ -432,7 +432,7 @@
                                             <div class="col-lg-12">
                                                 <div class="card shadow mb-1">
                                                     <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Calcule Generale Moi</h6>
+                                                        <h6 class="m-0 font-weight-bold text-primary">Calcul Generale Mois</h6>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-5">

@@ -604,6 +604,88 @@ class Vente{
         }
         return $don; 
     }
+
+    public function VenteTemesttre($anne)
+    {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT QUARTER(datevente) AS trimestre, ROUND(SUM(prix),2) AS nombre_enregistrements 
+        FROM ventephamacie
+        WHERE YEAR(datevente) = $anne 
+        GROUP BY QUARTER(datevente);";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
+
+    public function VenteSemesttre($anne)
+    {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT 
+        CEILING(MONTH(datevente) / 6) AS semestre,
+        ROUND(SUM(prix),2) AS montant
+        FROM 
+            ventephamacie
+        WHERE YEAR(datevente) = $anne 
+        GROUP BY 
+            semestre";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
+    
+    public function VenteAnnuelle($anne)
+    {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT 
+        MONTH(datevente) AS Mois,
+        YEAR(datevente) AS Annee,
+        ROUND(SUM(prix), 2) AS Total_Ventes
+            FROM 
+                ventephamacie
+            WHERE YEAR(datevente) = '$anne'
+            GROUP BY 
+                YEAR(datevente), MONTH(datevente)
+            ORDER BY 
+        YEAR(datevente), MONTH(datevente)";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
+
+    public function VenteAnnuelleSemain($anne)
+    {
+        global $conn;
+        $this->data =[];
+        $sql = "SELECT 
+            YEAR(datevente) AS Annee,
+            WEEK(datevente) AS Semaine,
+            ROUND(SUM(prix), 2) AS Total_Ventes
+        FROM 
+            ventephamacie
+        WHERE YEAR(datevente) = '2024'
+        GROUP BY 
+            YEAR(datevente), WEEK(datevente)
+        ORDER BY 
+            YEAR(datevente), WEEK(datevente)";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($this->data,$row);
+        }
+        return $this->data; 
+    }
 }
 
 

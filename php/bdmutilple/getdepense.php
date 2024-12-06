@@ -213,5 +213,41 @@ class Depense{
        return $data ;
         
     }
+
+    public function DepenseTemesttre($anne)
+    {
+        global $conn;
+        $data =[];
+        $sql = "SELECT QUARTER(datedepense) AS trimestre, ROUND(SUM(montant),2) AS nombre_enregistrements 
+        FROM depenses 
+        WHERE YEAR(datedepense) = $anne
+        GROUP BY QUARTER(datedepense);";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function DepenseSemesttre($anne)
+    {
+        global $conn;
+        $data =[];
+        $sql = "SELECT 
+        CEILING(MONTH(datedepense) / 6) AS semestre,
+        ROUND(SUM(montant),2) AS montant
+        FROM 
+            depenses
+        WHERE YEAR(datedepense) = $anne
+        GROUP BY 
+            semestre";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
 }
 ?>

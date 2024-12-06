@@ -44,11 +44,11 @@
                                 </div>
                             
                            
-                                <div class="form-group">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <p>     </p>
-                                </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                <div class="form-group row">
+                                    <div class="col-sm-8">
+                                        
+                                    </div>
+                                    <div class="col-sm-4 ">
                                         <a href="../pdf/getPdftoday.php">
                                             <button type="" name="" id="" class="btn btn-success btn-user btn-block">
                                             Rapport du jour
@@ -57,18 +57,17 @@
                                     </div>
                                     
                                 </div>
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                <p></p>
-                                </div>
+                                
                                 <hr>
                             <form class="user" action="../pdf/getRapportDay.php" method="post">
                                 <hr>
                                 <div class="form-group row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <input type="date" class="form-control form-control-user" id="date"
                                         name="date" placeholder="telephone client">
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-4">
                                     <a href="../pdf/getPdftoday.php">
                                             <button type="" name="" id="" class="btn btn-success btn-user btn-block">
                                             Rapport pour chaque Date
@@ -105,9 +104,10 @@
                             <form action="../pdf/getannuel.php" method="post">
                             <div class="form-group row">
                                     <div class="col-sm-4">
-                                       Entrer le numeros Moi <input type="number" class="form-control form-control-user" id="mois"
+                                       <input type="number" class="form-control form-control-user" id="mois"
                                         name="mois" placeholder="numero du moi" require>
                                     </div>
+                                    <div class="col-sm-4"></div>
                                     <div class="col-sm-4">
                                             <button type="" name="" id="" class="btn btn-success btn-user btn-block">
                                             Rapport Mensuelle
@@ -117,6 +117,39 @@
                                 <hr>
                                 <hr>
 
+                            </form>
+
+                            <form class="user" action="../pdf/getsemestre.php" method="post">
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-user" id="anne"
+                                        name="anne" placeholder="numero du moi" required>
+                                    </div>
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-4">
+                                            <button type="" name="" id="" class="btn btn-success btn-user btn-block">
+                                            rapport Trimestriele et Semestrielle 
+                                            </button> 
+                                    </div>
+                                </div>
+                                <hr>
+                                <hr>
+                            </form>
+                            <form action="../pdf/getanne.php" method="post">
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-user" id="anne"
+                                            name="anne" placeholder="numero du moi" required>
+                                    </div>
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-4">
+                                            <button type="" name="" id="" class="btn btn-success btn-user btn-block">
+                                            Rapport Annuel
+                                            </button> 
+                                    </div>
+                                </div>
+                                <hr>
+                                <hr>
                             </form>
                         </div>
                     </div>

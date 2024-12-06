@@ -230,5 +230,41 @@ class Achat{
         $row = mysqli_fetch_assoc($result);
        return $row["montant"];  
     }
+
+    public function AchatTemesttre($anne)
+    {
+        global $conn;
+        $data =[];
+        $sql = "SELECT QUARTER(dateachat) AS trimestre, ROUND(SUM(prixAcaht),2) AS nombre_enregistrements 
+        FROM achatphamacie 
+        WHERE YEAR(dateachat) = $anne
+        GROUP BY QUARTER(dateachat)";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function AchatSemesttre($anne)
+    {
+        global $conn;
+        $data =[];
+        $sql = "SELECT 
+        CEILING(MONTH(dateachat) / 6) AS semestre,
+        ROUND(SUM(prixAcaht),2) AS montant
+        FROM 
+            achatphamacie
+        WHERE YEAR(dateachat) = $anne
+        GROUP BY 
+            semestre";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
 }
 ?>
