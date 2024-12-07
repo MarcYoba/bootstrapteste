@@ -34,9 +34,27 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Enregistrer un sujet</h1>
-                            </div>
+                            </div>  
+                                <div class="form-group row">
+                                        <div class="col-sm-10 ">
+                                        <h6 class="m-0 font-weight-bold text-success">Enregistrer un sujet</h6>
+                                        </div>
+                                        <div class="col-sm-2 ">
+                                        <a class="m-0 font-weight-bold text-success" href="liste.php">Retour</a>
+                                        </div>
+                                </div>
+                            
                             <form class="user" action="register.php" method="post">
+                                <?php 
+                                 if (isset($_GET["id"])) {
+                                    echo '<input type="text" class="form-control form-control-user" id="id"
+                                           name="id" placeholder="Nom sujet" required value="'.$_GET["id"].'" readonly> <br>';
+                                 }else if(isset($_GET["delete"])){
+                                    echo '<input type="text" class="form-control form-control-user" id="iddelete"
+                                           name="iddelete" placeholder="Nom sujet" required value="'.$_GET["delete"].'" readonly> <br>';
+                                 }
+
+                                ?>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Name"
@@ -102,9 +120,12 @@
                                            name="secondvacin" placeholder="date achat" required>
                                     </div>
                                 </div>
-                                <button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
-                                    Enregister
-                                </button>
+                                <span id="enregistrement">
+                                    <button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
+                                        Enregister
+                                    </button>
+                                </span>
+                                
                                 
                             </form>
                             <hr>
@@ -116,37 +137,16 @@
         </div>
 
     </div>
-
+    <script src="suivie.js"></script>                                        
     <!-- Bootstrap core JavaScript-->
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
     <!-- Core plugin JavaScript-->
     <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-    <script>
-        function myFunctionP() {
-        // Récupérer l'input et la liste déroulante
-        var input, filter, ul, li, a, i;
-        input = document.getElementById("rechercheP");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("idclient");
-        li = ul.getElementsByTagName("option");
-
-        // Boucler sur toutes les options
-        for (i = 0; i < li.length; i++) {
-            a = li[i];
-            if (a.value.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-            } else {
-            li[i].style.display = "none";
-            }
-        }
-        
-        }
-    </script>
+    
 
 </body>
 

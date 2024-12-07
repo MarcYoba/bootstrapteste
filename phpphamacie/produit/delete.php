@@ -6,7 +6,7 @@
 // Récupération de l'ID
 $id = $_GET['id'];
 
-// Requête SQL pour récupérer les informations de la vente
+// Requête SQL pour récupérer les informations de la produitphamacie
 $sql = "SELECT * FROM produitphamacie WHERE id = $id";
 
 $result = $conn->query($sql);

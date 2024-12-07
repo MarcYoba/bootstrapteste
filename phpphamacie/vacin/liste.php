@@ -123,8 +123,8 @@ require_once("../bdmutilple/getclient.php");
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
                                                 echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             }else{
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<a href='vacin.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                            echo "<a href='vacin.php?delete=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer ce Vaccin ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';
