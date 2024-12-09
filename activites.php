@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,28 +22,45 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <style>
-      .image-container {
-    text-align: center;
-    margin: 0px;
-    background-image: url('img/active.jpeg'); 
-    background-size: cover; 
-    background-position: center; 
-    
+      body {
+    margin: 0;
+    overflow: hidden; /* Empêche le défilement normal */
     }
-    .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
+
+    .background-images {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Place les images en arrière-plan */
+    }
+
+    .background-images img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ajuste l'image pour couvrir tout l'espace */
+        transition: transform 60s linear; /* Durée et type de transition */
+    }
     
     </style>
 
 </head>
 
-<body class="bg-gradient-white image-container">
+<body class="bg-gradient-white background-images">
     
+
     
-    <div class="container">  
+    <div class="container ">  
+
+    <img src="img/unpoussinquieclot.jpg" alt="Image 1">
+    <img src="img/unpoussinquisepromene.jpg" alt="Image 2">
+    <img src="img/cabinet.jpg" alt="Image 3">
+    <img src="img/provenderie.jpg" alt="Image 4">
+    <img src="img/phamcie.jpg" alt="Image 5">
 
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
@@ -71,112 +90,119 @@
                 </div>
             </div>
         </nav>
-        <br><br><br><br><br>
-            <div class=" row">
+        <br>
+            <div class="form-group row">
                 <!-- Nested Row within Card Body -->
-                    
-                    
-                            <br>
-                            <div class="col-md-3 mb-4 ">
-                                <?php        
-                                                session_start();
-
-                                                 if (($_SESSION['zonetravail'] == "provenderie") || ($_SESSION["zonetravail"] == "Tous")) {
-                                                    echo '<a  href="home.php" class="btn btn-primary btn-user btn-block" >
-                                                    <div class="card border-left-primary shadow h-100 py-2 rounded-circle">
-                                                        <div class="card-body">
-                                                            <div class="row no-gutters align-items-center">
-                                                                <div class="col mr-2">';
-                                                   
-                                                    echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
-                                                    echo  '<h3> Provenderie </h3></div>';
-                                                 
-                                                    echo '</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </a>';
-                                            }          
-                                    ?>
+                <div class="col-xl-8 col-lg-5">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <!-- Card Body -->
+                            <div class="card-body">
+                                    <div class=" pt-1 pb-1">
+                                        
+                                    </div>
+                                    
                             </div>
-                                <div class="col-md-3 mb-4">
-                                <?php           
-                                    if (($_SESSION["zonetravail"] == "cabinet") || ($_SESSION["zonetravail"] == "Tous")) {
-                                    echo '<a href="homepahamacie.php">
-                                    <div class="card border-left-success shadow h-100 py-2 rounded-circle">
-                                        <div class="card-body">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col mr-2">';
-                                                    echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
-                                                    echo '<h3>Cabinet</h3></div>';
-                                                    echo' </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </a>';
-                                                   
-                                    }   
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <!-- Card Body -->
+                            <div class="card-body">
+                                <div class=" pt-1 pb-1">
+                                        <?php        
+                                            if (($_SESSION['zonetravail'] == "provenderie") || ($_SESSION["zonetravail"] == "Tous")) {
+                                                echo '<a  href="home.php" class="btn btn-primary btn-user btn-block" >';
+                                                echo  '<h3> Provenderie </h3></div>';
+                                                echo '</a>';
+                                            }          
+                                        ?>
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="form-group row">
+                <!-- Nested Row within Card Body -->
+                <div class="col-xl-8 col-lg-5">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <!-- Card Body -->
+                            <div class="card-body">
+                                    <div class=" pt-4 pb-2">
+                                        
+                                    </div>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <!-- Card Body -->
+                            <div class="card-body">
+                                <div class=" pt-1 pb-1">
+                                    <?php           
+                                        if (($_SESSION["zonetravail"] == "cabinet") || ($_SESSION["zonetravail"] == "Tous")) {
+                                            echo '<a href="homepahamacie.php">';
+                                            echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
+                                            echo '<h3>Cabinet</h3></div>';
+                                            echo' </a>';
+                                                    
+                                        }   
                                     ?>
-                                </div>
-
-                                <br>
-                                <div class="col-md-3 mb-4">
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nested Row within Card Body -->
+                <div class="col-xl-8 col-lg-5">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <!-- Card Body -->
+                            <div class="card-body">
+                                    <div class=" pt-4 pb-2">
+                                        
+                                    </div>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <!-- Card Body -->
+                            <div class="card-body">
+                                <div class=" pt-1 pb-1">
                                 <?php           
                                     if (($_SESSION["zonetravail"] == "spaceclie") || ($_SESSION["zonetravail"] == "Tous")) {
-                                    echo '<a href="#">
-                                    <div class="card border-left-success shadow h-100 py-2 rounded-circle">
-                                        <div class="card-body">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col mr-2">';
-                                                    echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
-                                                    echo  '<h3> Space Clients </h3></div>';
-                                                    echo' </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </a>';
-                                                   
+                                    echo '<a href="customer/client.php">';
+                                    echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
+                                    echo  '<h3> Space Clients </h3></div>';
+                                    echo'</a>';               
                                     }   
-                                    ?>
-                                </div>
-                            </div> 
-                    
+                                ?>
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        
 
     </div>
     
-    <footer class="footer bg-dark text-light">
-        
-            <div class="row">
-            <div class="col-md-6">
-                <h5>About Us</h5>
-                <p>L'entreprise AB GROUP met a votre disposition un cabinet vétérinaire et une provenderie avec les services suivants: <br>
-                 - clinique( vaccination, hospitalisation)<br>
-                  - pharmacie ( vente en détail et en gros des produits vétérinaires)</p>
-            </div>
-            <div class="col-md-2">
-                <h5>Contact Us</h5>
-                <ul class="list-unstyled">
-                <li><i class="fas fa-map-marker-alt"></i> Yaounde</li>
-                <li><i class="fas fa-phone"></i> 237 676359056<br>
-                655271506<br> YAOUNDE, Soa</li>
-                <li><i class="fas fa-envelope"></i> me@gmail.coms</li>
-                </ul>
-            </div>
-            </div>
-            <div class="row">
-            <!--<div class="col-md-12 text-center">
-                
-                <ul class="list-inline">
-                <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
-                </ul>
-            </div> -->
-            </div>
-    </footer>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -185,6 +211,26 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages  homepahamacie.php -->
     <script src="js/sb-admin-2.min.js"></script>
+    <script>
+        const images = document.querySelectorAll('.background-images img');
+        let index = 0;
+
+        function changeImage() {
+            images[index].style.transform = 'translateY(-100%)';
+            index++;
+            if (index === images.length) {
+                index = 0;
+                images[index].style.transform = 'translateY(0)';
+            }else{
+                images[index].style.transform = 'translateY(0)';
+                console.log(index);
+            }
+            
+            
+        }
+
+        setInterval(changeImage, 60000); // Change d'image toutes les 10 secondes// Change d'image toutes les 2 secondes
+    </script>
 
 </body>
 

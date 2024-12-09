@@ -29,7 +29,7 @@ if(isset($_FILES['image'])){
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
             //echo "Le fichier ". basename( $_FILES["image"]["name"]). " a été téléchargé.";
            // $date = date("Y-m-d");
-            $sql = "INSERT INTO Boncommande (nomimage , chemin,iduser,datecommade) VALUES ('" . basename($_FILES["image"]["name"]) . "', '" . $target_file . "','".$_SESSION["id"]."','".$date."')";
+            $sql = "INSERT INTO boncommande (nomimage , chemin,iduser,datecommade) VALUES ('" . basename($_FILES["image"]["name"]) . "', '" . $target_file . "','".$_SESSION["id"]."','".$date."')";
             if (mysqli_query($conn, $sql)) {
                 header('Location:liste.php?date='.$date.'');
             } else {

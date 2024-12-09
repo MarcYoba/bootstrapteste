@@ -20,8 +20,19 @@
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
     <style>
+        #imageContainer {
+        width: 21cm; /* Largeur d'une feuille A4 */
+        height: 29.7cm; /* Hauteur d'une feuille A4 */
+        border: 1px solid black;
+        overflow: hidden;
+        }
         .drop{
             display: none;
+        }
+        #imageContainer img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
         }
     </style>
 
@@ -73,7 +84,7 @@
                                                         </div>';
                                                 echo'<div class="col-sm-12">';
                                                 echo '<div style="text-align: center;">
-                                                        <img src="'.$value["chemin"].'" alt="Mon image" style="display: block;">
+                                                        <img src="'.$value["chemin"].'" alt="Mon image" style="display: block;" id="imageContainer">
                                                     </div>';
                                                 echo'</div>';
                                             }

@@ -23,6 +23,18 @@
         .drop{
             display: none;
         }
+        #imageContainer {
+        width: 21cm; /* Largeur d'une feuille A4 */
+        height: 29.7cm; /* Hauteur d'une feuille A4 */
+        border: 1px solid black;
+        overflow: hidden;
+        }
+
+        #imageContainer img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        }
     </style>
 
 </head>
@@ -57,10 +69,12 @@
                                            name="date" placeholder="" required>
                                     </div>
                                 </div>
+                                <div id="imageContainer"></div>
                                 <span id="enregistrement">
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
                                     Enregistrer
                                 </button>
+
                                 </span>
                             </form>
                             <hr>
@@ -81,6 +95,22 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-    <script src="client.js"></script>
+    <script>
+        const imageUpload = document.getElementById('image');
+        const imageContainer = document.getElementById('imageContainer');
+
+        imageUpload.addEventListener('change', () => {
+        const file = imageUpload.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const img = new Image();
+            img.src = e.target.result;
+            imageContainer.appendChild(img);
+        };
+
+        reader.readAsDataURL(file);
+        });
+    </script>
 </body>
 </html>
