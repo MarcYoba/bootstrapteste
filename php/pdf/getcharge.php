@@ -85,8 +85,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">Ventes de marchandises (A)</th>
             <th scope="col">+</th>
             <th scope="col">1</th>
-            <th scope="col">'.$vente->SommeVente().'</th>
-            <th scope="col">'.$vente->SommeVenteAnnePasse().'</th>
+            <th scope="col">'.$vente->SommeVente() - $facture->sommeVenteProduitFabriquer().'</th>
+            <th scope="col">'.$vente->SommeVenteAnnePasse() - $facture->sommeVenteProduitFabriquerPasser().'</th>
         </tr>';
 
         $html .= '
@@ -112,8 +112,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col" style="color: blue;">MARGE COMMERCIALE (Somme TA à RB)</th>
             <th scope="col" style="color: blue;">-</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">'.($achat->SommeAchat()*-1) + $vente->SommeVente().'</th>
-            <th scope="col" style="color: blue;">'.($achat->SommeAchatAnnePasse()*-1) + ($vente->SommeVenteAnnePasse()).'</th>
+            <th scope="col" style="color: blue;">'.($achat->SommeAchat()*-1) + $vente->SommeVente()-$facture->sommeVenteProduitFabriquer().'</th>
+            <th scope="col" style="color: blue;">'.($achat->SommeAchatAnnePasse()*-1) + ($vente->SommeVenteAnnePasse())-$facture->sommeVenteProduitFabriquerPasser().'</th>
         </tr>';
 
         $html .= '
@@ -122,7 +122,7 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">+</th>
             <th scope="col">1</th>
             <th scope="col">'.$facture->sommeVenteProduitFabriquer().'</th>
-            <th scope="col">0</th>
+            <th scope="col">'.$facture->sommeVenteProduitFabriquerPasser().'</th>
         </tr>';
         $html .= '
         <tr>

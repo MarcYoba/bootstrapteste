@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +20,15 @@
 
     
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+      .image-container {
+    text-align: center;
+    margin: 20px;
+    background-image: url('img/poul3.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    }
+    </style>
 
 </head>
 
@@ -27,21 +37,19 @@
     <div class="container">
 
        
-        <div class="row justify-content-center">
+        <div class="row justify-content-center " >
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="col-xl-10 col-lg-12 col-md-9 ">
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card o-hidden border-0 shadow-lg my-5 image-container">
                     <div class="card-body p-0">
                        
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image">
-                            <img  src="img/poul2.jpg" alt="Responsive image">
-                            </div>
+                            
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-white mb-4 ">Welcome Back!</h1>
                                     </div>
                                     <form class="user" action="php/userCon/login.php" method="post">
                                         <div class="form-group">
@@ -56,7 +64,7 @@
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
+                                                <label class="custom-control-label text-white" for="customCheck">Remember
                                                     Me</label>
                                             </div>
                                         </div>
@@ -74,10 +82,10 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="php/userCon/forgot-password.html">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Creer un compte!</a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +106,7 @@
    
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-     Custom scripts for all pages
+     
     <script src="js/sb-admin-2.min.js"></script>
 
 </body>

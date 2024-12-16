@@ -24,13 +24,37 @@ class Facture{
     public function sommeVenteProduitFabriquer(){
         global $conn;
         
-        $sql = "SELECT ROUND(SUM(montant),2) AS montant 
-        FROM facture 
-        WHERE YEAR(datefacture) = YEAR(CURRENT_DATE) 
-        AND (nomproduit LIKE 'PREDEMARRAGE%' OR nomproduit LIKE 'FONOTION%' OR nomproduit LIKE 'CROISSANCE%' OR nomproduit LIKE 'DEMARRAGE%' OR nomproduit LIKE 'ALIMENT%' OR nomproduit LIKE 'dechet%')";
+        $sql = "SELECT ROUND(SUM(v.prix),2) AS montant
+                FROM facture f 
+                INNER JOIN vente v ON v.id = f.idvente 
+                WHERE nomproduit='MACHINE' AND YEAR(F.datefacture) = YEAR(CURRENT_DATE)";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
 
+    public function sommeVenteProduitFabriquerAnne($anne){
+        global $conn;
+        
+        $sql = "SELECT ROUND(SUM(v.prix),2) AS montant
+                FROM facture f 
+                INNER JOIN vente v ON v.id = f.idvente 
+                WHERE nomproduit='MACHINE' AND YEAR(F.datefacture) = '$anne'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function sommeVenteProduitFabriquerPasser(){
+        global $conn;
+        $date = date("Y");
+        $date = $date-1;
+        $sql = "SELECT ROUND(SUM(v.prix),2) AS montant
+                FROM facture f 
+                INNER JOIN vente v ON v.id = f.idvente 
+                WHERE nomproduit='MACHINE' AND YEAR(F.datefacture) = $date";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
     }
 

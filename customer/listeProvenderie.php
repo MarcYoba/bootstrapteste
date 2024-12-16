@@ -234,34 +234,21 @@
                             <!-- Area Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <div class="form-group row">
-                                        <div class="col-sm-5 ">
-                                            <a class="m-0 font-weight-bold text-success" href="">Precedent</a>
-                                        </div>
-                                        <div class="col-sm-2 ">
-                                            <p class="m-0 font-weight-bold text-bold" >Facture :<?php echo $achatClient["id"]; ?></p>
-                                        </div>
-                                        <div class="col-sm-3 ">
-                                            <p class="m-0 font-weight-bold text-bold" >date<?php echo $achatClient["datevente"]; ?></p>
-                                        </div>
-                                        <div class="col-sm-2 ">
-                                            <a class="m-0 font-weight-bold text-success" href="">Suivant</a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="card-body">
                                     
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25'>
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='100'>
                                             <thead>
                                             
                                                 <tr>
                                                     <th>id</th>
                                                     <th>Nom</th>
                                                     <th>quantite</th>
-                                                    <th>prix unitaire</th>
-                                                    <th>montant</th>
-                                                    <th>Typepaiement</th>
+                                                    <th>Montant</th>
+                                                    <th>Date</th>
+                                                    <th>Facture</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
@@ -269,36 +256,36 @@
                                                     <th>id</th>
                                                     <th>Nom</th>
                                                     <th>quantite</th>
-                                                    <th>prix</th>
-                                                    <th>montant</th>
-                                                    <th>Typepaiement</th>
+                                                    <th>Montant</th>
+                                                    <th>Date</th>
+                                                    <th>Facture</th>
                                                 </tr>
                                                 --->
                                             </tfoot>
                                             <tbody>
                                             <?php 
                                                 global $conn;
-                                                $id = $achatClient["id"];
+                                                $id = $_SESSION["id"];
                                                 $quantite = 0;
                                                 $prix = 0;
                                                 $montant = 0;
 
-                                                $sql = "SELECT * FROM facture WHERE idvente = '$id'";
+                                                $sql = "SELECT * FROM vente WHERE idclient = '$id' ORDER BY id DESC";
                                                 $result = $conn->query($sql);
                                                 while ($row = mysqli_fetch_assoc($result)){
                                                     echo '<tr>';
                                                     echo '<td>'.$row["id"].'</td>';
-                                                    echo '<td>'.$row["nomproduit"].'</td>';
+                                                    echo '<td>'.$row["typevente"].'</td>';
                                                     echo '<td>'.$row["quantite"].'</td>';
                                                     echo '<td>'.$row["prix"].'</td>';
-                                                    echo '<td>'.$row["montant"].'</td>';
-                                                    echo '<td>'.$row["Typepaiement"].'</td>';
+                                                    echo '<td>'.$row["datevente"].'</td>';
+                                                    echo "<td><a href='facture.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fa fa-bars'></i></a></td>";
                                                     echo '</tr>';
                                                     //var_dump($row);
 
                                                     $quantite += $row["quantite"];
                                                     $prix += $row["prix"];
-                                                    $montant += $row["montant"];
+                                                    
 
                                                 }
 
@@ -308,7 +295,7 @@
                                                     echo '<td>-</td>';
                                                     echo '<td>'.$quantite.'</td>';
                                                     echo '<td>'.$prix.'</td>';
-                                                    echo '<td>'.$montant.'</td>';
+                                                    echo '<td>-</td>';
                                                     echo '<td>-</td>';
                                                     echo '</tr>';
                                             ?>

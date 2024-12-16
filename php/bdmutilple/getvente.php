@@ -38,6 +38,14 @@ class Vente{
         return $row["montant"]; 
     }
 
+    public function SommeVenteAnne($anne){
+        global $conn;
+        $sql = "SELECT ROUND(SUM(prix),2) as montant FROM vente WHERE YEAR(datevente)= '$anne'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
     public function SommeVenteAnnePasse(){
         global $conn;
         $anne = date("Y");
@@ -334,6 +342,23 @@ class Vente{
         $row = mysqli_fetch_assoc($result);
         return $row["banque"]; 
     }
+
+    public function SommeReduction() {
+        global $conn;
+        $sql = "SELECT SUM(reduction) as reduction FROM vente WHERE YEAR(datevente)= YEAR(CURRENT_DATE)";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["reduction"]; 
+    }
+
+    public function SommeReductionAnne($date) {
+        global $conn;
+        $sql = "SELECT SUM(reduction) as reduction FROM vente WHERE YEAR(datevente)= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["reduction"]; 
+    }
+
 
     public function getSommeReduction() {
         global $conn;

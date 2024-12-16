@@ -202,5 +202,14 @@ class Client{
 
         return $row;
     }
+
+    public function VenteClient($type){
+        if ($type = "provenderie") {
+            
+        } else {
+            # code...
+        }
+        
+    }
 }
 ?>

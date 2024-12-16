@@ -47,7 +47,7 @@ class Poussin{
         $cred = $tableau["CREDIT"];
         $cash = $tableau["CASH"];
         $rest = $tableau["RESTE"];
-        $sql = "UPDATE poussin SET quantite='$qt',prixUnite='$prix',montant='$montant',montantOm='$om',montantCredit='$cred',montantCash='$cash',reste='$rest',statusCommande='$status' WHERE id='$id'";
+        $sql = "UPDATE  SET quantite='$qt',prixUnite='$prix',montant='$montant',montantOm='$om',montantCredit='$cred',montantCash='$cash',reste='$rest',statusCommande='$status' WHERE id='$id'";
         $result = $conn->query($sql);
         // Exécuter la requête
         if ($result == true) {
@@ -55,6 +55,45 @@ class Poussin{
         }else{
             return "echec";
         }
+    }
+
+    public function getPoussin(){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM poussin WHERE dateCommande= CURRENT_DATE";
+        $result = $conn->query($sql);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+
+        return $data;
+    }
+
+    public function getPoussinDate($date){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM poussin WHERE dateCommande= '$date'";
+        $result = $conn->query($sql);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+
+        return $data;
+    }
+
+    public function getPoussinSemaine($datebebut,$datefin){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM poussin WHERE dateCommande BETWEEN '$datebebut' AND $datefin";
+        $result = $conn->query($sql);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+
+        return $data;
     }
 }
 ?>

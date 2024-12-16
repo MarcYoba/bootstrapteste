@@ -40,6 +40,35 @@ function invantaire() {
 
 }
 
+function MargeBeneficier() {
+  let evolution = document.getElementById("nombre").value;
+  let sortie = {};
+  sortie.marge = 1;
+  sortie.anne = evolution;
+fetch('../bdmutilple/ressouceComptable.php',{
+    method:'POST',
+      headers:{
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(sortie)
+})
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    console.log(data); 
+    document.getElementById("profabri").innerText = data.produitFabriquer;
+    document.getElementById("ventepro").innerText = data.vente - data.produitFabriquer;
+    document.getElementById("vente").innerText = data.vente - data.reduction;
+    document.getElementById("couachat").innerText = data.achat;
+    document.getElementById("resultat").innerText = (data.vente - data.reduction) - data.achat;
+  })
+  .catch(error => {
+    console.error(error);
+});
+
+}
+
 function semaine() {
   let evolution = document.getElementById("nombre").value;
   let evoluseme = {};

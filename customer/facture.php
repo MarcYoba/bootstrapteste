@@ -2,7 +2,7 @@
     session_start();
     require_once("getclient.php");
     $client = new Client($_SESSION['id']);
-    $achatClient = $client->SelectAchatProvenderie($_SESSION['id']);
+    $achatClient = $_GET["id"];
     
 ?>
 <!DOCTYPE html>
@@ -239,13 +239,16 @@
                                             <a class="m-0 font-weight-bold text-success" href="">Precedent</a>
                                         </div>
                                         <div class="col-sm-2 ">
-                                            <p class="m-0 font-weight-bold text-bold" >Facture :<?php echo $achatClient["id"]; ?></p>
-                                        </div>
-                                        <div class="col-sm-3 ">
-                                            <p class="m-0 font-weight-bold text-bold" >date<?php echo $achatClient["datevente"]; ?></p>
+                                            <p class="m-0 font-weight-bold text-bold" >Facture :<?php echo $achatClient; ?></p>
                                         </div>
                                         <div class="col-sm-2 ">
-                                            <a class="m-0 font-weight-bold text-success" href="">Suivant</a>
+                                            
+                                        </div>
+                                        <div class="col-sm-1 ">
+                                            
+                                        </div>
+                                        <div class="col-sm-2 ">
+                                            <?php echo "<a href='facture.php?id=" . $achatClient +1 . "' class='btn btn-primary'><i class='fa fa-fa-arrow-right '>Suivant</i></a>";  ?>
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +281,7 @@
                                             <tbody>
                                             <?php 
                                                 global $conn;
-                                                $id = $achatClient["id"];
+                                                $id = $achatClient;
                                                 $quantite = 0;
                                                 $prix = 0;
                                                 $montant = 0;
