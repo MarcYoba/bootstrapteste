@@ -91,6 +91,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Etat des resultats:</h6>
                         <a class="collapse-item" href="../comptabilite/etatresultat.php">marge beneficiere</a> 
+                        <a class="collapse-item" href="../comptabilite/chiffreaffaire.php">CHIFFRE AFFAIRES</a>
+                        <a class="collapse-item" href="../comptabilite/ProduitStocks.php">Production et Stocks</a>
                     </div>
                 </div>
             </li>
@@ -358,7 +360,7 @@
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Journal des Achats</h6>
                                 </div>
-                                <div class="card-body">
+                                
                                     
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -455,7 +457,7 @@
                                     </div>
                                     <hr> 
                                 
-                            </div>
+                          
 
                             <!-- Bar Chart -->
                             <div class="card shadow mb-4">

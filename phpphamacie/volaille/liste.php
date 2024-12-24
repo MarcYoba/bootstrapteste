@@ -1,4 +1,6 @@
-<?php require_once("../connexion.php"); 
+<?php 
+require_once("../connexion.php"); 
+require_once("../bdmutilple/getclient.php");
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +70,7 @@
                                             <th>id</th>
                                             <th>Date</th>
                                             <th>Nom</th>
+                                            <th>Telephone</th>
                                             <th>QuaT</th>
                                             <th>P/unit</th>
                                             <th>Montant</th>
@@ -84,6 +87,7 @@
                                             <th>id</th>
                                             <th>Date</th>
                                             <th>Nom</th>
+                                            <th>Telephone</th>
                                             <th>QuaT</th>
                                             <th>P/unit</th>
                                             <th>Montant</th>
@@ -99,12 +103,17 @@
                                     <?php 
                                         global $conn;
                                         $sql = "SELECT * FROM poussin ";
+                                        $client = new Client(0);
+
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
+                                            $idclient = $client->getByNameClient($row["Nomclient"]);
+                                            $infoclient = $client->getAllByIdClient($idclient);
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
                                             echo '<td>'.$row["dateCommande"].'</td>';
                                             echo '<td>'.$row["Nomclient"].'</td>';
+                                            echo '<td>'.$infoclient["telephone"].'</td>';
                                             echo '<td>'.$row["quantite"].'</td>';
                                             echo '<td>'.$row["prixUnite"].'</td>';
                                             echo '<td>'.$row["montant"].'</td>';

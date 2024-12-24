@@ -45,27 +45,85 @@ function MargeBeneficier() {
   let sortie = {};
   sortie.marge = 1;
   sortie.anne = evolution;
-fetch('../bdmutilple/ressouceComptable.php',{
-    method:'POST',
-      headers:{
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(sortie)
-})
-  .then(response => {
-    return response.json();
+  fetch('../bdmutilple/ressouceComptable.php',{
+      method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sortie)
   })
-  .then(data => {
-    console.log(data); 
-    document.getElementById("profabri").innerText = data.produitFabriquer;
-    document.getElementById("ventepro").innerText = data.vente - data.produitFabriquer;
-    document.getElementById("vente").innerText = data.vente - data.reduction;
-    document.getElementById("couachat").innerText = data.achat;
-    document.getElementById("resultat").innerText = (data.vente - data.reduction) - data.achat;
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data); 
+      document.getElementById("profabri").innerText = data.produitFabriquer;
+      document.getElementById("ventepro").innerText = data.vente - data.produitFabriquer;
+      document.getElementById("vente").innerText = data.vente - data.reduction;
+      document.getElementById("couachat").innerText = data.achat;
+      document.getElementById("resultat").innerText = (data.vente - data.reduction) - data.achat;
+    })
+    .catch(error => {
+      console.error(error);
+  });
+
+}
+
+function Cfhiffreafaire() {
+  let evolution = document.getElementById("nombre").value;
+  let sortie = {};
+  sortie.chiffre = 1;
+  sortie.anne = evolution;
+  fetch('../bdmutilple/ressouceComptable.php',{
+      method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sortie)
   })
-  .catch(error => {
-    console.error(error);
-});
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data); 
+      document.getElementById("profabri").innerText = data.produitFabriquer;
+      document.getElementById("ventepro").innerText = (data.vente - data.produitFabriquer) - data.reduction;
+      document.getElementById("service").innerText = data.service;
+      document.getElementById("accesoire").innerText = data.accessoire;
+      document.getElementById("resultat").innerText = parseFloat(data.produitFabriquer) + parseFloat((data.vente - data.produitFabriquer) - data.reduction) + parseFloat(data.service) +  parseFloat(data.accessoire);
+    })
+    .catch(error => {
+      console.error(error);
+  });
+
+}
+
+function ProduitStock() {
+  let evolution = document.getElementById("nombre").value;
+  let sortie = {};
+  sortie.stock = 1;
+  sortie.anne = evolution;
+  fetch('../bdmutilple/ressouceComptable.php',{
+      method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sortie)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data); 
+      document.getElementById("produitst").innerText = data.prostock;
+      document.getElementById("Prodiom").innerText =  data.prodim;
+      document.getElementById("Variast").innerText = data.varia;
+      document.getElementById("Variat").innerText = data.autrevariat;
+      document.getElementById("resultat").innerText = parseFloat(data.prostock) + parseFloat(data.prodim) + parseFloat(data.varia) +  parseFloat(data.autrevariat);
+    })
+    .catch(error => {
+      console.error(error);
+  });
 
 }
 

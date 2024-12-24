@@ -24,6 +24,15 @@ class Produit{
         return $row["quantites"];
     }
 
+    public function SommeProduitStocker($produit){
+        global $conn;
+        $sql = "SELECT ROUND(SUM(prix_produit_vente*quantite_produit),2) as montant FROM produit;";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["montant"];
+    }
+
     public function UpdateProduit($idproduit,$quantite){
         global $conn;
         $sql = "UPDATE produit SET quantite_produit = '$quantite' WHERE id = '$idproduit'";

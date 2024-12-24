@@ -195,6 +195,18 @@ class Comptabilite{
        return $row["montant"];
 
     }
+
+    public function SommeImmobilisationCorporelAnne($anne){
+        global $conn;
+        $sql = "SELECT SUM(brut) AS montant FROM actif WHERE cathegorie ='corporelles' AND ( YEAR(datebilan) ='$anne')";
+        $resulte= $conn->query($sql);
+        $row = mysqli_fetch_assoc($resulte);
+ 
+        if (empty($row["montant"])) {
+            $row["montant"] = 0;
+        }
+        return $row["montant"]; 
+     }
     public function SommeImmobilisationCorporelexercice(){
         global $conn;
         $anne = date("Y");
@@ -266,8 +278,21 @@ class Comptabilite{
  
         return $row["montant"];
     }
+
+    public function SommeCorporelles($anne){
+        global $conn;
+        // $anne = date("Y");
+        // $anne = $anne -1;
+        $sql = "SELECT SUM(net) AS montant FROM actif WHERE  YEAR(datebilan) ='$anne' AND cathegorie='corporelles'";
+        $resulte= $conn->query($sql);
+        $row = mysqli_fetch_assoc($resulte);
+        if (empty($row["montant"])) {
+            $row["montant"] = 0;
+        }
+        return $row["montant"];
+    }
 }
-// selectionner les donnes par trimestre pour chaque client
+// selectionner les donnes par trimestre pour chaque client 
 
 // SELECT DISTINCT c.firstname, YEAR(v.datevente) AS year, 
 //                 QUARTER(v.prix) AS trimestre, 

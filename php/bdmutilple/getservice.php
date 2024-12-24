@@ -15,6 +15,17 @@ Class Service{
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
     }
+
+    public function sommeServiceAnne($anne) {
+        global $conn;
+        $sql = "SELECT ROUND(SUM(Montant),2) as montant FROM terrain WHERE YEAR(datejour)= '$anne'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        if (empty($row["montant"])) {
+            $row["montant"] = 0;
+        }
+        return $row["montant"]; 
+    }
 }
 
 ?>

@@ -312,12 +312,23 @@ class Stock{
                 FROM historiquestock hs 
                 WHERE hs.datet = '$janvier'";
             $result = $conn->query($sql);
-            $Stockdebut = mysqli_fetch_assoc($result);
+            $row = mysqli_fetch_assoc($result);
+            $Stockdebut = $row["Produibultiple"];
 
-            $sql = "SELECT SUM(p.quantite_produit) AS Produibultiple FROM produit p";
+            if (empty($Stockdebut)) {
+                $Stockdebut=0;
+            }
+
+            $sql = "SELECT SUM(quantite_produit) AS Produibultiple FROM produit";
             $result = $conn->query($sql);
-            $Stockfin = mysqli_fetch_assoc($result); 
-            return $Stockfin["Produibultiple"]-$Stockdebut["Produibultiple"];
+            $row = mysqli_fetch_assoc($result); 
+            $Stockfin = $row["Produibultiple"];
+
+            if (empty($Stockfin)) {
+                $Stockfin = 0;
+            }
+            $Stockfin -= $Stockdebut;
+            return  $Stockfin;
     }
 
     public function VariationStokfournitureExercice(){

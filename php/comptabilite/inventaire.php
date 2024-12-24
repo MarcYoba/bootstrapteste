@@ -89,6 +89,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Etat des resultats:</h6>
                         <a class="collapse-item" href="../comptabilite/etatresultat.php">marge beneficiere</a> 
+                        <a class="collapse-item" href="../comptabilite/chiffreaffaire.php">CHIFFRE AFFAIRES</a>
+                        <a class="collapse-item" href="../comptabilite/ProduitStocks.php">Production et Stocks</a>
                     </div>
                 </div>
             </li>
@@ -141,7 +143,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item active">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="../../charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Statistique</span></a>
             </li>

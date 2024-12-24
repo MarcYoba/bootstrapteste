@@ -1,6 +1,4 @@
 <?php
-
-require('../../fpdf186/fpdf.php');
 require_once("../bdmutilple/getvente.php");
 require_once("../bdmutilple/getdepense.php");
 require_once("../bdmutilple/getversement.php");
@@ -13,6 +11,7 @@ require_once("../bdmutilple/getfacture.php");
 require_once("../bdmutilple/getservice.php");
 require_once("../bdmutilple/getstock.php");
 require_once("../bdmutilple/comptabilite.php");
+require_once("../bdmutilple/getproduit.php");
 
 require '../../vendor/autoload.php';
 ini_set('memory_limit', '256M');
@@ -30,6 +29,7 @@ $versement = new Versement(1);
 $service = new Service();
 $stok = new Stock(0,0,0,0);
 $comptabilite = new Comptabilite();
+$produit = new Produit();
 //var_dump($date);
 
 // Créer une instance de Dompdf
@@ -137,7 +137,7 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">Produits accessoires (D)</th>
             <th scope="col">+</th>
             <th scope="col">1</th>
-            <th scope="col">0</th>
+            <th scope="col">'.$comptabilite->SommeCorporelles(date("Y")).'</th>
             <th scope="col">0</th>
         </tr>';
 
@@ -155,7 +155,7 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">Production stockée (ou déstockage) </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">0</th>
+            <th scope="col">'.$produit->SommeProduitStocker(date("Y")).'</th>
             <th scope="col">0</th>
         </tr>';
         $html .= '
@@ -180,7 +180,7 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">Autres produits</th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">0</th>
+            <th scope="col">'.$depenses->SommeDepenseAchat().'</th>
             <th scope="col">0</th>
         </tr>';
 

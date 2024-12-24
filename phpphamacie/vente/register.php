@@ -213,8 +213,11 @@ function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,
     $stmt->close(); 
     
     $quantite = $quantitestock - $quantite;
-
-    $sql = "UPDATE produitphamacie SET quantite_produit ='$quantite' WHERE id = '$id'";
+    if ($quantite == 0) {
+        $sql = "UPDATE produitphamacie SET quantite_produit ='$quantite',datePeramtion='' WHERE id = '$id'";
+    } else {
+        $sql = "UPDATE produitphamacie SET quantite_produit ='$quantite' WHERE id = '$id'";
+    }
     $result = $conn->query($sql); 
     if ($result === True) {
         produitstock($idvente,$quantite,$nomproduit);

@@ -53,13 +53,13 @@ require_once("../bdmutilple/getclient.php");
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Vaccin</h1>
+                    <h1 class="h3 mb-2 text-gray-800">service</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success">Liste des Vaccins</h6>
+                            <h6 class="m-0 font-weight-bold text-success">Terrain </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -72,6 +72,7 @@ require_once("../bdmutilple/getclient.php");
                                             <th>motifvisite</th>
                                             <th>efectif</th>
                                             <th>Client</th>
+                                            <th>Telephone</th>
                                             <th>Age</th>
                                             <th>Montant</th>
                                             <th>date</th>
@@ -85,6 +86,7 @@ require_once("../bdmutilple/getclient.php");
                                             <th>motifvisite</th>
                                             <th>efectif</th>
                                             <th>Client</th>
+                                            <th>Telephone</th>
                                             <th>Age</th>
                                             <th>Montant</th>
                                             <th>date </th>
@@ -95,15 +97,18 @@ require_once("../bdmutilple/getclient.php");
                                     <?php 
                                         global $conn;
                                         $client = new Client(1);
+                                        
                                         $sql = "SELECT * FROM terrain ";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
+                                            $infoclient = $client->getAllByIdClient($row["idclient"]);
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
                                             echo '<td>'.$row["localisation"].'</td>';
                                             echo '<td>'.$row["motifvisite"].'</td>';
                                             echo '<td>'.$row["efectif"].'</td>';
                                             echo '<td>'.$client->getByIdClient($row["idclient"]).'</td>';
+                                            echo '<td>'.$infoclient["telephone"].'</td>';
                                             echo '<td>'.$row["Age"].'</td>';
                                             echo '<td>'.$row["Montant"].'</td>';
                                             echo '<td>'.$row["datejour"].'</td>';
