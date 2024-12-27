@@ -214,7 +214,10 @@ function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,
     
     $quantite = $quantitestock - $quantite;
     if ($quantite == 0) {
-        $sql = "UPDATE produitphamacie SET quantite_produit ='$quantite',datePeramtion='' WHERE id = '$id'";
+        $sql = "UPDATE produitphamacie p 
+        INNER JOIN lots l ON p.id = l.idproduit 
+        SET p.quantite_produit ='$quantite',p.datePeramtion='',l.date_expiration='',l.dateRapelle='' 
+        WHERE p.id = '$id' AND l.idproduit='$id';";
     } else {
         $sql = "UPDATE produitphamacie SET quantite_produit ='$quantite' WHERE id = '$id'";
     }

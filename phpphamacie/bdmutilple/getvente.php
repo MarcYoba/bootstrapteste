@@ -686,6 +686,31 @@ class Vente{
         }
         return $this->data; 
     }
+
+    public function UPDATEClient($idclient,$idvente){
+        global $conn;
+
+        $sql = "UPDATE ventephamacie SET idclient ='$idclient' WHERE id = '$idvente'";
+        $result = $conn->query($sql);
+        if ($result==true) {
+            $sql = "UPDATE facturephamacie SET idclient ='$idclient' WHERE idvente = '$idvente'";
+            $result = $conn->query($sql);
+
+            if ($result==true) {
+                $sql = "SELECT * FROM dettephamacie WHERE idvente = '$idvente'";
+                $result = $conn->query($sql);
+                if ($result->num_rows>0) {
+                    $sql = "UPDATE dettephamacie SET idclient ='$idclient' WHERE idvente = '$idvente'";
+                    $result = $conn->query($sql);
+                    if ($result == true) {
+                        header("Location:liste.php");
+                    }
+                }else{
+                    header("Location:liste.php");
+                }  
+            }
+        }
+    }
 }
 
 

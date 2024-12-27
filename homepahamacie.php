@@ -1,7 +1,16 @@
 <?php 
-session_start(); 
-require_once("phpphamacie/historique/historiqueStock.php");
-$_SESSION["route"] = "cabinet";
+    session_start(); 
+    require_once("phpphamacie/historique/historiqueStock.php");
+    require_once("phpphamacie/historique/getproduit.php");
+    $_SESSION["route"] = "cabinet";
+   // if (!isset($_SESSION['modal_affiche'])) {
+        //$_SESSION['modal_affiche'] = true;
+        echo "<script>$(document).ready(function() { $('#monModal').modal('show'); });</script>";
+    //}
+    $produit = new Produit();
+    $peremption = $produit->ProduitSansDatePremption();
+    $doublonproduit = $produit->DoublonProduit();
+    $moiperemtion = $produit->ProduitEnCourPeremtionPrelote();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +45,41 @@ $_SESSION["route"] = "cabinet";
 </head>
 
 <body id="page-top">
+
+    <div class="modal fade" id="monModal" tabindex="-1" aria-labelledby="monModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+            <h5 class="modal-title" id="monModalLabel">Information de rapelle d'urgence</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    nombre de produit sans date de peremtion : <?php  echo count($peremption)?>
+                    
+                </div>
+                <div class="col-sm-4">
+                    Doublon de produit : <?php  echo count($doublonproduit)?>
+                    
+                </div>
+                <div class="col-sm-4">
+                    Produit perimer ou Proche de la peremtion lots 1(intervale 6 mois)  : <?php  echo count($moiperemtion)?>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+           <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button> -->
+            <a href="phpphamacie/pdf/getinforapelle.php" type="button" class="btn btn-primary" ><i class="fa fa-download" aria-hidden="true"></i>produit sans date</a>
+            <a href="phpphamacie/pdf/getperemption.php" type="button" class="btn btn-primary" ><i class="fa fa-download" aria-hidden="true"></i>Peremtion ou Proche</a>
+        </div>
+        </div>
+    </div>
+    </div>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -446,29 +490,34 @@ $_SESSION["route"] = "cabinet";
                                                 aria-valuenow="3" aria-valuemin="0" aria-valuemax="100">'.'</div>';
                                                 echo '</div>';
                                                 $preamtion = $row["id"];
-                                                echo '<div class="form-group row"';
+                                               
+                                                if ($row["quantite"]>0) {
+                                                    echo '<div class="form-group row"';
+                                                        $data=[];
 
-                                                $data=[];
+                                                    $sql1 = " SELECT p.datePeramtion FROM produitphamacie p WHERE p.id = '$preamtion'";
+                                                    $result1 =$conn->query($sql1);
+                                                    $row1 = mysqli_fetch_assoc($result1);
+                                                    array_push($data,$row1);
 
-                                                $sql1 = " SELECT p.datePeramtion FROM produitphamacie p WHERE p.id = '$preamtion'";
-                                                $result1 =$conn->query($sql1);
-                                                $row1 = mysqli_fetch_assoc($result1);
-                                                array_push($data,$row1);
+                                                    $sql1 = " SELECT l.date_expiration FROM lots l WHERE l.idproduit = '$preamtion'";
+                                                    $result1 =$conn->query($sql1);
+                                                    $row1 = mysqli_fetch_assoc($result1);
+                                                    array_push($data,$row1);
+                                                    $lots = 1;
 
-                                                $sql1 = " SELECT l.date_expiration FROM lots l WHERE l.idproduit = '$preamtion'";
-                                                $result1 =$conn->query($sql1);
-                                                $row1 = mysqli_fetch_assoc($result1);
-                                                array_push($data,$row1);
-                                                $lots = 1;
-
-                                                foreach ($data as $key => $value) {
-                                                    foreach ($value as $key => $val) {
-                                                        echo '<a href="phpphamacie/produit/Peramtion.php" class="col-sm-3 ">lots:'.$lots.' '.$val.'</a><hr>';
-                                                        $lots++;
+                                                    foreach ($data as $key => $value) {
+                                                        foreach ($value as $key => $val) {
+                                                            echo '<a href="phpphamacie/produit/Peramtion.php" class="col-sm-3 ">lots:'.$lots.' '.$val.'</a><hr>';
+                                                            $lots++;
+                                                        }
                                                     }
+                                                    echo '</div>';
                                                 }
-                                                echo '</div>';
+                                                
+                                                echo "<hr>"; 
                                             }
+                                            
                                         }
                                                     //var_dump($row);
                                     ?>
@@ -661,7 +710,9 @@ $_SESSION["route"] = "cabinet";
             document.getElementById('verse').innerHTML= document.getElementById('monversement').innerText;
             document.getElementById('vente').innerHTML= document.getElementById('montantvente').innerText;//.style.display='block';
         }
-        
+        $(document).ready(function() {
+            $('#monModal').modal('show');
+        });
     </script>
     <?php ;?>
 </body>
