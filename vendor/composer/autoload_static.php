@@ -14,14 +14,19 @@ class ComposerStaticInitac2d307f4ed514763a8119f3523066bb
         'S' => 
         array (
             'Svg\\' => 4,
+            'Slim\\Http\\' => 10,
             'Sabberworm\\CSS\\' => 15,
         ),
         'P' => 
         array (
+<<<<<<< HEAD
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
+=======
+            'Psr\\Http\\Message\\' => 17,
+>>>>>>> entete
         ),
         'M' => 
         array (
@@ -52,19 +57,27 @@ class ComposerStaticInitac2d307f4ed514763a8119f3523066bb
         array (
             0 => __DIR__ . '/..' . '/dompdf/php-svg-lib/src/Svg',
         ),
+        'Slim\\Http\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/slim/http/src',
+        ),
         'Sabberworm\\CSS\\' => 
         array (
             0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
         ),
+<<<<<<< HEAD
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
+=======
+>>>>>>> entete
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
+<<<<<<< HEAD
         'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
@@ -81,6 +94,8 @@ class ComposerStaticInitac2d307f4ed514763a8119f3523066bb
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
         ),
+=======
+>>>>>>> entete
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
