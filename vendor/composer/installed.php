@@ -82,7 +82,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-<<<<<<< HEAD
+
         'myclabs/php-enum' => array(
             'pretty_version' => '1.8.4',
             'version' => '1.8.4.0',
@@ -110,8 +110,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-=======
->>>>>>> entete
+
         'psr/http-factory' => array(
             'pretty_version' => '1.1.0',
             'version' => '1.1.0.0',
@@ -122,21 +121,17 @@
             'dev_requirement' => false,
         ),
         'psr/http-message' => array(
-<<<<<<< HEAD
+
             'pretty_version' => '1.1',
             'version' => '1.1.0.0',
             'reference' => 'cb6ce4845ce34a8ad9e68117c10ee90a29919eba',
-=======
-            'pretty_version' => '2.0',
-            'version' => '2.0.0.0',
-            'reference' => '402d35bcb92c70c026d1a6a9883f06b2ead23d71',
->>>>>>> entete
+
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/http-message',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-<<<<<<< HEAD
+
         'psr/simple-cache' => array(
             'pretty_version' => '3.0.0',
             'version' => '3.0.0.0',
@@ -146,8 +141,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-=======
->>>>>>> entete
+
         'sabberworm/php-css-parser' => array(
             'pretty_version' => 'v8.6.0',
             'version' => '8.6.0.0',
