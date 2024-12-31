@@ -33,8 +33,11 @@
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Fiche descente su terrain</h1>
+                            <div class="card-header py-3">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4 m-0 font-weight-bold">Fiche descente su terrain</h1>
+                                    <button  class='btn btn-primary' onclick="selection()"><i class='fas fa-pencil-alt'></i></a>
+                                </div>
                             </div>
                             <?php 
                             $id = $_GET["id"];
@@ -48,21 +51,27 @@
 
                                                 
                             ?>
-                                Information du client
-                                <hr>
+                                
                                 <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                          
+                                    Fichier Numero : <p class="text-lg font-weight-bold text-center" id="id">  <?php echo $id; ?></p>
+                                    <hr> 
+                                    </div>
+                                    Information du client
+                                <hr>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                       Nom:     
-                                    <p class="text-lg font-weight-bold"><?php echo $client->getByIdClient($row["idclient"]); ?></p> 
+                                    <p class="text-lg font-weight-bold" id="nom"><?php echo $client->getByIdClient($row["idclient"]); ?></p> 
                                     </div>
                                     
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         Localisation:
-                                    <p class="text-lg font-weight-bold"> <?php echo $row["localisation"] ?></p> 
+                                    <p class="text-lg font-weight-bold" id="localisation"> <?php echo $row["localisation"] ?></p> 
                                     </div>
 
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                    Telephone :<p class="text-lg font-weight-bold"> <?php echo $row["telephone"] ?></p> 
+                                    Telephone :<p class="text-lg font-weight-bold" id="telephone"> <?php echo $row["telephone"] ?></p> 
                                     </div>
                                     
                                 </div>
@@ -70,99 +79,99 @@
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                        date du jour: <p class="text-lg font-weight-bold"> <?php echo $row["datejour"] ?></p>  
+                                        date du jour: <p class="text-lg font-weight-bold" id="datejour"> <?php echo $row["datejour"] ?></p>  
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Motif de la visite :<p class="text-lg font-weight-bold"> <?php echo $row["motifvisite"] ?></p> 
+                                        Motif de la visite :<p class="text-lg font-weight-bold" id="motifvisite"> <?php echo $row["motifvisite"] ?></p> 
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Efectif: <p class="text-lg font-weight-bold"> <?php echo $row["efectif"] ?></p>
+                                        Effectif: <p class="text-lg font-weight-bold" id="efectif"> <?php echo $row["efectif"] ?></p>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Age: <p class="text-lg font-weight-bold"> <?php echo $row["Age"] ?></p>
+                                        Age: <p class="text-lg font-weight-bold" id="age"> <?php echo $row["Age"] ?></p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Presence de barrier: 
-                                        <p class="text-lg font-weight-bold"> <?php echo $row["barrier"] ?></p>
+                                        <p class="text-lg font-weight-bold" id="barrier"> <?php echo $row["barrier"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Pedulive: 
-                                        <p class="text-lg font-weight-bold"> <?php echo $row["pedulive"] ?></p>
+                                        <p class="text-lg font-weight-bold" id="pedulive"> <?php echo $row["pedulive"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Type de construction: 
-                                        <p class="text-lg font-weight-bold"> <?php echo $row["construction"] ?></p>
+                                        <p class="text-lg font-weight-bold" id="construction"> <?php echo $row["construction"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Nombre de batiment: 
-                                        <p class="text-lg font-weight-bold"> <?php echo $row["batiment"] ?></p>
+                                        <p class="text-lg font-weight-bold" id="batiment"> <?php echo $row["batiment"] ?></p>
                                     </div>
                                 </div>  
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Superficie du locale: 
-                                        <p class="text-lg font-weight-bold"> <?php echo $row["superficie"] ?></p>
+                                        <p class="text-lg font-weight-bold" id="superficie"> <?php echo $row["superficie"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Qualite du sole: <p class="text-lg font-weight-bold"> <?php echo $row["sole"] ?></p>
+                                        Qualite du sole: <p class="text-lg font-weight-bold" id="sole"> <?php echo $row["sole"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Densite: <p class="text-lg font-weight-bold"> <?php echo $row["densite"] ?></p>
+                                        Densite: <p class="text-lg font-weight-bold" id="densite"> <?php echo $row["densite"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                    Environement d'exploitation: <p class="text-lg font-weight-bold"> <?php echo $row["environement"] ?></p>
+                                    Environement d'exploitation: <p class="text-lg font-weight-bold" id="environement"> <?php echo $row["environement"] ?></p>
                                     </div>
                                 </div> 
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Hygiene du batiment: <p class="text-lg font-weight-bold"> <?php echo $row["hygiene"] ?></p>
+                                        Hygiene du batiment: <p class="text-lg font-weight-bold" id="hygiene"> <?php echo $row["hygiene"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Nombre mangeoire: <p class="text-lg font-weight-bold"> <?php echo $row["mangeoire"] ?></p>
+                                        Nombre mangeoire: <p class="text-lg font-weight-bold" id="mangeoire"> <?php echo $row["mangeoire"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                    Nombre abrevoire: <p class="text-lg font-weight-bold"> <?php echo $row["abrevoire"] ?></p>
+                                    Nombre abrevoire: <p class="text-lg font-weight-bold" id="abrevoire"> <?php echo $row["abrevoire"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Type d'alimentation: 
-                                    <p class="text-lg font-weight-bold"> <?php echo $row["alimentation"] ?></p>
+                                    <p class="text-lg font-weight-bold" id="alimentation"> <?php echo $row["alimentation"] ?></p>
                                     </div>
                                 </div> 
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Granulometrie: 
-                                        <p class="text-lg font-weight-bold"> <?php echo $row["granulometrie"] ?></p>
+                                        <p class="text-lg font-weight-bold" id="granulometrie"> <?php echo $row["granulometrie"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Presence de l'antenou: 
-                                        <p class="text-lg font-weight-bold"> <?php echo $row["antenou"] ?></p>
+                                        <p class="text-lg font-weight-bold" id="antenou"> <?php echo $row["antenou"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Prophylacie:
-                                    <p class="text-lg font-weight-bold"> <?php echo $row["prophylacie"] ?></p>
+                                    <p class="text-lg font-weight-bold" id="prophylacie"> <?php echo $row["prophylacie"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Patologie anterieux: 
-                                    <p class="text-lg font-weight-bold"> <?php echo $row["patologie"] ?></p>
+                                    <p class="text-lg font-weight-bold" id="patologie"> <?php echo $row["patologie"] ?></p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Traitement anterieur: 
-                                        <p class="text-lg font-weight-bold"> <?php echo $row["traitemenanterieux"] ?></p>
+                                        <p class="text-lg font-weight-bold" id="traitemenanterieux"> <?php echo $row["traitemenanterieux"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Signe clinique: 
-                                    <p class="text-lg font-weight-bold"> <?php echo $row["signeclinique"] ?></p>
+                                    <p class="text-lg font-weight-bold" id="signeclinique"> <?php echo $row["signeclinique"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Traitement Anvisage: 
-                                    <p class="text-lg font-weight-bold"> <?php echo $row["Traitementanvisage"] ?></p>
+                                    <p class="text-lg font-weight-bold" id="traia"> <?php echo $row["Traitementanvisage"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0"> 
-                                    Montant: <p class="text-lg font-weight-bold"> <?php echo $row["Montant"] ?></p>
+                                    Montant: <p class="text-lg font-weight-bold" id="Montant"> <?php echo $row["Montant"] ?></p>
                                     </div>
                                 </div>
                                 
@@ -185,6 +194,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="service.js"></script>
 
 </body>
 

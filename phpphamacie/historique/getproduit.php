@@ -137,5 +137,16 @@ class Produit{
         return $data;
     }
 
+    public function CommandePoussinNonLivrer(){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM `poussin` WHERE statusCommande ='EN COUR'";
+        $result =$conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data;
+    }
+
 }
 ?>

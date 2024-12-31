@@ -3,10 +3,6 @@ require_once("../connexion.php");
 global $conn;
 
 
-
-// Formulaire d'enregistrement produit
-if (isset($_POST['submit'])) {
-
     $idclient = $_POST['idclient'];
     $Localisation = $_POST['Localisation'];
     $telephone = $_POST['telephone'];
@@ -35,12 +31,14 @@ if (isset($_POST['submit'])) {
     $siclinique = $_POST['siclinique'];
     $Traitementan = $_POST['Traitementan'];
     $Montant = $_POST['Montant'];
+
+
+// Formulaire d'enregistrement produit
+if (isset($_POST['submit'])) {
     
     // Vérifier si tous les champs sont remplis
     if (!empty($date) || !empty($age) || !empty($Montant) || !empty($Traitementan) || !empty($siclinique) || !empty($patologie)) {
-        
-            
-               
+   
                 // Créer le compte utilisateur
         $sql = "INSERT INTO terrain (idclient, localisation, telephone, datejour, motifvisite, efectif, Age, barrier, pedulive, construction, batiment, superficie,sole, densite, environement, hygiene , mangeoire , abrevoire , alimentation , granulometrie , antenou,prophylacie,patologie,traitemenanterieux,signeclinique,Traitementanvisage,Montant) 
         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -66,6 +64,32 @@ if (isset($_POST['submit'])) {
 
             $stmt->close(); 
    
+}elseif(isset($_POST['modifier'])){
+
+    $idt = $_POST['idterain'];
+    
+
+    if (!empty($idclient) || !empty($id) || !empty($telephone) || !empty($date) || !empty($Montant) || !empty($Localisation)) {
+        
+        
+        $sql = "UPDATE terrain  set idclient='$idclient', localisation='$Localisation', telephone='$telephone',
+         datejour='$date', motifvisite='$motifvisite', efectif='$efectif', Age='$Age', barrier='$barrier', 
+         pedulive='$Pedulive', construction='$construction', batiment='$batiment', superficie='$superficie',
+         sole='$sole', densite='$densite', environement='$Environement', hygiene='$hygiene' , mangeoire='$mangeoire' , 
+         abrevoire='$abrevoire' , alimentation='$alimentation' , granulometrie='$granulo' , antenou='$antenou',
+         prophylacie='$prophylacie',patologie='$patologie',traitemenanterieux='$Traitemenante',signeclinique='$siclinique',
+         Traitementanvisage='$Traitementan',Montant='$Montant' 
+        WHERE id = '$idt'";
+        $result = $conn->query($sql);
+        if ($result == true) {
+           header("Location: liste.php");
+        }
+            
+
+    }else {
+        header("Location: ../../404.html");
+        exit();
+    }
 }
 
 ?>

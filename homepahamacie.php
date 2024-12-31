@@ -70,12 +70,17 @@
                     Produit perimer ou Proche de la peremtion lots 1(intervale 6 mois)  : <?php  echo count($moiperemtion)?>
                     
                 </div>
+                <div class="col-sm-4">
+                    Command Poussin Nom livrer :<?php  echo count($produit->CommandePoussinNonLivrer())?>
+                    
+                </div>
             </div>
         </div>
         <div class="modal-footer">
            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button> -->
             <a href="phpphamacie/pdf/getinforapelle.php" type="button" class="btn btn-primary" ><i class="fa fa-download" aria-hidden="true"></i>produit sans date</a>
             <a href="phpphamacie/pdf/getperemption.php" type="button" class="btn btn-primary" ><i class="fa fa-download" aria-hidden="true"></i>Peremtion ou Proche</a>
+            <a href="phpphamacie/pdf/getcondpoussin.php" type="button" class="btn btn-primary" ><i class="fa fa-download" aria-hidden="true"></i>Poussin non livree</a>
         </div>
         </div>
     </div>

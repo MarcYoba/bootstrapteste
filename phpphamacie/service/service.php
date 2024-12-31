@@ -38,10 +38,11 @@
                             </div>
                             <form class="user" action="register.php" method="post">
                                 Information du client
+                                <textarea id="idterain" name="idterain" style="display: none;"></textarea>
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                    <select id="idclient"  name="idclient"  class="form-control form-select">
+                                    <select id="idclient"  name="idclient"  class="form-control form-select" required>
                                             <?php 
                                             require_once("../connexion.php");
                                                 global $conn;
@@ -133,7 +134,7 @@
                                 </div> 
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Hygiene du batiment: <input type="text"  class="form-control form-control-user" id="Hygiene"
+                                        Hygiene du batiment: <input type="text"  class="form-control form-control-user" id="hygiene"
                                            name="hygiene" placeholder="Hygiene du batiment" required>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
@@ -204,10 +205,12 @@
                                     name="Montant" placeholder="Montant" required>
                                     </div>
                                 </div>
+                                <span id="message">
+                                    <button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
+                                        Enregister
+                                    </button>
+                                </span>
                                 
-                                <button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
-                                    Enregister
-                                </button>
                                 
                             </form>
                             <hr>
@@ -229,6 +232,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="service.js"></script>
 
 </body>
 

@@ -29,38 +29,32 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-$(function() {
-  fetch('php/graphe/getannulmoi.php',{
-    method:'POST',
-      headers:{
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(0)
-})
+$(document).ready(function() {
+  fetch('php/graphe/getannulmoi.php')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       return response.json();
     })
-    .then(data => { 
-        for (let proriete in data) {
-            value = data[proriete];
-            index = 0;
-            for (let  key in value) { 
-              tabannulsemaine1[index] = value[key];
-              //console.log(tab);
-              index +=1;
-            }
-           }
-           creationGrapehe();
+    .then(data => {
+      // Parcours des données et affichag
+      for (let proriete in data) {
+        value = data[proriete];
+        index = 0;
+        for (let  key in value) { 
+          tab1[index] = value[key];
+          //console.log(tab1);
+          index +=1;
+        }
+       }
+      CreationGraphe();
     })
     .catch(error => {
       console.error('There has been a problem with your fetch operation:', error);
     });
 });
 
-console.log("data");
 // Bar Chart Example
 
 function creationGrapehe() {

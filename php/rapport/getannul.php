@@ -419,7 +419,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-area">
-                                        <canvas id=""></canvas>
+                                        <canvas id="annulmoi"></canvas>
                                     </div>
                                     <hr> 
                                     <code> Vente</code> 
@@ -433,7 +433,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
-                                        <canvas id="annulmoi"></canvas>
+                                        <canvas id=""></canvas>
                                     </div>
                                     <hr>
                                     
