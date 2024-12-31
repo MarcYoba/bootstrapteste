@@ -1,0 +1,85 @@
+<?php
+
+require('../../fpdf186/fpdf.php');
+require_once("../bdmutilple/getproduit.php");
+require_once("../bdmutilple/getfournisseur.php");
+
+
+require '../../vendor/autoload.php';
+ini_set('memory_limit', '256M');
+use Dompdf\Dompdf;
+
+
+
+$produit = new Produit();
+
+$formule = 1;
+
+// Créer une instance de Dompdf
+$dompdf = new Dompdf();
+
+// Créer le contenu HTML du PDF
+$html = '
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facture</title>
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+        @Page {
+                    footer {
+                       position: fixed;
+                        bottom: 0cm;
+                        left: 0cm;
+                        right: 0cm;
+                        height: 2cm;
+                        text-align: center;
+                    }
+                }
+</style>
+</head>
+<body>';
+
+$html .='<br><br><br> <table style="width:100%">
+        <thead>';
+        $html .=' <tr><th colspan="10" align="center">liste des produi date :                     "</th></tr>
+        </thead>
+        <tbody>';
+        $html .= '<tr>';
+        
+        $html .= '</tr>
+            <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">quantite</th>
+            <th scope="col">prixUnite</th>
+            <th scope="col">inavantaire</th>
+        </tr>';
+            $nbperemption = $produit->getRecaptulatif();
+            foreach ($nbperemption as $linefatcture) {
+                $html .= '<tr>';
+                foreach ($linefatcture as $key => $cell) {
+                    $html .= '<td>' .$cell.'</td>';
+                }
+                $html .= '<td> </td>';
+                $html .= '</tr>';
+            }
+        $html .= '
+        </tbody>
+    </table>';
+
+    
+
+$html .= '
+</body>
+</html>';
+
+// Charger le contenu HTML dans Dompdf
+$dompdf->loadHtml($html);
+$dompdf->setPaper('A4', 'portrait');
+$dompdf->render();
+$dompdf->stream("historique.pdf", array("Attachment" => 0));
+
+?>
