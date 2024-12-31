@@ -37,6 +37,12 @@
                                 <h1 class="h4 text-gray-900 mb-4">Caisse</h1>
                             </div>
                             <form class="user" action="register.php" method="post" >
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <input type="date" class="form-control form-control-user"
+                                    name="date" id="date" placeholder="quantite" required>
+                                    </div>
+                                </div>
                                 <?php 
                                     
                                     if(isset($_GET['tableau'])){
@@ -63,7 +69,11 @@
                                         }else{
                                             echo'<option value="retour en caisse" > retour en caisse </option>';
                                             echo'<option value="sortie en caisse" > sortie en caisse</option>';
-                                            echo'<option value="Entrer OM MOMO" > Entrer OM MOMO</option>';
+                                            echo'<option value="sortie OM MOMO" > sortie OM MOMO</option>';
+                                            echo'<option value="sortie Dr Toukam" >sortie Dr Toukam</option>';
+                                            echo'<option value="sortie Mr Abdel" >sortie Mr Abdel</option>';
+                                            echo'<option value="sortie SKAB" >sortie SKAB</option>';
+                                            echo'<option value="sortie Banque" >sortie Banque</option>';
                                         }
                                         echo '</select>';
                                         echo'</div>'; 

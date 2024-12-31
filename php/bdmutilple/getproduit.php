@@ -24,8 +24,34 @@ class Produit{
         return $row["quantites"];
     }
 
+    public function SommeProduitStocker($produit){
+        global $conn;
+        $sql = "SELECT ROUND(SUM(prix_produit_vente*quantite_produit),2) as montant FROM produit;";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+                 
+        return $row["montant"];
+    }
+
     public function UpdateProduit($idproduit,$quantite){
         global $conn;
+        $sql = "UPDATE produit SET quantite_produit = '$quantite' WHERE id = '$idproduit'";
+        $result = $conn->query($sql);
+        if($result === true){
+            //return "Edite OK";
+        }else{
+            return "Edite false";
+        }  
+    }
+
+    public function UgradeProduit($idproduit,$quantite){
+        global $conn;
+
+        $sql = "SELECT quantite_produit AS quantite FROM produit WHERE  id='$idproduit'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result); 
+        $quantite = $row["quantite"] + $quantite;
+
         $sql = "UPDATE produit SET quantite_produit = '$quantite' WHERE id = '$idproduit'";
         $result = $conn->query($sql);
         if($result === true){
@@ -103,7 +129,6 @@ class Produit{
             if (!$stmt->execute()) {
                 die('Erreur d\'exécution de la requête : ' . $stmt->error);
             }
-
             // Fermer la requête
             $stmt->close();
        }

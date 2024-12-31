@@ -18,6 +18,14 @@ class Versement{
         return $row["montant"]; 
     }
 
+    public function TotalVersement(){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement BETWEEN '2025-12-01' AND CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
     public function ByDateVersement($date){
         global $conn;
         $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement= '$date'";
@@ -32,6 +40,34 @@ class Versement{
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
+    }
+
+    public function ByVersementIdClientDate($idclient,$date){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM versement WHERE idclient = '$idclient' AND dateversement= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function ByVersementClientdate($dette){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM versement WHERE iddette = '$dette' AND dateversement= CURRENT_DATE";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function getVersementByClientBydate($date,$client){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM versement WHERE dateversement = '$date' AND idclient ='$client'";
+        $result = $conn->query($sql);
+
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
     }
 
     public function ByWeekVersement($datebedut,$datafin){
@@ -101,6 +137,40 @@ class Versement{
         $sql = "SELECT * FROM versement WHERE dateversement BETWEEN '$datebedut'  AND '$detefin'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+
+        return $data; 
+    }
+
+    public function VersementMensuel($idmois){
+        global $conn;
+        $data = [];
+
+        $sql = "SELECT dateversement, 
+            GROUP_CONCAT(montant,',') AS listMontant,
+            ROUND(SUM(montant)) AS nomtant,
+            GROUP_CONCAT(motif,',') AS motif 
+            FROM versement
+            WHERE Month(dateversement) = '$idmois'
+            GROUP BY dateversement";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+
+        $sql = "SELECT dateversement, 
+            GROUP_CONCAT(montant,',') AS listMontant,
+            ROUND(SUM(montant)) AS nomtant,
+            GROUP_CONCAT(motif,',') AS motif 
+            FROM versement
+            WHERE Month(dateversement) = '$idmois'
+            ";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            $row["dateversement"] = "TOTAL";
+            $row["listMontant"] = $row["nomtant"];
+            $row["motif"] = "-";
             array_push($data,$row);
         }
 

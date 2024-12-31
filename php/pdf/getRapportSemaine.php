@@ -9,7 +9,7 @@ require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
 require_once("../bdmutilple/trievalue.php");
-ini_set('memory_limit', '256M');
+ini_set('memory_limit', '556M');
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
@@ -64,7 +64,7 @@ $html = '
         foreach ($value as $line) {
             $inclient=$client->getClientByIdVente($line["id"]);
             $html .= '<tr>';
-            $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"]." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"].'</td>';
+            $html .= '<td colspan="6" align="center"> Formule ' . $formule." Vente N= ".$line["id"]." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]. " utilisateur".$line["iduser"]."/".$line["heure"]."/".$line["aliment"]. '</td>';
             $html .= '</tr>
                 <tr>
                 <th scope="col">Nom produit</th>
@@ -95,7 +95,7 @@ $html = '
         </thead>
         <tbody>';
             $html .= '<tr>';
-            $html .= '<td colspan="9" align="center"> Recapitulatif Vente </td>';
+            $html .= '<td colspan="10" align="center"> Recapitulatif Vente </td>';
             $html .= '</tr>
                 <tr>
                 <th scope="col">Total Vente Net</th>
@@ -103,6 +103,7 @@ $html = '
                 <th scope="col">Total Cash</th>
                 <th scope="col">Total OM</th>
                 <th scope="col">Total Credit </th>
+                <th scope="col">Total Banque </th>
                 <th scope="col">Total reduction</th>
                 <th scope="col">Total sortie caise</th>
                 <th scope="col">Total Versement</th>
@@ -114,10 +115,11 @@ $html = '
                     $html .= '<td>' .$vente->getSommeCashWeek($datedebut,$datedefin).'</td>';
                     $html .= '<td>' .$vente->getSommeOmWeek($datedebut,$datedefin).'</td>';
                     $html .= '<td>' .$vente->getSommeCreditWeek($datedebut,$datedefin).'</td>';
+                    $html .= '<td>' .$vente->getSommeBanqueWeek($datedebut,$datedefin).'</td>';
                     $html .= '<td>' .$vente->getSommeReductionWeek($datedebut,$datedefin).'</td>';
                     $html .= '<td>' .($caise->getByWeekSortie($datedebut,$datedefin)).'</td>';
                     $html .= '<td>' .$versement->ByWeekVersement($datedebut,$datedefin).'</td>';
-                    $html .= '<td>' .(((($vente->getSommeCashWeek($datedebut,$datedefin))-0)+$caise->getByWeekSortie($datedebut,$datedefin))-0).'</td>';
+                    $html .= '<td>' .(((($vente->getSommeCashWeek($datedebut,$datedefin))-0)+$caise->getByWeekSortie($datedebut,$datedefin))+$caise->RetourCaisse($datedebut,$datedefin)+$vente->getSommeBanqueWeek($datedebut,$datedefin)).'</td>';
                 $html .= '</tr>';
         $html .= '
         </tbody>

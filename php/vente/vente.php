@@ -70,6 +70,12 @@ require_once("../connexion.php");
                                                     name="datevente" id="datevente" placeholder="quantite" required>
                                                 </p>
                                                 <a class="btn btn-warning btn-user col-md-1" href="liste.php">Liste</a>
+                                                <p class="col-md-2" >
+                                                    <span id="TypePaie" class="drop" ></span>
+                                                    <span id="teste" class="drop" >0</span>
+                                                   Total reduction <input type="number" class="form-control form-control-user"
+                                                name="caculelreduction" id="caculelreduction" placeholder="reduction produit" readonly value="0">
+                                                </p>
                                             </div>
                                             <br>
                                             <div class="row">
@@ -90,6 +96,11 @@ require_once("../connexion.php");
                                                     name="credit" id="credit" value="0" required>
                                                 </p>
                                                 <p class="col-md-2" >
+                                                    Banque
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="Banque" id="Banque" value="0" required>
+                                                </p>
+                                                <p class="col-md-2" >
                                                     Reduction
                                                     <input type="number" class="form-control form-control-user"
                                                     name="reduction" id="reduction" value="0" required>
@@ -99,9 +110,7 @@ require_once("../connexion.php");
                                                     <input type="txt" class="form-control form-control-user"
                                                      name="Total" id="Total" placeholder="0 FCFA"  readonly>
                                                 </p>
-                                                <p class="col-md-2" >
-                                                    <span id="TypePaie" class="drop" ></span>
-                                                </p>
+                                                
                                                 
                                             </div>
                                             <div class="row">
@@ -110,7 +119,7 @@ require_once("../connexion.php");
                                                     <input type="tel" id="telephone"   class="form-control form-control-user" placeholder="telephone"> <br>
                                                     <button class="btn btn-success btn-user" onclick="enregistremetnclient()">enregistrer client</button>
                                                 </p>
-                                                <p class="col-md-4" >
+                                                <p class="col-md-3" >
                                                     <select id="fournisseur"  name="fournisseur"   class="form-control form-select"  size="10" multiple aria-label="multiple select " onchange="Client()" required>
                                                                     
                                                         <?php 
@@ -129,28 +138,54 @@ require_once("../connexion.php");
                                                 <p class="col-md-2" >
                                                     <input type="search" id="rechercheP" onkeyup="myFunctionP()"  class="form-control form-control-user" placeholder="recherche"><br>
                                                     <input type="number" class="form-control form-control-user"
-                                                    name="quantite" id="quantite" placeholder="quantite" required><br>
+                                                    name="quantite" id="quantite" placeholder="quantite" required value="0"><br>
                                                     <input type="number" class="form-control form-control-user"
                                                     name="prixglobal" id="prixglobal" placeholder="Prix du produit" readonly><br>
                                                     <i  id="montanttotal" class="form-control form-control-user"><span id="resultat" ></span></i>
                                                 </p>
-                                                <p class="col-md-4" >
+                                                <p class="col-md-3" >
                                                 <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="10"  multiple aria-label="multiple select " required onchange="recherchePrix()">
                                                                         <option selected> </option>
                                                                         <?php 
                                                                         global $conn;
-                                                                        $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                                                        $sql = "SELECT  nom_produit,cathegorie,quantite_produit FROM produit";
                                                                         $result = $conn->query($sql);
                                                                         while ($row = mysqli_fetch_assoc($result)){
-                                                                            
-                                                                            echo "<option value='".$row["nom_produit"]." ".$row["cathegorie"]."'>".$row["nom_produit"]."</option>";
-                                                                            
-                                                                            //var_dump($row);
+                                                                            if($row["quantite_produit"]>0){
+                                                                                echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
+                                                                            }
+                                                                              //var_dump($row);
                                                                         }
                                                                     ?>
                                                                     </select>
                                                 </p>
-                                                <p class="col-md-8" ></p>
+                                                <p class="col-md-2" >
+                                                   Esperce: <select class="form-control form-select" name="esperce" id="esperce" required>
+                                                        <option value="CHAIRE">CHAIRE</option>
+                                                        <option value="PONDEUSE">PONDEUSE</option>
+                                                        <option value="PORC">PORC</option>
+                                                        <option value="LAPIN">LAPIN</option>
+                                                        <option value="AUTRE">AUTRE</option>
+                                                    </select>
+                                                    
+                                                   Aliment: <select class="form-control form-select" name="aliment" id="aliment" required>
+                                                        <option value="PREDEMARRAGE">PREDEMARRAGE</option>
+                                                        <option value="DEMARRAGE">DEMARRAGE</option>
+                                                        <option value="CROISSANCE">CROISSANCE</option>
+                                                        <option value="FINITION">FINITION</option>
+                                                    </select>
+                                                    reduction produit:
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="rp" id="rp" placeholder="reduction produit" required value="0"><br>
+                                                    <button class="btn btn-primary btn-user" onclick="caculeReduction()">Calculer</button>
+                                                    
+                                                </p>
+                                                <p class="col-md-4" >
+                                                    <select id="statusvente" name="statusvente" class="form-control form-select">
+                                                        <option value="livree">livree</option>
+                                                        <option value="non livree">non livree</option>
+                                                    </select>
+                                                </p>
                                                 <p class="col-md-4" >
                                                     <span id="modifiervente"></span>
                                                     <span id="enregistremet"></span>

@@ -1,10 +1,23 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+<?php
+session_start(); 
+require_once("php/activesaision.php");
+?>
+ <?php 
+        if (!isset($_SESSION["route"])) {
+            header('Location:../../index.php');
+        }
+        if (($_SESSION["zonetravail"] == "Tous") && ($_SESSION["route"] == "cabinet")) {
+            echo '<ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">';
+        } else {
+            echo '<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">';
+        }
+        
+        ?>
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
-       I </div>
+        </div>
         <div class="sidebar-brand-text mx-3">ABGROUP <sup>2</sup></div>
     </a>
 
@@ -12,11 +25,23 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="../../home.php">
+     <?php
+    if (($_SESSION["route"] == "cabinet")) {
+        echo '
+        <li class="nav-item active">
+            <a class="nav-link" href="../../homepahamacie.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
-    </li>
+        </li>';
+    }else{
+        echo '
+        <li class="nav-item active">
+            <a class="nav-link" href="../../home.php">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>';
+    }
+    ?>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsevente"
             aria-expanded="true" aria-controls="collapsevente">
@@ -26,10 +51,22 @@
         <div id="collapsevente" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation de vente</h6>
-                <a class="collapse-item" href="../vente/vente.php"> ajouter une vente</a>
-                <a class="collapse-item" href="../vente/liste.php">liste vente</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                            <a class="collapse-item" href="../vente/vente.php" id="ajouterVente"> ajouter une vente</a>
+                            <a class="collapse-item" href="../vente/liste.php">liste vente</a>
+                        '; 
+                    } else {
+                        echo '
+                            <a class="collapse-item" href="../vente/vente.php" id="ajouterVente"> ajouter une vente</a>
+                            <a class="collapse-item" href="../vente/liste.php">liste vente</a>
+                        ';
+                    }
+                ?>
+                
             </div>
-        O</div>
+        </div>
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseahcat"
@@ -40,8 +77,20 @@
         <div id="collapseahcat" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Achat</h6>
-                <a class="collapse-item" href="../achat/teste.php">ajouter un Achat</a>
-                <a class="collapse-item" href="../achat/liste.php">liste Achat</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                        <a class="collapse-item" href="../achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
+                        <a class="collapse-item" href="../achat/liste.php">liste Achat</a>
+                      ';     
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
+                        <a class="collapse-item" href="../achat/liste.php">liste Achat</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -54,8 +103,24 @@
         <div id="collapseclient" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des clients</h6>
-               <a class="collapse-item" href="../client/client.php">ajouter un client</a>
-                <a class="collapse-item" href="../client/liste.php">liste client</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+
+                        echo '
+                        <a class="collapse-item" href="../client/client.php" id="ajouterClient">ajouter un client</a>
+                        <a class="collapse-item" href="../client/liste.php">liste client</a>
+                        <a class="collapse-item" href="../client/clientInactif.php">liste des client Inactif client</a>
+                        ';
+                            
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../client/client.php" id="ajouterClient">ajouter un client</a>
+                        <a class="collapse-item" href="../client/liste.php">liste client</a>
+                        <a class="collapse-item" href="../client/clientInactif.php">liste des client Inactif</a>
+                        ';
+                    }
+                ?>
+               
             </div>
         </div>
     </li>
@@ -68,8 +133,21 @@
         <div id="collapseproduit" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des produit</h6>
-                <a class="collapse-item" href="../produit/produit.php">ajouter un produit</a>
-                <a class="collapse-item" href="../produit/liste.php">liste produit</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                        <a class="collapse-item" href="../produit/produit.php" id="ajouterProduit">ajouter un produit</a>
+                        <a class="collapse-item" href="../produit/liste.php">liste produit</a>
+                        ';
+                    } else {
+                        echo '
+                            <a class="collapse-item" href="../produit/produit.php" id="ajouterProduit">ajouter un produit</a>
+                            <a class="collapse-item" href="../produit/liste.php">liste produit</a>
+                            <a class="collapse-item" href="../produit/Peramtion.php">Date Peramtion<</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -81,9 +159,21 @@
         </a>
         <div id="collapsefournisseur" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Operation des produit</h6>
-                <a class="collapse-item" href="../fournisseur/fourniseur.php">ajouter un Fournisseur</a>
-                <a class="collapse-item" href="../fournisseur/liste.php">liste Fournisseur</a>
+                <h6 class="collapse-header">Operation des Fourniseurs</h6>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                        <a class="collapse-item" href="../fournisseur/fourniseur.php" id="ajouterFourniseur">ajouter un Fournisseur</a>
+                        <a class="collapse-item" href="../fournisseur/liste.php">liste Fournisseur</a>
+                    ';
+                    } else {
+                        echo '
+                            <a class="collapse-item" href="../fournisseur/fourniseur.php" id="ajouterFourniseur">ajouter un Fournisseur</a>
+                            <a class="collapse-item" href="../fournisseur/liste.php">liste Fournisseur</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -96,10 +186,24 @@
         <div id="collapsestock" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Stock</h6>
-                <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
-                <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
-                <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
-                <a class="collapse-item" href="../stock/editeStock.php">Edite Stock </a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                        <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
+                        <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
+                        <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
+                        <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire </a>
+                        ';    
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
+                        <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
+                        <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
+                        <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire </a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -112,8 +216,20 @@
         <div id="versement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">versement:</h6>
-                <a class="collapse-item" href="../versement/versement.php">ajouter versement</a>
-                <a class="collapse-item" href="../versement/liste.php">Liste versement</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                            <a class="collapse-item" href="../versement/versement.php" id="ajouterVersement">ajouter versement</a>
+                            <a class="collapse-item" href="../versement/liste.php">Liste versement</a>
+                        ';
+                    } else {
+                        echo '
+                            <a class="collapse-item" href="../versement/versement.php" id="ajouterVersement">ajouter versement</a>
+                            <a class="collapse-item" href="../versement/liste.php">Liste versement</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -126,7 +242,20 @@
         <div id="dette" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette:</h6>
-                <a class="collapse-item" href="../dette/dette.php">Liste credit</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+
+                        echo '
+                            <a class="collapse-item" href="../dette/dette.php">Liste credit</a>
+                        ';
+                            
+                    } else {
+                        echo '
+                            <a class="collapse-item" href="../dette/dette.php">Liste credit</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -140,8 +269,20 @@
         <div id="caisse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette:</h6>
-                <a class="collapse-item" href="../caisse/caisse.php">Caisse</a>
-                <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                        <a class="collapse-item" href="../caisse/caisse.php" id="ajouterCaise">Caisse</a>
+                        <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
+                        ';    
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../caisse/caisse.php" id="ajouterCaise">Caisse</a>
+                        <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
+                        ';
+                    }
+                ?>
+                
             </div>
         </div>
     </li>
@@ -155,8 +296,140 @@
         <div id="utilisateur" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">utilisateur:</h6>
-                <a class="collapse-item" href="../../register.html">ajouter utilisateur</a>
-                <a class="collapse-item" href="../userCon/liste.php">Liste</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                        <a class="collapse-item" href="../userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
+                        <a class="collapse-item" href="../userCon/liste.php">Liste</a>
+                        ';    
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
+                        <a class="collapse-item" href="../userCon/liste.php">Liste</a>
+                        ';
+                    }
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#volaille"
+            aria-expanded="true" aria-controls="volaille">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Poussin </span>
+        </a>
+        <div id="volaille" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Volaille :</h6>
+                <?php
+                    if (($_SESSION["route"] == "cabinet")) { 
+                        echo '
+                        <a class="collapse-item" href="../volaille/volaille.php" id="ajouterUtilisateur">Commande</a>
+                        <a class="collapse-item" href="../volaille/comandefourniseur.php">Commande fourniseur</a>
+                        <a class="collapse-item" href="../volaille/liste.php">Liste</a>
+                        <a class="collapse-item" href="../volaille/listecommande.php">Liste fourniseur</a>
+                        '; 
+                    }
+                ?>
+                
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Clinique"
+            aria-expanded="true" aria-controls="Clinique">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Clinique </span>
+        </a>
+        <div id="Clinique" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Clinique :</h6>
+                <?php
+                    if (($_SESSION["route"] == "cabinet")) { 
+                        echo '
+                        <a class="collapse-item" href="../vacin/consultation.php" id="ajouterUtilisateur">Consultation</a>
+                        <a class="collapse-item" href="../vacin/fichesuivi.php" >fiche suivi </a>
+                        <a class="collapse-item" href="../vacin/tableconsultation.php">liste Consultation</a>
+                        <a class="collapse-item" href="../vacin/listesuivi.php" >liste des suivi</a>
+                        
+                        ';  
+                    }
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#vaccin"
+            aria-expanded="true" aria-controls="vaccin">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Vaccin </span>
+        </a>
+        <div id="vaccin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Vaccin :</h6>
+                <?php
+                        if (($_SESSION["route"] == "cabinet")) {  
+                        echo '
+                        <a class="collapse-item" href="../vacin/vacin.php" id="ajouterUtilisateur">Adminitrer un Vaccin</a>
+                        <a class="collapse-item" href="../vacin/liste.php">Liste Vaccin</a>
+                        '; 
+                        }
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#depense"
+            aria-expanded="true" aria-controls="depense">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Depense</span>
+        </a>
+        <div id="depense" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Depense:</h6>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
+                        <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                        ';
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
+                        <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                        ';
+                    }
+                ?>
+                
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#service"
+            aria-expanded="true" aria-controls="service">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Service </span>
+        </a>
+        <div id="service" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Service :</h6>
+                <?php 
+                if (($_SESSION["route"] == "cabinet")) {
+                    echo '
+                    <a class="collapse-item" href="../service/service.php" id="ajouterUtilisateur">Descente sur terrain</a>
+                    <a class="collapse-item" href="../service/liste.php">Liste </a>
+                    ';       
+                }
+                        
+                ?>
+                
             </div>
         </div>
     </li>
@@ -179,7 +452,18 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette :</h6>
-                <a class="collapse-item" href="../dette/dette.php">Liste dette</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                        <a class="collapse-item" href="../dette/dette.php">Liste dette</a>
+                        ';   
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../dette/dette.php">Liste dette</a>
+                        ';
+                    }
+                ?>
+                
                 <!--<a class="collapse-item" href="cards.html">Dette client</a>-->
             </div>
         </div>
@@ -197,10 +481,23 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="../caisse/caisse.php">Caisse</a>
-                <a class="collapse-item" href="../caise/liste.php">liste caisse</a>
-                <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
-                <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                <?php 
+                    if (($_SESSION["route"] == "cabinet")) {
+                        echo '
+                        <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
+                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
+                        <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                        ';    
+                    } else {
+                        echo '
+                        <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
+                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
+                        <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                        ';
+                    }
+                ?>
+              <!--  <a class="collapse-item" href="../caisse/caisse.php" id="ajoutCaise">Caisse</a> -->
+                
             </div>
         </div>
     </li>
@@ -212,6 +509,25 @@
     <div class="sidebar-heading">
         Administrateur
     </div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employer"
+            aria-expanded="true" aria-controls="employer">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Employer </span>
+        </a>
+        <div id="employer" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Employer :</h6>
+                <?php 
+                        echo '
+                        <a class="collapse-item" href="../employer/employer.php">Employer</a>
+                        <a class="collapse-item" href="../employer/liste.php">Liste </a>
+                        '; 
+                ?>
+                
+            </div>
+        </div>
+    </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
@@ -224,9 +540,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Login Screens:</h6>
                 <a class="collapse-item" href="../../index.php">Login</a>
-                <a class="collapse-item" href="../../register.html">ajouter utilisateur</a>
+               <!-- <a class="collapse-item" href="../userCon/page.php" id="ajouteruser">ajouter utilisateur</a> -->
                 <a class="collapse-item" href="../userCon/liste.php">Liste</a>
-                <a class="collapse-item" href="../../forgot-password.html">Forgot Password</a>
+                <a class="collapse-item" href="../userCon/forgot-password.html">Forgot Password</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Other Pages:</h6>
                 <a class="collapse-item" href="../../404.html">404 Page</a>
@@ -236,11 +552,24 @@
     </li>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+
+    <?php 
+        if (($_SESSION["route"] == "cabinet")) {
+            echo '
+            <li class="nav-item">
+            <a class="nav-link" href="../../comptaPhamacie.html">
             <i class="fas fa-fw fa-chart-area"></i>
             Statistique<span></span></a>
-    </li>
+            </li>';    
+        } else {
+            echo '
+            <li class="nav-item">
+            <a class="nav-link" href="../../charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                Statistique<span></span></a>
+            </li>';
+        }
+    ?>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
@@ -261,3 +590,4 @@
     
 
 </ul>
+

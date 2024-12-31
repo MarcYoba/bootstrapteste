@@ -1,25 +1,66 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 var tabMontantMoi = new Array(32);
 var tabJourMoi = new Array(32);
+var varmois  = 1;
 
+const  inputMars = document.getElementById("Mars");
+//const  nombre = document.getElementById("nombre");
+function funMars() {
+  
+  RechargeGraphe();
+}
+
+inputMars.addEventListener('input',funMars);
+//nombre.addEventListener('input',funMars);
+
+function RechargeGraphe() {
+  console.log("Valeur du moi");
+  varmois = document.getElementById("nombre").value;
+  console.log(varmois);
+  for (let index = 0; index < tabMontantMoi.length; index++) {
+    tabMontantMoi[index] = 0; 
+    tabJourMoi[index] = 0;  
+  }
+
+  fetch('php/graphe/getdatamoi.php',{
+      method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(varmois)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(dat => {
+      console.log(dat); 
+      // Parcours des données et affichage
+      let ind = 0;
+      dat.forEach(element => {
+        for(let proriete in element){
+           // console.log(element[proriete]); 
+            result = element[proriete];
+            tabMontantMoi[ind] = result.prix;
+            tabJourMoi[ind] = result.jour;
+
+            ind +=1  
+        }
+      });
+     creationGrapeh();
+    })
+    .catch(error => {
+      console.error(error);
+  });
+
+//Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+//Chart.defaults.global.defaultFontColor = '#858796'; 
+}
 for (let index = 0; index < tabMontantMoi.length; index++) {
     tabMontantMoi[index] = 0; 
     tabJourMoi[index] = 0;  
 }
 
 $(document).ready(function() {
-  
-
-  /**
-    ,{
-      method:'POST',
-      headers:{
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(donnees)
-  }
-   */
-
 
   fetch('php/graphe/getdatamoi.php')
     .then(response => {

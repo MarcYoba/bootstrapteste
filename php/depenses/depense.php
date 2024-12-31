@@ -31,15 +31,31 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center" >
                                 <h1 class="h4 text-gray-900 mb-4">Depenses</h1>
                             </div>
                             <form class="user" action="register.php" method="post" >
                                 <hr>
-                                <input type="date" class="form-control form-control-user" id="datedepense"
-                                name="datedepense" placeholder="date achat">
+                                <div class="from-group row">
+                                    <div class="col-sm-6">
+                                        <input type="date" class="form-control form-control-user" id="datedepense"
+                                        name="datedepense" placeholder="date achat" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <select id="type" name="type" class="form-control form-select" required>
+                                            <option value="Autres achats"> Autres achats ( Tami, marteau, ralonge, etc.)</option>
+                                            <option value="service exterieur"> charges générales ( Loyer, eau, electricite, etc.)</option>
+                                            <option value="impots et taxes">  impôts et taxes </option>
+                                            <option value="charge personnel">  charges de personnel(Salaires)  </option>
+                                            <option value="autre charge"> (Heures supplémentaires, primes,Motivation,Miting etc.) </option>
+                                            <option value="Voyages">  Voyages et déplacements, deplacement pour versement,seminaire, autre depense </option>
+                                        </select>  
+                                    </div>
+                                    
+                                </div>
+                                
                                 <hr>
                                 <?php 
                                     
@@ -106,12 +122,6 @@
                                 ?>
                             </form>
                             <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="../../index.html">Already have an account? Login!</a>
-                            </div>
                         </div>
                     </div>
                 </div>

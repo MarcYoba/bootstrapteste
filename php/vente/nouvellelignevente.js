@@ -139,7 +139,7 @@ function recherchePrix(){
                 document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> Rupture de stock en cour : '+data.quantite+'</p>';
                 if (data.quantite >= 1 && data.quantite <= 5) {
                    document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> fin de stock pour ce produit: '+data.quantite+'</p>';  
-                   //document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" disabled>Enregistrer</button>'
+                   document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer</button>'
                 }else if(data.quantite <= 0){
                     if (document.getElementById("modifiervente").textContent == "Modifier vente") {
                         
@@ -282,6 +282,10 @@ function recuperationdonneTable() {
         data.Total = document.getElementById("Total").value;
         data.Qttotal = document.getElementById("quantitetotal").textContent;
         data.taille = tableau.rows.length;
+        data.Banque = document.getElementById("Banque").value;
+        data.esperce = document.getElementById("esperce").value;
+        data.aliment = document.getElementById("aliment").value;
+        data.statusvente = document.getElementById("statusvente").value;
 
         donnees.push({...data});  //on peut aussi  declarer directement let data = {} dans la boucle pour redure le programme
         data.value++;
@@ -330,22 +334,50 @@ function enregistrementDonnees(){
     let cahs = document.getElementById("cash").value;
     let credit = document.getElementById("credit").value;
     let momo = document.getElementById("momo").value;
-    somme = parseInt(momo) + parseInt(cahs)+parseInt(credit) ;
+    let banque = document.getElementById("Banque").value;
+    let teste = document.getElementById("teste").textContent;
+    somme = parseInt(momo) + parseInt(cahs)+parseInt(credit) + parseInt(banque) ;
     if ((somme) == (document.getElementById("Total").value)) 
     {
     
         if(document.getElementById("momo").value == 0){
             if (document.getElementById("cash").value == 0) {
                 if (document.getElementById("credit").value == 0) {
-                    document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH ou Credit</p>';
+                    if (document.getElementById("Banque").value ==0) {
+                        document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH/Banque ou Credit</p>';
+                    } else {
+                        if (teste == 0) {
+                            document.getElementById("teste").innerText = 1;
+                        }else{
+                            window.location.href = 'liste.php'
+                        }
+                        enregistrementBD();
+                    }
                 } else {
+                    
+                    if (teste == 0) {
+                        document.getElementById("teste").innerText = 1;
+                    }else{
+                        window.location.href = 'liste.php'
+                    }
                     enregistrementBD();
                 }
             } else {
+                
+                    if (teste == 0) {
+                        document.getElementById("teste").innerText = 1;
+                    }else{
+                        window.location.href = 'liste.php'
+                    }
                 enregistrementBD(); 
             }
         }
         else{
+                    if (teste == 0) {
+                        document.getElementById("teste").innerText = 1;
+                    }else{
+                        window.location.href = 'liste.php'
+                    }
             enregistrementBD();
         }
    
@@ -422,6 +454,7 @@ function LigneventeMofiier(donnees){
     document.getElementById("idfacture").textContent = donnees.id;
     document.getElementById("idvente").textContent = donnees.idvente;
     
+    
 }
 function editevente(){
     if (typeof data === 'undefined' || data === null) {
@@ -433,7 +466,7 @@ function editevente(){
             LigneventeMofiier(element);
         });
         localStorage.removeItem('myData');
-      
+        document.getElementById("enregistremet").style.display="none";
       document.getElementById("modifiervente").innerHTML = '<button  class="btn btn-warning btn-user btn-block" onclick="saveedite()" >Modifier vente</button>';
     }
       
@@ -471,6 +504,7 @@ function enregistrementEdite(){
             document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> Verifier que le produit ne sont conforme </p>';
         }else{
             console.log(data);
+            window.location.href = 'liste.php';
         }     
     })
     .catch(error => {
@@ -483,14 +517,27 @@ function saveedite(){
    let cahs = document.getElementById("cash").value;
     let credit = document.getElementById("credit").value;
     let momo = document.getElementById("momo").value;
-    somme = parseInt(momo) + parseInt(cahs)+parseInt(credit) ;
+    let banque = document.getElementById("Banque").value;
+    let teste = document.getElementById("teste").textContent;
+    somme = parseInt(momo) + parseInt(cahs)+parseInt(credit)+parseInt(banque) ;
     if ((somme) == (document.getElementById("Total").value)) 
     {
     
         if(document.getElementById("momo").value == 0){
             if (document.getElementById("cash").value == 0) {
                 if (document.getElementById("credit").value == 0) {
-                    document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH ou Credit</p>';
+                    if (document.getElementById("Banque").value==0) {
+                        document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-warning"> vous deviez enregistrer le montant OM/MOMO ou CASH ou Credit</p>';
+                        if (teste == 0) {
+                            document.getElementById("teste").innerText = 1;
+                        }else{
+                            alert("Voullez - Vous Vraiment modifier cette facture ?");
+                            document.getElementById("teste").innerText = 0;
+                            enregistrementEdite()
+                        }
+                    } else {
+                        enregistrementEdite()
+                    }
                 } else {
                     enregistrementEdite()
                 }
@@ -556,4 +603,10 @@ function Client(element){
     .catch(error => {
         console.error(error);
     });
+  }
+
+  function caculeReduction() {
+    let resultreduction= parseFloat(document.getElementById("quantite").value)*parseFloat(document.getElementById("rp").value);
+    document.getElementById("caculelreduction").value = parseFloat(document.getElementById("caculelreduction").value) + parseFloat(resultreduction);
+    document.getElementById("rp").value = 0;
   }

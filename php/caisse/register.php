@@ -5,9 +5,9 @@ session_start();
 require_once("../connexion.php");
 
 // Fonction pour créer un compte utilisateur $nom, $type, $prixvente, $prixachat, $quantite
-function creerCaisse($description, $motif, $montant) {
+function creerCaisse($description, $motif, $montant,$date) {
     global $conn;
-    $date = date("y/m/d");
+   
     
     if($description == "sortie en caisse"){
         $montant = "-".$montant;
@@ -40,12 +40,12 @@ if (isset($_POST['enregistrement'])) {
     $description = $_POST['description'];
     $motif = $_POST['motif'];
     $montant = $_POST['montant'];
-    
+    $date = $_POST["date"];
     // Vérifier si tous les champs sont remplis
     if (!empty($description) || !empty($motif) || !empty($montant)) {
         
                 // Créer le compte utilisateur
-                creerCaisse($description, $motif, $montant);
+                creerCaisse($description, $motif, $montant,$date);
                 header("Location:liste.php");
                 exit();
 
@@ -62,12 +62,13 @@ if (isset($_POST['modifier'])) {
     $motif = $_POST['motif'];
     $montant = $_POST['montant'];
     $reference = $_POST['reference'];
+    $date = $_POST["date"];
     
     // Vérifier si tous les champs sont remplis
     if (!empty($description) || !empty($motif) || !empty($montant)) {
         
                 // Créer le compte utilisateur
-            $sql = "UPDATE caisse SET operation='$description', montant ='$montant', motif='$motif' WHERE id='$reference'";
+            $sql = "UPDATE caisse SET operation='$description', montant ='$montant', motif='$motif',dateoperation='$date' WHERE id='$reference'";
             $result = $conn->query($sql);
             
                 header("Location:liste.php");

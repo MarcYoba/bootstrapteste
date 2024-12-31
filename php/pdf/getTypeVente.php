@@ -180,7 +180,7 @@ $html = '
         if(isset($_POST["quantite"])){
                 $html .='<br><br><br> <table style="width:100%">
                 <thead>';
-                $html .=' <tr><th colspan="5" align="center""> Quantite Pour chaque produit : '.$_POST['date']." Au ".$_POST['date2'].'</th></tr>
+                $html .=' <tr><th colspan="5" align="center""> Quantite Pour chaque produit : '.$_POST['date']." Au ".$_POST['date2']."Produit : ".$nomPtoduit.'</th></tr>
                 </thead>
                 <tbody>';
                     $html .= '<tr>';
@@ -188,7 +188,7 @@ $html = '
                     $html .= '</tr>
                         <tr>
                         <th scope="col">Mon du produit </th>
-                        <th scope="col">Stock debut du jour</th>
+                        <th scope="col">Stock debut periode</th>
                         <th scope="col">Quantite vendu</th>
                         <th scope="col">Reste en stock</th>
                         <th scope="col">Date</th>

@@ -72,7 +72,7 @@ class Stock{
         $sql = "SELECT
             hs.Nomproduit,
             hs.quantite AS quantite_stock,
-            p.quantite_produit,
+            p.quantite_produit,p.stock_start_produit,
             (SELECT SUM(a2.quantite) FROM achat a2 WHERE a2.idproduit = hs.idproduit AND YEAR(a2.dateachat) = YEAR(CURDATE()) AND 					MONTH(a2.dateachat) = MONTH(CURDATE())) AS quantite_achetee,
             (SELECT SUM(f2.quantite) FROM facture f2 WHERE f2.idproduit = hs.idproduit AND YEAR(f2.datefacture) = YEAR(CURDATE()) AND 				MONTH(f2.datefacture) = MONTH(CURDATE())) AS somme_facture,
             (SELECT SUM(f.quantite) FROM facture f WHERE f.idproduit = hs.idproduit AND  f.datefacture = CURRENT_DATE) AS quantite_facturee
@@ -270,8 +270,92 @@ class Stock{
         while($row = mysqli_fetch_assoc($result)){
                array_push($this->data,$row);  
         }
-
         return $this->data;
+    }
+
+    public function VariationStok(){
+        global $conn;
+        // Créer une date pour le 1er janvier de l'année en cours :
+        $date = new DateTime('first day of january this year');
+        $janvier =  $date->format('Y-m-d');
+
+        // Créer une date pour le 1er janvier de l'année précédente :
+        // $date = new DateTime('first day of january last year');
+        // echo $date->format('Y-m-d');
+
+        $sql = "SELECT (p.prix_produit_vente * hs.quantite) AS Produibultiple
+                FROM historiquestock hs 
+                INNER JOIN produit p ON p.id = hs.idproduit
+                WHERE hs.datet = '$janvier'";
+            $result = $conn->query($sql);
+            $Stockdebut = mysqli_fetch_assoc($result);
+
+            $sql = "SELECT (p.prix_produit_vente * p.quantite_produit) AS Produibultiple FROM produit p";
+            $result = $conn->query($sql);
+            $Stockfin = mysqli_fetch_assoc($result); 
+            $retVal = (!is_array($Stockdebut)) ? 0 : array_sum($Stockdebut);
+            $total = array_sum($Stockfin) - $retVal;
+            return $total;
+    }
+
+    public function VariationStokfourniture(){
+        global $conn;
+        // Créer une date pour le 1er janvier de l'année en cours :
+        $date = new DateTime('first day of january this year');
+        $janvier =  $date->format('Y-m-d');
+
+        // Créer une date pour le 1er janvier de l'année précédente :
+        // $date = new DateTime('first day of january last year');
+        // echo $date->format('Y-m-d');
+
+        $sql = "SELECT SUM(hs.quantite) AS Produibultiple
+                FROM historiquestock hs 
+                WHERE hs.datet = '$janvier'";
+            $result = $conn->query($sql);
+            $row = mysqli_fetch_assoc($result);
+            $Stockdebut = $row["Produibultiple"];
+
+            if (empty($Stockdebut)) {
+                $Stockdebut=0;
+            }
+
+            $sql = "SELECT SUM(quantite_produit) AS Produibultiple FROM produit";
+            $result = $conn->query($sql);
+            $row = mysqli_fetch_assoc($result); 
+            $Stockfin = $row["Produibultiple"];
+
+            if (empty($Stockfin)) {
+                $Stockfin = 0;
+            }
+            $Stockfin -= $Stockdebut;
+            return  $Stockfin;
+    }
+
+    public function VariationStokfournitureExercice(){
+        global $conn;
+        // Créer une date pour le 1er janvier de l'année en cours :
+        $date = new DateTime('first day of january this year');
+        $janvier =  $date->format('Y-m-d');
+
+        // Créer une date pour le 1er janvier de l'année précédente :
+         $date = new DateTime('first day of january last year');
+         $janvierdernier =  $date->format('Y-m-d');
+
+        $sql = "SELECT SUM(hs.quantite) AS Produibultiple
+                FROM historiquestock hs 
+                WHERE hs.datet = '$janvierdernier'";
+            $result = $conn->query($sql);
+            $Stockdebut = mysqli_fetch_assoc($result);
+        
+        $date = new DateTime('last day of december last year');
+            $janvierdernier =  $date->format('Y-m-d');
+
+            $sql = "SELECT SUM(hs.quantite) AS Produibultiple
+                FROM historiquestock hs 
+                WHERE hs.datet = '$janvierdernier'";
+            $result = $conn->query($sql);
+            $Stockfin = mysqli_fetch_assoc($result); 
+            return $Stockfin["Produibultiple"]-$Stockdebut["Produibultiple"];
     }
 
 }

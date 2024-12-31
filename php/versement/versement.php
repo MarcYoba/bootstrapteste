@@ -76,7 +76,12 @@
                                            $donnees= json_decode($tabdonne,true);
                                             
                                             echo'<input type="number" class="form-control form-control-user" id="iddette"
-                                            name="iddette" placeholder="id dette" value="'.$donnees["iddette"].'" required readonly>';  
+                                            name="iddette" placeholder="id dette" value="'.$donnees["iddette"].'" required readonly>'; 
+                                            if (isset($donnees["idversme"])) {
+                                                echo'<input type="number" class="form-control form-control-user" id="idverse"
+                                                name="idverse" placeholder="id dette" value="'.$donnees["idversme"].'" required readonly>';
+                                            }
+                                             
                                         }else{
                                             echo'<input type="number" class="form-control form-control-user" id="iddette"
                                             name="iddette" placeholder="id dette"  required>';
@@ -131,7 +136,7 @@
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="txt" class="form-control form-control-user"
-                                                name="matif" id="matif" value='.intval($donnees["motif"]).' placeholder="montant" required>';
+                                                name="matif" id="matif" value='.intval($donnees["motif"]).' placeholder="Motif" required>';
                                             }else{
                                                 echo'<input type="txt" class="form-control form-control-user"
                                                 name="matif" id="matif" placeholder="motif" required>';

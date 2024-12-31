@@ -34,7 +34,7 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Modifier le stock</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Modifier le stock Initiale</h1>
                              </div>
                            
                                 <div class="form-group">
@@ -49,11 +49,11 @@
                                         </div>
                                             <div class="col-sm-3">
                                                 <select id="nomProduit"  name="nomProduit"  class="form-control form-select" required size="4" multiple aria-label="multiple select ">
-                                                    <option selected></option>
+                                                   
                                                     <?php 
                                                          require_once("../connexion.php"); 
                                                         global $conn;
-                                                        $sql = "SELECT  nom_produit FROM produit";
+                                                        $sql = "SELECT  nom_produit FROM produit ORDER BY nom_produit ASC";
                                                         $result = $conn->query($sql);
                                                             while ($row = mysqli_fetch_assoc($result)){             
                                                                 echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
@@ -73,7 +73,48 @@
                                         <hr>
                                         <hr>  
                                     </form>
-                            
+                            <hr>
+                        </div>
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Declaration d'inventaire</h1>
+                             </div>
+                           
+                                <div class="form-group">
+                                
+                                <hr>
+                                    <form class="user" action="../stock/register.php" method="post">
+                                        <hr>
+                                        <div class="form-group row">
+                                        <div class="col-sm-3">
+                                        <input type="text" id="rechercheP" onkeyup="SecondFunction()" class="form-control form-control-user" placeholder="recherche produit"><br>
+                                        </div>
+                                            <div class="col-sm-3">
+                                                <select id="nomProduitP"  name="nomProduitP"  class="form-control form-select" required size="4" multiple aria-label="multiple select ">
+                                                    
+                                                    <?php 
+                                                         //require_once("../connexion.php"); 
+                                                        global $conn;
+                                                        $sql = "SELECT  nom_produit FROM produit ORDER BY nom_produit ASC";
+                                                        $result = $conn->query($sql);
+                                                            while ($row = mysqli_fetch_assoc($result)){             
+                                                                echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
+                                                            }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                    <input type="number" class="form-control form-control-user"
+                                                    name="quantite2" id="quantite2" placeholder="quantite" required><br>
+                                                    <button type="submit" name="inventaire" id="" class="btn btn-warning btn-user btn-block">
+                                                    Enregistrer
+                                                    </button> 
+                                                
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <hr>  
+                                    </form>
                             <hr>
                         </div>
                     </div>

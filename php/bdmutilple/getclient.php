@@ -19,6 +19,35 @@ class Client{
         return $row["firstname"]; 
     }
 
+    public function getClientNoNumber(){
+        global $conn;
+        $data =[];
+        $sql = "SELECT id,`firstname`,`adresse`,`telephone`,`sexe` FROM `client` WHERE `telephone`=0 OR `telephone`=NULL";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function SelectAchatProvenderie($id){
+        global $conn;
+       
+        $sql = "SELECT * FROM vente WHERE idclient ='$id' ORDER BY vente.id DESC";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row; 
+    }
+
+    public function SelectAchatCabinet($id){
+        global $conn;
+        
+        $sql = "SELECT * FROM ventephamacie WHERE idclient ='$id' ORDER BY ventephamacie.id DESC";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    }
+
     public function getAllByIdClient($id){
         global $conn;
         $sql = "SELECT * FROM client WHERE id= '$id'";
@@ -138,6 +167,40 @@ class Client{
             $conn->close(); 
             return "ECHEC";
         }
+    }
+
+    public function ClientPasAchat(){
+        global $conn;
+        $data = [];
+        $sql = "SELECT DISTINCT id ,firstname,adresse,telephone,telephone
+        FROM client
+        WHERE id NOT IN (
+            SELECT idclient
+            FROM vente
+            WHERE datevente >= DATE_SUB(CURDATE(), INTERVAL 10 DAY))  ORDER BY firstname ASC";
+        
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+        return $data;
+    }
+
+    public function DoublonClient(){
+        global $conn;
+
+        $sql= "SELECT firstname, `firstname`, COUNT(*) FROM client GROUP BY `firstname`, `firstname` HAVING COUNT(*) > 1 ";
+        $result = $conn->query($sql);
+        $row = $result->num_rows;
+        return $row;
+    }
+    public function SellectAll(){
+        global $conn;
+        $sql = "SELECT * FROM client";
+        $result = $conn->query($sql);
+        $row = $result->num_rows;
+
+        return $row;
     }
 }
 ?>
