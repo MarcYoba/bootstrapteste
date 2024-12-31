@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '853707cc47dece8e52527ba4c98b15d6d88b296b',
+        'reference' => '920dae503c10232754ce70358b8de00f0d4d0eb8',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '853707cc47dece8e52527ba4c98b15d6d88b296b',
+            'reference' => '920dae503c10232754ce70358b8de00f0d4d0eb8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -82,7 +82,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-
         'myclabs/php-enum' => array(
             'pretty_version' => '1.8.4',
             'version' => '1.8.4.0',
@@ -110,7 +109,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-
         'psr/http-factory' => array(
             'pretty_version' => '1.1.0',
             'version' => '1.1.0.0',
@@ -121,17 +119,14 @@
             'dev_requirement' => false,
         ),
         'psr/http-message' => array(
-
             'pretty_version' => '1.1',
             'version' => '1.1.0.0',
             'reference' => 'cb6ce4845ce34a8ad9e68117c10ee90a29919eba',
-
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/http-message',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-
         'psr/simple-cache' => array(
             'pretty_version' => '3.0.0',
             'version' => '3.0.0.0',
@@ -141,22 +136,12 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-
         'sabberworm/php-css-parser' => array(
             'pretty_version' => 'v8.6.0',
             'version' => '8.6.0.0',
             'reference' => 'd2fb94a9641be84d79c7548c6d39bbebba6e9a70',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sabberworm/php-css-parser',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'slim/http' => array(
-            'pretty_version' => '1.4.0',
-            'version' => '1.4.0.0',
-            'reference' => 'a8def7b8e9eabd0cdc21654ad4a82606942e066a',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../slim/http',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

@@ -216,6 +216,17 @@ class Produit{
         return $data;
     }
 
+    public function getRecaptulatif(){
+        global $conn;
+        $tableau = [];
+        $sql = "SELECT nom_produit,round(quantite_produit,2),prix_produit_vente FROM `produitphamacie` ORDER BY nom_produit ASC";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($tableau,$row);
+        }    
+        return $tableau; 
+    }
+
 
 
 }

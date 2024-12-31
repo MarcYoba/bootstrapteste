@@ -57,7 +57,14 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Produit</h6>
+                        <div class="form-group row">
+                                    <div class="col-sm-10 ">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables Produit</h6>
+                                    </div>
+                                    <div class="col-sm-2 ">
+                                    <a class="m-0 font-weight-bold text-primary" href="../pdf/getproduit.php">telecharger</a>
+                                    </div>
+                                </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
