@@ -47,7 +47,7 @@ class Poussin{
         $cred = $tableau["CREDIT"];
         $cash = $tableau["CASH"];
         $rest = $tableau["RESTE"];
-        $sql = "UPDATE  SET quantite='$qt',prixUnite='$prix',montant='$montant',montantOm='$om',montantCredit='$cred',montantCash='$cash',reste='$rest',statusCommande='$status' WHERE id='$id'";
+        $sql = "UPDATE poussin SET quantite='$qt',prixUnite='$prix',montant='$montant',montantOm='$om',montantCredit='$cred',montantCash='$cash',reste='$rest',statusCommande='$status' WHERE id='$id'";
         $result = $conn->query($sql);
         // Exécuter la requête
         if ($result == true) {
