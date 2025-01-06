@@ -38,8 +38,10 @@ $html = '
 <head>
     <title>Facture</title>
     <style>
+        body {
+            font-size: 09pt;
+        }
         table, th, td {
-        border: 1px solid black;
         border-collapse: collapse;
         }
         @Page {
@@ -49,17 +51,17 @@ $html = '
                         left: 0cm;
                         right: 0cm;
                         height: 2cm;
-                        text-align: center;
+                        text-align: left;
                     }
                 }
 </style>
 </head>
 <body>';
 
-$html .='<br><br><br> <table style="width:100%">
+$html .='<br><br><br> <table style="border-collapse: separate; border-spacing: 0px;">
         <thead>';
         $inclient=$client->getClientByIdVente($id);
-        $html .=' <tr><th colspan="6" align="center"">AFRICA BELIEVE GROUP SARL : '.$date." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' Cabinet veterinaire-provenderie
+        $html .=' <tr><th  align="left"">AFRICA BELIEVE GROUP SARL : '.$date." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' Cabinet veterinaire-provenderie
          N cont: M0822175619296A NRCCM:RC/YAE2022/B/2852 YDE-SOA FIN GOUDRON +237 655 271506
         </th></tr>
         </thead>
@@ -69,17 +71,14 @@ $html .='<br><br><br> <table style="width:100%">
         $html .= '</tr>
             <tr>
             <th scope="col">Nom produit</th>
-            <th scope="col">quantite</th>
-            <th scope="col">prix</th>
-            <th scope="col">montant </th>
-            <th scope="col">Typepaiement</th>
-            <th scope="col">datevente</th>
         </tr>';
         $facture = $vente->getFactureVente($id);
             foreach ($facture as $linefatcture) {
                 $html .= '<tr>';
                 foreach ($linefatcture as $key => $cell) {
-                    $html .= '<td>' .$cell.'</td>';
+                    $html .= '<td style="width: 10%;">' ;
+                    $html .=$cell;
+                    $html .= '</td>' ;
                 }
                 $html .= '</tr>';
             }
@@ -93,7 +92,7 @@ $html .= '
 
 // Charger le contenu HTML dans Dompdf
 $dompdf->loadHtml($html);
-$dompdf->setPaper('A4', 'portrait');
+$dompdf->setPaper('A6', 'portrait');
 $dompdf->render();
 $dompdf->stream("mon_fichier.pdf", array("Attachment" => 0));
 

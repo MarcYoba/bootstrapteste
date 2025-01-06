@@ -421,6 +421,13 @@ class Vente{
         return $this->data;
     }
 
+    public function getTypePaiement($idvente) {
+        global $conn;
+        $sql = "SELECT typevente FROM ventephamacie WHERE id= '$idvente'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["typevente"]; 
+    }
     public function getFactureVente($idfacutre){
         global $conn;
             $valdata = [];
@@ -428,7 +435,7 @@ class Vente{
             $quantite = 0;
             $prix = 0;
 
-            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facturephamacie WHERE  idvente = '$idfacutre'";
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant FROM facturephamacie WHERE  idvente = '$idfacutre'";
             $resultfa = $conn->query($sqlfacture); 
             while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
                 array_push($valdata,$rowfacture);
@@ -436,9 +443,9 @@ class Vente{
                 $quantite+=$rowfacture["quantite"];
                 $prix+=$rowfacture["prix"];
             }
-            $tab = ["Total",$quantite,$prix,$montant,"-","-"];
-            $tabr = ["Reduction","-","-",$this->getReductionForVente($idfacutre),"-","-"];
-            $tabn = ["Net a payer","-","-",$montant-$this->getReductionForVente($idfacutre),"-","-"];
+            $tab = ["Total",$quantite,$prix,$montant];
+            $tabr = ["Reduction",$this->getReductionForVente($idfacutre)];
+            $tabn = ["Net a payer",$montant-$this->getReductionForVente($idfacutre),$this->getTypePaiement($idfacutre)];
             array_push($valdata,$tab);
             array_push($valdata,$tabr);
             array_push($valdata,$tabn);
