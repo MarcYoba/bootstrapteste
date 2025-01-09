@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headerProvenderi.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -137,6 +137,7 @@
                                             echo '<td>'.$row["montant"].'</td>';
                                             echo '<td>'.$row["dateachat"].'</td>';
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
+                                                echo '<td></td>';
                                                 echo "<td><a href='../bond/liste.php?date=" .$row["dateachat"]. "' class='btn btn-primary' id='modification'><i class='far fa-file-image'></i></a>";
                                             }else if(($_SESSION['roles'] == "semiadmin")){
                                                 echo "<td><a href='modifie.php?id=" .$row["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";

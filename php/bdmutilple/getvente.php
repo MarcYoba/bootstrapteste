@@ -516,7 +516,7 @@ class Vente{
             $quantite = 0;
             $prix = 0;
 
-            $sqlfacture = "SELECT nomproduit,quantite,prix,montant FROM facture WHERE  idvente = '$idfacutre'";
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant,Typepaiement,datefacture FROM facture WHERE  idvente = '$idfacutre'";
             $resultfa = $conn->query($sqlfacture); 
             while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
                 array_push($valdata,$rowfacture);
@@ -525,8 +525,8 @@ class Vente{
                 $prix+=$rowfacture["prix"];
             }
             $tab = ["Total",$quantite,$prix,$montant,"-","-"];
-            $tabr = ["Reduction","-",$this->getReductionForVente($idfacutre)];
-            $tabn = ["Net a payer",(($montant)-($this->getReductionForVente($idfacutre))),"-",$this->getTypePaiement($idfacutre)];
+            $tabr = ["Reduction","-","-",$this->getReductionForVente($idfacutre),"-","-"];
+            $tabn = ["Net a payer",(($montant)-($this->getReductionForVente($idfacutre))),"-",$this->getTypePaiement($idfacutre),"-","-"];
             array_push($valdata,$tab);
             array_push($valdata,$tabr);
             array_push($valdata,$tabn);

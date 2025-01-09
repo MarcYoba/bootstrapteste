@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headerProvenderi.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
