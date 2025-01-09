@@ -1,3 +1,14 @@
+<?php 
+    $id = $_GET["id"];
+    require_once("../connexion.php");
+    require_once("../bdmutilple/getclient.php");
+        global $conn;
+        $client = new Client(1);
+        $sql = "SELECT * FROM terrain WHERE id='$id'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);                                            
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,23 +45,19 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="card-header py-3">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4 m-0 font-weight-bold">Fiche descente su terrain</h1>
-                                    <button  class='btn btn-primary' onclick="selection()"><i class='fas fa-pencil-alt'></i></a>
+                                <div class="form-group row">
+                                    <div class="col-sm-8 ">
+                                        <h1 class="h4 text-gray-900 mb-4 m-0 font-weight-bold">Fiche descente su terrain</h1>
+                                    </div>
+                                    <div class="col-sm-2 ">
+                                        <button  class='btn btn-success' onclick="selection()"><i class='fas fa-pencil-alt'></i></button>
+                                    </div>
+                                    <div class="col-sm-2 ">
+                                    <?php  echo '<a  class="btn btn-success" href="../pdf/getTerrain.php?id='.$id.'"><i class="fas fa-download fa-sm "></i>Telecharger</a>' ?>
+                                    </div>
                                 </div>
                             </div>
-                            <?php 
-                            $id = $_GET["id"];
-                                require_once("../connexion.php");
-                                require_once("../bdmutilple/getclient.php");
-                                global $conn;
-                                $client = new Client(1);
-                                        $sql = "SELECT * FROM terrain WHERE id='$id'";
-                                        $result = $conn->query($sql);
-                                        $row = mysqli_fetch_assoc($result);
-
-                                                
-                            ?>
+                            
                                 
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">

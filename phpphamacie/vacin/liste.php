@@ -76,6 +76,7 @@ require_once("../bdmutilple/getclient.php");
                                             <th>montant</th>
                                             <th>Avance</th>
                                             <th>Type vacin</th>
+                                            <th>Lieu</th>
                                             <th>date Vacin</th>
                                             <th>date rappel</th>
                                             <th>Operation</th>
@@ -92,6 +93,7 @@ require_once("../bdmutilple/getclient.php");
                                             <th>montant</th>
                                             <th>Avance</th>
                                             <th>Type vacin</th>
+                                            <th>Lieu</th>
                                             <th>date Vacin</th>
                                             <th>date rappel</th>
                                             <th>Operation</th>
@@ -115,6 +117,7 @@ require_once("../bdmutilple/getclient.php");
                                             echo '<td>'.$row["montant"].'</td>';
                                             echo '<td>'.$row["netpayer"].'</td>';
                                             echo '<td>'.$row["typeVacin"].'</td>';
+                                            echo '<td>'.$row["lieux"].'</td>';
                                             echo '<td>'.$row["datevacin"].'</td>';
                                             echo '<td>'.$row["daterappel"].'</td>';
                                             echo "<td>";

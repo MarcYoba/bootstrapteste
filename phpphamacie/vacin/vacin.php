@@ -80,11 +80,13 @@
                                                 }
                                             ?>
                                     </select>
+
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Type"
                                         name="Type" placeholder="Race de sujet" required>
                                     </div>
+                                    
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -119,7 +121,15 @@
                                         date rapelle <input type="date" class="form-control form-control-user" id="secondvacin"
                                            name="secondvacin" placeholder="date achat" required>
                                     </div>
+
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        Lieu vaccin :<select class="form-control form-select" id="lieu" name="lieu" placeholder="Race de sujet" required>
+                                            <Option value="Entreprise">Entreprise</Option>
+                                            <Option value="Domicille">Domicille</Option>
+                                        </select>
+                                    </div>
                                 </div>
+
                                 <span id="enregistrement">
                                     <button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
                                         Enregister
