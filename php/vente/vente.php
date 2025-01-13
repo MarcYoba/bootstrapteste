@@ -190,6 +190,9 @@ require_once("../connexion.php");
                                                     <span id="modifiervente"></span>
                                                     <span id="enregistremet"></span>
                                                 </p>
+                                                <p class="col-md-4" >
+                                                    <input type="number" id="quantiteStokage" name="quantiteStokage" class="form-control form-select" readonly>
+                                                </p>
                                                 
                                             </div>
                                             <span id="verificatiobDonne"></span>

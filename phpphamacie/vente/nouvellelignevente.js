@@ -105,15 +105,29 @@ function calculeprixTotalquantitetotal(){
 
 function calculeTotal(){
     
-    document.getElementById("resultat").textContent = document.getElementById("quantite").value * document.getElementById("prixglobal").value;
+    let verQuantite = parseInt(document.getElementById("quantite").value);
+    let stoQuantite = parseInt(document.getElementById("quantiteStokage").value);
 
-    quantiteTotal = 0;
-    prixtotal = 0;
-    calculeprixTotalquantitetotal();
-    document.getElementById("quantitetotal").innerHTML = quantiteTotal + parseFloat(document.getElementById("quantite").value);
-    document.getElementById("Total").value = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
-    document.getElementById("prixtotal").textContent = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
-    document.getElementById("verificatiobDonne").innerHTML ='';
+    console.log("valeure : "+verQuantite);
+    console.log("valeure : "+stoQuantite);
+
+    if (verQuantite <= stoQuantite) {
+        document.getElementById("resultat").textContent = document.getElementById("quantite").value * document.getElementById("prixglobal").value;
+
+        quantiteTotal = 0;
+        prixtotal = 0;
+        calculeprixTotalquantitetotal();
+        document.getElementById("quantitetotal").innerHTML = quantiteTotal + parseFloat(document.getElementById("quantite").value);
+        document.getElementById("Total").value = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
+        document.getElementById("prixtotal").textContent = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
+        document.getElementById("verificatiobDonne").innerHTML =''; 
+    }else{
+        if (verQuantite>=0) {
+            alert('Vous voulez faire une action impossible;  cette vente vous crée des  problèmes.  Est-ce que vous êtes sûre pour les problèmes ?'); 
+            document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> Les quantite ne sont pas conforme  </p>';
+        }
+        
+    }
 }
 
 
@@ -157,6 +171,7 @@ function recherchePrix(){
                 }
             }
             document.getElementById("prixglobal").value = data.message;
+            document.getElementById("quantiteStokage").value = data.quantite;
             console.log(data);
         }else if(data.success == false){
         }else{
