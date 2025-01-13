@@ -100,7 +100,7 @@
                                         <input type="number" class="form-control form-control-user" id="quantitetotale" 
                                            name="quantitetotale" placeholder="Montant" readonly>
                                            date rappelle <input type="date" class="form-control form-control-user" id="daterapel"
-                                           name="daterapel" placeholder="date achat" required>
+                                           name="daterapel" placeholder="date achat" required value="0001-01-01">
                                     </div>
                                 </div>
                                 <div class="form-group row">

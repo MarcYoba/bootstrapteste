@@ -75,9 +75,13 @@ $html .='<br><br><br> <table style="border-collapse: separate; border-spacing: 0
         $facture = $vente->getFactureVente($id);
             foreach ($facture as $linefatcture) {
                 $html .= '<tr>';
+                $i = 0;
                 foreach ($linefatcture as $key => $cell) {
                     $html .= '<td style="width: 10%;">' ;
-                    $html .=$cell;
+                    if ($i<5) {
+                        $html .=$cell;
+                    }
+                    $i++;
                     $html .= '</td>' ;
                 }
                 $html .= '</tr>';
