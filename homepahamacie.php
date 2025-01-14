@@ -129,7 +129,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="php/achat/liste.php">
+                                            <a href="phpphamacie/achat/liste.php">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     ACHAT (MONTANT)</div>
                                                 <?php 
@@ -172,7 +172,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                        <a href="php/vente/liste.php" >
+                                        <a href="phpphamacie/vente/liste.php" >
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 VENTE (MONTANT)</div>
                                                     <?php 
@@ -215,7 +215,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                        <a href="php/dette/dette.php">
+                                        <a href="phpphamacie/dette/dette.php">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                 DETTE (MONTANT)</div>
                                                 <?php 
@@ -255,7 +255,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                        <a href="php/dette/dette.php">
+                                        <a href="phpphamacie/dette/dette.php">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 VERSEMENT (MONTANT)</div>
                                                 <?php 
@@ -298,7 +298,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="php/caisse/liste.php">
+                                            <a href="phpphamacie/caisse/liste.php">
                                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
                                                     CAISSE (MONTANT)</div>
                                                     <?php 
@@ -340,7 +340,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="php/depenses/liste.php">
+                                            <a href="phpphamacie/depenses/liste.php">
                                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
                                                     DEPENSE (MONTANT)</div>
                                                     <?php 
@@ -470,7 +470,7 @@
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Stock de produit et date peramtion</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Stock de produit</h6>
                                 </div>
                                 <div class="card-body">
                                     <?php 
@@ -494,31 +494,7 @@
                                                 echo '<div class="progress-bar bg-danger" role="progressbar" style="width:'.$row["quantite"].'%"
                                                 aria-valuenow="3" aria-valuemin="0" aria-valuemax="100">'.'</div>';
                                                 echo '</div>';
-                                                $preamtion = $row["id"];
-                                               
-                                                if ($row["quantite"]>0) {
-                                                    echo '<div class="form-group row"';
-                                                        $data=[];
-
-                                                    $sql1 = " SELECT p.datePeramtion FROM produitphamacie p WHERE p.id = '$preamtion'";
-                                                    $result1 =$conn->query($sql1);
-                                                    $row1 = mysqli_fetch_assoc($result1);
-                                                    array_push($data,$row1);
-
-                                                    $sql1 = " SELECT l.date_expiration FROM lots l WHERE l.idproduit = '$preamtion'";
-                                                    $result1 =$conn->query($sql1);
-                                                    $row1 = mysqli_fetch_assoc($result1);
-                                                    array_push($data,$row1);
-                                                    $lots = 1;
-
-                                                    foreach ($data as $key => $value) {
-                                                        foreach ($value as $key => $val) {
-                                                            echo '<a href="phpphamacie/produit/Peramtion.php" class="col-sm-3 ">lots:'.$lots.' '.$val.'</a><hr>';
-                                                            $lots++;
-                                                        }
-                                                    }
-                                                    echo '</div>';
-                                                }
+                                                
                                                 
                                                 echo "<hr>"; 
                                             }
@@ -619,7 +595,7 @@
                                                     INNER JOIN produitphamacie p
                                                     WHERE month(f.datefacture) = month(now()) AND f.idproduit = p.id
                                                     GROUP BY f.nomproduit 
-                                                    ORDER BY quantite_vendu DESC 
+                                                    ORDER BY COUNT(f.idproduit) DESC 
                                                     LIMIT 20";
 
                                         
