@@ -187,12 +187,17 @@
                             <div class="card-body">
                                 <div class=" pt-1 pb-1">
                                 <?php           
-                                    if (($_SESSION["zonetravail"] == "spaceclie") || ($_SESSION["zonetravail"] == "Tous")) {
-                                    echo '<a href="customer/client.php">';
-                                    echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
-                                    echo  '<h3> Space Clients </h3></div>';
-                                    echo'</a>';               
-                                    }   
+                                    if (empty($_SESSION['cathegorie'])) {
+                                        echo '<a href="customer/client.php">';
+                                        echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
+                                        echo  '<h3> Space Clients </h3></div>';
+                                        echo'</a>';               
+                                    } else{
+                                        echo '<a href="customer/transition.php">';
+                                        echo '<div class="text-xs font-weight-bold text-white text-uppercase mb-1 btn btn-success btn-lg">';
+                                        echo  '<h3> Space Clients </h3></div>';
+                                        echo'</a>'; 
+                                    }  
                                 ?>
                                 </div>   
                             </div>

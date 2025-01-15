@@ -62,7 +62,7 @@
                 <div id="vente" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Achat Provenderie</h6>
-                        <a class="collapse-item" href="listeProvenderie.php">Liste Achat Provenderie</a> 
+                        <a class="collapse-item" href="listeProvenderie.php">Liste Achat </a> 
                     </div>
                 </div>
             </li>
@@ -74,7 +74,7 @@
                 </a>
                 <div id="pharmacie" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Achat Pharmacie</h6>
+                        <h6 class="collapse-header">Liste Achat </h6>
                         <a class="collapse-item" href="#">Achat Pharmacie</a> 
                     </div>
                 </div>

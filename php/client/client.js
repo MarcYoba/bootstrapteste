@@ -20,6 +20,7 @@ if (dataclient !== null) {
 
 function modifierClient(params) {
 
+    console.log(params);
 
     fetch('edite.php', {
         method: 'POST',
@@ -35,7 +36,7 @@ function modifierClient(params) {
         window.location.href= "client.php";
     })
     .catch(error => {
-        console.error('Erreur:',   error);
+        console.error('Erreur:', error);
     });
 }
 
@@ -61,7 +62,7 @@ function editClient(){
         window.location.href= "liste.php";
     })
     .catch(error => {
-        console.error('Erreur:',   error);
+        console.error('Erreur:', error);
     });
 
 }
