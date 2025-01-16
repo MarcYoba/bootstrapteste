@@ -211,5 +211,15 @@ class Client{
         }
         
     }
+    public function getClient(){
+        global $conn;
+        $data =[];
+        $sql = "SELECT id,firstname,adresse,telephone,sexe FROM client ";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data;  
+    }
 }
 ?>

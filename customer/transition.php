@@ -1,5 +1,8 @@
 <?php
 session_start();
+    require_once("getclient.php");
+    $client = new Client(0);
+
  ?>
 
 <!DOCTYPE html>
@@ -45,21 +48,63 @@ session_start();
                                        <a href="../activites.php"> <h1 class="h4 text-gray-900 mb-4">Retour</h1> </a>
                                     </div>
                                 </div>
-                            
-                           <!-- <form class="user"  >-->
-                                
-                                    <!-- DataTales Example -->
+                                <hr>
+
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                                <hr>
-                                            <button  class="btn btn-primary btn-user btn-block">
-                                                    Enregistrer
-                                            </button>
+                                        <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="exampleFormControlSelect1">Selectionner le client</label>
+                                        <input type="text" class="form-control form-control-user" id="FirstName"
+                                            name="FirstName" placeholder="Recherche client" required>
+                                        
+                                        <select class="form-control form-select" id="exampleFormControlSelect1"   size="25" multiple aria-label="multiple select " >
+                                            <option>Selectionner le client</option>
+                                            <?php
+                                                $data = $client->getClient();
+                                                foreach ($data as $key => $value) {
+                                                    echo '<option value="'.$value["id"].'">'.$value["firstname"].'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="refecrence">Reference du client</label>
+                                        <input type="text" class="form-control form-control-user" id="refecrence"
+                                            name="refecrence" placeholder="refecrence client" required>
+                                            <br>
+                                    <label for="telephone">Telephone client</label>
+                                        <input type="text" class="form-control form-control-user" id="telephone"
+                                            name="telephone" placeholder="telephone client" required>
+                                            <br>
+                                    <label for="achat">Somme Achat</label>
+                                            <input type="text" class="form-control form-control-user" id="achat"
+                                            name="achat" placeholder="achat client" required>
+                                            <br>
+                                    <label for="cash">Achat en Cash </label>
+                                        <input type="text" class="form-control form-control-user" id="cash"
+                                            name="cash" placeholder="cash client" required>  
+                                        <br>
+                                    <label for="credit">Achat en Credit </label>
+                                        <input type="text" class="form-control form-control-user" id="credit"
+                                            name="credit" placeholder="credit client" required>
+                                            <br>
+                                    <label for="OM">Achat en OM/MOMO </label>
+                                        <input type="text" class="form-control form-control-user" id="OM"
+                                            name="OM" placeholder="credit OM/MOMO" required>
+                                    <label for="OM">Achat en OM/MOMO </label>
+                                        <input type="text" class="form-control form-control-user" id="OM"
+                                            name="OM" placeholder="credit OM/MOMO" required>
+                                    </div>
+                                </div>
+                                <button  class="btn btn-primary btn-user btn-block">
+                                        Enregistrer
+                                </button>
                                         </div>
                                     </div>
                                 </div>
-                                    <hr>
+                                <hr>
                                     
                                 </div>
                             <!--</form> -->
