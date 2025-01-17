@@ -55,11 +55,11 @@ session_start();
                                         <div class="table-responsive">
                                         <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="exampleFormControlSelect1">Selectionner le client</label>
+                                    <label for="clientselec">Selectionner le client</label>
                                         <input type="text" class="form-control form-control-user" id="FirstName"
                                             name="FirstName" placeholder="Recherche client" required>
                                         
-                                        <select class="form-control form-select" id="exampleFormControlSelect1"   size="25" multiple aria-label="multiple select " >
+                                        <select class="form-control form-select" id="clientselec"   size="25" multiple aria-label="multiple select " >
                                             <option>Selectionner le client</option>
                                             <?php
                                                 $data = $client->getClient();
@@ -99,7 +99,7 @@ session_start();
                                     </div>
                                 </div>
                                 <button  class="btn btn-primary btn-user btn-block">
-                                        Enregistrer
+                                        Suivre le client
                                 </button>
                                         </div>
                                     </div>
@@ -126,6 +126,7 @@ session_start();
 
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
+    <script src="client.js"></script>
     
 </body>
 </html>
