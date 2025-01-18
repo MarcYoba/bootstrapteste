@@ -193,7 +193,7 @@ class Produit{
             FROM produitphamacie p 
             WHERE p.datePeramtion <= DATE_ADD(CURDATE(), INTERVAL 6 MONTH)
             AND p.datePeramtion <> '0001-01-01' AND p.datePeramtion <> '0000-00-00'
-            AND p.quantite_produit > 0";
+            AND p.quantite_produit > 0  order by p.datePeramtion ASC";
         $result =$conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);
@@ -208,7 +208,8 @@ class Produit{
         FROM lots l
         INNER JOIN produitphamacie p ON l.idproduit = p.id
         WHERE l.date_expiration <= DATE_ADD(CURDATE(), INTERVAL 6 MONTH)
-        AND l.date_expiration <> '0001-01-01' AND l.date_expiration <> '0000-00-00'";
+        AND l.date_expiration <> '0001-01-01' AND l.date_expiration <> '0000-00-00' 
+        order by l.date_expiration ASC";
         $result =$conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);

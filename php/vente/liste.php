@@ -63,8 +63,10 @@ require_once("../connexion.php");
                             </div>
                             <form  action="../pdf/getTypeVente.php" method="post" class="user row" >
 
-                                <p class="col-md-2">
-                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select">
+                                <p class="col-md-6">
+                                <label class="form-check-label" id="nomProduit">Produit</label>
+                                <input type="search" id="produitrecher" onkeyup="recherchduproduit()"  class="form-control" placeholder="recherche produit">
+                                    <select id="nomProduite"  name="nomProduit"  class="form-control form-select" size="4" multiple aria-label="multiple select">
                                         <option value="ALL" selected>ALL</option>
                                             <?php 
                                                 global $conn;
@@ -75,9 +77,11 @@ require_once("../connexion.php");
                                                 }
                                             ?>
                                     </select>
-                                    <label class="form-check-label" id="nomProduit">Produit</label>
+                                </p>
+                                <p class="col-md-6">
                                     <br>
-                                    <select id="client"  name="client"   class="form-control form-select" >   <!-- size="10" multiple aria-label="multiple select " -->
+                                    <input type="search" id="clientrecher" onkeyup="recherchduclient()"  class="form-control" placeholder="recherche client">
+                                    <select id="clientt"  name="client"   class="form-control form-select" size="4" multiple aria-label="multiple select">   <!-- size="10" multiple aria-label="multiple select " -->
                                     <option value="ALL" selected>ALL</option>             
                                         <?php 
                                             global $conn;
@@ -244,7 +248,7 @@ require_once("../connexion.php");
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-   <!-- <script src="listeVente.js"></script> -->
+   <script src="listeVente.js"></script>
 
 </body>
 

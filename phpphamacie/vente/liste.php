@@ -63,25 +63,32 @@ require_once("../connexion.php");
                             </div>
                             <form  action="../pdf/getTypeVente.php" method="post" class="user row" >
 
-                                <p class="col-md-2">
-                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select">
+                                <p class="col-md-6">
+                                <label class="form-check-label" id="client">Produit</label>
+                                <input type="search" id="produitrecher" onkeyup="recherchduproduit()"  class="form-control" placeholder="recherche produit">
+                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select"  size="4" multiple aria-label="multiple select">
+
                                         <option value="ALL" selected>ALL</option>
                                             <?php 
                                                 global $conn;
-                                                $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie";
+                                                $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie 
+                                                 order by nom_produit ASC ";
                                                 $result = $conn->query($sql);
                                                 while ($row = mysqli_fetch_assoc($result)){               
                                                     echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
                                                 }
                                             ?>
                                     </select>
-                                    <label class="form-check-label" id="nomProduit">Produit</label>
+                                </p>
+                                <p class="col-md-6">    
                                     <br>
-                                    <select id="client"  name="client"   class="form-control form-select" >   <!-- size="10" multiple aria-label="multiple select " -->
-                                    <option value="ALL" selected>ALL</option>             
+                                    <input type="search" id="clientrecher" onkeyup="recherchduclient()"  class="form-control" placeholder="recherche client">
+                                    <select id="clientt"  name="clientt"   class="form-control form-select" size="4" multiple aria-label="multiple select" >   
+                                        <option value="ALL" selected>ALL</option>             
                                         <?php 
                                             global $conn;
-                                            $sql = "SELECT id, firstname, adresse FROM client";
+                                            $sql = "SELECT id, firstname, adresse FROM client
+                                            order by firstname ASC ";
                                             $result = $conn->query($sql);
                                                 while ($row = mysqli_fetch_assoc($result)){     
                                                     echo "<option value='".$row["id"]."'>".$row["firstname"]."</option>";       
@@ -89,7 +96,7 @@ require_once("../connexion.php");
                                                 }
                                         ?> 
                                     </select>
-                                    <label class="form-check-label" id="client">Cleint</label>
+                                    <!--<label class="form-check-label" id="client">Cleint</label>-->
                                 </p>
                                 <p class="col-md-2"> 
                                         <input class="form-check-input" type="checkbox" id="OM" name="OM" value="OM">
@@ -244,7 +251,7 @@ require_once("../connexion.php");
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-   <!-- <script src="listeVente.js"></script> -->
+    <script src="listeVente.js"></script> 
 
 </body>
 

@@ -53,7 +53,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand smoothie" href="index.html">ABGROUP<span class="theme-accent-color">SARL</span></a>
+                    <a class="navbar-brand smoothie" href="index.php">ABGROUP<span class="theme-accent-color">SARL</span></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -162,9 +162,9 @@
                             </div>
 
                             <div class="col-md-5">
-                                <h2 class="mb50">Fiche <span class="theme-accent-color">Profilassi</span></h2>
+                                <h2 class="mb50">Fiche <span class="theme-accent-color">Prophylaxie</span></h2>
                                 <p class="lead">
-                                    Les fiches de profilassi sont des documents détaillant les protocoles de prévention et de traitement des maladies animales. Elles incluent des informations sur les vaccins, les médicaments, les dosages, les calendriers de vaccination, et les mesures de biosécurité à suivre pour maintenir la santé des animaux.
+                                    Les fiches de Prophylaxie sont des documents détaillant les protocoles de prévention et de traitement des maladies animales. Elles incluent des informations sur les vaccins, les médicaments, les dosages, les calendriers de vaccination, et les mesures de biosécurité à suivre pour maintenir la santé des animaux.
                                 </p>
                             </div>
                         </div>
@@ -338,7 +338,7 @@
                             <?php           
                                     if (empty($_SESSION['cathegorie'])) {
                                         echo '<p class="mt20"><a href="customer/client.php" class="btn btn-primary btn-red page-scroll">passer une commande</a></p>';
-                                                     
+                                        $_SESSION['idclient']  = $_SESSION['id'];          
                                     } else{
                                         echo '<p class="mt20"><a href="customer/transition.php" class="btn btn-primary btn-red page-scroll">passer une commande</a></p>';
                                          

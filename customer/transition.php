@@ -51,15 +51,16 @@ session_start();
                                 <hr>
 
                                 <div class="card shadow mb-4">
+                                
                                     <div class="card-body">
                                         <div class="table-responsive">
                                         <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label for="clientselec">Selectionner le client</label>
                                         <input type="text" class="form-control form-control-user" id="FirstName"
-                                            name="FirstName" placeholder="Recherche client" required>
-                                        
-                                        <select class="form-control form-select" id="clientselec"   size="25" multiple aria-label="multiple select " >
+                                            name="FirstName" placeholder="Recherche client" required onkeyup="myFunction()">
+                                        <form class="user" action="selectinfo.php" method="post" >
+                                        <select class="form-control form-select" id="clientselec" name="clientselec"  size="4" multiple aria-label="multiple select" onchange="rechercheclient()" >
                                             <option>Selectionner le client</option>
                                             <?php
                                                 $data = $client->getClient();
@@ -72,35 +73,36 @@ session_start();
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label for="refecrence">Reference du client</label>
                                         <input type="text" class="form-control form-control-user" id="refecrence"
-                                            name="refecrence" placeholder="refecrence client" required>
+                                            name="refecrence" placeholder="refecrence client" required readonly>
                                             <br>
-                                    <label for="telephone">Telephone client</label>
+                                   <!-- <label for="telephone">Telephone client</label>
                                         <input type="text" class="form-control form-control-user" id="telephone"
-                                            name="telephone" placeholder="telephone client" required>
+                                            name="telephone" placeholder="telephone client" required readonly>
                                             <br>
                                     <label for="achat">Somme Achat</label>
                                             <input type="text" class="form-control form-control-user" id="achat"
-                                            name="achat" placeholder="achat client" required>
+                                            name="achat" placeholder="achat client" required readonly>
                                             <br>
                                     <label for="cash">Achat en Cash </label>
                                         <input type="text" class="form-control form-control-user" id="cash"
-                                            name="cash" placeholder="cash client" required>  
+                                            name="cash" placeholder="cash client" required readonly>  
                                         <br>
                                     <label for="credit">Achat en Credit </label>
                                         <input type="text" class="form-control form-control-user" id="credit"
-                                            name="credit" placeholder="credit client" required>
+                                            name="credit" placeholder="credit client" required readonly>
                                             <br>
                                     <label for="OM">Achat en OM/MOMO </label>
                                         <input type="text" class="form-control form-control-user" id="OM"
-                                            name="OM" placeholder="credit OM/MOMO" required>
-                                    <label for="OM">Achat en OM/MOMO </label>
+                                            name="OM" placeholder="credit OM/MOMO" required readonly>
+                                    <label for="banque">Achat bancaire </label>
                                         <input type="text" class="form-control form-control-user" id="OM"
-                                            name="OM" placeholder="credit OM/MOMO" required>
+                                            name="OM" placeholder="Achat bancaire" required readonly>
                                     </div>
-                                </div>
-                                <button  class="btn btn-primary btn-user btn-block">
+                                </div>-->
+                                <button type="submit" id="suivre" name="suivre" class="btn btn-primary btn-user btn-block">
                                         Suivre le client
                                 </button>
+                                </form>
                                         </div>
                                     </div>
                                 </div>

@@ -30,13 +30,26 @@ class Client{
         return $data; 
     }
 
+    public function selectFactureProvenderi($idvente){
+        global $conn;
+        $data =[];
+        $sql = "SELECT * FROM facture WHERE idvente = '$idvente'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
     public function SelectAchatProvenderie($id){
         global $conn;
-       
-        $sql = "SELECT * FROM vente WHERE idclient ='$id' ORDER BY vente.id DESC";
+        $data =[];
+        $sql = "SELECT id,typevente,quantite,prix,reduction,datevente FROM vente WHERE idclient ='$id' ORDER BY vente.id DESC";
         $result = $conn->query($sql);
-        $row = mysqli_fetch_assoc($result);
-        return $row; 
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
     }
 
     public function SelectAchatCabinet($id){
@@ -118,6 +131,30 @@ class Client{
         }
         $date = date("y/m/d");
         $stmt->bind_param('sds', $nom,  $tel, $date);
+
+        // Exécuter la requête
+        if (!$stmt->execute()) {
+            return "Echec";
+        }else{
+            return "OK";
+        }
+    }
+
+    public function insertToCommande($idvente,$paiementmode){
+        global $conn;
+        
+        $sql = "INSERT INTO commadeclient  (idvente , userid , nom ,paiementmethode ,datecommande, statuscommande ) VALUES (?, ?,?,?, ?,?)";
+
+        // Lier les paramètres
+        if (!$stmt = $conn->prepare($sql)) {
+            return "erreur sql";
+        }
+        // Obtenir le timestamp actuel
+        $timestamp = time();
+        $statut = "en coure";
+        // Formater la date et l'heure actuelles
+        $dateFormatee = date("d/m/Y H:i:s", $timestamp);
+        $stmt->bind_param('ddssss', $idvente,  $_SESSION['idclient'], $_SESSION['name'],$paiementmode,$dateFormatee,$statut);
 
         // Exécuter la requête
         if (!$stmt->execute()) {
@@ -214,7 +251,8 @@ class Client{
     public function getClient(){
         global $conn;
         $data =[];
-        $sql = "SELECT id,firstname,adresse,telephone,sexe FROM client ";
+        $sql = "SELECT id,firstname,adresse,telephone,sexe FROM client 
+        order by firstname ASC";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);
