@@ -7,7 +7,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="client.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>MENU</span></a>
             </li>
@@ -38,7 +38,7 @@
                 <div id="pharmacie" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Achat Pharmacie</h6>
-                        <a class="collapse-item" href="#">Liste Achat</a> 
+                        <a class="collapse-item" href="listeCabinet.php">Liste Achat</a> 
                     </div>
                 </div>
             </li>
@@ -51,7 +51,8 @@
                 <div id="dette" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Liste Dette</h6>
-                        <a class="collapse-item" href="#">Liste Dette</a> 
+                        <a class="collapse-item" href="detteProvenderie.php">Liste Dette Provenderie</a>
+                        <a class="collapse-item" href="dettecabinet.php">Liste Dette pharmacie</a> 
                     </div>
                 </div>
             </li>
@@ -64,8 +65,8 @@
                 <div id="Versement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"> Liste Versement:</h6>
-                        <a class="collapse-item" href="#">Liste Versement</a>
-                        
+                        <a class="collapse-item" href="vetrsementprovenderie.php">Versement Provenderie</a>
+                        <a class="collapse-item" href="versementpharmacie.php">Versement Pharmacie</a>
                     </div>
                 </div>
             </li>

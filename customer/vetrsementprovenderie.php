@@ -2,8 +2,7 @@
     session_start();
     require_once("getclient.php");
     $client = new Client($_SESSION['idclient']);
-    $achatClient = $client->SelectAchatProvenderie($_SESSION['idclient']);
-    $somme = $client->getSommeProvenderie($_SESSION['idclient']);
+    $achatClient = $client->getVersementProvenderie($_SESSION['idclient']);
     $nbelement = count($achatClient);
     
 ?>
@@ -61,29 +60,20 @@
                             <!-- Area Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <div class="form-group row">
-                                        <div class="col-sm-2 ">
-                                            <p class="m-0 font-weight-bold text-bold" >Qantite Total : <?php echo $somme["quantite"]; ?></p>
+                                   <!-- <div class="form-group row">
+                                        <div class="col-sm-5 ">
+                                            <a class="m-0 font-weight-bold text-success" href="">Precedent</a>
                                         </div>
                                         <div class="col-sm-2 ">
-                                            <p class="m-0 font-weight-bold text-bold test-primary" >Montant Total <?php echo $somme["montant"]; ?></p>  
+                                            <p class="m-0 font-weight-bold text-bold" >Facture :<?php echo $achatClient["id"]; ?></p>
+                                        </div>
+                                        <div class="col-sm-3 ">
+                                            <p class="m-0 font-weight-bold text-bold" >date<?php echo $achatClient["datevente"]; ?></p>
                                         </div>
                                         <div class="col-sm-2 ">
-                                            <p class="m-0 font-weight-bold text-bold" >Total CASH <?php echo $somme["cash"]; ?></p>
+                                            <a class="m-0 font-weight-bold text-success" href="">Suivant</a>
                                         </div>
-                                        <div class="col-sm-2 ">
-                                        <p class="m-0 font-weight-bold text-bold" >Total Credit <?php echo $somme["credit"]; ?></p>
-                                        </div>
-                                        <div class="col-sm-2 ">
-                                        <p class="m-0 font-weight-bold text-bold" >Total OM <?php echo $somme["om"]; ?></p>
-                                        </div>
-                                        <div class="col-sm-2 ">
-                                        <p class="m-0 font-weight-bold text-bold" >Total Banque <?php echo $somme["om"]; ?></p>
-                                        </div>
-                                        <div class="col-sm-2 ">
-                                        <p class="m-0 font-weight-bold text-bold" >Total reduction <?php echo $somme["reduction"]; ?></p>
-                                        </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="card-body">
                                     
@@ -93,24 +83,15 @@
                                             
                                                 <tr>
                                                     <th>id</th>
-                                                    <th>Typepaiement</th>
-                                                    <th>quantite</th>
-                                                    <th>prix</th>
                                                     <th>montant</th>
-                                                    <th>reduction</th>
-                                                    
-                                                    <th>voire facture</th>
+                                                    <th>dateversement</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                  <tr>
                                                     <th>id</th>
-                                                    <th>Typepaiement</th>
-                                                    <th>quantite</th>
-                                                    <th>prix</th>
                                                     <th>montant</th>
-                                                    <th>reduction</th>
-                                                    <th>voire facture</th>
+                                                    <th>dateversement</th>
                                                 </tr>
                                                 
                                             </tfoot>
@@ -121,13 +102,9 @@
                                                 echo '<tr>';
                                                 
                                                     echo '<td>' .$linefatcture["id"].'</td>';
-                                                    echo '<td>' .$linefatcture["typevente"].'</td>';
-                                                    echo '<td>' .$linefatcture["quantite"].'</td>';
-                                                    echo '<td>' .$linefatcture["prix"].'</td>';
-                                                    echo '<td>' .$linefatcture["datevente"].'</td>';
-                                                    echo '<td>' .$linefatcture["reduction"].'</td>';
-                                                    echo "<td><a href='pfacture.php?id=" . $index. "' class='btn btn-primary'><i class='fas fa-pencil-alt'>Facture</i></a></td>";
-                                                
+                                                    echo '<td>' .$linefatcture["montant"].'</td>';
+                                                    echo '<td>' .$linefatcture["dateversement"].'</td>';
+                                                    
                                                echo '</tr>';
                                                $index++;
                                             } 
@@ -214,5 +191,4 @@
     <script src="../js/demo/datatables-demo.js"></script>
 
 </body>
-
 </html>

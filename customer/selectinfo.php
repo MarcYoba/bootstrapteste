@@ -18,21 +18,37 @@ if (isset($_POST['suivre'])) {
 
 if (isset($_POST['enregistrer'])) {
 
-    $reference = $_POST['reference'];
-    $OM = $_POST['OM'];
-    $MOMO = $_POST['MOMO'];
-    $BANQUE = $_POST['BANQUE'];
-    $CASH = $_POST['CASH'];
+    $reference = 0;
+    $OM = 0;
+    $MOMO = 0;
+    $BANQUE = 0;
+    $CASH = 0;
 
+    if (isset($_POST['OM'])) {     
+        $OM = $_POST['OM'];
+    }
+    if (isset($_POST['MOMO'])) {
+        $MOMO = $_POST['MOMO'];
+    }
+    if (isset($_POST['BANQUE'])) {
+        $BANQUE = $_POST['BANQUE'];
+    }
+    if (isset($_POST['CASH'])) {
+        $CASH = $_POST['CASH'];
+    }
+    if (isset($_POST['reference'])) {
+        $reference = $_POST['reference'];
+    }
+
+    $paie = $OM." ".$MOMO." ".$BANQUE." ".$CASH;
     if (!empty($OM) || !empty($MOMO) || !empty($BANQUE) || !empty($CASH) || !empty($reference)){
-        $client->insertToCommande($refecrence,$OM." ".$MOMO." ".$BANQUE." ".$CASH);
+
+        $client->insertToCommande($reference,$paie);
         header('Location: client.php');
     }else{
         header('Location: client.php');
     }
-         
-    
-    
+  
 }
 
 

@@ -2,7 +2,7 @@
     session_start();
     require_once("getclient.php");
     $client = new Client($_SESSION['idclient']);
-    $achatClient = $client->SelectAchatProvenderie($_SESSION['idclient']);
+    $achatClient = $client->SelectAchatDetteProvenderie($_SESSION['idclient']);
     $somme = $client->getSommeProvenderie($_SESSION['idclient']);
     $nbelement = count($achatClient);
     
@@ -61,7 +61,7 @@
                             <!-- Area Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <div class="form-group row">
+                                <div class="form-group row">
                                         <div class="col-sm-2 ">
                                             <p class="m-0 font-weight-bold text-bold" >Qantite Total : <?php echo $somme["quantite"]; ?></p>
                                         </div>
