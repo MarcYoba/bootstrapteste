@@ -113,12 +113,12 @@ function animalvollaile() {
 }
 
 function animalporc() {
-  document.getElementById("").innerHTML= 'ok'  ;
+  document.getElementById("typeelement").innerHTML= ''  ;
   
 }
 
 function animallapin() {
-  document.getElementById("").innerHTML= 'ok'  ;
+  document.getElementById("typeelement").innerHTML= ''  ;
   
 }
 
@@ -128,9 +128,9 @@ function selectype() {
     if (typedonne == "volaille") {
       animalvollaile();
     } else if (typedonne == "porc") { 
-        
+      animalporc();
     }else if (typedonne == "lapin"){
-
+      animallapin();
     }
 }
 
