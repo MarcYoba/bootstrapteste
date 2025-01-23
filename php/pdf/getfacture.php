@@ -10,9 +10,32 @@ require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
 require_once("../bdmutilple/getdette.php");
 
-require '../../vendor/autoload.php';
+
 ini_set('memory_limit', '256M');
 use Dompdf\Dompdf;
+use chillerlan\QRCode\{QRCode, QROptions};
+// Configuration des options du QR code
+require '../../vendor/autoload.php';
+
+// $options = new QROptions([
+//     'version'    => 5,
+//     'outputType' => QROutputInterface::GDIMAGE_PNG,
+//     'eccLevel'   => EccLevel::M,
+// ]);
+
+
+
+// Données à encoder
+//$notreqrcode  = "https://www.monsite.fr";
+
+// Génération du QR code
+//$qrcode = (new QRCode($options))->render($notreqrcode);
+
+// Enregistrement du QR code dans un fichier temporaire
+ //file_put_contents('temp_qrcode.png', $qrcode);
+ 
+ //header('Content-Type: image/png');
+// echo $qrcode;
 
 $date = date("Y-m-d");
 
@@ -27,7 +50,16 @@ $versement = new Versement(1);
 $id =  $_GET["id"];
 
 $facture = $vente->getFactureVente($id);
+$inclient=$client->getClientByIdVente($id);
 
+$tabqrcod  =$facture;
+if (is_array($facture)) {
+    $tabqrcod = array_pop($tabqrcod);
+} 
+$data   = 'M0822175619296A +237655271506 '.$inclient["firstname"]." ".$inclient["telephone"].$tabqrcod[0].$tabqrcod[1].$tabqrcod[3].$tabqrcod[2]."vente:".$id;
+$qrcode = (new QRCode)->render($data);
+
+// $facture = $vente->getFactureVente($id);
 // Créer une instance de Dompdf
 $dompdf = new Dompdf();
 
@@ -55,16 +87,25 @@ $html = '
                         text-align: left;
                     }
                 }
+        img {
+            width: 100px;
+            height: 100px;
+        }
 </style>
 </head>
 <body>';
 
 $html .='<table style="border-collapse: separate; border-spacing: 0px;">
         <thead>';
-        $inclient=$client->getClientByIdVente($id);
+        
         $html .=' <tr><th  align="left"">AFRICA BELIEVE GROUP SARL : '.$date." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' Cabinet veterinaire-provenderie
          N cont: M0822175619296A NRCCM:RC/YAE2022/B/2852 YDE-SOA FIN GOUDRON +237 655 271506
-        </th></tr>
+        </th>
+        
+        <th>
+            <img src="'.$qrcode.'" alt="QR Code" />    
+        </th>
+        </tr>
         </thead>
         <tbody>';
         $html .= '<tr>';

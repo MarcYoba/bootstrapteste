@@ -72,7 +72,7 @@
                                         <option selected value="All">All </option>
                                         <?php 
                                             global $conn;
-                                            $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie";
+                                            $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie ORDER BY nom_produit ASC";
                                             $result = $conn->query($sql);
                                             while ($row = mysqli_fetch_assoc($result)){               
                                                 echo "<option value='".$row["nom_produit"]." "."'>".$row["nom_produit"]."</option>";

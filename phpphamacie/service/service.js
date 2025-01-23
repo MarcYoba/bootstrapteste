@@ -77,3 +77,60 @@ function selection() {
     window.location.href="service.php";
 
 }
+
+function recherclient() {
+    // Récupérer l'input et la liste déroulante
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("produitname");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("idclient");
+    li = ul.getElementsByTagName("option");
+    console.log(li.length);
+    // Boucler sur toutes les options
+    for (i = 0; i < li.length; i++) {
+      a = li[i];
+      
+      if (a.textContent.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+    
+}
+
+function animalvollaile() {
+  
+    var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("typeelement").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "typepoule.php", true);
+        xhttp.send();
+   
+}
+
+function animalporc() {
+  document.getElementById("").innerHTML= 'ok'  ;
+  
+}
+
+function animallapin() {
+  document.getElementById("").innerHTML= 'ok'  ;
+  
+}
+
+function selectype() {
+    let typedonne = document.getElementById("cathegorie").value;
+
+    if (typedonne == "volaille") {
+      animalvollaile();
+    } else if (typedonne == "porc") { 
+        
+    }else if (typedonne == "lapin"){
+
+    }
+}
+

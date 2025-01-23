@@ -82,7 +82,7 @@
                                     <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="4" multiple aria-label="multiple select ">
                                         <?php 
                                             global $conn;
-                                            $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                            $sql = "SELECT  nom_produit,cathegorie FROM produit ORDER BY nom_produit ASC";
                                             $result = $conn->query($sql);
                                             while ($row = mysqli_fetch_assoc($result)){               
                                                 echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
@@ -214,11 +214,11 @@
             </div>
         </div>
     </div>
-
+    <script src="stockVente.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    
     <!-- Core plugin JavaScript-->
     <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -232,7 +232,7 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-    <script src="../stock/stockVente.js"></script>
+    
 
 </body>
 

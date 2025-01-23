@@ -72,7 +72,7 @@
                                         <option selected value="All">All </option>
                                         <?php 
                                             global $conn;
-                                            $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                            $sql = "SELECT  nom_produit,cathegorie FROM produit ORDER BY nom_produit ASC";
                                             $result = $conn->query($sql);
                                             while ($row = mysqli_fetch_assoc($result)){               
                                                 echo "<option value='".$row["nom_produit"]." "."'>".$row["nom_produit"]."</option>";
@@ -140,7 +140,7 @@
                                     <tbody id="liste">
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM historiquestock";
+                                        $sql = "SELECT * FROM historiquestock ORDER BY Nomproduit ASC";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

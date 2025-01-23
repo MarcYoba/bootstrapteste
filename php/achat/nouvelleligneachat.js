@@ -169,3 +169,4 @@ function calculerTotal(ligneIndex){
 
     Totalcellule.textContent = total;
 }
+

@@ -71,11 +71,13 @@
                                         name="datedett2" id="datedett2" placeholder="quantite">
                                     </p>
                                     <p class="col-md-3" >
-                                    <select id="produit"  name="produit"   class="form-control form-select" >   <!-- size="10" multiple aria-label="multiple select " -->
+                                    <input type="text" class="form-control form-control-user" id="produitname"
+                                        name="produitname" placeholder="Nom produit" onkeyup="recherproduit()" required> 
+                                    <select id="produit"  name="produit"   class="form-control form-select" size="4" multiple aria-label="multiple select">   <!--  " -->
                                         <option value="ALL" selected>ALL</option>             
                                             <?php 
                                                 global $conn;
-                                                $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                                $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie ORDER BY nom_produit";
                                                 $result = $conn->query($sql);
                                                 while ($row = mysqli_fetch_assoc($result)){               
                                                     echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
@@ -217,6 +219,7 @@
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="../../header.js"></script>
+    <script src="achat.js"></script>
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
 
