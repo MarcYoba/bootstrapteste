@@ -89,7 +89,7 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
     $stock = $stock + $quantite;
     $gain = $prixvente - $prix;
 
-    if ($perantiondate == "0000-00-00") {
+    if (($perantiondate == "0000-00-00") || (empty($perantiondate)) || ($perantiondate == "0001-01-01")) {
         $sql = "UPDATE produitphamacie SET quantite_produit = '$stock',prix_achat_produit='$prix',gain_produit='$gain',datePeramtion='$dateperantion' WHERE nom_produit = '$produit' ";
         $result = $conn->query($sql);
         $date = date("y/m/d");

@@ -613,6 +613,43 @@
                                     ?>
                                 </div>
                             </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Date  péremption des produits</h6>
+                                </div>
+                                <div class="card-body">
+                                    <?php 
+                                        global $conn;
+                                        
+                                        $tab = array("rouge"=>"",
+                                            "jaune"=>"",
+                                            "info"=>"",
+                                            "success"=>""
+
+                                        );
+                                        
+                                            $sql = "SELECT p.nom_produit, p.datePeramtion as lot1, l.date_expiration AS lot2 
+                                            FROM produitphamacie p 
+                                            LEFT JOIN lots l ON p.id = l.idproduit 
+                                            WHERE p.quantite_produit>0 
+                                            GROUP BY p.nom_produit 
+                                            ORDER BY p.nom_produit ASC";
+                                        
+                                        $result = $conn->query($sql);
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            
+                                                echo '<h4 class="small font-weight-bold">'.$row["nom_produit"].'<span class="float-right">('
+                                                .$row["lot1"].')</span>'.'<span class="float-right"><---></span>'.'<span class="float-right">('.'  '.$row["lot2"].')</span></h4>';
+                                                echo '<hr>';
+                                               
+                                                
+                                            
+                                        }
+                                                    //var_dump($row);
+                                    ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

@@ -1,5 +1,12 @@
 const dataservice = JSON.parse(localStorage.getItem("service"));
 
+
+ function calculedensite() {
+  const  inputEfectif = document.getElementById("Efectif");
+  const  inputsuperficie = document.getElementById("superficie");
+  document.getElementById("densite").value = parseInt(inputEfectif.value)/parseInt(inputsuperficie.value);
+}
+
 if (dataservice) {
     
     console.log(dataservice);

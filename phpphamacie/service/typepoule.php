@@ -6,8 +6,8 @@ Information du client
 <div class="form-group row">
     <div class="col-sm-4 mb-3 mb-sm-0">
     <input type="text" class="form-control form-control-user" id="produitname"
-    name="produitname" placeholder="Nom produit" onkeyup="recherclient()" required>   
-    <select id="idclient"  name="idclient"  class="form-control form-select" required size="4" multiple aria-label="multiple select">
+    name="produitname" placeholder="Nom produit" onkeyup="recherclient()" >   
+    <select id="idclient"  name="idclient"  class="form-control form-select" required size="4" multiple aria-label="multiple select" required>
             <?php 
             require_once("../connexion.php");
                 global $conn;
@@ -44,7 +44,7 @@ Information de descente
     </div>
     <div class="col-sm-2 mb-3 mb-sm-0">
         Efectif: <input type="number"  class="form-control form-control-user" id="Efectif"
-           name="Efectif" placeholder="Efectif" required>
+           name="Efectif" placeholder="Efectif" value="0" onchange="calculedensite()" required>
     </div>
     <div class="col-sm-2 mb-3 mb-sm-0">
         Age: <input type="number"  class="form-control form-control-user" id="Age"
@@ -53,14 +53,14 @@ Information de descente
 </div>
 <div class="form-group row">
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Presence de barrier: 
+        Présence de barrière: 
         <select  class="form-control form-select" id="barrier" name="barrier"  required>
         <option value="OUI" >OUI</option>
         <option value="NON">NON</option>
         </select>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Pedulive: 
+        Pédiluve: 
         <select  class="form-control form-select" id="Pedulive" name="Pedulive"  required>
         <option value="OUI" >OUI</option>
         <option value="NON">NON</option>
@@ -73,16 +73,16 @@ Information de descente
             <option value="semi definitif">semi definitif</option>
             <option value="materiau provisoire">materiau provisoire</option>
         </select>
-    </div>
-    <div class="col-sm-3 mb-3 mb-sm-0">
-        Nombre de batiment: <input type="number"  class="form-control form-control-user" id="batiment"
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0">
+                Nombre de bâtiments: <input type="number"  class="form-control form-control-user" id="batiment"
            name="batiment" placeholder="Nombre de batiment" required>
     </div>
 </div>  
 <div class="form-group row">
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Superficie du locale: <input type="numbers"  class="form-control form-control-user" id="superficie"
-           name="superficie" placeholder="Superficie" required>
+        Superficie du local (m): <input type="number"  class="form-control form-control-user" id="superficie"
+           name="superficie" placeholder="Superficie en (m)" value="0" onchange="calculedensite()" varequired>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
         Qualite du sole: <input type="texte"  class="form-control form-control-user" id="sole"
@@ -129,14 +129,14 @@ Information de descente
         </select>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Presence de l'antenou: 
+        Présence de l'antenou: 
         <select  class="form-control form-select" id="antenou" name="antenou"  required>
             <option value="OUI" >OUI</option>
             <option value="NON">NON</option>
         </select>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Prophylacie:
+    prophylaxie:
         <select  class="form-control form-select" id="prophylacie" name="prophylacie"  required>
             <option value="respecte" >respecte</option>
             <option value="non respecte">non respecte</option>
