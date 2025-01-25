@@ -53,13 +53,13 @@ require_once("../bdmutilple/getclient.php");
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Consultation</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Vaccin</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success">Liste des consultations</h6>
+                            <h6 class="m-0 font-weight-bold text-success">Liste des Vaccins</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -70,10 +70,16 @@ require_once("../bdmutilple/getclient.php");
                                             <th>id</th>
                                             <th>Nom Sujet</th>
                                             <th>Age</th>
-                                            <th>Race</th>
+                                            <th>espece</th>
                                             <th>Client</th>
-                                            <th>Montant</th>
-                                            <th>Operation</th>
+                                            <th>telephone</th>
+                                            <th>montant</th>
+                                            <th>dianostique</th>
+                                            <th>Type vaccin</th>
+                                            <th>Lieu</th>
+                                            <th>date Vacin</th>
+                                            <th>date Arrive</th>
+                                            <th>Rapelle</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -81,10 +87,16 @@ require_once("../bdmutilple/getclient.php");
                                             <th>id</th>
                                             <th>Nom Sujet</th>
                                             <th>Age</th>
-                                            <th>Race</th>
+                                            <th>espece</th>
                                             <th>Client</th>
-                                            <th>Montant</th>
-                                            <th>Operation</th>
+                                            <th>telephone</th>
+                                            <th>montant</th>
+                                            <th>dianostique</th>
+                                            <th>Type vaccin</th>
+                                            <th>motif consultation</th>
+                                            <th>date Vacin</th>
+                                            <th>date Arrive</th>
+                                            <th>Rapelle</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -94,21 +106,28 @@ require_once("../bdmutilple/getclient.php");
                                         $sql = "SELECT * FROM consultation ";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
+                                            $dataclient = $client->getAllByIdClient($row["idclient"]);
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
                                             echo '<td>'.$row["Nom"].'</td>';
                                             echo '<td>'.$row["age"].'</td>';
-                                            echo '<td>'.$row["sexe"].'</td>';
-                                            echo '<td>'.$client->getByIdClient($row["idclient"]).'</td>';
+                                            echo '<td>'.$row["esperce"].'</td>';
+                                            echo '<td>'.$dataclient["firstname"].'</td>';
+                                            echo '<td>'.$dataclient["telephone"].'</td>';
                                             echo '<td>'.$row["montant"].'</td>';
+                                            echo '<td>'.$row["dianostique"].'</td>';
+                                            echo '<td>'.$row["vaccin"].'</td>';
+                                            echo '<td>'.$row["moticconsultation"].'</td>';
+                                            echo '<td>'.$row["dateArrive"].'</td>';
+                                            echo '<td>'.$row["race"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                echo "<a href='listeconsultation.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-bars'></i></a>";
+                                                # code...
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                echo "<a href='listeconsultation.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-bars'></i></a>";
+                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             }else{
-                                            echo "<a href='listeconsultation.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-bars'></i></a>";
-                                            echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<a href='vacin.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                            echo "<a href='vacin.php?delete=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer ce Vaccin ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';

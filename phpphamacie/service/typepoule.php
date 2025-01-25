@@ -23,6 +23,9 @@ Information du client
     <div class="col-sm-4 mb-3 mb-sm-0">
         <input type="text" class="form-control form-control-user" id="Localisation"
            name="Localisation" placeholder="Localisation" required>
+        <br>
+        <input type="text" class="form-control form-control-user" id="speculation"
+           name="speculation" placeholder="speculation" required>
     </div>
 
     <div class="col-sm-4 mb-3 mb-sm-0">
@@ -151,7 +154,7 @@ Information de descente
 </div>
 <div class="form-group row">
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Traitement anterieur: 
+        Traitements anterieurs: 
         <textarea  id="Traitemenante" name="Traitemenante" placeholder="Traitement anterieur" required>
     </textarea>
     </div>
@@ -161,9 +164,24 @@ Information de descente
     </textarea>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Traitement Anvisage: 
+    Traitement prescrit: 
         <textarea  id="Traitementan" name="Traitementan" placeholder="Traitement Anvisage" required>
     </textarea>
+    </div>
+    <div class="col-sm-3 mb-3 mb-sm-0">
+    Diagnostic de suspicion: 
+        <textarea  id="Diagnostic" name="Diagnostic" placeholder="Diagnostic de suspicion" required>
+    </textarea>
+    </div>
+    <div class="col-sm-3 mb-3 mb-sm-0">
+    Recommendation: 
+        <textarea  id="Recommendation" name="Recommendation" placeholder="Recommendation" required>
+    </textarea>
+    </div>
+    <div class="col-sm-3 mb-3 mb-sm-0">
+    Date de la prochaine visite: 
+    <input type="date" class="form-control form-control-user" id="datepvisit"
+           name="datepvisit" placeholder="date achat" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0"> 
     Montant <input type="number" class="form-control form-control-user" id="Montant"

@@ -80,6 +80,10 @@
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                     Telephone :<p class="text-lg font-weight-bold" id="telephone"> <?php echo $row["telephone"] ?></p> 
                                     </div>
+
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    speculation :<p class="text-lg font-weight-bold" id="telephone"> <?php echo $row["speculation"] ?></p> 
+                                    </div>
                                     
                                 </div>
                                 Information de descente
@@ -176,6 +180,18 @@
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Traitement Anvisage: 
                                     <p class="text-lg font-weight-bold" id="traia"> <?php echo $row["Traitementanvisage"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Diagnostic de suspicion: 
+                                        <p class="text-lg font-weight-bold" id="Diagnostic"> <?php echo $row["dianostique"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Recommendation: 
+                                        <p class="text-lg font-weight-bold" id="Recommendation"> <?php echo $row["recommandation"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Date de la prochaine visite: 
+                                    <p class="text-lg font-weight-bold" id="datepvisit"> <?php echo $row["dateprochevisite"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0"> 
                                     Montant: <p class="text-lg font-weight-bold" id="Montant"> <?php echo $row["Montant"] ?></p>
