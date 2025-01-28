@@ -36,7 +36,7 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center" >
                                 <h1 class="h4 text-gray-900 mb-4">Versement</h1>
@@ -87,15 +87,17 @@
                                             name="iddette" placeholder="id dette"  required>';
                                         }
                                         echo'</div>'; 
-                                        echo'<div class="col-sm-6 mb-3 mb-sm-0">';
-                                            echo'<select id="client"  name="client"  class="form-control " required>';
+                                        echo'<div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="search" id="rechecliet" onkeyup="recherclinet()"  class="form-control" placeholder="recherche fournisseur">
+                                        ';
+                                            echo'<select id="client"  name="client"  class="form-control " required size="4" multiple aria-label="multiple select">';
                                                 if(isset($_GET['tableau'])){
                                                     $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                     echo'<option value="'.$donnees["idclient"].'"  selected>'.$donnees["firstname"].'</option>';
                                                 }else{
                                                                         global $conn;
-                                                                        $sql = "SELECT id, firstname, adresse FROM client";
+                                                                        $sql = "SELECT id, firstname, adresse FROM client ORDER BY firstname ASC";
                                                                         $result = $conn->query($sql);
                                                                         while ($row = mysqli_fetch_assoc($result)){
                                                                             
@@ -112,7 +114,7 @@
                                     echo'<div class="form-group row">';
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="montant" id="montant" placeholder="montant versement" required>'; 
+                                                name="montant" id="montant" placeholder="montant" required>'; 
                                         echo'</div>';
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                             if(isset($_GET['tableau'])){
@@ -122,7 +124,7 @@
                                                 name="montantdette" id="montantdette" value='.intval($donnees["montant"]).' placeholder="montant" required>';
                                             }else{
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="montantdette" id="montantdette" placeholder="montant dette" required>';
+                                                name="montantdette" id="montantdette" placeholder="banque" required>';
                                             }
                                         echo'</div>';
                                     echo'</div>';
@@ -190,7 +192,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-    <!--<script src="produit.js"></script> --> 
+    <script src="versement.js"></script>
 
 </body>
 

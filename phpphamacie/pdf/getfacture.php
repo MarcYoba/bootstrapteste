@@ -77,8 +77,8 @@ $html = '
 $html .='<br><br><br> <table style="border-collapse: separate; border-spacing: 0px;">
         <thead>';
         
-        $html .=' <tr><th  align="left"">AFRICA BELIEVE GROUP SARL : '.$date." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' Cabinet veterinaire-provenderie
-         N cont: M0822175619296A NRCCM:RC/YAE2022/B/2852 YDE-SOA FIN GOUDRON +237 655 271506
+        $html .=' <tr><th  align="left"">CABINET VETERINAIRE DE SOA : '.$date." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' 
+          NRCCM:RC/YAE2022/B/2852 
         </th>
         
         <th>
@@ -112,7 +112,7 @@ $html .='<br><br><br> <table style="border-collapse: separate; border-spacing: 0
         </tbody>
     </table>';
 
-$html .= '
+$html .= '<br>TELEPHONE : YDE-SOA FIN GOUDRON 655271506-673925507-676359056
 </body>
 </html>';
 

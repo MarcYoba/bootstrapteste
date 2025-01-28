@@ -92,9 +92,10 @@
                                         $sql = "SELECT * FROM versement";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
+                                            $montant = $row["montant"] + $row["Om"]+$row["banque"];
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["montant"].'</td>';
+                                            echo '<td>'.$montant.'</td>';
                                             $idclient = $row["idclient"];
                                             $sqlclient = "SELECT firstname FROM client WHERE id = '$idclient'";
                                             $value = $conn->query($sqlclient);

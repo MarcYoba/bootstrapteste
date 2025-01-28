@@ -124,26 +124,14 @@ if (isset($_POST['submit'])) {
     if (!empty($iddette) || !empty($client) || !empty($montant) || !empty($montantdette)) {
         
             // Vérifier si l'adresse e-mail existe déjà
-            $sql = "SELECT * FROM dettephamacie WHERE id = ? AND status = 'en cour'";
+           
 
-            if (!$stmt = $conn->prepare($sql)) {
-                die('Erreur de préparation de la requête : ' . $conn->error);
-            }
             
-            $stmt->bind_param('d', $iddette);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows > 0) {
                 creerVersement($iddette, $client, $montant, $montantdette,$dateversement,$om,$matif);
                 header("Location:liste.php");
-            } else {
-                // Créer le compte utilisateur
-                header("Location:liste.php");
+           
                 exit();
-            }
-
-            $stmt->close(); 
+           
     }else {
         header("Location: ../../404.html");
         exit();

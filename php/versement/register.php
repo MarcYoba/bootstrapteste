@@ -35,7 +35,7 @@ function creerCaisse($montant) {
 }
 
 // Fonction pour créer un compte utilisateur $nom, $type, $prixvente, $prixachat, $quantite
-function creerVersement($iddette, $client, $montant, $montantdette,$dateversement,$om,$matif ) {
+function creerVersement($iddette, $client, $montant, $montantdette,$dateversement,$om,$matif,$banque) {
     global $conn;
 
     if (!empty($dateversement )) {
@@ -48,14 +48,14 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO versement (montant, idclient, iddette, iduser,dateversement,Om,motif) VALUES (?, ?, ?, ?, ?,?,?)";
+    $sql = "INSERT INTO versement (montant, idclient, iddette, iduser,dateversement,Om,motif,banque) VALUES (?, ?, ?, ?, ?,?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
         die('Erreur de préparation de la requête : ' . $conn->error);
     }
 
-    $stmt->bind_param('ddddsds', $montant , $client ,$iddette, $_SESSION['id'], $date,$om,$matif);
+    $stmt->bind_param('ddddsdsd', $montant , $client ,$iddette, $_SESSION['id'], $date,$om,$matif,$banque);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
@@ -115,35 +115,21 @@ if (isset($_POST['submit'])) {
     $iddette = $_POST['iddette'];
     $client = $_POST['client'];
     $montant = $_POST['montant'];
-    $montantdette = $_POST['montantdette'];
+    $banque = $_POST['montantdette'];
     $dateversement = $_POST['dateversement'];
     $om = $_POST['om'];
     $matif = $_POST['matif'];
     
     // Vérifier si tous les champs sont remplis
-    if (!empty($iddette) || !empty($client) || !empty($montant) || !empty($montantdette)) {
+    if (!empty($iddette) || !empty($client) || !empty($montant) || !empty($banque)) {
         
             // Vérifier si l'adresse e-mail existe déjà
-            $sql = "SELECT * FROM dette WHERE id = ? AND status = 'en cour'";
+           
 
-            if (!$stmt = $conn->prepare($sql)) {
-                die('Erreur de préparation de la requête : ' . $conn->error);
-            }
+           
+                creerVersement($iddette, $client, $montant, $banque,$dateversement,$om,$matif,$banque);
+                header("Location:liste.php");
             
-            $stmt->bind_param('d', $iddette);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows > 0) {
-                creerVersement($iddette, $client, $montant, $montantdette,$dateversement,$om,$matif);
-                header("Location:liste.php");
-            } else {
-                // Créer le compte utilisateur
-                header("Location:liste.php");
-                exit();
-            }
-
-            $stmt->close(); 
     }else {
         header("Location: ../../404.html");
         exit();

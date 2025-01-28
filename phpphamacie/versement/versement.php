@@ -27,7 +27,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container" >
         
@@ -36,13 +36,13 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center" >
                                 <h1 class="h4 text-gray-900 mb-4">Versement</h1>
                             </div>
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Versement</h6>
+                                <h6 class="m-0 font-weight-bold text-success">Versement</h6>
                                 <hr>
                                  <div class="row">
                                     <a href="../dette/dette.php"  class="btn btn-info btn-user col-md-4" >Dette</a>
@@ -55,7 +55,7 @@
                             <form class="user" action="register.php" method="post" >
                             <hr>
                             <input type="date" class="form-control form-control-user" id="dateversement"
-                            name="dateversement" placeholder="date achat" required>
+                            name="dateversement" placeholder="date achat" required > <br>
                                 <?php 
                                     
                                     if(isset($_GET['tableau'])){
@@ -82,15 +82,18 @@
                                             name="iddette" placeholder="id dette"  required>';
                                         }
                                         echo'</div>'; 
-                                        echo'<div class="col-sm-6 mb-3 mb-sm-0">';
-                                            echo'<select id="client"  name="client"  class="form-control " required>';
+                                        echo'<div class="col-sm-6 mb-3 mb-sm-0"> 
+                                        <input type="search" id="fourni" onkeyup="recherclinet()"  class="form-control" placeholder="recherche fournisseur">
+                                        ';
+
+                                            echo'<select id="client"  name="client"  class="form-control " required size="4" multiple aria-label="multiple select">';
                                                 if(isset($_GET['tableau'])){
                                                     $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                     echo'<option value="'.$donnees["idclient"].'"  selected>'.$donnees["firstname"].'</option>';
                                                 }else{
                                                                         global $conn;
-                                                                        $sql = "SELECT id, firstname, adresse FROM client";
+                                                                        $sql = "SELECT id, firstname, adresse FROM client ORDER BY firstname ASC";
                                                                         $result = $conn->query($sql);
                                                                         while ($row = mysqli_fetch_assoc($result)){
                                                                             
@@ -144,17 +147,17 @@
                                         $tabdonne = $_GET['tableau'];
                                         $donnees = json_decode($tabdonne,true);
                                         if ($donnees["role"] == "modification") {
-                                            echo'<button type="submit" name="modification" id="modification" class="btn btn-primary btn-user btn-block">
+                                            echo'<button type="submit" name="modification" id="modification" class="btn btn-success btn-user btn-block">
                                             Modifier
                                             </button>';
                                         } else {
-                                            echo'<button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
+                                            echo'<button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
                                             Enregistrement
                                             </button>';
                                         }
                                         
                                     } else {
-                                        echo'<button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
+                                        echo'<button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
                                             Enregistrement
                                         </button>';
                                     } 
@@ -180,7 +183,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-    <!--<script src="produit.js"></script> --> 
+    <script src="versement.js"></script>
 
 </body>
 

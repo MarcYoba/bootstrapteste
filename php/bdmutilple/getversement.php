@@ -12,7 +12,7 @@ class Versement{
 
     public function ToDay(){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement= CURRENT_DATE";
+        $sql = "SELECT SUM(montant + Om) as montant FROM versement WHERE dateversement= CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -20,7 +20,7 @@ class Versement{
 
     public function TotalVersement(){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement BETWEEN '2025-12-01' AND CURRENT_DATE";
+        $sql = "SELECT SUM(montant + Om) as montant FROM versement WHERE dateversement BETWEEN '2025-12-01' AND CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -28,7 +28,7 @@ class Versement{
 
     public function ByDateVersement($date){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement= '$date'";
+        $sql = "SELECT SUM(montant + Om) as montant FROM versement WHERE dateversement= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -36,7 +36,7 @@ class Versement{
 
     public function ByVersementClient($dette){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM versement WHERE iddette = '$dette'";
+        $sql = "SELECT SUM(montant + Om) as montant FROM versement WHERE iddette = '$dette'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -44,7 +44,7 @@ class Versement{
 
     public function ByVersementIdClientDate($idclient,$date){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM versement WHERE idclient = '$idclient' AND dateversement= '$date'";
+        $sql = "SELECT SUM(montant + Om) as montant FROM versement WHERE idclient = '$idclient' AND dateversement= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -52,7 +52,7 @@ class Versement{
 
     public function ByVersementClientdate($dette){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM versement WHERE iddette = '$dette' AND dateversement= CURRENT_DATE";
+        $sql = "SELECT SUM(montant + Om) as montant FROM versement WHERE iddette = '$dette' AND dateversement= CURRENT_DATE";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -72,7 +72,7 @@ class Versement{
 
     public function ByWeekVersement($datebedut,$datafin){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM versement WHERE dateversement BETWEEN '$datebedut'  AND '$datafin'";
+        $sql = "SELECT SUM(montant + Om + banque) as montant FROM versement WHERE dateversement BETWEEN '$datebedut'  AND '$datafin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
