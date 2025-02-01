@@ -1,4 +1,7 @@
-<?php require_once("../connexion.php"); 
+<?php 
+require_once("../connexion.php"); 
+require_once("../bdmutilple/getclient.php");
+$client = new Client(0);
 ?>
 
 <!DOCTYPE html>
@@ -44,22 +47,20 @@
             <div id="content">
 
                 <!-- Topbar -->
-                 <?php require_once("../../Topbar.php");?>
+                <?php require_once("../../Topbar.php"); ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Versement</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Commande client</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <div class="row">
-                                <p class="col-md-0"><h6 class="m-0 font-weight-bold text-primary">Tables Versement</h6></p>
-                            </div>
+                        <h6 class="m-0 font-weight-bold text-primary">Tables Commande</h6> <br>
                             
                         </div>
                         <div class="card-body">
@@ -69,47 +70,48 @@
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>montant</th>
-                                            <th>client</th>
-                                            <th>date versement</th>
-                                            <th>operation</th>
+                                            <th>vente</th>
+                                            <th>Nom</th>
+                                            <th>methode paiement</th>
+                                            <th>date commande</th>
+                                            <th>status commande</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>montant</th>
-                                            <th>client</th>
-                                            <th>date versement</th>
-                                            <th>operation</th>
+                                            <th>vente</th>
+                                            <th>Nom</th>
+                                            <th>methode paiement</th>
+                                            <th>date commande</th>
+                                            <th>status commande</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM versement";
+                                        $sql = "SELECT * FROM commadeclient";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
-                                            $montant = $row["montant"] + $row["Om"]+$row["banque"];
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$montant.'</td>';
-                                            $idclient = $row["idclient"];
-                                            $sqlclient = "SELECT firstname FROM client WHERE id = '$idclient'";
-                                            $value = $conn->query($sqlclient);
-                                            $nom = mysqli_fetch_assoc($value);
-
-                                            echo '<td>'.$nom["firstname"].'</td>';
-                                            
-                                            echo '<td>'.$row["dateversement"].'</td>';
+                                            echo '<td>'.$row["idvente"].'</td>';
+                                            echo '<td>'.$client->getByIdClient($row["userid"]).'</td>';
+                                            echo '<td>'.$row["paiementmethode"].'</td>';
+                                            echo '<td>'.$row["datecommande"].'</td>';
+                                            echo '<td>'.$row["statuscommande"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                # code...
+                                                echo "<button class='btn btn-primary' onclick='valider(". $row["id"] .")'>Valider</button>";
+                                                echo "<button class='btn btn-danger' onclick='modifierClient(". $row["id"] .")'>ANNUL</button>";
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                                echo "<button class='btn btn-primary' onclick='valider(". $row["id"] .")'>Valider</button>";
+                                                echo "<button class='btn btn-danger' onclick='modifierClient(". $row["id"] .")'>ANNUL</button>";
                                             }else{
-                                            echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
-                                            echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<button class='btn btn-primary' onclick='valider(". $row["id"] .")'>Valider</button>";
+                                            echo "<button class='btn btn-danger' onclick='annuler(". $row["id"] .")'>ANNUL</button>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';
@@ -186,6 +188,7 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="client.js"></script>
 
 </body>
 

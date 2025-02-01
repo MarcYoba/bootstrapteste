@@ -72,7 +72,8 @@
                                 </p>
                                 
                                 <p class="col-md-3" >
-                                <select id="client"  name="client"   class="form-control form-select" >   <!-- size="10" multiple aria-label="multiple select " -->
+                                <input type="search" id="recherche" onkeyup="recherduclient()"  class="form-control form-control-user" placeholder="recherche"><br>
+                                <select id="client"  name="client"   class="form-control form-select" size="4" multiple aria-label="multiple select">   <!--  -->
                                     <option value="ALL" selected>ALL</option>             
                                         <?php 
                                             global $conn;
@@ -111,10 +112,8 @@
                                             <th>quantite</th>
                                             <th>Prix </th>
                                             <th>Date</th>
-                                            <th>versement</th>
-                                            <th>Reste</th>
-                                            <th>status</th>
-                                            <th>operation</th>
+                                            
+                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -124,10 +123,9 @@
                                             <th>quantite</th>
                                             <th>Prix </th>
                                             <th>Date</th>
-                                            <th>versement</th>
-                                            <th>Reste</th>
-                                            <th>status</th>
-                                            <th>operation</th>
+                                            
+                                            
+                                            
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -146,39 +144,6 @@
                                             echo '<td>'.$row["quantite"].'</td>';
                                             echo '<td>'.$row["prix"].'</td>';
                                             echo '<td>'.$row["datedette"].'</td>';
-
-                                            $iddette = $row["id"];
-                                            $sqldette ="SELECT SUM(montant) as somme FROM versementphamacie WHERE iddette ='$iddette'";
-                                            $resultdette = $conn->query($sqldette);
-                                            $value = mysqli_fetch_assoc($resultdette);
-
-                                            echo '<td class="px-1 py-1 bg-gradient-warning text-white" >'.$value["somme"].'</td>';
-                                           
-                                            echo '<td>'.$row["prix"]-$value["somme"].'</td>';
-                                            echo '<td class="px-1 py-1 bg-gradient-info text-white">'.$row["status"].'</td>';
-                                            if ($_SESSION['roles'] == "Lecture") {
-                                                # code...
-                                            }else{
-                                                if (($_SESSION['roles'] == "Ecriture") || ($_SESSION['roles'] == "administrateur")) {
-                                                    if($row["status"] == "en cour"){
-                                                    
-                                                        echo "<td>";
-                                                        echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'>versement</i></a>";
-                                                        //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
-                                                        echo "</td>";
-                                                    }else{
-                                                        
-                                                        echo '<td class="px-1 py-2 bg-gradient-primary text-white">'.$row["status"].'</td>';
-                                                        echo "<td>";
-                                                        //echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'>versement</i></a>";
-                                                        //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
-                                                        echo "</td>";
-                                                    }
-                                                } else {
-                                                    # code...
-                                                }
-                                                
-                                            }
                                             echo '</tr>';
                                             //var_dump($row);
                                         }
@@ -246,24 +211,26 @@
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
     <script >
-        function myFunction() {
+        function recherduclient() {
             // Récupérer l'input et la liste déroulante
             var input, filter, ul, li, a, i;
             input = document.getElementById("recherche");
             filter = input.value.toUpperCase();
             ul = document.getElementById("client");
             li = ul.getElementsByTagName("option");
-
+            console.log(li.length);
             // Boucler sur toutes les options
             for (i = 0; i < li.length; i++) {
                 a = li[i];
-                if (a.value.toUpperCase().indexOf(filter) > -1) {
+                
+                if (a.textContent.toUpperCase().indexOf(filter) > -1) {
                 li[i].style.display = "";
                 } else {
                 li[i].style.display = "none";
                 }
             }
-            }
+        
+    }
     </script>
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>

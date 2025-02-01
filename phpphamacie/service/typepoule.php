@@ -96,6 +96,10 @@ Information de descente
            name="densite" placeholder="Densite au sole" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
+        Poid Moyen: <input type="number"  class="form-control form-control-user" id="poidmoyen"
+           name="poidmoyen" placeholder="Poid Moyen" required>
+    </div>
+    <div class="col-sm-3 mb-3 mb-sm-0">
     Environement d'exploitation: <input type="text"  class="form-control form-control-user" id="Environement"
            name="Environement" placeholder="Environement d'exploitation" required>
     </div>
@@ -159,6 +163,21 @@ Information de descente
     </textarea>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
+    Date debut Maladie: 
+    <input type="date" class="form-control form-control-user" id="datedebmal"
+           name="datedebmal" placeholder="Date debut Maladie" required>
+    </div>
+    <div class="col-sm-3 mb-3 mb-sm-0">
+    nombre de mort: 
+    <input type="number" class="form-control form-control-user" id="mort"
+           name="mort" placeholder="Nombre de mort" required>
+    </div>
+    <div class="col-sm-3 mb-3 mb-sm-0">
+    Nombre jour maladie: 
+    <input type="number" class="form-control form-control-user" id="jourmalad"
+           name="jourmalad" placeholder="Nombre de jour de la maladie" required>
+    </div>
+    <div class="col-sm-3 mb-3 mb-sm-0">
     Signe clinique: 
         <textarea  id="siclinique" name="siclinique" placeholder="Signe clinique" required>
     </textarea>
@@ -179,7 +198,7 @@ Information de descente
     </textarea>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Date de la prochaine visite: 
+    Date prochaine visite: 
     <input type="date" class="form-control form-control-user" id="datepvisit"
            name="datepvisit" placeholder="date achat" required>
     </div>

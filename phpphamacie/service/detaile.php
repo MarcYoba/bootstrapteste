@@ -82,7 +82,7 @@
                                     </div>
 
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                    speculation :<p class="text-lg font-weight-bold" id="telephone"> <?php echo $row["speculation"] ?></p> 
+                                    speculation :<p class="text-lg font-weight-bold" id="speculation"> <?php echo $row["speculation"] ?></p> 
                                     </div>
                                     
                                 </div>
@@ -132,6 +132,9 @@
                                         Densite: <p class="text-lg font-weight-bold" id="densite"> <?php echo $row["densite"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                        Poid Moyen: <p class="text-lg font-weight-bold" id="poidmoyen"> <?php echo $row["Poidmoyen"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                     Environement d'exploitation: <p class="text-lg font-weight-bold" id="environement"> <?php echo $row["environement"] ?></p>
                                     </div>
                                 </div> 
@@ -172,6 +175,18 @@
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Traitement anterieur: 
                                         <p class="text-lg font-weight-bold" id="traitemenanterieux"> <?php echo $row["traitemenanterieux"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Nombre jour maladie:
+                                        <p class="text-lg font-weight-bold" id="jourmalad"> <?php echo $row["jourmaladie"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Date debut Maladie:
+                                        <p class="text-lg font-weight-bold" id="datedebmal"> <?php echo $row["datemaladie"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    nombre de mort:
+                                        <p class="text-lg font-weight-bold" id="mort"> <?php echo $row["nbmort"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Signe clinique: 

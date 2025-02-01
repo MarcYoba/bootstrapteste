@@ -230,13 +230,14 @@ require_once("php/activesaision.php");
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Service :</h6>
                 
-                    <a class="collapse-item" href="../service/service.php" id="ajouterUtilisateur">Descente sur terrain</a>
-                    <a class="collapse-item" href="../service/liste.php">Liste </a>
+                    <a class="collapse-item" href="phpphamacie/service/service.php" id="ajouterUtilisateur">Descente sur terrain</a>
+                    <a class="collapse-item" href="phpphamacie/service/liste.php">Liste </a>
                     
                 
             </div>
         </div>
     </li>
+    
 
     <!-- Divider -->
     <hr class="sidebar-divider">

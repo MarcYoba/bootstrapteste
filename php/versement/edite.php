@@ -19,11 +19,11 @@ $tab = array(
 );
 
 
- $sql = "SELECT id, montant, idclient, iddette,dateversement,motif FROM versement WHERE id ='$id'";
+ $sql = "SELECT id,SUM(montant + Om + banque) AS montant, idclient,dateversement,motif FROM versement WHERE id ='$id'";
  $result = $conn->query($sql);
  $row = $result->fetch_assoc();
  $tab["iddette"] = $row["id"];
- $tab["iddette"] = $row["iddette"];
+
  $tab["montant"] = $row["montant"];
  $tab["dateversement"] = $row["dateversement"];
  $tab["motif"] = $row["motif"];

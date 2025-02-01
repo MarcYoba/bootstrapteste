@@ -114,7 +114,7 @@ require_once("../bdmutilple/getclient.php");
                                             echo '<td>'.$row["datejour"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                # code...
+                                                echo "<a href='detaile.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
                                                 echo "<a href='detaile.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             }else{

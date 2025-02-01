@@ -76,10 +76,10 @@
                                            $donnees= json_decode($tabdonne,true);
                                             
                                             echo'<input type="number" class="form-control form-control-user" id="iddette"
-                                            name="iddette" placeholder="id dette" value="'.$donnees["iddette"].'" required readonly>';  
+                                            name="iddette" placeholder="id dette" value="'.$donnees["iddette"].'" readonly>';  
                                         }else{
                                             echo'<input type="number" class="form-control form-control-user" id="iddette"
-                                            name="iddette" placeholder="id dette"  required>';
+                                            name="iddette" placeholder="id dette"  readonly>';
                                         }
                                         echo'</div>'; 
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0"> 
@@ -110,17 +110,17 @@
                                     echo'<div class="form-group row">';
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="montant" id="montant" placeholder="montant versement" required>'; 
+                                                name="montant" id="montant" placeholder="montant versement" value='.intval($donnees["montant"]).' required>'; 
                                         echo'</div>';
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                             if(isset($_GET['tableau'])){
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="montantdette" id="montantdette" value='.intval($donnees["montant"]).' placeholder="montant" required>';
+                                                name="banque" id="banque"  placeholder="banque" required>';
                                             }else{
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="montantdette" id="montantdette" placeholder="montant dette" required>';
+                                                name="banque" id="banque" placeholder="banque" required>';
                                             }
                                         echo'</div>';
                                     echo'</div>';

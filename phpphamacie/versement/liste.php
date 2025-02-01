@@ -71,7 +71,7 @@
                                             <th>id</th>
                                             <th>montant</th>
                                             <th>client</th>
-                                            <th>Numero dette</th>
+                                            
                                             <th>date versement</th>
                                             <th>operation</th>
                                         </tr>
@@ -81,7 +81,7 @@
                                             <th>id</th>
                                             <th>montant</th>
                                             <th>client</th>
-                                            <th> Numero dette </th>
+                                            
                                             <th>date versement</th>
                                             <th>operation</th>
                                         </tr>
@@ -102,15 +102,15 @@
                                             $nom = mysqli_fetch_assoc($value);
 
                                             echo '<td>'.$nom["firstname"].'</td>';
-                                            echo '<td>'.$row["iddette"].'</td>';
+                                            
                                             echo '<td>'.$row["dateversement"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                                 # code...
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                                echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             }else{
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                            echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             }
                                             echo "</td>";

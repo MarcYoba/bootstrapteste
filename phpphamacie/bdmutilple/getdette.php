@@ -86,5 +86,23 @@ class Dette{
         }
         return $data;
     }
+
+    public function getAllSomme(){
+        global $conn;
+        $sql = "SELECT SUM(montant) AS montant FROM dettephamacie ";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+            //$id = $row["id"];
+        return $row["montant"];
+    }
+
+    public function getSommeDette($date1,$date2){
+        global $conn;
+        $sql = "SELECT SUM(montant) AS montant FROM dettephamacie WHERE datedette BETWEEN '$date1' AND '$date2'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+            //$id = $row["id"];
+        return $row["montant"];
+    }
 }
 ?>

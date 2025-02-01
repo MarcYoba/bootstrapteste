@@ -1,3 +1,5 @@
+
+
 function Provenderie() {
     console.log("send");
     fetch('route/route.php',{
@@ -56,5 +58,26 @@ if (infouser.roles.includes("Lecture")) {
    
    
 }
-                   
+$(document).ready(function() {
+    console.log("recherche commande");
+    fetch('php/client/commande.php',{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify("commande")
+    })
+    .then(response => response.json())
+    .then(data => { 
+        console.log(data);
+        if (data == "success") { 
+            $('#monModal').modal('show');  
+            exit;
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    
+});                   
                 

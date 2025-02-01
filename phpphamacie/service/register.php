@@ -35,23 +35,27 @@ global $conn;
     $Diagnostic = $_POST['Diagnostic'];
     $Recommendation = $_POST['Recommendation'];
     $datepvisit = $_POST['datepvisit'];
-
+    $datedebmal = $_POST['datedebmal'];
+    $mort = $_POST['mort'];
+    $jourmalad = $_POST['jourmalad'];
+    $poidmoyen = $_POST['poidmoyen'];
+    
 // Formulaire d'enregistrement produit
 if (isset($_POST['submit'])) {
     
     // Vérifier si tous les champs sont remplis
-    if (!empty($date) || !empty($age) || !empty($Montant) || !empty($Traitementan) || !empty($siclinique) || !empty($patologie)) {
+    if (!empty($date) || !empty($Age) || !empty($Montant) || !empty($Traitementan) || !empty($siclinique) || !empty($patologie)) {
    
                 // Créer le compte utilisateur
-        $sql = "INSERT INTO terrain (idclient, localisation, telephone, datejour, motifvisite, efectif, Age, barrier, pedulive, construction, batiment, superficie,sole, densite, environement, hygiene , mangeoire , abrevoire , alimentation , granulometrie , antenou,prophylacie,patologie,traitemenanterieux,signeclinique,Traitementanvisage,Montant,speculation,dianostique,recommandation,dateprochevisite) 
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO terrain (idclient, localisation, telephone, datejour, motifvisite, efectif, Age, barrier, pedulive, construction, batiment, superficie,sole, densite, environement, hygiene , mangeoire , abrevoire , alimentation , granulometrie , antenou,prophylacie,patologie,traitemenanterieux,signeclinique,Traitementanvisage,Montant,speculation,dianostique,recommandation,dateprochevisite,datemaladie,nbmort,jourmaladie,Poidmoyen) 
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                     // Lier les paramètres
         if (!$stmt = $conn->prepare($sql)) {
             die('Erreur de préparation de la requête : ' . $conn->error);
         }
                     
-                    $stmt->bind_param('dsdssddsssddssssddssssssssdssss', $idclient, $Localisation,$telephone,$date,$motifvisite,$efectif,$age,$barrier,$Pedulive,$construction,$batiment,$superficie,$sole,$densite,$Environement,$hygiene,$mangeoire,$abrevoire,$alimentation,$granulo, $antenou,$prophylacie,$patologie,$Traitemenante,$siclinique,$Traitementan,$Montant,$speculation,$Diagnostic,$Recommendation,$datepvisit);
+                    $stmt->bind_param('dsdssddsssddssssddssssssssdsssssddd', $idclient, $Localisation,$telephone,$date,$motifvisite,$efectif,$Age,$barrier,$Pedulive,$construction,$batiment,$superficie,$sole,$densite,$Environement,$hygiene,$mangeoire,$abrevoire,$alimentation,$granulo, $antenou,$prophylacie,$patologie,$Traitemenante,$siclinique,$Traitementan,$Montant,$speculation,$Diagnostic,$Recommendation,$datepvisit,$datedebmal,$mort,$jourmalad,$poidmoyen);
 
                     // Exécuter la requête
         if (!$stmt->execute()) {
@@ -76,12 +80,13 @@ if (isset($_POST['submit'])) {
         
         
         $sql = "UPDATE terrain  set idclient='$idclient', localisation='$Localisation', telephone='$telephone',
-         datejour='$date', motifvisite='$motifvisite', efectif='$efectif', Age='$Age', barrier='$barrier', 
-         pedulive='$Pedulive', construction='$construction', batiment='$batiment', superficie='$superficie',
-         sole='$sole', densite='$densite', environement='$Environement', hygiene='$hygiene' , mangeoire='$mangeoire' , 
-         abrevoire='$abrevoire' , alimentation='$alimentation' , granulometrie='$granulo' , antenou='$antenou',
-         prophylacie='$prophylacie',patologie='$patologie',traitemenanterieux='$Traitemenante',signeclinique='$siclinique',
-         Traitementanvisage='$Traitementan',Montant='$Montant' 
+        datejour='$date', motifvisite='$motifvisite', efectif='$efectif', Age='$Age', barrier='$barrier', 
+        pedulive='$Pedulive', construction='$construction', batiment='$batiment', superficie='$superficie',
+        sole='$sole', densite='$densite', environement='$Environement', hygiene='$hygiene' , mangeoire='$mangeoire' , 
+        abrevoire='$abrevoire' , alimentation='$alimentation' , granulometrie='$granulo' , antenou='$antenou',
+        prophylacie='$prophylacie',patologie='$patologie',traitemenanterieux='$Traitemenante',signeclinique='$siclinique',
+        Traitementanvisage='$Traitementan',Montant='$Montant',speculation = '$speculation',dianostique='$Diagnostic',recommandation='$Recommendation',
+        dateprochevisite='$datepvisit',datemaladie='$datedebmal',nbmort='$mort',jourmaladie='$jourmalad',Poidmoyen='$poidmoyen'
         WHERE id = '$idt'";
         $result = $conn->query($sql);
         if ($result == true) {

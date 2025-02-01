@@ -52,8 +52,11 @@ $html = '
         </td>
        <td> Telephone 
         <p class="text-lg font-weight-bold" > '. $element["telephone"].'
-        <tr>
         </td>
+        <td> Speculation: 
+        <p class="text-lg font-weight-bold" > '. $element["speculation"].'
+        </td>
+        <tr>
         </tbody>
         </table>';
         
@@ -84,7 +87,8 @@ $html = '
                     <td>Superficie du locale: 
                     <p class="text-lg font-weight-bold">'.$element["superficie"].'</p></td>
                    <td> Qualite du sole: <p class="text-lg font-weight-bold">'. $element["sole"].'</p></td>
-                   <td> Densite: <p class="text-lg font-weight-bold">'. $element["densite"].'</p></td>                     
+                   <td> Densite: <p class="text-lg font-weight-bold">'. $element["densite"].'</p></td>   
+                   <td> Poid moyen: <p class="text-lg font-weight-bold">'. $element["Poidmoyen"].'</p></td>                   
                     <td>Environement d\'exploitation: 
                     <p class="text-lg font-weight-bold">'. $element["environement"].'</p></td>
                     </tr>
@@ -100,7 +104,17 @@ $html = '
                    <td> Granulometrie: 
                     <p class="text-lg font-weight-bold">'. $element["granulometrie"].'</p></td>
                    <td> Presence de l\'antenou: 
-                    <p class="text-lg font-weight-bold">'. $element["antenou"].'</p></td>
+                    <p class="text-lg font-weight-bold">'. $element["antenou"].'</p>
+                    </td>
+                    <td> Date Debut de la maladie: 
+                    <p class="text-lg font-weight-bold">'. $element["datemaladie"].'</p>
+                    </td>
+                    <td> Nombre de Mort: 
+                    <p class="text-lg font-weight-bold">'. $element["nbmort"].'</p>
+                    </td>
+                    <td> Nombre de jour maladie: 
+                    <p class="text-lg font-weight-bold">'. $element["jourmaladie"].'</p>
+                    </td>
                     </tr>
                     </tbody>
         </table> information medicale <hr>';    
@@ -109,13 +123,22 @@ $html = '
                                        
                                         Patologie anterieux: 
                                         <p class="text-lg font-weight-bold">'. $element["patologie"].'</p>
-                                            Traitement anterieur: 
-                                            <p class="text-lg font-weight-bold">'. $element["traitemenanterieux"].'</p>
+                                        Traitement anterieur: 
+                                        <p class="text-lg font-weight-bold">'. $element["traitemenanterieux"].'</p>
                                         Signe clinique: 
                                         <p class="text-lg font-weight-bold">'. $element["signeclinique"].'</p>
                                        
                                         Traitement Anvisage: 
                                         <p class="text-lg font-weight-bold">'. $element["Traitementanvisage"].'</p>
+
+                                        Diagnostic de suspicion: 
+                                        <p class="text-lg font-weight-bold">'. $element["dianostique"].'</p>
+
+                                        Recommendation:: 
+                                        <p class="text-lg font-weight-bold">'. $element["recommandation"].'</p>
+
+                                        Date prochaine visite: 
+                                        <p class="text-lg font-weight-bold">'. $element["dateprochevisite"].'</p>
                                 <hr>        
                                         Montant: <p class="text-lg font-weight-bold">'. $element["Montant"].'</p>   
                                 <hr>

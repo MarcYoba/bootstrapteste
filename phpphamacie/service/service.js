@@ -9,43 +9,68 @@ const dataservice = JSON.parse(localStorage.getItem("service"));
 
 if (dataservice) {
     
-    console.log(dataservice);
+    
+
+    var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("typeelement").innerHTML = this.responseText;
+                remplissagevolaille();
+            }
+        };
+        xhttp.open("GET", "typepoule.php", true);
+        xhttp.send();
 
         
-    document.getElementById("idterain").innerText = dataservice.id;
-    document.getElementById("idclient").value = dataservice.nom;
-    document.getElementById("Localisation").value = dataservice.localisation;
-    document.getElementById("telephone").value = dataservice.telephone;
-    document.getElementById("date").value = dataservice.datejour;
-    document.getElementById("motifvisite").value = dataservice.motifvisite;
-    document.getElementById("Efectif").value = dataservice.efectif;
-    document.getElementById("Age").value = dataservice.Age;
-    document.getElementById("barrier").value = dataservice.barrier;
-    document.getElementById("Pedulive").value = dataservice.pedulive;
-    document.getElementById("construction").value = dataservice.construction;
-    document.getElementById("batiment").value = dataservice.batiment;
-    document.getElementById("superficie").value = dataservice.superficie;
-    document.getElementById("sole").value = dataservice.sole;
-    document.getElementById("densite").value = dataservice.densite;
-    document.getElementById("Environement").value = dataservice.environement;
-    document.getElementById("hygiene").value = dataservice.hygien;
-    document.getElementById("mangeoire").value = dataservice.mangeoire;
-    document.getElementById("abrevoire").value = dataservice.abrevoire;
-    document.getElementById("alimentation").value = dataservice.alimentation;
-    document.getElementById("granulo").value = dataservice.granulometrie;
-    document.getElementById("antenou").value = dataservice.antenou;
-    document.getElementById("prophylacie").value = dataservice.prophylacie;
-    document.getElementById("patologie").innerText = dataservice.patologie;
-    document.getElementById("Traitemenante").innerText = dataservice.traitemenanterieux;
-    document.getElementById("siclinique").innerText = dataservice.signeclinique;
-    document.getElementById("Traitementan").innerText = dataservice.traia;
-    document.getElementById("Montant").value = dataservice.Montant;
-    document.getElementById("message").innerHTML= '<button type="submit" name="modifier" id="modifier" class="btn btn-danger btn-user btn-block">'+
-                                        'Modifier'+
-                                    '</button>';
-
     localStorage.removeItem("service");
 
+}
+
+
+function remplissagevolaille(){
+  console.log(dataservice);
+  
+  document.getElementById("idterain").innerText = dataservice.id;
+  document.getElementById("idclient").value = dataservice.nom;
+  document.getElementById("Localisation").value = dataservice.localisation;
+  document.getElementById("telephone").value = dataservice.telephone;
+  document.getElementById("date").value = dataservice.datejour;
+  document.getElementById("motifvisite").value = dataservice.motifvisite;
+  document.getElementById("Efectif").value = dataservice.efectif;
+  document.getElementById("Age").value = dataservice.Age;
+  document.getElementById("barrier").value = dataservice.barrier;
+  document.getElementById("Pedulive").value = dataservice.pedulive;
+  document.getElementById("construction").value = dataservice.construction;
+  document.getElementById("batiment").value = dataservice.batiment;
+  document.getElementById("superficie").value = dataservice.superficie;
+  document.getElementById("sole").value = dataservice.sole;
+  document.getElementById("densite").value = dataservice.densite;
+  document.getElementById("Environement").value = dataservice.environement;
+  document.getElementById("hygiene").value = dataservice.hygien;
+  document.getElementById("mangeoire").value = dataservice.mangeoire;
+  document.getElementById("abrevoire").value = dataservice.abrevoire;
+  document.getElementById("alimentation").value = dataservice.alimentation;
+  document.getElementById("granulo").value = dataservice.granulometrie;
+  document.getElementById("antenou").value = dataservice.antenou;
+  document.getElementById("prophylacie").value = dataservice.prophylacie;
+  document.getElementById("patologie").innerText = dataservice.patologie;
+  document.getElementById("Traitemenante").innerText = dataservice.traitemenanterieux;
+  document.getElementById("siclinique").innerText = dataservice.signeclinique;
+  document.getElementById("Traitementan").innerText = dataservice.traia;
+  document.getElementById("Montant").value = dataservice.Montant;
+
+  document.getElementById("speculation").value = dataservice.speculation;
+  document.getElementById("Diagnostic").innerText = dataservice.Diagnostic;
+  document.getElementById("Recommendation").innerText = dataservice.Recommendation;
+  document.getElementById("datepvisit").value = dataservice.datepvisit;
+  document.getElementById("datedebmal").value = dataservice.datedebmal;
+  document.getElementById("mort").value = dataservice.mort;
+  document.getElementById("jourmalad").value = dataservice.jourmalad;
+   document.getElementById("poidmoyen").value = dataservice.poidmoyen ;
+
+  document.getElementById("message").innerHTML= '<button type="submit" name="modifier" id="modifier" class="btn btn-danger btn-user btn-block">'+
+                                      'Modifier'+
+                                  '</button>';
 }
 
 function selection() {
@@ -77,7 +102,17 @@ function selection() {
     service.traitemenanterieux =   document.getElementById("traitemenanterieux").innerText;
     service.signeclinique =   document.getElementById("signeclinique").innerText;
     service.traia =   document.getElementById("traia").innerText;
+
     service.Montant =   document.getElementById("Montant").innerText;
+
+    service.speculation =   document.getElementById("speculation").innerText;
+    service.Diagnostic =   document.getElementById("Diagnostic").innerText;
+    service.Recommendation =   document.getElementById("Recommendation").innerText;
+    service.datepvisit =   document.getElementById("datepvisit").innerText;
+    service.datedebmal =   document.getElementById("datedebmal").innerText;
+    service.mort =   document.getElementById("mort").innerText;
+    service.jourmalad =   document.getElementById("jourmalad").innerText;
+    service.poidmoyen =   document.getElementById("poidmoyen").innerText;
 
     localStorage.setItem("service", JSON.stringify(service));
 

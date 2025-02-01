@@ -36,7 +36,7 @@ class Versement{
 
     public function ByVersementClient($dette){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM versementphamacie WHERE iddette = '$dette'";
+        $sql = "SELECT SUM(montant) as montant FROM versementphamacie ";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -146,6 +146,26 @@ class Versement{
             array_push($data,$row);
         }
 
+        return $data; 
+    }
+
+    public function ByVersementIdClientDate($idclient,$date){
+        global $conn;
+        $sql = "SELECT SUM(montant + Om) as montant FROM versementphamacie WHERE idclient = '$idclient' AND dateversement= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function getVersementByClientBydate($date,$client){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM versementphamacie WHERE dateversement = '$date' AND idclient ='$client'";
+        $result = $conn->query($sql);
+
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
         return $data; 
     }
 }
