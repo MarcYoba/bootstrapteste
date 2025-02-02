@@ -77,7 +77,7 @@ class Depense{
             GROUP_CONCAT(montant,',') AS listMontant,
             ROUND(SUM(montant)) AS nomtant,
             GROUP_CONCAT(description,',') AS motif 
-            FROM depensephamacie
+            FROM depensesphamacie
             WHERE Month(datedepense) = '$mois'
             GROUP BY datedepense";
         $result = $conn->query($sql);
@@ -89,7 +89,7 @@ class Depense{
             GROUP_CONCAT(montant,',') AS listMontant,
             ROUND(SUM(montant)) AS nomtant,
             GROUP_CONCAT(description,',') AS motif 
-            FROM depensephamacie
+            FROM depensesphamacie
             WHERE Month(datedepense) = '$mois'
             ";
         $result = $conn->query($sql);
@@ -108,7 +108,7 @@ class Depense{
         global $conn;
         $data =[];
         $sql = "SELECT QUARTER(datedepense) AS trimestre, ROUND(SUM(montant),2) AS nombre_enregistrements 
-        FROM depensephamacie 
+        FROM depensesphamacie 
         WHERE YEAR(datedepense) = $anne
         GROUP BY QUARTER(datedepense);";
 
@@ -127,7 +127,7 @@ class Depense{
         CEILING(MONTH(datedepense) / 6) AS semestre,
         ROUND(SUM(montant),2) AS montant
         FROM 
-            depensephamacie
+            depensesphamacie
         WHERE YEAR(datedepense) = $anne
         GROUP BY 
             semestre";
