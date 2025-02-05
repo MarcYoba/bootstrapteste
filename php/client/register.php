@@ -24,7 +24,7 @@ if (!empty($donnees)) {
 // Fonction pour créer un compte utilisateur
 function creerClient($nom, $prenom, $email, $mot_de_passe,$phone,$sexe) {
     global $conn;
-    $roles = "admin";
+    $roles = "client";
     // Hacher le mot de passe
     $hash= password_hash($mot_de_passe, PASSWORD_DEFAULT, [
         'cost' => 12, // Ajuster le coût selon vos besoins

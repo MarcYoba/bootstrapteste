@@ -85,7 +85,7 @@
                                         <a class="small" href="php/userCon/forgot-password.html">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        
+                                        <a class="small" href="php/userCon/CreateAccount.php">Create Account</a>
                                     </div>
                                 </div>
                             </div>
