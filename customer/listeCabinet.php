@@ -126,7 +126,7 @@
                                                     echo '<td>' .$linefatcture["prix"].'</td>';
                                                     echo '<td>' .$linefatcture["datevente"].'</td>';
                                                     echo '<td>' .$linefatcture["reduction"].'</td>';
-                                                    echo "<td><a href='pfacture.php?id=" . $index. "' class='btn btn-primary'><i class='fas fa-pencil-alt'>Facture</i></a></td>";
+                                                    echo "<td><a href='cfacture.php?id=" . $index. "' class='btn btn-primary'><i class='fas fa-pencil-alt'>Facture</i></a></td>";
                                                 
                                                echo '</tr>';
                                                $index++;

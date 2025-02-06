@@ -49,6 +49,37 @@ if (isset($_POST['enregistrer'])) {
         header('Location: client.php');
     }
   
+}elseif (isset($_POST['pharmacie'])) {
+    $reference = 0;
+    $OM = 0;
+    $MOMO = 0;
+    $BANQUE = 0;
+    $CASH = 0;
+
+    if (isset($_POST['OM'])) {     
+        $OM = $_POST['OM'];
+    }
+    if (isset($_POST['MOMO'])) {
+        $MOMO = $_POST['MOMO'];
+    }
+    if (isset($_POST['BANQUE'])) {
+        $BANQUE = $_POST['BANQUE'];
+    }
+    if (isset($_POST['CASH'])) {
+        $CASH = $_POST['CASH'];
+    }
+    if (isset($_POST['reference'])) {
+        $reference = $_POST['reference'];
+    }
+
+    $paie = $OM." ".$MOMO." ".$BANQUE." ".$CASH;
+    if (!empty($OM) || !empty($MOMO) || !empty($BANQUE) || !empty($CASH) || !empty($reference)){
+
+        $client->insertToCommandeCabinet($reference,$paie);
+        header('Location: client.php');
+    }else{
+        header('Location: client.php');
+    }
 }
 
 

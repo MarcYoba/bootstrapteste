@@ -65,3 +65,49 @@ function editClient(){
     });
 
 }
+function valider(params) {
+    let element={};
+    element.id = params;
+    element.operation = "valider";
+    console.log(params);
+
+    fetch('commande.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(element)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Réponse du serveur:', data);
+        window.location.href= "commandeliste.php";
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+    });
+}
+
+function annuler(params) {
+    let element={};
+    element.id = params;
+    element.operation = "annuler";
+    console.log(params);
+
+    fetch('commande.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(element)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Réponse du serveur:', data);
+        window.location.href= "commandeliste.php";
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+    });
+}
+

@@ -41,6 +41,17 @@ class Client{
         return $data; 
     }
 
+    public function selectFactureCabinet($idvente){
+        global $conn;
+        $data =[];
+        $sql = "SELECT * FROM facturephamacie WHERE idvente = '$idvente'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
     public function SelectAchatProvenderie($id){
         global $conn;
         $data =[];
@@ -230,6 +241,30 @@ class Client{
     public function insertToCommande($idvente,$paiementmode){
         global $conn;
         $sql = "INSERT INTO commadeclient  (idvente , userid , nom ,paiementmethode ,datecommande, statuscommande ) VALUES (?, ?,?,?, ?,?)";
+
+        // Lier les paramètres
+        if (!$stmt = $conn->prepare($sql)) {
+            return "erreur sql";
+        }
+        // Obtenir le timestamp actuel
+        $timestamp = time();
+        $statut = "en coure";
+        // Formater la date et l'heure actuelles
+        $dateFormatee = date("Y-m-d H:i:s", $timestamp);
+        
+        $stmt->bind_param('ddssss', $idvente,  $_SESSION['idclient'], $_SESSION['name'],$paiementmode,$dateFormatee,$statut);
+
+        // Exécuter la requête
+        if (!$stmt->execute()) {
+            return "Echec";
+        }else{
+            return "OK";
+        }
+    }
+
+    public function insertToCommandeCabinet($idvente,$paiementmode){
+        global $conn;
+        $sql = "INSERT INTO commadeclientc  (idvente , userid , nom ,paiementmethode ,datecommande, statuscommande ) VALUES (?, ?,?,?, ?,?)";
 
         // Lier les paramètres
         if (!$stmt = $conn->prepare($sql)) {
