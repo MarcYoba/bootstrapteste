@@ -80,9 +80,7 @@
                                         <div class="col-sm-2 ">
                                         <p class="m-0 font-weight-bold text-bold" >Total Banque <?php echo $somme["om"]; ?></p>
                                         </div>
-                                        <div class="col-sm-2 ">
-                                        <p class="m-0 font-weight-bold text-bold" >Total reduction <?php echo $somme["reduction"]; ?></p>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="card-body">
