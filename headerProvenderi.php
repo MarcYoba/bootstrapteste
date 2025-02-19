@@ -340,9 +340,9 @@ require_once("php/activesaision.php");
 
     
             <li class="nav-item">
-            <a class="nav-link" href="../../charts.html">
+            <a class="nav-link" href="comptabilite/charts.html">
                 <i class="fas fa-fw fa-chart-area"></i>
-                Statistique<span></span></a>
+                Comptabilite<span></span></a>
             </li>
 
     <!-- Nav Item - Tables -->

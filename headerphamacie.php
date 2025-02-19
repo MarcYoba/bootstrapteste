@@ -457,16 +457,11 @@
     </li>
 
     <!-- Nav Item - Charts -->
-    <?php 
-        
-            echo '
-            <li class="nav-item">
-            <a class="nav-link" href="comptaPhamacie.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            Statistique<span></span></a>
-            </li>';    
-        
-    ?>
+    <li class="nav-item">
+            <a class="nav-link" href="comptabilite/charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                Comptabilite<span></span></a>
+            </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
