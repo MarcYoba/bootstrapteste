@@ -97,7 +97,7 @@ require_once("getclient.php");
                                         
                                     ?>
                                     
-                                   <div class='col-md-4 '> <a <?php echo "href='paiementmode.php?id=" . $element["id"]. "'"; ?>  class='btn btn-primary btn-user' >Passer commande</a></div>
+                                   <div class='col-md-4 '> <a <?php echo "href='prvenderie.php?id=" . $element["id"]. "'"; ?>  class='btn btn-primary btn-user' >Passer commande</a></div>
                                     
                                     <?php 
                                         if (($_GET["id"]>=0) && ($_GET["id"]<$nbelement-1)) {

@@ -1,15 +1,15 @@
 <?php 
+    require_once("php/connexion.php");
     session_start(); 
     require_once("phpphamacie/historique/historiqueStock.php");
     require_once("phpphamacie/historique/getproduit.php");
     $_SESSION["route"] = "cabinet";
-   // if (!isset($_SESSION['modal_affiche'])) {
-        //$_SESSION['modal_affiche'] = true;
-        echo "<script>$(document).ready(function() { $('#monModal').modal('show'); });</script>";
-    //}
-    $produit = new Produit();
+   if (!isset($_SESSION['modal_affiche'])) {
+        $_SESSION['modal_affiche'] = true;
+    }
+   $produit = new Produit();
     $peremption = $produit->ProduitSansDatePremption();
-    $doublonproduit = $produit->DoublonProduit();
+   $doublonproduit = $produit->DoublonProduit();
     $moiperemtion = $produit->ProduitEnCourPeremtionPrelote();
 ?>
 <!DOCTYPE html>
@@ -41,7 +41,7 @@
             display: none;
         }
     </style>
-
+    
 </head>
 
 <body id="page-top">
@@ -71,10 +71,10 @@
                     
                 </div>
                 <div class="col-sm-4">
-                    Command Poussin Nom livrer :<?php  echo count($produit->CommandePoussinNonLivrer())?>
+                    Command Poussin Nom livrer :<?php  //echo count($produit->CommandePoussinNonLivrer())?>
                 </div>
                 <div class="col-sm-4">
-                    Commande Client :<?php  echo count($produit->CommandePoussinNonLivrer())?>
+                    Commande Client :<?php  //echo count($produit->CommandePoussinNonLivrer())?>
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@
                                                     }
                                                     echo '<span  id="achat">'.$etoile.'</span>';
                                                     echo '<div class="h5 mb-0 font-weight-bold text-gray-800 amount" id="montantachat">'.ceil($montant).' FCFA'.'</div>'; 
-                                                        //var_dump($row);
+                                                        
                                                 ?>
                                             </div>
                                         </a>
@@ -180,13 +180,7 @@
                                                 VENTE (MONTANT)</div>
                                                     <?php 
                                                     global $conn;
-                                                    if (($_SESSION["route"] == "cabinet")) {
-                                                        $sql = "SELECT SUM(prix) as montant FROM ventephamacie  WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'";
-
-                                                    } else {
-                                                        $sql = "SELECT SUM(prix) as montant FROM vente WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'";
-
-                                                    }
+                                                        $sql = "SELECT SUM(prix) as montant FROM ventephamacie  WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'"; 
                                                     $result = $conn->query($sql);
                                                     $row = mysqli_fetch_assoc($result);
                                                     $nbetoile = 10;
@@ -200,7 +194,7 @@
                                                     }
                                                     echo '<span  id="vente">'.$etoile.'</span>';
                                                     echo '<div class="h5 mb-0 font-weight-bold text-gray-800 amount" id="montantvente">'.ceil($montant).' FCFA'.'</div>'; 
-                                                        //var_dump($row);
+                                                    
                                                     ?>
                                             </div>
                                         </a>
@@ -240,7 +234,7 @@
                                                     
                                                     echo '<span  id="dette">'.$etoile.'</span>';
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount " id="montantdette">'.$row["montant"].' FCFA'.'</div>'; 
-                                                    //var_dump($row);
+                                                
                                             ?>
                                         </div>
                                         </a>
@@ -283,7 +277,7 @@
                                                     }
                                                     echo '<span  id="verse">'.$etoile.'</span>';
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount" id="monversement">'.ceil($montant).' FCFA'.'</div>'; 
-                                                    //var_dump($row);
+                                                
                                             ?>
                                         </div>
                                         </a>
@@ -326,7 +320,7 @@
                                                     }
                                                         echo '<span  id="caise">'.$etoile.'</span>';
                                                         echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount"  id="montcaise">'.ceil($montant).' FCFA'.'</div>'; 
-                                                            //var_dump($row);
+                                                    
                                                     ?>
                                                 </div>
                                             </a>
@@ -364,7 +358,7 @@
                                                         }
                                                          echo '<span  id="depense">'.$etoile.'</span>';
                                                         echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount" id="montdepense">'.$row["montant"].' FCFA'.'</div>'; 
-                                                            //var_dump($row);
+                                                        
                                                     ?>
                                                 </div>
                                             </a>

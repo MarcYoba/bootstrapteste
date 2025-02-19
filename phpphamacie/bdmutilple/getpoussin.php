@@ -86,7 +86,20 @@ class Poussin{
     public function getPoussinSemaine($datebebut,$datefin){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM poussin WHERE dateCommande BETWEEN '$datebebut' AND $datefin";
+        $sql = "SELECT * FROM poussin WHERE dateCommande BETWEEN '$datebebut' AND '$datefin'";
+        $result = $conn->query($sql);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+
+        return $data;
+    }
+
+    public function getPoussinMonth($number){
+        global $conn;
+        $data = [];
+        $sql = "SELECT * FROM poussin WHERE MONTH(dateCommande) = '$number'";
         $result = $conn->query($sql);
 
         while ($row = mysqli_fetch_assoc($result)) {

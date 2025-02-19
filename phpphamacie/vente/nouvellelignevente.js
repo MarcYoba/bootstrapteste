@@ -170,6 +170,7 @@ function recherchePrix(){
                     document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer vente</button>'
                 }
             }
+            document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')">Enregistrer</button>'
             document.getElementById("prixglobal").value = data.message;
             document.getElementById("quantiteStokage").value = data.quantite;
             console.log(data);

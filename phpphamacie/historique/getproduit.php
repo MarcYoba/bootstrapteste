@@ -1,6 +1,6 @@
 <?php
 
-require_once("./php/connexion.php"); 
+require_once("php/connexion.php"); 
 
 class Produit{
 

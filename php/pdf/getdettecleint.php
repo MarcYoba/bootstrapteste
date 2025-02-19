@@ -116,21 +116,21 @@ $html .='<br><br><br> <table style="width:100%">
                     $html .= '<td>' .$client->getByIdClient($value["idclient"]).'</td>';
                     $html .= '<td>-</td>';
                     
-                    $sommversement = $sommversement +  $versement->ByVersementClientdate($value["iddette"]);
-                    $html .= '<td>' .$versement->ByVersementClientdate($value["iddette"]).'</td>';
+                    $sommversement = $sommversement +  $versement->ByVersementClientdate($value["dateversement"]);
+                    $html .= '<td>' .$versement->ByVersementClientdate($value["dateversement"]).'</td>';
                     $html .= '</tr>';
                 }
             } else {
                 foreach ($tabledette as $key ) {
                     $tableauDates = $dateDebut->format("Y-m-d");
-                    $sommversement = $sommversement + $versement->ByVersementIdClientDate($nomclient,$tableauDates);
+                    $sommversement = $sommversement + $versement->ByVersementIdClientDate($key["idclient"],$tableauDates);
                     
                     if ((empty($key["datedette"])) || empty($key["idclient"])) {
                         $html .= '<tr>';
                         $html .= '<td>'.$tableauDates.'</td>';
-                        $html .= '<td>'.$client->getByIdClient($nomclient).'</td>';
+                        $html .= '<td>'.$client->getByIdClient($key["idclient"]).'</td>';
                         $html .= '<td>-</td>';
-                        $html .= '<td>' .$versement->ByVersementIdClientDate($nomclient,$tableauDates).'</td>';
+                        $html .= '<td>' .$versement->ByVersementIdClientDate($key["idclient"],$tableauDates).'</td>';
                         $html .= '<td>'.$tableauDates.'</td>';
                         $html .= '</tr>';
                         
@@ -138,9 +138,9 @@ $html .='<br><br><br> <table style="width:100%">
                         $html .= '<tr>';
                         $html .= '<td>' .$key["datedette"].'</td>';
                         $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
-                        $html .= '<td>' .$key["montant"].'</td>';
-                        $html .= '<td>' .$versement->ByVersementIdClientDate($nomclient,$tableauDates).'</td>';
-                        $html .= '<td>'.$key["datedette"].'</td>';
+                        $html .= '<td>' .$key["montant"] +$key["Om"]+$key["banque"] .'</td>';
+                        $html .= '<td>' .$versement->ByVersementIdClientDate($key["idclient"],$tableauDates).'</td>';
+                        $html .= '<td>'.$key["datedette"]." " .$key["idclient"].'</td>';
                         $html .= '</tr>';
                         
                     }

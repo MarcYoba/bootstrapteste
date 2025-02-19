@@ -107,10 +107,22 @@
             return $data;
         }
 
+        public function getsuivianimaleMonth($mois) {
+            global $conn;
+            $data = [];
+            $sql = "SELECT * FROM suivianimale WHERE MONTH(datejour) ='$mois'";
+            $result = $conn->query($sql);
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                array_push($data,$row);
+            }
+            return $data;
+        }
+
         public function getVaccination() {
             global $conn;
             $data = [];
-            $sql = "SELECT * FROM vacin WHERE datevacin =CURRENT_DATE";
+            $sql = "SELECT * FROM animale WHERE datevacin =CURRENT_DATE";
             $result = $conn->query($sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
@@ -122,7 +134,7 @@
         public function getVaccinationDate($date) {
             global $conn;
             $data = [];
-            $sql = "SELECT * FROM vacin WHERE datevacin ='$date'";
+            $sql = "SELECT * FROM animale WHERE datevacin ='$date'";
             $result = $conn->query($sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
@@ -134,7 +146,19 @@
         public function getVaccinationSemain($datedebut,$datefin) {
             global $conn;
             $data = [];
-            $sql = "SELECT * FROM vacin WHERE datevacin BETWEEN '$datedebut' AND '$datefin'";
+            $sql = "SELECT * FROM animale WHERE datevacin BETWEEN '$datedebut' AND '$datefin'";
+            $result = $conn->query($sql);
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                array_push($data,$row);
+            }
+            return $data;
+        }
+
+        public function getVaccinationMonth($mois) {
+            global $conn;
+            $data = [];
+            $sql = "SELECT * FROM animale WHERE MONTH(datevacin) = '$mois'";
             $result = $conn->query($sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
@@ -171,6 +195,17 @@
             global $conn;
             $data = [];
             $sql = "SELECT * FROM terrain WHERE datejour BETWEEN '$datedebut' AND '$datefin'";
+            $result = $conn->query($sql);
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                array_push($data,$row);
+            }
+            return $data;
+        }
+        public function getTerrainMonth($mois) {
+            global $conn;
+            $data = [];
+            $sql = "SELECT * FROM terrain WHERE MONTH(datejour) = '$mois'";
             $result = $conn->query($sql);
 
             while ($row = mysqli_fetch_assoc($result)) {

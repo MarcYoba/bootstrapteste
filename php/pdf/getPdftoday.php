@@ -151,14 +151,21 @@ $html = '
                     <th scope="col">motif</th>
                 </tr>';
                 $tabcaise = $caise->AllSortieCaise();
+                $montant = 0;
                 foreach ($tabcaise as $key ) {
+                    $montant +=(-1*$key["montant"]);
                     $html .= '<tr>';
                     $html .= '<td>' .$key["operation"].'</td>';
                     $html .= '<td>' .(-1*$key["montant"]).'</td>';
                     $html .= '<td>' .$key["dateoperation"].'</td>';
                     $html .= '<td>' .$key["motif"].'</td>';
                 $html .= '</tr>';
-                }   
+                } 
+                $html .= '<tr>
+                <td>-----</td>
+                <td>' .$montant.' FCFA </td>
+                <td>-----</td>
+            </tr>'; 
             $html .= '
             </tbody>
         </table>';
