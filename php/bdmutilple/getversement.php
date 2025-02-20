@@ -44,15 +44,15 @@ class Versement{
 
     public function ByVersementIdClientDate($idclient,$date){
         global $conn;
-        $sql = "SELECT SUM(montant + Om) as montant FROM versement WHERE idclient = '$idclient' AND dateversement= '$date'";
+        $sql = "SELECT SUM(montant + Om + banque) as montant FROM versement WHERE idclient = '$idclient' AND dateversement= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
     }
 
-    public function ByVersementClientdate($dette){
+    public function ByVersementClientdate($date){
         global $conn;
-        $sql = "SELECT SUM(montant + Om) as montant FROM versement WHERE iddette = '$dette' AND dateversement= CURRENT_DATE";
+        $sql = "SELECT SUM(montant + Om + banque) as montant FROM versement WHERE  dateversement= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -148,8 +148,8 @@ class Versement{
         $data = [];
 
         $sql = "SELECT dateversement, 
-            GROUP_CONCAT(montant,',') AS listMontant,
-            ROUND(SUM(montant)) AS nomtant,
+            GROUP_CONCAT((montant + Om + banque),',') AS listMontant,
+            ROUND(SUM(montant + Om + banque)) AS nomtant,
             GROUP_CONCAT(motif,',') AS motif 
             FROM versement
             WHERE Month(dateversement) = '$idmois'
@@ -160,8 +160,8 @@ class Versement{
         }
 
         $sql = "SELECT dateversement, 
-            GROUP_CONCAT(montant,',') AS listMontant,
-            ROUND(SUM(montant)) AS nomtant,
+            GROUP_CONCAT((montant + Om + banque),',') AS listMontant,
+            ROUND(SUM(montant + Om + banque)) AS nomtant,
             GROUP_CONCAT(motif,',') AS motif 
             FROM versement
             WHERE Month(dateversement) = '$idmois'

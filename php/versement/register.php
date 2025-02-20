@@ -44,6 +44,12 @@ function creerVersement( $client, $montant, $montantdette,$dateversement,$om,$ma
         $date = date("y/m/d");
     }
     
+    if (empty($banque)) {
+        $banque = 0;
+    }
+    if (empty($om)) {
+        $om = 0;
+    }
     // Préparer la requête SQL
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 

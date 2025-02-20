@@ -139,13 +139,20 @@ $html = '
                 <th scope="col">date operation</th>
             </tr>';
             $tabcaisse = $caise->AllSortieCaiseWeek($datedebut,$datedefin);
+            $montant = 0;
             foreach ($tabcaisse as $key ) {
+                $montant +=($key["montant"]);
                 $html .= '<tr>';
                 $html .= '<td>' .$key["operation"].'</td>';
                 $html .= '<td>' .$key["montant"].'</td>';
                 $html .= '<td>' .$key["dateoperation"].'</td>';
             $html .= '</tr>';
-            }   
+            }  
+            $html .= '<tr>
+            <td>-----</td>
+            <td>' .$montant.' FCFA </td>
+                <td>-----</td>
+            </tr>'; 
         $html .= '
         </tbody>
     </table>';

@@ -145,13 +145,20 @@ $html = '
                 <th scope="col">date operation</th>
             </tr>';
             $tabcaisse = $caise->AllSortieCaiseDate($date);
+            $montant = 0;
             foreach ($tabcaisse as $key ) {
+                $montant +=($key["montant"]);
                 $html .= '<tr>';
                 $html .= '<td>' .$key["operation"].'</td>';
                 $html .= '<td>' .$key["montant"].'</td>';
                 $html .= '<td>' .$key["dateoperation"].'</td>';
             $html .= '</tr>';
-            }   
+            }
+            $html .= '<tr>
+            <td>-----</td>
+            <td>' .$montant.' FCFA </td>
+                <td>-----</td>
+            </tr>';   
         $html .= '
         </tbody>
     </table>';
@@ -320,7 +327,9 @@ $html = '
                     <th scope="col">Reste</th>
                 </tr>';
                 $tabpoussin =$poussin->getPoussinDate($date);
+                $montant = 0;
                 foreach ($tabpoussin as $key ) {
+                    $montant += $key["montantOm"] + $key["montantCash"];
                     $html .= '<tr>';
                     $html .= '<td>' .$key["dateCommande"].'</td>';
                     $html .= '<td>' .$key["Nomclient"].'</td>';
@@ -332,7 +341,12 @@ $html = '
                     $html .= '<td>' .$montant.'</td>';
                     $html .= '<td>' .$key["reste"].'</td>';
                 $html .= '</tr>';
-                }   
+                }
+                $html .= '<tr>
+                    <td>-----</td>
+                    <td>' .$montant.' FCFA </td>
+                    <td colspan="6">-----</td>
+            </tr>';    
             $html .= '
             </tbody>
         </table>';
@@ -353,7 +367,9 @@ $html = '
                     <th scope="col">Montant</th>
                 </tr>';
                 $tabconsultation =$vaccin->getConsultationDate($date);
+                $montant = 0;
                 foreach ($tabconsultation as $key ) {
+                    $montant += $key["montant"];
                     $html .= '<tr>';
                     $html .= '<td>' .$key["Nom"].'</td>';
                     $html .= '<td>' .$key["age"].'</td>';
@@ -361,7 +377,12 @@ $html = '
                     $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
                     $html .= '<td>' .$key["montant"].'</td>';
                 $html .= '</tr>';
-                }   
+                }  
+                $html .= '<tr>
+                <td>-----</td>
+                <td>' .$montant.' FCFA </td>
+                <td colspan="3">-----</td>
+                </tr>';
             $html .= '
             </tbody>
         </table>';
@@ -384,7 +405,9 @@ $html = '
                     <th scope="col">datejour</th>
                 </tr>';
                 $tabconsultation =$vaccin->getsuivianimaleDate($date);
+                $montant = 0;
                 foreach ($tabconsultation as $key ) {
+                    $montant +=$key["montant"];
                     $html .= '<tr>';
                     $html .= '<td>' .$key["nom"].'</td>';
                     $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
@@ -394,7 +417,12 @@ $html = '
                     $html .= '<td>' .$key["montant"].'</td>';
                     $html .= '<td>' .$key["datejour"].'</td>';
                 $html .= '</tr>';
-                }   
+                }  
+                $html .= '<tr>
+                <td>-----</td>
+                <td>' .$montant.' FCFA </td>
+                <td colspan="6">-----</td>
+                </tr>'; 
             $html .= '
             </tbody>
         </table>';
@@ -414,18 +442,27 @@ $html = '
                     <th scope="col">date vaccin</th>
                     <th scope="col">date secondvacin</th>
                     <th scope="col">montant</th>
+                    <th scope="col">Avance</th>
                 </tr>';
                 $tabconsultation =$vaccin->getVaccinationDate($date);
+                $montant = 0;
                 foreach ($tabconsultation as $key ) {
+                    $montant += $key["montant"];
                     $html .= '<tr>';
-                    $html .= '<td>' .$key["nom"].'</td>';
+                    $html .= '<td>' .$key["nomSujet"].'</td>';
                     $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
                     $html .= '<td>' . $key["typeVacin"].'</td>';
                     $html .= '<td>' .$key["datevacin"].'</td>';
-                    $html .= '<td>' .$key["datesecondvacin"].'</td>';
+                    $html .= '<td>' .$key["daterappel"].'</td>';
+                    $html .= '<td>' .$key["montant"].'</td>';
                     $html .= '<td>' .$key["netpayer"].'</td>';
                 $html .= '</tr>';
-                }   
+                } 
+                $html .= '<tr>
+                <td>-----</td>
+                <td>' .$montant.' FCFA </td>
+                <td colspan="5">-----</td>
+                </tr>';   
             $html .= '
             </tbody>
         </table>';
@@ -447,7 +484,9 @@ $html = '
                     
                 </tr>';
                 $tabconsultation =$vaccin->getTerrainDate($date);
+                $montant = 0;
                 foreach ($tabconsultation as $key ) {
+                    $montant += $key["Montant"];
                     $html .= '<tr>';
                     $html .= '<td>' .$key["localisation"].'</td>';
                     $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
@@ -456,7 +495,12 @@ $html = '
                     $html .= '<td>' .$key["datejour"].'</td>';
                     $html .= '<td>' .$key["Montant"].'</td>';
                 $html .= '</tr>';
-                }   
+                } 
+                $html .= '<tr>
+                <td>-----</td>
+                <td>' .$montant.' FCFA </td>
+                <td colspan="3">-----</td>
+                </tr>';  
             $html .= '
             </tbody>
         </table>';
