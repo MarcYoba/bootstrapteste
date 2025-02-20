@@ -93,6 +93,20 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tresorerie"
+                    aria-expanded="true" aria-controls="tresorerie">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Tresorerie</span>
+                </a>
+                <div id="tresorerie" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header"> Tresorerie :</h6>
+                        <a class="collapse-item" href="tresorerie.php">Ajouter</a>
+                        <a class="collapse-item" href="listeTresorerie.php">liste</a>
+                    </div>
+                </div>
+            </li>
 
             
 
