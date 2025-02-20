@@ -15,8 +15,14 @@ class Bilan{
         
         $sql = "SELECT id,libelle ,SUM(brut)as brut, SUM(amortisement) as amortisement, SUM(net) as net FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='Incorporelles'";
         $result = $conn->query($sql);
+        $actifbrut = 0;
+        $amortibrut = 0;
+        $amortinet = 0;
         while ($row = mysqli_fetch_assoc($result)) {
             $row["libelle"] = "Totale imobilisatiion Incorporelles";
+            $actifbrut = $row["brut"];
+            $amortibrut = $row["amortisement"];
+            $amortinet = $row["net"];
             array_push($data,$row);
         }
 
@@ -25,14 +31,16 @@ class Bilan{
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
         }
-
         $sql = "SELECT id,libelle ,SUM(brut)as brut, SUM(amortisement) as amortisement, SUM(net) as net FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='corporelles'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
+            $amortibrut += $row["amortisement"];
+            $actifbrut += $row["brut"];
+            $amortinet += $row["net"];
             $row["libelle"] = "Totale imobilisatiion corporelles";
             array_push($data,$row);
         }
-
+        
         $sql = "SELECT * FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='corporelles'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
@@ -42,7 +50,10 @@ class Bilan{
         $sql = "SELECT id,libelle ,SUM(brut)as brut, SUM(amortisement) as amortisement, SUM(net) as net FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='financieres'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
-            $row["libelle"] = "Totale financieres";
+            $actifbrut += $row["brut"];
+            $amortibrut += $row["amortisement"];
+            $amortinet += $row["net"];
+            $row["libelle"] = "Totale imobilisatiion financieres";
             array_push($data,$row);
         }
 
@@ -51,14 +62,29 @@ class Bilan{
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
         }
+        $tab = [
+            'libelle'=>"Totale Actif imobilisatiion",
+            'brut'=>$actifbrut,
+            'amortisement'=>$amortibrut,
+            'net'=>$amortinet
+        ];
+        
+        array_push($data,$tab);
 
+        
+        $sql = "SELECT * FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='circulant'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
         $sql = "SELECT id,libelle ,SUM(brut)as brut, SUM(amortisement) as amortisement, SUM(net) as net FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='circulant'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             $row["libelle"] = "Totale Actif circulant";
             array_push($data,$row);
         }
-        $sql = "SELECT * FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='circulant'";
+
+        $sql = "SELECT * FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='trsorerieactif'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -70,23 +96,19 @@ class Bilan{
             $row["libelle"] = "Totale trsorerie actif";
             array_push($data,$row);
         }
-        $sql = "SELECT * FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='trsorerieactif'";
-        $result = $conn->query($sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            array_push($data,$row);
-        }
 
-        $sql = "SELECT id,libelle ,SUM(brut)as brut, SUM(amortisement) as amortisement, SUM(net) as net FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='differentiels'";
-        $result = $conn->query($sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            $row["libelle"] = "Totale differentiels";
-            array_push($data,$row);
-        }
+        
         $sql = "SELECT * FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='differentiels'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
         }
+        // $sql = "SELECT id,libelle ,SUM(brut)as brut, SUM(amortisement) as amortisement, SUM(net) as net FROM actif WHERE YEAR(datebilan)= '$annee' AND cathegorie='differentiels'";
+        // $result = $conn->query($sql);
+        // while ($row = mysqli_fetch_assoc($result)) {
+        //     $row["libelle"] = "Totale differentiels";
+        //     array_push($data,$row);
+        // }
 
         $sql = "SELECT id,libelle ,SUM(brut)as brut, SUM(amortisement) as amortisement, SUM(net) as net FROM actif WHERE YEAR(datebilan)= '$annee'";
         $result = $conn->query($sql);
@@ -102,27 +124,42 @@ class Bilan{
         global $conn;
         $data =[];
         
-        $sql = "SELECT id,libelle ,SUM(montant)as montant FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='Capital'";
-        $result = $conn->query($sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            $row["libelle"] = "Totale CAPITAUX PROPRES ET RESSOURCES ASSIMILEES";
-            array_push($data,$row);
-        }
+        
 
         $sql = "SELECT * FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='Capital' ORDER BY id";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
         }
-
-        $sql = "SELECT id,libelle ,SUM(montant)as montant FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='DETTES'";
+        $capitau = 0;
+        $sql = "SELECT id,libelle ,SUM(montant)as montant FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='Capital'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
-            $row["libelle"] = "Totale DETTES FINANCIERES ET RESSOURCES ASSIMILEES";
+            $row["libelle"] = "Totale CAPITAUX PROPRES ET RESSOURCES ASSIMILEES";
+            $capitau = $row["montant"];
             array_push($data,$row);
         }
 
         $sql = "SELECT * FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='DETTES'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+        $dette = 0;
+        $sql = "SELECT id,libelle ,SUM(montant)as montant FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='DETTES'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $row["libelle"] = "Totale DETTES FINANCIERES ET RESSOURCES ASSIMILEES";
+            $dette = $row["montant"];
+            array_push($data,$row);
+        }
+        $tab = [
+            'libelle'=>"Totale Ressource stables",
+            'montant'=>$capitau + $dette
+        ];
+        array_push($data,$tab);
+
+        $sql = "SELECT * FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='circulant'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -135,7 +172,7 @@ class Bilan{
             array_push($data,$row);
         }
 
-        $sql = "SELECT * FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='circulant'";
+        $sql = "SELECT * FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='TRESORERIE'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
@@ -147,18 +184,13 @@ class Bilan{
             $row["libelle"] = "Totale TRESORERIE-PASSIF";
             array_push($data,$row);
         }
-        $sql = "SELECT * FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='TRESORERIE'";
-        $result = $conn->query($sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            array_push($data,$row);
-        }
 
-        $sql = "SELECT id,libelle ,SUM(montant)as montant FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='differentiels'";
-        $result = $conn->query($sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            $row["libelle"] = "Totale differentiels";
-            array_push($data,$row);
-        }
+        // $sql = "SELECT id,libelle ,SUM(montant)as montant FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='differentiels'";
+        // $result = $conn->query($sql);
+        // while ($row = mysqli_fetch_assoc($result)) {
+        //     $row["libelle"] = "Totale differentiels";
+        //     array_push($data,$row);
+        // }
         $sql = "SELECT * FROM passif WHERE YEAR(datepassif)= '$annee' AND cathegorie='differentiels'";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
