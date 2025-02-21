@@ -249,7 +249,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tresorerie</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Compte de Resultat</h1>
                     <hr>
                     <!-- Content Row -->
                     <div class="row">
@@ -258,78 +258,82 @@
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Ajouter ligne Tresorerie</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Compte de Resultat</h6>
                                     
                                 </div>
                                 <br>
                                 
-                                <form class="user" action="regirsterTresorerie.php" method="post" enctype="multipart/form-data">
+                                <form class="user" action="registerresutat.php" method="post" enctype="multipart/form-data">
                                 <?php 
                                    if (isset($_GET["id"])) {
-                                    require_once("bdmutilple/getbilan.php");
-                                    $bilan = new Bilan();
-                                    $element = $bilan->getElement($_GET["id"]);
+                                    require_once("bdmutilple/getCompteResultat.php");
+                                    $CompteResultat = new CompteResultat();
+                                    $element = $CompteResultat->getElement($_GET["id"]);
+                                    //  
                                     echo '<div class="form-group row">
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control form-control-user"
                                                 name="id" id="id" value="'.$element["id"].'" readonly>
                                             </div>
                                             </div>';
-                                    echo '<span class="drop" id="label">'.$element["libelle"].'</span>';
-                                    echo '<span class="drop" id="mbrut">'.$element["brut"].'</span>';
-                                    echo '<span class="drop" id="momort">'.$element["amortisement"].'</span>';
-                                    echo '<span class="drop" id="mnet">'.$element["net"].'</span>';
-                                    echo '<span class="drop" id="dt">'.$element["datebilan"].'</span>';
+                                    echo '<span class="drop" id="referenc">'.$element["reference"].'</span>';
+                                    echo '<span class="drop" id="libell">'.$element["libelle"].'</span>';
+                                    echo '<span class="drop" id="sign">'.$element["signe"].'</span>';
+                                    echo '<span class="drop" id="montan">'.$element["montant"].'</span>';
+                                    echo '<span class="drop" id="ordr">'.$element["ordre"].'</span>';
+                                    echo '<span class="drop" id="group">'.$element["groupe"].'</span>';
+                                    echo '<span class="drop" id="dat">'.$element["dateexercice"].'</span>';
                                    }
                                 ?>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user"
-                                           name="besoin" id="besoin" placeholder="BESOINS" required>
+                                           name="reference" id="reference" placeholder="Reference" required >
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user"
+                                           name="libelle" id="libelle" placeholder="Libelle" required >
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select id="groupe"  name="groupe"  class="form-control form-select" >
+                                            <option value="marge">Marge commerciale</option>
+                                            <option value="chiffre">Chiffre d'affaires</option>
+                                            <option value="valeur">Valeur Ajoutee</option>
+                                            <option value="execedent">Exedent brut d'exploitation</option>
+                                            <option value="resultat_exploitation">Resultat d'exploitation</option>
+                                            <option value="resultat_finaciere">Resultat Financier</option>
+                                            
+                                            <option value="resultat_hors">Resultat hors activites ordinaires</option>
+                                            <option value="resultat_net">Resultat net</option>
+                                        </select>
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <select id="groupe"  name="groupe"  class="form-control form-select" required>
-                                            <option value="Investisements_initiaux">Investisements initiaux</option>
-                                            <option value="BFR">BFR</option>
-                                            <option value="ressources">RESSOURCES</option>
-                                            <option value="Fond_propres">Fond propres</option>
-                                            <option value="Dette_long">Dette de long terme</option>
-                                            <option value="differentiels">produits différentiels</option>
+                                        <select id="signe"  name="signe"  class="form-control form-select" >
+                                            <option value="+">Signe (+) </option>
+                                            <option value="-">Signe (-) </option>
+                                            <option value="-/+">Signe (-/+) </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <input type="number" class="form-control form-control-user"
-                                           name="Montant" id="Montant" placeholder="Montant" required>
+                                           name="Montant" id="Montant" placeholder="Montant" >
                                     </div>
-                                    <div class="col-sm-6">
-                                    <label for="mois">Sélectionnez un mois :</label>
-                                    <select id="mois" name="mois" required>
-                                        <option value="01">Janvier</option>
-                                        <option value="02">Février</option>
-                                        <option value="03">Mars</option>
-                                        <option value="04">Avril</option>
-                                        <option value="05">Mai</option>
-                                        <option value="06">Juin</option>
-                                        <option value="07">Juillet</option>
-                                        <option value="08">Août</option>
-                                        <option value="09">Septembre</option>
-                                        <option value="10">Octobre</option>
-                                        <option value="11">Novembre</option>
-                                        <option value="12">Décembre</option>
-                                    </select>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-user"
+                                           name="ordre" id="ordre" placeholder="numero d'ordre" >
                                     </div>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control form-control-user"
+                                           name="date" id="date" placeholder="date" >
+                                    </div>
+                                    
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input type="number" class="form-control form-control-user"
-                                           name="ordre" id="ordre" placeholder="numero d'ordre" required>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="date" class="form-control form-control-user"
-                                           name="date" id="date" placeholder="date" required>
-                                    </div>
+                                    
                                 </div>    
                             
                                 <hr>
@@ -408,11 +412,13 @@
     <script src="invantaire.js"></script>
     <!-- Page level plugins -->
     <script>
-        document.getElementById("Libelle").value = document.getElementById("label").innerText;
-        document.getElementById("brut").value = document.getElementById("mbrut").innerText;
-        document.getElementById("amortisement").value = document.getElementById("momort").innerText;
-        document.getElementById("net").value = document.getElementById("mnet").innerText;
-        document.getElementById("date").value = document.getElementById("dt").innerText;
+        document.getElementById("reference").value = document.getElementById("referenc").innerText;
+        document.getElementById("libelle").value = document.getElementById("libell").innerText;
+        document.getElementById("signe").value = document.getElementById("sign").innerText;
+        document.getElementById("Montant").value = document.getElementById("montan").innerText;
+        document.getElementById("ordre").value = document.getElementById("ordr").innerText;
+        document.getElementById("groupe").value = document.getElementById("group").innerText;
+        document.getElementById("date").value = document.getElementById("dat").innerText;
         document.getElementById("enregistrement").innerHTML = '<button type="submit" name="modifier" id="modifier" class="btn btn-primary btn-user btn-block">modifier</button>'
     </script>
 </body>

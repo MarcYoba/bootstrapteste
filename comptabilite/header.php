@@ -107,6 +107,20 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Compteresultat"
+                    aria-expanded="true" aria-controls="Compteresultat">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Compte Resultat</span>
+                </a>
+                <div id="Compteresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header"> Compte Resultat :</h6>
+                        <a class="collapse-item" href="compteresultat.php">Ajouter</a>
+                        <a class="collapse-item" href="listeCompteresultat.php">liste</a>
+                    </div>
+                </div>
+            </li>
 
             
 
