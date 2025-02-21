@@ -125,23 +125,26 @@ require_once("bdmutilple/connexion.php");
                                             // var_dump($value);
                                             // exit();
                                            
-                                                if (strpos($value["libelle"], "Totale") !== false) {
+                                                if (strpos($value["libelle"], "Total") !== false) {
                                                     
                                                     echo '<td style="color: red;">'.$value["reference"].'</td>';
                                                     echo '<td style="color: red;">'.$value["libelle"].'</td>';
+                                                    echo '<td style="color: red;">'.$value["signe"].'</td>';
                                                     echo '<td style="color: red;">'.$value["montant"].'</td>';
-                                                    echo '<td style="color: red;">'.$value["montant"].'</td>';
+                                                    echo '<td style="color: red;"></td>';
                                                      
                                                 } else {
                                                     echo '<td >'.$value["reference"].'</td>';
                                                     echo '<td >'.$value["libelle"].'</td>';
-                                                    echo '<td >'.$value["montant"].'</td>';
+                                                    echo '<td >'.$value["signe"].'</td>';
                                                     echo '<td >'.$value["montant"].'</td>';
                                                     if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                        # code...
+                                                        echo '<td style="color: red;"></td>';
                                                     }else if(($_SESSION['roles'] == "semiadmin")){
                                                         echo "<td><a href='compteresultat.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                                        
                                                     }else{
+                                                        
                                                         echo "<td><a href='compteresultat.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
                                                     }
                                                 }

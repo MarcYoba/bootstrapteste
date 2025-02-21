@@ -304,7 +304,7 @@
                                             <option value="execedent">Exedent brut d'exploitation</option>
                                             <option value="resultat_exploitation">Resultat d'exploitation</option>
                                             <option value="resultat_finaciere">Resultat Financier</option>
-                                            <option value="resultat_activite">Resultat des activites ordinaires</option>
+                                            
                                             <option value="resultat_hors">Resultat hors activites ordinaires</option>
                                             <option value="resultat_net">Resultat net</option>
                                         </select>
