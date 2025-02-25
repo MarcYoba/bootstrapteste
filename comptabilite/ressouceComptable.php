@@ -1,12 +1,12 @@
 <?php 
-require_once("connexion.php");
-require_once("comptabilite.php");
-require_once("getvente.php");
-require_once("getfacture.php");
-require_once("getachat.php");
-require_once("getservice.php");
-require_once("getproduit.php");
-require_once("getstock.php");
+require_once("bdmutilple/connexion.php");
+require_once("bdmutilple/comptabilite.php");
+require_once("bdmutilple/getvente.php");
+require_once("bdmutilple/getfacture.php");
+require_once("bdmutilple/getachat.php");
+require_once("bdmutilple/getservice.php");
+require_once("bdmutilple/getproduit.php");
+require_once("bdmutilple/getstock.php");
 header('Content-Type: application/json');
 
 $comptabilite = new Comptabilite();
@@ -48,4 +48,10 @@ if (isset($donnees["marge"])) {
     ];
     echo json_encode($table);
 }
+
+
+
+
+
+
 ?>

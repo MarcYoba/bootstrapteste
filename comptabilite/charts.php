@@ -470,9 +470,9 @@
     <script src="../vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-moi.js"></script>
+    <script src="../js/comptabilite/chart-area-moi.js"></script>
     
-    <script src="../js/demo/chart-bar-moi.js"></script>
+    <script src="../js/comptabilite/chart-bar-moi.js"></script>
 
 </body>
 

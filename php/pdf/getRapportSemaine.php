@@ -188,13 +188,14 @@ $html = '
         </thead>
         <tbody>';
             $html .= '<tr>';
-            $html .= '<td colspan="6" align="center"> Recapitulatif Versement </td> </tr>';
+            $html .= '<td colspan="7" align="center"> Recapitulatif Versement </td> </tr>';
             $html .= '
                 <tr>
                 <th scope="col">Nom client</th>
                 <th scope="col">montant</th>
                 <th scope="col">OM</th>
-                <th scope="col">Montant cash</th>
+                 <th scope="col">banque</th>
+                <th scope="col">Montant Total</th>
                 <th scope="col">Motif</th>
                 <th scope="col">dateversement</th>
             </tr>';
@@ -204,7 +205,8 @@ $html = '
                 $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
                 $html .= '<td>' .$key["montant"].'</td>';
                 $html .= '<td>' .$key["Om"].'</td>';
-                $html .= '<td>' .$key["montant"] - $key["Om"].'</td>';
+                $html .= '<td>' .$key["Om"].'</td>';
+                $html .= '<td>' .$key["banque"] + $key["Om"] + $key["montant"].'</td>';
                 $html .= '<td>' .$key["motif"].'</td>';
                 $html .= '<td>' .$key["dateversement"].'</td>';
             $html .= '</tr>';
@@ -218,6 +220,7 @@ $html = '
             <th scope="col">'.$versement->ByWeekVersementCash($datedebut,$datedefin).'</th>
             <th scope="col">-</th>
             <th scope="col">-</th>
+            
         </tr>';
 
         $html .= '

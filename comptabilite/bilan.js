@@ -1,6 +1,6 @@
 function AnneBilan() {
    const anne= document.getElementById("nombre").value;
-    window.location.href ='liste.php?anne='+anne+'';
+    window.location.href ='listebilant.php?anne='+anne+'';
 }
 
 function AnnePassif() {
