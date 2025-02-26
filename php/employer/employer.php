@@ -39,32 +39,77 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Opne space</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Enregistrement Employer</h1>
                                 <span id="idutilisateur" class="drop"></span>
                             </div>
+
                             <form class="user" action="register.php" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <select id="utilisateur"  name="utilisateur"  class="form-control form-select" size="5"  multiple aria-label="multiple select ">
-                                        <?php
-                                            global $conn;
-                                            require_once("../connexion.php");
-                                            $sql = "SELECT * FROM user WHERE cathegorie='Employer'";
-                                            $result = $conn->query($sql);
-                                            while ($row = mysqli_fetch_assoc($result)) {
-                                                echo '<option value='.$row["id"].'>'.$row["firstname"].'</option>';
-                                            }
-                                        ?>
-                                    </select>
+                                    <input type="text" class="form-control form-control-user"
+                                           name="nom" id="nom" placeholder="Entrer le nom du client" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        Salaire : <input type="number" class="form-control form-control-user"
-                                           name="montant" id="montant" placeholder="Salaire brut" >
+                                        <input type="number" class="form-control form-control-user"
+                                           name="telephone" id="telephone" placeholder="Entrer le numero de telephone" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user"
+                                           name="banque" id="banque" placeholder="Numero compte bancaire" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="date" class="form-control form-control-user"
+                                           name="date" id="date" placeholder="Date engregistrement cleint" required>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <span id="idpersonnel"> </span>
                                     </div>
                                 </div>
                                 <hr>
                                 <span id="enregistrement">
-                                <button type="submit" name="enregistrement" id="enregistrement" class="btn btn-primary btn-user btn-block">
+                                <button type="submit" name="personnel" id="personnel" class="btn btn-warning btn-user btn-block">
+                                    Enregistrer un nouveau employer
+                                </button>
+                                </span>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4 text-green">Paiement salaire</h1>
+                                <span id="idutilisateur" class="drop"></span>
+                            </div>
+                            <form class="user" action="register.php" method="post" enctype="multipart/form-data">
+                                <div class="form-group row">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <select id="utilisateur"  name="utilisateur"  class="form-control form-select" size="5"  multiple aria-label="multiple select " required>
+                                        <?php
+                                            global $conn;
+                                            require_once("../connexion.php");
+                                            $sql = "SELECT * FROM personnel ";
+                                            $result = $conn->query($sql);
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                echo '<option value='.$row["id"].'>'.$row["nom"].'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <input type="number" class="form-control form-control-user"
+                                           name="montant" id="montant" placeholder="Salaire brut" required>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="date" class="form-control form-control-user"
+                                           name="date" id="date" placeholder="Date engregistrement cleint" required>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <span id="idsalaire"> </span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <span id="salaireboutton">
+                                <button type="submit" name="enregistrement" id="enregistrement" class="btn btn-info btn-user btn-block">
                                     Enregistrer
                                 </button>
                                 </span>
@@ -88,6 +133,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-    <script src="client.js"></script>
+    <script src="personnel.js"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@ function EtudeEvolutive() {
   console.log("Evolution : ");
   let evolution= document.getElementById("nombre3").value;
   
-  fetch('comptabilite/graphe/getevolution.php',{
+  fetch('../comptabilite/graphe/getevolution.php',{
       method:'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -125,7 +125,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 $(function() {
-  fetch('comptabilite/graphe/getquantitemoi.php')
+  fetch('graphe/getquantitemoi.php')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');

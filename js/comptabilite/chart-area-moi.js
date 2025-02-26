@@ -22,7 +22,7 @@ function RechargeGraphe() {
     tabJourMoi[index] = 0;  
   }
 
-  fetch('comptabilite/graphe/getdatamoi.php',{
+  fetch('../comptabilite/graphe/getdatamoi.php',{
       method:'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ for (let index = 0; index < tabMontantMoi.length; index++) {
 
 $(document).ready(function() {
 
-  fetch('comptabilite/graphe/getdatamoi.php')
+  fetch('../comptabilite/graphe/getdatamoi.php')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');

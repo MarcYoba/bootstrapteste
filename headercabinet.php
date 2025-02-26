@@ -350,16 +350,14 @@ require_once("php/activesaision.php");
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employer"
             aria-expanded="true" aria-controls="employer">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Employer </span>
+            <span>Personnel </span>
         </a>
         <div id="employer" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Employer :</h6>
-                
-                        <a class="collapse-item" href="../employer/employer.php">Employer</a>
-                        <a class="collapse-item" href="../employer/liste.php">Liste </a>
-                  
-                
+                <h6 class="collapse-header">Personnel :</h6>
+                        <a class="collapse-item" href="../../php/employer/employer.php">Personnel</a>
+                        <a class="collapse-item" href="../employer/personnel.php">Liste Personnel </a>
+                        <a class="collapse-item" href="../../php/employer/liste.php">Liste salaire </a>
             </div>
         </div>
     </li>
