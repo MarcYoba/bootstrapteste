@@ -632,6 +632,7 @@
                                         </div>
                                     </div>
                                     </div>
+                                    
                                     <hr>
                                     
                                     <code>Evaluation des ventes su ancien client</code>.

@@ -51,22 +51,23 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Table des Salaires</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Table des Personnels</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <div class="form-group row">
+                            <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tables des Salaire</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables des Personnels</h6>
                                 </div>
                                 <div class="col-sm-2">
-                                    <a href="personnel.php" class="btn btn-primary btn-user btn-block">
-                                        <i class="fas fa-plus"></i> Personnel
+                                    <a href="liste.php" class="btn btn-primary btn-user btn-block">
+                                        <i class="fas fa-plus"></i> Salaire
                                     </a>
                                 </div>
                             </div>
+                        
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -75,46 +76,43 @@
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>inuser</th>
-                                            <th>montant</th>
+                                            <th>Nom</th>
+                                            <th>Telephone</th>
                                             <th>usersave</th>
-                                            <th>datepaiement</th>
+                                            <th>Date creation</th>
                                             <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>inuser</th>
-                                            <th>montant</th>
+                                            <th>Nom</th>
+                                            <th>Telephone</th>
                                             <th>usersave</th>
-                                            <th>datepaiement</th>
+                                            <th>Date creation</th>
                                             <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM salaire";
+                                        $sql = "SELECT * FROM personnel ";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
-                                            $sql = "SELECT nom FROM personnel WHERE id = ".$row["inuser"]; 
-                                            $resultat = $conn->query($sql);
-                                            $rows = mysqli_fetch_assoc($resultat);
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$rows["nom"].'</td>';
-                                            echo '<td>'.$row["montant"].'</td>';
-                                            echo '<td>'.$row["usersave"].'</td>';
-                                            echo '<td>'.$row["datepaiement"].'</td>';
+                                            echo '<td>'.$row["nom"].'</td>';
+                                            echo '<td>'.$row["telephone"].'</td>';
+                                            echo '<td>'.$row["compteBanque"].'</td>';
+                                            echo '<td>'.$row["datecreation"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                                 # code...
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                echo "<button class='btn btn-primary' onclick='salaire(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
+                                                echo "<button class='btn btn-primary' onclick='personnel(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
                                             }else{
-                                            echo "<button class='btn btn-primary' onclick='salaire(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
-                                            echo "<a href='edite.php?id=" . $row["id"] ."&nom=".urlencode("salaire"). "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<button class='btn btn-primary' onclick='personnel(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
+                                            echo "<a href='edite.php?id=" . $row["id"] . "&nom=" . urlencode("personnel") . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';
@@ -187,7 +185,7 @@
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    
+    <script src="../../header.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>

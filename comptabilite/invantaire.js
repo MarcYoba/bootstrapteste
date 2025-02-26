@@ -3,7 +3,7 @@ function invantaire() {
 
     console.log("Evolution : ");
   
-  fetch('../graphe/getevolution.php',{
+  fetch('graphe/getevolution.php',{
       method:'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -45,7 +45,8 @@ function MargeBeneficier() {
   let sortie = {};
   sortie.marge = 1;
   sortie.anne = evolution;
-  fetch('../bdmutilple/ressouceComptable.php',{
+  console.log(sortie);
+  fetch('ressouceComptable.php',{
       method:'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -74,7 +75,7 @@ function Cfhiffreafaire() {
   let sortie = {};
   sortie.chiffre = 1;
   sortie.anne = evolution;
-  fetch('../bdmutilple/ressouceComptable.php',{
+  fetch('bdmutilple/ressouceComptable.php',{
       method:'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -103,7 +104,7 @@ function ProduitStock() {
   let sortie = {};
   sortie.stock = 1;
   sortie.anne = evolution;
-  fetch('../bdmutilple/ressouceComptable.php',{
+  fetch('bdmutilple/ressouceComptable.php',{
       method:'POST',
         headers:{
             'Content-Type': 'application/json'
