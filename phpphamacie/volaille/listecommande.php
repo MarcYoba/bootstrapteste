@@ -89,9 +89,16 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
+                                        $date = date("Y-m-d");
+                                        if(isset($_GET['date'])){
+                                            $date = $_GET['date'];
+
+                                        }else{
+                                            $date = date("Y");
+                                        }
                                         require_once("../bdmutilple/getfournisseur.php");
                                         $commande = new Fournisseur(0);
-                                        $sql = "SELECT * FROM commandPoussin ";
+                                        $sql = "SELECT * FROM commandPoussin WHERE YEAR(datecommande) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

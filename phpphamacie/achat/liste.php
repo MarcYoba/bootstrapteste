@@ -127,7 +127,13 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM achatphamacie";
+                                        $date = date("Y-m-d");
+                                        if(isset($_GET['date'])){
+                                            $date = $_GET['date'];
+                                        }else{
+                                            $date = date("Y");
+                                        }
+                                        $sql = "SELECT * FROM achatphamacie WHERE YEAR(dateachat) = '$date' ORDER BY dateachat DESC";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

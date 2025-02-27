@@ -140,7 +140,14 @@
                                     <tbody id="liste">
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM historiquestockphamacie";
+                                        $date = date("Y-m-d");
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET['date'];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        
+                                        $sql = "SELECT * FROM historiquestockphamacie WHERE YEAR(datet) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

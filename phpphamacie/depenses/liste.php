@@ -86,7 +86,14 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM depensesphamacie  ORDER BY id DESC";
+                                        $date = date('Y-m-d');
+                                        if(isset($_GET['date'])){
+                                            $date = $_GET['date'];
+
+                                        }else{
+                                            $date = date('Y');
+                                        }
+                                        $sql = "SELECT * FROM depensesphamacie WHERE YEAR(datedepense) = '$date'  ORDER BY id DESC";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

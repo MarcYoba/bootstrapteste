@@ -102,8 +102,14 @@ require_once("../bdmutilple/getclient.php");
                                     <tbody>
                                     <?php 
                                         global $conn;
+                                        $date = date("Y-m-d");
+                                        if(isset($_GET['date'])){
+                                            $date = $_GET['date'];
+                                        }else{
+                                            $date = date("Y");
+                                        }
                                         $client = new Client(1);
-                                        $sql = "SELECT * FROM animale ";
+                                        $sql = "SELECT * FROM animale WHERE YEAR(datevacin) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             $dataclient = $client->getAllByIdClient($row["idclient"]);

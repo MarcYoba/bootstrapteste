@@ -97,8 +97,14 @@ require_once("../bdmutilple/getclient.php");
                                     <?php 
                                         global $conn;
                                         $client = new Client(1);
+                                        $date = date("Y-m-d");
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET['date'];
+                                        } else {
+                                            $date = date("Y");
+                                        }
                                         
-                                        $sql = "SELECT * FROM terrain ";
+                                        $sql = "SELECT * FROM terrain WHERE YEAR(datejour) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             $infoclient = $client->getAllByIdClient($row["idclient"]);

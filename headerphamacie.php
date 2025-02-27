@@ -35,7 +35,7 @@
                     
                         echo '
                         <a class="collapse-item" href="phpphamacie/vente/vente.php" id="ajouterVente"> ajouter une vente</a>
-                        <a class="collapse-item" href="phpphamacie/vente/liste.php">liste vente</a>
+                        <a class="collapse-item" href="phpphamacie/vente/liste.php?date=2025">liste vente</a>
                         ';
                     
                 ?>
@@ -55,7 +55,7 @@
                 <?php 
                       echo '
                         <a class="collapse-item" href="phpphamacie/achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
-                        <a class="collapse-item" href="phpphamacie/achat/liste.php">liste Achat</a>
+                        <a class="collapse-item" href="phpphamacie/achat/liste.php?date=2025">liste Achat</a>
                       ';       
                 ?>
                 
@@ -141,9 +141,9 @@
                 <?php 
                     
                         echo '
-                            <a class="collapse-item" href="phpphamacie/stock/sctockVente.php">Historique </a>
+                            <a class="collapse-item" href="phpphamacie/stock/sctockVente.php?date=2025">Historique </a>
                             <a class="collapse-item" href="phpphamacie/achat/liste.php">Stock Achat </a>
-                            <a class="collapse-item" href="phpphamacie/stock/recaptliste.php">Recapitulatif</a>
+                            <a class="collapse-item" href="phpphamacie/stock/recaptliste.php?date=2025">Recapitulatif</a>
                             <a class="collapse-item" href="phpphamacie/stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire</a>
                         ';
                     
@@ -165,7 +165,7 @@
                     
                         echo '
                             <a class="collapse-item" href="phpphamacie/versement/versement.php" id="ajouterVersement">ajouter versement</a>
-                            <a class="collapse-item" href="phpphamacie/versement/liste.php">Liste versement</a>
+                            <a class="collapse-item" href="phpphamacie/versement/liste.php?date=2025">Liste versement</a>
                         ';
                     
                 ?>
@@ -208,7 +208,7 @@
                     
                         echo '
                         <a class="collapse-item" href="phpphamacie/caisse/caisse.php" id="ajouterCaise">Caisse</a>
-                        <a class="collapse-item" href="phpphamacie/caisse/liste.php">liste caisse</a>
+                        <a class="collapse-item" href="phpphamacie/caisse/liste.php?date=2025">liste caisse</a>
                         ';
                     
                 ?>
@@ -230,7 +230,7 @@
                     
                         echo '
                         <a class="collapse-item" href="phpphamacie/depenses/depense.php">Depense</a>
-                        <a class="collapse-item" href="phpphamacie/depenses/liste.php">Liste Depense</a>
+                        <a class="collapse-item" href="phpphamacie/depenses/liste.php?date=2025">Liste Depense</a>
                         ';
                     
                 ?>
@@ -273,7 +273,7 @@
                 <?php 
                         echo '
                         <a class="collapse-item" href="phpphamacie/volaille/volaille.php">Commande</a>
-                        <a class="collapse-item" href="phpphamacie/volaille/liste.php">Liste</a>
+                        <a class="collapse-item" href="phpphamacie/volaille/liste.php?date=2025">Liste</a>
                         <a class="collapse-item" href="phpphamacie/volaille/comandefourniseur.php">Commande fourniseur</a>
                         <a class="collapse-item" href="phpphamacie/volaille/listecommande.php">Liste fourniseur</a>
                         '; 
@@ -297,8 +297,8 @@
                         
                         <a class="collapse-item" href="phpphamacie/vacin/consultation.php" >Consultation</a> 
                         <a class="collapse-item" href="phpphamacie/vacin/fichesuivi.php" >fiche suivi </a>
-                        <a class="collapse-item" href="phpphamacie/vacin/tableconsultation.php" >liste Consultation</a> 
-                        <a class="collapse-item" href="phpphamacie/vacin/listesuivi.php" >liste des suivi</a>
+                        <a class="collapse-item" href="phpphamacie/vacin/tableconsultation.php?date=2025" >liste Consultation</a> 
+                        <a class="collapse-item" href="phpphamacie/vacin/listesuivi.php?date=2025" >liste des suivi</a>
                         
                         '; 
                 ?>
@@ -319,7 +319,7 @@
                 <?php 
                         echo '
                         <a class="collapse-item" href="phpphamacie/vacin/vacin.php" id="ajouterUtilisateur">Adminitrer un Vaccin</a>
-                        <a class="collapse-item" href="phpphamacie/vacin/liste.php">Liste Vaccin</a>
+                        <a class="collapse-item" href="phpphamacie/vacin/liste.php?date=2025">Liste Vaccin</a>
                         '; 
                 ?>
                 
@@ -339,7 +339,7 @@
                 <?php 
                         echo '
                         <a class="collapse-item" href="phpphamacie/service/service.php" id="ajouterUtilisateur">Descente sur terrain</a>
-                        <a class="collapse-item" href="phpphamacie/service/liste.php">Liste </a>
+                        <a class="collapse-item" href="phpphamacie/service/liste.php?date=2025">Liste </a>
                         '; 
                 ?>
                 
@@ -351,15 +351,15 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employer"
             aria-expanded="true" aria-controls="employer">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Employer </span>
+            <span>Personnel </span>
         </a>
         <div id="employer" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Employer :</h6>
+                <h6 class="collapse-header">Personnel :</h6>
                 <?php 
                         echo '
-                        <a class="collapse-item" href="phpphamacie/employer/employer.php">Employer</a>
-                        <a class="collapse-item" href="phpphamacie/employer/liste.php">Liste </a>
+                        <a class="collapse-item" href="php/employer/employer.php">Employer</a>
+                        <a class="collapse-item" href="php/employer/liste.php">Liste </a>
                         '; 
                 ?>
                 
@@ -388,7 +388,7 @@
                 <?php 
                     
                         echo '
-                        <a class="collapse-item" href="phpphamacie/dette/dette.php">Liste dette</a>
+                        <a class="collapse-item" href="phpphamacie/dette/dette.php?date=2025">Liste dette</a>
                         ';
                     
                 ?>
@@ -413,8 +413,8 @@
                 <?php 
                     
                         echo '
-                        <a class="collapse-item" href="phpphamacie/caisse/liste.php">liste caisse</a>
-                        <a class="collapse-item" href="phpphamacie/depenses/liste.php">Liste Depense</a>
+                        <a class="collapse-item" href="phpphamacie/caisse/liste.php?date=2025">liste caisse</a>
+                        <a class="collapse-item" href="phpphamacie/depenses/liste.php?date=2025">Liste Depense</a>
                         ';
                     
                 ?>

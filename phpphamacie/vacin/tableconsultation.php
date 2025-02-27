@@ -91,7 +91,14 @@ require_once("../bdmutilple/getclient.php");
                                     <?php 
                                         global $conn;
                                         $client = new Client(1);
-                                        $sql = "SELECT * FROM consultation ";
+                                        $date = date("Y-m-d");
+                                        if (isset($_GET['id'])) {
+                                            $date = $_GET['id'];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        
+                                        $sql = "SELECT * FROM consultation WHERE YEAR(dateArrive) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

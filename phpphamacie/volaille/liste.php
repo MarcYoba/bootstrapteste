@@ -102,7 +102,14 @@ require_once("../bdmutilple/getclient.php");
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM poussin ";
+                                        $date = date("Y-m-d");
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET['date'];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        
+                                        $sql = "SELECT * FROM poussin WHERE YEAR(dateCommande) = '$date'";
                                         $client = new Client(0);
 
                                         $result = $conn->query($sql);

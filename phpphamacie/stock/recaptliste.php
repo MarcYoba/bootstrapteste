@@ -130,12 +130,18 @@
                                         $stock = new Stock(1,1,1);
                                         $facture = new Facture(1);
                                         $date =  date("Y-m-d");
+                                        if(isset($_GET['date'])){
+                                            $date = $_GET['date'];
+                                        }else{
+                                            $date = date("Y");
+                                        }
                                         // $sqlp = "SELECT  id,nom_produit,cathegorie FROM produit"; 
                                         // $resultp = $conn->query($sqlp);
                                         // while ($rowt = mysqli_fetch_assoc($resultp)){ 
                                         //     var_dump($facture->setIdFacture($rowt["nom_produit"]." ".$rowt["cathegorie"] ,$rowt["id"]));
                                         // }
-                                        $variable = $stock->getLogsDate();
+                                        $variable = $stock->getLogsDate($date);
+                                        $date =  date("Y-m-d");
                                         foreach ($variable as $key => $value) {
                                             echo '<tr>';
                                             echo '<th>'.$value["Nomproduit"].'</th>';
