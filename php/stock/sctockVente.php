@@ -140,7 +140,12 @@
                                     <tbody id="liste">
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM historiquestock ORDER BY Nomproduit ASC";
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET["date"];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        $sql = "SELECT * FROM historiquestock  WHERE YEAR(datet) = '$date' ORDER BY Nomproduit ASC";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

@@ -128,7 +128,12 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM dette ";
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET["date"];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        $sql = "SELECT * FROM dette WHERE YEAR(datedette) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

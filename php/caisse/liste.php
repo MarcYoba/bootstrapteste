@@ -122,7 +122,12 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM caisse ORDER BY id DESC";
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET["date"];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        $sql = "SELECT * FROM caisse WHERE YEAR(dateoperation)='$date' ORDER BY id DESC";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';

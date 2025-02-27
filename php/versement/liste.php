@@ -87,7 +87,12 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM versement";
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET["date"];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        $sql = "SELECT * FROM versement WHERE YEAR(dateversement) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             $montant = $row["montant"] + $row["Om"]+$row["banque"];
