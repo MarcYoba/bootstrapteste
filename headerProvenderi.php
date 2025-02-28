@@ -338,10 +338,70 @@ require_once("php/activesaision.php");
 
     
             <li class="nav-item">
-            <a class="nav-link" href="../../comptabilite/charts.php">
+            <a class="nav-link" href="../../comptabilite.php">
                 <i class="fas fa-fw fa-chart-area"></i>
                 Comptabilite<span></span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#jounale"
+                    aria-expanded="true" aria-controls="jounale">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Journal Comptable</span>
+                </a>
+                <div id="jounale" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Journal Comptable:</h6>
+                        <a class="collapse-item" href="../comptabilite/Journale.php">Jounal</a> 
+                    </div>
+                </div>
+    </li>
+    <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#inventaire"
+                    aria-expanded="true" aria-controls="inventaire">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Analyse Evolutive</span>
+                </a>
+                <div id="inventaire" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Analyse Evolutive:</h6>
+                        <a class="collapse-item" href="../comptabilite/inventaire.php">Analyse Evolutive Moi</a> 
+                        <a class="collapse-item" href="../comptabilite/invantairesemaine.php">Analyse Evolutive Semaine</a> 
+                    </div>
+                </div>
+    </li>
+
+    <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#etatresultat"
+                    aria-expanded="true" aria-controls="etatresultat">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Etat des resultats</span>
+                </a>
+                <div id="etatresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Etat des resultats:</h6>
+                        <a class="collapse-item" href="../comptabilite/etatresultat.php">marge beneficiere</a> 
+                        <a class="collapse-item" href="../comptabilite/chiffreaffaire.php">CHIFFRE AFFAIRES</a>
+                        <a class="collapse-item" href="../comptabilite/ProduitStocks.php">Production et Stocks</a>  
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bilan"
+                    aria-expanded="true" aria-controls="bilan">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Bilan Comptable</span>
+                </a>
+                <div id="bilan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header"> Bilan :</h6>
+                        <a class="collapse-item" href="../bilan/actif.php">Actif Bilan</a>
+                        <a class="collapse-item" href="../bilan/liste.php">liste Actif</a>
+                        <a class="collapse-item" href="../bilan/passif.php">Passif Bilan</a>
+                        <a class="collapse-item" href="../bilan/listepasif.php">liste Passif</a>
+                    </div>
+                </div>
+            </li>
+
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
