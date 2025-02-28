@@ -14,7 +14,7 @@ class Comptabilite{
         $index = 1;
         
         while ($index <= 12) {
-            $sql = "SELECT ROUND(SUM(montant),2) FROM achat WHERE MONTH(dateachat)= '$index'";
+            $sql = "SELECT ROUND(SUM(montant),2) FROM achat WHERE MONTH(dateachat)= '$index' AND YEAR(dateachat) = YEAR(CURRENT_DATE)";
             $resulte = $conn->query($sql);
             $row = mysqli_fetch_assoc($resulte);
             if (empty($row)) {
@@ -34,7 +34,7 @@ class Comptabilite{
         $index = 1;
         
         while ($index <= 12) {
-            $sql = "SELECT ROUND(SUM(prix),2) FROM vente WHERE MONTH(datevente)= '$index'";
+            $sql = "SELECT ROUND(SUM(prix),2) FROM vente WHERE MONTH(datevente)= '$index' AND YEAR(datevente) = YEAR(CURRENT_DATE)";
             $resulte = $conn->query($sql);
             $row = mysqli_fetch_assoc($resulte);
             if (empty($row)) {
@@ -59,9 +59,9 @@ class Comptabilite{
         ];
         $index=1;
         while ($index <= 4) {
-            $sql = "SELECT YEAR(NOW()) AS anne, QUARTER(dateachat) AS trimestre, ROUND(SUM(montant),2) as montant
+            $sql = "SELECT YEAR(CURRENT_DATE) AS anne, QUARTER(dateachat) AS trimestre, ROUND(SUM(montant),2) as montant
                 FROM achat  
-                WHERE YEAR(dateachat) = YEAR(NOW()) AND QUARTER(dateachat) = '$index'
+                WHERE YEAR(dateachat) = YEAR(CURRENT_DATE) AND QUARTER(dateachat) = '$index'
                 GROUP BY anne, trimestre 
                 ORDER BY anne,trimestre";
             $resultat = $conn->query($sql);
@@ -96,6 +96,7 @@ class Comptabilite{
                     ROUND(SUM(montant),2) AS total_achat
                 FROM 
                     achat
+                WHERE YEAR(dateachat) = YEAR(CURRENT_DATE)
                 GROUP BY 
                     annee, semestre
                 ORDER BY 
@@ -129,9 +130,9 @@ class Comptabilite{
         ];
         $index=1;
         while ($index <= 4) {
-            $sql = "SELECT YEAR(NOW()) AS anne, QUARTER(datevente) AS trimestre, ROUND(SUM(prix),2) as montant
+            $sql = "SELECT YEAR(CURRENT_DATE) AS anne, QUARTER(datevente) AS trimestre, ROUND(SUM(prix),2) as montant
                 FROM vente  
-                WHERE YEAR(datevente) = YEAR(NOW()) AND QUARTER(datevente) = '$index'
+                WHERE YEAR(datevente) = YEAR(CURRENT_DATE) AND QUARTER(datevente) = '$index'
                 GROUP BY anne, trimestre 
                 ORDER BY anne,trimestre";
             $resultat = $conn->query($sql);
@@ -166,6 +167,7 @@ class Comptabilite{
                     ROUND(SUM(prix),2) AS total_achat
                 FROM 
                     vente
+                WHERE YEAR(datevente) = YEAR(CURRENT_DATE)
                 GROUP BY 
                     annee, semestre
                 ORDER BY 

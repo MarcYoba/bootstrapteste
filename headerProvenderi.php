@@ -401,6 +401,36 @@ require_once("php/activesaision.php");
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tresor"
+                    aria-expanded="true" aria-controls="tresor">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Tresorerie</span>
+                </a>
+                <div id="tresor" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header"> Tresorerie :</h6>
+                        <a class="collapse-item" href="../tresorerie/tresorerie.php"> tresorerie</a>
+                        <a class="collapse-item" href="../tresorerie/liste.php">liste </a>
+                        
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#compteresultat"
+                    aria-expanded="true" aria-controls="compteresultat">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Compte Resultat : </span>
+                </a>
+                <div id="compteresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header"> Compte Resultat :</h6>
+                        <a class="collapse-item" href="../compteresultat/compteresultat.php"> tresorerie</a>
+                        <a class="collapse-item" href="../compteresultat/liste.php">liste </a>
+                        
+                    </div>
+                </div>
+            </li>
 
 
     <!-- Nav Item - Tables -->

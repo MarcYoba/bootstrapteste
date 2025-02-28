@@ -44,7 +44,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Rapport Comptable</h6>
                                     </div>
                                     <div class="col-sm-2 ">
-                                    <a class="m-0 font-weight-bold text-warning" href="../../charts.html">Retour</a>
+                                    <a class="m-0 font-weight-bold text-warning" href="../compteresultat/liste.php">Retour</a>
                                     </div>
                                 </div>
                                 </div>
@@ -55,7 +55,7 @@
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <a href="../pdf/getcharge.php">
                                             <button type="" name="" id="" class="btn btn-warning btn-user btn-block">
-                                             Cahier de charge
+                                             Compte de Resultat
                                             </button> 
                                         </a>
                                     </div>
