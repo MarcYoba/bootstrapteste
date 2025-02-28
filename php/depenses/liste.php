@@ -57,7 +57,24 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Depense</h6>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <h6 class="m-0 font-weight-bold text-primary">Liste des depenses</h6>
+                                </div>
+                                <div class="col-sm-6">
+                                <br>
+                                <label for="annee">Année recherche</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -86,7 +103,12 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM depenses ORDER BY id DESC";
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET["date"];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        $sql = "SELECT * FROM depenses WHERE YEAR(datedepense) = '$date' ORDER BY id DESC";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
@@ -177,6 +199,12 @@
     <script src="../../header.js"></script>
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "liste.php?date=" + annee;
+        }
+    </script>
 
 </body>
 

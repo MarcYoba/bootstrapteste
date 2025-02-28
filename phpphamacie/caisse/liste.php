@@ -60,11 +60,11 @@
                             <h6 class="m-0 font-weight-bold text-primary">Tables Caisse</h6>
                             <form  action="recapCaisse.php" method="post" class="user row" >
                                 <div class="row">
-                                    <p class="col-md-3" >
+                                    <p class="col-md-2" >
                                         <input type="date" class="form-control form-control-user"
                                         name="datedette" id="datedette" placeholder="quantite">
                                     </p>
-                                    <p class="col-md-3" >
+                                    <p class="col-md-2" >
                                         <input type="date" class="form-control form-control-user"
                                         name="datedett2" id="datedett2" placeholder="quantite">
                                     </p>
@@ -76,7 +76,7 @@
                                             <label class="form-check-label" id="credit">crédit</label>
                                     </p>
 
-                                    <p class="col-md-3" >
+                                    <p class="col-md-2" >
                                         <input class="form-check-input" type="checkbox" id="cash" name="cash" value="cash">
                                         <label class="form-check-label" id="cash">cash</label><br>
 
@@ -84,8 +84,19 @@
                                         <label class="form-check-label" id="vente">Total vente</label>
                                     </p>
 
-                                <p class="col-md-1" >
+                                <p class="col-md-3" >
                                 <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                <br>
+                                    <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </p>  
                                 </div>
                             </form>
@@ -122,7 +133,13 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM caissePhamacie ORDER BY id DESC";
+                                        $date = date('Y-m-d');
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET['date'];
+                                        } else {
+                                            $date = date('Y');
+                                        }
+                                        $sql = "SELECT * FROM caissePhamacie WHERE YEAR(dateoperation) = '$date' ORDER BY id DESC";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
@@ -214,7 +231,12 @@
     <script src="../../header.js"></script>
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "liste.php?date=" + annee;
+        }
+    </script>
 </body>
 
 </html>

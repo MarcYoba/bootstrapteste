@@ -40,12 +40,12 @@
                     if (($_SESSION["route"] == "cabinet")) {
                         echo '
                         <a class="collapse-item" href="phpphamacie/vente/vente.php" id="ajouterVente"> ajouter une vente</a>
-                        <a class="collapse-item" href="phpphamacie/vente/liste.php">liste vente</a>
+                        <a class="collapse-item" href="phpphamacie/vente/liste.php?date='.date("Y").'">liste vente</a>
                         ';
                     } else {
                         echo '
                         <a class="collapse-item" href="php/vente/vente.php" id="ajouterVente"> ajouter une vente</a>
-                        <a class="collapse-item" href="php/vente/liste.php">liste vente</a>
+                        <a class="collapse-item" href="php/vente/liste.php?date='.date("Y").'">liste vente</a>
                         ';
                     }
                 ?>
@@ -68,7 +68,7 @@
                     } else {
                       echo '
                         <a class="collapse-item" href="php/achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
-                        <a class="collapse-item" href="php/achat/liste.php">liste Achat</a>
+                        <a class="collapse-item" href="php/achat/liste.php?date='.date("Y").'">liste Achat</a>
                       ';   
                     }
                 ?>
@@ -169,9 +169,9 @@
                             
                     } else {
                         echo '
-                            <a class="collapse-item" href="php/stock/sctockVente.php">Historique </a>
-                            <a class="collapse-item" href="php/achat/liste.php">Stock Achat </a>
-                            <a class="collapse-item" href="php/stock/recaptliste.php">Recapitulatif</a>
+                            <a class="collapse-item" href="php/stock/sctockVente.php?date='.date("Y").'">Historique </a>
+                            <a class="collapse-item" href="php/achat/liste.php?date='.date("Y").'">Stock Achat </a>
+                            <a class="collapse-item" href="php/stock/recaptliste.php?date='.date("Y").'">Recapitulatif</a>
                             <a class="collapse-item" href="php/stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire</a>
                         ';
                     }
@@ -195,7 +195,7 @@
                     } else {
                         echo '
                             <a class="collapse-item" href="php/versement/versement.php" id="ajouterVersement">ajouter versement</a>
-                            <a class="collapse-item" href="php/versement/liste.php">Liste versement</a>
+                            <a class="collapse-item" href="php/versement/liste.php?date='.date("Y").'">Liste versement</a>
                         ';
                     }
                 ?>
@@ -217,7 +217,7 @@
                             
                     } else {
                         echo '
-                            <a class="collapse-item" href="php/dette/dette.php">Liste credit</a>
+                            <a class="collapse-item" href="php/dette/dette.php?date='.date("Y").'">Liste credit</a>
                         ';
                     }
                 ?>
@@ -242,7 +242,7 @@
                     } else {
                         echo '
                         <a class="collapse-item" href="php/caisse/caisse.php" id="ajouterCaise">Caisse</a>
-                        <a class="collapse-item" href="php/caisse/liste.php">liste caisse</a>
+                        <a class="collapse-item" href="php/caisse/liste.php?date='.date("Y").'">liste caisse</a>
                         ';
                     }
                 ?>
@@ -290,7 +290,7 @@
                     } else {
                         echo '
                         <a class="collapse-item" href="php/depenses/depense.php">Depenses</a>
-                        <a class="collapse-item" href="php/depenses/liste.php">Liste Depense</a>
+                        <a class="collapse-item" href="php/depenses/liste.php?date='.date("Y").'">Liste Depense</a>
                         ';
                     }
                 ?>
@@ -325,7 +325,7 @@
                             
                     } else {
                         echo '
-                        <a class="collapse-item" href="php/dette/dette.php">Liste dette</a>
+                        <a class="collapse-item" href="php/dette/dette.php?date='.date("Y").'">Liste dette</a>
                         ';
                     }
                 ?>
@@ -352,8 +352,8 @@
                             
                     } else {
                         echo '
-                        <a class="collapse-item" href="php/caise/liste.php">liste caisse</a>
-                        <a class="collapse-item" href="php/depenses/liste.php">Liste Depense</a>
+                        <a class="collapse-item" href="php/caise/liste.php?date='.date("Y").'">liste caisse</a>
+                        <a class="collapse-item" href="php/depenses/liste.php?date='.date("Y").'">Liste Depense</a>
                         ';
                     }
                 ?>

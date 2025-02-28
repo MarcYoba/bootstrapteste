@@ -41,7 +41,7 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Operation de vente</h6>
 
                             <a class="collapse-item" href="../vente/vente.php" id="ajouterVente"> ajouter une vente</a>
-                            <a class="collapse-item" href="../vente/liste.php">liste vente</a>
+                            <a class="collapse-item" href="../vente/liste.php?date=<?php echo date("Y"); ?>">liste vente</a>
 
             </div>
         </div>
@@ -57,7 +57,7 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Operation des Achat</h6>
 
                         <a class="collapse-item" href="../achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
-                        <a class="collapse-item" href="../achat/liste.php">liste Achat</a>
+                        <a class="collapse-item" href="../achat/liste.php?date=<?php echo date("Y"); ?>">liste Achat</a>
 
             </div>
         </div>
@@ -123,9 +123,9 @@ require_once("php/activesaision.php");
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Operation des Stock</h6>
                 
-                        <a class="collapse-item" href="../stock/sctockVente.php">Historique </a>
-                        <a class="collapse-item" href="../achat/liste.php">Stock Achat </a>
-                        <a class="collapse-item" href="../stock/recaptliste.php">Recapitulatif </a>
+                        <a class="collapse-item" href="../stock/sctockVente.php?date=<?php echo date("Y"); ?>">Historique </a>
+                        <a class="collapse-item" href="../achat/liste.php?date=<?php echo date("Y"); ?>">Stock Achat </a>
+                        <a class="collapse-item" href="../stock/recaptliste.php?date=<?php echo date("Y"); ?>">Recapitulatif </a>
                         <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire </a>
                    
                 
@@ -143,7 +143,7 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">versement:</h6>
                 
                             <a class="collapse-item" href="../versement/versement.php" id="ajouterVersement">ajouter versement</a>
-                            <a class="collapse-item" href="../versement/liste.php">Liste versement</a>
+                            <a class="collapse-item" href="../versement/liste.php?date=<?php echo date("Y"); ?>">Liste versement</a>
                 
                 
             </div>
@@ -159,7 +159,7 @@ require_once("php/activesaision.php");
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette:</h6>
                 
-                            <a class="collapse-item" href="../dette/dette.php">Liste credit</a>
+                            <a class="collapse-item" href="../dette/dette.php?date=<?php echo date("Y"); ?>">Liste credit</a>
                    
             </div>
         </div>
@@ -176,7 +176,7 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Dette:</h6>
                 
                         <a class="collapse-item" href="../caisse/caisse.php" id="ajouterCaise">Caisse</a>
-                        <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
+                        <a class="collapse-item" href="../caisse/liste.php?date=<?php echo date("Y"); ?>">liste caisse</a>
                    
             </div>
         </div>
@@ -193,7 +193,7 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">utilisateur:</h6>
                 '
                         <a class="collapse-item" href="../userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
-                        <a class="collapse-item" href="../userCon/liste.php">Liste</a>
+                        <a class="collapse-item" href="../userCon/liste.php?date=<?php echo date("Y"); ?>">Liste</a>
                         
                 ?>
                 
@@ -214,7 +214,7 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Depense:</h6>
                 
                         <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
-                        <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                        <a class="collapse-item" href="../depenses/liste.php?date=<?php echo date("Y"); ?>">Liste Depense</a>
                        
             </div>
         </div>
@@ -231,7 +231,7 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Service :</h6>
                 
                     <a class="collapse-item" href="../../phpphamacie/service/service.php" id="ajouterUtilisateur">Descente sur terrain</a>
-                    <a class="collapse-item" href="../../phpphamacie/service/liste.php">Liste </a>
+                    <a class="collapse-item" href="../../phpphamacie/service/liste.php?date=<?php echo date("Y"); ?>">Liste </a>
                     
                 
             </div>
@@ -258,7 +258,7 @@ require_once("php/activesaision.php");
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Dette :</h6>
                 
-                        <a class="collapse-item" href="../dette/dette.php">Liste dette</a>
+                        <a class="collapse-item" href="../dette/dette.php?date=<?php echo date("Y"); ?>">Liste dette</a>
                         
                 
                 <!--<a class="collapse-item" href="cards.html">Dette client</a>-->
@@ -279,9 +279,9 @@ require_once("php/activesaision.php");
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
                 
-                        <a class="collapse-item" href="../caisse/liste.php">liste caisse</a>
-                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
-                        <a class="collapse-item" href="../depenses/liste.php">Liste Depense</a>
+                        <a class="collapse-item" href="../caisse/liste.php?date=<?php echo date("Y"); ?>">liste caisse</a>
+                        <a class="collapse-item" href="../depenses/depense.php?date=<?php echo date("Y"); ?>">Depenses</a>
+                        <a class="collapse-item" href="../depenses/liste.php?date=<?php echo date("Y"); ?>">Liste Depense</a>
                         
               <!--  <a class="collapse-item" href="../caisse/caisse.php" id="ajoutCaise">Caisse</a> -->
                 

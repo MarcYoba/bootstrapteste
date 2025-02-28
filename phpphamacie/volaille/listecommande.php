@@ -57,7 +57,24 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Commende</h6>
+                           
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables Commende</h6>
+                                </div>
+                                <div class="col-md-6" style="text-align:right;">
+                                
+                                    <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -89,9 +106,16 @@
                                     <tbody>
                                     <?php 
                                         global $conn;
+                                        $date = date("Y-m-d");
+                                        if(isset($_GET['date'])){
+                                            $date = $_GET['date'];
+
+                                        }else{
+                                            $date = date("Y");
+                                        }
                                         require_once("../bdmutilple/getfournisseur.php");
                                         $commande = new Fournisseur(0);
-                                        $sql = "SELECT * FROM commandPoussin ";
+                                        $sql = "SELECT * FROM commandPoussin WHERE YEAR(datecommande) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
@@ -189,6 +213,12 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "listecommande.php?date=" + annee;
+        }
+    </script>
 
 </body>
 

@@ -59,7 +59,27 @@ require_once("../bdmutilple/getclient.php");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success">Liste des consultations</h6>
+                            
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables Consultation</h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="consultation.php" class="btn btn-success" style="float:right;"><i class="fas fa-plus"></i> Ajouter une consultation</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -91,7 +111,14 @@ require_once("../bdmutilple/getclient.php");
                                     <?php 
                                         global $conn;
                                         $client = new Client(1);
-                                        $sql = "SELECT * FROM consultation ";
+                                        $date = date("Y-m-d");
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET['date'];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        
+                                        $sql = "SELECT * FROM consultation WHERE YEAR(dateArrive) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
@@ -185,6 +212,12 @@ require_once("../bdmutilple/getclient.php");
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "tableconsultation.php?date=" + annee;
+        }
+    </script>
 
 </body>
 
