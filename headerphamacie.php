@@ -35,7 +35,7 @@
                     
                         echo '
                         <a class="collapse-item" href="phpphamacie/vente/vente.php" id="ajouterVente"> ajouter une vente</a>
-                        <a class="collapse-item" href="phpphamacie/vente/liste.php?date=2025">liste vente</a>
+                        <a class="collapse-item" href="phpphamacie/vente/liste.php?date='.date("Y").'">liste vente</a>
                         ';
                     
                 ?>
@@ -55,7 +55,7 @@
                 <?php 
                       echo '
                         <a class="collapse-item" href="phpphamacie/achat/teste.php" id="ajouterAcaht">ajouter un Achat</a>
-                        <a class="collapse-item" href="phpphamacie/achat/liste.php?date=2025">liste Achat</a>
+                        <a class="collapse-item" href="phpphamacie/achat/liste.php?date='.date("Y").'">liste Achat</a>
                       ';       
                 ?>
                 
@@ -141,9 +141,9 @@
                 <?php 
                     
                         echo '
-                            <a class="collapse-item" href="phpphamacie/stock/sctockVente.php?date=2025">Historique </a>
+                            <a class="collapse-item" href="phpphamacie/stock/sctockVente.php?date='.date("Y").'">Historique </a>
                             <a class="collapse-item" href="phpphamacie/achat/liste.php">Stock Achat </a>
-                            <a class="collapse-item" href="phpphamacie/stock/recaptliste.php?date=2025">Recapitulatif</a>
+                            <a class="collapse-item" href="phpphamacie/stock/recaptliste.php?date='.date("Y").'">Recapitulatif</a>
                             <a class="collapse-item" href="phpphamacie/stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire</a>
                         ';
                     
@@ -165,7 +165,7 @@
                     
                         echo '
                             <a class="collapse-item" href="phpphamacie/versement/versement.php" id="ajouterVersement">ajouter versement</a>
-                            <a class="collapse-item" href="phpphamacie/versement/liste.php?date=2025">Liste versement</a>
+                            <a class="collapse-item" href="phpphamacie/versement/liste.php?date='.date("Y").'">Liste versement</a>
                         ';
                     
                 ?>
@@ -185,7 +185,7 @@
             <?php 
                     
                         echo '
-                            <a class="collapse-item" href="phpphamacie/dette/dette.php">Liste credit</a>
+                            <a class="collapse-item" href="phpphamacie/dette/dette.php?date='.date("Y").'">Liste credit</a>
                         ';
                     
                 ?>
@@ -208,7 +208,7 @@
                     
                         echo '
                         <a class="collapse-item" href="phpphamacie/caisse/caisse.php" id="ajouterCaise">Caisse</a>
-                        <a class="collapse-item" href="phpphamacie/caisse/liste.php?date=2025">liste caisse</a>
+                        <a class="collapse-item" href="phpphamacie/caisse/liste.php?date='.date("Y").'">liste caisse</a>
                         ';
                     
                 ?>
@@ -230,7 +230,7 @@
                     
                         echo '
                         <a class="collapse-item" href="phpphamacie/depenses/depense.php">Depense</a>
-                        <a class="collapse-item" href="phpphamacie/depenses/liste.php?date=2025">Liste Depense</a>
+                        <a class="collapse-item" href="phpphamacie/depenses/liste.php?date='.date("Y").'">Liste Depense</a>
                         ';
                     
                 ?>
@@ -273,9 +273,9 @@
                 <?php 
                         echo '
                         <a class="collapse-item" href="phpphamacie/volaille/volaille.php">Commande</a>
-                        <a class="collapse-item" href="phpphamacie/volaille/liste.php?date=2025">Liste</a>
+                        <a class="collapse-item" href="phpphamacie/volaille/liste.php?date='.date("Y").'">Liste</a>
                         <a class="collapse-item" href="phpphamacie/volaille/comandefourniseur.php">Commande fourniseur</a>
-                        <a class="collapse-item" href="phpphamacie/volaille/listecommande.php">Liste fourniseur</a>
+                        <a class="collapse-item" href="phpphamacie/volaille/listecommande.php?date='.date("Y").'">Liste fourniseur</a>
                         '; 
                 ?>
                 
@@ -297,8 +297,8 @@
                         
                         <a class="collapse-item" href="phpphamacie/vacin/consultation.php" >Consultation</a> 
                         <a class="collapse-item" href="phpphamacie/vacin/fichesuivi.php" >fiche suivi </a>
-                        <a class="collapse-item" href="phpphamacie/vacin/tableconsultation.php?date=2025" >liste Consultation</a> 
-                        <a class="collapse-item" href="phpphamacie/vacin/listesuivi.php?date=2025" >liste des suivi</a>
+                        <a class="collapse-item" href="phpphamacie/vacin/tableconsultation.php?date='.date("Y").'" >liste Consultation</a> 
+                        <a class="collapse-item" href="phpphamacie/vacin/listesuivi.php?date='.date("Y").'" >liste des suivi</a>
                         
                         '; 
                 ?>
@@ -319,7 +319,7 @@
                 <?php 
                         echo '
                         <a class="collapse-item" href="phpphamacie/vacin/vacin.php" id="ajouterUtilisateur">Adminitrer un Vaccin</a>
-                        <a class="collapse-item" href="phpphamacie/vacin/liste.php?date=2025">Liste Vaccin</a>
+                        <a class="collapse-item" href="phpphamacie/vacin/liste.php?date='.date("Y").'">Liste Vaccin</a>
                         '; 
                 ?>
                 
@@ -339,7 +339,7 @@
                 <?php 
                         echo '
                         <a class="collapse-item" href="phpphamacie/service/service.php" id="ajouterUtilisateur">Descente sur terrain</a>
-                        <a class="collapse-item" href="phpphamacie/service/liste.php?date=2025">Liste </a>
+                        <a class="collapse-item" href="phpphamacie/service/liste.php?date='.date("Y").'">Liste </a>
                         '; 
                 ?>
                 
@@ -359,7 +359,7 @@
                 <?php 
                         echo '
                         <a class="collapse-item" href="php/employer/employer.php">Employer</a>
-                        <a class="collapse-item" href="php/employer/liste.php">Liste </a>
+                        <a class="collapse-item" href="php/employer/liste.php?date='.date("Y").'">Liste </a>
                         '; 
                 ?>
                 
@@ -388,7 +388,7 @@
                 <?php 
                     
                         echo '
-                        <a class="collapse-item" href="phpphamacie/dette/dette.php?date=2025">Liste dette</a>
+                        <a class="collapse-item" href="phpphamacie/dette/dette.php?date='.date("Y").'">Liste dette</a>
                         ';
                     
                 ?>
@@ -413,8 +413,8 @@
                 <?php 
                     
                         echo '
-                        <a class="collapse-item" href="phpphamacie/caisse/liste.php?date=2025">liste caisse</a>
-                        <a class="collapse-item" href="phpphamacie/depenses/liste.php?date=2025">Liste Depense</a>
+                        <a class="collapse-item" href="phpphamacie/caisse/liste.php?date='.date("Y").'">liste caisse</a>
+                        <a class="collapse-item" href="phpphamacie/depenses/liste.php?date='.date("Y").'">Liste Depense</a>
                         ';
                     
                 ?>

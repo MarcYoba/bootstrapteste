@@ -59,6 +59,19 @@
                         <div class="card-header py-3">
                             <div class="row">
                                 <p class="col-md-0"><h6 class="m-0 font-weight-bold text-primary">Tables Versement</h6></p>
+                                <div class="col-md-2">
+                                <br>
+                                    <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
                             
                         </div>
@@ -194,6 +207,12 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "liste.php?date=" + annee;
+        }
+    </script>
 
 </body>
 

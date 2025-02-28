@@ -123,6 +123,18 @@ require_once("../connexion.php");
                                 <p class="col-md-2">
                                     <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
                                 </p>
+                                <div class="col-md-2">
+                                    <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
                             
                             </form>
                         </div>
@@ -258,6 +270,12 @@ require_once("../connexion.php");
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
     <script src="listeVente.js"></script> 
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "liste.php?date=" + annee;
+        }
+    </script>
 
 </body>
 

@@ -91,8 +91,19 @@
                                     </select>
                                 </p>
                
-                                <p class="col-md-2">
+                                <p class="col-md-3">
                                     <button class='btn btn-info btn-user'>Imprimer</button>
+                                    <br>
+                                    <label for="annee">Année recherche</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </p>
                             </div>
                             </form>
@@ -134,13 +145,23 @@
                                         }
                                         $stock = new Stock(1,1,1);
                                         $facture = new Facture(1);
-                                        $date =  date("Y-m-d");
+                                        
                                         // $sqlp = "SELECT  id,nom_produit,cathegorie FROM produit"; 
                                         // $resultp = $conn->query($sqlp);
                                         // while ($rowt = mysqli_fetch_assoc($resultp)){ 
                                         //     var_dump($facture->setIdFacture($rowt["nom_produit"]." ".$rowt["cathegorie"] ,$rowt["id"]));
                                         // }
                                         $variable = $stock->getLogsDate($date);
+                                        $currentYear = date("Y");
+                                        if ($currentYear>$date) {
+                                            $jour = date("d");
+                                            $mois = date("m");
+                                            $datecreat = new DateTime("$date-$mois-$jour");
+                                            $date = $datecreat->format("Y-m-d");
+                                        }else{
+                                            $date =  date("Y-m-d");
+                                        }
+                                        
                                         foreach ($variable as $key => $value) {
                                             echo '<tr>';
                                             echo '<th>'.$value["Nomproduit"].'</th>';
@@ -237,6 +258,12 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "recaptliste.php?date=" + annee;
+        }
+    </script>
     
 
 </body>

@@ -93,6 +93,17 @@
 
                             <p class="col-md-2" >
                             <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                            <br>
+                                    <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
                             </p>
 
 
@@ -133,7 +144,7 @@
                                         global $conn;
                                         $date = date("Y-m-d");
                                         if (isset($_GET['date'])) {
-                                            $date = $_GET('date');
+                                            $date = $_GET['date'];
                                         } else {
                                            $date = date("Y");
                                         }
@@ -246,7 +257,12 @@
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
     <script src="../../header.js"></script>
-
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "dette.php?date=" + annee;
+        }
+    </script>
 </body>
 
 </html>

@@ -87,16 +87,24 @@
                                 </select>
                                 </p>
                             
-                            <p class="col-md-2" >
+                            <p class="col-md-1" >
                                 <a href="../versement/liste.php"  class="btn btn-info btn-user" >Liste</a>
                             </p>
 
-                            <p class="col-md-2" >
+                            <p class="col-md-3" >
                             <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
-                            </p>
-
-
-                                
+                            <br>
+                                    <label for="annee">Année recherche</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                            </p>  
                             </div>
                             </form>
                         </div>
@@ -241,6 +249,12 @@
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
     <script src="../../header.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "dette.php?date=" + annee;
+        }
+    </script>
     
 
 </body>
