@@ -12,14 +12,18 @@
     <title>GESTION DE STOCK</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
-        href="../https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        href="../../https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .drop{
+            display: none;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -28,7 +32,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("header.php"); ?>
+        <?php require_once("../../headerProvenderi.php") ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -245,166 +249,106 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Statistique des stocks</h1>
-                    
-                        <div class="row">
-                            
-                            <p class="col-md-5 btn btn-user btn-block">
-                               Entrez le numero du moi <input type="number" name="nombre" id="nombre" value="1"> 
-                            </p>
-                           
-                            <p class="col-md-2" >
-                                Montant :<input type="checkbox" name="Mars" id="Mars" class="btn btn-primary btn-user btn-block">
-                            </p> 
-                            <p class="col-md-3">
-
-                            </p>
-                            
-                        </div>
+                    <h1 class="h3 mb-2 text-gray-800">Compte de Resultat</h1>
                     <hr>
                     <!-- Content Row -->
                     <div class="row">
 
                         <div class="col-xl-12 col-lg-10">
 
-                            <!-- Area Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Graphe de vente</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Compte de Resultat</h6>
+                                    
                                 </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+                                <br>
+                                
+                                <form class="user" action="registerresutat.php" method="post" enctype="multipart/form-data">
+                                <?php 
+                                   if (isset($_GET["id"])) {
+                                    require_once("../bdmutilple/getCompteResultat.php");
+                                    $CompteResultat = new CompteResultat();
+                                    $element = $CompteResultat->getElement($_GET["id"]);
+                                    //  
+                                    echo '<div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <input type="text" class="form-control form-control-user"
+                                                name="id" id="id" value="'.$element["id"].'" readonly>
+                                            </div>
+                                            </div>';
+                                    echo '<span class="drop" id="referenc">'.$element["reference"].'</span>';
+                                    echo '<span class="drop" id="libell">'.$element["libelle"].'</span>';
+                                    echo '<span class="drop" id="sign">'.$element["signe"].'</span>';
+                                    echo '<span class="drop" id="montan">'.$element["montant"].'</span>';
+                                    echo '<span class="drop" id="ordr">'.$element["ordre"].'</span>';
+                                    echo '<span class="drop" id="group">'.$element["groupe"].'</span>';
+                                    echo '<span class="drop" id="dat">'.$element["dateexercice"].'</span>';
+                                   }
+                                ?>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user"
+                                           name="reference" id="reference" placeholder="Reference" required >
                                     </div>
-                                    <hr> 
-                                    <code> Vente</code> 
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user"
+                                           name="libelle" id="libelle" placeholder="Libelle" required >
+                                    </div>
                                 </div>
-                            </div>
-
-                            <!-- Bar Chart -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Quantite</h6>
-                                    <div class="row">
-                            
-                                        <p class="col-md-5 btn btn-user btn-block">
-                                           Entrez le numero du moi <input type="number" name="nombre2" id="nombre2" value="1"> 
-                                        </p>
-                                        <p class="col-md-2" >
-                                            Quantite :<input type="checkbox" name="Quantite" id="Quantite" class="btn btn-primary btn-user btn-block">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select id="groupe"  name="groupe"  class="form-control form-select" >
+                                            <option value="marge">Marge commerciale</option>
+                                            <option value="chiffre">Chiffre d'affaires</option>
+                                            <option value="valeur">Valeur Ajoutee</option>
+                                            <option value="execedent">Exedent brut d'exploitation</option>
+                                            <option value="resultat_exploitation">Resultat d'exploitation</option>
+                                            <option value="resultat_finaciere">Resultat Financier</option>
                                             
-                                        </p>
+                                            <option value="resultat_hors">Resultat hors activites ordinaires</option>
+                                            <option value="resultat_net">Resultat net</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select id="signe"  name="signe"  class="form-control form-select" >
+                                            <option value="+">Signe (+) </option>
+                                            <option value="-">Signe (-) </option>
+                                            <option value="-/+">Signe (-/+) </option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-user"
+                                           name="Montant" id="Montant" placeholder="Montant" >
                                     </div>
-                                    <hr>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-user"
+                                           name="ordre" id="ordre" placeholder="numero d'ordre" >
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control form-control-user"
+                                           name="date" id="date" placeholder="date" >
+                                    </div>
                                     
-                                    <code>Quantite</code>.
                                 </div>
-                            </div>
-
-                            <!--<div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Etude Evolutive</h6>
-                                    <div class="row">
+                                <div class="form-group row">
+                                    
+                                </div>    
                             
-                                        <p class="col-md-5 btn btn-user btn-block">
-                                           Entrez le numero du moi <input type="number" name="nombre3" id="nombre3" value="1"> 
-                                        </p>
-                                        <p class="col-md-2" >
-                                            Analyse Evolutive :<input type="checkbox" name="Evolution" id="Evolution" class="btn btn-primary btn-user btn-block" onclick="EtudeEvolutive()">
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-bar">
-                                        <div class="form-group row">
-                                            <div class="col-lg-6">
-                                                <div class="card shadow mb-1">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Valeur du moi N</h6>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            Montant du moi N :
-                                                            <span id="montant1"> </span>
-                                                        </div>
+                                <hr>
+                                <span id="enregistrement">
+                                <button type="submit" name="enregistrement" id="enregistrement" class="btn btn-primary btn-user btn-block">
+                                    Enregistrer
+                                </button>
+                                </span>
+                            </form>
 
-                                                        <div class="col-lg-5">
-                                                            Nombre client du moi N :
-                                                            <span id="client1"> </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            </div>
+                            <!-------------------------------------------------->
+                            
 
-                                            <div class="col-lg-6">
-                                                <div class="card shadow mb-1">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Valeur du moi N+1</h6>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            Montant du moi N :
-                                                            <span id="montant2"> </span>
-                                                        </div>
-
-                                                        <div class="col-lg-5">
-                                                            Nombre client du moi N :
-                                                            <span id="client2"> </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-12">
-                                                <div class="card shadow mb-1">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Calcule Generale Moi</h6>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            Total en FCFA:
-                                                            <span id="Total"> </span>
-                                                        </div>
-
-                                                        <div class="col-lg-5">
-                                                            Total en % :
-                                                            <span id="Poucentage"> </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-12">
-                                                <div class="card shadow mb-1">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Calcule Generale Client</h6>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            Total en Client:
-                                                            <span id="Totalclient"> </span>
-                                                        </div>
-
-                                                        <div class="col-lg-5">
-                                                            Total en % :
-                                                            <span id="Poucentageclient"> </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <hr>
-                                    
-                                    <code>Evolution</code>.
-                                </div>
-                            </div>-->
+                            <!----------------------------------------------------------------->    
 
                         </div>
 
@@ -450,30 +394,33 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="index.php">Logout</a>
+                    <a class="btn btn-primary" href="../../index.php">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
+    <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="invantaire.js"></script>
     <!-- Page level plugins -->
-    <script src="../vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/chart-area-moi.js"></script>
-    
-    <script src="js/chart-bar-moi.js"></script>
-
+    <script>
+        document.getElementById("reference").value = document.getElementById("referenc").innerText;
+        document.getElementById("libelle").value = document.getElementById("libell").innerText;
+        document.getElementById("signe").value = document.getElementById("sign").innerText;
+        document.getElementById("Montant").value = document.getElementById("montan").innerText;
+        document.getElementById("ordre").value = document.getElementById("ordr").innerText;
+        document.getElementById("groupe").value = document.getElementById("group").innerText;
+        document.getElementById("date").value = document.getElementById("dat").innerText;
+        document.getElementById("enregistrement").innerHTML = '<button type="submit" name="modifier" id="modifier" class="btn btn-primary btn-user btn-block">modifier</button>'
+    </script>
 </body>
 
 </html>

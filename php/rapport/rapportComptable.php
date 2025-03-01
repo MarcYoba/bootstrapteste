@@ -39,29 +39,40 @@
                             
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-10 ">
-                                    <h6 class="m-0 font-weight-bold text-primary">Rapport Comptable</h6>
-                                    </div>
-                                    <div class="col-sm-2 ">
-                                    <a class="m-0 font-weight-bold text-warning" href="../../charts.html">Retour</a>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="form-group">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <p>     </p>
-                                </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                        <a href="../pdf/getcharge.php">
-                                            <button type="" name="" id="" class="btn btn-warning btn-user btn-block">
-                                             Cahier de charge
-                                            </button> 
-                                        </a>
+                                    <div class="form-group row">
+                                        <div class="col-sm-10 ">
+                                        <h6 class="m-0 font-weight-bold text-primary">Rapport Comptable</h6>
+                                        </div>
+                                        
+                                        <div class="col-sm-2 ">
+                                        <a class="m-0 font-weight-bold text-warning" href="../compteresultat/liste.php">Retour</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                <p></p>
+                                <form class="user" action="../pdf/getcharge.php" method="post">
+                                    <div class="form-group row">
+                                        
+                                            <div class="col-sm-4 mb-3 mb-sm-0">
+                                                <label for="annee">Année recherche</label>
+                                                <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                                    <?php
+                                                    $currentYear = 2024;
+                                                    echo "<option >Recherche a</option>";
+                                                    for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                                        echo "<option value=\"$year\">$year</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <button type="submit" name="" id="" class="btn btn-warning btn-user btn-block">
+                                                    Compte de Resultat
+                                                </button> 
+                                            </div>
+                                        
+                                    </div>
+                                </form>
+
                                 </div>
                                 <hr>
                            <!-- <form class="user" action="../pdf/getRapportDay.php" method="post">

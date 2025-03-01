@@ -2,8 +2,8 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
-var tabQTmoi = new Array(32);
-var tabDatemoi = new Array(32);
+var comptaQTmoi = new Array(32);
+var comptatabDatemoi = new Array(32);
 var varmoi  = 1;
 const  inputQuantite = document.getElementById("Quantite");
 //const  inputnombre = document.getElementById("nombre");
@@ -20,7 +20,7 @@ function EtudeEvolutive() {
   console.log("Evolution : ");
   let evolution= document.getElementById("nombre3").value;
   
-  fetch('../comptabilite/graphe/getevolution.php',{
+  fetch('graphe/getevolution.php',{
       method:'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -56,12 +56,12 @@ function RechargeGrapheQuantite() {
   console.log("QUANTITE du moi");
   varmoi = document.getElementById("nombre2").value;
   console.log(varmoi);
-  for (let index = 0; index < tabQTmoi.length; index++) {
-    tabQTmoi[index] = 0; 
-    tabDatemoi[index] = 0;  
+  for (let index = 0; index < comptaQTmoi.length; index++) {
+    comptaQTmoi[index] = 0; 
+    comptatabDatemoi[index] = 0;  
   }
 
-  fetch('comptabilite/graphe/getquantitemoi.php',{
+  fetch('graphe/getquantitemoi.php',{
       method:'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -79,8 +79,8 @@ function RechargeGrapheQuantite() {
           for(let proriete in element){
            // console.log(element[proriete]); 
             result = element[proriete];
-            tabQTmoi[index] = result.quantite;
-            tabDatemoi[index] = result.jour;
+            comptaQTmoi[index] = result.quantite;
+            comptatabDatemoi[index] = result.jour;
             //console.log(result.quantite); 
             //console.log(result.jour); 
               index +=1  
@@ -95,9 +95,9 @@ function RechargeGrapheQuantite() {
 //Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 //Chart.defaults.global.defaultFontColor = '#858796'; 
 }
-for (let index = 0; index < tabDatemoi.length; index++) {
-  tabDatemoi[index] = 0;
-  tabQTmoi[index] = 0;
+for (let index = 0; index < comptatabDatemoi.length; index++) {
+  comptatabDatemoi[index] = 0;
+  comptaQTmoi[index] = 0;
 }
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
@@ -138,8 +138,8 @@ $(function() {
           for(let proriete in element){
            // console.log(element[proriete]); 
             result = element[proriete];
-            tabQTmoi[index] = result.quantite;
-            tabDatemoi[index] = result.jour;
+            comptaQTmoi[index] = result.quantite;
+            comptatabDatemoi[index] = result.jour;
             //console.log(result.quantite); 
             //console.log(result.jour); 
               index +=1  
@@ -158,13 +158,13 @@ function creationBard(){
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: tabDatemoi,
+    labels: comptatabDatemoi,
     datasets: [{
       label: "Quantite",
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: tabQTmoi,
+      data: comptaQTmoi,
     }],
   },
   options: {
@@ -187,7 +187,7 @@ var myBarChart = new Chart(ctx, {
           drawBorder: false
         },
         ticks: {
-          maxTicksLimit: tabQTmoi.length
+          maxTicksLimit: comptaQTmoi.length
         },
         maxBarThickness: 25,
       }],

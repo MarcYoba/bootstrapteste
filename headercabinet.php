@@ -388,7 +388,7 @@ require_once("php/activesaision.php");
 
     
             <li class="nav-item">
-            <a class="nav-link" href="../../comptabilite/charts.php">
+            <a class="nav-link" href="../../comptabilite.php">
             <i class="fas fa-fw fa-chart-area"></i>
             Comtabilite<span></span></a>
             </li>';    

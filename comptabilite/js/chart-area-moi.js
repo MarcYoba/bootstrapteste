@@ -1,7 +1,7 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
-var tabMontantMoi = new Array(32);
-var tabJourMoi = new Array(32);
-var varmois  = 1;
+var comptatabMontantMoi = new Array(32);
+var comptatabJourMoi = new Array(32);
+var comptavarmois  = 1;
 
 const  inputMars = document.getElementById("Mars");
 //const  nombre = document.getElementById("nombre");
@@ -15,19 +15,19 @@ inputMars.addEventListener('input',funMars);
 
 function RechargeGraphe() {
   console.log("Valeur du moi");
-  varmois = document.getElementById("nombre").value;
-  console.log(varmois);
-  for (let index = 0; index < tabMontantMoi.length; index++) {
-    tabMontantMoi[index] = 0; 
-    tabJourMoi[index] = 0;  
+  comptavarmois = document.getElementById("nombre").value;
+  console.log(comptavarmois);
+  for (let index = 0; index < comptatabMontantMoi.length; index++) {
+    comptatabMontantMoi[index] = 0; 
+    comptatabJourMoi[index] = 0;  
   }
 
-  fetch('../comptabilite/graphe/getdatamoi.php',{
+  fetch('graphe/getdatamoi.php',{
       method:'POST',
         headers:{
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(varmois)
+        body: JSON.stringify(comptavarmois)
   })
     .then(response => {
       return response.json();
@@ -40,8 +40,8 @@ function RechargeGraphe() {
         for(let proriete in element){
            // console.log(element[proriete]); 
             result = element[proriete];
-            tabMontantMoi[ind] = result.prix;
-            tabJourMoi[ind] = result.jour;
+            comptatabMontantMoi[ind] = result.prix;
+            comptatabJourMoi[ind] = result.jour;
 
             ind +=1  
         }
@@ -55,14 +55,19 @@ function RechargeGraphe() {
 //Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 //Chart.defaults.global.defaultFontColor = '#858796'; 
 }
-for (let index = 0; index < tabMontantMoi.length; index++) {
-    tabMontantMoi[index] = 0; 
-    tabJourMoi[index] = 0;  
+for (let index = 0; index < comptatabMontantMoi.length; index++) {
+    comptatabMontantMoi[index] = 0; 
+    comptatabJourMoi[index] = 0;  
 }
 
 $(document).ready(function() {
 
-  fetch('../comptabilite/graphe/getdatamoi.php')
+  fetch('graphe/getdatamoi.php',{
+      method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        }
+  })
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -77,8 +82,8 @@ $(document).ready(function() {
         for(let proriete in element){
            // console.log(element[proriete]); 
             result = element[proriete];
-            tabMontantMoi[index] = result.prix;
-            tabJourMoi[index] = result.jour;
+            comptatabMontantMoi[index] = result.prix;
+            comptatabJourMoi[index] = result.jour;
 
             index +=1  
         }
@@ -125,7 +130,7 @@ function creationGrapeh(){
   var myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: tabJourMoi,
+      labels: comptatabJourMoi,
       datasets: [{
         label: "Vente",
         lineTension: 0.3,
@@ -139,7 +144,7 @@ function creationGrapeh(){
         pointHoverBorderColor: "rgba(78, 115, 223, 1)",
         pointHitRadius: 10,
         pointBorderWidth: 2,
-        data: tabMontantMoi,
+        data: comptatabMontantMoi,
       }],
     },
     options: {

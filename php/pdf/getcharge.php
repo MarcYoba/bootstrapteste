@@ -17,6 +17,14 @@ require '../../vendor/autoload.php';
 ini_set('memory_limit', '256M');
 use Dompdf\Dompdf;
 
+if (isset($_POST['annee'])) {
+    $annee = $_POST['annee'];
+} else {
+    $annee = date("Y");
+}
+
+
+
 $date = date("Y-m-d");
 $depenses = new Depense(0);
 $vente = new Vente(0);
@@ -76,220 +84,242 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">Libelle</th>
             <th scope="col">Signe</th>
             <th scope="col">Coef</th>
-            <th scope="col">'.date("Y").'</th>
+            <th scope="col">'.$annee.'</th>
             <th scope="col">Exercice -1 </th>
         </tr>';
-
+        
+        $sommevente = $vente->SommeVente();
+        $sommeventeAnnePasse = $vente->SommeVenteAnnePasse();
         $html .= '
         <tr>
             <th scope="col">Ventes de marchandises (A)</th>
             <th scope="col">+</th>
             <th scope="col">1</th>
-            <th scope="col">'.$vente->SommeVente() - $facture->sommeVenteProduitFabriquer().'</th>
-            <th scope="col">'.$vente->SommeVenteAnnePasse() - $facture->sommeVenteProduitFabriquerPasser().'</th>
+            <th scope="col">'.$sommevente.'</th>
+            <th scope="col">'.$sommeventeAnnePasse.'</th>
         </tr>';
-
+        $sommeachat = $achat->SommeAchat();
+        $sommeachatAnnePasse = $achat->SommeAchatAnnePasse();
         $html .= '
         <tr>
             <th scope="col">Achats de marchandises </th>
             <th scope="col">-</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$achat->SommeAchat().'</th>
-            <th scope="col">'.$achat->SommeAchatAnnePasse().'</th>
+            <th scope="col">'.$sommeachat.'</th>
+            <th scope="col">'.$sommeachatAnnePasse.'</th>
         </tr>';
-
+        //$stok->VariationStok()
         $html .= '
         <tr>
             <th scope="col">Variation de stocks de marchandises</th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$stok->VariationStok().'</th>
+            <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
-
+        $xampp = $sommevente - $sommeachat;
+        $xamppAnnePasse = $sommeventeAnnePasse - $sommeachatAnnePasse;
         $html .= '
         <tr>
             <th scope="col" style="color: blue;">MARGE COMMERCIALE (Somme TA à RB)</th>
             <th scope="col" style="color: blue;">-</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">'.($achat->SommeAchat()*-1) + $vente->SommeVente()-$facture->sommeVenteProduitFabriquer().'</th>
-            <th scope="col" style="color: blue;">'.($achat->SommeAchatAnnePasse()*-1) + ($vente->SommeVenteAnnePasse())-$facture->sommeVenteProduitFabriquerPasser().'</th>
+            <th scope="col" style="color: blue;">'.$xampp.'</th>
+            <th scope="col" style="color: blue;">'.$xamppAnnePasse.'</th>
         </tr>';
-
+        //'.$facture->sommeVenteProduitFabriquer().'
+        //'.$facture->sommeVenteProduitFabriquerPasser().'
         $html .= '
         <tr>
             <th scope="col">Ventes de produits fabriqués (B)</th>
             <th scope="col">+</th>
             <th scope="col">1</th>
-            <th scope="col">'.$facture->sommeVenteProduitFabriquer().'</th>
-            <th scope="col">'.$facture->sommeVenteProduitFabriquerPasser().'</th>
+            <th scope="col">0</th>
+            <th scope="col">0</th>
         </tr>';
+        //'.$service->sommeService().'
         $html .= '
         <tr>
             <th scope="col">Travaux, services vendus (C)</th>
             <th scope="col">+</th>
             <th scope="col">1</th>
-            <th scope="col">'.$service->sommeService().'</th>
+            <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
+        //'.$comptabilite->SommeCorporelles(date("Y")).'
         $html .= '
         <tr>
             <th scope="col">Produits accessoires (D)</th>
             <th scope="col">+</th>
             <th scope="col">1</th>
-            <th scope="col">'.$comptabilite->SommeCorporelles(date("Y")).'</th>
+            <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
-
+        //'.$service->sommeService() + $facture->sommeVenteProduitFabriquer().'
         $html .= '
         <tr>
             <th scope="col" style="color: blue;">CHIFFRE AFFAIRES (A  B  C  D)</th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">'.$service->sommeService() + $facture->sommeVenteProduitFabriquer().'</th>
+            <th scope="col" style="color: blue;">0</th>
             <th scope="col" style="color: blue;">0</th>
         </tr>';
-
+        //'.$produit->SommeProduitStocker(date("Y")).'
         $html .= '
         <tr>
             <th scope="col">Production stockée (ou déstockage) </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$produit->SommeProduitStocker(date("Y")).'</th>
+            <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
+        //'.$comptabilite->SommeImmobilisationCorporel().'
+        //'.$comptabilite->SommeImmobilisationCorporelexercice().'
         $html .= '
         <tr>
             <th scope="col">Production immobilisée </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$comptabilite->SommeImmobilisationCorporel().'</th>
-            <th scope="col">'.$comptabilite->SommeImmobilisationCorporelexercice().'</th>
+            <th scope="col">0</th>
+            <th scope="col">0</th>
         </tr>';
+        //'.$comptabilite->SommeSubvention().'
+        //'.$comptabilite->SommeSubventionexercice().'
         $html .= '
         <tr>
             <th scope="col">Subventions d’exploitation</th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$comptabilite->SommeSubvention().'</th>
-            <th scope="col">'.$comptabilite->SommeSubventionexercice().'</th>
+            <th scope="col">0</th>
+            <th scope="col">0</th>
         </tr>';
-
+        //'.$depenses->SommeDepenseAchat().'
         $html .= '
         <tr>
             <th scope="col">Autres produits</th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$depenses->SommeDepenseAchat().'</th>
+            <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
-
+        //'.$depenses->SommeDepense().'
+        //'.$depenses->SommeDepenseExercice().'
         $html .= '
         <tr>
             <th scope="col">Transferts de charges exploitation   </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$depenses->SommeDepense().'</th>
-            <th scope="col">'.$depenses->SommeDepenseExercice().'</th>
+            <th scope="col">0</th>
+            <th scope="col">0</th>
         </tr>';
-
+        //'.$achat->SommeAchat().'
+        //'.$achat->SommeAchatAnnePasse().'
         $html .= '
         <tr>
             <th scope="col">Achats de matières premières et fournitures liées  </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$achat->SommeAchat().'</th>
-            <th scope="col">'.$achat->SommeAchatAnnePasse().'</th>
+            <th scope="col">0</th>
+            <th scope="col">0</th>
         </tr>';
-
+        //'.$stok->VariationStokfourniture().'
+        //'.$stok->VariationStokfournitureExercice().'
         $html .= '
         <tr>
             <th scope="col">Variation de stocks de matières premières et fournitures liées  </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$stok->VariationStokfourniture().'</th>
-            <th scope="col">'.$stok->VariationStokfournitureExercice().'</th>
+            <th scope="col">0</th>
+            <th scope="col">0</th>
         </tr>';
-
+        $sommedepenseAchat = $depenses->SommeDepenseAchat();
+        $sommedepenseExerciceAchat = $depenses->SommeDepenseExerciceAchat();
         $html .= '
         <tr>
             <th scope="col">Autres achats   </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$depenses->SommeDepenseAchat().'</th>
-            <th scope="col">'.$depenses->SommeDepenseExerciceAchat().'</th>
+            <th scope="col">'.$sommedepenseAchat.'</th>
+            <th scope="col">'.$sommedepenseExerciceAchat.'</th>
         </tr>';
-
+        //'.$comptabilite->SommeAutreAprovision().'
+        //'.$comptabilite->SommeAutreAprovisionExercice().'
         $html .= '
         <tr>
             <th scope="col">Variation de stocks d’autres approvisionnements</th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$comptabilite->SommeAutreAprovision().'</th>
-            <th scope="col">'.$comptabilite->SommeAutreAprovisionExercice().'</th>
+            <th scope="col">0</th>
+            <th scope="col">0</th>
         </tr>';
-
+        $sommedepensevoyage = $depenses->SommeDepenseVoyages();
+        $sommedepenseExerciceVoyage = $depenses->SommeDepenseExerciceVoyages();
         $html .= '
         <tr>
             <th scope="col">Transports</th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$depenses->SommeDepenseVoyages().'</th>
-            <th scope="col">'.$depenses->SommeDepenseExerciceVoyages().'</th>
+            <th scope="col">'. $sommedepensevoyage.'</th>
+            <th scope="col">'.$sommedepenseExerciceVoyage.'</th>
         </tr>';
-
+        $sommeservice = $service->sommeService();
         $html .= '
         <tr>
             <th scope="col">Services extérieurs </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">0</th>
+            <th scope="col">'.$sommeservice.'</th>
             <th scope="col">0</th>
         </tr>';
-
+        $sommeinpot = $depenses->SommeDepenseImpot();
+        $sommeinpotExercice = $depenses->SommeDepenseExerciceImpot();
         $html .= '
         <tr>
             <th scope="col">Impôts et taxes </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$depenses->SommeDepenseImpot().'</th>
-            <th scope="col">'.$depenses->SommeDepenseExerciceImpot().'</th>
+            <th scope="col">'.$sommeinpot.'</th>
+            <th scope="col">'.$sommeinpotExercice.'</th>
         </tr>';
-
+        $sommeautrecharge = $depenses->SommeDepenseAutreCharge();
+        $sommeautrechargeExercice = $depenses->SommeDepenseExerciceAutreCharge();
         $html .= '
         <tr>
             <th scope="col">Autres charges  </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$depenses->SommeDepenseAutreCharge().'</th>
-            <th scope="col">'.$depenses->SommeDepenseExerciceAutreCharge().'</th>
+            <th scope="col">'.$sommeautrecharge .'</th>
+            <th scope="col">'.$sommeautrechargeExercice.'</th>
         </tr>';
-
+        $xc = $sommeautrecharge + $sommeinpot + $sommeservice + $sommedepensevoyage + $sommedepenseAchat;
+        $xcExercice = $sommeautrechargeExercice + $sommeinpotExercice + $sommeservice + $sommedepenseExerciceVoyage + $sommedepenseExerciceAchat;
         $html .= '
         <tr>
             <th scope="col">VALEUR AJOUTEE (XB +RA+RB) + (somme TE à RJ)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">0</th>
-            <th scope="col" style="color: blue;">0</th>
+            <th scope="col" style="color: blue;">'.$xc.'</th>
+            <th scope="col" style="color: blue;">'.$xcExercice.'</th>
         </tr>';
-
+        $sommepersonnel = $depenses->SommeDepensePersonnel();
+        $sommepersonnelexercice = $depenses->SommeDepenseExercicePersonnel();
         $html .= '
         <tr>
             <th scope="col">Charges de personnel  </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">'.$depenses->SommeDepensePersonnel().'</th>
-            <th scope="col">'.$depenses->SommeDepenseExercicePersonnel().'</th>
+            <th scope="col">'.$sommepersonnel.'</th>
+            <th scope="col">'.$sommepersonnelexercice.'</th>
         </tr>';
-
+        $xd = $xc - $sommepersonnel;
+        $xdExercice = $xcExercice - $sommepersonnelexercice;
         $html .= '
         <tr>
             <th scope="col">EXCEDENT BRUT EXPLOITATION (XC+RK)   </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">0</th>
-            <th scope="col" style="color: blue;">0</th>
+            <th scope="col" style="color: blue;">'.$xd.'</th>
+            <th scope="col" style="color: blue;">'.$xdExercice.'</th>
         </tr>';
 
         $html .= '
@@ -300,6 +330,7 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
+
         $html .= '
         <tr>
             <th scope="col">Dotations aux amortissements, aux provisions et dépréciations</th>
@@ -308,14 +339,15 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'.$comptabilite->SommeAmortise().'</th>
             <th scope="col">'.$comptabilite->SommeExerciceAmortise().'</th>
         </tr>';
-
+        $xe = $xd - $comptabilite->SommeAmortise();
+        $xeExercice = $xdExercice - $comptabilite->SommeExerciceAmortise();
         $html .= '
         <tr>
             <th scope="col">RESULTAT EXPLOITATION (XD+TJ+ RL)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">0</th>
-            <th scope="col" style="color: blue;">0</th>
+            <th scope="col" style="color: blue;">'.$xe.'</th>
+            <th scope="col" style="color: blue;">'.$xeExercice.'</th>
         </tr>';
 
         $html .= '
@@ -370,14 +402,15 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col" style="color: blue;">0</th>
             <th scope="col" style="color: blue;">0</th>
         </tr>';
-
+        $xg = $xe;
+        $xgExercice = $xeExercice;
         $html .= '
         <tr>
             <th scope="col">RESULTAT DES ACTIVITES ORDINAIRES (XE+XF)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">0</th>
-            <th scope="col" style="color: blue;">0</th>
+            <th scope="col" style="color: blue;">'.$xg.'</th>
+            <th scope="col" style="color: blue;">'.$xgExercice.'</th>
         </tr>';
 
         $html .= '
@@ -415,14 +448,15 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
-
+        $xh = $xg*(26.5/100);
+        $xhExercice = $xgExercice*(26.5/100);
         $html .= '
         <tr>
             <th scope="col">RESULTAT HORS ACTIVITES ORDINAIRES (somme TN à RP)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">0</th>
-            <th scope="col" style="color: blue;">0</th>
+            <th scope="col" style="color: blue;">'.$xh.'</th>
+            <th scope="col" style="color: blue;">'.$xhExercice.'</th>
         </tr>';
 
         $html .= '
@@ -442,14 +476,15 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
-
+        $xi = $xg - $xh;
+        $xiExercice = $xgExercice - $xhExercice;
         $html .= '
         <tr>
             <th scope="col">RESULTAT NET (XG+XH+RQ+RS)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">0</th>
-            <th scope="col" style="color: blue;">0</th>
+            <th scope="col" style="color: blue;">'.$xi.'</th>
+            <th scope="col" style="color: blue;">'.$xiExercice.'</th>
         </tr>';
         
         $html .= '
