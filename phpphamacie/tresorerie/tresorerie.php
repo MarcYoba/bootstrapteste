@@ -32,7 +32,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headercabinet.php"); ?>
+        <?php require_once("../../headercabinet.php") ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -249,7 +249,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Actif du bilan</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Tresorerie</h1>
                     <hr>
                     <!-- Content Row -->
                     <div class="row">
@@ -258,15 +258,15 @@
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Constitution Actif</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Ajouter ligne Tresorerie</h6>
                                     
                                 </div>
                                 <br>
                                 
-                                <form class="user" action="registerbilan.php" method="post" enctype="multipart/form-data">
+                                <form class="user" action="regirsterTresorerie.php" method="post" enctype="multipart/form-data">
                                 <?php 
                                    if (isset($_GET["id"])) {
-                                    require_once("../bdmutilple/getbilan.php");
+                                    require_once("bdmutilple/getbilan.php");
                                     $bilan = new Bilan();
                                     $element = $bilan->getElement($_GET["id"]);
                                     echo '<div class="form-group row">
@@ -285,15 +285,15 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user"
-                                           name="Libelle" id="Libelle" placeholder="Libelle Actif" >
+                                           name="besoin" id="besoin" placeholder="BESOINS" required>
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <select id="groupe"  name="groupe"  class="form-control form-select" >
-                                            <option value="Incorporelles">Immobilisations Incorporelles</option>
-                                            <option value="corporelles">Immobilisations corporelles</option>
-                                            <option value="financieres">Immobilisations financières</option>
-                                            <option value="circulant">ACTIF CIRCULANT</option>
-                                            <option value="trsorerieactif">TRESORERIE-ACTIF</option>
+                                        <select id="groupe"  name="groupe"  class="form-control form-select" required>
+                                            <option value="Investisements_initiaux">Investisements initiaux</option>
+                                            <option value="BFR">BFR</option>
+                                            <option value="ressources">RESSOURCES</option>
+                                            <option value="Fond_propres">Fond propres</option>
+                                            <option value="Dette_long">Dette de long terme</option>
                                             <option value="differentiels">produits différentiels</option>
                                         </select>
                                     </div>
@@ -301,21 +301,34 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <input type="number" class="form-control form-control-user"
-                                           name="brut" id="brut" placeholder="Montant Brut" >
+                                           name="Montant" id="Montant" placeholder="Montant" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="number" class="form-control form-control-user"
-                                           name="amortisement" id="amortisement" placeholder="amortisement/ prov" >
+                                    <label for="mois">Sélectionnez un mois :</label>
+                                    <select id="mois" name="mois" required>
+                                        <option value="01">Janvier</option>
+                                        <option value="02">Février</option>
+                                        <option value="03">Mars</option>
+                                        <option value="04">Avril</option>
+                                        <option value="05">Mai</option>
+                                        <option value="06">Juin</option>
+                                        <option value="07">Juillet</option>
+                                        <option value="08">Août</option>
+                                        <option value="09">Septembre</option>
+                                        <option value="10">Octobre</option>
+                                        <option value="11">Novembre</option>
+                                        <option value="12">Décembre</option>
+                                    </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <input type="number" class="form-control form-control-user"
-                                           name="net" id="net" placeholder="NET" >
+                                           name="ordre" id="ordre" placeholder="numero d'ordre" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="date" class="form-control form-control-user"
-                                           name="date" id="date" placeholder="date" >
+                                           name="date" id="date" placeholder="date" required>
                                     </div>
                                 </div>    
                             

@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerProvenderi.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -52,9 +52,9 @@
 
                     if (isset($_GET["anne"])) {
                         //echo $_GET["anne"];
-                        $actif = $bilan->GetActif($_GET["anne"]);
+                        $actif = $bilan->GetPassif($_GET["anne"]);
                     } else {
-                        $actif = $bilan->GetActif(2022);
+                        $actif = $bilan->GetPassif(2022);
                     }  
                 ?>
                 <!-- End of Topbar -->
@@ -63,17 +63,17 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Bilan</h1>
+                    <h1 class="h3 mb-2 text-gray-800">passif bilan</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Structure du bilan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Structure du Passif</h6>
                             <br>
                             <div class=" form-group row">
                             <p class="col-md-2" >
-                                <button class="btn btn-info btn-user btn-block" onclick="AnneBilan()">Bilan au </button>
+                                <button class="btn btn-info btn-user btn-block" onclick="AnnePassif()">Bilan au </button>
                             </p>
                             <p class="col-md-3">
                                Entrez annee <input type="number" name="nombre" id="nombre" value="2022"> 
@@ -89,28 +89,24 @@
                                     <thead>
                                        
                                         <tr>
-                                            <th rowspan="2" style="text-align: center;">Actif</th>
+                                            <th rowspan="2" style="text-align: center;">Passif</th>
                                             <?php 
                                              if (isset($_GET["anne"])) {
-                                                echo '<th colspan="4" style="text-align: center;">'.$_GET["anne"].'</th>';
+                                                echo '<th colspan="2" style="text-align: center;">'.$_GET["anne"].'</th>';
                                              } else {
-                                                echo '<th colspan="4" style="text-align: center;">2022</th>';
+                                                echo '<th colspan="2" style="text-align: center;">2022</th>';
                                              }
                                             ?>
                                         </tr>
                                         <tr>
-                                            <th>BRUT</th>
-                                            <th>AMORT/PROV</th>
-                                            <th>NET</th>
+                                            <th>Montant</th>
                                             <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Actif</th>
-                                            <th>BRUT</th>
-                                            <th>AMORT/PROV</th>
-                                            <th>NET</th>
+                                            <th>Passif</th>
+                                            <th>Montant</th>
                                             <th>Operation</th>
                                         </tr>
                                     </tfoot>
@@ -122,21 +118,17 @@
                                             echo '<tr>';
                                             if (strpos($value["libelle"], "Totale") !== false) {
                                                 echo '<td style="color: blue;">'.$value["libelle"].'</td>';
-                                                echo '<td style="color: blue;">'.$value["brut"].'</td>';
-                                                echo '<td style="color: blue;">'.$value["amortisement"].'</td>';
-                                                echo '<td style="color: blue;">'.$value["net"].'</td>';
+                                                echo '<td style="color: blue;">'.$value["montant"].'</td>';
                                             } else {
                                                 echo '<td>'.$value["libelle"].'</td>';
-                                                echo '<td>'.$value["brut"].'</td>';
-                                                echo '<td>'.$value["amortisement"].'</td>';
-                                                echo '<td>'.$value["net"].'</td>';
+                                                echo '<td>'.$value["montant"].'</td>';
 
                                                 if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                                     # code...
                                                 }else if(($_SESSION['roles'] == "semiadmin")){
-                                                    echo "<td><a href='actif.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                                    echo "<td><a href='passif.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
                                                 }else{
-                                                    echo "<td><a href='actif.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                                    echo "<td><a href='passif.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
                                                 }
                                             }
                                             echo '</tr>';

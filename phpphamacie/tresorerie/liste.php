@@ -1,5 +1,9 @@
-<?php require_once("../connexion.php"); 
+<?php 
+
+require_once("../connexion.php"); 
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +38,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerProvenderi.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -45,16 +49,16 @@
 
                 <!-- Topbar -->
                 <?php 
-                    require_once("../../Topbar.php");
+                   
                     global $conn;
-                    require_once("../bdmutilple/getbilan.php");
-                    $bilan = new Bilan();
+                    require_once("../bdmutilple/getTresorerie.php");
+                    $Tresorerie = new Tresorerie();
 
                     if (isset($_GET["anne"])) {
                         //echo $_GET["anne"];
-                        $actif = $bilan->GetActif($_GET["anne"]);
+                        $Tresorerie = $Tresorerie->GetTresorerie($_GET["anne"]);
                     } else {
-                        $actif = $bilan->GetActif(2022);
+                        $Tresorerie = $Tresorerie->GetTresorerie(date("Y"));
                     }  
                 ?>
                 <!-- End of Topbar -->
@@ -63,17 +67,17 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Bilan</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Tresorerie</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Structure du bilan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Structure de la Tresorerie</h6>
                             <br>
                             <div class=" form-group row">
                             <p class="col-md-2" >
-                                <button class="btn btn-info btn-user btn-block" onclick="AnneBilan()">Bilan au </button>
+                                <button class="btn btn-info btn-user btn-block" onclick="AnneBilan()">Tresorerie au </button>
                             </p>
                             <p class="col-md-3">
                                Entrez annee <input type="number" name="nombre" id="nombre" value="2022"> 
@@ -89,54 +93,79 @@
                                     <thead>
                                        
                                         <tr>
-                                            <th rowspan="2" style="text-align: center;">Actif</th>
+                                            <th rowspan="2" style="text-align: center;">BESOINS</th>
                                             <?php 
                                              if (isset($_GET["anne"])) {
-                                                echo '<th colspan="4" style="text-align: center;">'.$_GET["anne"].'</th>';
+                                                echo '<th colspan="13" style="text-align: center;">'.$_GET["anne"].'</th>';
                                              } else {
-                                                echo '<th colspan="4" style="text-align: center;">2022</th>';
+                                                echo '<th colspan="13" style="text-align: center;">2022</th>';
                                              }
                                             ?>
                                         </tr>
                                         <tr>
-                                            <th>BRUT</th>
-                                            <th>AMORT/PROV</th>
-                                            <th>NET</th>
+                                            
+                                            <th>MOIS 01</th>
+                                            <th>MOIS 02</th>
+                                            <th>MOIS 03</th>
+                                            <th>MOIS 04</th>
+                                            <th>MOIS 05</th>
+                                            <th>MOIS 06</th>
+                                            <th>MOIS 07</th>
+                                            <th>MOIS 08</th>
+                                            <th>MOIS 09</th>
+                                            <th>MOIS 10</th>
+                                            <th>MOIS 11</th>
+                                            <th>MOIS 12</th>
                                             <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Actif</th>
-                                            <th>BRUT</th>
-                                            <th>AMORT/PROV</th>
-                                            <th>NET</th>
-                                            <th>Operation</th>
+                                        <th>--</th>
+                                            <th>MOIS 01</th>
+                                            <th>MOIS 02</th>
+                                            <th>MOIS 03</th>
+                                            <th>MOIS 04</th>
+                                            <th>MOIS 05</th>
+                                            <th>MOIS 06</th>
+                                            <th>MOIS 07</th>
+                                            <th>MOIS 08</th>
+                                            <th>MOIS 09</th>
+                                            <th>MOIS 10</th>
+                                            <th>MOIS 11</th>
+                                            <th>MOIS 12</th>
+                                        <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
-                                        
+                                         if(!empty($Tresorerie)){
                                         // var_dump($actif);
-                                        foreach ($actif as $key => $value) {
+                                        foreach ($Tresorerie as $key => $value) {
                                             echo '<tr>';
-                                            if (strpos($value["libelle"], "Totale") !== false) {
-                                                echo '<td style="color: blue;">'.$value["libelle"].'</td>';
-                                                echo '<td style="color: blue;">'.$value["brut"].'</td>';
-                                                echo '<td style="color: blue;">'.$value["amortisement"].'</td>';
-                                                echo '<td style="color: blue;">'.$value["net"].'</td>';
-                                            } else {
-                                                echo '<td>'.$value["libelle"].'</td>';
-                                                echo '<td>'.$value["brut"].'</td>';
-                                                echo '<td>'.$value["amortisement"].'</td>';
-                                                echo '<td>'.$value["net"].'</td>';
-
-                                                if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                    # code...
-                                                }else if(($_SESSION['roles'] == "semiadmin")){
-                                                    echo "<td><a href='actif.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
-                                                }else{
-                                                    echo "<td><a href='actif.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                            // var_dump($value);
+                                            // exit();
+                                           
+                                                if (strpos($value[0], "Totale") !== false) {
+                                                    foreach ($value as $keys => $element) {
+                                                        if($keys != 1){
+                                                            echo '<td style="color: red;">'.$element.'</td>';
+                                                            echo '<td style="color: blue;">'.$element.'</td>';
+                                                        }
+                                                    }
+                                                } else {
+                                                    foreach ($value as $keys => $element) {
+                                                        if( $keys != 1){
+                                                            echo '<td>'.$element.'</td>';
+                                                        }
+                                                    }
+                                                    if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
+                                                        # code...
+                                                    }else if(($_SESSION['roles'] == "semiadmin")){
+                                                        echo "<td><a href='tresorerie.php?id=" .$value[1]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                                    }else{
+                                                        echo "<td><a href='tresorerie.php?id=" .$value[1]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                                    }
                                                 }
                                             }
                                             echo '</tr>';
@@ -211,7 +240,7 @@
     <script src="../../header.js"></script>
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-    <script src="bilan.js"></script>
+    
 
 </body>
 

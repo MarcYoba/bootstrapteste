@@ -125,6 +125,22 @@ class Vente{
         }
         return $this->data; 
     }
+    public function SommeVente(){
+        global $conn;
+        $sql = "SELECT ROUND(SUM(prix),2) as montant FROM ventephamacie WHERE YEAR(datevente)= YEAR(CURRENT_DATE)";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+    public function SommeVenteAnnePasse(){
+        global $conn;
+        $anne = date("Y");
+        $anne = $anne-1;
+        $sql = "SELECT ROUND(SUM(prix),2) as montant FROM ventephamacie WHERE YEAR(datevente)= '$anne'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
 
     public function getSommeTotalCaisse() {
         global $conn;
@@ -444,8 +460,32 @@ class Vente{
                 $prix+=$rowfacture["prix"];
             }
             $tab = ["Total",$quantite,$prix,$montant,"-","-"];
-            $tabr = ["Reduction","0","0",$this->getReductionForVente($idfacutre),"-","-"];
-            $tabn = ["Net a payer","-",$montant-$this->getReductionForVente($idfacutre),$this->getTypePaiement($idfacutre),"-","-"];
+            $tabr = ["Reduction","-","-",$this->getReductionForVente($idfacutre),"-","-"];
+            $tabn = ["Net a payer","-","-",$montant-$this->getReductionForVente($idfacutre),"-","-"];
+            array_push($valdata,$tab);
+            array_push($valdata,$tabr);
+            array_push($valdata,$tabn);
+        return $valdata;
+    }
+
+    public function getFactureVentePrint($idfacutre){
+        global $conn;
+            $valdata = [];
+            $montant = 0;
+            $quantite = 0;
+            $prix = 0;
+
+            $sqlfacture = "SELECT nomproduit,quantite,prix,montant FROM facturephamacie WHERE  idvente = '$idfacutre'";
+            $resultfa = $conn->query($sqlfacture); 
+            while ($rowfacture = mysqli_fetch_assoc($resultfa)) {
+                array_push($valdata,$rowfacture);
+                $montant+=$rowfacture["montant"];
+                $quantite+=$rowfacture["quantite"];
+                $prix+=$rowfacture["prix"];
+            }
+            $tab = ["Total",$quantite];
+            $tabr = ["Reduction",$this->getReductionForVente($idfacutre)];
+            $tabn = ["Net a payer",$montant-$this->getReductionForVente($idfacutre),"-",$this->getTypePaiement($idfacutre)];
             array_push($valdata,$tab);
             array_push($valdata,$tabr);
             array_push($valdata,$tabn);

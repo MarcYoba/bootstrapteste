@@ -12,7 +12,7 @@ if (empty($donnees)) {
   $day = $donnees;
 }
 
-$sql = "SELECT DATE(datevente) AS jour, SUM(prix) AS prix FROM ventephamacie WHERE Year(datevente) = Year(NOW()) AND MONTH(datevente) = '$day' GROUP BY DATE(datevente) ORDER BY jour";
+$sql = "SELECT DATE(datevente) AS jour, SUM(prix) AS prix FROM ventephamacie WHERE YEAR(datevente) = YEAR(CURRENT_DATE) AND MONTH(datevente) = '$day' GROUP BY DATE(datevente) ORDER BY jour";
 $result = $conn->query($sql);
 //$data = mysqli_fetch_assoc($result);
 $data = [];

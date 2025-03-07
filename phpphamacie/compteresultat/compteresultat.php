@@ -32,7 +32,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headercabinet.php"); ?>
+        <?php require_once("../../headercabinet.php") ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -249,7 +249,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Actif du bilan</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Compte de Resultat</h1>
                     <hr>
                     <!-- Content Row -->
                     <div class="row">
@@ -258,65 +258,82 @@
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Constitution Actif</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Compte de Resultat</h6>
                                     
                                 </div>
                                 <br>
                                 
-                                <form class="user" action="registerbilan.php" method="post" enctype="multipart/form-data">
+                                <form class="user" action="registerresutat.php" method="post" enctype="multipart/form-data">
                                 <?php 
                                    if (isset($_GET["id"])) {
-                                    require_once("../bdmutilple/getbilan.php");
-                                    $bilan = new Bilan();
-                                    $element = $bilan->getElement($_GET["id"]);
+                                    require_once("../bdmutilple/getCompteResultat.php");
+                                    $CompteResultat = new CompteResultat();
+                                    $element = $CompteResultat->getElement($_GET["id"]);
+                                    //  
                                     echo '<div class="form-group row">
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control form-control-user"
                                                 name="id" id="id" value="'.$element["id"].'" readonly>
                                             </div>
                                             </div>';
-                                    echo '<span class="drop" id="label">'.$element["libelle"].'</span>';
-                                    echo '<span class="drop" id="mbrut">'.$element["brut"].'</span>';
-                                    echo '<span class="drop" id="momort">'.$element["amortisement"].'</span>';
-                                    echo '<span class="drop" id="mnet">'.$element["net"].'</span>';
-                                    echo '<span class="drop" id="dt">'.$element["datebilan"].'</span>';
+                                    echo '<span class="drop" id="referenc">'.$element["reference"].'</span>';
+                                    echo '<span class="drop" id="libell">'.$element["libelle"].'</span>';
+                                    echo '<span class="drop" id="sign">'.$element["signe"].'</span>';
+                                    echo '<span class="drop" id="montan">'.$element["montant"].'</span>';
+                                    echo '<span class="drop" id="ordr">'.$element["ordre"].'</span>';
+                                    echo '<span class="drop" id="group">'.$element["groupe"].'</span>';
+                                    echo '<span class="drop" id="dat">'.$element["dateexercice"].'</span>';
                                    }
                                 ?>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user"
-                                           name="Libelle" id="Libelle" placeholder="Libelle Actif" >
+                                           name="reference" id="reference" placeholder="Reference" required >
                                     </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user"
+                                           name="libelle" id="libelle" placeholder="Libelle" required >
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <select id="groupe"  name="groupe"  class="form-control form-select" >
-                                            <option value="Incorporelles">Immobilisations Incorporelles</option>
-                                            <option value="corporelles">Immobilisations corporelles</option>
-                                            <option value="financieres">Immobilisations financières</option>
-                                            <option value="circulant">ACTIF CIRCULANT</option>
-                                            <option value="trsorerieactif">TRESORERIE-ACTIF</option>
-                                            <option value="differentiels">produits différentiels</option>
+                                            <option value="marge">Marge commerciale</option>
+                                            <option value="chiffre">Chiffre d'affaires</option>
+                                            <option value="valeur">Valeur Ajoutee</option>
+                                            <option value="execedent">Exedent brut d'exploitation</option>
+                                            <option value="resultat_exploitation">Resultat d'exploitation</option>
+                                            <option value="resultat_finaciere">Resultat Financier</option>
+                                            
+                                            <option value="resultat_hors">Resultat hors activites ordinaires</option>
+                                            <option value="resultat_net">Resultat net</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select id="signe"  name="signe"  class="form-control form-select" >
+                                            <option value="+">Signe (+) </option>
+                                            <option value="-">Signe (-) </option>
+                                            <option value="-/+">Signe (-/+) </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <input type="number" class="form-control form-control-user"
-                                           name="brut" id="brut" placeholder="Montant Brut" >
+                                           name="Montant" id="Montant" placeholder="Montant" >
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <input type="number" class="form-control form-control-user"
-                                           name="amortisement" id="amortisement" placeholder="amortisement/ prov" >
+                                           name="ordre" id="ordre" placeholder="numero d'ordre" >
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input type="number" class="form-control form-control-user"
-                                           name="net" id="net" placeholder="NET" >
-                                    </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <input type="date" class="form-control form-control-user"
                                            name="date" id="date" placeholder="date" >
                                     </div>
+                                    
+                                </div>
+                                <div class="form-group row">
+                                    
                                 </div>    
                             
                                 <hr>
@@ -395,11 +412,13 @@
     <script src="invantaire.js"></script>
     <!-- Page level plugins -->
     <script>
-        document.getElementById("Libelle").value = document.getElementById("label").innerText;
-        document.getElementById("brut").value = document.getElementById("mbrut").innerText;
-        document.getElementById("amortisement").value = document.getElementById("momort").innerText;
-        document.getElementById("net").value = document.getElementById("mnet").innerText;
-        document.getElementById("date").value = document.getElementById("dt").innerText;
+        document.getElementById("reference").value = document.getElementById("referenc").innerText;
+        document.getElementById("libelle").value = document.getElementById("libell").innerText;
+        document.getElementById("signe").value = document.getElementById("sign").innerText;
+        document.getElementById("Montant").value = document.getElementById("montan").innerText;
+        document.getElementById("ordre").value = document.getElementById("ordr").innerText;
+        document.getElementById("groupe").value = document.getElementById("group").innerText;
+        document.getElementById("date").value = document.getElementById("dat").innerText;
         document.getElementById("enregistrement").innerHTML = '<button type="submit" name="modifier" id="modifier" class="btn btn-primary btn-user btn-block">modifier</button>'
     </script>
 </body>

@@ -95,16 +95,16 @@ $html = '
 </head>
 <body>';
 
-$html .='<table style="border-collapse: separate; border-spacing: 0px;">
+$html .='<table style="border-collapse: separate; border-spacing: 0px;" >
         <thead>';
         
-        $html .=' <tr><th  align="left"">CABINET VETERINAIRE DE SOA : '.$date." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' 
-          NRCCM:RC/YAE2022/B/2852
+        $html .=' <tr><th  align="center"">CABINET VETERINAIRE DE SOA <br> '.$date." Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' 
+        <br>  NRCCM:RC/YAE2022/B/2852
         </th>
         
-        <th>
-            <img src="'.$qrcode.'" alt="QR Code" />    
-        </th>
+        </tr>
+        <tr>
+            <th colspan="1"><img src="'.$qrcode.'" alt="QR Code" />  </th>
         </tr>
         </thead>
         <tbody>';
@@ -112,27 +112,33 @@ $html .='<table style="border-collapse: separate; border-spacing: 0px;">
         
         $html .= '</tr>
             <tr>
-            <th scope="colspan="4">produit</th>
+            <th colspan="1">produit</th>
         </tr>';
-        $facture = $vente->getFactureVente($id);
+        $facture = $vente->getFactureVentePrint($id);
             foreach ($facture as $linefatcture) {
-                $html .= '<tr>';
+                $html .= '<tr><td >';
                 $i = 0;
                 foreach ($linefatcture as $key => $cell) {
-                    $html .= '<td style="width: 10%;">' ;
-                    if ($i<5) {
-                        $html .=$cell;
+                    if ($i==0) {
+                        $html .= $cell ." : ";
+                    }
+                    elseif ($i==1) {
+                        $html .= " ".$cell ."x";
+                    }elseif ($i==2) {
+                        $html .= " ".$cell." =";
+                    }else{
+                        $html .= " ".$cell;
                     }
                     $i++;
-                    $html .= '</td>' ;
+                   
                 }
-                $html .= '</tr>';
+                $html .= '</td></tr>';
             }
         $html .= '
         </tbody>
     </table>';
 
-$html .= '<br>TELEPHONE : YDE-SOA FIN GOUDRON 655271506-673925507-676359056
+$html .= '<br>TELEPHONE : YDE-SOA FIN GOUDRON <br> 655271506-673925507-676359056
 </body>
 </html>';
 

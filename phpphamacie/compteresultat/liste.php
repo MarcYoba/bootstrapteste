@@ -1,5 +1,8 @@
-<?php require_once("../connexion.php"); 
+<?php 
+require_once("../connexion.php"); 
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +37,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerProvenderi.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -45,16 +48,16 @@
 
                 <!-- Topbar -->
                 <?php 
-                    require_once("../../Topbar.php");
+                   
                     global $conn;
-                    require_once("../bdmutilple/getbilan.php");
-                    $bilan = new Bilan();
+                    require_once("../bdmutilple/getCompteResultat.php");
+                    $CompteResultat = new CompteResultat();
 
                     if (isset($_GET["anne"])) {
                         //echo $_GET["anne"];
-                        $actif = $bilan->GetActif($_GET["anne"]);
+                        $CompteResultat = $CompteResultat->GetCompteREsultat($_GET["anne"]);
                     } else {
-                        $actif = $bilan->GetActif(2022);
+                        $CompteResultat = $CompteResultat->GetCompteREsultat(date("Y"));
                     }  
                 ?>
                 <!-- End of Topbar -->
@@ -63,25 +66,27 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Bilan</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Compte de resultat</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Structure du bilan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Compte de resultat</h6>
                             <br>
-                            <div class=" form-group row">
-                            <p class="col-md-2" >
-                                <button class="btn btn-info btn-user btn-block" onclick="AnneBilan()">Bilan au </button>
-                            </p>
-                            <p class="col-md-3">
-                               Entrez annee <input type="number" name="nombre" id="nombre" value="2022"> 
-                            </p>
-                            <p class="col-md-5"> 
-                            </p>
-                            
-                        </div>
+                            <div class="form-group row">
+                                <div class="col-md-5" >
+                                    <button class="btn btn-info btn-user btn-block" onclick="AnneBilan()">compte de resultat au </button>
+                                </div>
+                                <div class="col-md-3">
+                                Entrez annee <input type="number" name="nombre" id="nombre" value="2022"> 
+                                </div>
+                                <div class="col-md-4"> 
+                                    <a href="../rapport/rapportComptable.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                        class="fas fa-download fa-sm text-white-50"></i>telecharger</a>
+                                </div>
+                                
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -89,58 +94,64 @@
                                     <thead>
                                        
                                         <tr>
-                                            <th rowspan="2" style="text-align: center;">Actif</th>
+                                        <th style="text-align: center;">REF</th>
+                                            <th style="text-align: center;">LIBELLES</th>
+                                            <th>Signe</th>
                                             <?php 
                                              if (isset($_GET["anne"])) {
-                                                echo '<th colspan="4" style="text-align: center;">'.$_GET["anne"].'</th>';
+                                                echo '<th colspan="" style="text-align: center;"> EXERCICE'.$_GET["anne"].'</th>';
                                              } else {
-                                                echo '<th colspan="4" style="text-align: center;">2022</th>';
+                                                echo '<th colspan="" style="text-align: center;"> EXERCICE 2022</th>';
                                              }
                                             ?>
-                                        </tr>
-                                        <tr>
-                                            <th>BRUT</th>
-                                            <th>AMORT/PROV</th>
-                                            <th>NET</th>
+                                            
                                             <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Actif</th>
-                                            <th>BRUT</th>
-                                            <th>AMORT/PROV</th>
-                                            <th>NET</th>
-                                            <th>Operation</th>
+                                            <th>REF</th>
+                                            <th>LIBELLES</th>
+                                            <th>Signe</th>
+                                            <th>Exercice</th>
+                                        <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                         
                                         // var_dump($actif);
-                                        foreach ($actif as $key => $value) {
+                                        foreach ($CompteResultat as $key => $value) {
                                             echo '<tr>';
-                                            if (strpos($value["libelle"], "Totale") !== false) {
-                                                echo '<td style="color: blue;">'.$value["libelle"].'</td>';
-                                                echo '<td style="color: blue;">'.$value["brut"].'</td>';
-                                                echo '<td style="color: blue;">'.$value["amortisement"].'</td>';
-                                                echo '<td style="color: blue;">'.$value["net"].'</td>';
-                                            } else {
-                                                echo '<td>'.$value["libelle"].'</td>';
-                                                echo '<td>'.$value["brut"].'</td>';
-                                                echo '<td>'.$value["amortisement"].'</td>';
-                                                echo '<td>'.$value["net"].'</td>';
-
-                                                if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                    # code...
-                                                }else if(($_SESSION['roles'] == "semiadmin")){
-                                                    echo "<td><a href='actif.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
-                                                }else{
-                                                    echo "<td><a href='actif.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                            // var_dump($value);
+                                            // exit();
+                                           
+                                                if (strpos($value["libelle"], "Total") !== false) {
+                                                    
+                                                    echo '<td style="color: red;">'.$value["reference"].'</td>';
+                                                    echo '<td style="color: red;">'.$value["libelle"].'</td>';
+                                                    echo '<td style="color: red;">'.$value["signe"].'</td>';
+                                                    echo '<td style="color: red;">'.$value["montant"].'</td>';
+                                                    echo '<td style="color: red;"></td>';
+                                                     
+                                                } else {
+                                                    echo '<td >'.$value["reference"].'</td>';
+                                                    echo '<td >'.$value["libelle"].'</td>';
+                                                    echo '<td >'.$value["signe"].'</td>';
+                                                    echo '<td >'.$value["montant"].'</td>';
+                                                    if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
+                                                        echo '<td style="color: red;"></td>';
+                                                    }else if(($_SESSION['roles'] == "semiadmin")){
+                                                        echo "<td><a href='compteresultat.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                                        
+                                                    }else{
+                                                        
+                                                        echo "<td><a href='compteresultat.php?id=" .$value["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
+                                                    }
                                                 }
                                             }
                                             echo '</tr>';
-                                        }
+                                        
                                     ?>
                                     </tbody>
                                 </table>
@@ -211,7 +222,7 @@
     <script src="../../header.js"></script>
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-    <script src="bilan.js"></script>
+    
 
 </body>
 

@@ -13,25 +13,25 @@ $data = array(
     "versement" =>0,
 );
 
-$sql = "SELECT SUM(montant) as montant FROM achatphamacie";
+$sql = "SELECT SUM(montant) as montant FROM achatphamacie WHERE YEAR(dateachat) = YEAR(CURRENT_DATE)";
 $result = $conn->query($sql);
 $row = mysqli_fetch_assoc($result);
 
 $data["achat"] = $row["montant"];
 
-$sql = "SELECT SUM(prix) as montant FROM ventephamacie";
+$sql = "SELECT SUM(prix) as montant FROM ventephamacie WHERE YEAR(datevente) = YEAR(CURRENT_DATE)";
 $result = $conn->query($sql);
 $row = mysqli_fetch_assoc($result);
 
 $data["vente"] =$row["montant"];
 
-$sql = "SELECT SUM(montant) as montant FROM dettephamacie";
+$sql = "SELECT SUM(montant) as montant FROM dettephamacie WHERE YEAR(datedette) = YEAR(CURRENT_DATE)";
 $result = $conn->query($sql);
 $row = mysqli_fetch_assoc($result);
 
 $data["dette"] =$row["montant"];
 
-$sql = "SELECT SUM(montant) as montant FROM versementphamacie";
+$sql = "SELECT SUM(montant) as montant FROM versementphamacie WHERE YEAR(dateversement) = YEAR(CURRENT_DATE)";
 $result = $conn->query($sql);
 $row = mysqli_fetch_assoc($result);
 

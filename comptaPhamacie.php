@@ -12,18 +12,14 @@
     <title>GESTION DE STOCK</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
-        href="../../https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
-    <style>
-        .drop{
-            display: none;
-        }
-    </style>
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -32,7 +28,10 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headercabinet.php"); ?>
+        <?php 
+        session_start();
+        require_once("headerphamacie.php"); 
+        ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -81,7 +80,7 @@
                                             placeholder="Search for..." aria-label="Search"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
+                                            <button class="btn btn-success" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
                                             </button>
                                         </div>
@@ -106,7 +105,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
+                                        <div class="icon-circle bg-success">
                                             <i class="fas fa-file-alt text-white"></i>
                                         </div>
                                     </div>
@@ -249,89 +248,168 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Actif du bilan</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Statistique des stocks</h1>
+                    
+                        <div class="row">
+                            
+                            <p class="col-md-5 btn btn-user btn-block">
+                               Entrez le numero du moi <input type="number" name="nombre" id="nombre" value="1"> 
+                            </p>
+                           
+                            <p class="col-md-2" >
+                                Montant :<input type="checkbox" name="Mars" id="Mars" class="btn btn-primary btn-user btn-block">
+                            </p>
+                            
+                            
+                            
+                            
+                        </div>
+                    
+
                     <hr>
                     <!-- Content Row -->
                     <div class="row">
 
                         <div class="col-xl-12 col-lg-10">
 
+                            <!-- Area Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Constitution Actif</h6>
-                                    
+                                    <h6 class="m-0 font-weight-bold text-primary">Graphe de vente</h6>
                                 </div>
-                                <br>
-                                
-                                <form class="user" action="registerbilan.php" method="post" enctype="multipart/form-data">
-                                <?php 
-                                   if (isset($_GET["id"])) {
-                                    require_once("../bdmutilple/getbilan.php");
-                                    $bilan = new Bilan();
-                                    $element = $bilan->getElement($_GET["id"]);
-                                    echo '<div class="form-group row">
-                                            <div class="col-sm-12">
-                                                <input type="text" class="form-control form-control-user"
-                                                name="id" id="id" value="'.$element["id"].'" readonly>
-                                            </div>
-                                            </div>';
-                                    echo '<span class="drop" id="label">'.$element["libelle"].'</span>';
-                                    echo '<span class="drop" id="mbrut">'.$element["brut"].'</span>';
-                                    echo '<span class="drop" id="momort">'.$element["amortisement"].'</span>';
-                                    echo '<span class="drop" id="mnet">'.$element["net"].'</span>';
-                                    echo '<span class="drop" id="dt">'.$element["datebilan"].'</span>';
-                                   }
-                                ?>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user"
-                                           name="Libelle" id="Libelle" placeholder="Libelle Actif" >
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart"></canvas>
                                     </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <select id="groupe"  name="groupe"  class="form-control form-select" >
-                                            <option value="Incorporelles">Immobilisations Incorporelles</option>
-                                            <option value="corporelles">Immobilisations corporelles</option>
-                                            <option value="financieres">Immobilisations financières</option>
-                                            <option value="circulant">ACTIF CIRCULANT</option>
-                                            <option value="trsorerieactif">TRESORERIE-ACTIF</option>
-                                            <option value="differentiels">produits différentiels</option>
-                                        </select>
-                                    </div>
+                                    <hr> 
+                                    <code> Vente</code> 
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input type="number" class="form-control form-control-user"
-                                           name="brut" id="brut" placeholder="Montant Brut" >
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="number" class="form-control form-control-user"
-                                           name="amortisement" id="amortisement" placeholder="amortisement/ prov" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input type="number" class="form-control form-control-user"
-                                           name="net" id="net" placeholder="NET" >
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="date" class="form-control form-control-user"
-                                           name="date" id="date" placeholder="date" >
-                                    </div>
-                                </div>    
-                            
-                                <hr>
-                                <span id="enregistrement">
-                                <button type="submit" name="enregistrement" id="enregistrement" class="btn btn-primary btn-user btn-block">
-                                    Enregistrer
-                                </button>
-                                </span>
-                            </form>
-
                             </div>
-                            <!-------------------------------------------------->
-                            
 
-                            <!----------------------------------------------------------------->    
+                            <!-- Bar Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Quantite</h6>
+                                    <div class="row">
+                            
+                                        <p class="col-md-5 btn btn-user btn-block">
+                                           Entrez le numero du moi <input type="number" name="nombre2" id="nombre2" value="1"> 
+                                        </p>
+                                        <p class="col-md-2" >
+                                            Quantite :<input type="checkbox" name="Quantite" id="Quantite" class="btn btn-primary btn-user btn-block">
+                                            
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="myBarChart"></canvas>
+                                    </div>
+                                    <hr>
+                                    
+                                    <code>Quantite</code>.
+                                </div>
+                            </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Etude Evolutive</h6>
+                                    <div class="row">
+                            
+                                        <p class="col-md-5 btn btn-user btn-block">
+                                           Entrez le numero du moi <input type="number" name="nombre3" id="nombre3" value="1"> 
+                                        </p>
+                                        <p class="col-md-2" >
+                                            Analyse Evolutive :<input type="checkbox" name="Evolution" id="Evolution" class="btn btn-primary btn-user btn-block" onclick="EtudeEvolutive()">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <div class="card shadow mb-1">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Valeur du moi N</h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-5">
+                                                            Montant du moi N :
+                                                            <span id="montant1"> </span>
+                                                        </div>
+
+                                                        <div class="col-lg-5">
+                                                            Nombre client du moi N :
+                                                            <span id="client1"> </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="card shadow mb-1">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Valeur du moi N+1</h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-5">
+                                                            Montant du moi N :
+                                                            <span id="montant2"> </span>
+                                                        </div>
+
+                                                        <div class="col-lg-5">
+                                                            Nombre client du moi N :
+                                                            <span id="client2"> </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="card shadow mb-1">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Calcule Generale Moi</h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-5">
+                                                            Total en FCFA:
+                                                            <span id="Total"> </span>
+                                                        </div>
+
+                                                        <div class="col-lg-5">
+                                                            Total en % :
+                                                            <span id="Poucentage"> </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="card shadow mb-1">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Calcule Generale Client</h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-5">
+                                                            Total en Client:
+                                                            <span id="Totalclient"> </span>
+                                                        </div>
+
+                                                        <div class="col-lg-5">
+                                                            Total en % :
+                                                            <span id="Poucentageclient"> </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <hr>
+                                    
+                                    <code>Evolution</code>.
+                                </div>
+                            </div>
 
                         </div>
 
@@ -377,31 +455,30 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="../../index.php">Logout</a>
+                    <a class="btn btn-primary" href="index.php">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../../vendor/jquery/jquery.min.js"></script>
-    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../../js/sb-admin-2.min.js"></script>
-    <script src="invantaire.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+
     <!-- Page level plugins -->
-    <script>
-        document.getElementById("Libelle").value = document.getElementById("label").innerText;
-        document.getElementById("brut").value = document.getElementById("mbrut").innerText;
-        document.getElementById("amortisement").value = document.getElementById("momort").innerText;
-        document.getElementById("net").value = document.getElementById("mnet").innerText;
-        document.getElementById("date").value = document.getElementById("dt").innerText;
-        document.getElementById("enregistrement").innerHTML = '<button type="submit" name="modifier" id="modifier" class="btn btn-primary btn-user btn-block">modifier</button>'
-    </script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-moipharmacie.js"></script>
+    
+    <script src="js/demo/chart-bar-moipharmacie.js"></script>
+
 </body>
 
 </html>

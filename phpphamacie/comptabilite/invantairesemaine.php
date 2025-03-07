@@ -19,11 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
-    <style>
-        .drop{
-            display: none;
-        }
-    </style>
+
 </head>
 
 <body id="page-top">
@@ -249,90 +245,142 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Actif du bilan</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Evolution Vente semain</h1>
+                    
+                        <div class="row">
+                            
+                            <p class="col-md-3 btn btn-user btn-block">
+                               Entrez le numero du moi <input type="number" name="nombre" id="nombre" value="1"> 
+                            </p>
+                           
+                            <p class="col-md-2" >
+                                <button class="btn btn-info btn-user btn-block" onclick="semaine()">Evolurion moi</button>
+                            </p>
+                        </div>
+                    
+
                     <hr>
                     <!-- Content Row -->
                     <div class="row">
 
-                        <div class="col-xl-12 col-lg-10">
-
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Constitution Actif</h6>
-                                    
-                                </div>
-                                <br>
-                                
-                                <form class="user" action="registerbilan.php" method="post" enctype="multipart/form-data">
-                                <?php 
-                                   if (isset($_GET["id"])) {
-                                    require_once("../bdmutilple/getbilan.php");
-                                    $bilan = new Bilan();
-                                    $element = $bilan->getElement($_GET["id"]);
-                                    echo '<div class="form-group row">
-                                            <div class="col-sm-12">
-                                                <input type="text" class="form-control form-control-user"
-                                                name="id" id="id" value="'.$element["id"].'" readonly>
-                                            </div>
-                                            </div>';
-                                    echo '<span class="drop" id="label">'.$element["libelle"].'</span>';
-                                    echo '<span class="drop" id="mbrut">'.$element["brut"].'</span>';
-                                    echo '<span class="drop" id="momort">'.$element["amortisement"].'</span>';
-                                    echo '<span class="drop" id="mnet">'.$element["net"].'</span>';
-                                    echo '<span class="drop" id="dt">'.$element["datebilan"].'</span>';
-                                   }
-                                ?>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user"
-                                           name="Libelle" id="Libelle" placeholder="Libelle Actif" >
-                                    </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <select id="groupe"  name="groupe"  class="form-control form-select" >
-                                            <option value="Incorporelles">Immobilisations Incorporelles</option>
-                                            <option value="corporelles">Immobilisations corporelles</option>
-                                            <option value="financieres">Immobilisations financières</option>
-                                            <option value="circulant">ACTIF CIRCULANT</option>
-                                            <option value="trsorerieactif">TRESORERIE-ACTIF</option>
-                                            <option value="differentiels">produits différentiels</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input type="number" class="form-control form-control-user"
-                                           name="brut" id="brut" placeholder="Montant Brut" >
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="number" class="form-control form-control-user"
-                                           name="amortisement" id="amortisement" placeholder="amortisement/ prov" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input type="number" class="form-control form-control-user"
-                                           name="net" id="net" placeholder="NET" >
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="date" class="form-control form-control-user"
-                                           name="date" id="date" placeholder="date" >
-                                    </div>
-                                </div>    
-                            
-                                <hr>
-                                <span id="enregistrement">
-                                <button type="submit" name="enregistrement" id="enregistrement" class="btn btn-primary btn-user btn-block">
-                                    Enregistrer
-                                </button>
-                                </span>
-                            </form>
-
-                            </div>
+                        <div class="col-xl-12 col-lg-10">                           
                             <!-------------------------------------------------->
-                            
+                            <!----------------------------------------------------------------->  
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <div class="form-group row">
+                                                <div class="card shadow mb-1">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Vente Semaine</h6>
+                                                    </div>
+                                                <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-order='[[0, "desc"]]'>
+                                                <thead>
+                                                    <tr>
+                                                        <th>/\</th>
+                                                        <th>Lundi</th>
+                                                        <th>Madi</th>
+                                                        <th>Mercredi</th>
+                                                        <th>Jeudi</th>
+                                                        <th>Vendredi</th>
+                                                        <th>Samedi</th>
+                                                        <th>Dimanche</th>
+                                                        <th>Evolution</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>/\</th>
+                                                        <th>Lundi</th>
+                                                        <th>Madi</th>
+                                                        <th>Mercredi</th>
+                                                        <th>Jeudi</th>
+                                                        <th>Vendredi</th>
+                                                        <th>Samedi</th>
+                                                        <th>Dimanche</th>
+                                                        <th>Evolution</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <tr>
+                                                    <?php 
+                                            
+                                                        if (isset($_GET["id"])) {
+                                                            $id = $_GET["id"];
+                                                            if (empty($id)) {
+                                                                $id =  date('m');
+                                                            }
+                                                        }else{
+                                                            $id =  date('m');
+                                                        }
+                                                        // Exemple d'utilisation pour l'année en cours :
 
-                            <!----------------------------------------------------------------->    
+                                                        function premierLundiDuMois($mois = null, $annee = null) {
+                                                            // Si aucune année ou mois n'est spécifié, on prend les valeurs actuelles
+                                                            $annee = $annee ?? date('Y');
+                                                            $mois = $mois ?? date('m');
+                                                            // Créer une date pour le premier jour du mois
+                                                            $date = new DateTime("$annee-$mois-01");
+                                                            // Trouver le prochain lundi
+                                                            $date->modify('next monday');
+                                                            // Retourner la date au format souhaité
+                                                            return $date->format('Y-m-d'); // Format AAAA-MM-JJ
+                                                        }
+                                                        
+                                                        // Exemple d'utilisation :
+                                                        $premierLundi = premierLundiDuMois($id);
 
+                                                        $numeroSemaine = date('W', strtotime($premierLundi));
+                                                        require_once("../bdmutilple/etudeEvolutive.php");
+                                                        $evolution = new EtudeEvolution();
+                                                        
+                                                        for ($i=1; $i <=4 ; $i++) { 
+                                                            echo "<tr>";
+                                                            echo '<td> semain'.$i.'</td>';
+                                                            $variable = $evolution->SommeSemaine($numeroSemaine);
+                                                            if (!empty($variable)) {
+                                                                foreach ($variable as $key => $value) {
+                                                                    
+                                                                        echo '<td>'.$value["datevente"].'</td>';
+                                                                    
+                                                                }
+
+                                                            } else {
+                                                                for ($j=0; $j <7; $j++) { 
+                                                                    echo "<td>-----</td>";
+                                                                }
+                                                            }
+                                                            
+                                                            
+                                                            if ($i== 1 || $i== 3) {
+                                                                echo '<td rowspan="5" align="center">'.$evolution->EvolutionSommePrixsemain($numeroSemaine).' FCFA </td>';
+
+                                                            }
+                                                            echo "</tr>";
+                                                            echo "<tr>";
+                                                            echo '<td> Montant</td>';
+                                                            $variable = $evolution->SommeSemaine($numeroSemaine);
+                                                                foreach ($variable as $key => $value) {
+                                                                    
+                                                                        echo '<td>'.$value["total_par_jour"].'</td>';
+                                                                    
+                                                                }
+                                                            echo "</tr>";
+                                                            echo "<tr>";
+                                                            echo '<td>Total : </td>';
+                                                            echo '<td colspan="7" align="center">'.$evolution->SommePrixsemain($numeroSemaine).' FCFA </td>';
+                                                            echo "</tr>";
+                                                            $numeroSemaine+=1;
+                                                        }
+                                                    ?>
+                                                
+                                                </tbody>
+                                            </table>
+                                    
+                                    <code>Evaluation semain</code>.
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Donut Chart -->
@@ -394,14 +442,7 @@
     <script src="../../js/sb-admin-2.min.js"></script>
     <script src="invantaire.js"></script>
     <!-- Page level plugins -->
-    <script>
-        document.getElementById("Libelle").value = document.getElementById("label").innerText;
-        document.getElementById("brut").value = document.getElementById("mbrut").innerText;
-        document.getElementById("amortisement").value = document.getElementById("momort").innerText;
-        document.getElementById("net").value = document.getElementById("mnet").innerText;
-        document.getElementById("date").value = document.getElementById("dt").innerText;
-        document.getElementById("enregistrement").innerHTML = '<button type="submit" name="modifier" id="modifier" class="btn btn-primary btn-user btn-block">modifier</button>'
-    </script>
+
 </body>
 
 </html>

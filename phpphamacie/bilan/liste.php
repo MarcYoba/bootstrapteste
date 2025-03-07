@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerProvenderi.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -80,7 +80,7 @@
                             </p>
                             <p class="col-md-5"> 
                             </p>
-                            
+                           
                         </div>
                         </div>
                         <div class="card-body">
