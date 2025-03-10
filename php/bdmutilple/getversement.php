@@ -42,6 +42,14 @@ class Versement{
         return $row["montant"]; 
     }
 
+    public function ByVersementIdClient($idclient){
+        global $conn;
+        $sql = "SELECT SUM(montant + Om) as montant FROM versement WHERE idclient = '$idclient' AND YEAR(dateversement) = YEAR(CURRENT_DATE)";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
     public function ByVersementIdClientDate($idclient,$date){
         global $conn;
         $sql = "SELECT SUM(montant + Om + banque) as montant FROM versement WHERE idclient = '$idclient' AND dateversement= '$date'";

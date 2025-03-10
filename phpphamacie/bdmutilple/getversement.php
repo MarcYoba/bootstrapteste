@@ -10,6 +10,8 @@ class Versement{
         $this->dateversement = $dateversement;
     }
 
+
+
     public function ToDay(){
         global $conn;
         $sql = "SELECT SUM(montant) as montant FROM versementphamacie WHERE dateversement= CURRENT_DATE";
@@ -20,7 +22,12 @@ class Versement{
 
     public function TotalVersement(){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM versementphamacie WHERE dateversement BETWEEN '2025-12-01' AND CURRENT_DATE";
+        // $anne = date("Y");
+        // $jour = date("d");
+        // $mois = date("m");
+        // $anne_jour = new DateTime($anne."-".$mois."-".$jour);
+        // $anne_jour = $anne_jour->format('Y-m-d');
+        $sql = "SELECT SUM(montant + Om + banque) as montant FROM versementphamacie WHERE YEAR(dateversement) = YEAR(CURRENT_DATE)";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -44,10 +51,10 @@ class Versement{
 
     public function ByWeekVersement($datebedut,$datafin){
         global $conn;
-        $sql = "SELECT SUM(montant) as montant FROM versementphamacie WHERE dateversement BETWEEN '$datebedut'  AND '$datafin'";
+        $sql = "SELECT SUM(montant + Om + banque) as prix FROM versementphamacie WHERE dateversement BETWEEN '$datebedut'  AND '$datafin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
-        return $row["montant"]; 
+        return $row["prix"]; 
     }
 
     public function ByDateVersementOm($date){
@@ -151,7 +158,7 @@ class Versement{
 
     public function ByVersementIdClientDate($idclient,$date){
         global $conn;
-        $sql = "SELECT SUM(montant + Om) as montant FROM versementphamacie WHERE idclient = '$idclient' AND dateversement= '$date'";
+        $sql = "SELECT SUM(montant + Om + banque) as montant FROM versementphamacie WHERE idclient = '$idclient' AND dateversement= '$date'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -167,6 +174,14 @@ class Versement{
             array_push($data,$row);
         }
         return $data; 
+    }
+
+    public function ByVersementClientdate($date){
+        global $conn;
+        $sql = "SELECT SUM(montant + Om + banque) as montant FROM versementphamacie WHERE  dateversement= '$date'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
     }
 }
 ?>

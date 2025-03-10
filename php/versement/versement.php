@@ -114,7 +114,7 @@
                                     echo'<div class="form-group row">';
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="montant" id="montant" placeholder="montant" value='.intval($donnees["montant"]).' required>'; 
+                                                name="montant" id="montant" placeholder="montant" value="0" required>'; 
                                         echo'</div>';
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                             if(isset($_GET['tableau'])){

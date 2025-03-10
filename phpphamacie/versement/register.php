@@ -35,7 +35,7 @@ function creerCaisse($montant) {
 }
 
 // Fonction pour créer un compte utilisateur $nom, $type, $prixvente, $prixachat, $quantite
-function creerVersement($client, $montant, $montantdette,$dateversement,$om,$matif ) {
+function creerVersement($client, $montant,$dateversement,$om,$matif,$banque ) {
     global $conn;
 
     if (!empty($dateversement )) {
@@ -48,14 +48,14 @@ function creerVersement($client, $montant, $montantdette,$dateversement,$om,$mat
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO versementphamacie (montant, idclient, iduser,dateversement,Om,motif) VALUES (?, ?, ?, ?,?,?)";
+    $sql = "INSERT INTO versementphamacie (montant, idclient, iduser,dateversement,Om,motif,banque) VALUES (?, ?, ?, ?,?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
         die('Erreur de préparation de la requête : ' . $conn->error);
     }
 
-    $stmt->bind_param('dddsds', $montant , $client, $_SESSION['id'], $date,$om,$matif);
+    $stmt->bind_param('dddsdsd', $montant , $client, $_SESSION['id'], $date,$om,$matif,$banque);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
@@ -65,7 +65,7 @@ function creerVersement($client, $montant, $montantdette,$dateversement,$om,$mat
     // Fermer la requête
     $stmt->close();
 
-    if($montant == $montantdette){
+    if($montant){
 
        $sql ="SELECT SUM(versement) as somme FROM client WHERE id='$client'";
         $result = $conn->query($sql);
@@ -111,17 +111,18 @@ if (isset($_POST['submit'])) {
    // $iddette = $_POST['iddette'];
     $client = $_POST['client'];
     $montant = $_POST['montant'];
-    $montantdette = $_POST['montantdette'];
+    
     $dateversement = $_POST['dateversement'];
     $om = $_POST['om'];
+    $banque = $_POST['banque'];
     $matif = $_POST['matif'];
     
     // Vérifier si tous les champs sont remplis
-    if (!empty($client) || !empty($montant) || !empty($montantdette)) {
+    if (!empty($client) || !empty($montant) ) {
         
             // Vérifier si l'adresse e-mail existe déjà
 
-                creerVersement($client, $montant, $montantdette,$dateversement,$om,$matif);
+                creerVersement($client, $montant,$dateversement,$om,$matif,$banque);
                 header("Location:liste.php");
            
                 exit();
