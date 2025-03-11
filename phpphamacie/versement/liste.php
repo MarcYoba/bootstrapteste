@@ -58,7 +58,61 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div class="row">
-                                <p class="col-md-0"><h6 class="m-0 font-weight-bold text-primary">Tables Versement</h6></p>
+                                
+                                <div class="col-md-10">
+                                    <form method="post" action="../pdf/getversement.php">
+                                    <div class="col-md-0">
+                                        <h6 class="m-0 font-weight-bold text-primary">Tables Versement</h6>
+                                    </div>
+                                    <div class="form-group row">
+                                    <div class="col-md-2" >
+                                        <input type="date" class="form-control form-control-user"
+                                            name="date1" id="date1" placeholder="quantite">
+                                    </div>
+                                    <div class="col-md-2" >
+                                        <input type="date" class="form-control form-control-user"
+                                            name="date2" id="date2" placeholder="quantite">
+                                    </div>
+                                        
+                                    <div class="col-md-3" >
+                                        <input type="search" id="recherche" onkeyup="recherduclient()"  class="form-control form-control-user" placeholder="recherche"><br>
+                                        <select id="client"  name="client"   class="form-control form-select" size="4" multiple aria-label="multiple select">   <!--  -->
+                                            <option value="ALL" selected>ALL</option>             
+                                                <?php 
+                                                    global $conn;
+                                                    $sql = "SELECT id, firstname, adresse FROM client";
+                                                    $result = $conn->query($sql);
+                                                    while ($row = mysqli_fetch_assoc($result)){     
+                                                        echo "<option value='".$row["id"]."'>".$row["firstname"]."</option>";       
+                                                                                        //var_dump($row);
+                                                    }
+                                                ?> 
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-md-1" >
+                                        <a href="../versement/liste.php"  class="btn btn-info btn-user" >Liste</a>
+                                    </div>
+
+                                    
+                                    <div class="col-md-3" >
+                                    <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                    </div>
+                                    </div>
+                                    <div class="col-md-2" >
+                                        <label for="annee">Année recherche</label>
+                                        <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                            <?php
+                                            $currentYear = 2024;
+                                            echo "<option >Recherche a</option>";
+                                            for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                                echo "<option value=\"$year\">$year</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </form>
+                                </div>
                                 <div class="col-md-2">
                                 <br>
                                     <label for="annee">Année recherche :</label>
@@ -211,6 +265,27 @@
         function reload() {
             var annee = document.getElementById("annee").value;
             window.location.href = "liste.php?date=" + annee;
+        }
+
+        function recherduclient() {
+        // Récupérer l'input et la liste déroulante
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("recherche");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("client");
+        li = ul.getElementsByTagName("option");
+        console.log(li.length);
+        // Boucler sur toutes les options
+        for (i = 0; i < li.length; i++) {
+            a = li[i];
+            
+            if (a.textContent.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+            } else {
+            li[i].style.display = "none";
+            }
+        }
+        
         }
     </script>
 

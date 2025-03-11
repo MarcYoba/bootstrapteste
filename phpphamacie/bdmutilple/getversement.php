@@ -33,6 +33,41 @@ class Versement{
         return $row["montant"]; 
     }
 
+    public function AllVersementYear(){
+        global $conn;
+        $data = [];
+
+        $sql = "SELECT * FROM versementphamacie WHERE YEAR(dateversement)= YEAR(CURRENT_DATE)";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+
+        return $data; 
+    }
+
+    public function ByVersementdate($date){
+        global $conn;
+        $data = [];
+        $sql = "SELECT  SUM(montant + Om + banque) as montant, dateversement, idclient FROM versementphamacie WHERE  dateversement= '$date'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function ByWeekVersementClient($datebedut,$datafin,$idclient){
+        global $conn;
+        $data = [];
+        $sql = "SELECT dateversement, idclient, SUM(montant + Om + banque) as montant FROM versementphamacie WHERE dateversement BETWEEN '$datebedut'  AND '$datafin' AND idclient='$idclient'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
     public function ByDateVersement($date){
         global $conn;
         $sql = "SELECT SUM(montant) as montant FROM versementphamacie WHERE dateversement= '$date'";

@@ -20,7 +20,7 @@ class Versement{
 
     public function TotalVersement(){
         global $conn;
-        $sql = "SELECT SUM(montant + Om) as montant FROM versement WHERE dateversement BETWEEN '2025-12-01' AND CURRENT_DATE";
+        $sql = "SELECT SUM(montant + Om + banque) as montant FROM versement WHERE YEAR(dateversement) = YEAR(CURRENT_DATE)";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -50,6 +50,17 @@ class Versement{
         return $row["montant"]; 
     }
 
+    public function ByVersemenClient($idclient){
+        global $conn;
+        $date = [];
+        $sql = "SELECT dateversement, idclient, SUM(montant + Om + banque) as montant FROM versement WHERE idclient = '$idclient' AND YEAR(dateversement) = YEAR(CURRENT_DATE)";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
     public function ByVersementIdClientDate($idclient,$date){
         global $conn;
         $sql = "SELECT SUM(montant + Om + banque) as montant FROM versement WHERE idclient = '$idclient' AND dateversement= '$date'";
@@ -66,6 +77,17 @@ class Versement{
         return $row["montant"]; 
     }
 
+    public function ByVersementdate($date){
+        global $conn;
+        $data = [];
+        $sql = "SELECT  SUM(montant + Om + banque) as montant, dateversement, idclient FROM versement WHERE  dateversement= '$date'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
     public function getVersementByClientBydate($date,$client){
         global $conn;
         $data = [];
@@ -80,10 +102,21 @@ class Versement{
 
     public function ByWeekVersement($datebedut,$datafin){
         global $conn;
-        $sql = "SELECT SUM(montant + Om + banque) as montant FROM versement WHERE dateversement BETWEEN '$datebedut'  AND '$datafin'";
+        $sql = "SELECT dateversement, idclient, SUM(montant + Om + banque) as montant FROM versement WHERE dateversement BETWEEN '$datebedut'  AND '$datafin'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
+    }
+
+    public function ByWeekVersementClient($datebedut,$datafin,$idclient){
+        global $conn;
+        $data = [];
+        $sql = "SELECT dateversement, idclient, SUM(montant + Om + banque) as montant FROM versement WHERE dateversement BETWEEN '$datebedut'  AND '$datafin' AND idclient='$idclient'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+        return $data; 
     }
 
     public function ByDateVersementOm($date){
@@ -130,6 +163,19 @@ class Versement{
         $data = [];
 
         $sql = "SELECT * FROM versement WHERE dateversement= '$this->dateversement'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+
+        return $data; 
+    }
+
+    public function AllVersementYear(){
+        global $conn;
+        $data = [];
+
+        $sql = "SELECT * FROM versement WHERE YEAR(dateversement)= YEAR(CURRENT_DATE)";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);
