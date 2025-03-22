@@ -60,12 +60,22 @@ class Versement{
     public function ByWeekVersementClient($datebedut,$datafin,$idclient){
         global $conn;
         $data = [];
-        $sql = "SELECT dateversement, idclient, SUM(montant + Om + banque) as montant FROM versementphamacie WHERE dateversement BETWEEN '$datebedut'  AND '$datafin' AND idclient='$idclient'";
+        $sql = "SELECT dateversement, idclient, SUM(montant + Om + banque) as montant FROM versementphamacie WHERE dateversement BETWEEN '$datebedut'  AND '$datafin' AND idclient='$idclient' GROUP BY dateversement ORDER BY dateversement ";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($data,$row);
         }
         return $data; 
+    }
+
+    public function SommeWeekVersementClient($datebedut,$datafin,$idclient){
+        global $conn;
+        $data = [];
+        $sql = "SELECT SUM(montant + Om + banque) as montant FROM versementphamacie WHERE dateversement BETWEEN '$datebedut'  AND '$datafin' AND idclient='$idclient'";
+        $result = $conn->query($sql);
+       $row = mysqli_fetch_assoc($result);
+        
+        return $row["montant"]; 
     }
 
     public function ByDateVersement($date){
@@ -217,6 +227,14 @@ class Versement{
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
+    }
+
+    public function getFacture($idfacture){
+        global $conn;
+        $sql = "SELECT * FROM versementphamacie WHERE id ='$idfacture'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row; 
     }
 }
 ?>

@@ -39,7 +39,7 @@ if (isset($date1)) {
         $tabledette= $versement->ByWeekVersementClient($date1,$date2,$nomclient);
         $dateDebut = new DateTime($date1);
         $somdette = $dette->getSommeDetteClient($date1,$date2, $nomclient);
-        $sommversement = $versement->ByWeekVersement($date1,$date2);
+        $sommversement = $versement->SommeWeekVersementClient($date1,$date2, $nomclient);
     }else if($nomclient == "ALL" && (!empty($date1))){
         $tabledette = $versement->ByVersementdate($date1);
         $somdette = $dette->getAllSommeDate($date1);
@@ -107,7 +107,7 @@ $html .='<br><br><br> <table style="width:100%">
                 <tr>
                 <th scope="col">Date Versement</th>
                 <th scope="col">Client</th>
-                <th scope="col">Credit</th>
+                <th scope="col">versement</th>
             </tr>';
             
             
@@ -152,8 +152,8 @@ $html .='<br><br><br> <table style="width:100%">
             }
                 $html .= '<tr>';
                     $html .= '<td>Total</td>';
-                    $html .= '<td>-</td>';
-                    $html .= '<td>'.$somdette.'</td>';
+                    $html .= '<td> dette : '.$somdette.'</td>';
+                    $html .= '<td>'.$sommversement.'</td>';
                     // $html .= '<td>'.$sommversement.'</td>';
                     // $html .= '<td>-</td>';
                 $html .= '</tr>';

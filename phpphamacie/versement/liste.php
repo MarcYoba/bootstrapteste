@@ -179,12 +179,14 @@
                                             echo '<td>'.$row["dateversement"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                # code...
+                                                echo "<a href='imprimer.php?id=" . $row["id"] . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
                                                 echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                                echo "<a href='imprimer.php?id=" . $row["id"] . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
                                             }else{
                                             echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<a href='imprimer.php?id=" . $row["id"] . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';

@@ -156,7 +156,7 @@ function recherchduclient() {
   var input, filter, ul, li, a, i;
   input = document.getElementById("clientrecher");
   filter = input.value.toUpperCase();
-  ul = document.getElementById("clientt");
+  ul = document.getElementById("client");
   li = ul.getElementsByTagName("option");
   console.log(li.length);
   // Boucler sur toutes les options

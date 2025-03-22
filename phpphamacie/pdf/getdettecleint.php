@@ -16,7 +16,7 @@ use Dompdf\Dompdf;
 
 $vente = new Vente(0);
 $client = new Client(0);
-$formule = 1;
+$formule = 0;
 $date = $_POST['datedette'];
 $dette = new Dette();
 $versement = new Versement(1);
@@ -34,6 +34,7 @@ if (isset($_POST['datedette'])) {
         $tabledette= $dette->getAllDetteIntervallClient($_POST['datedette'],$_POST['datedett2'],$nomclient);
         $dateDebut = new DateTime($_POST['datedette']);
         $somdette = $dette->getSommeDetteClient($_POST['datedette'],$_POST['datedett2'], $nomclient);
+        $sommversement = $versement->SommeWeekVersementClient($_POST['datedette'],$_POST['datedett2'], $nomclient);
     }
     else if (empty($_POST['datedette']) && $nomclient == "ALL") {
         $tabledette = $dette->getAllDette();
@@ -134,7 +135,7 @@ $html .='<br><br><br> <table style="width:100%">
             }
                 $html .= '<tr>';
                     $html .= '<td>Total</td>';
-                    $html .= '<td>-</td>';
+                    $html .= '<td>versement : '.$sommversement.'</td>';
                     $html .= '<td>'.$somdette.'</td>';
                     
                     

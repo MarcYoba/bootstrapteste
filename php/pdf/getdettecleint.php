@@ -37,13 +37,14 @@ if (isset($_POST['datedette'])) {
         $tabledette= $dette->getAllDetteIntervallClient($_POST['datedette'],$_POST['datedett2'],$nomclient);
         $dateDebut = new DateTime($_POST['datedette']);
         $somdette = $dette->getSommeDetteClient($_POST['datedette'],$_POST['datedett2'], $nomclient);
-        $sommversement = $versement->ByWeekVersement($_POST['datedette'],$_POST['datedett2']);
+        $sommversement = $versement->SommeWeekVersementClient($_POST['datedette'],$_POST['datedett2'],$nomclient);
     }
     else if (empty($_POST['datedette']) && $nomclient == "ALL") {
         $tabledette = $dette->getAllDette();
         $dateDebut = new DateTime($_POST['datedette']);
         $somdette = $dette->getAllSomme();
-        $sommversement = $versement->ByDateVersement($_POST['datedette']);
+        
+        $sommversement = $versement->TotalVersement();
     }else if($nomclient == "ALL" && (!empty($_POST['datedette']))){
         $tabledette = $dette->getAllDetteDate($_POST['datedette']);
         $somdette = $dette->getAllSommeDate($_POST['datedette']);
@@ -153,7 +154,7 @@ $html .='<br><br><br> <table style="width:100%">
             }
                 $html .= '<tr>';
                     $html .= '<td>Total</td>';
-                    $html .= '<td>-</td>';
+                    $html .= '<td> Versement : '.$sommversement.'</td>';
                     $html .= '<td>'.$somdette.'</td>';
                     // $html .= '<td>'.$sommversement.'</td>';
                     // $html .= '<td>-</td>';

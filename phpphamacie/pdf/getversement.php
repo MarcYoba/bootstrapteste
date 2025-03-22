@@ -39,7 +39,7 @@ if (isset($date1)) {
         $tabledette= $versement->ByWeekVersementClient($date1,$date2,$nomclient);
         $dateDebut = new DateTime($date1);
         $somdette = $dette->getSommeDetteClient($date1,$date2, $nomclient);
-        $sommversement = $versement->ByWeekVersement($date1,$date2);
+        $sommversement = $versement->SommeWeekVersementClient($date1,$date2,$nomclient);
     }else if($nomclient == "ALL" && (!empty($date1))){
         $tabledette = $versement->ByVersementdate($date1);
         $somdette = $dette->getAllSommeDate($date1);

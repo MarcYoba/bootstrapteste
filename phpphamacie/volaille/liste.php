@@ -134,6 +134,7 @@ require_once("../bdmutilple/getclient.php");
                                         while ($row = mysqli_fetch_assoc($result)){
                                             $idclient = $client->getByNameClient($row["Nomclient"]);
                                             $infoclient = $client->getAllByIdClient($idclient);
+                                            $avnce = 0;
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
                                             echo '<td>'.$row["dateCommande"].'</td>';
@@ -143,13 +144,11 @@ require_once("../bdmutilple/getclient.php");
                                             echo '<td>'.$row["prixUnite"].'</td>';
                                             echo '<td>'.$row["montant"].'</td>';
                                             if ($row["montantCash"] > 0) {
-                                                echo '<td>'.$row["montantCash"].'</td>';
+                                                $avnce+=$row["montantCash"];
                                             } else if ($row["montantOm"] > 0) {
-                                                echo '<td>'.$row["montantOm"].'</td>';
-                                            }else{
-                                                echo '<td>'.$row["montantCredit"].'</td>';
+                                                $avnce+=$row["montantOm"];
                                             }
-                                            
+                                            echo '<td>'.$avnce.'</td>';
                                             echo '<td>'.$row["reste"].'</td>';
                                             echo '<td>'.$row["statusCommande"].'</td>';
                                             echo '<td>'.$row["dateLivraison"].'</td>';
@@ -157,13 +156,16 @@ require_once("../bdmutilple/getclient.php");
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                                 echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                                echo "<a href='imprimer.php?id=" . $row["id"] . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
                                                 //echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                                 echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                                echo "<a href='imprimer.php?id=" . $row["id"] . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
                                             }else{
                                             //echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                            echo "<a href='imprimer.php?id=" . $row["id"] . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';

@@ -64,7 +64,7 @@ require_once("../connexion.php");
                             <form  action="../pdf/getTypeVente.php" method="post" class="user row" >
 
                                 <p class="col-md-6">
-                                <label class="form-check-label" id="client">Produit</label>
+                                <label class="form-check-label" >Produit</label>
                                 <input type="search" id="produitrecher" onkeyup="recherchduproduit()"  class="form-control" placeholder="recherche produit">
                                     <select id="nomProduit"  name="nomProduit"  class="form-control form-select"  size="4" multiple aria-label="multiple select">
 
@@ -83,7 +83,7 @@ require_once("../connexion.php");
                                 <p class="col-md-6">    
                                     <br>
                                     <input type="search" id="clientrecher" onkeyup="recherchduclient()"  class="form-control" placeholder="recherche client">
-                                    <select id="clientt"  name="clientt"   class="form-control form-select" size="4" multiple aria-label="multiple select" >   
+                                    <select id="client"  name="client"   class="form-control form-select" size="4" multiple aria-label="multiple select" >   
                                         <option value="ALL" selected>ALL</option>             
                                         <?php 
                                             global $conn;

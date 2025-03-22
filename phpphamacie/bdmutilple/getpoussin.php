@@ -120,5 +120,12 @@ class Poussin{
         }
         return $data;
     }
+    public function getFacture($idfacture){
+        global $conn;
+        $sql = "SELECT * FROM poussin WHERE id ='$idfacture'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row; 
+    }
 }
 ?>
