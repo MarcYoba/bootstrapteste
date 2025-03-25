@@ -425,8 +425,8 @@ require_once("php/activesaision.php");
                 <div id="compteresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"> Compte Resultat :</h6>
-                        <a class="collapse-item" href="../compteresultat/compteresultat.php">Compte Resultat</a>
-                        <a class="collapse-item" href="../compteresultat/liste.php">liste </a>
+                        <a class="collapse-item" href="../rapport/rapportComptable.php">Compte Resultat</a>
+                        
                         
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 
 // Connexion à la base de données
 session_start();
-require_once("bdmutilple/connexion.php");
+require_once("../connexion.php");
 
 function creerValeurActif($Libelle, $groupe, $Montant,$reference,$ordre,$date,$signe) {
     global $conn;
@@ -41,7 +41,7 @@ if (isset($_POST['enregistrement'])) {
     if (!empty($libelle) || !empty($groupe) || !empty($date)) {
                 // Créer le compte utilisateur
                 creerValeurActif($libelle, $groupe, $Montant,$reference,$ordre,$date,$signe);
-                header("Location:listeCompteresultat.php");
+                header("Location:liste.php");
                 exit();
 
             $stmt->close(); 

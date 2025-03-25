@@ -73,8 +73,8 @@ $html = '
 $html .='<table style="border-collapse: separate; border-spacing: 0px;" >
         <thead>';
         
-        $html .=' <tr><th  align="center"">CABINET VETERINAIRE DE SOA <br> '.$date." Client : ".$getFacture["Nomclient"]."<br> Tel: ".$infoclient["telephone"]."<br> Commande Poussin "."<br> N= ".$id.' 
-        <br>  NRCCM:RC/YAE2022/B/2852
+        $html .=' <tr><th  align="center"">AFRICA BELIEVE GROUP SARL <br> '.$date." Client : ".$getFacture["Nomclient"]."<br> Tel: ".$infoclient["telephone"]."<br> Commande Poussin "."<br> N= ".$id.' 
+        <br> M0822175619296A
         
         <tr>
             <th colspan="1"><img src="'.$qrcode.'" alt="QR Code" />  </th>

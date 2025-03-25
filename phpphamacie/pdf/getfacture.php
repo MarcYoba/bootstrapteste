@@ -77,8 +77,8 @@ $html = '
 $html .='<br><br><br> <table style="border-collapse: separate; border-spacing: 0px;">
         <thead>';
         
-        $html .=' <tr><th  align="left"">CABINET VETERINAIRE DE SOA <br> '.$date."<br> Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' 
-        <br>  NRCCM:RC/YAE2022/B/2852 
+        $html .=' <tr><th  align="left"">AFRICA BELIEVE GROUP SARL <br> '.$date."<br> Client : ".$inclient["firstname"]." Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' 
+        <br>  M0822175619296A
         </th>
         </tr>
         <tr>

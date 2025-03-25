@@ -45,7 +45,7 @@
                                         </div>
                                         
                                         <div class="col-sm-2 ">
-                                        <a class="m-0 font-weight-bold text-warning" href="../compteresultat/liste.php">Retour</a>
+                                        <a class="m-0 font-weight-bold text-warning" href="../../home.php">Retour</a>
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +64,8 @@
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <div class="col-sm-4 mb-3 mb-sm-0">
+                                                <label for="annee">Tlecharger le compte de Resultat</label>
                                                 <button type="submit" name="" id="" class="btn btn-warning btn-user btn-block">
                                                     Compte de Resultat
                                                 </button> 

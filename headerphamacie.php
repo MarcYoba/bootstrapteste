@@ -10,7 +10,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">ABGROUP <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">AB COMPTA <sup>2</sup></div>
     </a>
 
     <!-- Divider -->
@@ -546,8 +546,7 @@
                 <div id="compteresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"> Compte Resultat :</h6>
-                        <a class="collapse-item" href="phpphamacie/compteresultat/compteresultat.php">Compte Resultat</a>
-                        <a class="collapse-item" href="phpphamacie/compteresultat/liste.php">liste </a>
+                        <a class="collapse-item" href="phpphamacie/rapport/rapportComptable.php">Compte Resultat</a>
                         
                     </div>
                 </div>

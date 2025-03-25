@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container">
 
@@ -45,7 +45,7 @@
                                         </div>
                                         
                                         <div class="col-sm-2 ">
-                                        <a class="m-0 font-weight-bold text-warning" href="../compteresultat/liste.php">Retour</a>
+                                        <a class="m-0 font-weight-bold text-warning" href="../../home.php">Retour</a>
                                         </div>
                                     </div>
                                 </div>
@@ -58,13 +58,14 @@
                                                     <?php
                                                     $currentYear = 2024;
                                                     echo "<option >Recherche a</option>";
-                                                    for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                                    for ($year = $currentYear; $year <= $currentYear + 100; $year++) {
                                                         echo "<option value=\"$year\">$year</option>";
                                                     }
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <div class="col-sm-4 mb-3 mb-sm-0">
+                                            <label for="annee">Tlecharger le compte de Resultat</label>
                                                 <button type="submit" name="" id="" class="btn btn-warning btn-user btn-block">
                                                     Compte de Resultat
                                                 </button> 
