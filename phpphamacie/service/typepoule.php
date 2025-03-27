@@ -50,7 +50,7 @@ Information de descente
            name="Efectif" placeholder="Efectif" value="0" onchange="calculedensite()" required>
     </div>
     <div class="col-sm-2 mb-3 mb-sm-0">
-        Age: <input type="number"  class="form-control form-control-user" id="Age"
+    Âge: <input type="number"  class="form-control form-control-user" id="Age"
            name="Age" placeholder="Age" required>
     </div>
 </div>
@@ -88,7 +88,7 @@ Information de descente
            name="superficie" placeholder="Superficie en (m)" value="0" onchange="calculedensite()" varequired>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Qualite du sole: <input type="texte"  class="form-control form-control-user" id="sole"
+    Qualité du sole: <input type="texte"  class="form-control form-control-user" id="sole"
            name="sole" placeholder="Qualite du sole" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
@@ -96,7 +96,7 @@ Information de descente
            name="densite" placeholder="Densite au sole" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Poid Moyen: <input type="number"  class="form-control form-control-user" id="poidmoyen"
+        Poids Moyen: <input type="number"  class="form-control form-control-user" id="poidmoyen"
            name="poidmoyen" placeholder="Poid Moyen" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
@@ -106,9 +106,9 @@ Information de descente
 </div> 
 <div class="form-group row">
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Hygiene du batiment: <input type="text"  class="form-control form-control-user" id="hygiene"
-           name="hygiene" placeholder="Hygiene du batiment" required>
-    </div>
+        Hygiène du bâtiment: <input type="text"  class="form-control form-control-user" id="hygiene"
+                   name="hygiene" placeholder="Hygiène du bâtiment" required>
+            </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
         Nombre mangeoire: <input type="number"  class="form-control form-control-user" id="mangeoire"
            name="mangeoire" placeholder="Nombre mangeoire" required>
@@ -151,7 +151,7 @@ Information de descente
         </select>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Patologie anterieux: 
+    Pathologie anterieu: 
     <textarea  id="patologie" name="patologie" placeholder="Patologie anterieux" required>
     </textarea>
     </div>
@@ -188,12 +188,12 @@ Information de descente
     </textarea>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Diagnostic de suspicion: 
+    Diagnostics de suspicion: 
         <textarea  id="Diagnostic" name="Diagnostic" placeholder="Diagnostic de suspicion" required>
     </textarea>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Recommendation: 
+    Recommandation: 
         <textarea  id="Recommendation" name="Recommendation" placeholder="Recommendation" required>
     </textarea>
     </div>

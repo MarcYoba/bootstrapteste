@@ -69,8 +69,8 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                    Age:  <input type="number" class="form-control form-control-user" id="age" 
-                                           name="age" placeholder="age" required>
+                                    Âge:  <input type="number" class="form-control form-control-user" id="age" 
+                                           name="age" placeholder="Âge" required>
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                     Vermifuge:  <input type="texte" class="form-control form-control-user" id="Vermifuge" 
@@ -87,7 +87,7 @@
                                            name="Poid" placeholder="Poid" required>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">    
-                                        Espace: <input type="text" class="form-control form-control-user" id="Espace"
+                                        Espèce: <input type="text" class="form-control form-control-user" id="Espace"
                                            name="Espace" placeholder="Espace" required>
                                     </div>
                                     
@@ -107,7 +107,7 @@
                                            name="Robe" placeholder="ROBE" required>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Temterature: <input type="texte" class="form-control form-control-user" id="Robe"
+                                        Température: <input type="text" class="form-control form-control-user" id="Temperature"
                                            name="Temterature" placeholder="Temterature" required>
                                     </div>
                                     <div class="col-sm-5 mb-3 mb-sm-0">
@@ -136,7 +136,7 @@
                                 <div class="form-group row ">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                          <textarea type="text" rows="5" cols="20" class="form-control " id="symptomes"
-                                           name="symptomes" placeholder="symptomes" required></textarea>
+                                           name="symptomes" placeholder="symptômes" required></textarea>
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                          <textarea type="text" rows="5" cols="20" class="form-control " id="diagnostic"
@@ -150,18 +150,17 @@
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                        Pronostique: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Pronostique"
-                                           name="Pronostique" placeholder="Pronostique de la consultation" required></textarea>
+                                        Pronostic: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Pronostic"
+                                           name="Pronostic" placeholder="Pronostic de la consultation" required></textarea>
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                        Prophylaxe: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Prophylaxe"
-                                           name="Prophylaxe" placeholder="Prophylaxe de la consultation" required></textarea>
+                                        Prophylaxie: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Prophylaxie"
+                                           name="Prophylaxie" placeholder="Prophylaxie de la consultation" required></textarea>
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                        Indication: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Indication"
-                                           name="Indication" placeholder="Indication consultation" required></textarea>
+                                        Indications: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Indication"
+                                           name="Indication" placeholder="Indication de la consultation" required></textarea>
                                     </div>
-                                    
                                 </div>
                                 <hr>
                                 <hr>
