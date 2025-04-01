@@ -1,10 +1,18 @@
 <?php
+require '../../vendor/autoload.php';
+
 session_start();
 // Connexion à la base de données
 require_once("../connexion.php");
+require_once("../bdmutilple/getproduit.php");
 
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+$produit = new Produit();
 // Fonction pour créer un compte utilisateur $nom, $type, $prixvente, $prixachat, $quantite
-function creerClient($nom, $type, $prixvente, $prixachat,$quantite,$cathegorie) {
+function creerProduit($nom, $type, $prixvente, $prixachat,$quantite,$cathegorie) {
     global $conn;
 
     // Préparer la requête SQL
@@ -17,7 +25,7 @@ function creerClient($nom, $type, $prixvente, $prixachat,$quantite,$cathegorie) 
     if (!$stmt = $conn->prepare($sql)) {
         die('Erreur de préparation de la requête : ' . $conn->error);
     }
-    $date = date("y/m/d");
+    $date = date("Y-m-d H:i:s");
     $stmt->bind_param('sddddsssd', $nom, $prixvente,$quantite,  $prixachat,$quantite,$type, $date,$cathegorie,$_SESSION["id"]);
 
     // Exécuter la requête
@@ -41,7 +49,7 @@ if (isset($_POST['enregistrement'])) {
     $cathegorie = $_POST['cathegorie'];
     
     // Vérifier si tous les champs sont remplis
-    if (!empty($nom) || !empty($type) || !empty($prixvente) || !empty($prixachat) || !empty($quantite) || !empty($cathegorie)) {
+    if (!empty($nom) && !empty($type) && !empty($prixvente) && !empty($prixachat) && !empty($quantite) && !empty($cathegorie)) {
         
             // Vérifier si l'adresse e-mail existe déjà
             $sql = "SELECT * FROM produit WHERE nom_produit = ?";
@@ -59,15 +67,101 @@ if (isset($_POST['enregistrement'])) {
                 //exit();
             } else {
                 // Créer le compte utilisateur
-                creerClient($nom, $type, $prixvente, $prixachat, $quantite,$cathegorie);
+                creerProduit($nom, $type, $prixvente, $prixachat, $quantite,$cathegorie);
                 header("Location:liste.php");
                 exit();
             }
 
             $stmt->close(); 
-    }else {
-        header("Location: ../../404.html");
-        exit();
+    }
+
+    if (($_FILES['file_excel']) && ($_FILES['file_excel']['error'] == 0)) {
+        if (!empty($_FILES["file_excel"])) {
+             $file_name = $_FILES['file_excel']['name'];
+             $file_tmp = $_FILES['file_excel']['tmp_name'];
+             $file_type = $_FILES['file_excel']['type'];
+     
+             //var_dump($file_name);
+                 // Vérification du type de fichier (ici, on vérifie si c'est un fichier Excel)
+         if($file_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
+             // Déplacement du fichier vers un répertoire de destination (à adapter)
+             $destination = '../../uploads'.$file_name;
+             move_uploaded_file($file_tmp,$destination);
+     
+             // Utilisation de PHPSpreadsheet pour lire le fichier Excel
+             $spreadsheet = IOFactory::load($destination);
+             $worksheet = $spreadsheet->getActiveSheet();
+             $highestColumn = $worksheet->getHighestColumn();
+             $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+            
+            $tab= [];
+            
+            $tmp = array(
+                "PRODUITS" => " ",
+                "QUANTITES" => 0,
+                "PRIX_ACHAT" => " ",
+                "PRIX_VENTE" => " ",
+                "TYPE" => " ",
+                "CATHEGORIE" => " ",
+         );
+
+            if ($highestColumnIndex==6) {
+                foreach ($worksheet->getRowIterator() as $row) {
+                    $cellIterator = $row->getCellIterator();
+                    $indextabe=1;
+                    foreach ($cellIterator as $cell) {
+                        $value = $cell->getValue();
+                        //echo $value.' ';
+                        switch ($indextabe) {
+                            case 1:
+                                $tmp["PRODUITS"] = $value;
+                                break;
+                            case 2:
+                                $tmp["QUANTITES"] = $value;
+                                break;
+                            case 3:
+                                $tmp["PRIX_ACHAT"] = $value;
+                                break;
+                            case 4:
+                                $tmp["PRIX_VENTE"] = $value;
+                                break;
+                            case 5:
+                                $tmp["TYPE"] = $value;
+                                break;
+                            case 6:
+                                $tmp["CATHEGORIE"] = $value;
+                                break;    
+                            default:
+                                # code...
+                                break;
+                        }
+                        $indextabe++;
+                    }
+                    array_push($tab,$tmp);
+                    
+                    
+                    //echo '<br>';
+                }
+                array_shift($tab);
+                
+                
+                foreach ($tab as $key => $valu) {
+                    $produit->InserProduit($valu,$_SESSION["id"]);
+                }
+                header("Location: liste.php");
+            }else{
+                header("Location: produit.php");
+            }
+            // Parcours des lignes et des colonnes
+         } else {
+             echo 'Le fichier envoyé n\'est pas un fichier Excel.';
+         }
+        } else {
+            echo 'Aucun fichier n\'a été envoyé.';
+        }
+        
+    }else{
+        echo "erreur";
     }
 }
 
@@ -113,8 +207,34 @@ if (isset($_POST['modifier'])) {
         header("Location: ../../404.html");
         exit();
     }
-}else{
-    echo 'non';
+}
+
+if (isset($_POST["template"])) {
+    // Charger un fichier Excel existant (remplacer 'mon_fichier.xlsx' par votre chemin)
+    // un nouvel objet Spreadsheet
+    $spreadsheet = new Spreadsheet();
+
+    // Sélectionner la feuille active (par défaut, la première)
+    $sheet = $spreadsheet->getActiveSheet();
+
+    // Écrire des données dans une cellule
+    $sheet->setCellValue('A1', 'PRODUITS');
+    $sheet->setCellValue('B1', 'QUANTITE');
+    $sheet->setCellValue('C1', 'PRIXVENTE');
+    $sheet->setCellValue('D1', 'PRIXACHAT');
+    $sheet->setCellValue('E1', 'TYPE');
+    $sheet->setCellValue('F1', 'CATHEGORIE');
+    // Créer un writer pour le format XLSX
+    $writer = new Xlsx($spreadsheet);
+
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="template.xlsx"'); 
+
+    header('Cache-Control: max-age=0');
+
+    // Sauvegarder le fichier directement dans la sortie
+    $writer->save('php://output');
+    exit;
 }
 
 ?>

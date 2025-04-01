@@ -83,12 +83,11 @@
                                 </div>
                                 <div class="form-group">
                                     <p>
-                                        <h6>Pour enregistrer une liste des client vous devier telecharger le template suivante.<br>
-                                            1. entregistrer les infomation ccomme les colonne l'indique.<br>
-                                            2. enregistrer le template sur un nom cour sans espace en cas de Modification.<br>
-                                            3. Inporte le model dans l'application.<br>
-                                            4. En fin cliquer sur entregister.<br>
-
+                                        <h6>Pour enregistrer une liste des clients, vous devez télécharger le template suivant.<br>
+                                            1. Enregistrez les informations comme les colonnes l'indiquent.<br>
+                                            2. Enregistrez le template sous un nom court sans espace en cas de modification.<br>
+                                            3. Importez le modèle dans l'application.<br>
+                                            4. Enfin, cliquez sur enregistrer.<br>
                                         </h6>                                        
                                             <button type="template" name="template" id="template" class="btn btn-info btn-user btn-block">
                                                 Telecharger le Template

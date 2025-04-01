@@ -109,9 +109,9 @@
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                                 # code...
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                                echo "<button class='btn btn-primary' Onclick=\"EditProduit('". $row["id"]."')\"><i class='fas fa-pencil-alt'></i></button>";
                                             }else{
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                            echo "<button class='btn btn-primary' Onclick=\"EditProduit('". $row["id"]."')\")'><i class='fas fa-pencil-alt'></i></button>";
                                             echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             }
                                             echo "</td>";
@@ -185,7 +185,8 @@
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="../../header.js"></script>
+    <!-- <script src="../../header.js"></script>-->
+    <script src="produit.js"></script> 
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
