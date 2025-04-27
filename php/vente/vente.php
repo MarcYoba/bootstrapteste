@@ -52,7 +52,7 @@ require_once("../connexion.php");
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">vente</h1>
                             </div>
-                           <!-- <form class="user"  >-->
+                           <!-- <form class="user" SQd4S0GNcd8 >-->
                                 
                                     <!-- DataTales Example -->
                                     <div class="card shadow mb-4">
@@ -144,7 +144,7 @@ require_once("../connexion.php");
                                                     <i  id="montanttotal" class="form-control form-control-user"><span id="resultat" ></span></i>
                                                 </p>
                                                 <p class="col-md-3" >
-                                                <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="10"  multiple aria-label="multiple select " required onchange="recherchePrix()">
+                                                <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="10"  multiple aria-label="multiple select " required onclick="recherchePrix()">
                                                                         <option selected> </option>
                                                                         <?php 
                                                                         global $conn;

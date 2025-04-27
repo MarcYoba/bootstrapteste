@@ -60,7 +60,8 @@
                 <div class="collapse navbar-collapse" id="main-navigation">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#about" class="page-scroll">About Us</a></li>  
-                       <!--  <li><a href="#about" class="page-scroll">Specials</a></li> -->   
+                        <li><a href="#informatique" class="page-scroll">informatique</a></li> 
+                        <li><a href="#commerce" class="page-scroll">general trade</a></li> 
                         <li><a href="#provenderie" class="page-scroll">Provenderie</a></li>      
                         <li><a href="#pharmacie" class="page-scroll">Pharmacie</a></li>   
                         <li><a href="#Client" class="page-scroll">Client</a></li>                
@@ -109,6 +110,21 @@
                             <hr class="thin-hr">
                             <h3 class="section-subheading secondary-font">Nous sommes très heureux de te voir.</h3>
                         </div>
+                        
+                        <div class="col-sm-12 nopadding-lr dark-wrapper opaqued background-cover left-half" style="background-image: url('assets/img/bg/bg3.jpg');">
+                            <div class="dark-opaqued-half section-inner pad-sides-60 match-height" data-mh="promo-inner">
+                                <h3 class="mb50">commerce,  <span class="theme-accent-color">Informatique</span></h3>
+                                <p class="lead mb50">AB COMPTA est un logiciel de gestion informatique qui est une 
+                                    solution centralisée conçue pour aider les entreprises à superviser les ventes 
+                                    et optimiser l'ensemble de leur parc technologique, incluant les postes de travail, serveurs, périphériques réseau, logiciels et licences. 
+                                    Il permet généralement d'automatiser des tâches essentielles telles que l'inventaire des actifs,
+                                    la surveillance des performances des ventes journalières, ainsi que la gestion des incidents de stock. 
+                                    En offrant une vue d'ensemble et un contrôle accru sur l'infrastructure,
+                                    ce type de logiciel vise à améliorer l'efficacité opérationnelle, renforcer la sécurité, réduire les pertes et assurer la conformité réglementaire.</p>
+                                <div class="spacer-180"></div>
+                                <p class="mt30"><a href="https://fayacomputer.wuaze.com" class="btn btn-primary btn-red page-scroll">FAYA COMPUTER</a></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -127,6 +143,58 @@
                         </div>
                     </div>
 
+                </div>
+
+            </div>
+        </section>
+
+        <section id="informatique" class="top-border-me">
+            <div class="section-inner">
+
+                <div class="container">
+                    <div class="row">
+                        
+                        <div class="col-sm-12 nopadding-lr dark-wrapper opaqued background-cover left-half" style="background-image: url('assets/img/bg/bg3.jpg');">
+                            <div class="dark-opaqued-half section-inner pad-sides-60 match-height" data-mh="promo-inner">
+                                <h3 class="mb50">commerce,  <span class="theme-accent-color">Informatique</span></h3>
+                                <p class="lead mb50">AB COMPTA est un logiciel de gestion informatique qui est une 
+                                    solution centralisée conçue pour aider les entreprises à superviser les ventes 
+                                    et optimiser l'ensemble de leur parc technologique, incluant les postes de travail, serveurs, périphériques réseau, logiciels et licences. 
+                                    Il permet généralement d'automatiser des tâches essentielles telles que l'inventaire des actifs,
+                                    la surveillance des performances des ventes journalières, ainsi que la gestion des incidents de stock. 
+                                    En offrant une vue d'ensemble et un contrôle accru sur l'infrastructure,
+                                    ce type de logiciel vise à améliorer l'efficacité opérationnelle, renforcer la sécurité, réduire les pertes et assurer la conformité réglementaire.</p>
+                                <div class="spacer-180"></div>
+                                <p class="mt30"><a href="https://fayacomputer.wuaze.com" class="btn btn-primary btn-red page-scroll">FAYA COMPUTER</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="commerce" class="top-border-me">
+            <div class="section-inner">
+
+                <div class="container">
+                    <div class="row">
+                        
+                        <div class="col-sm-12 nopadding-lr dark-wrapper opaqued background-cover left-half" style="background-image: url('assets/img/bg/bg14.jpg');">
+                            <div class="dark-opaqued-half section-inner pad-sides-60 match-height" data-mh="promo-inner">
+                                <h3 class="mb50">commerce,  <span class="theme-accent-color">Informatique</span></h3>
+                                <p class="lead mb50">AB COMPTA est un logiciel de gestion informatique qui est une 
+                                    solution centralisée conçue pour aider les entreprises à superviser les ventes 
+                                    et optimiser l'ensemble de leur parc technologique, incluant les postes de travail, serveurs, périphériques réseau, logiciels et licences. 
+                                    Il permet généralement d'automatiser des tâches essentielles telles que l'inventaire des actifs,
+                                    la surveillance des performances des ventes journalières, ainsi que la gestion des incidents de stock. 
+                                    En offrant une vue d'ensemble et un contrôle accru sur l'infrastructure,
+                                    ce type de logiciel vise à améliorer l'efficacité opérationnelle, renforcer la sécurité, réduire les pertes et assurer la conformité réglementaire.</p>
+                                <div class="spacer-180"></div>
+                                <p class="mt30"><a href="#" class="btn btn-primary btn-red page-scroll">Commerce generale</a></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -883,6 +951,7 @@
           "assets/img/bg/bg1.jpg",
           "assets/img/bg/bg2.jpg",
           "assets/img/bg/bg3.jpg",
+          "assets/img/bg/bg13.jpg",
         ], {duration: 8000, fade: 500});
     });
     </script>

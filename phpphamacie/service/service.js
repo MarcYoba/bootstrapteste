@@ -164,8 +164,8 @@ function animallapin() {
   
 }
 
-function selectype() {
-    let typedonne = document.getElementById("cathegorie").value;
+function selectType() {
+    let typedonne = document.getElementById("categorie").value;
 
     if (typedonne == "volaille") {
       animalvollaile();

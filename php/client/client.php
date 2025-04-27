@@ -130,5 +130,5 @@
     <script src="../../js/sb-admin-2.min.js"></script>
     <script src="client.js"></script>
 </body>
-/sb-admin-2.min.js
+
 </html>

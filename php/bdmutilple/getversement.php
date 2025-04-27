@@ -248,5 +248,41 @@ class Versement{
         $row = mysqli_fetch_assoc($result);
         return $row; 
     }
+
+    public function VersementTrimesttre($anne)
+    {
+        global $conn;
+        $data =[];
+        $sql = "SELECT QUARTER(dateversement) AS trimestre, ROUND(SUM(montant),2) AS nombre_enregistrements 
+        FROM versement 
+        WHERE YEAR(dateversement) = $anne
+        GROUP BY QUARTER(dateversement)";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function VersementSemesttre($anne)
+    {
+        global $conn;
+        $data =[];
+        $sql = "SELECT 
+        CEILING(MONTH(dateversement) / 6) AS semestre,
+        ROUND(SUM(montant),2) AS montant
+        FROM 
+            versement
+        WHERE YEAR(dateversement) = $anne
+        GROUP BY 
+            semestre";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
 }
 ?>

@@ -112,7 +112,8 @@
                                     </div>
                                     <div class="col-sm-5 mb-3 mb-sm-0">
                                         Nom du propritaire 
-                                        <select id="idclient"  name="idclient"  class="form-control form-select">
+                                        <input type="search" id="clientrecher" onkeyup="recherchduclient()"  class="form-control" placeholder="recherche client">
+                                        <select id="idclient"  name="idclient"  class="form-control form-select" size="4">
                                             <?php 
                                             require_once("../connexion.php");
                                                 global $conn;
@@ -200,7 +201,28 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-
+    <script>
+        function recherchduclient() {
+            // Récupérer l'input et la liste déroulante
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("clientrecher");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("idclient");
+            li = ul.getElementsByTagName("option");
+            console.log(li.length);
+            // Boucler sur toutes les options
+            for (i = 0; i < li.length; i++) {
+                a = li[i];
+                
+                if (a.textContent.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+                } else {
+                li[i].style.display = "none";
+                }
+            }
+            
+        }
+    </script>
 </body>
 
 </html>
