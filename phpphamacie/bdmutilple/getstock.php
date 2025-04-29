@@ -79,7 +79,7 @@ class Stock{
             FROM
                 historiquestockphamacie hs
             LEFT JOIN produitphamacie p ON p.id = hs.idproduit
-            WHERE YEAR(hs.datet) = '$date'
+            WHERE MONTH(hs.datet) = '$date'
             GROUP BY
                 hs.Nomproduit
             ORDER BY

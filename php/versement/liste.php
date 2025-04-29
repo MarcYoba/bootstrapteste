@@ -57,19 +57,34 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Tables Versement</h6>
+                            </div>
+                            <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                <a href="../../home.php" class="btn btn-primary">Home</a> 
+                            </div>
+                            <div class="col-sm-2">
+                                <i class="fa fa-plus"></i> 
+                                <a href="versement.php" class="btn btn-success"> Ajouter</a>
+                                    
+                            </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div>
                             <div class="form-group row">
                             <form method="post" action="../pdf/getversement.php">
                                 <div class="col-md-0">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tables Versement</h6>
+                                    
                                 </div>
                                 <div class="form-group row">
                                 <div class="col-md-2" >
                                     <input type="date" class="form-control form-control-user"
-                                        name="date1" id="date1" placeholder="quantite">
+                                        name="date1" id="date1" placeholder="quantité">
                                 </div>
                                 <div class="col-md-2" >
                                     <input type="date" class="form-control form-control-user"
-                                        name="date2" id="date2" placeholder="quantite">
+                                        name="date2" id="date2" placeholder="quantité">
                                 </div>
                                     
                                 <div class="col-md-3" >
@@ -94,11 +109,11 @@
 
                                 
                                 <div class="col-md-3" >
-                                <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
                                 </div>
                                 </div>
                                 <div class="col-md-2" >
-                                    <label for="annee">Année recherche</label>
+                                    <label for="annee">Année récherché</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
                                         <?php
                                         $currentYear = 2024;
@@ -120,19 +135,19 @@
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>montant</th>
+                                            <th>Montant</th>
                                             <th>client</th>
-                                            <th>date versement</th>
-                                            <th>operation</th>
+                                            <th>Date</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>montant</th>
-                                            <th>client</th>
-                                            <th>date versement</th>
-                                            <th>operation</th>
+                                            <th>Montant</th>
+                                            <th>Client</th>
+                                            <th>Date</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -190,7 +205,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Your Website <?php date("Y-m-d")?></span>
                     </div>
                 </div>
             </footer>

@@ -57,16 +57,30 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Tables Client Inactif</h6>
+                        <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Liste des clients inactifs</h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../home.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="client.php" class="btn btn-success"> Ajouter</a>
+                                    
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div>
                         <div class="form-group row">
                             <?php
                                 require_once("../bdmutilple/getclient.php");
                                 $client = new Client(0);
                                 $row = $client->ClientPasAchat();
                                 $doublon = $client->DoublonClient();
-                                echo '<div class="col-sm-3">nombre de cient : '.count($row).'</div>';
-                                echo '<div class="col-sm-3">nombre de doublons : '.$doublon.'</div>';
-                                echo '<div class="col-sm-3">nombre Total de client reel inactif : '.count($row)- $doublon.'</div>';
+                                echo '<div class="col-sm-3">Nombre de client : '.count($row).'</div>';
+                                echo '<div class="col-sm-3">Nombre de doublons : '.$doublon.'</div>';
+                                echo '<div class="col-sm-3">Nombre Total de client reel inactif : '.count($row)- $doublon.'</div>';
                             ?>
                             
                         </div>
@@ -80,7 +94,7 @@
                                             <th>id</th>
                                             <th>Nom</th>
                                             <th>Adresse</th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             
                                         </tr>
                                     </thead>
@@ -89,7 +103,7 @@
                                             <th>id</th>
                                             <th>Nom</th>
                                             <th>Adresse</th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             
                                         </tr>
                                     </tfoot>
@@ -121,7 +135,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>

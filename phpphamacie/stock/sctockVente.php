@@ -186,7 +186,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php date("Y") ?></span>
                     </div>
                 </div>
             </footer>

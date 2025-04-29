@@ -34,13 +34,13 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="card-header py-3">
-                                <h1 class="h4 text-gray-900 mb-4">Fiche descente su terrain</h1>
-                                selection de l'esperce 
-                                        <select  class="form-control form-select" id="cathegorie" name="cathegorie" onchange="selectype()" required>
-                                            <option value="volaille" >Selectionne le type d'esperce</option>
-                                            <option value="volaille" >volaille</option>
-                                            <option value="porc">porc</option>
-                                            <option value="lapin">lapin</option>
+                                <h1 class="h4 text-gray-900 mb-4">Fiche descente sur terrain</h1>
+                                Sélection de l'espèce 
+                                        <select class="form-control form-select" id="categorie" name="categorie" onchange="selectType()" required>
+                                            <option value="volaille">Sélectionnez le type d'espèce</option>
+                                            <option value="volaille">Volaille</option>
+                                            <option value="porc">Porc</option>
+                                            <option value="lapin">Lapin</option>
                                         </select>
                             </div>
                             <span id="typeelement"></span>

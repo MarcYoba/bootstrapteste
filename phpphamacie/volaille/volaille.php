@@ -34,38 +34,38 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Creer une Commande </h1>
+                                <h1 class="h4 text-gray-900 mb-4">Créer une Commande</h1>
                             </div>
                             <form class="user" action="register.php" method="post">
                                 <hr>
-                                <h10 class="text-center"> Enregistrer Nouveau Client</h10>
+                                <h10 class="text-center">Enregistrer Nouveau Client</h10>
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Nomclient"
-                                           name="Nomclient" placeholder="Nom client" required>
+                                           name="Nomclient" placeholder="Nom du client" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="tel" class="form-control form-control-user" id="telephone" 
-                                           name="telephone" placeholder="Telephone" required>
+                                           name="telephone" placeholder="Téléphone" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" name="client" id="client" class="btn btn-success btn-user btn-block">
-                                        Enregister
+                                        Enregistrer
                                     </button>
                                 </div>
                             </form>
                             <form class="user" action="register.php" method="post">
                                 <hr><hr>
-                                <h10 class="text-center"> Enregistrer Commande</h10>
+                                <h10 class="text-center">Enregistrer Commande</h10>
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="recherche"
-                                        name="recherche" placeholder="recherche client" onkeyup="myFunctionP()">
-                                    date commande:<input type="date" class="form-control form-control-user" id="dateCommande"
-                                           name="dateCommande" placeholder="date achat" required>
+                                        name="recherche" placeholder="Recherche client" onkeyup="myFunctionP()">
+                                    Date commande:<input type="date" class="form-control form-control-user" id="dateCommande"
+                                           name="dateCommande" placeholder="Date d'achat" required>
                                            
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
@@ -83,47 +83,47 @@
                                     </div>    
                                     <div class="col-sm-2">
                                         <input type="number" class="form-control form-control-user" id="quantite" 
-                                           name="quantite" placeholder="quantite poussin" required><br>
+                                           name="quantite" placeholder="Quantité poussin" required><br>
 
-                                        <input type="texte" class="form-control form-control-user" id="souche" 
-                                           name="souche" placeholder="souche" required>
+                                        <input type="text" class="form-control form-control-user" id="souche" 
+                                           name="souche" placeholder="Souche" required>
                                     </div>
                                     <div class="col-sm-2">
                                         <input type="number" class="form-control form-control-user" id="prixunite" 
                                            name="prixunite" placeholder="Prix unitaire" required>
                                         
-                                           date livraison<input type="date" class="form-control form-control-user" id="datelivraison"
-                                           name="datelivraison" placeholder="date achat" required> 
+                                           Date livraison<input type="date" class="form-control form-control-user" id="datelivraison"
+                                           name="datelivraison" placeholder="Date d'achat" required> 
                                             
                                     </div>
                                     <div class="col-sm-2">
                                         <input type="number" class="form-control form-control-user" id="quantitetotale" 
                                            name="quantitetotale" placeholder="Montant" readonly>
-                                           date rappelle <input type="date" class="form-control form-control-user" id="daterapel"
-                                           name="daterapel" placeholder="date achat" required value="0001-01-01">
+                                           Date rappel <input type="date" class="form-control form-control-user" id="daterapel"
+                                           name="daterapel" placeholder="Date d'achat" required value="0001-01-01">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
                                         <input type="number" class="form-control form-control-user" id="OM"
-                                       name="OM" placeholder="OM Montant"  required>
+                                       name="OM" placeholder="Montant OM"  required>
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="number" class="form-control form-control-user" id="CREDIT"
-                                       name="CREDIT" placeholder="CREDIT Montant"  required>
+                                       name="CREDIT" placeholder="Montant Crédit"  required>
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="number" class="form-control form-control-user" id="CASH"
-                                       name="CASH" placeholder="CASH Montant"  required>
+                                       name="CASH" placeholder="Montant Cash"  required>
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="number" class="form-control form-control-user" id="RESTE"
-                                       name="RESTE" placeholder="RESTE Montant"  required>
+                                       name="RESTE" placeholder="Montant Reste"  required>
                                     </div>
                                 </div>
                                 
                                 <button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
-                                    Enregister
+                                    Enregistrer
                                 </button>  
                             </form>
                             <hr>

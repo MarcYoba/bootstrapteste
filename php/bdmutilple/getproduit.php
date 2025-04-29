@@ -147,6 +147,41 @@ class Produit{
         return $tableau; 
     }
 
+    public function InserProduit($tab,$user){
+        global $conn;
+        $nom = $tab["PRODUITS"];
+        $sql = "SELECT * FROM produit WHERE nom_produit = ?";
 
+            if (!$stmt = $conn->prepare($sql)) {
+                die('Erreur de préparation de la requête : ' . $conn->error);
+            }
+            
+            $stmt->bind_param('s', $nom);
+            $stmt->execute();
+            $stmt->store_result();
+
+            if ($stmt->num_rows > 0) {
+                return 'Cette produit est déjà utilisée.';
+                //exit();
+            } 
+        // Préparer la requête SQL
+        // --------------------------------------------------------------------------------
+        // Creation du client (insertion de donne) 
+        $sql = "INSERT INTO produit (nom_produit, prix_produit_vente,quantite_produit, prix_achat_produit, stock_start_produit,type_produit,date_ajout_produit,cathegorie,iduser) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
+
+        // Lier les paramètres
+        if (!$stmt = $conn->prepare($sql)) {
+            die('Erreur de préparation de la requête : ' . $conn->error);
+        }
+        $date = date("Y-m-d H:i:s");
+        $stmt->bind_param('sddddsssd', $tab["PRODUITS"], $tab["PRIX_VENTE"],$tab["QUANTITES"],  $tab["PRIX_ACHAT"],$tab["QUANTITES"],$tab["TYPE"], $date,$tab["CATHEGORIE"],$user);
+
+        // Exécuter la requête
+        if (!$stmt->execute()) {
+            die('Erreur d\'exécution de la requête : ' . $stmt->error);
+        }
+
+        // Fermer la requête
+        $stmt->close();
+    }
 }
-?>
