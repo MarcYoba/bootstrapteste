@@ -57,7 +57,22 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Caisse</h6>
+                        <div class="card-header py-3">
+                            <div class="form-group row">
+                                <div class="col-sm-6 ">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables des Caisses</h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../home.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="caisse.php" class="btn btn-success"> Ajouter</a>
+                                </div>
+                                    
+                            </div>
+                        
                             <form  action="recapCaisse.php" method="post" class="user row" >
                                 <div class="row">
                                     <p class="col-md-2" >
@@ -85,7 +100,7 @@
                                     </p>
 
                                 <p class="col-md-3" >
-                                <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
                                 <br>
                                 <label for="annee">Année recherche</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
@@ -109,25 +124,25 @@
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>operation</th>
+                                            <th>Opération</th>
                                             <th>Montant</th>
-                                            <th>idvente </th>
-                                            <th>idversement</th>
+                                            <th>Id vente </th>
+                                            <th>Id versement</th>
                                             <th>Date</th>
-                                            <th>motif</th>
-                                            <th>operation</th>
+                                            <th>Motif</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>operation</th>
+                                            <th>Opération</th>
                                             <th>Montant</th>
-                                            <th>idvente </th>
-                                            <th>idversement</th>
+                                            <th>Id vente </th>
+                                            <th>Id versement</th>
                                             <th>Date</th>
-                                            <th>motif</th>
-                                            <th>operation1</th>
+                                            <th>Motif</th>
+                                            <th>Opération1</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -177,7 +192,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php date("Y-m-d")?></span>
                     </div>
                 </div>
             </footer>

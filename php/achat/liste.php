@@ -57,18 +57,32 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Achat</h6>
+                        <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Liste des Achats</h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../home.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="teste.php" class="btn btn-success"> Ajouter</a>
+                                    
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div>
 
                             
                             <form  action="../pdf/getvaleurachete.php" method="post" class="user row" >
                                 <div class="row">
                                     <p class="col-md-2" >
                                         <input type="date" class="form-control form-control-user"
-                                        name="datedette" id="datedette" placeholder="quantite">
+                                        name="datedette" id="datedette" placeholder="quantité">
                                     </p>
                                     <p class="col-md-2" >
                                         <input type="date" class="form-control form-control-user"
-                                        name="datedett2" id="datedett2" placeholder="quantite">
+                                        name="datedett2" id="datedett2" placeholder="quantité">
                                     </p>
                                     <p class="col-md-3" >
                                     <input type="text" class="form-control form-control-user" id="produitname"
@@ -87,13 +101,13 @@
                                     </p>
 
                                     <p class="col-md-2" >
-                                        <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                        <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
                                     </p>
                                     <p class="col-md-3" >
                                         <a href="../bond/bon.php" class="btn btn-info btn-user">
-                                            Bon Commande
+                                            Bon de Commande
                                     </a><br>
-                                    <label for="annee">Année recherche</label>
+                                    <label for="annee">Année récherché</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
                                         <?php
                                         $currentYear = 2024;
@@ -116,11 +130,10 @@
                                         <tr>
                                             <th>id</th>
                                             <th>Nom</th>
-                                            
-                                            <th>Quantite</th>
-                                            <th>Montant</th>
+                                            <th>Quantité</th>
+                                            <th>P.Total</th>
                                             <th>Date</th>
-                                            <th>Operation</th>
+                                            <th>Opération</th>
                                             <th>Bon</th>
                                         </tr>
                                     </thead>
@@ -128,11 +141,10 @@
                                         <tr>
                                             <th>id</th>
                                             <th>Nom</th>
-                                            
-                                            <th>Quantite</th>
-                                            <th>Montant</th>
+                                            <th>Quantité</th>
+                                            <th>P.Total</th>
                                             <th>Date</th>
-                                            <th>Operation</th>
+                                            <th>Opération</th>
                                             <th>Bon</th>
                                         </tr>
                                     </tfoot>
@@ -187,7 +199,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>

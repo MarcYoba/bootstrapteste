@@ -58,7 +58,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-1 font-weight-bold text-primary">Tables dette</h6>
+                            <h6 class="m-1 font-weight-bold text-primary">Tables des dettes</h6>
                             <hr>
                             <form  action="../pdf/getdettecleint.php" method="post" class="user row" >
                             <div class="row">
@@ -117,7 +117,7 @@
                                         <tr>
                                             <th>id</th>
                                             <th>Nom client</th>
-                                            <th>quantite</th>
+                                            <th>Quantité</th>
                                             <th>Prix </th>
                                             <th>Date</th>
                                             
@@ -127,7 +127,7 @@
                                         <tr>
                                             <th>id</th>
                                             <th>Nom client</th>
-                                            <th>quantite</th>
+                                            <th>Quantité</th>
                                             <th>Prix </th>
                                             <th>Date</th>
                                             

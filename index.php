@@ -58,8 +58,15 @@
                                                 placeholder="Enter Email Address..." required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="Passwordcon" name="Passwordcon" placeholder="Password" required>
+                                            <div class="input-group">
+                                                <input type="password" class="form-control form-control-user"
+                                                    id="Passwordcon" name="Passwordcon" placeholder="Password" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" type="button" onclick="togglePasswordVisibility()">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -73,12 +80,6 @@
                                         </button>
                                         
                                         <hr>
-                                        <a href="home.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="home.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
@@ -102,12 +103,16 @@
     
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-   
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-     
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script> 
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('Passwordcon');
+            const passwordFieldType = passwordField.getAttribute('type');
+            passwordField.setAttribute('type', passwordFieldType === 'password' ? 'text' : 'password');
+        }
+    </script>
 
 </body>
 

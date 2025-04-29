@@ -114,24 +114,24 @@
                                     <thead>  
                                         <tr>
                                             <th>Produit</th>
-                                            <th>Stock Initial KG</th>
-                                            <th>Som Achat KG</th>
-                                            <th>Total KG</th>
-                                            <th>vente du jour KG</th>
-                                            <th>Total Vente KG</th>
-                                            <th>Stock REEL KG</th>
+                                            <th>Stock Initial</th>
+                                            <th>Som Achat</th>
+                                            <th>Total</th>
+                                            <th>vente du jour</th>
+                                            <th>Total Vente</th>
+                                            <th>Stock REEL</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Produit</th>
-                                            <th>Stock Initial KG</th>
-                                            <th>Som Achat KG</th>
-                                            <th>Total KG</th>
-                                            <th>vente du Jour KG</th>
-                                            <th>Total Vente KG</th>
-                                            <th>Stock REEL KG</th>
+                                            <th>Stock Initial</th>
+                                            <th>Som Achat</th>
+                                            <th>Total</th>
+                                            <th>vente du Jour</th>
+                                            <th>Total Vente</th>
+                                            <th>Stock REEL</th>
                                             <th>Date</th>
                                         </tr>
                                     </tfoot>
@@ -151,13 +151,13 @@
                                         // while ($rowt = mysqli_fetch_assoc($resultp)){ 
                                         //     var_dump($facture->setIdFacture($rowt["nom_produit"]." ".$rowt["cathegorie"] ,$rowt["id"]));
                                         // }
-                                        $variable = $stock->getLogsDate($date);
+                                        $variable =$stock->getLogsDate($date);
                                         $date =  date("Y-m-d");
                                         foreach ($variable as $key => $value) {
                                             echo '<tr>';
-                                            echo '<th>'.$value["Nomproduit"].'</th>';
-                                            echo '<th>'.round($value["stock_start_produit"],2).'</th>';
-                                            echo '<th>'.$value["quantite_achetee"].'</th>';
+                                            echo '<th>'.(!empty($value["Nomproduit"]) ? $value["Nomproduit"] : "0").'</th>';
+                                            echo '<th>'.(!empty($value["stock_start_produit"]) ? round($value["stock_start_produit"],2) : "0").'</th>';
+                                            echo '<th>'.(!empty($value["quantite_achetee"]) ? $value["quantite_achetee"] : "0").'</th>';
                                             echo '<th>'.round($value["quantite_stock"],2) + $value["quantite_achetee"].'</th>';
                                             if (empty($value["quantite_facturee"])) {
                                                 echo '<th>'.$value["quantite_facturee"].'</th>'; 
@@ -169,7 +169,7 @@
                                             } else {
                                                 echo '<th>'.round($value["somme_facture"],2).'</th>'; 
                                             } 
-                                            echo '<th>'.$value["quantite_produit"].'</th>';
+                                            echo '<th>'.(!empty($value["quantite_produit"]) ? $value["quantite_produit"] : "0").'</th>';
                                             echo '<th>'.$date.'</th>';
                                             echo '</tr>';
                                         }
