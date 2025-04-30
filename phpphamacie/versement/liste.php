@@ -57,12 +57,26 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Table des versements</h6>     
+                            </div>
+                            <div class="col-sm-2">
+                            <i class="fa fa-home"></i>
+                                <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                            </div>
+                            <div class="col-sm-2">
+                                <i class="fa fa-plus"></i> 
+                                <a href="versement.php" class="btn btn-success"> Ajouter</a>             
+                            </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                        </div>
                             <div class="row">
                                 
                                 <div class="col-md-10">
                                     <form method="post" action="../pdf/getversement.php">
                                     <div class="col-md-0">
-                                        <h6 class="m-0 font-weight-bold text-primary">Tables Versement</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary"></h6>
                                     </div>
                                     <div class="form-group row">
                                     <div class="col-md-2" >
@@ -100,7 +114,7 @@
                                     </div>
                                     </div>
                                     <div class="col-md-2" >
-                                        <label for="annee">Année recherche</label>
+                                        <label for="annee">Année récherché</label>
                                         <select class="form-control" id="annee" name="annee" onchange="reload()">
                                             <?php
                                             $currentYear = 2024;
@@ -115,16 +129,7 @@
                                 </div>
                                 <div class="col-md-2">
                                 <br>
-                                    <label for="annee">Année recherche :</label>
-                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
-                                        <?php
-                                        $currentYear = 2024;
-                                        echo "<option >Recherche a</option>";
-                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
-                                            echo "<option value=\"$year\">$year</option>";
-                                        }
-                                        ?>
-                                    </select>
+                                    
                                 </div>
                             </div>
                             
@@ -136,21 +141,19 @@
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>montant</th>
-                                            <th>client</th>
-                                            
-                                            <th>date versement</th>
-                                            <th>operation</th>
+                                            <th>Montant</th>
+                                            <th>Client</th>
+                                            <th>Date versement</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>montant</th>
-                                            <th>client</th>
-                                            
-                                            <th>date versement</th>
-                                            <th>operation</th>
+                                            <th>Montant</th>
+                                            <th>Client</th>
+                                            <th>Date versement</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -209,7 +212,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>
