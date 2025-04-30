@@ -41,10 +41,23 @@
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-12">
-                    <div class="text-center card-header py-3">
-                                <h1 class="h4 text-gray-900 mb-4">Fiche de Consultation</h1>
+                                
+                            
+                            <div class="form-group row card-header py-3">
+                                <div class="col-sm-6">
+                                    <h6 class="m-0 font-weight-bold text-primary">Fiche de Consultation</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="tableconsultation.php" class="btn btn-success"> Liste</a>             
+                                </div>
+                                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div> 
-                        <div class="p-5">
+                            <div class="p-5">
                             
                             <form class="user" action="registerconsultation.php" method="post">
                             <div class="form-group row">

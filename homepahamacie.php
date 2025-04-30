@@ -59,31 +59,31 @@
         <div class="modal-body">
             <div class="form-group row">
                 <div class="col-sm-4">
-                    Nombre de produits sans date de péremption : <?php echo count($peremption) ?>
+                    Nombre de produits sans date de péremption : <?php echo count($peremption); ?>
                     
                 </div>
                 <div class="col-sm-4">
-                    Doublon de produit : <?php  echo count($doublonproduit)?>
+                    Doublons de produits : <?php echo count($doublonproduit) ?>
                     
                 </div>
                 <div class="col-sm-4">
-                    Produits périmés ou proches de la péremption lots 1 (intervalle 6 mois) : <?php echo count($moiperemtion) ?>
+                    Produits périmés ou proches de la péremption lot 1 (intervalle de 6 mois) : <?php echo count($moiperemtion) ?>
                     
                 </div>
                 <div class="col-sm-4">
-                    Command Poussin Nom livrer :<?php  echo count($produit->CommandePoussinNonLivrer())?>
+                    Commande Poussin Non Livrée : <?php echo count($produit->CommandePoussinNonLivrer()) ?>
                 </div>
                 <div class="col-sm-4">
-                    Commande Client :<?php  count($produit->CommandePoussinNonLivrer())?>
+                    Commande Client : <?php echo count($produit->CommandePoussinNonLivrer()); ?>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button> -->
-            <a href="phpphamacie/pdf/getinforapelle.php" type="button" class="btn btn-success" ><i class="fa fa-download" aria-hidden="true"></i>produit sans date</a>
-            <a href="phpphamacie/pdf/getperemption.php" type="button" class="btn btn-success" ><i class="fa fa-download" aria-hidden="true"></i>Peremtion ou Proche</a>
-            <a href="phpphamacie/pdf/getcondpoussin.php" type="button" class="btn btn-success" ><i class="fa fa-download" aria-hidden="true"></i>Poussin non livree</a>
-            <a href="phpphamacie/client/commandeliste.php" type="button" class="btn btn-success" ><i class="fa fa-download" aria-hidden="true"></i>Liste Commande client</a>
+            <a href="phpphamacie/pdf/getinforapelle.php" type="button" class="btn btn-success" ><i class="fa fa-download" aria-hidden="true"></i>Produit sans date</a>
+            <a href="phpphamacie/pdf/getperemption.php" type="button" class="btn btn-success" ><i class="fa fa-download" aria-hidden="true"></i>Péremption ou Proche</a>
+            <a href="phpphamacie/pdf/getcondpoussin.php" type="button" class="btn btn-success" ><i class="fa fa-download" aria-hidden="true"></i>Poussins non livrés</a>
+            <a href="phpphamacie/client/commandeliste.php" type="button" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Liste des commandes clients</a>
         </div>
         </div>
     </div>
@@ -613,7 +613,7 @@
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Date  péremption des produits</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Date de péremption des produits</h6>
                                 </div>
                                 <div class="card-body">
                                     <?php 

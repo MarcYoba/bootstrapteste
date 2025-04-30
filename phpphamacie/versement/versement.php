@@ -42,7 +42,20 @@
                                 <h1 class="h4 text-gray-900 mb-4">Versement</h1>
                             </div>
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-success">Versement</h6>
+                            <div class="form-group row">
+                            <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Table des versements</h6>     
+                            </div>
+                            <div class="col-sm-2">
+                            <i class="fa fa-home"></i>
+                                <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                            </div>
+                            <div class="col-sm-2">
+                                <i class="fa fa-list"></i> 
+                                <a href="liste.php" class="btn btn-success"> List</a>             
+                            </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                        </div>
                                 <hr>
                                  <div class="row">
                                     <a href="../dette/dette.php"  class="btn btn-info btn-user col-md-4" >Dette</a>

@@ -67,6 +67,14 @@ require_once("../bdmutilple/getclient.php");
                                 <div class="col-md-4">
                                     <a href="consultation.php" class="btn btn-success" style="float:right;"><i class="fas fa-plus"></i> Ajouter une consultation</a>
                                 </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="consultation.php" class="btn btn-success"> Ajouter</a>             
+                                </div>
                                 <div class="col-md-4">
                                     <label for="annee">Année recherche :</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
@@ -87,24 +95,24 @@ require_once("../bdmutilple/getclient.php");
                                     <thead>
                                        
                                         <tr>
-                                            <th>id</th>
-                                            <th>Nom Sujet</th>
-                                            <th>Age</th>
-                                            <th>Race</th>
+                                            <th>ID</th>
+                                            <th>Nom du Sujet</th>
+                                            <th>Âge</th>
+                                            <th>Sexe</th>
                                             <th>Client</th>
                                             <th>Montant</th>
-                                            <th>Operation</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>id</th>
-                                            <th>Nom Sujet</th>
-                                            <th>Age</th>
-                                            <th>Race</th>
+                                        <th>ID</th>
+                                            <th>Nom du Sujet</th>
+                                            <th>Âge</th>
+                                            <th>Sexe</th>
                                             <th>Client</th>
                                             <th>Montant</th>
-                                            <th>Operation</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -158,7 +166,7 @@ require_once("../bdmutilple/getclient.php");
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>

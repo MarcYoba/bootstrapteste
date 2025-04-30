@@ -59,9 +59,23 @@ require_once("../bdmutilple/getclient.php");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                        <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Tables des Commandes</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="volaille.php" class="btn btn-success"> Liste</a>             
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tables Commende</h6>
+                                    
                                 </div>
                                 <div class="col-md-6">
                                 
@@ -88,15 +102,15 @@ require_once("../bdmutilple/getclient.php");
                                             <th>id</th>
                                             <th>Date</th>
                                             <th>Nom</th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             <th>QuaT</th>
-                                            <th>P/unit</th>
-                                            <th>Montant</th>
+                                            <th>P.U</th>
+                                            <th>P.Total</th>
                                             <th>Avance</th>
-                                            <th>Reste/paie</th>
-                                            <th>Status</th>
-                                            <th>Date/Livr</th>
-                                            <th>Date/Rape</th>
+                                            <th>Reste-paie</th>
+                                            <th>Statut</th>
+                                            <th>Date-Livre</th>
+                                            <th>Date-Rape</th>
                                             <th>Valider</th>
                                         </tr>
                                     </thead>
@@ -105,15 +119,15 @@ require_once("../bdmutilple/getclient.php");
                                             <th>id</th>
                                             <th>Date</th>
                                             <th>Nom</th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             <th>QuaT</th>
-                                            <th>P/unit</th>
-                                            <th>Montant</th>
+                                            <th>P.U</th>
+                                            <th>P.Total</th>
                                             <th>Avance</th>
-                                            <th>Reste/paie</th>
-                                            <th>Status</th>
-                                            <th>Date/Livr</th>
-                                            <th>Date/Rape</th>
+                                            <th>Reste-paie</th>
+                                            <th>Statut</th>
+                                            <th>Date-Livr</th>
+                                            <th>Date-Rape</th>
                                             <th>Valider</th>
                                         </tr>
                                     </tfoot>
@@ -188,7 +202,7 @@ require_once("../bdmutilple/getclient.php");
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>

@@ -33,12 +33,23 @@
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Créer une Commande</h1>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Créer une Commande</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="liste.php" class="btn btn-success"> Liste</a>             
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div>
                             <form class="user" action="register.php" method="post">
                                 <hr>
-                                <h10 class="text-center">Enregistrer Nouveau Client</h10>
+                                <h6 class="text-center">Enregistrer un nouveau Client</h6>
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
