@@ -64,8 +64,13 @@ require_once("../bdmutilple/getclient.php");
                                 <div class="col-md-4">
                                     <h6 class="m-0 font-weight-bold text-primary">Tables Terrain</h6>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    <i class="fas fa-list"></i>
                                     <a href="service.php" class="btn btn-primary">Ajouter</a>
+                                </div>
+                                <div class="col-md-2">
+                                    <i class="fas fa-list"></i>
+                                    <a href="list.php" class="btn btn-primary">list</a>
                                 </div>
                                 <div class="col-md-4" style="text-align: right;">
                                 <label for="annee">Année recherche :</label>
@@ -167,7 +172,7 @@ require_once("../bdmutilple/getclient.php");
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>

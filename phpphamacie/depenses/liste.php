@@ -59,9 +59,18 @@
                         <div class="card-header py-3">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tables Depense</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables des Dépenses</h6>
                                 </div>
-                                <div class="col-md-6" style="text-align:right;">
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="depense.php" class="btn btn-success"> Ajouter</a>
+                                                
+                                </div>
+                                <div class="col-md-2" style="text-align:right;">
                                 
                                     <label for="annee">Année recherche :</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
