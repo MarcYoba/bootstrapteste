@@ -58,8 +58,17 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                         <div class="form-group row">
-                                <div class="col-sm-10">
+                                <div class="col-sm-6">
                                     <h6 class="m-0 font-weight-bold text-primary">Tables des Salaire</h6>
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="employer.php" class="btn btn-warning btn-user btn-block">
+                                        <i class="fas fa-plus"></i> Ajouter
+                                    </a>
                                 </div>
                                 <div class="col-sm-2">
                                     <a href="personnel.php" class="btn btn-primary btn-user btn-block">
