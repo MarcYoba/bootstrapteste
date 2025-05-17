@@ -76,7 +76,7 @@
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
                                         <?php
                                         $currentYear = 2024;
-                                        echo "<option >Recherche a</option>";
+                                        echo "<option>Recherche année</option>";
                                         for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
                                             echo "<option value=\"$year\">$year</option>";
                                         }
@@ -93,21 +93,21 @@
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>description</th>
-                                            <th>montant</th>
+                                            <th>Description</th>
+                                            <th>Montant</th>
                                             <th>Cathegorie </th>
                                             <th>Date</th>
-                                            <th>operation</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>description</th>
-                                            <th>montant</th>
+                                            <th>Description</th>
+                                            <th>Montant</th>
                                            <th>Cathegorie </th>
                                             <th>Date</th>
-                                            <th>operation</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>

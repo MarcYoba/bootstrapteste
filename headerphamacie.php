@@ -46,7 +46,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Opérations des Achats</h6>
                 <a class="collapse-item" href="phpphamacie/achat/teste.php" id="ajouterAcaht">Ajouter un Achat</a>
-                <a class="collapse-item" href="phpphamacie/achat/liste.php?date=<?php echo date("Y"); ?>">liste des Achats</a>
+                <a class="collapse-item" href="phpphamacie/achat/liste.php?date=<?php echo date("Y"); ?>">Liste des Achats</a>
             </div>
         </div>
     </li>
@@ -61,7 +61,7 @@
                 <h6 class="collapse-header">Opérations des clients</h6>
                 <a class="collapse-item" href="phpphamacie/client/client.php" id="ajouterClient">Ajouter un client</a>
                 <a class="collapse-item" href="phpphamacie/client/liste.php">Liste des clients</a>
-                <a class="collapse-item" href="phpphamacie/client/clientInactif.php">liste des clients Inactifs</a>
+                <a class="collapse-item" href="phpphamacie/client/clientInactif.php">Liste des clients Inactifs</a>
             </div>
         </div>
     </li>
@@ -90,7 +90,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Opérations des Fournisseur</h6>
                 <a class="collapse-item" href="phpphamacie/fournisseur/fourniseur.php" id="ajouterFourniseur">Ajouter un Fournisseur</a>
-                <a class="collapse-item" href="phpphamacie/fournisseur/liste.php">liste des Fournisseurs</a>
+                <a class="collapse-item" href="phpphamacie/fournisseur/liste.php">Liste des Fournisseurs</a>
             </div>
         </div>
     </li>
@@ -147,7 +147,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Caisse:</h6>
                 <a class="collapse-item" href="phpphamacie/caisse/caisse.php" id="ajouterCaise">Caisse</a>
-                <a class="collapse-item" href="phpphamacie/caisse/liste.php?date=<?php echo date("Y"); ?>">liste caisse</a>
+                <a class="collapse-item" href="phpphamacie/caisse/liste.php?date=<?php echo date("Y"); ?>">Liste caisse</a>
             </div>
         </div>
     </li>
@@ -170,12 +170,12 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#utilisateur"
             aria-expanded="true" aria-controls="utilisateur">
             <i class="fas fa-fw fa-folder"></i>
-            <span>utilisateur</span>
+            <span>Utilisateur</span>
         </a>
         <div id="utilisateur" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">utilisateur:</h6>
-                <a class="collapse-item" href="phpphamacie/userCon/page.php" id="ajouterUtilisateur">ajouter utilisateur</a>
+                <h6 class="collapse-header">Utilisateur:</h6>
+                <a class="collapse-item" href="phpphamacie/userCon/page.php" id="ajouterUtilisateur">Ajouter utilisateur</a>
                 <a class="collapse-item" href="phpphamacie/userCon/liste.php">Liste des utilisateurs</a>
             </div>
         </div>
@@ -209,7 +209,7 @@
                 <a class="collapse-item" href="phpphamacie/vacin/consultation.php" >Consultation</a> 
                 <a class="collapse-item" href="phpphamacie/vacin/fichesuivi.php" >Fiche de suivi</a>      
                 <a class="collapse-item" href="phpphamacie/vacin/tableconsultation.php?date=<?php echo date("Y"); ?>" >liste Consultation</a> 
-                <a class="collapse-item" href="phpphamacie/vacin/listesuivi.php?date=<?php echo date("Y"); ?>" >liste des suivi</a>
+                <a class="collapse-item" href="phpphamacie/vacin/listesuivi.php?date=<?php echo date("Y"); ?>" >Liste des suivi</a>
             </div>
         </div>
     </li>

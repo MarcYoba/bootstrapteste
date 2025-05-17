@@ -25,12 +25,12 @@ Information du client
            name="Localisation" placeholder="Localisation" required>
         <br>
         <input type="text" class="form-control form-control-user" id="speculation"
-           name="speculation" placeholder="speculation" required>
+           name="speculation" placeholder="Spéculation" required>
     </div>
 
     <div class="col-sm-4 mb-3 mb-sm-0">
         <input type="number" class="form-control form-control-user" id="telephone"
-           name="telephone" placeholder="telephone" required>
+           name="telephone" placeholder="Téléphone" required>
     </div>
     
 </div>
@@ -39,19 +39,19 @@ Information de descente
 <div class="form-group row">
     <div class="col-sm-4 mb-3 mb-sm-0">
         date du jour <input type="date" class="form-control form-control-user" id="date"
-           name="date" placeholder="date achat" required>
+           name="date" placeholder="Date achat" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
         Motif de la visite :<textarea  id="motifvisite" name="motifvisite" placeholder="Motif Visite" required>
         </textarea>
     </div>
     <div class="col-sm-2 mb-3 mb-sm-0">
-        Efectif: <input type="number"  class="form-control form-control-user" id="Efectif"
-           name="Efectif" placeholder="Efectif" value="0" onchange="calculedensite()" required>
+        Effectif: <input type="number"  class="form-control form-control-user" id="Efectif"
+           name="Efectif" placeholder="Effectif" value="0" onchange="calculedensite()" required>
     </div>
     <div class="col-sm-2 mb-3 mb-sm-0">
     Âge: <input type="number"  class="form-control form-control-user" id="Age"
-           name="Age" placeholder="Age" required>
+           name="Age" placeholder="Âge" required>
     </div>
 </div>
 <div class="form-group row">
@@ -72,9 +72,9 @@ Information de descente
     <div class="col-sm-3 mb-3 mb-sm-0">
         Type de construction: 
         <select  class="form-control form-select" id="construction" name="construction"  required>
-            <option value="definitif" >definitif</option>
-            <option value="semi definitif">semi definitif</option>
-            <option value="materiau provisoire">materiau provisoire</option>
+            <option value="definitif" >Définitive</option>
+            <option value="semi definitif">Semi définitive</option>
+            <option value="materiau provisoire">Matériau provisoire</option>
         </select>
             </div>
             <div class="col-sm-3 mb-3 mb-sm-0">
@@ -88,16 +88,16 @@ Information de descente
            name="superficie" placeholder="Superficie en (m)" value="0" onchange="calculedensite()" varequired>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Qualité du sole: <input type="texte"  class="form-control form-control-user" id="sole"
-           name="sole" placeholder="Qualite du sole" required>
+    Qualité du sol: <input type="texte"  class="form-control form-control-user" id="sole"
+           name="sole" placeholder="Qualité du sol" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Densite: <input type="texte"  class="form-control form-control-user" id="densite"
-           name="densite" placeholder="Densite au sole" required>
+        Densité au sol: <input type="texte"  class="form-control form-control-user" id="densite"
+           name="densite" placeholder="Densité au sol" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
         Poids Moyen: <input type="number"  class="form-control form-control-user" id="poidmoyen"
-           name="poidmoyen" placeholder="Poid Moyen" required>
+           name="poidmoyen" placeholder="Poids Moyen" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
     Environement d'exploitation: <input type="text"  class="form-control form-control-user" id="Environement"
@@ -106,69 +106,74 @@ Information de descente
 </div> 
 <div class="form-group row">
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Hygiène du bâtiment: <input type="text"  class="form-control form-control-user" id="hygiene"
+        Hygiène du bâtiment: <select type="text"  class="form-control form-control-user" id="hygiene"
                    name="hygiene" placeholder="Hygiène du bâtiment" required>
+                        <option id="MAUVAIRSE"> Mauvairse</option>
+                        <option id="ASSEZ BONNE">Assez Bonne</option>
+                        <option id="BONNE"> Bonne</option>
+                        <option id="Excelente"> Excelente</option>
+                   </select>
             </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Nombre mangeoire: <input type="number"  class="form-control form-control-user" id="mangeoire"
-           name="mangeoire" placeholder="Nombre mangeoire" required>
+        Nombre mangeoir: <input type="number"  class="form-control form-control-user" id="mangeoire"
+           name="mangeoire" placeholder="Nombre mangeoir" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Nombre abrevoire: <input type="number"  class="form-control form-control-user" id="abrevoire"
-           name="abrevoire" placeholder="Nombre abrevoire" required>
+    Nombre abreuvoir: <input type="number"  class="form-control form-control-user" id="abrevoire"
+           name="abrevoire" placeholder="Nombre abreuvoir" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Type d'alimentation: 
+    Type d'aliment: 
         <select  class="form-control form-select" id="alimentation" name="alimentation"  required>
-            <option value="predemarrage" >predemarrage</option>
-            <option value="demarrage">demarrage</option>
-            <option value="croissance">croissance</option>
-            <option value="finition">finition</option>
+            <option value="predemarrage" >Prédemarrage</option>
+            <option value="demarrage">Démarrage</option>
+            <option value="croissance">Croissance</option>
+            <option value="finition">Finition</option>
         </select>
     </div>
 </div> 
 <div class="form-group row">
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Granulometrie: 
+        Granulométrie: 
         <select  class="form-control form-select" id="granulo" name="granulo"  required>
-            <option value="BONNE" >BONNE</option>
-            <option value="MOVAIRSE">MOVAIRSE</option>
+            <option value="BONNE" >Bonne</option>
+            <option value="MAUVAIRSE">Mauvairse</option>
         </select>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Présence de l'antenou: 
+        Présence de l'anternau: 
         <select  class="form-control form-select" id="antenou" name="antenou"  required>
-            <option value="OUI" >OUI</option>
-            <option value="NON">NON</option>
+            <option value="OUI" >Oui</option>
+            <option value="NON">Non</option>
         </select>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    prophylaxie:
+    Prophylaxie:
         <select  class="form-control form-select" id="prophylacie" name="prophylacie"  required>
-            <option value="respecte" >respecte</option>
-            <option value="non respecte">non respecte</option>
-            <option value="non connu">non connu</option>
+            <option value="respecte" >Respècte</option>
+            <option value="non respecte">Non respècte</option>
+            <option value="non connu">Non connue</option>
         </select>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Pathologie anterieu: 
-    <textarea  id="patologie" name="patologie" placeholder="Patologie anterieux" required>
+    Pathologies antérieux: 
+    <textarea  id="patologie" name="patologie" placeholder="Patologies antérieux" required>
     </textarea>
     </div>
 </div>
 <div class="form-group row">
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Traitements anterieurs: 
-        <textarea  id="Traitemenante" name="Traitemenante" placeholder="Traitement anterieur" required>
+        Traitements antérieurs: 
+        <textarea  id="Traitemenante" name="Traitemenante" placeholder="Traitement antérieur" required>
     </textarea>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Date debut Maladie: 
+    Date début Maladie: 
     <input type="date" class="form-control form-control-user" id="datedebmal"
            name="datedebmal" placeholder="Date debut Maladie" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    nombre de mort: 
+    Nombre de mort: 
     <input type="number" class="form-control form-control-user" id="mort"
            name="mort" placeholder="Nombre de mort" required>
     </div>
@@ -178,18 +183,18 @@ Information de descente
            name="jourmalad" placeholder="Nombre de jour de la maladie" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Signe clinique: 
-        <textarea  id="siclinique" name="siclinique" placeholder="Signe clinique" required>
-    </textarea>
-    </div>
-    <div class="col-sm-3 mb-3 mb-sm-0">
-    Traitement prescrit: 
-        <textarea  id="Traitementan" name="Traitementan" placeholder="Traitement Anvisage" required>
+    Signes cliniques: 
+        <textarea  id="siclinique" name="siclinique" placeholder="Signes cliniques" required>
     </textarea>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
     Diagnostics de suspicion: 
         <textarea  id="Diagnostic" name="Diagnostic" placeholder="Diagnostic de suspicion" required>
+    </textarea>
+    </div>
+    <div class="col-sm-3 mb-3 mb-sm-0">
+    Traitement prescrit: 
+        <textarea  id="Traitementan" name="Traitementan" placeholder="Traitement Anvisage" required>
     </textarea>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
@@ -200,7 +205,7 @@ Information de descente
     <div class="col-sm-3 mb-3 mb-sm-0">
     Date prochaine visite: 
     <input type="date" class="form-control form-control-user" id="datepvisit"
-           name="datepvisit" placeholder="date achat" required>
+           name="datepvisit" placeholder="Date prochaine visite" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0"> 
     Montant <input type="number" class="form-control form-control-user" id="Montant"

@@ -165,7 +165,12 @@
                                     En offrant une vue d'ensemble et un contrôle accru sur l'infrastructure,
                                     ce type de logiciel vise à améliorer l'efficacité opérationnelle, renforcer la sécurité, réduire les pertes et assurer la conformité réglementaire.</p>
                                 <div class="spacer-180"></div>
-                                <p class="mt30"><a href="https://fayacomputer.wuaze.com" class="btn btn-primary btn-red page-scroll">FAYA COMPUTER</a></p>
+                                <?php
+                                    if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "fayacomputer") ) {
+                                        echo '<p class="mt30"><a href="https://fayacomputer.wuaze.com" class="btn btn-primary btn-red page-scroll">FAYA COMPUTER</a></p>';  
+                                    }
+                                ?>
+                                
                             </div>
                         </div>
                     </div>
@@ -446,7 +451,11 @@
                             <?php        
                                 if (($_SESSION['zonetravail'] == "provenderie") || ($_SESSION["zonetravail"] == "Tous")) {
                                     echo '<p class="mt20"><a href="home.php" class="btn btn-primary btn-red page-scroll">Aller a la provenderie</a></p>';           
-                                }          
+                                }
+                                
+                                if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "provenderie douala") ) {
+                                    echo '<p class="mt20"><a href="https://www.provenderiedouala.wuaze.com" class="btn btn-primary btn-red page-scroll">Provenderie Douala</a></p>';  
+                                }
                             ?>
                             <h3 class="section-subheading secondary-font">Bienvenue dans la communauté</h3>
                         </div>

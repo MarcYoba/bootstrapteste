@@ -104,13 +104,13 @@
 
                                     <p class="col-md-2" >
                                         <input class="form-check-input" type="checkbox" id="Intentaire" name="Intentaire" value="Intentaire">
-                                        <label class="form-check-label" id="Intentaire">Intentaire</label><br>
+                                        <label class="form-check-label" id="Intentaire">Inventaire</label><br>
 
                                         <input class="form-check-input" type="checkbox" id="vente" name="vente" value="vente">
                                         <label class="form-check-label" id="vente">vente</label>
                                     </p>
                                 <p class="col-md-2">
-                                    <button class='btn btn-info btn-user'>Affichier</button>
+                                    <button class='btn btn-info btn-user'>Afficher</button>
                                     <br>
                                     <label for="annee">Année recherche :</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">

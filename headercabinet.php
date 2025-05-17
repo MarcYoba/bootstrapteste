@@ -52,7 +52,7 @@ require_once("php/activesaision.php");
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Opérations des Achats</h6>
                 <a class="collapse-item" href="../achat/teste.php" id="ajouterAcaht">Ajouter un Achat</a>
-                <a class="collapse-item" href="../achat/liste.php?date=<?php echo date("Y"); ?>">liste des Achats</a>
+                <a class="collapse-item" href="../achat/liste.php?date=<?php echo date("Y"); ?>">Liste des Achats</a>
             </div>
         </div>
     </li>
@@ -67,7 +67,7 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Opérations des clients</h6>
                 <a class="collapse-item" href="../client/client.php" id="ajouterClient">Ajouter un client</a>
                 <a class="collapse-item" href="../client/liste.php">Liste des clients</a>
-                <a class="collapse-item" href="../client/clientInactif.php">liste des clients Inactifs</a>
+                <a class="collapse-item" href="../client/clientInactif.php">Liste des clients Inactifs</a>
             </div>
         </div>
     </li>
@@ -97,7 +97,7 @@ require_once("php/activesaision.php");
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Opérations des Fourniseurs</h6>
                 <a class="collapse-item" href="../fournisseur/fourniseur.php" id="ajouterFourniseur">Ajouter un Fournisseur</a>
-                <a class="collapse-item" href="../fournisseur/liste.php">liste des Fournisseurs</a>   
+                <a class="collapse-item" href="../fournisseur/liste.php">Liste des Fournisseurs</a>   
             </div>
         </div>
     </li>
@@ -192,7 +192,7 @@ require_once("php/activesaision.php");
                 
                 <a class="collapse-item" href="../volaille/volaille.php" id="ajouterUtilisateur">Commande Poussins</a>
                 <a class="collapse-item" href="../volaille/comandefourniseur.php">Commande fournisseur</a>
-                <a class="collapse-item" href="../volaille/liste.php?date=<?php echo date("m");?>">Liste</a>
+                <a class="collapse-item" href="../volaille/liste.php?date=<?php echo date("Y"); ?>">Liste Commande</a>
                 <a class="collapse-item" href="../volaille/listecommande.php?date=<?php echo date("Y");?>">Liste fourniseur</a>
                    
                 
@@ -210,7 +210,7 @@ require_once("php/activesaision.php");
                 <h6 class="collapse-header">Cliniques :</h6>
                 
                 <a class="collapse-item" href="../vacin/consultation.php" id="ajouterUtilisateur">Consultation</a>
-                <a class="collapse-item" href="../vacin/fichesuivi.php" >fiche de suivi </a>
+                <a class="collapse-item" href="../vacin/fichesuivi.php" >Fiche de suivi </a>
                 <a class="collapse-item" href="../vacin/tableconsultation.php?date=<?php echo date("Y");?>">Liste Consultation</a>
                 <a class="collapse-item" href="../vacin/listesuivi.php?date=<?php echo date("Y");?>" >Liste des suivis</a>
                     
@@ -240,14 +240,14 @@ require_once("php/activesaision.php");
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#depense"
             aria-expanded="true" aria-controls="depense">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Depense</span>
+            <span>Dépense</span>
         </a>
         <div id="depense" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Depense:</h6>
+                <h6 class="collapse-header">Dépense:</h6>
                 
-                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
-                        <a class="collapse-item" href="../depenses/liste.php?date=<?php echo date("Y");?>">Liste Depense</a>
+                        <a class="collapse-item" href="../depenses/depense.php">Dépense</a>
+                        <a class="collapse-item" href="../depenses/liste.php?date=<?php echo date("Y");?>">Liste des Dépenses</a>
                 
             </div>
         </div>

@@ -50,7 +50,7 @@
                             <form class="user" action="register.php" method="post" >
                                 <div class="form-group ">
                                     <div class="col-sm-14 mb-3 mb-sm-0">
-                                        date: <input type="date" class="form-control form-control-user" id="date"
+                                        Date: <input type="date" class="form-control form-control-user" id="date"
                                                 name="date"  required >   
                                     </div>
                                     <hr>
@@ -79,13 +79,13 @@
                                            $donnees= json_decode($tabdonne,true);
                                            echo "<option value='".$donnees["operation"]."'>".$donnees["operation"]."</option>";
                                         }else{
-                                            echo'<option value="retour en caisse" > retour en caisse </option>';
-                                            echo'<option value="sortie en caisse" > sortie en caisse</option>';
-                                            echo'<option value="sortie OM MOMO" > sortie OM MOMO</option>';
-                                            echo'<option value="sortie Dr Toukam" >sortie Dr Toukam</option>';
-                                            echo'<option value="sortie Mr Abdel" >sortie Mr Abdel</option>';
-                                            echo'<option value="sortie SKAB" >sortie SKAB</option>';
-                                            echo'<option value="sortie Banque" >sortie Banque</option>';
+                                            echo'<option value="retour en caisse" > Retour en caisse </option>';
+                                            echo'<option value="sortie en caisse" > Sortie en caisse</option>';
+                                            echo'<option value="sortie OM MOMO" > Sortie OM MOMO</option>';
+                                            echo'<option value="sortie Dr Toukam" >Sortie Dr Toukam</option>';
+                                            echo'<option value="sortie Mr Abdel" >Sortie Mr Abdel</option>';
+                                            echo'<option value="sortie SKAB" >Sortie SKAB</option>';
+                                            echo'<option value="sortie Banque" >Sortie Banque</option>';
                                         }
                                         echo '</select>';
                                         echo'</div>'; 

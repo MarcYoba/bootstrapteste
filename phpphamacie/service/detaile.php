@@ -96,7 +96,7 @@
                                         Motif de la visite :<p class="text-lg font-weight-bold" id="motifvisite"> <?php echo $row["motifvisite"] ?></p> 
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Effectif: <p class="text-lg font-weight-bold" id="effectif"> <?php echo $row["effectif"] ?></p>
+                                        Effectif: <p class="text-lg font-weight-bold" id="effectif"> <?php echo $row["efectif"] ?></p>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
                                         Âge: <p class="text-lg font-weight-bold" id="age"> <?php echo $row["Age"] ?></p>

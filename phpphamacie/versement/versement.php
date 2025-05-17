@@ -58,7 +58,7 @@
                         </div>
                                 <hr>
                                  <div class="row">
-                                    <a href="../dette/dette.php"  class="btn btn-info btn-user col-md-4" >Dette</a>
+                                    <a href="../dette/dette.php"  class="btn btn-info btn-user col-md-4" >Créance client</a>
                                 </div>
                                 <span id="verificatiobDonne"></span>
                                 
@@ -92,11 +92,11 @@
                                             name="iddette" placeholder="id dette" value="'.$donnees["iddette"].'" readonly>';  
                                         }else{
                                             echo'<input type="number" class="form-control form-control-user" id="iddette"
-                                            name="iddette" placeholder="id dette"  readonly>';
+                                            name="iddette" placeholder="Créance client"  readonly>';
                                         }
                                         echo'</div>'; 
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0"> 
-                                        <input type="search" id="fourni" onkeyup="recherclinet()"  class="form-control" placeholder="recherche fournisseur">
+                                        <input type="search" id="fourni" onkeyup="recherclinet()"  class="form-control" placeholder="Recherche fournisseur">
                                         ';
 
                                             echo'<select id="client"  name="client"  class="form-control " required size="4" multiple aria-label="multiple select">';
@@ -123,17 +123,17 @@
                                     echo'<div class="form-group row">';
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="montant" id="montant" placeholder="montant versement" value="0" required>'; 
+                                                name="montant" id="montant" placeholder="Montant versement" value="0" required>'; 
                                         echo'</div>';
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                             if(isset($_GET['tableau'])){
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="banque" id="banque"  placeholder="banque" required>';
+                                                name="banque" id="banque"  placeholder="Banque" required>';
                                             }else{
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="banque" id="banque" placeholder="banque" required>';
+                                                name="banque" id="banque" placeholder="Banque" required>';
                                             }
                                         echo'</div>';
                                     echo'</div>';
@@ -147,10 +147,10 @@
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="txt" class="form-control form-control-user"
-                                                name="matif" id="matif" value='.intval($donnees["motif"]).' placeholder="motif" required>';
+                                                name="matif" id="matif" value='.intval($donnees["motif"]).' placeholder="Motif versement" required>';
                                             }else{
                                                 echo'<input type="txt" class="form-control form-control-user"
-                                                name="matif" id="motif" placeholder="motif" required>';
+                                                name="matif" id="motif" placeholder="Motif versement" required>';
                                             }
                                         echo'</div>';
                                     echo'</div>';

@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="LastName" 
-                                           name="LastName" placeholder="adresse" >
+                                           name="LastName" placeholder="Address" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -82,7 +82,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <input type="tel" class="form-control form-control-user" id="Inputphone"
-                                        name="Inputphone" placeholder="telephone client" >
+                                        name="Inputphone" placeholder="Telephone client" >
                                     </div>
                                     <div class="col-sm-6">
                                         <select id="sexe"  name="sexe"  class="form-control form-select" >
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="form-group">
                                     <p>
-                                        <h6>Pour enregistrer une liste des clients, vous devez télécharger le template suivant.<br>
+                                        <h6>Pour enregistrer une liste de clients, vous devez télécharger le template suivant.<br>
                                             1. Enregistrez les informations comme les colonnes l'indiquent.<br>
                                             2. Enregistrez le template sous un nom court sans espace en cas de modification.<br>
                                             3. Importez le modèle dans l'application.<br>

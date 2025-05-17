@@ -31,7 +31,7 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
                         <div class="form-group row">
                                 <div class="col-sm-6">
@@ -149,10 +149,10 @@
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="number" class="form-control form-control-user" id="InputQuantite"
-                                                name="InputQuantite" placeholder="Quantite de demmarage"  value='.intval($donnees["quantite_produit"]).' required>';
+                                                name="InputQuantite" placeholder="Quantité de demmarage"  value='.intval($donnees["quantite_produit"]).' required>';
                                             }else{
                                                 echo'<input type="number" class="form-control form-control-user" id="InputQuantite"
-                                                name="InputQuantite" placeholder="Quantite de demmarage" required>';
+                                                name="InputQuantite" placeholder="Quantité de demmarage" required>';
                                             } 
                                             
                                         echo'</div>';
@@ -164,7 +164,7 @@
                                                     echo'<option value="'.$donnees["cathegorie"].'"  selected>'.$donnees["cathegorie"].'</option>';
                                                     echo '<div date_add='.$donnees["id"].' id="id"></div>';
                                                 }else{
-                                                    echo'<option selected> reference provenderie ou pharmacie</option>';;
+                                                    echo'<option selected> Indication </option>';;
                                                 }
                                                 
                                                 
