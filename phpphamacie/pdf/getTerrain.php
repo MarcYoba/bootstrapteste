@@ -15,7 +15,6 @@ $client = new Client(0);
 
 // Créer une instance de Dompdf
 $dompdf = new Dompdf();
-
 // Créer le contenu HTML du PDF
 $html = '
 <!DOCTYPE html>
@@ -39,7 +38,8 @@ $html = '
        
 </head>
 <body>
-<h1> FICHE DE VISITE ABGROUP SARL</h1>
+<img src="../../img/logo.jpg" alt="Logo ABGROUP"/>
+<h1> FICHE DE VISITE ABGROUP SARL </h1>
 <table style="width:100%;">
     <thead>';
     $element = $service->getElement($id);
@@ -139,11 +139,17 @@ $html = '
 
                                         Date prochaine visite: 
                                         <p class="text-lg font-weight-bold">'. $element["dateprochevisite"].'</p>
-                                <hr>        
-                                        Montant: <p class="text-lg font-weight-bold">'. $element["Montant"].'</p>   
+                                <hr>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div>
+                                        Montant: <p class="text-lg font-weight-bold">'. $element["Montant"] .'</p>
+                                        <p class="text-lg font-weight-bold" style="text-align: right;">'.$element["veterinaire"].'</p>
+                                        <br>
+                                    </div>
+                                </div>
                                 <hr>
                                 <br>
-                                <h1>NB : N\'oubliez pas de commander vos poussins, vos produits et l\'aliment pour garantir la croissance de votre élevage</h1>
+                                <h2>NB : N\'oubliez pas de commander vos poussins, vos produits et l\'aliment pour garantir la croissance de votre élevage</h2>
          ';
 
 $html .='
