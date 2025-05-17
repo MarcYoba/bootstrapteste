@@ -46,8 +46,8 @@ Information de descente
         </textarea>
     </div>
     <div class="col-sm-2 mb-3 mb-sm-0">
-        Effectif: <input type="number"  class="form-control form-control-user" id="Efectif"
-           name="Efectif" placeholder="Effectif" value="0" onchange="calculedensite()" required>
+        Effectif: <input type="number"  class="form-control form-control-user" id="effectif"
+           name="effectif" placeholder="Effectif" value="0" onchange="calculedensite()" required>
     </div>
     <div class="col-sm-2 mb-3 mb-sm-0">
     Âge: <input type="number"  class="form-control form-control-user" id="Age"
@@ -97,7 +97,7 @@ Information de descente
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
         Poids Moyen: <input type="number"  class="form-control form-control-user" id="poidmoyen"
-           name="poidmoyen" placeholder="Poids Moyen">
+           name="poidmoyen" placeholder="Poids Moyen" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
     Environement d'exploitation: <input type="text"  class="form-control form-control-user" id="Environement"
@@ -106,7 +106,7 @@ Information de descente
 </div> 
 <div class="form-group row">
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Hygiène du bâtiment: <select type="text"  class="form-control form-control-user" id="hygiene"
+        Hygiène du bâtiment: <select type="text"  class="form-control form-select" id="hygiene"
                    name="hygiene" placeholder="Hygiène du bâtiment" required>
                         <option id="MAUVAIRSE"> Mauvairse</option>
                         <option id="ASSEZ BONNE">Assez Bonne</option>
@@ -115,11 +115,11 @@ Information de descente
                    </select>
             </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-        Type mangeoir: <input type="text"  class="form-control form-control-user" id="mangeoire"
+        Nombre mangeoir: <input type="number"  class="form-control form-control-user" id="mangeoire"
            name="mangeoire" placeholder="Nombre mangeoir" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-    Type abreuvoir: <input type="number"  class="form-control form-control-user" id="abrevoire"
+    Nombre abreuvoir: <input type="number"  class="form-control form-control-user" id="abrevoire"
            name="abrevoire" placeholder="Nombre abreuvoir" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
@@ -141,7 +141,11 @@ Information de descente
         </select>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
-        
+        Présence de l'anternau: 
+        <select  class="form-control form-select" id="antenou" name="antenou"  required>
+            <option value="OUI" >Oui</option>
+            <option value="NON">Non</option>
+        </select>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0">
     Prophylaxie:
@@ -202,6 +206,11 @@ Information de descente
     Date prochaine visite: 
     <input type="date" class="form-control form-control-user" id="datepvisit"
            name="datepvisit" placeholder="Date prochaine visite" required>
+    </div>
+    <div class="col-sm-3 mb-3 mb-sm-0">
+    Nom du vétérinaire : 
+    <input type="text" class="form-control form-control-user" id="veterinaire"
+           name="veterinaire" placeholder="Date prochaine visite" required>
     </div>
     <div class="col-sm-3 mb-3 mb-sm-0"> 
     Montant <input type="number" class="form-control form-control-user" id="Montant"

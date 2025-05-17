@@ -77,7 +77,7 @@ require_once("../bdmutilple/getclient.php");
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
                                         <?php
                                         $currentYear = 2024;
-                                        echo "<option >Recherche a</option>";
+                                        echo "<option >Recherche Année</option>";
                                         for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
                                             echo "<option value=\"$year\">$year</option>";
                                         }
