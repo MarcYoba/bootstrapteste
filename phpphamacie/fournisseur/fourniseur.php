@@ -56,17 +56,17 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="adressfournisseur" 
-                                           name="adressfournisseur" placeholder="address fournisseur" required>
+                                           name="adressfournisseur" placeholder="Adresse fournisseur" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="date" class="form-control form-control-user" id="datefacture"
-                                           name="datefacture" placeholder="date achat" required>
+                                           name="datefacture" placeholder="Date achat" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="number" class="form-control form-control-user" id="numerofacture" 
-                                           name="numerofacture" placeholder="numero facture" required>
+                                           name="numerofacture" placeholder="Numero facture" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -76,7 +76,7 @@
                                 <hr>
                                 <div class="form-group">
                                     <input type="tel" class="form-control form-control-user" id="Inputphone"
-                                       name="Inputphone" placeholder="telephone fourniseur" required>
+                                       name="Inputphone" placeholder="Téléphone fourniseur" required>
                                 </div>
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
                                     Enregister

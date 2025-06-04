@@ -91,16 +91,16 @@
                                            $donnees= json_decode($tabdonne,true);
                                             
                                             echo'<input type="text" class="form-control form-control-user" id="description"
-                                            name="description" placeholder="description du mouvement" value="'.$donnees["description"].'" required>';  
+                                            name="description" placeholder="Description du mouvement" value="'.$donnees["description"].'" required>';  
                                         }else{
                                             echo'<input type="text" class="form-control form-control-user" id="description"
-                                            name="description" placeholder="description"  required>';
+                                            name="description" placeholder="Description"  required>';
                                         }
                                         echo'</div>'; 
                                             echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                                 
                                                     echo'<input type="file" class="form-control form-control-user" id="facture"
-                                                    name="facture" placeholder="facture"  >';
+                                                    name="facture" placeholder="Facture"  >';
                                                 
                                             echo'</div>';
                                         echo'</div>';

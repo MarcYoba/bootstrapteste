@@ -71,13 +71,35 @@
                                 </div>
                                 <hr>
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="col-sm-5 mb-3 mb-sm-0">
+                                        Nom du propritaire 
+                                        <input type="search" id="clientrecher" onkeyup="recherchduclient()"  class="form-control" placeholder="recherche client">
+                                        <select id="idclient"  name="idclient"  class="form-control form-select" size="4">
+                                            <?php 
+                                            require_once("../connexion.php");
+                                                global $conn;
+                                                $sql = "SELECT id, firstname, adresse FROM client";
+                                                $result = $conn->query($sql);
+                                                while ($row = mysqli_fetch_assoc($result)){               
+                                                    echo "<option value='".$row["id"]."'>".$row["firstname"]."</option>";
+                                                }
+                                            ?>
+                                    </select>
+                                    </div>
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
                                         Nom : <input type="text" class="form-control form-control-user" id="Name"
                                            name="Name" placeholder="Nom sujet" required>
+                                        Date vaccination : <input type="date" class="form-control form-control-user" id="datevaccination"
+                                           name="datevaccination" placeholder="date vaccination" required>
                                     </div>
-                                    <div class="col-sm-6">
-                                      Vaccin:  <input type="texte" class="form-control form-control-user" id="age" 
+                                    <div class="col-sm-2">
+                                      Vacciné:  <select type="texte" class="form-control form-select" id="age" 
                                            name="vaccin" placeholder="vaccin" required>
+                                            <option id="OUI">Oui</option>
+                                            <option id="NON">Non</option>
+                                           </select>
+                                           Date Rappel : <input type="date" class="form-control form-control-user" id="dateRappel"
+                                           name="dateRappel" placeholder="date vaccination" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -88,6 +110,8 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                     Vermifuge:  <input type="texte" class="form-control form-control-user" id="Vermifuge" 
                                            name="Vermifuge" placeholder="Vermifuge" required>
+                                    date Vermifuge:  <input type="date" class="form-control form-control-user" id="dateVermifuge" 
+                                           name="dateVermifuge" placeholder="Vermifuge" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -96,7 +120,7 @@
                                         name="Sexe" placeholder="Sexe" required>
                                     </div> 
                                     <div class="col-sm-2 mb-3 mb-sm-0">   
-                                        Poid: <input type="number" class="form-control form-control-user" id="Poid"
+                                        Poids: <input type="number" class="form-control form-control-user" id="Poid"
                                            name="Poid" placeholder="Poid" required>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">    
@@ -105,7 +129,7 @@
                                     </div>
                                     
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        Regime Alimentaire: <textarea rows="2" cols="20" class="form-control form-control-user" id="Regime"
+                                        Type Alimentation: <textarea rows="2" cols="20" class="form-control form-control-user" id="Regime"
                                         name="Regime" placeholder="Regime Alimentaire" required></textarea>
                                     </div>
                                     
@@ -123,21 +147,6 @@
                                         Température: <input type="text" class="form-control form-control-user" id="Temperature"
                                            name="Temterature" placeholder="Temterature" required>
                                     </div>
-                                    <div class="col-sm-5 mb-3 mb-sm-0">
-                                        Nom du propritaire 
-                                        <input type="search" id="clientrecher" onkeyup="recherchduclient()"  class="form-control" placeholder="recherche client">
-                                        <select id="idclient"  name="idclient"  class="form-control form-select" size="4">
-                                            <?php 
-                                            require_once("../connexion.php");
-                                                global $conn;
-                                                $sql = "SELECT id, firstname, adresse FROM client";
-                                                $result = $conn->query($sql);
-                                                while ($row = mysqli_fetch_assoc($result)){               
-                                                    echo "<option value='".$row["id"]."'>".$row["firstname"]."</option>";
-                                                }
-                                            ?>
-                                    </select>
-                                    </div>
                                 </div>
                                 <hr>
                                 <div class="form-group ">
@@ -148,32 +157,40 @@
                                 </div>
                                 <hr>
                                 <div class="form-group row ">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                          <textarea type="text" rows="5" cols="20" class="form-control " id="symptomes"
-                                           name="symptomes" placeholder="symptômes" required></textarea>
+                                           name="symptomes" placeholder="Signe clinique" required></textarea>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                         <textarea type="text" rows="5" cols="20" class="form-control " id="Examain"
+                                           name="Examain" placeholder="Examain Complementaire" required></textarea>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                          <textarea type="text" rows="5" cols="20" class="form-control " id="diagnostic"
-                                           name="diagnostic" placeholder="diagnostic" required></textarea>
+                                           name="diagnostic" placeholder="Diagnostic de suspision" required></textarea>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <textarea type="text" rows="5" cols="20" class="form-control " id="traitement"
-                                           name="traitement" placeholder="traitement" required></textarea>
+                                           name="traitement" placeholder="Traitement prescrite" required></textarea>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         Pronostic: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Pronostic"
                                            name="Pronostic" placeholder="Pronostic de la consultation" required></textarea>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                        Prophylaxie: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Prophylaxie"
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        Recommandation: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Prophylaxie"
                                            name="Prophylaxie" placeholder="Prophylaxie de la consultation" required></textarea>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         Indications: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Indication"
                                            name="Indication" placeholder="Indication de la consultation" required></textarea>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        Nom et signalture: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Medessin"
+                                           name="Medessin" placeholder="Medessin" required></textarea>
                                     </div>
                                 </div>
                                 <hr>

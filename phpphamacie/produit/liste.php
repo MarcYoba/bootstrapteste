@@ -70,7 +70,7 @@
                                         <a href="produit.php" class="btn btn-success"> Ajouter</a>       
                                     </div>
                                     <div class="col-sm-2 ">
-                                    <a class="m-0 font-weight-bold text-primary" href="../pdf/getproduit.php">telecharger</a>
+                                    <a class="m-0 font-weight-bold text-primary" href="../pdf/getproduit.php">Télecharger</a>
                                     </div>
                                 </div>
                         </div>

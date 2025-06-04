@@ -36,7 +36,7 @@ function remplissagevolaille(){
   document.getElementById("telephone").value = dataservice.telephone;
   document.getElementById("date").value = dataservice.datejour;
   document.getElementById("motifvisite").value = dataservice.motifvisite;
-  document.getElementById("Efectif").value = dataservice.efectif;
+  document.getElementById("effectif").value = dataservice.efectif;
   document.getElementById("Age").value = dataservice.Age;
   document.getElementById("barrier").value = dataservice.barrier;
   document.getElementById("Pedulive").value = dataservice.pedulive;
@@ -81,7 +81,7 @@ function selection() {
     service.telephone =   document.getElementById("telephone").innerText;
     service.datejour =   document.getElementById("datejour").innerText;
     service.motifvisite =   document.getElementById("motifvisite").innerText;
-    service.efectif =   document.getElementById("efectif").innerText;
+    service.efectif =   document.getElementById("effectif").innerText;
     service.Age =   document.getElementById("age").innerText;
     service.barrier =   document.getElementById("barrier").innerText;
     service.pedulive =   document.getElementById("pedulive").innerText;
@@ -155,7 +155,14 @@ function animalvollaile() {
 }
 
 function animalporc() {
-  document.getElementById("typeelement").innerHTML= ''  ;
+  var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("typeelement").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "typeporc.php", true);
+        xhttp.send();
   
 }
 

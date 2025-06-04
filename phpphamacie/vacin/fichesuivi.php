@@ -52,13 +52,15 @@
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                    Nom du patient :
                                         <input type="text" class="form-control form-control-user" id="Name"
-                                           name="Name" placeholder="Nom sujet" required>
+                                           name="Name" placeholder="Nom patient" required>
                                     </div>
     
                                 
                                     
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                    Nom du propriétaire
                                     <select id="idclient"  name="idclient"  class="form-control form-select">
                                             <?php 
                                             require_once("../connexion.php");
@@ -76,7 +78,7 @@
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Jour de traitement <input type="date" class="form-control form-control-user" id="datetraite"
+                                        Date de traitement <input type="date" class="form-control form-control-user" id="datetraite"
                                            name="datetraite" placeholder="date achat" required>
                                     </div>
                                     <div class="col-sm-5 mb-3 mb-sm-0">
@@ -84,15 +86,19 @@
                                            name="Observation" placeholder="Observation" required></textarea>
                                     </div>
                                     <div class="col-sm-5 mb-3 mb-sm-0">
-                                        Conduite: <textarea  class="form-control form-control-user" id="secondvacin"
-                                           name="Conduite" placeholder="Conduite" required></textarea>
+                                        Conduite à tenir: <textarea  class="form-control form-control-user" id="secondvacin"
+                                           name="Conduite" placeholder="Conduite à tenir:" required></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    
-                                        Montant <input type="number" class="form-control form-control-user" id="Montant"
-                                           name="Montant" placeholder="Montant" required>
-                                    
+                                <div class="form-group row">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                        Montant payé <input type="number" class="form-control form-control-user" id="Montant"
+                                           name="Montant" placeholder="Montant payé" required>
+                                    </div>
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                       Nom du vétérinaire: <textarea  class="form-control " id="" 
+                                           name="Veterinaire" placeholder="Nom du vétérinaire signature" required></textarea>
+                                    </div>
                                 </div>
                                 <button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
                                     Enregister

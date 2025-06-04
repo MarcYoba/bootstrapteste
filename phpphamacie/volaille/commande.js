@@ -131,7 +131,7 @@ function ajouter(dataTable,...donnees){
     nouvellecellule4.appendChild(p4);
 
     document.getElementById("fournisseur").value ='';
-    cdocument.getElementById("souche").value='';
+    document.getElementById("souche").value='';
     document.getElementById("unite").value='';
     document.getElementById("status").value='';
     }

@@ -91,7 +91,8 @@ $html .='<table style="border-collapse: separate; border-spacing: 0px;" >
             <th colspan="1"> Versement </th>
         </tr>';
             $html .= '<tr>';   
-            $html .= '<td> '." Objet :".$getFacture["motif"]."<br> Nom :".$facture["firstname"]."<br> Montant ".$getFacture["montant"].'FCFA</td>';   
+            $montant =  $getFacture["montant"] + $getFacture["Om"] + $getFacture["banque"];
+            $html .= '<td> '." Objet :".$getFacture["motif"]."<br> Nom :".$facture["firstname"]."<br> Montant ".$montant.'FCFA</td>';   
             $html .= '</tr>';
         $html .= '
         </tbody>

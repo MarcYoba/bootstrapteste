@@ -45,9 +45,11 @@ require_once("../connexion.php");
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-12">
+                <div class="form-group row">
+                    <div class="col-lg-1 d-none d-lg-block bg-register-image">
+                        <?php require_once("../../headercabinet.php")?>
+                    </div>
+                    <div class="col-lg-11">
                         <div class="p-5">
                                     <!-- DataTales Example -->
                                     <div class="card shadow mb-4">
@@ -124,8 +126,8 @@ require_once("../connexion.php");
                                             </div>
                                             <div class="row">
                                                 <p class="col-md-2 btn btn-info">
-                                                    <input type="search" id="recherche" onkeyup="myFunction()"  class="form-control form-control-user" placeholder="recherche"><br>
-                                                    <input type="tel" id="telephone"   class="form-control form-control-user" placeholder="telephone"> <br>
+                                                    <input type="search" id="recherche" onkeyup="myFunction()"  class="form-control form-control-user" placeholder="Recherche"><br>
+                                                    <input type="tel" id="telephone"   class="form-control form-control-user" placeholder="Téléphone"> <br>
                                                     <button class="btn btn-success btn-user" onclick="enregistremetnclient()">enregistrer client</button>
                                                 </p>
                                                 <p class="col-md-3" >
@@ -174,7 +176,7 @@ require_once("../connexion.php");
                                                         <option value="livree">livree</option>
                                                         <option value="non livree">non livree</option>
                                                     </select>
-                                                    réduction produit:
+                                                    Réduction produit:
                                                     <input type="number" class="form-control form-control-user"
                                                     name="rp" id="rp" placeholder="reduction produit" required value="0"><br>
                                                     <button class="btn btn-primary btn-user" onclick="caculeReduction()">Calculer</button>
@@ -197,7 +199,7 @@ require_once("../connexion.php");
                                                         <tr>
                                                             <th>Nom Client</th>
                                                             <th>Désignation</th>
-                                                            <th>Quantite</th>
+                                                            <th>Quantité</th>
                                                             <th>P.U</th>
                                                             <th>P.Total</th>
                                                             <th>Opération</th>
@@ -270,6 +272,14 @@ require_once("../connexion.php");
     <script src="../../js/sb-admin-2.min.js"></script>
    <script src="nouvellelignevente.js"></script>
     <script src="listeVente.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('sidebarToggle');
+            if(button) {
+                button.click();
+            }
+        });
+    </script>
 
 </body>
 

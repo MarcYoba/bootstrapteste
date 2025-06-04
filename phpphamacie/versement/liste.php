@@ -89,7 +89,7 @@
                                     </div>
                                         
                                     <div class="col-md-3" >
-                                        <input type="search" id="recherche" onkeyup="recherduclient()"  class="form-control form-control-user" placeholder="recherche"><br>
+                                        <input type="search" id="recherche" onkeyup="recherduclient()"  class="form-control form-control-user" placeholder="Recherche"><br>
                                         <select id="client"  name="client"   class="form-control form-select" size="4" multiple aria-label="multiple select">   <!--  -->
                                             <option value="ALL" selected>ALL</option>             
                                                 <?php 

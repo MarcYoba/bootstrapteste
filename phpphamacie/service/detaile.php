@@ -96,7 +96,7 @@
                                         Motif de la visite :<p class="text-lg font-weight-bold" id="motifvisite"> <?php echo $row["motifvisite"] ?></p> 
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Effectif: <p class="text-lg font-weight-bold" id="effectif"> <?php echo $row["effectif"] ?></p>
+                                        Effectif: <p class="text-lg font-weight-bold" id="effectif"> <?php echo $row["efectif"] ?></p>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
                                         Âge: <p class="text-lg font-weight-bold" id="age"> <?php echo $row["Age"] ?></p>
@@ -126,7 +126,7 @@
                                         <p class="text-lg font-weight-bold" id="superficie"> <?php echo $row["superficie"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Qualité du sol: <p class="text-lg font-weight-bold" id="sol"> <?php echo $row["sole"] ?></p>
+                                        Qualité du sol: <p class="text-lg font-weight-bold" id="sole"> <?php echo $row["sole"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Densité: <p class="text-lg font-weight-bold" id="densite"> <?php echo $row["densite"] ?></p>
@@ -207,6 +207,10 @@
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Date de la prochaine visite: 
                                     <p class="text-lg font-weight-bold" id="datepvisit"> <?php echo $row["dateprochevisite"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Nom du vétérinaire :
+                                    <p class="text-lg font-weight-bold" id="veterinaire"> <?php echo $row["veterinaire"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0"> 
                                     Montant: <p class="text-lg font-weight-bold" id="Montant"> <?php echo $row["Montant"] ?></p>

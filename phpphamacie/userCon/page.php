@@ -58,11 +58,11 @@ if (isset($_GET["id"])) {
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                <h6 class="m-0 font-weight-bold text-primary">Creation de compte</h6>     
+                                <h6 class="m-0 font-weight-bold text-primary">Création de compte</h6>     
                                 </div>
                                 <div class="col-sm-2">
                                 <i class="fa fa-home"></i>
@@ -104,7 +104,7 @@ if (isset($_GET["id"])) {
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control form-select" id="roleuser" name="roleuser" required>
-                                        <option selected disabled>role utilisateur</option>
+                                        <option selected disabled>Rôle utilisateur</option>
                                         <option value="client">clients</option>
                                         <option value="Lecture">lecture</option>
                                         <option value="Ecriture">Lecture ecriture</option>
@@ -114,7 +114,7 @@ if (isset($_GET["id"])) {
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control form-select" id="travaile" name="travaile" required>
-                                        <option selected disabled>Zone de travails</option>
+                                        <option selected disabled>Zone de travail</option>
                                         <option value="provenderie">Provenderie</option>
                                         <option value="cabinet">Cabinet</option>
                                         <option value="spaceclie">Space client</option>
@@ -125,12 +125,7 @@ if (isset($_GET["id"])) {
                                     Enregistrer
                                 </button>
                                 <hr>
-                                <a href="index.php" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.php" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
+                                
                             </form>
                             <hr>
                             

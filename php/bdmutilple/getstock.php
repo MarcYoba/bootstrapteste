@@ -68,18 +68,18 @@ class Stock{
 
     public function getLogsDate($date){
         global $conn;
-        $jour = date("d");
-        $mois = date("m");
-        $jour_moi_anne = new DateTime("$date-$mois-$jour");
-        $datejour = $jour_moi_anne->format("Y-m-d");
+        // $jour = date("d");
+        // $mois = date("m");
+        // $jour_moi_anne = new DateTime("$date-$mois-$jour");
+        // $datejour = $jour_moi_anne->format("Y-m-d");
         $data = [];
         $sql = "SELECT
             hs.Nomproduit,
             hs.quantite AS quantite_stock,
             p.quantite_produit,p.stock_start_produit,
-            (SELECT SUM(a2.quantite) FROM achat a2 WHERE a2.idproduit = hs.idproduit AND YEAR(a2.dateachat) = '$date' AND 	MONTH(a2.dateachat) = MONTH('$datejour')) AS quantite_achetee,
-            (SELECT SUM(f2.quantite) FROM facture f2 WHERE f2.idproduit = hs.idproduit AND YEAR(f2.datefacture) = '$date' AND 	MONTH(f2.datefacture) = MONTH('$datejour')) AS somme_facture,
-            (SELECT SUM(f.quantite) FROM facture f WHERE f.idproduit = hs.idproduit AND  f.datefacture = '$datejour') AS quantite_facturee
+            (SELECT SUM(a2.quantite) FROM achat a2 WHERE a2.idproduit = hs.idproduit AND YEAR(a2.dateachat) = YEAR(CURDATE()) AND 					MONTH(a2.dateachat) = MONTH(CURDATE())) AS quantite_achetee,
+            (SELECT SUM(f2.quantite) FROM facture f2 WHERE f2.idproduit = hs.idproduit AND YEAR(f2.datefacture) = YEAR(CURDATE()) AND 				MONTH(f2.datefacture) = MONTH(CURDATE())) AS somme_facture,
+            (SELECT SUM(f.quantite) FROM facture f WHERE f.idproduit = hs.idproduit AND  f.datefacture = CURRENT_DATE) AS quantite_facturee
             FROM
                 historiquestock hs
             LEFT JOIN produit p ON p.id = hs.idproduit

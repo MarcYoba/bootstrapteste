@@ -76,30 +76,30 @@
                                 <div class="row">
                                     <p class="col-md-2" >
                                         <input type="date" class="form-control form-control-user"
-                                        name="datedette" id="datedette" placeholder="quantite">
+                                        name="datedette" id="datedette" placeholder="Quantite">
                                     </p>
                                     <p class="col-md-2" >
                                         <input type="date" class="form-control form-control-user"
-                                        name="datedett2" id="datedett2" placeholder="quantite">
+                                        name="datedett2" id="datedett2" placeholder="Quantite">
                                     </p>
                                     <p class="col-md-2" >
                                         <input class="form-check-input" type="checkbox" id="OM" name="OM" value="OM">
                                             <label class="form-check-label" id="OM">OM</label><br>
                                         
                                         <input class="form-check-input" type="checkbox" id="credit" name="credit" value="credit">
-                                            <label class="form-check-label" id="credit">crédit</label>
+                                            <label class="form-check-label" id="credit">Crédit</label>
                                     </p>
 
                                     <p class="col-md-2" >
                                         <input class="form-check-input" type="checkbox" id="cash" name="cash" value="cash">
-                                        <label class="form-check-label" id="cash">cash</label><br>
+                                        <label class="form-check-label" id="cash">Cash</label><br>
 
                                         <input class="form-check-input" type="checkbox" id="vente" name="vente" value="vente">
                                         <label class="form-check-label" id="vente">Total vente</label>
                                     </p>
 
                                 <p class="col-md-3" >
-                                <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
                                 <br>
                                     <label for="annee">Année recherche :</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
