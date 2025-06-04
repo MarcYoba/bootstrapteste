@@ -119,28 +119,28 @@ require_once("../connexion.php");
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-check-input" type="checkbox" id="credit" name="credit" value="credit">
-                                        <label class="form-check-label" id="credit">crédit</label>
+                                        <label class="form-check-label" id="credit">Crédit</label>
                                         <br><br><br>
                                         <input class="form-check-input" type="checkbox" id="quantite" name="quantite" value="quantite">
                                         <label class="form-check-label" id="quantite">Qauntité</label>
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-check-input" type="checkbox" id="cash" name="cash" value="cash">
-                                        <label class="form-check-label" id="cash">cash</label>
+                                        <label class="form-check-label" id="cash">Cash</label>
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-control form-control-user" type="date" id="date" name="date" require><br>
                                         <input class="form-control form-control-user" type="date" id="date2" name="date2" require>     
                                 </p>
                                 <p class="col-md-2">
-                                    <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                    <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
                                 </p>
                                 <div class="col-md-2">
                                     <label for="annee">Année récherché :</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
                                         <?php
                                         $currentYear = 2024;
-                                        echo "<option >Recherche a</option>";
+                                        echo "<option >Recherche Année</option>";
                                         for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
                                             echo "<option value=\"$year\">$year</option>";
                                         }

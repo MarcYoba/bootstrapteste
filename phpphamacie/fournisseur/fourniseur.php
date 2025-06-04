@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="adressfournisseur" 
-                                           name="adressfournisseur" placeholder="Addresse fournisseur" required>
+                                           name="adressfournisseur" placeholder="Adresse fournisseur" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="number" class="form-control form-control-user" id="numerofacture" 
-                                           name="numerofacture" placeholder="numero facture" required>
+                                           name="numerofacture" placeholder="Numero facture" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -76,7 +76,7 @@
                                 <hr>
                                 <div class="form-group">
                                     <input type="tel" class="form-control form-control-user" id="Inputphone"
-                                       name="Inputphone" placeholder="Télephone fourniseur" required>
+                                       name="Inputphone" placeholder="Téléphone fourniseur" required>
                                 </div>
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
                                     Enregister

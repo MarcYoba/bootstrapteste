@@ -456,6 +456,9 @@
                                 if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "provenderie douala") ) {
                                     echo '<p class="mt20"><a href="https://www.provenderiedouala.wuaze.com" class="btn btn-primary btn-red page-scroll">Provenderie Douala</a></p>';  
                                 }
+                                if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "provenderie douala") ) {
+                                    echo '<p class="mt20"><a href="https://www.KATAMGA.wuaze.com" class="btn btn-primary btn-red page-scroll">Provenderie KATAMGA</a></p>';  
+                                }
                             ?>
                             <h3 class="section-subheading secondary-font">Bienvenue dans la communauté</h3>
                         </div>

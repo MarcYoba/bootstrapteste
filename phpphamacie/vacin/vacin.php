@@ -108,12 +108,12 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        montant <input type="number" class="form-control form-control-user" id="montant"
-                                           name="montant" placeholder="montant" required>
+                                        Montant <input type="number" class="form-control form-control-user" id="montant"
+                                           name="montant" placeholder="Montant" required>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        montant payer<input type="number" class="form-control form-control-user" id="montantpayer"
-                                           name="montantpayer" placeholder="montant payer" required>
+                                        Montant payer<input type="number" class="form-control form-control-user" id="montantpayer"
+                                           name="montantpayer" placeholder="Montant payer" required>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
                                         Reste<input type="number" class="form-control form-control-user" id="Reste"
@@ -123,12 +123,12 @@
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        date vacin <input type="date" class="form-control form-control-user" id="premiervacin"
-                                           name="premiervacin" placeholder="date achat" required>
+                                        Date vacin <input type="date" class="form-control form-control-user" id="premiervacin"
+                                           name="premiervacin" placeholder="Date achat" required>
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        date rapelle <input type="date" class="form-control form-control-user" id="secondvacin"
-                                           name="secondvacin" placeholder="date achat" required>
+                                        Date rapelle <input type="date" class="form-control form-control-user" id="secondvacin"
+                                           name="secondvacin" placeholder="Date achat" required>
                                     </div>
 
                                     <div class="col-sm-12 mb-3 mb-sm-0">

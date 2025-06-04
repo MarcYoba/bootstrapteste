@@ -1,5 +1,7 @@
 <?php
-session_start(); 
+if ((session_status() === PHP_SESSION_NONE)) {
+   session_start(); 
+}
 require_once("php/activesaision.php");
 ?>
  <?php 
@@ -280,46 +282,10 @@ require_once("php/activesaision.php");
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Composant vente</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Dette :</h6>
-                
-                        <a class="collapse-item" href="../dette/dette.php?date=<?php echo date("Y");?>">Liste dette</a>
-                       
-                
-                <!--<a class="collapse-item" href="cards.html">Dette client</a>-->
-            </div>
-        </div>
-       
-    </li>
+    
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Uotils</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                
-                        <a class="collapse-item" href="../caisse/liste.php?date=<?php echo date("Y");?>">liste caisse</a>
-                        <a class="collapse-item" href="../depenses/depense.php">Depenses</a>
-                        <a class="collapse-item" href="../depenses/liste.php?date=<?php echo date("Y");?>">Liste Depense</a>
-                     
-              <!--  <a class="collapse-item" href="../caisse/caisse.php" id="ajoutCaise">Caisse</a> -->
-                
-            </div>
-        </div>
-    </li>
+    
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -345,26 +311,7 @@ require_once("php/activesaision.php");
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="../../index.php">Login</a>
-               <!-- <a class="collapse-item" href="../userCon/page.php" id="ajouteruser">ajouter utilisateur</a> -->
-                <a class="collapse-item" href="../userCon/liste.php">Liste</a>
-                <a class="collapse-item" href="../userCon/forgot-password.html">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="../../404.html">404 Page</a>
-                <a class="collapse-item" href="../../blank.html">Blank Page</a>
-            </div>
-        </div>
-    </li>
+   
 
     <!-- Nav Item - Charts -->
 

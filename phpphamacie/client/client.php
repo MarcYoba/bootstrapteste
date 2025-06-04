@@ -82,7 +82,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <input type="tel" class="form-control form-control-user" id="Inputphone"
-                                        name="Inputphone" placeholder="Telephone client" >
+                                        name="Inputphone" placeholder="Téléphone client" >
                                     </div>
                                     <div class="col-sm-6">
                                         <select id="sexe"  name="sexe"  class="form-control form-select" >
