@@ -16,7 +16,16 @@ class Client{
         $sql = "SELECT firstname FROM client WHERE id= '$id'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
+        
         return $row["firstname"]; 
+    }
+
+    public function getCleint($id){
+        global $conn;
+        $sql = "SELECT * FROM client WHERE id= '$id'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row; 
     }
 
     public function getClientNoNumber(){

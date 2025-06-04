@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headerProvenderi.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -57,7 +57,22 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Utilisateur</h6>
+                            
+                            <div class="form-group row">
+                                    <div class="col-sm-8 ">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables des Utilisateurs</h6>
+                                    </div>
+                                    <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../home.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="page.php" class="btn btn-success"> Ajouter</a>
+                                    
+                                </div>
+                                
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -65,26 +80,26 @@
                                     <thead>
                                        
                                         <tr>
-                                            <th>id</th>
+                                            <th>ID</th>
                                             <th>Nom</th>
-                                            <th>Prenom</th>
+                                            <th>Prénom</th>
                                             <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Zone de travail</th>
-                                            <th>Datte arriver</th>
-                                            <th>Operation</th>
+                                            <th>Rôle</th>
+                                            <th>Zone de Travail</th>
+                                            <th>Date d'Arrivée</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>id</th>
+                                            <th>ID</th>
                                             <th>Nom</th>
-                                            <th>Prenom</th>
+                                            <th>Prénom</th>
                                             <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Zone de travail</th>
-                                            <th>Datte arriver</th>
-                                            <th>Operation</th>
+                                            <th>Rôle</th>
+                                            <th>Zone de Travail</th>
+                                            <th>Date d'Arrivée</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -129,7 +144,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Your Website <?php date("Y-m-d")?></span>
                     </div>
                 </div>
             </footer>

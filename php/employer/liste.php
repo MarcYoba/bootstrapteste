@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headerProvenderi.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -57,23 +57,25 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Tables des Salaires</h6> <br>
-                            <form method="post" action="../pdf/getClient.php">
-                                <div class="form-group row">
-                                    <div class="col-md-3" >
-                                       <!-- <input type="submit" class="btn btn-warning btn-user"  value="Client sans numero" >  -->                    
-                                    </div>
-                                    <?php
-                                        // require_once("../bdmutilple/getclient.php");
-                                        // $client = new Client(0);
-                                        // $nbclient = $client->SellectAll();
-                                        // $doublon = $client->DoublonClient();
-                                        // echo '<div class="col-md-2"> Nombre de client : '.$nbclient.'</div> ';
-                                        // echo '<div class="col-md-2">Nombre de doublon  : '.$doublon.'</div> ';
-                                        // echo '<div class="col-md-2">Total reel client  : '.$nbclient - $doublon.'</div> ';
-                                    ?>
+                        <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables des Salaire</h6>
                                 </div>
-                            </form>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="employer.php" class="btn btn-warning btn-user btn-block">
+                                        <i class="fas fa-plus"></i> Ajouter
+                                    </a>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="personnel.php" class="btn btn-primary btn-user btn-block">
+                                        <i class="fas fa-plus"></i> Personnel
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -105,9 +107,12 @@
                                         $sql = "SELECT * FROM salaire";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
+                                            $sql = "SELECT nom FROM personnel WHERE id = ".$row["inuser"]; 
+                                            $resultat = $conn->query($sql);
+                                            $rows = mysqli_fetch_assoc($resultat);
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["inuser"].'</td>';
+                                            echo '<td>'.$rows["nom"].'</td>';
                                             echo '<td>'.$row["montant"].'</td>';
                                             echo '<td>'.$row["usersave"].'</td>';
                                             echo '<td>'.$row["datepaiement"].'</td>';
@@ -115,10 +120,10 @@
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                                 # code...
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                echo "<button class='btn btn-primary' onclick='modifierClient(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
+                                                echo "<button class='btn btn-primary' onclick='salaire(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
                                             }else{
-                                            echo "<button class='btn btn-primary' onclick='modifierClient(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
-                                            echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<button class='btn btn-primary' onclick='salaire(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
+                                            echo "<a href='edite.php?id=" . $row["id"] ."&nom=".urlencode("salaire"). "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';
@@ -191,11 +196,11 @@
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="../../header.js"></script>
+    
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-    <script src="client.js"></script>
+    <script src="personnel.js"></script>
 
 </body>
 

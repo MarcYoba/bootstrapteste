@@ -20,6 +20,7 @@ if (dataclient !== null) {
 
 function modifierClient(params) {
 
+    console.log(params);
 
     fetch('edite.php', {
         method: 'POST',
@@ -35,7 +36,7 @@ function modifierClient(params) {
         window.location.href= "client.php";
     })
     .catch(error => {
-        console.error('Erreur:',   error);
+        console.error('Erreur:', error);
     });
 }
 
@@ -61,7 +62,53 @@ function editClient(){
         window.location.href= "liste.php";
     })
     .catch(error => {
-        console.error('Erreur:',   error);
+        console.error('Erreur:', error);
     });
 
+}
+
+function valider(params) {
+    let element={};
+    element.id = params;
+    element.operation = "valider";
+    console.log(params);
+
+    fetch('commande.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(element)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Réponse du serveur:', data);
+        window.location.href= "commandeliste.php";
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+    });
+}
+
+function annuler(params) {
+    let element={};
+    element.id = params;
+    element.operation = "annuler";
+    console.log(params);
+
+    fetch('commande.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(element)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Réponse du serveur:', data);
+        window.location.href= "commandeliste.php";
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+    });
 }

@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headerProvenderi.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -57,7 +57,22 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Tables Client</h6> <br>
+                        <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Liste des Clients</h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../home.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="client.php" class="btn btn-success"> Ajouter</a>
+                                    
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div>
+                        <br>
                             <form method="post" action="../pdf/getClient.php">
                                 <div class="form-group row">
                                     <div class="col-md-3" >
@@ -84,7 +99,7 @@
                                             <th>id</th>
                                             <th>Nom</th>
                                             <th>Adresse</th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             <th>Achat</th>
                                             <th>Dette</th>
                                             <th>versement</th>
@@ -97,7 +112,7 @@
                                             <th>id</th>
                                             <th>Nom</th>
                                             <th>Adresse</th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             <th>Achat</th>
                                             <th>Dette</th>
                                             <th>versement</th>
@@ -127,7 +142,7 @@
                                                 echo "<button class='btn btn-primary' onclick='modifierClient(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
                                             }else{
                                             echo "<button class='btn btn-primary' onclick='modifierClient(". $row["id"] .")'><i class='fas fa-pencil-alt'></i></button>";
-                                            echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer le client ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';
@@ -150,7 +165,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Your Website <?php date("Y-m-d")?></span>
                     </div>
                 </div>
             </footer>

@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headerProvenderi.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -80,9 +80,7 @@
                             </p>
                             <p class="col-md-5"> 
                             </p>
-                            <p class="col-md-2"> 
-                                <a href="../../charts.html" class="btn btn-info btn-user btn-block">Comptabilite </a>
-                            </p>
+                            
                         </div>
                         </div>
                         <div class="card-body">

@@ -15,7 +15,7 @@ function creerCaisse($montant) {
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO caisse (operation, montant,idversement, iduser, dateoperation, motif) VALUES (?, ?, ?, ?, ?,?)";
+    $sql = "INSERT INTO caisse (operation, montant,idversement, iduser, dateoperation, motif) VALUES (?, ?, ?, ?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -35,7 +35,7 @@ function creerCaisse($montant) {
 }
 
 // Fonction pour créer un compte utilisateur $nom, $type, $prixvente, $prixachat, $quantite
-function creerVersement($iddette, $client, $montant, $montantdette,$dateversement,$om,$matif ) {
+function creerVersement( $client, $montant, $montantdette,$dateversement,$om,$matif,$banque) {
     global $conn;
 
     if (!empty($dateversement )) {
@@ -44,18 +44,24 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
         $date = date("y/m/d");
     }
     
+    if (empty($banque)) {
+        $banque = 0;
+    }
+    if (empty($om)) {
+        $om = 0;
+    }
     // Préparer la requête SQL
     // --------------------------------------------------------------------------------
     // Creation du client (insertion de donne) 
 
-    $sql = "INSERT INTO versement (montant, idclient, iddette, iduser,dateversement,Om,motif) VALUES (?, ?, ?, ?, ?,?,?)";
+    $sql = "INSERT INTO versement (montant, idclient, iduser,dateversement,Om,motif,banque) VALUES ( ?, ?, ?, ?,?,?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
         die('Erreur de préparation de la requête : ' . $conn->error);
     }
 
-    $stmt->bind_param('ddddsds', $montant , $client ,$iddette, $_SESSION['id'], $date,$om,$matif);
+    $stmt->bind_param('dddsdsd', $montant , $client,  $_SESSION['id'], $date,$om,$matif,$banque);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
@@ -66,8 +72,6 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
     $stmt->close();
 
     if($montant == $montantdette){
-       $sql = "UPDATE dette SET status = 'OK' WHERE id ='$iddette'" ;
-       $result = $conn->query($sql);
 
        $sql ="SELECT SUM(versement) as somme FROM client WHERE id='$client'";
         $result = $conn->query($sql);
@@ -80,30 +84,8 @@ function creerVersement($iddette, $client, $montant, $montantdette,$dateversemen
        //creerCaisse($montant);
     }else{
 
-        $sql ="SELECT SUM(montant) as somme FROM versement WHERE iddette ='$iddette'";
-        $result = $conn->query($sql);
-        $row = mysqli_fetch_assoc($result);
 
-        if ($row["somme"]>=$montantdette) {
-            $sql = "UPDATE dette SET status = 'OK' WHERE id ='$iddette'" ;
-            $result = $conn->query($sql);
-
-            $sql ="SELECT SUM(versement) as somme FROM client WHERE id='$client'";
-                $result = $conn->query($sql);
-                $row = mysqli_fetch_assoc($result);
-                $versement = $montant + $row["somme"];
-
-            $sql = "UPDATE client SET versement = '$versement' WHERE id ='$client'" ;
-            $result = $conn->query($sql);
-        } else {
-            $sql ="SELECT SUM(versement) as somme FROM client WHERE id='$client'";
-            $result = $conn->query($sql);
-            $row = mysqli_fetch_assoc($result);
-            $versement = $montant + $row["somme"];
-
-            $sql = "UPDATE client SET versement = '$versement' WHERE id ='$client'" ;
-            $result = $conn->query($sql);
-        }     
+          
        //creerCaisse($montant);
     }
     
@@ -115,35 +97,18 @@ if (isset($_POST['submit'])) {
     $iddette = $_POST['iddette'];
     $client = $_POST['client'];
     $montant = $_POST['montant'];
-    $montantdette = $_POST['montantdette'];
+    $banque = $_POST['montantdette'];
     $dateversement = $_POST['dateversement'];
     $om = $_POST['om'];
     $matif = $_POST['matif'];
     
     // Vérifier si tous les champs sont remplis
-    if (!empty($iddette) || !empty($client) || !empty($montant) || !empty($montantdette)) {
+    if (!empty($client) || !empty($montant) || !empty($banque)) {
         
-            // Vérifier si l'adresse e-mail existe déjà
-            $sql = "SELECT * FROM dette WHERE id = ? AND status = 'en cour'";
-
-            if (!$stmt = $conn->prepare($sql)) {
-                die('Erreur de préparation de la requête : ' . $conn->error);
-            }
+            // Vérifier si l'adresse e-mail existe déjà           
+                creerVersement($client, $montant, $banque,$dateversement,$om,$matif,$banque);
+                header("Location:liste.php");
             
-            $stmt->bind_param('d', $iddette);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows > 0) {
-                creerVersement($iddette, $client, $montant, $montantdette,$dateversement,$om,$matif);
-                header("Location:liste.php");
-            } else {
-                // Créer le compte utilisateur
-                header("Location:liste.php");
-                exit();
-            }
-
-            $stmt->close(); 
     }else {
         header("Location: ../../404.html");
         exit();
@@ -161,7 +126,7 @@ if (isset($_POST['modification'])) {
     $om = $_POST['om'];
     $matif = $_POST['matif'];
     $idversement = $_POST["idverse"];
-    
+    $banque = $_POST['banque'];
     if (!empty($dateversement )) {
         $date = $dateversement ;
     } else {
@@ -172,16 +137,13 @@ if (isset($_POST['modification'])) {
     if (!empty($iddette) || !empty($client) || !empty($montant) || !empty($montantdette)) {
         
             // Vérifier si l'adresse e-mail existe déjà
-            $sql = "UPDATE versement SET montant='$montant',dateversement='$dateversement', Om='$om',idclient ='$client' WHERE id='$idversement'";
+            $sql = "UPDATE versement SET montant='$montant',dateversement='$dateversement', Om='$om',idclient ='$client',banque='$banque' WHERE id='$idversement'";
             $result = $conn->query($sql); 
             if ($result === True) {
                 if (($montant == 0) || ($montant < $montantdette)) {
-                    $status = "en cour";
-                    $sql = "UPDATE dette SET status='$status' WHERE id='$iddette'";
-                    $result = $conn->query($sql); 
-                    if ($result === True) {
+                    
                         header("Location:liste.php");
-                    }
+                    
                 }  
                 
             } else {
@@ -191,7 +153,9 @@ if (isset($_POST['modification'])) {
                 exit();
             }
 
-            $stmt->close(); 
+            header("Location:liste.php");
+                exit();
+
     }else {
         header("Location: ../../404.html");
         exit();

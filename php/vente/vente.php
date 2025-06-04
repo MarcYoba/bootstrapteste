@@ -45,36 +45,52 @@ require_once("../connexion.php");
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-12">
+                <div class="form-group row">
+                    <div class="col-lg-1 d-none d-lg-block bg-register-image">
+                        <?php require_once("../../headerProvenderi.php") ?>
+                    </div>
+                    <div class="col-lg-11">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">vente</h1>
                             </div>
-                           <!-- <form class="user"  >-->
+                           <!-- <form class="user" SQd4S0GNcd8 >-->
                                 
                                     <!-- DataTales Example -->
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Tables des ventes</h6>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6">
+                                            <h6 class="m-0 font-weight-bold text-primary">Table des ventes</h6>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <i class="fa fa-home"></i>
+                                                <a href="../../home.php" class="btn btn-primary">Home</a> 
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <i class="fa fa-list"></i> 
+                                                <a href="liste.php" class="btn btn-success"> Liste</a>
+                                                
+                                            </div>
+                                            <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                                        </div>
                                             <br>
                                             <div class="row">
                                                 <p class="btn btn-info btn-user col-md-2" onclick="ajouterLigne('dataTable', 
-                                                5, 10)"><i class="fas fa-check"></i> Ajouter ligne</p>
-                                                <p class="col-md-2" >Quantite Total  <br> <span id="quantitetotal">0</span></p>
+                                                5, 10)"><i class="fas fa-check"></i> Ajouter une ligne</p>
+                                                <p class="col-md-2" >Quantité Total <br> <span id="quantitetotal">0</span></p>
                                                 <p class="col-md-2" >Montant Total  <br> <span id="prixtotal">0</span></p>
                                                 <p class="col-md-3" >
-                                                    date vente non enregistrer:
+                                                    date vente:
                                                     <input type="date" class="form-control form-control-user"
-                                                    name="datevente" id="datevente" placeholder="quantite" required>
+                                                    name="datevente" id="datevente" placeholder="Quantité" required>
                                                 </p>
-                                                <a class="btn btn-warning btn-user col-md-1" href="liste.php">Liste</a>
+                                                
                                                 <p class="col-md-2" >
                                                     <span id="TypePaie" class="drop" ></span>
                                                     <span id="teste" class="drop" >0</span>
-                                                   Total reduction <input type="number" class="form-control form-control-user"
-                                                name="caculelreduction" id="caculelreduction" placeholder="reduction produit" readonly value="0">
+                                                   Total réduction <input type="number" class="form-control form-control-user"
+                                                name="caculelreduction" id="caculelreduction" placeholder="réduction produit" readonly value="0">
                                                 </p>
                                             </div>
                                             <br>
@@ -91,7 +107,7 @@ require_once("../connexion.php");
                                                     name="cash" id="cash" value="0" required>
                                                 </p>
                                                 <p class="col-md-2" >
-                                                    Credit
+                                                    Crédit
                                                     <input type="number" class="form-control form-control-user"
                                                     name="credit" id="credit" value="0" required>
                                                 </p>
@@ -101,12 +117,12 @@ require_once("../connexion.php");
                                                     name="Banque" id="Banque" value="0" required>
                                                 </p>
                                                 <p class="col-md-2" >
-                                                    Reduction
+                                                    Réduction
                                                     <input type="number" class="form-control form-control-user"
                                                     name="reduction" id="reduction" value="0" required>
                                                 </p>
                                                 <p class="col-md-2" >
-                                                    Net payer
+                                                    Net à payer
                                                     <input type="txt" class="form-control form-control-user"
                                                      name="Total" id="Total" placeholder="0 FCFA"  readonly>
                                                 </p>
@@ -115,9 +131,9 @@ require_once("../connexion.php");
                                             </div>
                                             <div class="row">
                                                 <p class="col-md-2 btn btn-info">
-                                                    <input type="search" id="recherche" onkeyup="myFunction()"  class="form-control form-control-user" placeholder="recherche"><br>
-                                                    <input type="tel" id="telephone"   class="form-control form-control-user" placeholder="telephone"> <br>
-                                                    <button class="btn btn-success btn-user" onclick="enregistremetnclient()">enregistrer client</button>
+                                                    <input type="search" id="recherche" onkeyup="myFunction()"  class="form-control form-control-user" placeholder="récherche"><br>
+                                                    <input type="tel" id="telephone"   class="form-control form-control-user" placeholder="télephone"> <br>
+                                                    <button class="btn btn-success btn-user" onclick="enregistremetnclient()">Enregistrer client</button>
                                                 </p>
                                                 <p class="col-md-3" >
                                                     <select id="fournisseur"  name="fournisseur"   class="form-control form-select"  size="10" multiple aria-label="multiple select " onchange="Client()" required>
@@ -136,15 +152,15 @@ require_once("../connexion.php");
                                                 </p>
                                                 
                                                 <p class="col-md-2" >
-                                                    <input type="search" id="rechercheP" onkeyup="myFunctionP()"  class="form-control form-control-user" placeholder="recherche"><br>
+                                                    <input type="search" id="rechercheP" onkeyup="myFunctionP()"  class="form-control form-control-user" placeholder="récherche"><br>
                                                     <input type="number" class="form-control form-control-user"
-                                                    name="quantite" id="quantite" placeholder="quantite" required value="0"><br>
+                                                    name="quantite" id="quantite" placeholder="quantité" required value="0"><br>
                                                     <input type="number" class="form-control form-control-user"
                                                     name="prixglobal" id="prixglobal" placeholder="Prix du produit" readonly><br>
                                                     <i  id="montanttotal" class="form-control form-control-user"><span id="resultat" ></span></i>
                                                 </p>
                                                 <p class="col-md-3" >
-                                                <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="10"  multiple aria-label="multiple select " required onchange="recherchePrix()">
+                                                <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="10"  multiple aria-label="multiple select " required onclick="recherchePrix()">
                                                                         <option selected> </option>
                                                                         <?php 
                                                                         global $conn;
@@ -160,7 +176,7 @@ require_once("../connexion.php");
                                                                     </select>
                                                 </p>
                                                 <p class="col-md-2" >
-                                                   Esperce: <select class="form-control form-select" name="esperce" id="esperce" required>
+                                                Espèce: <select class="form-control form-select" name="esperce" id="esperce" required>
                                                         <option value="CHAIRE">CHAIRE</option>
                                                         <option value="PONDEUSE">PONDEUSE</option>
                                                         <option value="PORC">PORC</option>
@@ -176,7 +192,7 @@ require_once("../connexion.php");
                                                     </select>
                                                     reduction produit:
                                                     <input type="number" class="form-control form-control-user"
-                                                    name="rp" id="rp" placeholder="reduction produit" required value="0"><br>
+                                                    name="rp" id="rp" placeholder="réduction produit" required value="0"><br>
                                                     <button class="btn btn-primary btn-user" onclick="caculeReduction()">Calculer</button>
                                                     
                                                 </p>
@@ -190,6 +206,9 @@ require_once("../connexion.php");
                                                     <span id="modifiervente"></span>
                                                     <span id="enregistremet"></span>
                                                 </p>
+                                                <p class="col-md-4" >
+                                                    <input type="number" id="quantiteStokage" name="quantiteStokage" class="form-control form-select" readonly>
+                                                </p>
                                                 
                                             </div>
                                             <span id="verificatiobDonne"></span>
@@ -201,11 +220,11 @@ require_once("../connexion.php");
                                                     
                                                         <tr>
                                                             <th>Nom Client</th>
-                                                            <th>description</th>
-                                                            <th>quantite</th>
-                                                            <th>prix_unite</th>
-                                                            <th>Mantant</th>
-                                                            <th>Operation</th>
+                                                            <th>Désignation</th>
+                                                            <th>Quantité</th>
+                                                            <th>P.U</th>
+                                                            <th>P.Total</th>
+                                                            <th>Opération</th>
                                                         </tr>
                                                     </thead>
                                                     <tfoot>
@@ -255,12 +274,7 @@ require_once("../connexion.php");
                                 </div>
                             <!--</form> -->
                             <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="../../index.php">Already have an account? Login!</a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -280,6 +294,14 @@ require_once("../connexion.php");
     <script src="../../js/sb-admin-2.min.js"></script>
    <script src="nouvellelignevente.js"></script>
     <script src="listeVente.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('sidebarToggle');
+            if(button) {
+                button.click();
+            }
+        });
+    </script>
 
 </body>
 

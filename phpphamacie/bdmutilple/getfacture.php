@@ -107,7 +107,7 @@ class Facture{
 
     public function InsertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,$datevente){
         global $conn;
-        $nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
+        //$nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
         $nom = $nomproduit ;
         
         $row = $this->getIdQuantite($nomproduit);
@@ -150,6 +150,258 @@ class Facture{
          
         
     }
+
+
+    // public function EditFacture($value){
+    //     global $conn;
+    //     $ligenid = array_pop($value);
+    //     $this->idvente = $ligenid["idvente"];
+    //     $ligneTotal = array_pop($value);
+        
+
+    //     if ($ligneTotal["cash"]>0) {
+    //         $this->TypePaie = "CASH";
+            
+    //         $this->cash =$ligneTotal["cash"];
+    //         if ($ligneTotal["credit"]>0) {
+    //             $this->TypePaie = "CASH/CREDIT";
+    //             $this->credit =$ligneTotal["credit"];
+    //             if ($ligneTotal["momo"]>0) {
+    //                 $this->TypePaie = "CASH/CREDIT/OM";
+    //                 $this->om =$ligneTotal["momo"];
+    //             }
+    //         }elseif($ligneTotal["momo"]>0){
+    //             $this->TypePaie = "CASH/OM";
+    //         }
+    //     } elseif($ligneTotal["credit"]>0) {
+    //         $this->TypePaie = "CREDIT";
+    //         $this->credit =$ligneTotal["credit"];
+    //         if ($ligneTotal["cash"]>0) {
+    //             $this->TypePaie = "CREDIT/CASH";
+    //             $this->cash =$ligneTotal["cash"];
+    //             if ($ligneTotal["momo"]>0) {
+    //                 $this->TypePaie = "CREDIT/CASH/OM";
+    //                 $this->om =$ligneTotal["momo"];
+    //             }
+    //         }elseif ($ligneTotal["momo"]>0) {
+    //             $this->TypePaie = "CREDIT/CASH/OM";
+    //             $this->om =$ligneTotal["momo"];
+    //         }
+    //     }else{
+    //         $this->TypePaie = "OM";
+    //         $this->om =$ligneTotal["momo"];
+    //     }
+    //     $Mmontant = $ligneTotal["Total"] ;
+    //     $quantite = $ligneTotal["Qttotal"];
+    //     $reduction = $ligneTotal["reduction"];
+
+    //     $sql = "UPDATE ventephamacie SET typevente='$this->TypePaie', quantite ='$quantite',prix='$Mmontant',cash='$this->cash',credit='$this->credit', Om='$this->om',reduction='$reduction' WHERE id = '$this->idvente'";
+    //     $result = $conn->query($sql); 
+        
+
+    //     $sql = "SELECT id FROM caissePhamacie WHERE idvente = '$this->idvente'";
+    //     $result = $conn->query($sql);
+
+    //     if ($result->num_rows>0) {
+    //         $Mmontant = $ligneTotal["Total"] - $ligneTotal["credit"];
+    //         $sql = "UPDATE caissePhamacie SET operation='$this->TypePaie', montant ='$Mmontant' WHERE idvente = '$this->idvente'";
+    //         $result = $conn->query($sql); 
+
+    //         if ($result == TRUE) {
+                
+    //         } else {
+                
+    //         }
+    //     } else {
+    //         $sql = "SELECT id FROM dettephamacie WHERE idvente = '$this->idvente'";
+    //         $result = $conn->query($sql);
+    //         if($result->num_rows>0){
+    //             $this->credit = $ligneTotal["credit"];
+    //             if ($ligneTotal["credit"] >0 ) {
+    //                 $quantite = $ligneTotal["Qttotal"];
+    //                 $sql = "UPDATE dettephamacie SET quantite='$quantite', montant ='$this->credit' WHERE idvente = '$this->idvente'";
+    //                 $result = $conn->query($sql);
+    //                 if ($result == TRUE) {
+                       
+    //                 } else {
+                        
+    //                 }
+                    
+    //             } else {
+    //                 $quantite = $ligneTotal["Qttotal"];
+    //                 $sql = "UPDATE dettephamacie SET quantite='$quantite', montant ='$this->credit',status='OK' WHERE idvente = '$this->idvente'";
+    //                 $result = $conn->query($sql);
+    //                 if ($result == TRUE) {
+                        
+    //                 } else {
+                        
+    //                 }
+    //             }  
+                
+    //         }
+    //     }     
+        
+    //     if ($result == true) {
+
+            
+
+    //          if(($ligneTotal["taille"]-2) >1){
+    //             $sql = "SELECT id,idclient,quantite,idproduit  FROM facturephamacie WHERE idvente = '$this->idvente'";
+    //             $result = $conn->query($sql);
+
+    //             if ($result->num_rows<($ligneTotal["taille"]-2)) {
+    //                 $nblignebd = $result->num_rows;
+    //                 $ndligneFac = ($ligneTotal["taille"]-2);
+                    
+    //                 while (($row = mysqli_fetch_assoc($result)) && $nblignebd >0) {
+    //                     $id = $row["id"];
+    //                     $idclient = $row["idclient"];
+    //                     $stockFacture = $row["quantite"];
+    //                     $idproduit = $row["idproduit"];
+    //                    $line = array_shift($value);
+                     
+    //                         $nomproduit = $line["produit"];
+    //                         $quantite = $line["quantite"];
+    //                         $position = strpos($nomproduit, "provenderie");
+
+    //                         if ($position !== false) {
+    //                             // Si le mot est trouvé, le supprimer
+    //                             $nouveauTexte = substr_replace($nomproduit, "", $position, strlen("provenderie"));
+    //                             $nomproduit = $nouveauTexte;
+    //                         } 
+    //                         if ($stockFacture!=$quantite) {
+    //                             $autre = $stockFacture-$quantite;
+    //                             $this->UgradeProduitFacture($idproduit,$autre);
+    //                         }
+                            
+    //                         $prix = $line["prix"];
+    //                         $total = $line["total"];
+    //                         //$nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
+    //                         $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE  id='$id'";
+    //                         $resultup = $conn->query($sql); 
+                            
+    //                         if ($resultup == true) {      
+    //                         }  
+    //                         $nblignebd--; 
+    //                         $ndligneFac--;
+    //                 }
+    //                 $ndligneFac = count($value);
+    //                 while ($ndligneFac > 0) {
+    //                         $line = array_shift($value);
+    //                         $nomproduit = $line["produit"];
+    //                         $quantite = $line["quantite"];
+    //                         $prix = $line["prix"];
+    //                         $total = $line["total"];
+    //                         //$nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
+    //                         $this->InsertFacture($nomproduit,$quantite,$prix,$this->idvente,$idclient,$this->TypePaie,date("Y-m-d"));
+    //                         $ndligneFac--;
+    //                 }
+                    
+
+    //             } else if($result->num_rows==($ligneTotal["taille"]-2)) {
+    //                 while ($row = mysqli_fetch_assoc($result)) {
+    //                     $id = $row["id"];
+    //                     $stockFacture = $row["quantite"];
+    //                     $idproduit = $row["idproduit"];
+    //                    $line = array_shift($value);
+                     
+    //                         $nomproduit = $line["produit"];
+    //                         $quantite = $line["quantite"];
+
+    //                         $position = strpos($nomproduit, "provenderie");
+
+    //                         if ($position !== false) {
+    //                             // Si le mot est trouvé, le supprimer
+    //                             $nouveauTexte = substr_replace($nomproduit, "", $position, strlen("provenderie"));
+    //                             $nomproduit = $nouveauTexte;
+    //                         } 
+    //                         if ($stockFacture!=$quantite) {
+    //                             $autre = $stockFacture-$quantite;
+    //                             $this->UgradeProduitFacture($idproduit,$autre);
+    //                         }
+    //                         $prix = $line["prix"];
+    //                         $total = $line["total"];
+    //                         //$nomproduit = substr_replace($nomproduit,"",strpos($nomproduit,"provenderie"));
+    //                         $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE  id='$id'";
+    //                         $resultup = $conn->query($sql); 
+                            
+    //                         if ($resultup == true) {      
+    //                         }    
+    //                 }
+    //             } else if($result->num_rows>($ligneTotal["taille"]-2)) {
+    //                 return "ligne inferieur";
+    //             }
+                
+    //          }else{
+    //             foreach ($value as $key) {
+    //                 $nomproduit = $key["produit"];
+    //                 $quantite = $key["quantite"];
+    //                 $prix = $key["prix"];
+    //                 $total = $key["total"];
+
+    //                 $sql = "SELECT id,idclient,quantite,idproduit,nomproduit  FROM facturephamacie WHERE idvente = '$this->idvente'";
+    //                 $result = $conn->query($sql);
+    //                 $row = mysqli_fetch_assoc($result);
+
+    //                 if ($nomproduit != $row["nomproduit"]) {
+    //                     $n = $row["idproduit"];
+    //                     $q = $row["quantite"];
+    //                     $v = $this->UgradeProduitFacture($n,$q);
+
+    //                     $sql = "SELECT id  FROM produitphamacie WHERE nom_produit = '$nomproduit'";
+    //                     $result = $conn->query($sql);
+    //                     $row = mysqli_fetch_assoc($result);
+    //                     $n = $row["id"];
+    //                     $q = $quantite*-1;
+
+    //                    $v = $this->UgradeProduitFacture($n,$q);
+    //                     $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total',idproduit='$n' WHERE idvente = '$this->idvente'";
+    //                     $result = $conn->query($sql); 
+    //                     if ($result == true) {
+    //                     }
+    //                 } else {
+    //                     $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE idvente = '$this->idvente'";
+    //                     $result = $conn->query($sql); 
+    //                     if ($result == true) {
+    //                     }
+    //                 }
+                    
+                    
+    //             }
+    //         }
+            
+    //     }
+
+    //     $reponse = [
+    //         "success" => true,
+    //         "message" => $this->idvente
+    //     ];
+    //    return $reponse;
+    // }
+
+    // public function HistoriqueVente($datedebut, $datefin,$nomProduit){
+    //     global $conn;
+    //     $data =[];
+    //     $sql = "SELECT c.firstname ,f.nomproduit,f.quantite,f.datefacture, v.datevente
+    //     FROM facturephamacie f 
+    //     LEFT JOIN client c ON c.id = f.idclient
+    //     INNER JOIN ventephamacie v ON v.id = f.idvente
+    //     WHERE (MONTH(f.datefacture) BETWEEN MONTH($datedebut) AND MONTH($datefin)) OR f.nomproduit='$nomProduit'";
+    //     $result = $conn->query($sql);
+    //    while($row = mysqli_fetch_assoc($result)) {
+    //         array_push($data,$row);
+    //    }
+
+    //    $sql = "SELECT ROUND(SUM(f.quantite),2) AS quantite_total
+    //     FROM facturephamacie f 
+    //     WHERE (MONTH(f.datefacture) BETWEEN MONTH($datedebut) AND MONTH($datefin)) OR f.nomproduit='$nomProduit'";
+    //     $result = $conn->query($sql);
+    //    $row = mysqli_fetch_assoc($result);
+
+    //         array_push($data,["TOTAL",$nomProduit,$row["quantite_total"],$datedebut."au".$datefin,$datedebut."au".$datefin]);
+    
+    //     return $data; 
+    // }
 
 
     public function EditFacture($value){
@@ -212,10 +464,10 @@ class Facture{
             } else {
                 
             }
-        } else {
-            $sql = "SELECT id FROM dettephamacie WHERE idvente = '$this->idvente'";
-            $result = $conn->query($sql);
-            if($result->num_rows>0){
+        } 
+        $sql = "SELECT id FROM dettephamacie WHERE idvente = '$this->idvente'";
+        $result = $conn->query($sql);
+        if($result->num_rows>0){
                 $this->credit = $ligneTotal["credit"];
                 if ($ligneTotal["credit"] >0 ) {
                     $quantite = $ligneTotal["Qttotal"];
@@ -238,6 +490,38 @@ class Facture{
                     }
                 }  
                 
+        }else{
+            if ($ligneTotal["credit"] >0) {
+                $Mmontant = $ligneTotal["credit"];
+                $sql = "SELECT idclient FROM ventephamacie WHERE id = '$this->idvente'";
+                $result = $conn->query($sql);
+                $row = mysqli_fetch_assoc($result);
+                $idclient = $row["idclient"];
+                $sql = "INSERT INTO dettephamacie (quantite,prix,montant,idclient,iduser,datedette,idvente,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
+                // Lier les paramètres
+                if (!$stmt = $conn->prepare($sql)) {
+                    die('Erreur de préparation de la requête : ' . $conn->error);
+                }
+            // $montant = $quantite * $prix;
+                $dette = "en cour";
+                $date = date("y/m/d");
+                $stmt->bind_param('dddddsds', $quantite, $Mmontant,$Mmontant, $idclient, $_SESSION["id"], $date,$this->idvente,$dette);
+    
+                // Exécuter la requête
+                if (!$stmt->execute()) {
+                    die('Erreur d\'exécution de la requête : ' . $stmt->error);
+                }
+    
+                $sql ="SELECT SUM(dette) as somme FROM client WHERE id='$idclient'";
+                    $result = $conn->query($sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $versement = $Mmontant + $row["somme"];
+    
+                $sql = "UPDATE client SET dette = '$versement' WHERE id ='$idclient'" ;
+                $result = $conn->query($sql);
+                // Fermer la requête
+                $stmt->close();
             }
         }     
         
@@ -360,13 +644,14 @@ class Facture{
                         if ($result == true) {
                         }
                     } else {
+                        $n = $row["idproduit"];
+                        $q = $row["quantite"];
+                        $v = $this->UgradeProduitFacture($n,$q);
                         $sql = "UPDATE facturephamacie SET nomproduit='$nomproduit',quantite='$quantite', prix ='$prix',montant='$total' WHERE idvente = '$this->idvente'";
                         $result = $conn->query($sql); 
                         if ($result == true) {
                         }
-                    }
-                    
-                    
+                    } 
                 }
             }
             
@@ -377,30 +662,6 @@ class Facture{
             "message" => $this->idvente
         ];
        return $reponse;
-    }
-
-    public function HistoriqueVente($datedebut, $datefin,$nomProduit){
-        global $conn;
-        $data =[];
-        $sql = "SELECT c.firstname ,f.nomproduit,f.quantite,f.datefacture, v.datevente
-        FROM facturephamacie f 
-        LEFT JOIN client c ON c.id = f.idclient
-        INNER JOIN ventephamacie v ON v.id = f.idvente
-        WHERE (MONTH(f.datefacture) BETWEEN MONTH($datedebut) AND MONTH($datefin)) OR f.nomproduit='$nomProduit'";
-        $result = $conn->query($sql);
-       while($row = mysqli_fetch_assoc($result)) {
-            array_push($data,$row);
-       }
-
-       $sql = "SELECT ROUND(SUM(f.quantite),2) AS quantite_total
-        FROM facturephamacie f 
-        WHERE (MONTH(f.datefacture) BETWEEN MONTH($datedebut) AND MONTH($datefin)) OR f.nomproduit='$nomProduit'";
-        $result = $conn->query($sql);
-       $row = mysqli_fetch_assoc($result);
-
-            array_push($data,["TOTAL",$nomProduit,$row["quantite_total"],$datedebut."au".$datefin,$datedebut."au".$datefin]);
-    
-        return $data; 
     }
 }
 ?>

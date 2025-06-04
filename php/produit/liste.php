@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headerProvenderi.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -58,13 +58,22 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div class="form-group row">
-                                    <div class="col-sm-10 ">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tables Produit</h6>
+                                    <div class="col-sm-6 ">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables des Produits</h6>
                                     </div>
-                                    <div class="col-sm-2 ">
-                                    <a class="m-0 font-weight-bold text-primary" href="../pdf/getproduit.php">telecharger</a>
-                                    </div>
+                                    <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../home.php" class="btn btn-primary">Home</a> 
                                 </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="produit.php" class="btn btn-success"> Ajouter</a>
+                                    
+                                </div>
+                                <div class="col-sm-2 ">
+                                    <a class="m-0 font-weight-bold text-primary" href="../pdf/getproduit.php">télécharger</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -74,22 +83,22 @@
                                         <tr>
                                             <th>id</th>
                                             <th>Nom</th>
-                                            <th>Prix vente</th>
-                                            <th>Prix achat</th>
-                                            <th>Quantite</th>
+                                            <th>P.vente</th>
+                                            <th>P.achat</th>
+                                            <th>Quantité</th>
                                             <th>Date</th>
-                                            <th>operation</th>
+                                            <th>opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
                                             <th>Nom</th>
-                                            <th>Prix vente</th>
-                                            <th>Prix achat</th>
-                                            <th>Quantite</th>
+                                            <th>P.vente</th>
+                                            <th>P.achat</th>
+                                            <th>Quantité</th>
                                             <th>Date</th>
-                                            <th>operation1</th>
+                                            <th>opération</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -109,9 +118,9 @@
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
                                                 # code...
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                                echo "<button class='btn btn-primary' Onclick=\"EditProduit('". $row["id"]."')\"><i class='fas fa-pencil-alt'></i></button>";
                                             }else{
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                            echo "<button class='btn btn-primary' Onclick=\"EditProduit('". $row["id"]."')\")'><i class='fas fa-pencil-alt'></i></button>";
                                             echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             }
                                             echo "</td>";
@@ -135,7 +144,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php date("Y-m-d")?></span>
                     </div>
                 </div>
             </footer>
@@ -185,7 +194,8 @@
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="../../header.js"></script>
+    <!-- <script src="../../header.js"></script>-->
+    <script src="produit.js"></script> 
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>

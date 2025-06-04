@@ -33,8 +33,20 @@
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center" >
-                                <h1 class="h4 text-gray-900 mb-4">Depenses</h1>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Dépenses</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="liste.php" class="btn btn-success"> Liste</a>
+                                                
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div>
                             <form class="user" action="register.php" method="post" >
                                 <hr>
@@ -79,16 +91,16 @@
                                            $donnees= json_decode($tabdonne,true);
                                             
                                             echo'<input type="text" class="form-control form-control-user" id="description"
-                                            name="description" placeholder="description du mouvement" value="'.$donnees["description"].'" required>';  
+                                            name="description" placeholder="Description du mouvement" value="'.$donnees["description"].'" required>';  
                                         }else{
                                             echo'<input type="text" class="form-control form-control-user" id="description"
-                                            name="description" placeholder="description"  required>';
+                                            name="description" placeholder="Description"  required>';
                                         }
                                         echo'</div>'; 
                                             echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                                 
                                                     echo'<input type="file" class="form-control form-control-user" id="facture"
-                                                    name="facture" placeholder="facture"  >';
+                                                    name="facture" placeholder="Facture"  >';
                                                 
                                             echo'</div>';
                                         echo'</div>';

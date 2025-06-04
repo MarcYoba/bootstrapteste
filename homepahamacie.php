@@ -1,15 +1,15 @@
 <?php 
+    require_once("php/connexion.php");
     session_start(); 
     require_once("phpphamacie/historique/historiqueStock.php");
     require_once("phpphamacie/historique/getproduit.php");
     $_SESSION["route"] = "cabinet";
-   // if (!isset($_SESSION['modal_affiche'])) {
-        //$_SESSION['modal_affiche'] = true;
-        echo "<script>$(document).ready(function() { $('#monModal').modal('show'); });</script>";
-    //}
-    $produit = new Produit();
+   if (!isset($_SESSION['modal_affiche'])) {
+        $_SESSION['modal_affiche'] = true;
+    }
+   $produit = new Produit();
     $peremption = $produit->ProduitSansDatePremption();
-    $doublonproduit = $produit->DoublonProduit();
+   $doublonproduit = $produit->DoublonProduit();
     $moiperemtion = $produit->ProduitEnCourPeremtionPrelote();
 ?>
 <!DOCTYPE html>
@@ -41,7 +41,7 @@
             display: none;
         }
     </style>
-
+    
 </head>
 
 <body id="page-top">
@@ -49,38 +49,41 @@
     <div class="modal fade" id="monModal" tabindex="-1" aria-labelledby="monModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-header text-primary">
+        <div class="modal-header text-success">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
                 <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
             </svg>
-            <h5 class="modal-title" id="monModalLabel">Information de rapelle d'urgence</h5>
+            <h5 class="modal-title" id="monModalLabel">Informations de rappel d'urgence</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
         </div>
         <div class="modal-body">
             <div class="form-group row">
                 <div class="col-sm-4">
-                    nombre de produit sans date de peremtion : <?php  echo count($peremption)?>
+                    Nombre de produits sans date de péremption : <?php echo count($peremption); ?>
                     
                 </div>
                 <div class="col-sm-4">
-                    Doublon de produit : <?php  echo count($doublonproduit)?>
+                    Doublons de produits : <?php echo count($doublonproduit) ?>
                     
                 </div>
                 <div class="col-sm-4">
-                    Produit perimer ou Proche de la peremtion lots 1(intervale 6 mois)  : <?php  echo count($moiperemtion)?>
+                    Produits périmés ou proches de la péremption lot 1 (intervalle de 6 mois) : <?php echo count($moiperemtion) ?>
                     
                 </div>
                 <div class="col-sm-4">
-                    Command Poussin Nom livrer :<?php  echo count($produit->CommandePoussinNonLivrer())?>
-                    
+                    Commande Poussin Non Livrée : <?php echo count($produit->CommandePoussinNonLivrer()) ?>
+                </div>
+                <div class="col-sm-4">
+                    Commande Client : <?php echo count($produit->CommandePoussinNonLivrer()); ?>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button> -->
-            <a href="phpphamacie/pdf/getinforapelle.php" type="button" class="btn btn-primary" ><i class="fa fa-download" aria-hidden="true"></i>produit sans date</a>
-            <a href="phpphamacie/pdf/getperemption.php" type="button" class="btn btn-primary" ><i class="fa fa-download" aria-hidden="true"></i>Peremtion ou Proche</a>
-            <a href="phpphamacie/pdf/getcondpoussin.php" type="button" class="btn btn-primary" ><i class="fa fa-download" aria-hidden="true"></i>Poussin non livree</a>
+            <a href="phpphamacie/pdf/getinforapelle.php" type="button" class="btn btn-success" ><i class="fa fa-download" aria-hidden="true"></i>Produit sans date</a>
+            <a href="phpphamacie/pdf/getperemption.php" type="button" class="btn btn-success" ><i class="fa fa-download" aria-hidden="true"></i>Péremption ou Proche</a>
+            <a href="phpphamacie/pdf/getcondpoussin.php" type="button" class="btn btn-success" ><i class="fa fa-download" aria-hidden="true"></i>Poussins non livrés</a>
+            <a href="phpphamacie/client/commandeliste.php" type="button" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Liste des commandes clients</a>
         </div>
         </div>
     </div>
@@ -129,7 +132,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="php/achat/liste.php">
+                                            <a href="phpphamacie/achat/liste.php">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     ACHAT (MONTANT)</div>
                                                 <?php 
@@ -154,7 +157,7 @@
                                                     }
                                                     echo '<span  id="achat">'.$etoile.'</span>';
                                                     echo '<div class="h5 mb-0 font-weight-bold text-gray-800 amount" id="montantachat">'.ceil($montant).' FCFA'.'</div>'; 
-                                                        //var_dump($row);
+                                                        
                                                 ?>
                                             </div>
                                         </a>
@@ -172,18 +175,12 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                        <a href="php/vente/liste.php" >
+                                        <a href="phpphamacie/vente/liste.php" >
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 VENTE (MONTANT)</div>
                                                     <?php 
                                                     global $conn;
-                                                    if (($_SESSION["route"] == "cabinet")) {
-                                                        $sql = "SELECT SUM(prix) as montant FROM ventephamacie  WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'";
-
-                                                    } else {
-                                                        $sql = "SELECT SUM(prix) as montant FROM vente WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'";
-
-                                                    }
+                                                        $sql = "SELECT SUM(prix) as montant FROM ventephamacie  WHERE MONTH(datevente) = MONTH(NOW()) AND typevente ='CASH'"; 
                                                     $result = $conn->query($sql);
                                                     $row = mysqli_fetch_assoc($result);
                                                     $nbetoile = 10;
@@ -197,7 +194,7 @@
                                                     }
                                                     echo '<span  id="vente">'.$etoile.'</span>';
                                                     echo '<div class="h5 mb-0 font-weight-bold text-gray-800 amount" id="montantvente">'.ceil($montant).' FCFA'.'</div>'; 
-                                                        //var_dump($row);
+                                                    
                                                     ?>
                                             </div>
                                         </a>
@@ -215,7 +212,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                        <a href="php/dette/dette.php">
+                                        <a href="phpphamacie/dette/dette.php">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                 DETTE (MONTANT)</div>
                                                 <?php 
@@ -237,7 +234,7 @@
                                                     
                                                     echo '<span  id="dette">'.$etoile.'</span>';
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount " id="montantdette">'.$row["montant"].' FCFA'.'</div>'; 
-                                                    //var_dump($row);
+                                                
                                             ?>
                                         </div>
                                         </a>
@@ -255,7 +252,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                        <a href="php/dette/dette.php">
+                                        <a href="phpphamacie/dette/dette.php">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 VERSEMENT (MONTANT)</div>
                                                 <?php 
@@ -280,7 +277,7 @@
                                                     }
                                                     echo '<span  id="verse">'.$etoile.'</span>';
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount" id="monversement">'.ceil($montant).' FCFA'.'</div>'; 
-                                                    //var_dump($row);
+                                                
                                             ?>
                                         </div>
                                         </a>
@@ -298,7 +295,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="php/caisse/liste.php">
+                                            <a href="phpphamacie/caisse/liste.php">
                                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
                                                     CAISSE (MONTANT)</div>
                                                     <?php 
@@ -323,7 +320,7 @@
                                                     }
                                                         echo '<span  id="caise">'.$etoile.'</span>';
                                                         echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount"  id="montcaise">'.ceil($montant).' FCFA'.'</div>'; 
-                                                            //var_dump($row);
+                                                    
                                                     ?>
                                                 </div>
                                             </a>
@@ -340,9 +337,9 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="php/depenses/liste.php">
+                                            <a href="phpphamacie/depenses/liste.php">
                                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-                                                    DEPENSE (MONTANT)</div>
+                                                    DÉPENSE (MONTANT)</div>
                                                     <?php 
                                                         global $conn;
                                                         if (($_SESSION["route"] == "cabinet")) {
@@ -361,7 +358,7 @@
                                                         }
                                                          echo '<span  id="depense">'.$etoile.'</span>';
                                                         echo '<div class="h5 mb-0 font-weight-bold text-gray-800 text-danger amount" id="montdepense">'.$row["montant"].' FCFA'.'</div>'; 
-                                                            //var_dump($row);
+                                                        
                                                     ?>
                                                 </div>
                                             </a>
@@ -421,7 +418,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Revenues Sources</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -470,7 +467,7 @@
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Stock de produit et date peramtion</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Stock de produit</h6>
                                 </div>
                                 <div class="card-body">
                                     <?php 
@@ -494,31 +491,7 @@
                                                 echo '<div class="progress-bar bg-danger" role="progressbar" style="width:'.$row["quantite"].'%"
                                                 aria-valuenow="3" aria-valuemin="0" aria-valuemax="100">'.'</div>';
                                                 echo '</div>';
-                                                $preamtion = $row["id"];
-                                               
-                                                if ($row["quantite"]>0) {
-                                                    echo '<div class="form-group row"';
-                                                        $data=[];
-
-                                                    $sql1 = " SELECT p.datePeramtion FROM produitphamacie p WHERE p.id = '$preamtion'";
-                                                    $result1 =$conn->query($sql1);
-                                                    $row1 = mysqli_fetch_assoc($result1);
-                                                    array_push($data,$row1);
-
-                                                    $sql1 = " SELECT l.date_expiration FROM lots l WHERE l.idproduit = '$preamtion'";
-                                                    $result1 =$conn->query($sql1);
-                                                    $row1 = mysqli_fetch_assoc($result1);
-                                                    array_push($data,$row1);
-                                                    $lots = 1;
-
-                                                    foreach ($data as $key => $value) {
-                                                        foreach ($value as $key => $val) {
-                                                            echo '<a href="phpphamacie/produit/Peramtion.php" class="col-sm-3 ">lots:'.$lots.' '.$val.'</a><hr>';
-                                                            $lots++;
-                                                        }
-                                                    }
-                                                    echo '</div>';
-                                                }
+                                                
                                                 
                                                 echo "<hr>"; 
                                             }
@@ -584,7 +557,7 @@
                                     <div class="text-center">
                                     <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Quantite Vendu</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Quantité Vendue</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
@@ -619,7 +592,7 @@
                                                     INNER JOIN produitphamacie p
                                                     WHERE month(f.datefacture) = month(now()) AND f.idproduit = p.id
                                                     GROUP BY f.nomproduit 
-                                                    ORDER BY quantite_vendu DESC 
+                                                    ORDER BY COUNT(f.idproduit) DESC 
                                                     LIMIT 20";
 
                                         
@@ -631,6 +604,43 @@
                                                 echo '<div class="progress-bar bg-danger" role="progressbar" style="width:'.$row["quantite_vendu"].'%"
                                                 aria-valuenow="3" aria-valuemin="0" aria-valuemax="100">'.'</div>';
                                                 echo '</div>';
+                                            
+                                        }
+                                                    //var_dump($row);
+                                    ?>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Date de péremption des produits</h6>
+                                </div>
+                                <div class="card-body">
+                                    <?php 
+                                        global $conn;
+                                        
+                                        $tab = array("rouge"=>"",
+                                            "jaune"=>"",
+                                            "info"=>"",
+                                            "success"=>""
+
+                                        );
+                                        
+                                            $sql = "SELECT p.nom_produit, p.datePeramtion as lot1, l.date_expiration AS lot2 
+                                            FROM produitphamacie p 
+                                            LEFT JOIN lots l ON p.id = l.idproduit 
+                                            WHERE p.quantite_produit>0 
+                                            GROUP BY p.nom_produit 
+                                            ORDER BY p.nom_produit ASC";
+                                        
+                                        $result = $conn->query($sql);
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            
+                                                echo '<h4 class="small font-weight-bold">'.$row["nom_produit"].'<span class="float-right">('
+                                                .$row["lot1"].')</span>'.'<span class="float-right"><---></span>'.'<span class="float-right">('.'  '.$row["lot2"].')</span></h4>';
+                                                echo '<hr>';
+                                               
+                                                
                                             
                                         }
                                                     //var_dump($row);

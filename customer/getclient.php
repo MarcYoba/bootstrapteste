@@ -30,22 +30,133 @@ class Client{
         return $data; 
     }
 
+    public function selectFactureProvenderi($idvente){
+        global $conn;
+        $data =[];
+        $sql = "SELECT * FROM facture WHERE idvente = '$idvente'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function selectFactureCabinet($idvente){
+        global $conn;
+        $data =[];
+        $sql = "SELECT * FROM facturephamacie WHERE idvente = '$idvente'";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
     public function SelectAchatProvenderie($id){
         global $conn;
-       
-        $sql = "SELECT * FROM vente WHERE idclient ='$id' ORDER BY vente.id DESC";
+        $data =[];
+        $sql = "SELECT id,typevente,quantite,prix,reduction,datevente FROM vente WHERE idclient ='$id' ORDER BY vente.id DESC";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function SelectAchatDetteCabinet($id){
+        global $conn;
+        $data =[];
+        $sql = "SELECT id,typevente,quantite,prix,reduction,datevente 
+        FROM ventephamacie 
+        WHERE idclient ='$id' AND credit>0
+        ORDER BY ventephamacie.id DESC";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function SelectAchatDetteProvenderie($id){
+        global $conn;
+        $data =[];
+        $sql = "SELECT id,typevente,quantite,prix,reduction,datevente 
+        FROM vente 
+        WHERE idclient ='$id' AND credit>0
+        ORDER BY vente.id DESC";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function SelectAchatCabinet($id){
+        global $conn;
+        $data =[];
+        $sql = "SELECT id,typevente,quantite,prix,reduction,datevente FROM ventephamacie WHERE idclient ='$id' ORDER BY ventephamacie.id DESC";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function getVersementProvenderie($id){
+        global $conn;
+        $data =[];
+        $sql = "SELECT id,montant,dateversement FROM versement WHERE idclient ='$id' ORDER BY versement.dateversement DESC";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function getVersementPhamacie($id){
+        global $conn;
+        $data =[];
+        $sql = "SELECT id,montant,dateversement FROM versementphamacie WHERE idclient ='$id' ORDER BY versementphamacie.dateversement DESC";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function getcommandeclient($id){
+        global $conn;
+        $data =[];
+        $sql = "SELECT * FROM commadeclient WHERE idclient ='$id' ORDER BY commadeclient.datecommande DESC";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+
+    public function getSommeProvenderie($idclient){
+        global $conn;
+        $sql = "SELECT ROUND(SUM(quantite),2) AS quantite,ROUND(SUM(prix),2) AS montant,ROUND(SUM(cash),2) AS cash,
+                ROUND(SUM(credit),2) AS credit,ROUND(SUM(om),2) AS om,ROUND(SUM(banque),2) AS banque, 
+                ROUND(SUM(reduction),2) AS reduction 
+                FROM vente 
+                WHERE idclient = '$idclient'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row; 
     }
 
-    public function SelectAchatCabinet($id){
+    public function getSommeCabinet($idclient){
         global $conn;
-        
-        $sql = "SELECT * FROM ventephamacie WHERE idclient ='$id' ORDER BY ventephamacie.id DESC";
+        $sql = "SELECT ROUND(SUM(quantite),2) AS quantite,ROUND(SUM(prix),2) AS montant,ROUND(SUM(cash),2) AS cash,
+                ROUND(SUM(credit),2) AS credit,ROUND(SUM(om),2) AS om,ROUND(SUM(banque),2) AS banque, 
+                ROUND(SUM(reduction),2) AS reduction 
+                FROM ventephamacie 
+                WHERE idclient = '$idclient'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
-        return $row;
+        return $row; 
     }
 
     public function getAllByIdClient($id){
@@ -118,6 +229,54 @@ class Client{
         }
         $date = date("y/m/d");
         $stmt->bind_param('sds', $nom,  $tel, $date);
+
+        // Exécuter la requête
+        if (!$stmt->execute()) {
+            return "Echec";
+        }else{
+            return "OK";
+        }
+    }
+
+    public function insertToCommande($idvente,$paiementmode){
+        global $conn;
+        $sql = "INSERT INTO commadeclient  (idvente , userid , nom ,paiementmethode ,datecommande, statuscommande ) VALUES (?, ?,?,?, ?,?)";
+
+        // Lier les paramètres
+        if (!$stmt = $conn->prepare($sql)) {
+            return "erreur sql";
+        }
+        // Obtenir le timestamp actuel
+        $timestamp = time();
+        $statut = "en coure";
+        // Formater la date et l'heure actuelles
+        $dateFormatee = date("Y-m-d H:i:s", $timestamp);
+        
+        $stmt->bind_param('ddssss', $idvente,  $_SESSION['idclient'], $_SESSION['name'],$paiementmode,$dateFormatee,$statut);
+
+        // Exécuter la requête
+        if (!$stmt->execute()) {
+            return "Echec";
+        }else{
+            return "OK";
+        }
+    }
+
+    public function insertToCommandeCabinet($idvente,$paiementmode){
+        global $conn;
+        $sql = "INSERT INTO commadeclientc  (idvente , userid , nom ,paiementmethode ,datecommande, statuscommande ) VALUES (?, ?,?,?, ?,?)";
+
+        // Lier les paramètres
+        if (!$stmt = $conn->prepare($sql)) {
+            return "erreur sql";
+        }
+        // Obtenir le timestamp actuel
+        $timestamp = time();
+        $statut = "en coure";
+        // Formater la date et l'heure actuelles
+        $dateFormatee = date("Y-m-d H:i:s", $timestamp);
+        
+        $stmt->bind_param('ddssss', $idvente,  $_SESSION['idclient'], $_SESSION['name'],$paiementmode,$dateFormatee,$statut);
 
         // Exécuter la requête
         if (!$stmt->execute()) {
@@ -210,6 +369,17 @@ class Client{
             # code...
         }
         
+    }
+    public function getClient(){
+        global $conn;
+        $data =[];
+        $sql = "SELECT id,firstname,adresse,telephone,sexe FROM client 
+        order by firstname ASC";
+        $result = $conn->query($sql);
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data;  
     }
 }
 ?>

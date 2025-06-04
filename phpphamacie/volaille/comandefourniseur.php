@@ -46,20 +46,33 @@ session_start();
                                     <!-- DataTales Example -->
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Commande Poussin Fourniseur</h6>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                <h6 class="m-0 font-weight-bold text-primary">Commande fourniseur des poussins </h6>     
+                                                </div>
+                                                <div class="col-sm-2">
+                                                <i class="fa fa-home"></i>
+                                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <i class="fa fa-list"></i> 
+                                                    <a href="listecommande.php" class="btn btn-success"> Liste</a>             
+                                                </div>
+                                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                                            </div>
                                             <br>
                                             <div class="row">
                                                 <p class="btn btn-warning btn-user col-md-2" onclick="ajouterLigne('dataTable', 
-                                                5, 10)">ajouter achat</p>
-                                                <p class="col-md-2" >quantite : <span id="quantitetotal">0</span></p>
-                                                <p class="col-md-2" >prix : <span id="prixtotal">0</span></p>
-                                                <p class="col-md-2" > Comande:<input type="date" class="form-control form-control-user" id="datefacture"
+                                                5, 10)">Ajouter une ligne</p>
+                                                <p class="col-md-2" >Quantité : <span id="quantitetotal">0</span></p>
+                                                <p class="col-md-2" >Prix : <span id="prixtotal">0</span></p>
+                                                <p class="col-md-2" > Dete Commande:<input type="date" class="form-control form-control-user" id="datefacture"
                                                 name="datefacture" placeholder="date achat"></p>
                                                 
                                             </div>
                                             <span id="verificatiobDonne"></span>
                                         </div>
-                                        <button class="btn btn-success btn-user btn-block" onclick="afficherFormulaire()">enregistrer une commande</button>
+                                        <button class="btn btn-success btn-user btn-block" onclick="afficherFormulaire()">Enregistrer une commande</button>
                                         <div class="card-body" id="formulaire" style="display: none;">
                                             <div class="table-responsive">
                                                 <table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
@@ -67,9 +80,9 @@ session_start();
                                                     
                                                         <tr>
                                                             <th>Fourniseur</th>
-                                                            <th>souche</th>
-                                                            <th>montant</th>
-                                                            <th>Status</th>
+                                                            <th>Souche</th>
+                                                            <th>Montant</th>
+                                                            <th>Statut</th>
                                                         </tr>
                                                     </thead>
                                                     <tfoot>
@@ -97,16 +110,16 @@ session_start();
                                                             <th>
                                                                 <div class="form-group row">
                                                                     <input type="text" class="form-control form-control-user" id="souche"
-                                                                    name="souche" placeholder="souche poussin" required>     
+                                                                    name="souche" placeholder="Souche poussin" required>     
                                                                 </div>
                                                             </th>
                                                             <th> 
                                                                 <input type="number" class="form-control form-control-user"
-                                                                    name="montant" id="montant" placeholder="montant versement" required>
+                                                                    name="montant" id="montant" placeholder="Montant versement" required>
                                                             </th>
                                                             <th> 
                                                                 <input type="text" class="form-control form-control-user"
-                                                                    name="status" id="status" placeholder="status commande" required>
+                                                                    name="status" id="status" placeholder="StatuT commande" required>
                                                             </th>  
                                                         </tr>
                                                     </tbody>
@@ -118,7 +131,7 @@ session_start();
                                             </div>
                                         </div><br>
 
-                                        <button class="btn btn-info btn-user btn-block" onclick="afficherlivraison()">enregistrer une livraison</button>
+                                        <button class="btn btn-info btn-user btn-block" onclick="afficherlivraison()">Enregistrer une livraison</button>
 
                                         <div class="card-body" id="livraison" style="display: none;">
                                         <p class="btn btn-warning btn-user col-md-2" onclick="ajouter('dataTable1', 
@@ -129,9 +142,9 @@ session_start();
                                                     
                                                         <tr>
                                                             <th>Fourniseur</th>
-                                                            <th>quantite</th>
-                                                            <th>prix unitaire</th>
-                                                            <th>Status</th>
+                                                            <th>Quantite</th>
+                                                            <th>Prix unitaire</th>
+                                                            <th>Statut</th>
                                                         </tr>
                                                     </thead>
                                                     <tfoot>
@@ -168,7 +181,7 @@ session_start();
                                                             </th>
                                                             <th> 
                                                                 <input type="text" class="form-control form-control-user"
-                                                                    name="status1" id="status1" placeholder="status commande" required>
+                                                                    name="status1" id="status1" placeholder="Statut commande" required>
                                                             </th>  
                                                         </tr>
                                                     </tbody>

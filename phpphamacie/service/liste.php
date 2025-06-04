@@ -36,7 +36,7 @@ require_once("../bdmutilple/getclient.php");
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -59,7 +59,31 @@ require_once("../bdmutilple/getclient.php");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success">Terrain </h6>
+                            
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables Terrain</h6>
+                                </div>
+                                <div class="col-md-2">
+                                    <i class="fas fa-list"></i>
+                                    <a href="service.php" class="btn btn-primary">Ajouter</a>
+                                </div>
+                                <div class="col-md-2">
+                                    <i class="fas fa-list"></i>
+                                    <a href="list.php" class="btn btn-primary">list</a>
+                                </div>
+                                <div class="col-md-4" style="text-align: right;">
+                                <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche Année</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -97,8 +121,14 @@ require_once("../bdmutilple/getclient.php");
                                     <?php 
                                         global $conn;
                                         $client = new Client(1);
+                                        $date = date("Y-m-d");
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET['date'];
+                                        } else {
+                                            $date = date("Y");
+                                        }
                                         
-                                        $sql = "SELECT * FROM terrain ";
+                                        $sql = "SELECT * FROM terrain WHERE YEAR(datejour) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             $infoclient = $client->getAllByIdClient($row["idclient"]);
@@ -114,7 +144,7 @@ require_once("../bdmutilple/getclient.php");
                                             echo '<td>'.$row["datejour"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                # code...
+                                                echo "<a href='detaile.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
                                                 echo "<a href='detaile.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             }else{
@@ -142,7 +172,7 @@ require_once("../bdmutilple/getclient.php");
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>
@@ -196,6 +226,12 @@ require_once("../bdmutilple/getclient.php");
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "liste.php?date=" + annee;
+        }
+    </script>
 
 </body>
 

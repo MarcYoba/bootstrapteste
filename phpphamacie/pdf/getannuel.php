@@ -9,6 +9,8 @@ require_once("../bdmutilple/getfournisseur.php");
 require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
 require_once("../bdmutilple/getdette.php");
+require_once("../bdmutilple/getpoussin.php");
+require_once("../bdmutilple/getvaccin.php");
 
 require '../../vendor/autoload.php';
 ini_set('memory_limit', '256M');
@@ -23,6 +25,8 @@ $formule = 1;
 $caisse = new Caise(0);
 $dette = new Dette();
 $versement = new Versement(1);
+$poussin = new Poussin();
+$vaccin = new Vaccin();
 $mois = $_POST["mois"];
 //var_dump($date);
 
@@ -160,23 +164,24 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">List opration</th>
             <th scope="col">nomtant</th>
         </tr>';
-       // $facture = $caisse->SommeeMenseurl($mois);
-            // foreach ($facture as $linefatcture) {
-            //     $html .= '<tr>';
-            //     foreach ($linefatcture as $key => $cell) {
-            //         if (!empty($cell)) {
-            //             if (strpos($cell,',')) {
-            //                 $chaine = str_replace(',','<br>',$cell);
-            //                 $html .= '<td>' .$chaine.'</td>';
-            //             } else {
-            //                 $html .= '<td>' .$cell.'</td>';
-            //             }
-            //         }else{
-            //             $html .= '<td></td>';
-            //         }   
-            //     }
-            //     $html .= '</tr>';
-            // }
+    $facture = $caisse->SommeeMenseurl($mois);
+    
+        foreach ($facture as $linefatcture) {
+        $html .= '<tr>';
+        foreach ($linefatcture as $key => $cell) {
+            if (!empty($cell)) {
+            if (strpos($cell, ',')) {
+                $chaine = str_replace(',', '<br>', $cell);
+                $html .= '<td>' . $chaine . '</td>';
+            } else {
+                $html .= '<td>' . $cell . '</td>';
+            }
+            } else {
+            $html .= '<td></td>';
+            }   
+        }
+        $html .= '</tr>';
+        }
         $html .= '
         </tbody>
     </table>';
@@ -260,6 +265,180 @@ $html .='<br><br><br> <table style="width:100%">
     </tbody>
 </table>';
 
+
+$html .='<br><br><br> <table style="width:100%">
+<thead>';
+$html .=' <tr><th colspan="8" align="center""> Poussin : '.date("d-m-Y").'</th></tr>
+</thead>
+<tbody>';
+    $html .= '<tr>';
+    $html .= '<td colspan="8" align="center"> Commade Poussin </td>';
+    $html .= '</tr>
+        <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Quantite</th>
+        <th scope="col">prix Unit</th>
+        <th scope="col">montant</th>
+        <th scope="col">Souche</th>
+        <th scope="col">Avance</th>
+        <th scope="col">Reste</th>
+        <th scope="col">Status</th>
+    </tr>';
+    $tabpoussin =$poussin->getPoussinMonth($mois);
+    $montant =0;
+    $quantite =0;
+    $avance =0;
+    $reste =0;
+    foreach ($tabpoussin as $key ) {
+        $quantite +=$key["quantite"];
+        $montant += $key["montantOm"] + $key["montantCash"];
+        $avance += $key["montantOm"] + $key["montantCash"];
+        $reste += $key["reste"];
+        $html .= '<tr>';
+        $html .= '<td>' .$key["dateCommande"].'</td>';
+        $html .= '<td>' .$key["Nomclient"].'</td>';
+        $html .= '<td>' .$key["quantite"].'</td>';
+        $html .= '<td>' .$key["prixUnite"].'</td>';
+        $html .= '<td>' . $key["montant"].'</td>';
+        $html .= '<td>' .$key["souche"].'</td>';
+        $html .= '<td>' .$key["montantOm"] + $key["montantCash"].'</td>';
+        $html .= '<td>' .$key["reste"].'</td>';
+        $html .= '<td>' .$key["statusCommande"].'</td>';
+    $html .= '</tr>';
+    } 
+    $html .= '<tr>
+    <td>-----</td>
+    <td>-----</td>
+    <td>'.$quantite.'</td>
+    <td>-----</td>
+    <td>' .$montant.' FCFA </td>
+    <td>-----</td>
+        <td>'.$avance.'</td>
+        <td>'.$reste.'</td>
+        <td>-----</td>
+    </tr>';   
+$html .= '
+</tbody>
+</table>';
+
+$html .='<br><br><br> <table style="width:100%">
+            <thead>';
+            $html .=' <tr><th colspan="7" align="center""> Suivie : </th></tr>
+            </thead>
+            <tbody>';
+                $html .= '<tr>';
+                $html .= '<td colspan="7" align="center"> Suivie Anmale </td>';
+                $html .= '</tr>
+                    <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">jour</th>
+                    <th scope="col">observation</th>
+                    <th scope="col">conduit</th>
+                    <th scope="col">montant</th>
+                    <th scope="col">datejour</th>
+                </tr>';
+                $tabconsultation =$vaccin->getsuivianimaleMonth($mois);
+                $montant =0;
+                foreach ($tabconsultation as $key ) {
+                    $montant += $key["montant"];
+                    $html .= '<tr>';
+                    $html .= '<td>' .$key["nom"].'</td>';
+                    $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
+                    $html .= '<td>' . $key["jour"].'</td>';
+                    $html .= '<td>' .$key["observation"].'</td>';
+                    $html .= '<td>' .$key["conduit"].'</td>';
+                    $html .= '<td>' .$key["montant"].'</td>';
+                    $html .= '<td>' .$key["datejour"].'</td>';
+                $html .= '</tr>';
+                }
+                $html .= '<tr>
+                <td>-----</td>
+                <td>' .$montant.' FCFA </td>
+                    <td colspan="5">-----</td>
+                </tr>';    
+            $html .= '
+            </tbody>
+        </table>';
+
+        $html .='<br><br><br> <table style="width:100%">
+        <thead>';
+        $html .=' <tr><th colspan="6" align="center""> Vaccination : </th></tr>
+        </thead>
+        <tbody>';
+            $html .= '<tr>';
+            $html .= '<td colspan="7" align="center"> Vaccination  </td>';
+            $html .= '</tr>
+                <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Client</th>
+                <th scope="col">typeVacin</th>
+                <th scope="col">date vaccin</th>
+                <th scope="col">date secondvacin</th>
+                <th scope="col">montant</th>
+                <th scope="col">avance</th>
+            </tr>';
+            $tabconsultation =$vaccin->getVaccinationMonth($mois);
+            $montant =0;
+            foreach ($tabconsultation as $key ) {
+                $montant += $key["montant"];
+                $html .= '<tr>';
+                $html .= '<td>' .$key["nomSujet"].'</td>';
+                $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
+                $html .= '<td>' . $key["typeVacin"].'</td>';
+                $html .= '<td>' .$key["datevacin"].'</td>';
+                $html .= '<td>' .$key["daterappel"].'</td>';
+                $html .= '<td>' .$key["montant"].'</td>';
+                $html .= '<td>' .$key["netpayer"].'</td>';
+            $html .= '</tr>';
+            } 
+            $html .= '<tr>
+            <td>-----</td>
+            <td>' .$montant.' FCFA </td>
+                <td colspan="4">-----</td>
+            </tr>';  
+        $html .= '
+        </tbody>
+    </table>';
+
+    $html .='<br><br><br> <table style="width:100%">
+            <thead>';
+            $html .=' <tr><th colspan="5" align="center""> Terrain : </th></tr>
+            </thead>
+            <tbody>';
+                $html .= '<tr>';
+                $html .= '<td colspan="5" align="center"> Terrain  </td>';
+                $html .= '</tr>
+                    <tr>
+                    <th scope="col">localisation</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">telephone</th>
+                    <th scope="col">date jour</th>
+                    <th scope="col">Montant</th>
+                    
+                </tr>';
+                $tabconsultation =$vaccin->getTerrainMonth($mois);
+                $montant =0;
+                foreach ($tabconsultation as $key ) {
+                    $montant += $key["Montant"];
+                    $html .= '<tr>';
+                    $html .= '<td>' .$key["localisation"].'</td>';
+                    $html .= '<td>' .$client->getByIdClient($key["idclient"]).'</td>';
+                    $html .= '<td>' . $key["telephone"].'</td>';
+                    
+                    $html .= '<td>' .$key["datejour"].'</td>';
+                    $html .= '<td>' .$key["Montant"].'</td>';
+                $html .= '</tr>';
+                }  
+                $html .= '<tr>
+                <td>-----</td>
+                <td>' .$montant.' FCFA </td>
+                    <td colspan="3">-----</td>
+                </tr>'; 
+            $html .= '
+            </tbody>
+        </table>';
 
 
 

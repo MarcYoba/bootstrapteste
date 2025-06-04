@@ -56,6 +56,8 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
         $idproduit = $row["id"];
         $stock = $row["quantite_produit"];
         $prixvente = $row["prix_produit_vente"];
+        $perantiondate = $row["datePeramtion"];
+
     /*
     $sql = "SELECT id FROM fournisseur WHERE nom = '$idfournissuer'";
         $result = $conn->query($sql);
@@ -86,11 +88,25 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
     $stmt->close();
     $stock = $stock + $quantite;
     $gain = $prixvente - $prix;
-    // selection la id dans la table d'achat
-    $sql = "UPDATE produitphamacie SET quantite_produit = '$stock',prix_achat_produit='$prix',gain_produit='$gain' WHERE nom_produit = '$produit' ";
-    $result = $conn->query($sql);
-    
-    $sql = "SELECT id,idproduit FROM achatphamacie WHERE dateachat = '$date' ORDER BY id DESC LIMIT 1";
+
+    if (($perantiondate == "0000-00-00") || (empty($perantiondate)) || ($perantiondate == "0001-01-01")) {
+        $sql = "UPDATE produitphamacie SET quantite_produit = '$stock',prix_achat_produit='$prix',gain_produit='$gain',datePeramtion='$dateperantion' WHERE nom_produit = '$produit' ";
+        $result = $conn->query($sql);
+        $date = date("y/m/d");
+
+        $sql = "SELECT id,idproduit FROM achatphamacie WHERE dateachat = '$date' ORDER BY id DESC LIMIT 1";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        $id = $row["id"];
+        $idproduit = $row["idproduit"];
+
+        insertPrix($produit, $prix,$id);
+    }else{
+        $sql = "UPDATE produitphamacie SET quantite_produit = '$stock',prix_achat_produit='$prix',gain_produit='$gain' WHERE nom_produit = '$produit' ";
+        $result = $conn->query($sql);
+        $date = date("y/m/d");
+
+        $sql = "SELECT id,idproduit FROM achatphamacie WHERE dateachat = '$date' ORDER BY id DESC LIMIT 1";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         $id = $row["id"];
@@ -98,6 +114,10 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
 
         insertPrix($produit, $prix,$id);
         insertLots($dateperantion,$id,$idproduit);
+    }
+    // selection la id dans la table d'achat
+    
+    
     
 }
 

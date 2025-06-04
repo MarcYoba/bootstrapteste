@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -57,7 +57,34 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Depense</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables des Dépenses</h6>
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="depense.php" class="btn btn-success"> Ajouter</a>
+                                                
+                                </div>
+                                <div class="col-md-2" style="text-align:right;">
+                                
+                                    <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option>Recherche année</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -66,27 +93,34 @@
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>description</th>
-                                            <th>montant</th>
+                                            <th>Description</th>
+                                            <th>Montant</th>
                                             <th>Cathegorie </th>
                                             <th>Date</th>
-                                            <th>operation</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>description</th>
-                                            <th>montant</th>
+                                            <th>Description</th>
+                                            <th>Montant</th>
                                            <th>Cathegorie </th>
                                             <th>Date</th>
-                                            <th>operation</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM depensesphamacie  ORDER BY id DESC";
+                                        $date = date('Y-m-d');
+                                        if(isset($_GET['date'])){
+                                            $date = $_GET['date'];
+
+                                        }else{
+                                            $date = date('Y');
+                                        }
+                                        $sql = "SELECT * FROM depensesphamacie WHERE YEAR(datedepense) = '$date'  ORDER BY id DESC";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
@@ -177,7 +211,12 @@
     <script src="../../header.js"></script>
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "liste.php?date=" + annee;
+        }
+    </script>
 </body>
 
 </html>

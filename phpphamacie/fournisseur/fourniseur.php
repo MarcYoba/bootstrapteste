@@ -31,10 +31,22 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Fournisseur</h1>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Enregistrement Fournisseur</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="liste.php" class="btn btn-success"> Liste</a>
+                                                
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div>
                             <form class="user" action="register.php" method="post">
                                 <div class="form-group row">
@@ -44,17 +56,17 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="adressfournisseur" 
-                                           name="adressfournisseur" placeholder="adress fournisseur" required>
+                                           name="adressfournisseur" placeholder="Adresse fournisseur" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="date" class="form-control form-control-user" id="datefacture"
-                                           name="datefacture" placeholder="date achat" required>
+                                           name="datefacture" placeholder="Date achat" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="number" class="form-control form-control-user" id="numerofacture" 
-                                           name="numerofacture" placeholder="numero facture" required>
+                                           name="numerofacture" placeholder="Numero facture" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -64,7 +76,7 @@
                                 <hr>
                                 <div class="form-group">
                                     <input type="tel" class="form-control form-control-user" id="Inputphone"
-                                       name="Inputphone" placeholder="telephone fourniseur" required>
+                                       name="Inputphone" placeholder="Téléphone fourniseur" required>
                                 </div>
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-user btn-block">
                                     Enregister

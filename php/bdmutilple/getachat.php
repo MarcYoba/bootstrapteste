@@ -261,7 +261,7 @@ class Achat{
     {
         global $conn;
         $data =[];
-        $sql = "SELECT QUARTER(dateachat) AS trimestre, ROUND(SUM(prixAcaht),2) AS nombre_enregistrements 
+        $sql = "SELECT QUARTER(dateachat) AS trimestre, ROUND(SUM(montant),2) AS nombre_enregistrements 
         FROM achat 
         WHERE YEAR(dateachat) = $anne
         GROUP BY QUARTER(dateachat)";
@@ -279,7 +279,7 @@ class Achat{
         $data =[];
         $sql = "SELECT 
         CEILING(MONTH(dateachat) / 6) AS semestre,
-        ROUND(SUM(prixAcaht),2) AS montant
+        ROUND(SUM(montant),2) AS montant
         FROM 
             achat
         WHERE YEAR(dateachat) = $anne

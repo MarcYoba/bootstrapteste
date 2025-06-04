@@ -1,15 +1,16 @@
 <?php 
     session_start();
     require_once("getclient.php");
-    $client = new Client($_SESSION['id']);
-    $achatClient = $client->SelectAchatProvenderie($_SESSION['id']);
+    $client = new Client($_SESSION['idclient']);
+    $achatClient = $client->SelectAchatProvenderie($_SESSION['idclient']);
+    $nbelement = count($achatClient);
     
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
+    <link rel="shortcut icon" href="../assets/img/ico/favicon.png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,98 +36,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>MENU</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#vente"
-                    aria-expanded="true" aria-controls="vente">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Achat Provenderie</span>
-                </a>
-                <div id="vente" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Achat Provenderie</h6>
-                        <a class="collapse-item" href="listeProvenderie.php">Liste Achat Provenderie</a> 
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pharmacie"
-                    aria-expanded="true" aria-controls="pharmacie">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Achat Pharmacie</span>
-                </a>
-                <div id="pharmacie" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Achat Pharmacie</h6>
-                        <a class="collapse-item" href="#">Achat Pharmacie</a> 
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dette"
-                    aria-expanded="true" aria-controls="dette">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Liste Dette</span>
-                </a>
-                <div id="dette" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Liste Dette</h6>
-                        <a class="collapse-item" href="#">Liste Dette</a> 
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Versement"
-                    aria-expanded="true" aria-controls="Versement">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Liste Versement</span>
-                </a>
-                <div id="Versement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"> Liste Versement:</h6>
-                        <a class="collapse-item" href="#">Liste Versement</a>
-                        
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-           
-
-            <!-- Divider -->
-            
-
-            <!-- Nav Item - Tables -->
-           
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
+        <?php require_once("navbar.php") ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -136,91 +46,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION["name"]; ?></span>
-                                <img class="img-profile rounded-circle"
-                                    src="../img/undraw_profile.svg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
+                <?php require_once("topbar.php") ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -234,7 +60,7 @@
                             <!-- Area Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <div class="form-group row">
+                                   <!-- <div class="form-group row">
                                         <div class="col-sm-5 ">
                                             <a class="m-0 font-weight-bold text-success" href="">Precedent</a>
                                         </div>
@@ -247,77 +73,61 @@
                                         <div class="col-sm-2 ">
                                             <a class="m-0 font-weight-bold text-success" href="">Suivant</a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="card-body">
                                     
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25'>
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='100'>
                                             <thead>
                                             
                                                 <tr>
                                                     <th>id</th>
-                                                    <th>Nom</th>
-                                                    <th>quantite</th>
-                                                    <th>prix unitaire</th>
-                                                    <th>montant</th>
                                                     <th>Typepaiement</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <!--- <tr>
-                                                    <th>id</th>
-                                                    <th>Nom</th>
                                                     <th>quantite</th>
                                                     <th>prix</th>
                                                     <th>montant</th>
-                                                    <th>Typepaiement</th>
+                                                    <th>reduction</th>
+                                                    
+                                                    <th>voire facture</th>
                                                 </tr>
-                                                --->
+                                            </thead>
+                                            <tfoot>
+                                                 <tr>
+                                                    <th>id</th>
+                                                    <th>Typepaiement</th>
+                                                    <th>quantite</th>
+                                                    <th>prix</th>
+                                                    <th>montant</th>
+                                                    <th>reduction</th>
+                                                    <th>voire facture</th>
+                                                </tr>
+                                                
                                             </tfoot>
                                             <tbody>
                                             <?php 
-                                                global $conn;
-                                                $id = $achatClient["id"];
-                                                $quantite = 0;
-                                                $prix = 0;
-                                                $montant = 0;
-
-                                                $sql = "SELECT * FROM facture WHERE idvente = '$id'";
-                                                $result = $conn->query($sql);
-                                                while ($row = mysqli_fetch_assoc($result)){
-                                                    echo '<tr>';
-                                                    echo '<td>'.$row["id"].'</td>';
-                                                    echo '<td>'.$row["nomproduit"].'</td>';
-                                                    echo '<td>'.$row["quantite"].'</td>';
-                                                    echo '<td>'.$row["prix"].'</td>';
-                                                    echo '<td>'.$row["montant"].'</td>';
-                                                    echo '<td>'.$row["Typepaiement"].'</td>';
-                                                    echo '</tr>';
-                                                    //var_dump($row);
-
-                                                    $quantite += $row["quantite"];
-                                                    $prix += $row["prix"];
-                                                    $montant += $row["montant"];
-
-                                                }
-
-                                                
+                                                $index = 0;
+                                               foreach ($achatClient as $linefatcture) {
                                                 echo '<tr>';
-                                                    echo '<td>Total</td>';
-                                                    echo '<td>-</td>';
-                                                    echo '<td>'.$quantite.'</td>';
-                                                    echo '<td>'.$prix.'</td>';
-                                                    echo '<td>'.$montant.'</td>';
-                                                    echo '<td>-</td>';
-                                                    echo '</tr>';
+                                                
+                                                    echo '<td>' .$linefatcture["id"].'</td>';
+                                                    echo '<td>' .$linefatcture["typevente"].'</td>';
+                                                    echo '<td>' .$linefatcture["quantite"].'</td>';
+                                                    echo '<td>' .$linefatcture["prix"].'</td>';
+                                                    echo '<td>' .$linefatcture["datevente"].'</td>';
+                                                    echo '<td>' .$linefatcture["reduction"].'</td>';
+                                                    echo "<td><a href='pfacture.php?id=" . $index. "' class='btn btn-primary'><i class='fas fa-pencil-alt'>Facture</i></a></td>";
+                                                
+                                               echo '</tr>';
+                                               $index++;
+                                            } 
                                             ?>
                                             </tbody>
                                         </table>
                                     </div>
                                 
                                     <hr> 
-                                    <b> Liste des facture </b> 
+                                    <b> Liste des Achat </b> 
                                 </div>
                             </div>
 
@@ -386,9 +196,7 @@
     <script src="../vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-moi.js"></script>
     
-    <script src="../js/demo/chart-bar-moi.js"></script>
     <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 

@@ -66,8 +66,12 @@ class Stock{
         return $row["quantites"];
     }
 
-    public function getLogsDate(){
+    public function getLogsDate($date){
         global $conn;
+        // $jour = date("d");
+        // $mois = date("m");
+        // $jour_moi_anne = new DateTime("$date-$mois-$jour");
+        // $datejour = $jour_moi_anne->format("Y-m-d");
         $data = [];
         $sql = "SELECT
             hs.Nomproduit,
@@ -79,6 +83,7 @@ class Stock{
             FROM
                 historiquestock hs
             LEFT JOIN produit p ON p.id = hs.idproduit
+            WHERE YEAR(hs.datet) = '$date'
             GROUP BY
                 hs.Nomproduit
             ORDER BY

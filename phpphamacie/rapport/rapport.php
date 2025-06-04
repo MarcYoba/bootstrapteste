@@ -123,7 +123,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-4">
                                         <input type="number" class="form-control form-control-user" id="anne"
-                                        name="anne" placeholder="numero du moi" required>
+                                        name="anne" placeholder="numéro de l'année" required>
                                     </div>
                                     <div class="col-sm-4"></div>
                                     <div class="col-sm-4">

@@ -46,16 +46,32 @@ session_start();
                                     <!-- DataTales Example -->
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Tables des Achats</h6>
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-success">Tables des Achats</h6>
+                                            <div class="form-group row">
+                                            <div class="col-sm-6">
+                                            
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <i class="fa fa-home"></i>
+                                                <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <i class="fa fa-list"></i> 
+                                                <a href="liste.php" class="btn btn-success"> Liste</a>
+                                                
+                                            </div>
+                                            <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                                        </div>
                                             <br>
                                             <div class="row">
                                                 <p class="btn btn-warning btn-user col-md-2" onclick="ajouterLigne('dataTable', 
-                                                5, 10)">ajouter achat</p>
-                                                <p class="col-md-2" >quantite : <span id="quantitetotal">0</span></p>
-                                                <p class="col-md-2" >prix : <span id="prixtotal">0</span></p>
+                                                5, 10)">Ajouter une Ligne</p>
+                                                <p class="col-md-2" >Quantité  : <span id="quantitetotal">0</span></p>
+                                                <p class="col-md-2" >Prix : <span id="prixtotal">0</span></p>
                                                 <p class="col-md-2" > Achat:<input type="date" class="form-control form-control-user" id="datefacture"
                                                 name="datefacture" placeholder="date achat"></p>
-                                                <p class="col-md-2" >Perantion:<input type="date" class="form-control form-control-user" id="peramtion"
+                                                <p class="col-md-2" >Péremption:<input type="date" class="form-control form-control-user" id="peramtion"
                                                 name="peramtion" placeholder="date achat"></p>
                                             </div>
                                             <span id="verificatiobDonne"></span>
@@ -67,10 +83,10 @@ session_start();
                                                     
                                                         <tr>
                                                             <th>Fourniseur</th>
-                                                            <th>description</th>
-                                                            <th>quantite</th>
-                                                            <th>prix_unite</th>
-                                                            <th>Mantant</th>
+                                                            <th>Désigantion</th>
+                                                            <th>Quantité</th>
+                                                            <th>P.U</th>
+                                                            <th>P.Total</th>
                                                         </tr>
                                                     </thead>
                                                     <tfoot>
@@ -81,11 +97,12 @@ session_start();
                                                         <tr class="br-primary">
                                                             <th class = >
                                                             <div class="form-group ">
-                                                                <select id="fournisseur"  name="fournisseur"  class="form-control form-select" required>
+                                                            <input type="search" id="fourni" onkeyup="recherfourniseur()"  class="form-control" placeholder="recherche fournisseur">
+                                                                <select id="fournisseur"  name="fournisseur"  class="form-control form-select" required size="4" multiple aria-label="multiple select">
                                                                     <option selected> </option>
                                                                     <?php 
                                                                         global $conn;
-                                                                        $sql = "SELECT id, nom FROM fournisseurphamacie";
+                                                                        $sql = "SELECT id, nom FROM fournisseurphamacie ORDER BY nom ASC";
                                                                         $result = $conn->query($sql);
                                                                         while ($row = mysqli_fetch_assoc($result)){
                                                                             echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";
@@ -98,9 +115,9 @@ session_start();
                                                             <th>
                                                                 <div class="form-group row">
                                                                 
-                                                                <!-- <input type="text" class="form-control form-control-user" id="Nomproduit"
-                                                                    name="Nomproduit" placeholder="Nom produit" required> -->
-                                                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select" required>
+                                                                <input type="text" class="form-control form-control-user" id="produitname"
+                                                                    name="produitname" placeholder="Nom produit" onkeyup="recherproduit()" required> 
+                                                                    <select id="nomProduit"  name="nomProduit"  class="form-control form-select" required size="4" multiple aria-label="multiple select">
                                                                     <option selected></option>
                                                                     <?php 
                                                                         global $conn;
@@ -144,12 +161,7 @@ session_start();
                                 </div>
                             <!--</form> -->
                             <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="../../index.html">Already have an account? Login!</a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -349,6 +361,48 @@ function calculerTotal(ligneIndex){
     const total = quantite * prix;
 
     Totalcellule.textContent = total;
+}
+
+function recherproduit() {
+    // Récupérer l'input et la liste déroulante
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("produitname");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("nomProduit");
+    li = ul.getElementsByTagName("option");
+    console.log(li.length);
+    // Boucler sur toutes les options
+    for (i = 0; i < li.length; i++) {
+      a = li[i];
+      
+      if (a.value.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+    
+}
+
+function recherfourniseur() {
+    // Récupérer l'input et la liste déroulante
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("fourni");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("fournisseur");
+    li = ul.getElementsByTagName("option");
+    console.log(li.length);
+    // Boucler sur toutes les options
+    for (i = 0; i < li.length; i++) {
+      a = li[i];
+      
+      if (a.textContent.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+    
 }
     </script>
 

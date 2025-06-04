@@ -31,10 +31,22 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center" >
-                                <h1 class="h4 text-gray-900 mb-4">Enregistrer un Produit Cabinet</h1>
+                        <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Enregistrement produit</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="liste.php" class="btn btn-success"> Liste</a>
+                                                
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div>
                             <form class="user" action="register.php" method="post" >
                                 <?php 
@@ -74,30 +86,33 @@
                                                 $donnees = json_decode($tabdonne,true);
                                                     echo'<option value="'.$donnees["type_produit"].'"  selected>'.$donnees["type_produit"].'</option>';
                                                 }else{
-                                                    echo'<option value="type de produit" > Cathegorie de produit</option>';
+                                                    echo'<option value="type de produit" >Catégorie de produit</option>';
                                                 }
                                                 echo'<option value="VITAMINE VOLAILLE">VITAMINE VOLAILLE</option>';
-                                                echo'<option value="MINERAUX VOLAILLE" >MINERAUX VOLAILLE</option>';
-                                                echo'<option value="ANTIBIOTIQUE VOLAILLE" >ANTIBIOTIQUE VOLAILLE</option>';
-                                                echo'<option value="ANTICOCCIDIEN" >ANTICOCCIDIEN</option>';
-                                                echo'<option value="VERMIFUGE VOLAILLE" >VERMIFUGE VOLAILLE</option>';
-                                                echo'<option value="DIRUTIQUE VOLAILLE" >DIRUTIQUE VOLAILLE</option>';
-                                                echo'<option value="ANTTISTRESS VOLAILLE" >ANTTISTRESS VOLAILLE"</option>';
-                                                echo'<option value="DESINFINTANT" > DESINFINTANT</option>';
-                                                echo'<option value="ANTIBIOTIQUE INJECTABLE" > ANTIBIOTIQUE INJECTABLE</option>';
-                                                echo'<option value="PRODUIT POISSON" > PRODUIT POISSON</option>';
-                                                echo'<option value="ANTIBIOTIQUE USAGE EXTERNE" > ANTIBIOTIQUE USAGE EXTERNE</option>';
-                                                echo'<option value="COMPLEMENT ALIMENTAIRE" > COMPLEMENT ALIMENTAIRE</option>';
-                                                echo'<option value="VITAMINE INJECTABLE" > VITAMINE INJECTABLE</option>';
-                                                echo'<option value="MINERAUX INJECTABLE" > MINEREAU INJECTABLE</option>';
-                                                echo'<option value="PRODUIT NETOILLAGE" > PRODUIT NETOILLAGE</option>';
-                                                echo'<option value="VACCIN VOLAILLE" > VACCIN VOLAILLE</option>';
-                                                echo'<option value="VACCIN PORCIN" >VACCIN PORCIN</option>';
-                                                echo'<option value="VACCIN CANIN" >VACCIN CANIN</option>';
-                                                echo'<option value="ACCESSOIRES CHIEN" >ACCESSOIRES CHIEN</option>';
-                                                echo'<option value="ACCESSOIRES INCUBATEUR" >ACCESSOIRES INCUBATEUR</option>';
-                                                echo'<option value="EQUIPEMENT ELEVAGE" >EQUIPEMENT ELEVAGE</option>';
-                                                echo'<option value="AUTRE" > AUTRE</option>';
+                                                echo'<option value="MINERAUX VOLAILLE">MINÉRAUX VOLAILLE</option>';
+                                                echo'<option value="ANTIBIOTIQUE VOLAILLE">ANTIBIOTIQUE VOLAILLE</option>';
+                                                echo'<option value="ANTICOCCIDIEN">ANTICOCCIDIEN</option>';
+                                                echo'<option value="ANTI-INFLAMMATOIRE">ANTI-INFLAMMATOIRE</option>';
+                                                echo'<option value="VERMIFUGE VOLAILLE">VERMIFUGE VOLAILLE</option>';
+                                                echo'<option value="VERMIFUGE INJECTABLE">VERMIFUGE VOLAILLE</option>';
+                                                echo'<option value="VERMIFUGE COMPRIMÉ">VERMIFUGE COMPRIMÉ</option>';
+                                                echo'<option value="DIURÉTIQUE VOLAILLE">DIURÉTIQUE VOLAILLE</option>';
+                                                echo'<option value="ANTISTRESS VOLAILLE">ANTISTRESS VOLAILLE</option>';
+                                                echo'<option value="DÉSINFECTANT">DÉSINFECTANT</option>';
+                                                echo'<option value="ANTIBIOTIQUE INJECTABLE">ANTIBIOTIQUE INJECTABLE</option>';
+                                                echo'<option value="PRODUIT POISSON">PRODUIT POISSON</option>';
+                                                echo'<option value="ANTIBIOTIQUE USAGE EXTERNE">ANTIBIOTIQUE USAGE EXTERNE</option>';
+                                                echo'<option value="COMPLÉMENT ALIMENTAIRE">COMPLÉMENT ALIMENTAIRE</option>';
+                                                echo'<option value="VITAMINE INJECTABLE">VITAMINE INJECTABLE</option>';
+                                                echo'<option value="MINÉRAUX INJECTABLE">MINÉRAUX INJECTABLE</option>';
+                                                echo'<option value="PRODUIT NETTOYAGE">PRODUIT NETTOYAGE</option>';
+                                                echo'<option value="VACCIN VOLAILLE">VACCIN VOLAILLE</option>';
+                                                echo'<option value="VACCIN PORCIN">VACCIN PORCIN</option>';
+                                                echo'<option value="VACCIN CANIN">VACCIN CANIN</option>';
+                                                echo'<option value="ACCESSOIRES CHIEN">ACCESSOIRES CHIEN</option>';
+                                                echo'<option value="ACCESSOIRES INCUBATEUR">ACCESSOIRES INCUBATEUR</option>';
+                                                echo'<option value="ÉQUIPEMENT ÉLEVAGE">ÉQUIPEMENT ÉLEVAGE</option>';
+                                                echo'<option value="AUTRE">AUTRE</option>';
                                             echo'</select>';
                                         echo'</div>';
                                     echo'</div>';
@@ -134,10 +149,10 @@
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="number" class="form-control form-control-user" id="InputQuantite"
-                                                name="InputQuantite" placeholder="Quantite de demmarage"  value='.intval($donnees["quantite_produit"]).' required>';
+                                                name="InputQuantite" placeholder="Quantité de demmarage"  value='.intval($donnees["quantite_produit"]).' required>';
                                             }else{
                                                 echo'<input type="number" class="form-control form-control-user" id="InputQuantite"
-                                                name="InputQuantite" placeholder="Quantite de demmarage" required>';
+                                                name="InputQuantite" placeholder="Quantité de demmarage" required>';
                                             } 
                                             
                                         echo'</div>';
@@ -149,7 +164,7 @@
                                                     echo'<option value="'.$donnees["cathegorie"].'"  selected>'.$donnees["cathegorie"].'</option>';
                                                     echo '<div date_add='.$donnees["id"].' id="id"></div>';
                                                 }else{
-                                                    echo'<option selected> reference provenderie ou pharmacie</option>';;
+                                                    echo'<option selected> Indication </option>';;
                                                 }
                                                 
                                                 

@@ -37,7 +37,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headerProvenderi.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -82,7 +82,7 @@
                                     <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="4" multiple aria-label="multiple select ">
                                         <?php 
                                             global $conn;
-                                            $sql = "SELECT  nom_produit,cathegorie FROM produit";
+                                            $sql = "SELECT  nom_produit,cathegorie FROM produit ORDER BY nom_produit ASC";
                                             $result = $conn->query($sql);
                                             while ($row = mysqli_fetch_assoc($result)){               
                                                 echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
@@ -91,8 +91,19 @@
                                     </select>
                                 </p>
                
-                                <p class="col-md-2">
+                                <p class="col-md-3">
                                     <button class='btn btn-info btn-user'>Imprimer</button>
+                                    <br>
+                                    <label for="annee">Année recherche</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </p>
                             </div>
                             </form>
@@ -127,15 +138,30 @@
                                     <tbody id="liste">
                                     <?php 
                                         global $conn;
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET["date"];
+                                        } else {
+                                            $date = date("Y");
+                                        }
                                         $stock = new Stock(1,1,1);
                                         $facture = new Facture(1);
-                                        $date =  date("Y-m-d");
+                                        
                                         // $sqlp = "SELECT  id,nom_produit,cathegorie FROM produit"; 
                                         // $resultp = $conn->query($sqlp);
                                         // while ($rowt = mysqli_fetch_assoc($resultp)){ 
                                         //     var_dump($facture->setIdFacture($rowt["nom_produit"]." ".$rowt["cathegorie"] ,$rowt["id"]));
                                         // }
-                                        $variable = $stock->getLogsDate();
+                                        $variable = $stock->getLogsDate($date);
+                                        $currentYear = date("Y");
+                                        if ($currentYear>$date) {
+                                            $jour = date("d");
+                                            $mois = date("m");
+                                            $datecreat = new DateTime("$date-$mois-$jour");
+                                            $date = $datecreat->format("Y-m-d");
+                                        }else{
+                                            $date =  date("Y-m-d");
+                                        }
+                                        
                                         foreach ($variable as $key => $value) {
                                             echo '<tr>';
                                             echo '<th>'.$value["Nomproduit"].'</th>';
@@ -214,11 +240,11 @@
             </div>
         </div>
     </div>
-
+    <script src="stockVente.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    
     <!-- Core plugin JavaScript-->
     <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -232,7 +258,13 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-    <script src="../stock/stockVente.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "recaptliste.php?date=" + annee;
+        }
+    </script>
+    
 
 </body>
 

@@ -41,10 +41,23 @@
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-12">
-                    <div class="text-center card-header py-3">
-                                <h1 class="h4 text-gray-900 mb-4">Fiche de Consultation</h1>
+                                
+                            
+                            <div class="form-group row card-header py-3">
+                                <div class="col-sm-6">
+                                    <h6 class="m-0 font-weight-bold text-primary">Fiche de Consultation</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="tableconsultation.php" class="btn btn-success"> Liste</a>             
+                                </div>
+                                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div> 
-                        <div class="p-5">
+                            <div class="p-5">
                             
                             <form class="user" action="registerconsultation.php" method="post">
                             <div class="form-group row">
@@ -58,23 +71,47 @@
                                 </div>
                                 <hr>
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="col-sm-5 mb-3 mb-sm-0">
+                                        Nom du propritaire 
+                                        <input type="search" id="clientrecher" onkeyup="recherchduclient()"  class="form-control" placeholder="recherche client">
+                                        <select id="idclient"  name="idclient"  class="form-control form-select" size="4">
+                                            <?php 
+                                            require_once("../connexion.php");
+                                                global $conn;
+                                                $sql = "SELECT id, firstname, adresse FROM client";
+                                                $result = $conn->query($sql);
+                                                while ($row = mysqli_fetch_assoc($result)){               
+                                                    echo "<option value='".$row["id"]."'>".$row["firstname"]."</option>";
+                                                }
+                                            ?>
+                                    </select>
+                                    </div>
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
                                         Nom : <input type="text" class="form-control form-control-user" id="Name"
                                            name="Name" placeholder="Nom sujet" required>
+                                        Date vaccination : <input type="date" class="form-control form-control-user" id="datevaccination"
+                                           name="datevaccination" placeholder="date vaccination" required>
                                     </div>
-                                    <div class="col-sm-6">
-                                      Vaccin:  <input type="texte" class="form-control form-control-user" id="age" 
+                                    <div class="col-sm-2">
+                                      Vacciné:  <select type="texte" class="form-control form-select" id="age" 
                                            name="vaccin" placeholder="vaccin" required>
+                                            <option id="OUI">Oui</option>
+                                            <option id="NON">Non</option>
+                                           </select>
+                                           Date Rappel : <input type="date" class="form-control form-control-user" id="dateRappel"
+                                           name="dateRappel" placeholder="date vaccination" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                    Age:  <input type="number" class="form-control form-control-user" id="age" 
-                                           name="age" placeholder="age" required>
+                                    Âge:  <input type="number" class="form-control form-control-user" id="age" 
+                                           name="age" placeholder="Âge" required>
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                     Vermifuge:  <input type="texte" class="form-control form-control-user" id="Vermifuge" 
                                            name="Vermifuge" placeholder="Vermifuge" required>
+                                    date Vermifuge:  <input type="date" class="form-control form-control-user" id="dateVermifuge" 
+                                           name="dateVermifuge" placeholder="Vermifuge" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -83,16 +120,16 @@
                                         name="Sexe" placeholder="Sexe" required>
                                     </div> 
                                     <div class="col-sm-2 mb-3 mb-sm-0">   
-                                        Poid: <input type="number" class="form-control form-control-user" id="Poid"
+                                        Poids: <input type="number" class="form-control form-control-user" id="Poid"
                                            name="Poid" placeholder="Poid" required>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">    
-                                        Espace: <input type="text" class="form-control form-control-user" id="Espace"
+                                        Espèce: <input type="text" class="form-control form-control-user" id="Espace"
                                            name="Espace" placeholder="Espace" required>
                                     </div>
                                     
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        Regime Alimentaire: <textarea rows="2" cols="20" class="form-control form-control-user" id="Regime"
+                                        Type Alimentation: <textarea rows="2" cols="20" class="form-control form-control-user" id="Regime"
                                         name="Regime" placeholder="Regime Alimentaire" required></textarea>
                                     </div>
                                     
@@ -107,22 +144,8 @@
                                            name="Robe" placeholder="ROBE" required>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Temterature: <input type="texte" class="form-control form-control-user" id="Robe"
+                                        Température: <input type="text" class="form-control form-control-user" id="Temperature"
                                            name="Temterature" placeholder="Temterature" required>
-                                    </div>
-                                    <div class="col-sm-5 mb-3 mb-sm-0">
-                                        Nom du propritaire 
-                                        <select id="idclient"  name="idclient"  class="form-control form-select">
-                                            <?php 
-                                            require_once("../connexion.php");
-                                                global $conn;
-                                                $sql = "SELECT id, firstname, adresse FROM client";
-                                                $result = $conn->query($sql);
-                                                while ($row = mysqli_fetch_assoc($result)){               
-                                                    echo "<option value='".$row["id"]."'>".$row["firstname"]."</option>";
-                                                }
-                                            ?>
-                                    </select>
                                     </div>
                                 </div>
                                 <hr>
@@ -134,34 +157,41 @@
                                 </div>
                                 <hr>
                                 <div class="form-group row ">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                          <textarea type="text" rows="5" cols="20" class="form-control " id="symptomes"
-                                           name="symptomes" placeholder="symptomes" required></textarea>
+                                           name="symptomes" placeholder="Signe clinique" required></textarea>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                         <textarea type="text" rows="5" cols="20" class="form-control " id="Examain"
+                                           name="Examain" placeholder="Examain Complementaire" required></textarea>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                          <textarea type="text" rows="5" cols="20" class="form-control " id="diagnostic"
-                                           name="diagnostic" placeholder="diagnostic" required></textarea>
+                                           name="diagnostic" placeholder="Diagnostic de suspision" required></textarea>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <textarea type="text" rows="5" cols="20" class="form-control " id="traitement"
-                                           name="traitement" placeholder="traitement" required></textarea>
+                                           name="traitement" placeholder="Traitement prescrite" required></textarea>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                        Pronostique: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Pronostique"
-                                           name="Pronostique" placeholder="Pronostique de la consultation" required></textarea>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        Pronostic: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Pronostic"
+                                           name="Pronostic" placeholder="Pronostic de la consultation" required></textarea>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                        Prophylaxe: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Prophylaxe"
-                                           name="Prophylaxe" placeholder="Prophylaxe de la consultation" required></textarea>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        Recommandation: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Prophylaxie"
+                                           name="Prophylaxie" placeholder="Prophylaxie de la consultation" required></textarea>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                        Indication: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Indication"
-                                           name="Indication" placeholder="Indication consultation" required></textarea>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        Indications: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Indication"
+                                           name="Indication" placeholder="Indication de la consultation" required></textarea>
                                     </div>
-                                    
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        Nom et signalture: <textarea type="text" rows="2" cols="20" class="form-control form-control-user" id="Medessin"
+                                           name="Medessin" placeholder="Medessin" required></textarea>
+                                    </div>
                                 </div>
                                 <hr>
                                 <hr>
@@ -201,7 +231,28 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-
+    <script>
+        function recherchduclient() {
+            // Récupérer l'input et la liste déroulante
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("clientrecher");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("idclient");
+            li = ul.getElementsByTagName("option");
+            console.log(li.length);
+            // Boucler sur toutes les options
+            for (i = 0; i < li.length; i++) {
+                a = li[i];
+                
+                if (a.textContent.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+                } else {
+                li[i].style.display = "none";
+                }
+            }
+            
+        }
+    </script>
 </body>
 
 </html>

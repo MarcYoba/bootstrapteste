@@ -1,3 +1,14 @@
+<?php 
+    $id = $_GET["id"];
+    require_once("../connexion.php");
+    require_once("../bdmutilple/getclient.php");
+        global $conn;
+        $client = new Client(1);
+        $sql = "SELECT * FROM terrain WHERE id='$id'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);                                            
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,23 +45,19 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="card-header py-3">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4 m-0 font-weight-bold">Fiche descente su terrain</h1>
-                                    <button  class='btn btn-primary' onclick="selection()"><i class='fas fa-pencil-alt'></i></a>
+                                <div class="form-group row">
+                                    <div class="col-sm-8 ">
+                                        <h1 class="h4 text-gray-900 mb-4 m-0 font-weight-bold">Fiche descente su terrain</h1>
+                                    </div>
+                                    <div class="col-sm-2 ">
+                                        <button  class='btn btn-success' onclick="selection()"><i class='fas fa-pencil-alt'></i></button>
+                                    </div>
+                                    <div class="col-sm-2 ">
+                                    <?php  echo '<a  class="btn btn-success" href="../pdf/getTerrain.php?id='.$id.'"><i class="fas fa-download fa-sm "></i>Telecharger</a>' ?>
+                                    </div>
                                 </div>
                             </div>
-                            <?php 
-                            $id = $_GET["id"];
-                                require_once("../connexion.php");
-                                require_once("../bdmutilple/getclient.php");
-                                global $conn;
-                                $client = new Client(1);
-                                        $sql = "SELECT * FROM terrain WHERE id='$id'";
-                                        $result = $conn->query($sql);
-                                        $row = mysqli_fetch_assoc($result);
-
-                                                
-                            ?>
+                            
                                 
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
@@ -61,7 +68,7 @@
                                     Information du client
                                 <hr>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                      Nom:     
+                                      Nom du client:     
                                     <p class="text-lg font-weight-bold" id="nom"><?php echo $client->getByIdClient($row["idclient"]); ?></p> 
                                     </div>
                                     
@@ -71,7 +78,11 @@
                                     </div>
 
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                    Telephone :<p class="text-lg font-weight-bold" id="telephone"> <?php echo $row["telephone"] ?></p> 
+                                    Téléphone :<p class="text-lg font-weight-bold" id="telephone"> <?php echo $row["telephone"] ?></p> 
+                                    </div>
+
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    speculation :<p class="text-lg font-weight-bold" id="speculation"> <?php echo $row["speculation"] ?></p> 
                                     </div>
                                     
                                 </div>
@@ -85,10 +96,10 @@
                                         Motif de la visite :<p class="text-lg font-weight-bold" id="motifvisite"> <?php echo $row["motifvisite"] ?></p> 
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Effectif: <p class="text-lg font-weight-bold" id="efectif"> <?php echo $row["efectif"] ?></p>
+                                        Effectif: <p class="text-lg font-weight-bold" id="effectif"> <?php echo $row["efectif"] ?></p>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Age: <p class="text-lg font-weight-bold" id="age"> <?php echo $row["Age"] ?></p>
+                                        Âge: <p class="text-lg font-weight-bold" id="age"> <?php echo $row["Age"] ?></p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -115,10 +126,13 @@
                                         <p class="text-lg font-weight-bold" id="superficie"> <?php echo $row["superficie"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Qualite du sole: <p class="text-lg font-weight-bold" id="sole"> <?php echo $row["sole"] ?></p>
+                                        Qualité du sol: <p class="text-lg font-weight-bold" id="sole"> <?php echo $row["sole"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Densite: <p class="text-lg font-weight-bold" id="densite"> <?php echo $row["densite"] ?></p>
+                                        Densité: <p class="text-lg font-weight-bold" id="densite"> <?php echo $row["densite"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        Poids Moyen: <p class="text-lg font-weight-bold" id="poidmoyen"> <?php echo $row["Poidmoyen"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Environement d'exploitation: <p class="text-lg font-weight-bold" id="environement"> <?php echo $row["environement"] ?></p>
@@ -126,7 +140,7 @@
                                 </div> 
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Hygiene du batiment: <p class="text-lg font-weight-bold" id="hygiene"> <?php echo $row["hygiene"] ?></p>
+                                        Hygiène du bâtiment: <p class="text-lg font-weight-bold" id="hygiene"> <?php echo $row["hygiene"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Nombre mangeoire: <p class="text-lg font-weight-bold" id="mangeoire"> <?php echo $row["mangeoire"] ?></p>
@@ -153,7 +167,7 @@
                                     <p class="text-lg font-weight-bold" id="prophylacie"> <?php echo $row["prophylacie"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                    Patologie anterieux: 
+                                    Pathologie anterieux: 
                                     <p class="text-lg font-weight-bold" id="patologie"> <?php echo $row["patologie"] ?></p>
                                     </div>
                                 </div>
@@ -163,12 +177,40 @@
                                         <p class="text-lg font-weight-bold" id="traitemenanterieux"> <?php echo $row["traitemenanterieux"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Nombre jour maladie:
+                                        <p class="text-lg font-weight-bold" id="jourmalad"> <?php echo $row["jourmaladie"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Date debut Maladie:
+                                        <p class="text-lg font-weight-bold" id="datedebmal"> <?php echo $row["datemaladie"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    nombre de mort:
+                                        <p class="text-lg font-weight-bold" id="mort"> <?php echo $row["nbmort"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                     Signe clinique: 
                                     <p class="text-lg font-weight-bold" id="signeclinique"> <?php echo $row["signeclinique"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Traitement Anvisage: 
                                     <p class="text-lg font-weight-bold" id="traia"> <?php echo $row["Traitementanvisage"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Diagnostics de suspicion: 
+                                        <p class="text-lg font-weight-bold" id="Diagnostic"> <?php echo $row["dianostique"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Recommandations: 
+                                        <p class="text-lg font-weight-bold" id="Recommendation"> <?php echo $row["recommandation"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Date de la prochaine visite: 
+                                    <p class="text-lg font-weight-bold" id="datepvisit"> <?php echo $row["dateprochevisite"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Nom du vétérinaire :
+                                    <p class="text-lg font-weight-bold" id="veterinaire"> <?php echo $row["veterinaire"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0"> 
                                     Montant: <p class="text-lg font-weight-bold" id="Montant"> <?php echo $row["Montant"] ?></p>

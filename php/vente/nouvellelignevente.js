@@ -104,16 +104,30 @@ function calculeprixTotalquantitetotal(){
 }
 
 function calculeTotal(){
-    
-    document.getElementById("resultat").textContent = document.getElementById("quantite").value * document.getElementById("prixglobal").value;
+    let verQuantite = parseInt(document.getElementById("quantite").value);
+    let stoQuantite = parseInt(document.getElementById("quantiteStokage").value);
 
-    quantiteTotal = 0;
-    prixtotal = 0;
-    calculeprixTotalquantitetotal();
-    document.getElementById("quantitetotal").innerHTML = quantiteTotal + parseFloat(document.getElementById("quantite").value);
-    document.getElementById("Total").value = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
-    document.getElementById("prixtotal").textContent = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
-    document.getElementById("verificatiobDonne").innerHTML ='';
+    console.log("valeure : "+verQuantite);
+    console.log("valeure : "+stoQuantite);
+
+    if (verQuantite <= stoQuantite) {
+        document.getElementById("resultat").textContent = document.getElementById("quantite").value * document.getElementById("prixglobal").value;
+
+        quantiteTotal = 0;
+        prixtotal = 0;
+        calculeprixTotalquantitetotal();
+        document.getElementById("quantitetotal").innerHTML = quantiteTotal + parseFloat(document.getElementById("quantite").value);
+        document.getElementById("Total").value = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
+        document.getElementById("prixtotal").textContent = Math.ceil(prixtotal + parseFloat(document.getElementById("quantite").value * document.getElementById("prixglobal").value));
+        document.getElementById("verificatiobDonne").innerHTML =''; 
+    }else{
+        if (verQuantite>=0) {
+            alert('Vous voulez faire une action impossible;  cette vente vous crée des  problèmes.  Est-ce que vous êtes sûre pour les problèmes ?'); 
+            document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> Les quantite ne sont pas conforme  </p>';
+        }
+        
+    }
+    
 }
 
 
@@ -140,7 +154,9 @@ function recherchePrix(){
                 if (data.quantite >= 1 && data.quantite <= 5) {
                    document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-danger"> fin de stock pour ce produit: '+data.quantite+'</p>';  
                    document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer</button>'
+                   document.getElementById("quantiteStokage").value = data.quantite;
                 }else if(data.quantite <= 0){
+                    document.getElementById("quantiteStokage").value = data.quantite;
                     if (document.getElementById("modifiervente").textContent == "Modifier vente") {
                         
                     } else {
@@ -149,13 +165,16 @@ function recherchePrix(){
                 }
             } else {
                 document.getElementById("verificatiobDonne").innerHTML = '<p class="bg-info"> stock en cour : '+data.quantite+'</p>';
+                document.getElementById("quantiteStokage").value = data.quantite;
                 console.log(document.getElementById("modifiervente").textContent);
+                document.getElementById("quantiteStokage").value = data.quantite;
                 if (document.getElementById("modifiervente").textContent == "Modifier vente") {
                     
                 } else {
                     document.getElementById("enregistremet").innerHTML = '<button  class="btn btn-primary btn-user btn-block" onclick="enregistrementDonnees('+'dataTable'+')" >Enregistrer vente</button>'
                 }
             }
+            document.getElementById("quantiteStokage").value = data.quantite;
             document.getElementById("prixglobal").value = data.message;
             console.log(data);
         }else if(data.success == false){

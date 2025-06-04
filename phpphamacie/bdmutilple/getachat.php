@@ -35,6 +35,32 @@ class Achat{
          
     }
 
+    public function SommeAchat(){
+        global $conn;
+        $sql = "SELECT ROUND(SUM(montant),2) as montant FROM achatphamacie WHERE YEAR(dateachat)= YEAR(CURRENT_DATE)";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function SommeAchatAnne($anne){
+        global $conn;
+        $sql = "SELECT ROUND(SUM(montant),2) as montant FROM achatphamacie WHERE YEAR(dateachat)= '$anne'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function SommeAchatAnnePasse(){
+        global $conn;
+        $anne = date("Y");
+        $anne = $anne-1;
+        $sql = "SELECT ROUND(SUM(montant),2) as montant FROM achatphamacie WHERE YEAR(dateachat)= '$anne'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
     public function getByDate($date){
         global $conn;
         $sql = "SELECT SUM(montant) as montant FROM achatphamacie WHERE dateachat= '$date'";
@@ -235,7 +261,7 @@ class Achat{
     {
         global $conn;
         $data =[];
-        $sql = "SELECT QUARTER(dateachat) AS trimestre, ROUND(SUM(prixAcaht),2) AS nombre_enregistrements 
+        $sql = "SELECT QUARTER(dateachat) AS trimestre, ROUND(SUM(montant),2) AS nombre_enregistrements 
         FROM achatphamacie 
         WHERE YEAR(dateachat) = $anne
         GROUP BY QUARTER(dateachat)";
@@ -253,7 +279,7 @@ class Achat{
         $data =[];
         $sql = "SELECT 
         CEILING(MONTH(dateachat) / 6) AS semestre,
-        ROUND(SUM(prixAcaht),2) AS montant
+        ROUND(SUM(montant),2) AS montant
         FROM 
             achatphamacie
         WHERE YEAR(dateachat) = $anne

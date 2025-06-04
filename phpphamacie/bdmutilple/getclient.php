@@ -19,6 +19,14 @@ class Client{
         return $row["firstname"]; 
     }
 
+    public function getCleint($id){
+        global $conn;
+        $sql = "SELECT * FROM client WHERE id= '$id'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row; 
+    }
+
     public function getAllByIdClient($id){
         global $conn;
         $sql = "SELECT * FROM client WHERE id= '$id'";
@@ -138,6 +146,40 @@ class Client{
             $conn->close(); 
             return "ECHEC";
         }
+    }
+
+    public function ClientPasAchat(){
+        global $conn;
+        $data = [];
+        $sql = "SELECT DISTINCT id ,firstname,adresse,telephone,telephone
+        FROM client
+        WHERE id NOT IN (
+            SELECT idclient
+            FROM ventephamacie
+            WHERE datevente >= DATE_SUB(CURDATE(), INTERVAL 10 DAY))  ORDER BY firstname ASC";
+        
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($data,$row);
+        }
+        return $data;
+    }
+
+    public function DoublonClient(){
+        global $conn;
+
+        $sql= "SELECT firstname, `firstname`, COUNT(*) FROM client GROUP BY `firstname`, `firstname` HAVING COUNT(*) > 1 ";
+        $result = $conn->query($sql);
+        $row = $result->num_rows;
+        return $row;
+    }
+    public function SellectAll(){
+        global $conn;
+        $sql = "SELECT * FROM client";
+        $result = $conn->query($sql);
+        $row = $result->num_rows;
+
+        return $row;
     }
 }
 ?>

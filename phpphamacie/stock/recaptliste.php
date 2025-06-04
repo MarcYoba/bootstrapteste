@@ -37,7 +37,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -82,7 +82,7 @@
                                     <select id="nomProduit"  name="nomProduit"  class="form-control form-select" size="4" multiple aria-label="multiple select ">
                                         <?php 
                                             global $conn;
-                                            $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie";
+                                            $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie ORDER BY nom_produit ASC";
                                             $result = $conn->query($sql);
                                             while ($row = mysqli_fetch_assoc($result)){               
                                                 echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
@@ -93,6 +93,17 @@
                
                                 <p class="col-md-2">
                                     <button class='btn btn-info btn-user'>Imprimer</button>
+                                    <br>
+                                    <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </p>
                             </div>
                             </form>
@@ -103,24 +114,24 @@
                                     <thead>  
                                         <tr>
                                             <th>Produit</th>
-                                            <th>Stock Initial KG</th>
-                                            <th>Som Achat KG</th>
-                                            <th>Total KG</th>
-                                            <th>vente du jour KG</th>
-                                            <th>Total Vente KG</th>
-                                            <th>Stock REEL KG</th>
+                                            <th>Stock Initial</th>
+                                            <th>Som Achat</th>
+                                            <th>Total</th>
+                                            <th>vente du jour</th>
+                                            <th>Total Vente</th>
+                                            <th>Stock REEL</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Produit</th>
-                                            <th>Stock Initial KG</th>
-                                            <th>Som Achat KG</th>
-                                            <th>Total KG</th>
-                                            <th>vente du Jour KG</th>
-                                            <th>Total Vente KG</th>
-                                            <th>Stock REEL KG</th>
+                                            <th>Stock Initial</th>
+                                            <th>Som Achat</th>
+                                            <th>Total</th>
+                                            <th>vente du Jour</th>
+                                            <th>Total Vente</th>
+                                            <th>Stock REEL</th>
                                             <th>Date</th>
                                         </tr>
                                     </tfoot>
@@ -130,17 +141,23 @@
                                         $stock = new Stock(1,1,1);
                                         $facture = new Facture(1);
                                         $date =  date("Y-m-d");
+                                        if(isset($_GET['date'])){
+                                            $date = $_GET['date'];
+                                        }else{
+                                            $date = date("Y");
+                                        }
                                         // $sqlp = "SELECT  id,nom_produit,cathegorie FROM produit"; 
                                         // $resultp = $conn->query($sqlp);
                                         // while ($rowt = mysqli_fetch_assoc($resultp)){ 
                                         //     var_dump($facture->setIdFacture($rowt["nom_produit"]." ".$rowt["cathegorie"] ,$rowt["id"]));
                                         // }
-                                        $variable = $stock->getLogsDate();
+                                        $variable =$stock->getLogsDate($date);
+                                        $date =  date("Y-m-d");
                                         foreach ($variable as $key => $value) {
                                             echo '<tr>';
-                                            echo '<th>'.$value["Nomproduit"].'</th>';
-                                            echo '<th>'.round($value["stock_start_produit"],2).'</th>';
-                                            echo '<th>'.$value["quantite_achetee"].'</th>';
+                                            echo '<th>'.(!empty($value["Nomproduit"]) ? $value["Nomproduit"] : "0").'</th>';
+                                            echo '<th>'.(!empty($value["stock_start_produit"]) ? round($value["stock_start_produit"],2) : "0").'</th>';
+                                            echo '<th>'.(!empty($value["quantite_achetee"]) ? $value["quantite_achetee"] : "0").'</th>';
                                             echo '<th>'.round($value["quantite_stock"],2) + $value["quantite_achetee"].'</th>';
                                             if (empty($value["quantite_facturee"])) {
                                                 echo '<th>'.$value["quantite_facturee"].'</th>'; 
@@ -152,7 +169,7 @@
                                             } else {
                                                 echo '<th>'.round($value["somme_facture"],2).'</th>'; 
                                             } 
-                                            echo '<th>'.$value["quantite_produit"].'</th>';
+                                            echo '<th>'.(!empty($value["quantite_produit"]) ? $value["quantite_produit"] : "0").'</th>';
                                             echo '<th>'.$date.'</th>';
                                             echo '</tr>';
                                         }
@@ -174,7 +191,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php date("Y")?></span>
                     </div>
                 </div>
             </footer>
@@ -214,7 +231,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="stockVente.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -228,7 +245,12 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-    <script src="../stock/stockVente.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "recaptliste.php?date=" + annee;
+        }
+    </script>
 
 </body>
 

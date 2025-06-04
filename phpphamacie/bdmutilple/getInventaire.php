@@ -26,13 +26,13 @@ class Inventaire{
         $sql = "UPDATE produitphamacie SET quantite_produit ='$quantite', stock_start_produit='$quantite' WHERE nom_produit = '$Nomproduit'";
         $result = $conn->query($sql);
         if ($result === TRUE) {
-            $sql = "INSERT INTO inventairephamacie (Nomproduit, quantite,quantiteHistorique, quantiteReeel, quantiteDepart,idproduit,dateInventaire) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO inventairephamacie (Nomproduit, quantite,quantiteHistorique, quantiteReeel, quantiteDepart,idproduit,dateInventaire,iduser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             // Lier les paramètres
             if (!$stmt = $conn->prepare($sql)) {
                 die('Erreur de préparation de la requête : ' . $conn->error);
             }
             $date = date("y/m/d");
-            $stmt->bind_param('sddddds', $Nomproduit, $quantite,$row["quantitehisto"],$row["quantitePro"] ,$row["quantitedepart"],$row["id"], $date);
+            $stmt->bind_param('sdddddsd', $Nomproduit, $quantite,$row["quantitehisto"],$row["quantitePro"] ,$row["quantitedepart"],$row["id"], $date,$_SESSION["id"]);
 
             // Exécuter la requête
             if (!$stmt->execute()) {

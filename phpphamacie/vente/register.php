@@ -213,15 +213,32 @@ function insertFacture($nomproduit,$quantite,$prix,$idvente,$idclient,$typepaie,
     $stmt->close(); 
     
     $quantite = $quantitestock - $quantite;
+    $vaider = 3;
     if ($quantite == 0) {
-        $sql = "UPDATE produitphamacie p 
-        INNER JOIN lots l ON p.id = l.idproduit 
-        SET p.quantite_produit ='$quantite',p.datePeramtion='',l.date_expiration='',l.dateRapelle='' 
-        WHERE p.id = '$id' AND l.idproduit='$id';";
+        do{
+            $sql = "UPDATE produitphamacie p 
+            SET p.quantite_produit ='$quantite',p.datePeramtion='' 
+            WHERE p.id = '$id'";
+            $result = $conn->query($sql); 
+            $vaider--;
+        }while ($vaider == 0 && $result != True);
+        $vaider = 3;
+        do {
+            $sql = "UPDATE lots l SET l.date_expiration='',l.dateRapelle='' WHERE id = '$id'";
+            $result = $conn->query($sql); 
+            $vaider--;
+        } while ($vaider == 0 && $result != True);
+        
     } else {
-        $sql = "UPDATE produitphamacie SET quantite_produit ='$quantite' WHERE id = '$id'";
+        $vaider = 3;
+        do {
+            $sql = "UPDATE produitphamacie SET quantite_produit ='$quantite' WHERE id = '$id'";
+            $result = $conn->query($sql); 
+            $vaider--;
+        } while ($vaider == 0 && $result != True);
+        
     }
-    $result = $conn->query($sql); 
+    
     if ($result === True) {
         produitstock($idvente,$quantite,$nomproduit);
     } 

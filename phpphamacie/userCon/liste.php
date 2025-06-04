@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>GESTION DE STOCK</title>
 
     <!-- Custom fonts for this template -->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -57,7 +57,20 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Utilisateur</h6>
+                        <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Table des utilisateurs</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="page.php" class="btn btn-success"> Ajouter</a>             
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -65,26 +78,26 @@
                                     <thead>
                                        
                                         <tr>
-                                            <th>id</th>
+                                            <th>ID</th>
                                             <th>Nom</th>
-                                            <th>Prenom</th>
+                                            <th>Prénom</th>
                                             <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Zone de travail</th>
-                                            <th>Datte arriver</th>
-                                            <th>Operation</th>
+                                            <th>Rôle</th>
+                                            <th>Zone de Travail</th>
+                                            <th>Date d'Arrivée</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>id</th>
+                                            <th>ID</th>
                                             <th>Nom</th>
-                                            <th>Prenom</th>
+                                            <th>Prénom</th>
                                             <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Zone de travail</th>
-                                            <th>Datte arriver</th>
-                                            <th>Operation</th>
+                                            <th>Rôle</th>
+                                            <th>Zone de Travail</th>
+                                            <th>Date d'Arrivée</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -129,7 +142,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>

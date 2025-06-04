@@ -35,7 +35,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headerProvenderi.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -58,7 +58,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-1 font-weight-bold text-primary">Tables dette</h6>
+                            <h6 class="m-1 font-weight-bold text-primary">Tables des dettes</h6>
                             <hr>
                             <form  action="../pdf/getdettecleint.php" method="post" class="user row" >
                             <div class="row">
@@ -72,7 +72,8 @@
                                 </p>
                                 
                                 <p class="col-md-3" >
-                                <select id="client"  name="client"   class="form-control form-select" >   <!-- size="10" multiple aria-label="multiple select " -->
+                                <input type="search" id="recherche" onkeyup="recherduclient()"  class="form-control form-control-user" placeholder="recherche"><br>
+                                <select id="client"  name="client"   class="form-control form-select" size="4" multiple aria-label="multiple select">   <!--  -->
                                     <option value="ALL" selected>ALL</option>             
                                         <?php 
                                             global $conn;
@@ -86,16 +87,24 @@
                                 </select>
                                 </p>
                             
-                            <p class="col-md-2" >
+                            <p class="col-md-1" >
                                 <a href="../versement/liste.php"  class="btn btn-info btn-user" >Liste</a>
                             </p>
 
-                            <p class="col-md-2" >
+                            <p class="col-md-3" >
                             <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
-                            </p>
-
-
-                                
+                            <br>
+                                    <label for="annee">Année recherche</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                            </p>  
                             </div>
                             </form>
                         </div>
@@ -108,32 +117,31 @@
                                         <tr>
                                             <th>id</th>
                                             <th>Nom client</th>
-                                            <th>quantite</th>
+                                            <th>Quantité</th>
                                             <th>Prix </th>
                                             <th>Date</th>
-                                            <th>versement</th>
-                                            <th>Reste</th>
-                                            <th>status</th>
-                                            <th>operation</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
                                             <th>Nom client</th>
-                                            <th>quantite</th>
+                                            <th>Quantité</th>
                                             <th>Prix </th>
                                             <th>Date</th>
-                                            <th>versement</th>
-                                            <th>Reste</th>
-                                            <th>status</th>
-                                            <th>operation</th>
+                                            
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM dette ";
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET["date"];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        $sql = "SELECT * FROM dette WHERE YEAR(datedette) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
@@ -146,39 +154,6 @@
                                             echo '<td>'.$row["quantite"].'</td>';
                                             echo '<td>'.$row["prix"].'</td>';
                                             echo '<td>'.$row["datedette"].'</td>';
-
-                                            $iddette = $row["id"];
-                                            $sqldette ="SELECT SUM(montant) as somme FROM versement WHERE iddette ='$iddette'";
-                                            $resultdette = $conn->query($sqldette);
-                                            $value = mysqli_fetch_assoc($resultdette);
-
-                                            echo '<td class="px-1 py-1 bg-gradient-warning text-white" >'.$value["somme"].'</td>';
-                                           
-                                            echo '<td>'.$row["prix"]-$value["somme"].'</td>';
-                                            echo '<td class="px-1 py-1 bg-gradient-info text-white">'.$row["status"].'</td>';
-                                            if ($_SESSION['roles'] == "Lecture") {
-                                                # code...
-                                            }else{
-                                                if (($_SESSION['roles'] == "Ecriture") || ($_SESSION['roles'] == "administrateur")) {
-                                                    if($row["status"] == "en cour"){
-                                                    
-                                                        echo "<td>";
-                                                        echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'>versement</i></a>";
-                                                        //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
-                                                        echo "</td>";
-                                                    }else{
-                                                        
-                                                        echo '<td class="px-1 py-2 bg-gradient-primary text-white">'.$row["status"].'</td>';
-                                                        // echo "<td>";
-                                                        // //echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'>versement</i></a>";
-                                                        // //echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
-                                                        // echo "</td>";
-                                                    }
-                                                } else {
-                                                    # code...
-                                                }
-                                                
-                                            }
                                             echo '</tr>';
                                             //var_dump($row);
                                         }
@@ -246,24 +221,26 @@
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
     <script >
-        function myFunction() {
-            // Récupérer l'input et la liste déroulante
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("recherche");
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("client");
-            li = ul.getElementsByTagName("option");
-
-            // Boucler sur toutes les options
-            for (i = 0; i < li.length; i++) {
-                a = li[i];
-                if (a.value.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-                } else {
-                li[i].style.display = "none";
-                }
+        function recherduclient() {
+        // Récupérer l'input et la liste déroulante
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("recherche");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("client");
+        li = ul.getElementsByTagName("option");
+        console.log(li.length);
+        // Boucler sur toutes les options
+        for (i = 0; i < li.length; i++) {
+            a = li[i];
+            
+            if (a.textContent.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+            } else {
+            li[i].style.display = "none";
             }
-            }
+        }
+        
+        }
     </script>
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
@@ -272,6 +249,13 @@
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
     <script src="../../header.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "dette.php?date=" + annee;
+        }
+    </script>
+    
 
 </body>
 

@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -72,7 +72,7 @@
                                         <option selected value="All">All </option>
                                         <?php 
                                             global $conn;
-                                            $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie";
+                                            $sql = "SELECT  nom_produit,cathegorie FROM produitphamacie ORDER BY nom_produit ASC";
                                             $result = $conn->query($sql);
                                             while ($row = mysqli_fetch_assoc($result)){               
                                                 echo "<option value='".$row["nom_produit"]." "."'>".$row["nom_produit"]."</option>";
@@ -104,13 +104,24 @@
 
                                     <p class="col-md-2" >
                                         <input class="form-check-input" type="checkbox" id="Intentaire" name="Intentaire" value="Intentaire">
-                                        <label class="form-check-label" id="Intentaire">Intentaire</label><br>
+                                        <label class="form-check-label" id="Intentaire">Inventaire</label><br>
 
                                         <input class="form-check-input" type="checkbox" id="vente" name="vente" value="vente">
                                         <label class="form-check-label" id="vente">vente</label>
                                     </p>
                                 <p class="col-md-2">
-                                    <button class='btn btn-info btn-user'>Affichier</button>
+                                    <button class='btn btn-info btn-user'>Afficher</button>
+                                    <br>
+                                    <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </p>
                             </div>
                             </form>
@@ -140,7 +151,14 @@
                                     <tbody id="liste">
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM historiquestockphamacie";
+                                        $date = date("Y-m-d");
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET['date'];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        
+                                        $sql = "SELECT * FROM historiquestockphamacie WHERE YEAR(datet) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
@@ -168,7 +186,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php date("Y") ?></span>
                     </div>
                 </div>
             </footer>
@@ -223,6 +241,12 @@
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
     <script src="stockVente.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "sctockVente.php?date=" + annee;
+        }
+    </script>
 
 </body>
 

@@ -18,11 +18,11 @@ $tab = array(
 );
 
 
- $sql = "SELECT id, montant, idclient, iddette,dateversement,motif FROM versementphamacie WHERE id ='$id'";
+ $sql = "SELECT id, SUM(montant + Om + banque)as montant, idclient,dateversement,motif FROM versementphamacie WHERE id ='$id'";
  $result = $conn->query($sql);
  $row = $result->fetch_assoc();
  $tab["iddette"] = $row["id"];
- $tab["iddette"] = $row["iddette"];
+ 
  $tab["montant"] = $row["montant"];
  $tab["dateversement"] = $row["dateversement"];
  $tab["motif"] = $row["motif"];
@@ -45,6 +45,6 @@ if ($result->num_rows > 0 && $result1->num_rows > 0 ) {
 } else {
     header("location :dette.php");
 }
-$conn->close();
+
 
 ?>

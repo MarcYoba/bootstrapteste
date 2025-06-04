@@ -78,7 +78,7 @@ class Caise{
                 GROUP_CONCAT(operation,',') AS qopration, 
                 GROUP_CONCAT(montant,',') AS listmont, 
                 ROUND(SUM(montant)) AS nomtant
-        FROM caissephamacie 
+        FROM caissePhamacie 
         WHERE (operation LIKE 'sortie%' OR operation ='retour en caisse') AND MONTH(dateoperation) = '$Idmois'
         GROUP BY dateoperation";
         $result = $conn->query($sql);
@@ -91,7 +91,7 @@ class Caise{
                 GROUP_CONCAT(operation,',') AS qopration, 
                 GROUP_CONCAT(montant,',') AS listmont, 
                 ROUND(SUM(montant),2) AS nomtant
-        FROM caissephamacie
+        FROM caissePhamacie
         WHERE (operation LIKE 'sortie%' OR operation ='retour en caisse') AND MONTH(dateoperation) = '$Idmois'
         ";
         $result = $conn->query($sql);

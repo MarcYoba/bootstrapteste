@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -57,7 +57,21 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Client</h6>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Tables des Clients</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="client.php" class="btn btn-success"> Ajouter</a>
+                                                
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -65,28 +79,28 @@
                                     <thead>
                                        
                                         <tr>
-                                            <th>id</th>
+                                            <th>ID</th>
                                             <th>Nom</th>
                                             <th>Adresse</th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             <th>Achat</th>
                                             <th>Dette</th>
-                                            <th>versement</th>
-                                            <th>Datte arriver</th>
-                                            <th>option</th>
+                                            <th>Versement</th>
+                                            <th>Date d'arrivée</th>
+                                            <th>Option</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>id</th>
+                                            <th>ID</th>
                                             <th>Nom</th>
                                             <th>Adresse</th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             <th>Achat</th>
                                             <th>Dette</th>
-                                            <th>versement</th>
-                                            <th>Datte arriver</th>
-                                            <th >option</th>
+                                            <th>Versement</th>
+                                            <th>Date d'arrivée</th>
+                                            <th>Option</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>

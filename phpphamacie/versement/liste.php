@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -57,8 +57,80 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Table des versements</h6>     
+                            </div>
+                            <div class="col-sm-2">
+                            <i class="fa fa-home"></i>
+                                <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                            </div>
+                            <div class="col-sm-2">
+                                <i class="fa fa-plus"></i> 
+                                <a href="versement.php" class="btn btn-success"> Ajouter</a>             
+                            </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                        </div>
                             <div class="row">
-                                <p class="col-md-0"><h6 class="m-0 font-weight-bold text-primary">Tables Versement</h6></p>
+                                
+                                <div class="col-md-10">
+                                    <form method="post" action="../pdf/getversement.php">
+                                    <div class="col-md-0">
+                                        <h6 class="m-0 font-weight-bold text-primary"></h6>
+                                    </div>
+                                    <div class="form-group row">
+                                    <div class="col-md-2" >
+                                        <input type="date" class="form-control form-control-user"
+                                            name="date1" id="date1" placeholder="quantite">
+                                    </div>
+                                    <div class="col-md-2" >
+                                        <input type="date" class="form-control form-control-user"
+                                            name="date2" id="date2" placeholder="quantite">
+                                    </div>
+                                        
+                                    <div class="col-md-3" >
+                                        <input type="search" id="recherche" onkeyup="recherduclient()"  class="form-control form-control-user" placeholder="Recherche"><br>
+                                        <select id="client"  name="client"   class="form-control form-select" size="4" multiple aria-label="multiple select">   <!--  -->
+                                            <option value="ALL" selected>ALL</option>             
+                                                <?php 
+                                                    global $conn;
+                                                    $sql = "SELECT id, firstname, adresse FROM client";
+                                                    $result = $conn->query($sql);
+                                                    while ($row = mysqli_fetch_assoc($result)){     
+                                                        echo "<option value='".$row["id"]."'>".$row["firstname"]."</option>";       
+                                                                                        //var_dump($row);
+                                                    }
+                                                ?> 
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-md-1" >
+                                        <a href="../versement/liste.php"  class="btn btn-info btn-user" >Liste</a>
+                                    </div>
+
+                                    
+                                    <div class="col-md-3" >
+                                    <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                    </div>
+                                    </div>
+                                    <div class="col-md-2" >
+                                        <label for="annee">Année récherché</label>
+                                        <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                            <?php
+                                            $currentYear = 2024;
+                                            echo "<option >Recherche a</option>";
+                                            for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                                echo "<option value=\"$year\">$year</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </form>
+                                </div>
+                                <div class="col-md-2">
+                                <br>
+                                    
+                                </div>
                             </div>
                             
                         </div>
@@ -69,48 +141,55 @@
                                        
                                         <tr>
                                             <th>id</th>
-                                            <th>montant</th>
-                                            <th>client</th>
-                                            <th>Numero dette</th>
-                                            <th>date versement</th>
-                                            <th>operation</th>
+                                            <th>Montant</th>
+                                            <th>Client</th>
+                                            <th>Date versement</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>montant</th>
-                                            <th>client</th>
-                                            <th> Numero dette </th>
-                                            <th>date versement</th>
-                                            <th>operation</th>
+                                            <th>Montant</th>
+                                            <th>Client</th>
+                                            <th>Date versement</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM versementphamacie";
+                                        $date = date("Y-m-d");
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET['date'];
+                                        } else {
+                                            $date = date("Y");
+                                        }
+                                        $sql = "SELECT * FROM versementphamacie WHERE YEAR(dateversement) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
+                                            $montant = $row["montant"] +$row["Om"]+$row["banque"];
                                             echo '<tr>';
                                             echo '<td>'.$row["id"].'</td>';
-                                            echo '<td>'.$row["montant"].'</td>';
+                                            echo '<td>'.$montant.'</td>';
                                             $idclient = $row["idclient"];
                                             $sqlclient = "SELECT firstname FROM client WHERE id = '$idclient'";
                                             $value = $conn->query($sqlclient);
                                             $nom = mysqli_fetch_assoc($value);
 
                                             echo '<td>'.$nom["firstname"].'</td>';
-                                            echo '<td>'.$row["iddette"].'</td>';
+                                            
                                             echo '<td>'.$row["dateversement"].'</td>';
                                             echo "<td>";
                                             if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                # code...
+                                                echo "<a href='imprimer.php?id=" . $row["id"] . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
                                             }elseif ($_SESSION['roles'] == "semiadmin"){
-                                                echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                                echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                                echo "<a href='imprimer.php?id=" . $row["id"] . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
                                             }else{
-                                            echo "<a href='Edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
+                                            echo "<a href='edite.php?id=" . $row["id"] . "' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></a>";
                                             echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<a href='imprimer.php?id=" . $row["id"] . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';
@@ -133,7 +212,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>
@@ -187,6 +266,33 @@
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "liste.php?date=" + annee;
+        }
+
+        function recherduclient() {
+        // Récupérer l'input et la liste déroulante
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("recherche");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("client");
+        li = ul.getElementsByTagName("option");
+        console.log(li.length);
+        // Boucler sur toutes les options
+        for (i = 0; i < li.length; i++) {
+            a = li[i];
+            
+            if (a.textContent.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+            } else {
+            li[i].style.display = "none";
+            }
+        }
+        
+        }
+    </script>
 
 </body>
 

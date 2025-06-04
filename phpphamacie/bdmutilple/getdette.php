@@ -25,7 +25,7 @@ class Dette{
     public function getAllDette(){
         global $conn;
         $data = [];
-        $sql = "SELECT* FROM dettephamacie";
+        $sql = "SELECT* FROM dettephamacie WHERE YEAR(datedette) = YEAR(CURRENT_DATE)";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);    
@@ -85,6 +85,51 @@ class Dette{
             array_push($data,$row);    
         }
         return $data;
+    }
+
+    public function getAllSomme(){
+        global $conn;
+        $sql = "SELECT SUM(montant) AS montant FROM dettephamacie WHERE YEAR(datedette) = YEAR(CURRENT_DATE)";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+            //$id = $row["id"];
+        return $row["montant"];
+    }
+
+    public function getSommeDette($date1,$date2){
+        global $conn;
+        $sql = "SELECT SUM(montant) AS montant FROM dettephamacie WHERE datedette BETWEEN '$date1' AND '$date2'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+            //$id = $row["id"];
+        return $row["montant"];
+    }
+
+    public function getSommeDetteClient($date1,$date2,$idclient){
+        global $conn;
+        $sql = "SELECT SUM(montant) AS montant FROM dettephamacie WHERE datedette BETWEEN '$date1' AND '$date2' AND idclient='$idclient'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+            //$id = $row["id"];
+        return $row["montant"];
+    }
+
+    public function getAllSommeDate($data){
+        global $conn;
+        $sql = "SELECT SUM(montant) AS montant FROM dettephamacie WHERE datedette ='$data'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+            //$id = $row["id"];
+        return $row["montant"];
+    }
+
+    public function getAllSommeDateClient($data,$idclient){
+        global $conn;
+        $sql = "SELECT SUM(montant) AS montant FROM dettephamacie WHERE datedette ='$data' AND idclient='$idclient'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+            //$id = $row["id"];
+        return $row["montant"];
     }
 }
 ?>

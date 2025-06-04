@@ -36,7 +36,7 @@ require_once("../bdmutilple/getclient.php");
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -59,7 +59,36 @@ require_once("../bdmutilple/getclient.php");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success">Liste des Suivi</h6>
+                            <div class="form-group row card-header py-3">
+                                <div class="col-sm-6">
+                                    <h6 class="m-0 font-weight-bold text-primary">Table de suivi</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="fichesuivi.php" class="btn btn-success"> Ajouter</a>             
+                                </div>
+                                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -94,8 +123,15 @@ require_once("../bdmutilple/getclient.php");
                                     <tbody>
                                     <?php 
                                         global $conn;
+                                        $date = date("Y-m-d");
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET['date'];
+                                        } else {
+                                           $date = date("Y");
+                                        }
+                                        
                                         $client = new Client(1);
-                                        $sql = "SELECT * FROM suivianimale ";
+                                        $sql = "SELECT * FROM suivianimale WHERE YEAR(datejour) = '$date'";
                                         $result = $conn->query($sql); 
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
@@ -191,6 +227,12 @@ require_once("../bdmutilple/getclient.php");
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "listesuivi.php?date=" + annee;
+        }
+    </script>
 
 </body>
 

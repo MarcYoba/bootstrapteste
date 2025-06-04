@@ -14,7 +14,7 @@ class Comptabilite{
         $index = 1;
         
         while ($index <= 12) {
-            $sql = "SELECT ROUND(SUM(montant),2) FROM achatphamacie WHERE MONTH(dateachat)= '$index'";
+            $sql = "SELECT ROUND(SUM(montant),2) FROM achatphamacie WHERE YEAR(dateachat)=YEAR(CURRENT_DATE) AND MONTH(dateachat)= '$index'";
             $resulte = $conn->query($sql);
             $row = mysqli_fetch_assoc($resulte);
             if (empty($row)) {
@@ -41,7 +41,7 @@ class Comptabilite{
         while ($index <= 4) {
             $sql = "SELECT YEAR(NOW()) AS anne, QUARTER(dateachat) AS trimestre, ROUND(SUM(montant),2) as montant
                 FROM achatphamacie  
-                WHERE YEAR(dateachat) = YEAR(NOW()) AND QUARTER(dateachat) = '$index'
+                WHERE YEAR(dateachat) = YEAR(CURRENT_DATE) AND QUARTER(dateachat) = '$index'
                 GROUP BY anne, trimestre 
                 ORDER BY anne,trimestre";
             $resultat = $conn->query($sql);
@@ -76,6 +76,7 @@ class Comptabilite{
                     ROUND(SUM(montant),2) AS total_achat
                 FROM 
                     achatphamacie
+                WHERE YEAR(dateachat) = YEAR(CURRENT_DATE)
                 GROUP BY 
                     annee, semestre
                 ORDER BY 
@@ -104,7 +105,7 @@ class Comptabilite{
         $index = 1;
         
         while ($index <= 12) {
-            $sql = "SELECT ROUND(SUM(prix),2) FROM ventephamacie WHERE MONTH(datevente)= '$index'";
+            $sql = "SELECT ROUND(SUM(prix),2) FROM ventephamacie WHERE YEAR(datevente) = YEAR(CURRENT_DATE) AND MONTH(datevente)= '$index'";
             $resulte = $conn->query($sql);
             $row = mysqli_fetch_assoc($resulte);
             if (empty($row)) {
@@ -131,7 +132,7 @@ class Comptabilite{
         while ($index <= 4) {
             $sql = "SELECT YEAR(NOW()) AS anne, QUARTER(datevente) AS trimestre, ROUND(SUM(prix),2) as montant
                 FROM ventephamacie  
-                WHERE YEAR(datevente) = YEAR(NOW()) AND QUARTER(datevente) = '$index'
+                WHERE YEAR(datevente) = YEAR(CURRENT_DATE) AND QUARTER(datevente) = '$index'
                 GROUP BY anne, trimestre 
                 ORDER BY anne,trimestre";
             $resultat = $conn->query($sql);
@@ -166,6 +167,7 @@ class Comptabilite{
                     ROUND(SUM(prix),2) AS total_achat
                 FROM 
                     ventephamacie
+                WHERE YEAR(datevente) = YEAR(CURRENT_DATE)
                 GROUP BY 
                     annee, semestre
                 ORDER BY 
@@ -186,6 +188,111 @@ class Comptabilite{
             
         return $tab;
     }
+    public function SommeImmobilisationCorporel(){
+        global $conn;
+        $sql = "SELECT SUM(brut) AS montant FROM actif WHERE cathegorie ='corporelles' AND ( YEAR(datebilan) =YEAR(CURRENT_DATE))";
+        $resulte= $conn->query($sql);
+        $row = mysqli_fetch_assoc($resulte);
+ 
+        return $row["montant"];
+ 
+     }
+ 
+     public function SommeImmobilisationCorporelAnne($anne){
+         global $conn;
+         $sql = "SELECT SUM(brut) AS montant FROM actif WHERE cathegorie ='corporelles' AND ( YEAR(datebilan) ='$anne')";
+         $resulte= $conn->query($sql);
+         $row = mysqli_fetch_assoc($resulte);
+  
+         if (empty($row["montant"])) {
+             $row["montant"] = 0;
+         }
+         return $row["montant"]; 
+      }
+     public function SommeImmobilisationCorporelexercice(){
+         global $conn;
+         $anne = date("Y");
+         $anne = $anne -1;
+         $sql = "SELECT SUM(brut) AS montant FROM actif WHERE cathegorie ='corporelles' AND ( YEAR(datebilan) =$anne)";
+         $resulte= $conn->query($sql);
+         $row = mysqli_fetch_assoc($resulte);
+  
+         return $row["montant"];
+  
+      }
+ 
+     public function SommeSubvention(){
+         global $conn;
+         $sql = "SELECT SUM(montant) AS montant FROM passif WHERE libelle='Subvention%' AND ( YEAR(datepassif) =YEAR(CURRENT_DATE))";
+         $resulte= $conn->query($sql);
+         $row = mysqli_fetch_assoc($resulte);
+  
+         return $row["montant"];
+     }
+ 
+     public function SommeSubventionexercice(){
+         global $conn;
+         $anne = date("Y");
+         $anne = $anne -1;
+         $sql = "SELECT SUM(montant) AS montant FROM passif WHERE libelle='Subvention%' AND ( YEAR(datepassif) ='$anne')";
+         $resulte= $conn->query($sql);
+         $row = mysqli_fetch_assoc($resulte);
+  
+         return $row["montant"];
+     }
+ 
+     public function SommeAutreAprovision(){
+         global $conn;
+         $sql = "SELECT SUM(brut) AS montant FROM actif WHERE libelle='Materiel%' AND ( YEAR(datebilan) =YEAR(CURRENT_DATE))";
+         $resulte= $conn->query($sql);
+         $row = mysqli_fetch_assoc($resulte);
+  
+         return $row["montant"];
+     }
+ 
+     public function SommeAutreAprovisionExercice(){
+         global $conn;
+         $anne = date("Y");
+         $anne = $anne -1;
+         $sql = "SELECT SUM(brut) AS montant FROM actif WHERE libelle='Materiel%' AND ( YEAR(datebilan) ='$anne')";
+         $resulte= $conn->query($sql);
+         $row = mysqli_fetch_assoc($resulte);
+  
+         return $row["montant"];
+     }
+ 
+     public function SommeAmortise(){
+         global $conn;
+         $sql = "SELECT SUM(amortisement) AS montant FROM actif WHERE ( YEAR(datebilan) =YEAR(CURRENT_DATE))";
+         $resulte= $conn->query($sql);
+         $row = mysqli_fetch_assoc($resulte);
+  
+         return $row["montant"];
+     }
+ 
+     public function SommeExerciceAmortise(){
+         global $conn;
+         $anne = date("Y");
+         $anne = $anne -1;
+         $sql = "SELECT SUM(amortisement) AS montant FROM actif WHERE  ( YEAR(datebilan) ='$anne')";
+         $resulte= $conn->query($sql);
+         $row = mysqli_fetch_assoc($resulte);
+  
+         return $row["montant"];
+     }
+ 
+     public function SommeCorporelles($anne){
+         global $conn;
+         // $anne = date("Y");
+         // $anne = $anne -1;
+         $sql = "SELECT SUM(net) AS montant FROM actif WHERE  YEAR(datebilan) ='$anne' AND cathegorie='corporelles'";
+         $resulte= $conn->query($sql);
+         $row = mysqli_fetch_assoc($resulte);
+         if (empty($row["montant"])) {
+             $row["montant"] = 0;
+         }
+         return $row["montant"];
+     }
 }
 
 ?>

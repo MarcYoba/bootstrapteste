@@ -34,7 +34,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once("../../headerInterface.php"); ?>
+        <?php require_once("../../headercabinet.php"); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -57,35 +57,60 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables Caisse</h6>
+                            
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Opération En Caisse</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="caisse.php" class="btn btn-success"> Ajouter</a>             
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div>
                             <form  action="recapCaisse.php" method="post" class="user row" >
                                 <div class="row">
-                                    <p class="col-md-3" >
+                                    <p class="col-md-2" >
                                         <input type="date" class="form-control form-control-user"
-                                        name="datedette" id="datedette" placeholder="quantite">
+                                        name="datedette" id="datedette" placeholder="Quantite">
                                     </p>
-                                    <p class="col-md-3" >
+                                    <p class="col-md-2" >
                                         <input type="date" class="form-control form-control-user"
-                                        name="datedett2" id="datedett2" placeholder="quantite">
+                                        name="datedett2" id="datedett2" placeholder="Quantite">
                                     </p>
                                     <p class="col-md-2" >
                                         <input class="form-check-input" type="checkbox" id="OM" name="OM" value="OM">
                                             <label class="form-check-label" id="OM">OM</label><br>
                                         
                                         <input class="form-check-input" type="checkbox" id="credit" name="credit" value="credit">
-                                            <label class="form-check-label" id="credit">crédit</label>
+                                            <label class="form-check-label" id="credit">Crédit</label>
                                     </p>
 
-                                    <p class="col-md-3" >
+                                    <p class="col-md-2" >
                                         <input class="form-check-input" type="checkbox" id="cash" name="cash" value="cash">
-                                        <label class="form-check-label" id="cash">cash</label><br>
+                                        <label class="form-check-label" id="cash">Cash</label><br>
 
                                         <input class="form-check-input" type="checkbox" id="vente" name="vente" value="vente">
                                         <label class="form-check-label" id="vente">Total vente</label>
                                     </p>
 
-                                <p class="col-md-1" >
-                                <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                <p class="col-md-3" >
+                                <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
+                                <br>
+                                    <label for="annee">Année recherche :</label>
+                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
+                                        <?php
+                                        $currentYear = 2024;
+                                        echo "<option >Recherche a</option>";
+                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                            echo "<option value=\"$year\">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </p>  
                                 </div>
                             </form>
@@ -97,32 +122,38 @@
                                     <thead>
                                        
                                         <tr>
-                                            <th>id</th>
-                                            <th>operation</th>
+                                            <th>ID</th>
+                                            <th>Opération</th>
                                             <th>Montant</th>
-                                            <th>idvente </th>
-                                            <th>idversement</th>
+                                            <th>ID Vente</th>
+                                            <th>ID Versement</th>
                                             <th>Date</th>
-                                            <th>motif</th>
-                                            <th>operation</th>
+                                            <th>Motif</th>
+                                            <th>Opérations</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>id</th>
-                                            <th>operation</th>
+                                            <th>ID</th>
+                                            <th>Opération</th>
                                             <th>Montant</th>
-                                            <th>idvente </th>
-                                            <th>idversement</th>
+                                            <th>ID Vente</th>
+                                            <th>ID Versement</th>
                                             <th>Date</th>
-                                            <th>motif</th>
-                                            <th>operation1</th>
+                                            <th>Motif</th>
+                                            <th>Opérations</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                         global $conn;
-                                        $sql = "SELECT * FROM caissePhamacie ORDER BY id DESC";
+                                        $date = date('Y-m-d');
+                                        if (isset($_GET['date'])) {
+                                            $date = $_GET['date'];
+                                        } else {
+                                            $date = date('Y');
+                                        }
+                                        $sql = "SELECT * FROM caissePhamacie WHERE YEAR(dateoperation) = '$date' ORDER BY id DESC";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
@@ -161,7 +192,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>
@@ -214,7 +245,12 @@
     <script src="../../header.js"></script>
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
-
+    <script>
+        function reload() {
+            var annee = document.getElementById("annee").value;
+            window.location.href = "liste.php?date=" + annee;
+        }
+    </script>
 </body>
 
 </html>
