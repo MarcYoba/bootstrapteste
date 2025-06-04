@@ -65,7 +65,7 @@ $html .='<br><br><br>
         </thead>
         <tbody>';
         $html .= '<tr>
-            <th>Numero de semestre</th>
+            <th>Numero du Trimestre</th>
             <th>Montant</th>
         </tr>';
         $historique = $vente->VenteTemesttre($anne);
@@ -107,7 +107,7 @@ $html .='<br><br><br> <table style="width:100%">
     </thead>
     <tbody>';
     $html .= '<tr>
-        <th>Numero de semestre</th>
+        <th>Numero de Trimestre</th>
         <th>Montant</th>
     </tr>';
     $historique = $depense->DepenseTemesttre($anne);
@@ -149,7 +149,7 @@ $html .='<br><br><br> <table style="width:100%">
     </thead>
     <tbody>';
     $html .= '<tr>
-        <th>Numero de semestre</th>
+        <th>Numero du Trimestre</th>
         <th>Montant</th>
     </tr>';
     $historique = $achat->AchatTemesttre($anne);
@@ -185,6 +185,48 @@ $html .='<br><br><br> <table style="width:100%">
     </tbody>
 </table>';
 
+
+$html .='<br><br><br> <table style="width:100%">
+    <thead>';
+    $html .=' <tr><th colspan="2" align="center">Versement Trimestre : '.$anne.'</th></tr>
+    </thead>
+    <tbody>';
+    $html .= '<tr>
+        <th>Numero du Trimestre</th>
+        <th>Montant</th>
+    </tr>';
+    $historique = $versement->VersementTrimesttre($anne);
+        foreach ($historique as $linefatcture) {
+            $html .= '<tr>';
+            foreach ($linefatcture as $key => $cell) {
+                $html .= '<th>' .$cell.'</th>';
+            }
+            $html .= '</tr>';
+        }
+    $html .= '
+    </tbody>
+</table>';
+
+$html .='<br><br><br> <table style="width:100%">
+    <thead>';
+    $html .=' <tr><th colspan="2" align="center">Versement Semesttre : '.$anne.'</th></tr>
+    </thead>
+    <tbody>';
+    $html .= '<tr>
+        <th>Numero de semestre</th>
+        <th>Montant</th>
+    </tr>';
+    $historique = $versement->VersementSemesttre($anne);
+        foreach ($historique as $linefatcture) {
+            $html .= '<tr>';
+            foreach ($linefatcture as $key => $cell) {
+                $html .= '<th>' .$cell.'</th>';
+            }
+            $html .= '</tr>';
+        }
+    $html .= '
+    </tbody>
+</table>';
 
 $html .= '
 </body>

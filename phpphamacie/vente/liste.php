@@ -58,8 +58,20 @@ require_once("../connexion.php");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <div class="row">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tables Vente</h6>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <h6 class="m-0 font-weight-bold text-success">Tables des ventes</h6>      
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="vente.php" class="btn btn-success"> Ajouter</a>
+                                                
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div>
                             <form  action="../pdf/getTypeVente.php" method="post" class="user row" >
 
@@ -103,32 +115,32 @@ require_once("../connexion.php");
                                         <label class="form-check-label" id="OM">OM</label>
                                         <br><br><br>
                                         <input class="form-check-input" type="checkbox" id="facture" name="facture" value="facture">
-                                        <label class="form-check-label" id="facture">facture</label>
+                                        <label class="form-check-label" id="facture">Facture</label>
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-check-input" type="checkbox" id="credit" name="credit" value="credit">
-                                        <label class="form-check-label" id="credit">crédit</label>
+                                        <label class="form-check-label" id="credit">Crédit</label>
                                         <br><br><br>
                                         <input class="form-check-input" type="checkbox" id="quantite" name="quantite" value="quantite">
-                                        <label class="form-check-label" id="quantite">Qauntite</label>
+                                        <label class="form-check-label" id="quantite">Qauntité</label>
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-check-input" type="checkbox" id="cash" name="cash" value="cash">
-                                        <label class="form-check-label" id="cash">cash</label>
+                                        <label class="form-check-label" id="cash">Cash</label>
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-control form-control-user" type="date" id="date" name="date" require><br>
                                         <input class="form-control form-control-user" type="date" id="date2" name="date2" require>     
                                 </p>
                                 <p class="col-md-2">
-                                    <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                    <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
                                 </p>
                                 <div class="col-md-2">
-                                    <label for="annee">Année recherche :</label>
+                                    <label for="annee">Année récherché :</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
                                         <?php
                                         $currentYear = 2024;
-                                        echo "<option >Recherche a</option>";
+                                        echo "<option >Recherche Année</option>";
                                         for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
                                             echo "<option value=\"$year\">$year</option>";
                                         }
@@ -144,28 +156,28 @@ require_once("../connexion.php");
                                     <thead>
                                        
                                         <tr>
-                                            <th>id</th>
+                                            <th>ID</th>
                                             <th>Client</th>
-                                            <th>Type paiement </th>
-                                            <th>numero facture</th>
-                                            <th>Quantite total</th>
-                                            <th>Montant total</th>
-                                            <th>Status</th>
+                                            <th>Moyen de paiement</th>
+                                            <th>Numéro de facture</th>
+                                            <th>Q.Total</th>
+                                            <th>P.Total</th>
+                                            <th>Statut</th>
                                             <th>Date</th>
-                                            <th>Operation</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>id</th>
+                                        <th>ID</th>
                                             <th>Client</th>
-                                            <th>Nom</th>
-                                            <th>numero facture</th>
-                                            <th>Quantite total</th>
-                                            <th>Montant total</th>
-                                            <th>Status</th>
+                                            <th>Moyen de paiement</th>
+                                            <th>Numéro de facture</th>
+                                            <th>Q.Total</th>
+                                            <th>P.Total</th>
+                                            <th>Statut</th>
                                             <th>Date</th>
-                                            <th>Operation</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </tfoot>
                                     <tbody id="liste">
@@ -215,7 +227,7 @@ require_once("../connexion.php");
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>

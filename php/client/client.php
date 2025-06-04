@@ -38,15 +38,29 @@
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Creation compte client</h1>
+                            <div class="card-header py-3">
+                            <div class="form-group row">
+                                            <div class="col-sm-6">
+                                            <h6 class="m-0 font-weight-bold text-primary">Création du Compte client</h6>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <i class="fa fa-home"></i>
+                                                <a href="../../home.php" class="btn btn-primary">Home</a> 
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <i class="fa fa-list"></i> 
+                                                <a href="liste.php" class="btn btn-success"> Liste</a>
+                                                
+                                            </div>
+                                            <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                                        </div>
                                 <span id="idclient" class="drop"></span>
                             </div>
                             <form class="user" action="register.php" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="FirstName"
-                                           name="FirstName" placeholder="First Name">
+                                           name="FirstName" placeholder=" Nom">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="LastName" 
@@ -71,7 +85,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <input type="tel" class="form-control form-control-user" id="Inputphone"
-                                        name="Inputphone" placeholder="telephone client" >
+                                        name="Inputphone" placeholder="téléphone client" >
                                     </div>
                                     <div class="col-sm-6">
                                         <select id="sexe"  name="sexe"  class="form-control form-select" >
@@ -83,12 +97,11 @@
                                 </div>
                                 <div class="form-group">
                                     <p>
-                                        <h6>Pour enregistrer une liste des client vous devier telecharger le template suivante.<br>
-                                            1. entregistrer les infomation ccomme les colonne l'indique.<br>
-                                            2. enregistrer le template sur un nom cour sans espace en cas de Modification.<br>
-                                            3. Inporte le model dans l'application.<br>
-                                            4. En fin cliquer sur entregister.<br>
-
+                                        <h6>Pour enregistrer une liste des clients, vous devez télécharger le template suivant.<br>
+                                            1. Enregistrez les informations comme les colonnes l'indiquent.<br>
+                                            2. Enregistrez le template sous un nom court sans espace en cas de modification.<br>
+                                            3. Importez le modèle dans l'application.<br>
+                                            4. Enfin, cliquez sur enregistrer.<br>
                                         </h6>                                        
                                             <button type="template" name="template" id="template" class="btn btn-info btn-user btn-block">
                                                 Telecharger le Template
@@ -131,5 +144,5 @@
     <script src="../../js/sb-admin-2.min.js"></script>
     <script src="client.js"></script>
 </body>
-/sb-admin-2.min.js
+
 </html>

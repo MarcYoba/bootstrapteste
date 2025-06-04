@@ -33,21 +33,34 @@
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Fiche de suivie</h1>
-                            </div>
+                        <div class="form-group row card-header py-3">
+                                <div class="col-sm-6">
+                                    <h6 class="m-0 font-weight-bold text-primary">Fiche de suivi</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="listesuivi.php" class="btn btn-success"> Liste</a>             
+                                </div>
+                                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div> 
                             <form class="user" action="registersuivi.php" method="post">
                                 Information sur le sujet
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                    Nom du patient :
                                         <input type="text" class="form-control form-control-user" id="Name"
-                                           name="Name" placeholder="Nom sujet" required>
+                                           name="Name" placeholder="Nom patient" required>
                                     </div>
     
                                 
                                     
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                    Nom du propriétaire
                                     <select id="idclient"  name="idclient"  class="form-control form-select">
                                             <?php 
                                             require_once("../connexion.php");
@@ -65,7 +78,7 @@
                                 <hr>
                                 <div class="form-group row">
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Jour de traitement <input type="date" class="form-control form-control-user" id="datetraite"
+                                        Date de traitement <input type="date" class="form-control form-control-user" id="datetraite"
                                            name="datetraite" placeholder="date achat" required>
                                     </div>
                                     <div class="col-sm-5 mb-3 mb-sm-0">
@@ -73,15 +86,19 @@
                                            name="Observation" placeholder="Observation" required></textarea>
                                     </div>
                                     <div class="col-sm-5 mb-3 mb-sm-0">
-                                        Conduite: <textarea  class="form-control form-control-user" id="secondvacin"
-                                           name="Conduite" placeholder="Conduite" required></textarea>
+                                        Conduite à tenir: <textarea  class="form-control form-control-user" id="secondvacin"
+                                           name="Conduite" placeholder="Conduite à tenir:" required></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    
-                                        Montant <input type="number" class="form-control form-control-user" id="Montant"
-                                           name="Montant" placeholder="Montant" required>
-                                    
+                                <div class="form-group row">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                        Montant payé <input type="number" class="form-control form-control-user" id="Montant"
+                                           name="Montant" placeholder="Montant payé" required>
+                                    </div>
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                       Nom du vétérinaire: <textarea  class="form-control " id="" 
+                                           name="Veterinaire" placeholder="Nom du vétérinaire signature" required></textarea>
+                                    </div>
                                 </div>
                                 <button type="submit" name="submit" id="submit" class="btn btn-success btn-user btn-block">
                                     Enregister

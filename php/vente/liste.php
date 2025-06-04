@@ -58,14 +58,28 @@ require_once("../connexion.php");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <div class="row">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tables Vente</h6>
+                            
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Liste des ventes</h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../home.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-plus"></i> 
+                                    <a href="vente.php" class="btn btn-success"> Ajouter</a>
+                                    
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div>
+                            
                             <form  action="../pdf/getTypeVente.php" method="post" class="user row" >
 
                                 <p class="col-md-6">
                                 <label class="form-check-label" id="nomProduit">Produit</label>
-                                <input type="search" id="produitrecher" onkeyup="recherchduproduit()"  class="form-control" placeholder="recherche produit">
+                                <input type="search" id="produitrecher" onkeyup="recherchduproduit()"  class="form-control" placeholder="récherché produit">
                                     <select id="nomProduite"  name="nomProduit"  class="form-control form-select" size="4" multiple aria-label="multiple select">
                                         <option value="ALL" selected>ALL</option>
                                             <?php 
@@ -80,7 +94,7 @@ require_once("../connexion.php");
                                 </p>
                                 <p class="col-md-6">
                                     <br>
-                                    <input type="search" id="clientrecher" onkeyup="recherchduclient()"  class="form-control" placeholder="recherche client">
+                                    <input type="search" id="clientrecher" onkeyup="recherchduclient()"  class="form-control" placeholder="récherché client">
                                     <select id="clientt"  name="client"   class="form-control form-select" size="4" multiple aria-label="multiple select">   <!-- size="10" multiple aria-label="multiple select " -->
                                     <option value="ALL" selected>ALL</option>             
                                         <?php 
@@ -100,28 +114,28 @@ require_once("../connexion.php");
                                         <label class="form-check-label" id="OM">OM</label>
                                         <br><br><br>
                                         <input class="form-check-input" type="checkbox" id="facture" name="facture" value="facture">
-                                        <label class="form-check-label" id="facture">facture</label>
+                                        <label class="form-check-label" id="facture">Facture</label>
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-check-input" type="checkbox" id="credit" name="credit" value="credit">
-                                        <label class="form-check-label" id="credit">crédit</label>
+                                        <label class="form-check-label" id="credit">Crédit</label>
                                         <br><br><br>
                                         <input class="form-check-input" type="checkbox" id="quantite" name="quantite" value="quantite">
-                                        <label class="form-check-label" id="quantite">Qauntite</label>
+                                        <label class="form-check-label" id="quantite">Qauntité</label>
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-check-input" type="checkbox" id="cash" name="cash" value="cash">
-                                        <label class="form-check-label" id="cash">cash</label>
+                                        <label class="form-check-label" id="cash">Cash</label>
                                 </p>
                                 <p class="col-md-2">
                                         <input class="form-control form-control-user" type="date" id="date" name="date" require><br>
                                         <input class="form-control form-control-user" type="date" id="date2" name="date2" require>     
                                 </p>
                                 <p class="col-md-2">
-                                    <input type="submit" class="btn btn-warning btn-user"  value="Affichier" >  
+                                    <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
                                 </p>
                                 <div class="col-md-2">
-                                    <label for="annee">Année recherche :</label>
+                                    <label for="annee">Année rècherché :</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
                                         <?php
                                         $currentYear = 2024;
@@ -143,12 +157,12 @@ require_once("../connexion.php");
                                             <th>id</th>
                                             <th>Client</th>
                                             <th>Type paiement </th>
-                                            <th>numero facture</th>
-                                            <th>Quantite total</th>
-                                            <th>Montant total</th>
-                                            <th>Status</th>
+                                            <th>Numero facture</th>
+                                            <th>Quantité total</th>
+                                            <th>P.Total</th>
+                                            <th>Statut</th>
                                             <th>Date</th>
-                                            <th>Operation</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -156,12 +170,12 @@ require_once("../connexion.php");
                                             <th>id</th>
                                             <th>Client</th>
                                             <th>Nom</th>
-                                            <th>numero facture</th>
-                                            <th>Quantite total</th>
-                                            <th>Montant total</th>
-                                            <th>Status</th>
+                                            <th>Numero facture</th>
+                                            <th>Quantité total</th>
+                                            <th>P.Total</th>
+                                            <th>Statut</th>
                                             <th>Date</th>
-                                            <th>Operation</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </tfoot>
                                     <tbody id="liste">

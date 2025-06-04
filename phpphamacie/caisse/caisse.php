@@ -31,15 +31,26 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center" >
-                                <h1 class="h4 text-gray-900 mb-4">Caisse</h1>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Caisse</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="liste.php" class="btn btn-success"> Liste</a>             
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div>
                             <form class="user" action="register.php" method="post" >
                                 <div class="form-group ">
                                     <div class="col-sm-14 mb-3 mb-sm-0">
-                                        date: <input type="date" class="form-control form-control-user" id="date"
+                                        Date: <input type="date" class="form-control form-control-user" id="date"
                                                 name="date"  required >   
                                     </div>
                                     <hr>
@@ -68,13 +79,13 @@
                                            $donnees= json_decode($tabdonne,true);
                                            echo "<option value='".$donnees["operation"]."'>".$donnees["operation"]."</option>";
                                         }else{
-                                            echo'<option value="retour en caisse" > retour en caisse </option>';
-                                            echo'<option value="sortie en caisse" > sortie en caisse</option>';
-                                            echo'<option value="sortie OM MOMO" > sortie OM MOMO</option>';
-                                            echo'<option value="sortie Dr Toukam" >sortie Dr Toukam</option>';
-                                            echo'<option value="sortie Mr Abdel" >sortie Mr Abdel</option>';
-                                            echo'<option value="sortie SKAB" >sortie SKAB</option>';
-                                            echo'<option value="sortie Banque" >sortie Banque</option>';
+                                            echo'<option value="retour en caisse" > Retour en caisse </option>';
+                                            echo'<option value="sortie en caisse" > Sortie en caisse</option>';
+                                            echo'<option value="sortie OM MOMO" > Sortie OM MOMO</option>';
+                                            echo'<option value="sortie Dr Toukam" >Sortie Dr Toukam</option>';
+                                            echo'<option value="sortie Mr Abdel" >Sortie Mr Abdel</option>';
+                                            echo'<option value="sortie SKAB" >Sortie SKAB</option>';
+                                            echo'<option value="sortie Banque" >Sortie Banque</option>';
                                         }
                                         echo '</select>';
                                         echo'</div>'; 

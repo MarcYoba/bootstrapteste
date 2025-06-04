@@ -42,11 +42,27 @@
                                 <h1 class="h4 text-gray-900 mb-4">Versement</h1>
                             </div>
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Versement</h6>
-                                <hr>
-                                 <div class="row">
-                                    <a href="../dette/dette.php"  class="btn btn-info btn-user col-md-4" >Dette</a>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables des Versements</h6>
                                 </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                    <a href="../../home.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="liste.php" class="btn btn-success"> Liste</a>
+                                                
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="../dette/dette.php" class="btn btn-info"> Dette</a>              
+                                </div>
+                                            <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div>
+                                <hr>
+                                 
                                 <span id="verificatiobDonne"></span>
                                 
                             </div>
@@ -169,12 +185,7 @@
                                 ?>
                             </form>
                             <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="../../index.html">Already have an account? Login!</a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

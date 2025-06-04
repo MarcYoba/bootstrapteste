@@ -68,7 +68,7 @@
                                     Information du client
                                 <hr>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                      Nom:     
+                                      Nom du client:     
                                     <p class="text-lg font-weight-bold" id="nom"><?php echo $client->getByIdClient($row["idclient"]); ?></p> 
                                     </div>
                                     
@@ -78,7 +78,7 @@
                                     </div>
 
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                    Telephone :<p class="text-lg font-weight-bold" id="telephone"> <?php echo $row["telephone"] ?></p> 
+                                    Téléphone :<p class="text-lg font-weight-bold" id="telephone"> <?php echo $row["telephone"] ?></p> 
                                     </div>
 
                                     <div class="col-sm-4 mb-3 mb-sm-0">
@@ -96,10 +96,10 @@
                                         Motif de la visite :<p class="text-lg font-weight-bold" id="motifvisite"> <?php echo $row["motifvisite"] ?></p> 
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Effectif: <p class="text-lg font-weight-bold" id="efectif"> <?php echo $row["efectif"] ?></p>
+                                        Effectif: <p class="text-lg font-weight-bold" id="effectif"> <?php echo $row["efectif"] ?></p>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        Age: <p class="text-lg font-weight-bold" id="age"> <?php echo $row["Age"] ?></p>
+                                        Âge: <p class="text-lg font-weight-bold" id="age"> <?php echo $row["Age"] ?></p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -126,13 +126,13 @@
                                         <p class="text-lg font-weight-bold" id="superficie"> <?php echo $row["superficie"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Qualite du sole: <p class="text-lg font-weight-bold" id="sole"> <?php echo $row["sole"] ?></p>
+                                        Qualité du sol: <p class="text-lg font-weight-bold" id="sole"> <?php echo $row["sole"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Densite: <p class="text-lg font-weight-bold" id="densite"> <?php echo $row["densite"] ?></p>
+                                        Densité: <p class="text-lg font-weight-bold" id="densite"> <?php echo $row["densite"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Poid Moyen: <p class="text-lg font-weight-bold" id="poidmoyen"> <?php echo $row["Poidmoyen"] ?></p>
+                                        Poids Moyen: <p class="text-lg font-weight-bold" id="poidmoyen"> <?php echo $row["Poidmoyen"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Environement d'exploitation: <p class="text-lg font-weight-bold" id="environement"> <?php echo $row["environement"] ?></p>
@@ -140,7 +140,7 @@
                                 </div> 
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        Hygiene du batiment: <p class="text-lg font-weight-bold" id="hygiene"> <?php echo $row["hygiene"] ?></p>
+                                        Hygiène du bâtiment: <p class="text-lg font-weight-bold" id="hygiene"> <?php echo $row["hygiene"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         Nombre mangeoire: <p class="text-lg font-weight-bold" id="mangeoire"> <?php echo $row["mangeoire"] ?></p>
@@ -167,7 +167,7 @@
                                     <p class="text-lg font-weight-bold" id="prophylacie"> <?php echo $row["prophylacie"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                    Patologie anterieux: 
+                                    Pathologie anterieux: 
                                     <p class="text-lg font-weight-bold" id="patologie"> <?php echo $row["patologie"] ?></p>
                                     </div>
                                 </div>
@@ -197,16 +197,20 @@
                                     <p class="text-lg font-weight-bold" id="traia"> <?php echo $row["Traitementanvisage"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                    Diagnostic de suspicion: 
+                                    Diagnostics de suspicion: 
                                         <p class="text-lg font-weight-bold" id="Diagnostic"> <?php echo $row["dianostique"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                    Recommendation: 
+                                    Recommandations: 
                                         <p class="text-lg font-weight-bold" id="Recommendation"> <?php echo $row["recommandation"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                     Date de la prochaine visite: 
                                     <p class="text-lg font-weight-bold" id="datepvisit"> <?php echo $row["dateprochevisite"] ?></p>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    Nom du vétérinaire :
+                                    <p class="text-lg font-weight-bold" id="veterinaire"> <?php echo $row["veterinaire"] ?></p>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0"> 
                                     Montant: <p class="text-lg font-weight-bold" id="Montant"> <?php echo $row["Montant"] ?></p>

@@ -46,16 +46,32 @@ session_start();
                                     <!-- DataTales Example -->
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Tables des Achats</h6>
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-success">Tables des Achats</h6>
+                                            <div class="form-group row">
+                                            <div class="col-sm-6">
+                                            
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <i class="fa fa-home"></i>
+                                                <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <i class="fa fa-list"></i> 
+                                                <a href="liste.php" class="btn btn-success"> Liste</a>
+                                                
+                                            </div>
+                                            <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                                        </div>
                                             <br>
                                             <div class="row">
                                                 <p class="btn btn-warning btn-user col-md-2" onclick="ajouterLigne('dataTable', 
-                                                5, 10)">ajouter achat</p>
-                                                <p class="col-md-2" >quantite : <span id="quantitetotal">0</span></p>
-                                                <p class="col-md-2" >prix : <span id="prixtotal">0</span></p>
+                                                5, 10)">Ajouter une Ligne</p>
+                                                <p class="col-md-2" >Quantité  : <span id="quantitetotal">0</span></p>
+                                                <p class="col-md-2" >Prix : <span id="prixtotal">0</span></p>
                                                 <p class="col-md-2" > Achat:<input type="date" class="form-control form-control-user" id="datefacture"
                                                 name="datefacture" placeholder="date achat"></p>
-                                                <p class="col-md-2" >Perantion:<input type="date" class="form-control form-control-user" id="peramtion"
+                                                <p class="col-md-2" >Péremption:<input type="date" class="form-control form-control-user" id="peramtion"
                                                 name="peramtion" placeholder="date achat"></p>
                                             </div>
                                             <span id="verificatiobDonne"></span>
@@ -67,10 +83,10 @@ session_start();
                                                     
                                                         <tr>
                                                             <th>Fourniseur</th>
-                                                            <th>description</th>
-                                                            <th>quantite</th>
-                                                            <th>prix_unite</th>
-                                                            <th>Mantant</th>
+                                                            <th>Désigantion</th>
+                                                            <th>Quantité</th>
+                                                            <th>P.U</th>
+                                                            <th>P.Total</th>
                                                         </tr>
                                                     </thead>
                                                     <tfoot>
@@ -145,12 +161,7 @@ session_start();
                                 </div>
                             <!--</form> -->
                             <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="../../index.html">Already have an account? Login!</a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

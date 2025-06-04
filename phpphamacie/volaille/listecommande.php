@@ -57,10 +57,23 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                           
+                        <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                <h6 class="m-0 font-weight-bold text-primary">Table des poussins </h6>     
+                                                </div>
+                                                <div class="col-sm-2">
+                                                <i class="fa fa-home"></i>
+                                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <i class="fa fa-plus"></i> 
+                                                    <a href="comandefourniseur.php" class="btn btn-success"> Ajouter</a>             
+                                                </div>
+                                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                                            </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tables Commende</h6>
+                                    
                                 </div>
                                 <div class="col-md-6" style="text-align:right;">
                                 
@@ -82,25 +95,24 @@
                                     <thead>
                                        
                                         <tr>
-                                            <th>id</th>
-                                            <th>Nom fourniseur</th>
+                                            <th>ID</th>
+                                            <th>Nom</th>
                                             <th>Souche</th>
-                                            <th>prix</th>
-                                            
-                                            <th>Status commande</th>
-                                            <th>date commande</th>
-                                            <th>Operation</th>
+                                            <th>P.Total</th>
+                                            <th>Statut</th>
+                                            <th>Date</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
-                                            <th>Nom fourniseur</th>
+                                            <th>Nom</th>
                                             <th>Souche</th>
-                                            <th>Montant</th>
-                                            <th>Status commande</th>
-                                            <th>date commande</th>
-                                            <th>Operation</th>
+                                            <th>P.otal</th>
+                                            <th>Statut</th>
+                                            <th>date</th>
+                                            <th>Opération</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -159,7 +171,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>
@@ -209,7 +221,7 @@
     <!-- Page level plugins -->
     <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="../../header.js"></script>
+    
 
     <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>

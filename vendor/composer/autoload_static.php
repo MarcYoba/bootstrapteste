@@ -45,6 +45,7 @@ class ComposerStaticInitac2d307f4ed514763a8119f3523066bb
         ),
         'C' => 
         array (
+            'Composer\\Pcre\\' => 14,
             'Complex\\' => 8,
         ),
     );
@@ -110,6 +111,10 @@ class ComposerStaticInitac2d307f4ed514763a8119f3523066bb
         'Dompdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
+        ),
+        'Composer\\Pcre\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/pcre/src',
         ),
         'Complex\\' => 
         array (

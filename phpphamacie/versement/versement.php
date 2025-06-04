@@ -42,10 +42,23 @@
                                 <h1 class="h4 text-gray-900 mb-4">Versement</h1>
                             </div>
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-success">Versement</h6>
+                            <div class="form-group row">
+                            <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Table des versements</h6>     
+                            </div>
+                            <div class="col-sm-2">
+                            <i class="fa fa-home"></i>
+                                <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                            </div>
+                            <div class="col-sm-2">
+                                <i class="fa fa-list"></i> 
+                                <a href="liste.php" class="btn btn-success"> List</a>             
+                            </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                        </div>
                                 <hr>
                                  <div class="row">
-                                    <a href="../dette/dette.php"  class="btn btn-info btn-user col-md-4" >Dette</a>
+                                    <a href="../dette/dette.php"  class="btn btn-info btn-user col-md-4" >Créance client</a>
                                 </div>
                                 <span id="verificatiobDonne"></span>
                                 
@@ -79,11 +92,11 @@
                                             name="iddette" placeholder="id dette" value="'.$donnees["iddette"].'" readonly>';  
                                         }else{
                                             echo'<input type="number" class="form-control form-control-user" id="iddette"
-                                            name="iddette" placeholder="id dette"  readonly>';
+                                            name="iddette" placeholder="Créance client"  readonly>';
                                         }
                                         echo'</div>'; 
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0"> 
-                                        <input type="search" id="fourni" onkeyup="recherclinet()"  class="form-control" placeholder="recherche fournisseur">
+                                        <input type="search" id="fourni" onkeyup="recherclinet()"  class="form-control" placeholder="Recherche fournisseur">
                                         ';
 
                                             echo'<select id="client"  name="client"  class="form-control " required size="4" multiple aria-label="multiple select">';
@@ -110,17 +123,17 @@
                                     echo'<div class="form-group row">';
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="montant" id="montant" placeholder="montant versement" value="0" required>'; 
+                                                name="montant" id="montant" placeholder="Montant versement" value="0" required>'; 
                                         echo'</div>';
                                         echo'<div class="col-sm-6 mb-3 mb-sm-0">';
                                             if(isset($_GET['tableau'])){
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="banque" id="banque"  placeholder="banque" required>';
+                                                name="banque" id="banque"  placeholder="Banque" required>';
                                             }else{
                                                 echo'<input type="number" class="form-control form-control-user"
-                                                name="banque" id="banque" placeholder="banque" required>';
+                                                name="banque" id="banque" placeholder="Banque" required>';
                                             }
                                         echo'</div>';
                                     echo'</div>';
@@ -134,10 +147,10 @@
                                                 $tabdonne = $_GET['tableau'];
                                                 $donnees = json_decode($tabdonne,true);
                                                 echo'<input type="txt" class="form-control form-control-user"
-                                                name="matif" id="matif" value='.intval($donnees["motif"]).' placeholder="motif" required>';
+                                                name="matif" id="matif" value='.intval($donnees["motif"]).' placeholder="Motif versement" required>';
                                             }else{
                                                 echo'<input type="txt" class="form-control form-control-user"
-                                                name="matif" id="motif" placeholder="motif" required>';
+                                                name="matif" id="motif" placeholder="Motif versement" required>';
                                             }
                                         echo'</div>';
                                     echo'</div>';

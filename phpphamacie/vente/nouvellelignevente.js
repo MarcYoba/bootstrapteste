@@ -319,6 +319,7 @@ function enregistrementBD(){
 
     let donnees =[];
     donnees = recuperationdonneTable();
+    document.getElementById("enregistremet").display='none';
     fetch('register.php',{
         method:'POST',
         headers:{

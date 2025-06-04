@@ -34,13 +34,28 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="card-header py-3">
-                                <h1 class="h4 text-gray-900 mb-4">Fiche descente su terrain</h1>
-                                selection de l'esperce 
-                                        <select  class="form-control form-select" id="cathegorie" name="cathegorie" onchange="selectype()" required>
-                                            <option value="volaille" >Selectionne le type d'esperce</option>
-                                            <option value="volaille" >volaille</option>
-                                            <option value="porc">porc</option>
-                                            <option value="lapin">lapin</option>
+                                
+                                <div class="form-group row">
+                                <div class="col-sm-6">
+                                <h6 class="m-0 font-weight-bold text-primary">Fiche de descente sur terrain</h6>     
+                                </div>
+                                <div class="col-sm-2">
+                                <i class="fa fa-home"></i>
+                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <i class="fa fa-list"></i> 
+                                    <a href="liste.php" class="btn btn-success"> Liste</a>
+                                                
+                                </div>
+                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            </div> <br>
+                                Sélection de l'espèce 
+                                        <select class="form-control form-select" id="categorie" name="categorie" onchange="selectType()" required>
+                                            <option value="volaille">Sélectionnez le type d'espèce</option>
+                                            <option value="volaille">Volaille</option>
+                                            <option value="porc">Porc</option>
+                                            <option value="lapin">Lapin</option>
                                         </select>
                             </div>
                             <span id="typeelement"></span>
