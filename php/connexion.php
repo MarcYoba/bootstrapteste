@@ -1,15 +1,11 @@
 <?php
 
 //Define database connection parameters
-$dbHost = "localhost";
-$dbUsername = "root";
-$dbPassword = "";
-$dbName = "stockabgroup";
+$dbHost = "127.0.0.1";
+$dbUsername = "u238144589_abgroup022";
+$dbPassword = "Abgroup022";
+$dbName = "u238144589_abcompta_v0";
 
-// $dbHost = "sql211.infinityfree.com";
-// $dbUsername = "if0_37894408";
-// $dbPassword = "3xZx7ZMieH";
-// $dbName = "if0_37894408_stockabgroup";
 //Create database connection
 $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 
