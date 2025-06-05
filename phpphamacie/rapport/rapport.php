@@ -103,11 +103,15 @@
 
                             <form action="../pdf/getannuel.php" method="post">
                             <div class="form-group row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                        <input type="number" class="form-control form-control-user" id="mois"
                                         name="mois" placeholder="numero du moi" require>
                                     </div>
-                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-3">
+                                       <input type="date" class="form-control form-control-user" id="date"
+                                        name="date" placeholder="numero du moi">
+                                    </div>
+                                    <div class="col-sm-2"></div>
                                     <div class="col-sm-4">
                                             <button type="" name="" id="" class="btn btn-success btn-user btn-block">
                                             Rapport Mensuelle

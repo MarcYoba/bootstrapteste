@@ -5,8 +5,6 @@ require_once("../bdmutilple/getvente.php");
 require_once("../bdmutilple/getdepense.php");
 require_once("../bdmutilple/getversement.php");
 require_once("../bdmutilple/getachat.php");
-require_once("../bdmutilple/getfournisseur.php");
-require_once("../bdmutilple/getclient.php");
 require_once("../bdmutilple/getcaise.php");
 require_once("../bdmutilple/getdette.php");
 
@@ -14,22 +12,37 @@ require '../../vendor/autoload.php';
 ini_set('memory_limit', '256M');
 use Dompdf\Dompdf;
 
-$date = date("Y-m-d");
+    $date = 0;
 $depense = new Depense(0);
 $vente = new Vente(0);
-$client = new Client(0);
 $achat = new Achat(0);
 $formule = 1;
 $caisse = new Caise(0);
 $dette = new Dette();
 $versement = new Versement(1);
-$mois = $_POST["mois"];
-//var_dump($date);
+$mois = 0;
 
-// Créer une instance de Dompdf
+if (isset($_POST["mois"])) {
+    if (empty($_POST["date"])) {
+        $date = date("Y-m-d");
+    }else{
+        $date = $_POST["date"];
+    }
+    $mois = $_POST["mois"];
+    header('Location:getannuel.php?mois='.$mois.".".$date);
+}else{
+    $mois = $_GET["mois"];
+    $mois = explode('.',$mois);
+    $date = $mois[1];
+    $mois = $mois[0];
+    
+}
+
+
+
 $dompdf = new Dompdf();
 
-// Créer le contenu HTML du PDF
+
 $html = '
 <!DOCTYPE html>
 <html>
@@ -52,31 +65,37 @@ $html = '
                 }
 </style>
 </head>
-<body>';
+<body>
+<h1 style="text-align: center;">Rapport Mensuelle</h1>
+<h2 style="text-align: center;">Mois: '.$mois.'</h2>
+<img src="php/pdf/image.jpg" alt="Logo" />
+<p style="text-align: center;">Date: '.$date.'</p>
+';
 
 $html .='<br><br><br> <table style="width:100%">
         <thead>';
-        
+
         $html .='
         </thead>
         <tbody>';
         $html .= '<tr> 
-                <td scope="col" colspan="7" align="center">Rapport Mensuel</td>
+                <td scope="col" colspan="8" align="center">Rapport vente Mensuel</td>
                 </tr>
         ';
         
         $html .= '
             <tr>
             <th scope="col">Date vente</th>
-            <th scope="col">Quantite</th>
-            <th scope="col">Montant</th>
-            <th scope="col">MontantCash</th>
-            <th scope="col">Dette </th>
-            <th scope="col">OM </th>
-            <th scope="col">Reduction </th>
+            <th scope="col">Q.Total</th>
+            <th scope="col">M.Total</th>
+            <th scope="col">M.Cash</th>
+            <th scope="col">M.Dette </th>
+            <th scope="col">M.OM</th>
+            <th scope="col">Reduction</th>
+            <th scope="col">M.Banque</th>
             
         </tr>';
-        $facture = $vente->SommeAnnuel($mois);
+        $facture = $vente->SommeAnnuel($mois,$date);
             foreach ($facture as $linefatcture) {
                 $html .= '<tr>';
                 foreach ($linefatcture as $key => $cell) {
@@ -103,24 +122,25 @@ $html .='<br><br><br> <table style="width:100%">
             <tr>
             <th scope="col">date Achat</th>
             <th scope="col">liste prix</th>
-            <th scope="col">Som Prix</th>
+            <th scope="col">P.Total</th>
             <th scope="col">list quantite</th>
-            <th scope="col">Som Quantite </th>
+            <th scope="col">Q.Total </th>
             <th scope="col">list Montant </th>
-            <th scope="col">Som Montant </th>
+            <th scope="col">M.Total </th>
             <th scope="col">Produit </th>
             
         </tr>';
-        $facture = $achat->Sommemenseule($mois);
+        $facture = $achat->Sommemenseule($mois,$date);
             foreach ($facture as $linefatcture) {
                 $html .= '<tr>';
                 foreach ($linefatcture as $key => $cell) {
-                    if (strpos($cell,',')) {
-                        $chaine = str_replace(',','<br>',$cell);
-                        $html .= '<td>' .$chaine.'</td>';
-                    } else {
+                    // if ($cell) {
+                    //     //strpos($cell,',')
+                    //     $chaine = str_replace(',','<br>',$cell);
+                    //     $html .= '<td>' .$chaine.'</td>';
+                    // } else {
                         $html .= '<td>' .$cell.'</td>';
-                    }
+                    // }
                     
                     
                 }
@@ -147,18 +167,19 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">date </th>
             <th scope="col">Operation </th>
             <th scope="col">List opration</th>
-            <th scope="col">nomtant</th>
+            <th scope="col">M.Total</th>
         </tr>';
-        $facture = $caisse->SommeeMenseurl($mois);
+        $facture = $caisse->SommeeMenseurl($mois,$date);
             foreach ($facture as $linefatcture) {
                 $html .= '<tr>';
                 foreach ($linefatcture as $key => $cell) {
-                    if (strpos($cell,',')) {
-                        $chaine = str_replace(',','<br>',$cell);
-                        $html .= '<td>' .$chaine.'</td>';
-                    } else {
+                    // if ($cell) {
+                    //     //strpos($cell,',')
+                    //     $chaine = str_replace(',','<br>',$cell);
+                    //     $html .= '<td>' .$chaine.'</td>';
+                    // } else {
                         $html .= '<td>' .$cell.'</td>';
-                    }
+                    // }
                     
                     
                 }
@@ -183,19 +204,20 @@ $html .='<br><br><br> <table style="width:100%">
             <tr>
             <th scope="col">date </th>
             <th scope="col">Operation </th>
+            <th scope="col">M.total</th>
             <th scope="col">List opration</th>
-            <th scope="col">nomtant</th>
         </tr>';
-        $facture = $depense->DepenseMensuelle($mois);
+        $facture = $depense->DepenseMensuelle($mois,$date);
             foreach ($facture as $linefatcture) {
                 $html .= '<tr>';
                 foreach ($linefatcture as $key => $cell) {
-                    if (strpos($cell,',')) {
-                        $chaine = str_replace(',','<br>',$cell);
-                        $html .= '<td>' .$chaine.'</td>';
-                    } else {
+                    // if ($cell) {
+                    //     //strpos($cell,',')
+                    //     $chaine = str_replace(',','<br>',$cell);
+                    //     $html .= '<td>' .$chaine.'</td>';
+                    // } else {
                         $html .= '<td>' .$cell.'</td>';
-                    }
+                    // }
                     
                     
                 }
@@ -223,16 +245,16 @@ $html .='<br><br><br> <table style="width:100%">
         <th scope="col">nomtant</th>
         <th scope="col">motif</th>
     </tr>';
-    $facture = $versement->VersementMensuel($mois);
+    $facture = $versement->VersementMensuel($mois,$date);
         foreach ($facture as $linefatcture) {
             $html .= '<tr>';
             foreach ($linefatcture as $key => $cell) {
-                if (strpos($cell,',')) {
-                    $chaine = str_replace(',','<br>',$cell);
-                    $html .= '<td>' .$chaine.'</td>';
-                } else {
+                // if (strpos($cell,',')) {
+                //     $chaine = str_replace(',','<br>',$cell);
+                //     $html .= '<td>' .$chaine.'</td>';
+                // } else {
                     $html .= '<td>' .$cell.'</td>';
-                }
+                // }
                 
                 
             }
@@ -253,6 +275,6 @@ $html .= '
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-$dompdf->stream("mon_fichier.pdf", array("Attachment" => 0));
+$dompdf->stream("mon_fichier_annuel.pdf", array("Attachment" => 0));
 
 ?>

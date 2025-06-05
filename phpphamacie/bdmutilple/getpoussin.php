@@ -96,17 +96,26 @@ class Poussin{
         return $data;
     }
 
-    public function getPoussinMonth($number){
+    public function getPoussinMonth($mois,$date){
         global $conn;
         $data = [];
-        $sql = "SELECT * FROM poussin WHERE MONTH(dateCommande) = '$number'";
+        $sql = "SELECT dateCommande, 
+            GROUP_CONCAT(prixUnite,',') AS listMontant,
+            ROUND(SUM(montant)) AS nomtant,
+            ROUND(SUM(quantite)) AS quantite,
+            ROUND(SUM(montantCash)) AS montantCash,
+            ROUND(SUM(montantOm)) AS montantOm,
+            ROUND(SUM(reste)) AS reste
+            FROM poussin
+            WHERE Month(dateCommande) = '$mois' AND YEAR(dateCommande) = YEAR('$date')
+            ";
         $result = $conn->query($sql);
-
         while ($row = mysqli_fetch_assoc($result)) {
+            $row["dateCommande"] = "TOTAL";
+            $row["dateCommande"] = "-";
             array_push($data,$row);
         }
-
-        return $data;
+       return $data ;
     }
 
     public function CommandePoussinNonLivrer(){

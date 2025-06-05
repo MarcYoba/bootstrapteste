@@ -107,13 +107,18 @@
             return $data;
         }
 
-        public function getsuivianimaleMonth($mois) {
+        public function getsuivianimaleMonth($mois,$date) {
             global $conn;
             $data = [];
-            $sql = "SELECT * FROM suivianimale WHERE MONTH(datejour) ='$mois'";
+            $sql = "SELECT datejour, 
+            ROUND(SUM(montant)) AS nomtant
+            FROM suivianimale
+            WHERE Month(datejour) = '$mois' AND YEAR(datejour) = YEAR('$date')
+            ";
             $result = $conn->query($sql);
-
-            while ($row = mysqli_fetch_assoc($result)) {
+            while($row = mysqli_fetch_assoc($result)){
+                $row["datejour"] = "TOTAL";
+                $row["montant"] = $row["nomtant"];
                 array_push($data,$row);
             }
             return $data;
@@ -155,13 +160,20 @@
             return $data;
         }
 
-        public function getVaccinationMonth($mois) {
+        public function getVaccinationMonth($mois,$date) {
             global $conn;
             $data = [];
-            $sql = "SELECT * FROM animale WHERE MONTH(datevacin) = '$mois'";
-            $result = $conn->query($sql);
 
-            while ($row = mysqli_fetch_assoc($result)) {
+            $sql = "SELECT datevacin, 
+            ROUND(SUM(montant)) AS nomtant,
+            ROUND(SUM(netpayer)) AS netpayer
+            FROM animale
+            WHERE Month(datevacin) = '$mois' AND YEAR(datevacin) = YEAR('$date')
+            ";
+            $result = $conn->query($sql);
+            while($row = mysqli_fetch_assoc($result)){
+                $row["datevacin"] = "TOTAL";
+                $row["netpayer"] = $row["netpayer"];
                 array_push($data,$row);
             }
             return $data;
@@ -202,13 +214,16 @@
             }
             return $data;
         }
-        public function getTerrainMonth($mois) {
+        public function getTerrainMonth($mois,$date) {
             global $conn;
             $data = [];
-            $sql = "SELECT * FROM terrain WHERE MONTH(datejour) = '$mois'";
+            $sql = "SELECT COUNT(datejour) AS total,
+            ROUND(SUM(montant)) AS nomtant
+            FROM terrain
+            WHERE Month(datejour) = '$mois' AND YEAR(datejour) = YEAR('$date')
+            ";
             $result = $conn->query($sql);
-
-            while ($row = mysqli_fetch_assoc($result)) {
+            while($row = mysqli_fetch_assoc($result)){
                 array_push($data,$row);
             }
             return $data;

@@ -207,28 +207,28 @@ class Versement{
         return $data; 
     }
 
-    public function VersementMensuel($idmois){
+    public function VersementMensuel($idmois,$date){
         global $conn;
         $data = [];
 
-        $sql = "SELECT dateversement, 
-            GROUP_CONCAT((montant + Om + banque),',') AS listMontant,
-            ROUND(SUM(montant + Om + banque)) AS nomtant,
-            GROUP_CONCAT(motif,',') AS motif 
-            FROM versement
-            WHERE Month(dateversement) = '$idmois'
-            GROUP BY dateversement";
-        $result = $conn->query($sql);
-        while($row = mysqli_fetch_assoc($result)){
-            array_push($data,$row);
-        }
+        // $sql = "SELECT dateversement, 
+        //     GROUP_CONCAT((montant + Om + banque),',') AS listMontant,
+        //     ROUND(SUM(montant + Om + banque)) AS nomtant,
+        //     GROUP_CONCAT(motif,',') AS motif 
+        //     FROM versement
+        //     WHERE Month(dateversement) = '$idmois'
+        //     GROUP BY dateversement";
+        // $result = $conn->query($sql);
+        // while($row = mysqli_fetch_assoc($result)){
+        //     array_push($data,$row);
+        // }
 
         $sql = "SELECT dateversement, 
             GROUP_CONCAT((montant + Om + banque),',') AS listMontant,
             ROUND(SUM(montant + Om + banque)) AS nomtant,
             GROUP_CONCAT(motif,',') AS motif 
             FROM versement
-            WHERE Month(dateversement) = '$idmois'
+            WHERE Month(dateversement) = '$idmois' AND YEAR(dateversement) = YEAR('$date')
             ";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){

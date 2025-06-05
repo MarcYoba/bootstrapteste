@@ -706,33 +706,34 @@ class Vente{
         }
     }
 
-    public function SommeAnnuel($idmois) {
+    public function SommeAnnuel($idmois,$date) {
         global $conn;
         $don=[];
-        $sql = "SELECT datevente,
-                    ROUND(SUM(quantite),2) AS quantite , 
-                    ROUND(SUM(prix),2) AS montant, 
-                    ROUND(SUM(cash),2) AS MontantCash, 
-                    ROUND(SUM(credit),2) AS dette, 
-                    ROUND(SUM(Om),2) AS OM, 
-                    ROUND(SUM(reduction),2) AS reduction  
-                FROM vente 
-                WHERE month(datevente) = '$idmois'
-                GROUP BY datevente";
-        $result = $conn->query($sql);
-        while ($row = mysqli_fetch_assoc($result)){
-            //$id = $row["id"];
-            array_push($don,$row);    
-        }
+        // $sql = "SELECT datevente,
+        //             ROUND(SUM(quantite),2) AS quantite , 
+        //             ROUND(SUM(prix),2) AS montant, 
+        //             ROUND(SUM(cash),2) AS MontantCash, 
+        //             ROUND(SUM(credit),2) AS dette, 
+        //             ROUND(SUM(Om),2) AS OM, 
+        //             ROUND(SUM(reduction),2) AS reduction  
+        //         FROM vente 
+        //         WHERE month(datevente) = '$idmois' AND YEAR(datevente) = YEAR(CURRENT_DATE)
+        //         GROUP BY datevente";
+        // $result = $conn->query($sql);
+        // while ($row = mysqli_fetch_assoc($result)){
+        //     //$id = $row["id"];
+        //     array_push($don,$row);    
+        // }
         $sql = "SELECT datevente as TOTAL,
                     ROUND(SUM(quantite),2) AS quantite , 
                     ROUND(SUM(prix),2) AS montant, 
                     ROUND(SUM(cash),2) AS MontantCash, 
                     ROUND(SUM(credit),2) AS dette, 
                     ROUND(SUM(Om),2) AS OM, 
-                    ROUND(SUM(reduction),2) AS reduction  
+                    ROUND(SUM(reduction),2) AS reduction,
+                    ROUND(SUM(banque),2) AS banque  
                 FROM vente 
-                WHERE month(datevente) = '$idmois'
+                WHERE month(datevente) = '$idmois' AND YEAR(datevente) = YEAR('$date')
                 ";
                 
         $result = $conn->query($sql);

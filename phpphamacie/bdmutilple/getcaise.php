@@ -71,21 +71,21 @@ class Caise{
         return $data; 
     }
 
-    public function SommeeMenseurl($Idmois){
+    public function SommeeMenseurl($Idmois,$date){
         global $conn;
         $data=[];
-        $sql = "SELECT dateoperation, 
-                GROUP_CONCAT(operation,',') AS qopration, 
-                GROUP_CONCAT(montant,',') AS listmont, 
-                ROUND(SUM(montant)) AS nomtant
-        FROM caissePhamacie 
-        WHERE (operation LIKE 'sortie%' OR operation ='retour en caisse') AND MONTH(dateoperation) = '$Idmois'
-        GROUP BY dateoperation";
-        $result = $conn->query($sql);
+        // $sql = "SELECT dateoperation, 
+        //         GROUP_CONCAT(operation,',') AS qopration, 
+        //         GROUP_CONCAT(montant,',') AS listmont, 
+        //         ROUND(SUM(montant)) AS nomtant
+        // FROM caissePhamacie 
+        // WHERE (operation LIKE 'sortie%' OR operation ='retour en caisse') AND MONTH(dateoperation) = '$Idmois'
+        // GROUP BY dateoperation";
+        // $result = $conn->query($sql);
 
-        while($row = mysqli_fetch_assoc($result)){
-            array_push($data,$row);
-        }
+        // while($row = mysqli_fetch_assoc($result)){
+        //     array_push($data,$row);
+        // }
 
         $sql = "SELECT dateoperation, 
                 GROUP_CONCAT(operation,',') AS qopration, 
@@ -93,7 +93,7 @@ class Caise{
                 ROUND(SUM(montant),2) AS nomtant
         FROM caissePhamacie
         WHERE (operation LIKE 'sortie%' OR operation ='retour en caisse') AND MONTH(dateoperation) = '$Idmois'
-        ";
+        AND YEAR(dateoperation) = YEAR('$date')";
         $result = $conn->query($sql);
 
         while($row = mysqli_fetch_assoc($result)){

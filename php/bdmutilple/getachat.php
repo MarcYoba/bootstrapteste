@@ -207,24 +207,24 @@ class Achat{
         
     }
 
-    public function Sommemenseule($idmois){
+    public function Sommemenseule($idmois,$date){
         global $conn;
         $data = [];
-        $sql = "SELECT dateachat,
-                GROUP_CONCAT(prixAcaht SEPARATOR',') as listeprix,
-                ROUND(SUM(prixAcaht),2) AS somPrix,
-                GROUP_CONCAT(quantite SEPARATOR',') as listquantite,
-                ROUND(SUM(quantite),2) as somQuantite,
-                GROUP_CONCAT(montant SEPARATOR',') as listMontant,
-                ROUND(SUM(montant),2) AS somMontant,
-                GROUP_CONCAT(Nomproduit SEPARATOR ',') AS nom
-        FROM `achat` 
-        WHERE month(dateachat) = '$idmois'
-        GROUP BY dateachat";
-        $result = $conn->query($sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            array_push($data,$row);
-        }
+        // $sql = "SELECT dateachat,
+        //         GROUP_CONCAT(prixAcaht SEPARATOR',') as listeprix,
+        //         ROUND(SUM(prixAcaht),2) AS somPrix,
+        //         GROUP_CONCAT(quantite SEPARATOR',') as listquantite,
+        //         ROUND(SUM(quantite),2) as somQuantite,
+        //         GROUP_CONCAT(montant SEPARATOR',') as listMontant,
+        //         ROUND(SUM(montant),2) AS somMontant,
+        //         GROUP_CONCAT(Nomproduit SEPARATOR ',') AS nom
+        // FROM `achat` 
+        // WHERE month(dateachat) = '$idmois'
+        // GROUP BY dateachat";
+        // $result = $conn->query($sql);
+        // while ($row = mysqli_fetch_assoc($result)) {
+        //     array_push($data,$row);
+        // }
 
         $sql = "SELECT dateachat,
                 GROUP_CONCAT(prixAcaht SEPARATOR',') as listeprix,
@@ -235,7 +235,7 @@ class Achat{
                 ROUND(SUM(montant),2) AS somMontant,
                 GROUP_CONCAT(Nomproduit SEPARATOR ',') AS nom
         FROM `achat` 
-        WHERE month(dateachat) = '$idmois'";
+        WHERE month(dateachat) = '$idmois' AND YEAR(dateachat) = YEAR('$date')";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             $row["dateachat"] = "TOTAL";

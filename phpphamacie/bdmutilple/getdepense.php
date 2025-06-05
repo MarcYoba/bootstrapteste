@@ -118,27 +118,27 @@ class Depense{
     }
 
 
-    public function DepenseMensuelle($mois){
+    public function DepenseMensuelle($mois,$date){
         global $conn;
         $data = [];
-        $sql = "SELECT datedepense, 
-            GROUP_CONCAT(montant,',') AS listMontant,
-            ROUND(SUM(montant)) AS nomtant,
-            GROUP_CONCAT(description,',') AS motif 
-            FROM depensesphamacie
-            WHERE Month(datedepense) = '$mois'
-            GROUP BY datedepense";
-        $result = $conn->query($sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            array_push($data,$row);
-        }
+        // $sql = "SELECT datedepense, 
+        //     GROUP_CONCAT(montant,',') AS listMontant,
+        //     ROUND(SUM(montant)) AS nomtant,
+        //     GROUP_CONCAT(description,',') AS motif 
+        //     FROM depensesphamacie
+        //     WHERE Month(datedepense) = '$mois'
+        //     GROUP BY datedepense";
+        // $result = $conn->query($sql);
+        // while ($row = mysqli_fetch_assoc($result)) {
+        //     array_push($data,$row);
+        // }
 
         $sql = "SELECT datedepense, 
             GROUP_CONCAT(montant,',') AS listMontant,
             ROUND(SUM(montant)) AS nomtant,
             GROUP_CONCAT(description,',') AS motif 
             FROM depensesphamacie
-            WHERE Month(datedepense) = '$mois'
+            WHERE Month(datedepense) = '$mois' AND YEAR(datedepense) = YEAR('$date')
             ";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
