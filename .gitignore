@@ -1,1 +1,8 @@
-node_modules
+# Dependencies
+
+node_modules/
+
+# Sensitive PHP files
+php/connexion.php
+# Ajoutez d'autres chemins si nécessaire :
+phpphamacie/connexion.php
