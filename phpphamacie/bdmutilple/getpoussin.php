@@ -100,7 +100,7 @@ class Poussin{
         global $conn;
         $data = [];
         $sql = "SELECT dateCommande, 
-            GROUP_CONCAT(prixUnite,',') AS listMontant,
+            ROUND(SUM(prixUnite)) AS listMontant,
             ROUND(SUM(montant)) AS nomtant,
             ROUND(SUM(quantite)) AS quantite,
             ROUND(SUM(montantCash)) AS montantCash,
