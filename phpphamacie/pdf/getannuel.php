@@ -431,6 +431,40 @@ $html .='<br><br><br> <table style="width:100%">
             </tbody>
         </table>';
 
+        $html .='<br><br><br> <table style="width:100%">
+            <thead>';
+            $html .=' <tr><th colspan="2" align="center""> Consultation : </th></tr>
+            </thead>
+            <tbody>';
+                $html .= '<tr>';
+                $html .= '<td colspan="2" align="center"> Consultation  </td>';
+                $html .= '</tr>
+                    <tr>
+                    <th scope="col">M.Total</th>
+                    <th scope="col">Q.Total</th>
+                </tr>';
+                $tabconsultation =$vaccin->getConsultationMonth($mois,$date);
+                foreach ($tabconsultation as $linefatcture) {
+                    $html .= '<tr>';
+                    foreach ($linefatcture as $key => $cell) {
+                        if(!empty( $cell)){
+                                    // if (strpos($cell,',')) {
+                                    //     $chaine = str_replace(',','<br>',$cell);
+                                    //     $html .= '<td>' .$chaine.'</td>';
+                                    // } else {
+                                        $html .= '<td>' .$cell.'</td>';
+                                    // }
+                        }else{
+                            $html .= '<td></td>';
+                        }
+
+                        }
+                    $html .= '</tr>';
+                }
+            $html .= '
+            </tbody>
+        </table>';
+
 
 
 $html .= '

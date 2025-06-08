@@ -70,7 +70,22 @@
             }
             return $data;
         }
-
+        public function getConsultationMonth($mois,$date) {
+            global $conn;
+            $data = [];
+            $sql = "SELECT dateArrive, 
+            ROUND(SUM(montant)) AS nomtant,
+            ROUND(COUNT(*)) AS netpayer
+            FROM consultation
+            WHERE Month(dateArrive) = '$mois' AND YEAR(dateArrive) = YEAR('$date')
+            ";
+            $result = $conn->query($sql);
+            while($row = mysqli_fetch_assoc($result)){
+                $row["dateArrive"] = "TOTAL";
+                array_push($data,$row);
+            }
+            return $data;
+        }
         public function getsuivianimale() {
             global $conn;
             $data = [];
