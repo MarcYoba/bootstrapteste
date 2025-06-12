@@ -86,7 +86,7 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
 
     // Fermer la requête
     $stmt->close();
-    $stock = $stock + $quantite;
+    $stock = $stock + 0;
     $gain = $prixvente - $prix;
 
     if (($perantiondate == "0000-00-00") || (empty($perantiondate)) || ($perantiondate == "0001-01-01")) {
