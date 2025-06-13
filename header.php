@@ -183,6 +183,20 @@
             </div>
         </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Prospection"
+            aria-expanded="true" aria-controls="Prospection">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Prospection</span>
+        </a>
+        <div id="Prospection" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Prospection:</h6>
+                <a class="collapse-item" href="php/prospection/prospection.php">prospection</a>
+                <a class="collapse-item" href="php/prospection/list.php?date=<?php echo date("Y") ?>">Liste Prospection</a>
+            </div>
+        </div>
+    </li>
 
     
 
