@@ -85,9 +85,43 @@ if (isset($_POST['submit'])) {
         die('Erreur d\'exécution de la requête : ' . $stmt->error);
     }
 
-    // Fermer la requête
+    // Femer la requête
     $stmt->close();
     header("Location: liste.php");
+}elseif (isset($_POST['image'])) {
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $targetDir = "../../uploads/";
+        // Crée le dossier s'il n'existe pas
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+        $fileName = basename($_FILES["image"]["name"]);
+        $targetFile = $targetDir . uniqid() . "_" . $fileName;
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        // Vérifie le type de fichier
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        if (in_array($imageFileType, $allowedTypes)) {
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                $sql = "INSERT INTO imageprospection (image,dateprospection) VALUES (?,?)";
+                if (!$stmt = $conn->prepare($sql)) {
+                    die('Erreur de préparation de la requête : ' . $conn->error);
+                }
+                $stmt->bind_param('ss', $targetFile, $_POST['dateprospection']);
+                if (!$stmt->execute()) {
+                    die('Erreur d\'exécution de la requête : ' . $stmt->error);
+                }
+                $stmt->close();
+            } else {
+                die("Erreur lors de l'enregistrement de l'image.");
+            }
+        } else {
+            die("Type de fichier non autorisé.");
+        }
+    } else {
+        die("Aucune image téléchargée ou erreur lors de l'upload.");
+    }
+    header("Location: image.php");
 }else {
     // Rediriger vers la page de liste si le formulaire n'est pas soumis
     header("Location: liste.php");

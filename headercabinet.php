@@ -281,6 +281,7 @@ require_once("php/activesaision.php");
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Employé :</h6>
                 <a class="collapse-item" href="../prospection/prospection.php">Ajouter Prospection</a>
+                <a class="collapse-item" href="../prospection/image.php">Ajouter image</a>
                 <a class="collapse-item" href="../prospection/list.php?date=<?php echo date("Y"); ?>">Liste Prospection</a>
             </div>
         </div>

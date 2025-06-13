@@ -33,7 +33,7 @@ function getLocation() {
     } else {
         alert("Géolocalisation non supportée par votre navigateur.");
     }
-}
+}x
 
 function EditProspection(id) {
     // Récupérer les données de la prospection à modifier
