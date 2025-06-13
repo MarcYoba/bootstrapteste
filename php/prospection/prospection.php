@@ -40,7 +40,7 @@
                         <div class="card-header py-3">
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <h6 class="m-0 font-weight-bold text-primary">Création du Produit</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Création du Prospection</h6>
                                 </div>
                                 <div class="col-sm-2">
                                     <i class="fa fa-home"></i>
@@ -56,41 +56,89 @@
                             <form class="user" action="register.php" method="post" enctype="multipart/form-data">
                                 <div class="form-group ">
                                     <div class="col-sm-14 mb-3 mb-sm-0">
-                                        Numero Reference du produit :
+                                    Porspection Id:
                                         <input type="text" class="form-control form-control-user drop" id="reference"
                                         name="reference" required readonly> 
                                                 
                                     </div>
                                     <hr>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="dateprospection">Nom </label>
                                         <input type="text" class="form-control form-control-user" id="propect"
                                             name="propect" placeholder="Nom de la personne" >
                                     </div>
+                                    <br>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="telephone">Téléphone de la personne</label>
                                         <input type="tel" class="form-control form-control-user" id="telephone"
-                                            name="telephone" placeholder="Telephone de la personne" >
+                                            name="telephone" placeholder="Téléphone de la personne" >
                                     </div>
+                                    <br>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="localisation">Localisation de la personne</label>
+                                        <input type="text" class="form-control form-control-user" id="localisation"
+                                            name="localisation" placeholder="Localisation de la personne" >
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user"
-                                            name="prixvente" id="prixvente" placeholder="Prix de vente" >
-                                        </div>
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="number" class="form-control form-control-user"
-                                            name="prixachat" id="prixachat" placeholder="Prix achat" > 
-                                        </div>
+                                    <br>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="speculation">Spéculation</label>
+                                        <input type="text" class="form-control form-control-user"
+                                        name="speculation" id="speculation" placeholder="Speculation" >
                                     </div>
-                                    <hr>
+                                    <br>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="nbsujet">Nombre de sujets</label>
+                                        <input type="number" class="form-control form-control-user" id="nbsujet"
+                                            name="nbsujet" placeholder="Nombre de sujets" >
+                                    </div>
+                                    <br>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="souche">Souche / espèce</label>
+                                        <input type="text" class="form-control form-control-user" id="souche"
+                                            name="souche" placeholder="Souche / espèce" >
+                                    </div>
+                                    <br>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="ravitaillement">Source de ravitaillement</label>
+                                        <input type="text" class="form-control form-control-user" id="ravitaillement"
+                                            name="ravitaillement" placeholder="Source de ravitaillement" >
+                                    </div>
+                                    <br>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="commentaire">Commentaire</label>
+                                        <input type="text" class="form-control form-control-user" id="commentaire"
+                                            name="commentaire" placeholder="Commentaire" >
+                                    </div>
+                                    <br>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="dateprospection">Date de prospection</label>
+                                        <input type="date" class="form-control form-control-user" id="dateprospection"
+                                            name="dateprospection" placeholder="Date de prospection" >
+                                    </div>
+                                    <br>
                                     
-                                    
-                                    <span id="buttonenregistrement" >
-                                        <button type="submit" name="enregistrement" id="enregistrement" class="btn btn-primary btn-user btn-block">
-                                            Enregistrement
-                                        </button>
-                                    </span>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-2 mb-3 mb-sm-0">
+                                        <label for="longitude">Coordonnées GPS</label>
+                                        <input type="text" class="form-control form-control-user" id="longitude"
+                                            name="longitude" placeholder="longitude GPS" >
+                                    </div>
+                                    <div class="col-sm-2 mb-3 mb-sm-0">
+                                        <label for="latitude">Latitude</label>
+                                        <input type="text" class="form-control form-control-user" id="latitude"
+                                            name="latitude" placeholder="latitude GPS" >
+                                    </div>
+                                    <div class="col-sm-2 mb-3 mb-sm-0">
+                                        <span id="buttonenregistrement" >
+                                            <button type="submit" name="submit" id="submit"  class="btn btn-primary " onclick="getLocation()">
+                                                Enregistrement
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
                                     
                             </form>
                             <hr>
@@ -112,7 +160,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
-    <script src="produit.js"></script> 
+    <script src="prospection.js"></script>
 
 </body>
 
