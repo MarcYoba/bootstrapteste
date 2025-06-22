@@ -4,9 +4,31 @@ session_start();
 require_once("../connexion.php");
 header('Content-Type: application/json');
 
- $json = file_get_contents('php://input');
-    $donnees = json_decode($json,true);
+$json = file_get_contents('php://input');
+$donnees = json_decode($json,true);
 
+function calcul_somme_prix($prix,$produit,$idproduit){
+    global $conn;
+
+    $sql = "SELECT SUM(prixAcaht) AS prix FROM prixphamacie WHERE produit='$produit' ";
+    $result = $conn->query($sql);
+    $sommeprix = mysqli_fetch_assoc($result);
+    $sommeprix = $sommeprix["prix"];
+    $sommeprix = $sommeprix+$prix;
+
+    return $sommeprix;
+}
+function calcul_somme_quantite($quantite,$produit,$idproduit){
+    global $conn;
+
+    $sql = "SELECT SUM(quantite_produit) AS quantite FROM produitphamacie WHERE nom_produit='$produit'";
+    $result = $conn->query($sql);
+    $sommequantite = mysqli_fetch_assoc($result);
+    $sommequantite = $sommequantite["quantite"];
+    $sommequantite = $sommequantite+$quantite;
+
+    return $sommequantite;
+}
 function calculer_date_rappel($date_expiration, $marge_en_mois) {
         // Convertit la date d'expiration en objet DateTime
         $date_exp = new DateTime($date_expiration);
@@ -86,8 +108,10 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
 
     // Fermer la requête
     $stmt->close();
-    $stock = $stock + 0;
+    $stock = $stock + $quantite;
     $gain = $prixvente - $prix;
+    //$sommeprix = calcul_somme_prix($prix,$produit,$idproduit);
+    $prix = calcul_somme_prix($prix,$produit,$idproduit)/calcul_somme_quantite($prix,$produit,$idproduit);
 
     if (($perantiondate == "0000-00-00") || (empty($perantiondate)) || ($perantiondate == "0001-01-01")) {
         $sql = "UPDATE produitphamacie SET quantite_produit = '$stock',prix_achat_produit='$prix',gain_produit='$gain',datePeramtion='$dateperantion' WHERE nom_produit = '$produit' ";
@@ -100,7 +124,7 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
         $id = $row["id"];
         $idproduit = $row["idproduit"];
 
-        insertPrix($produit, $prix,$id);
+        insertPrix($produit, $prix,$id,$idproduit);
     }else{
         $sql = "UPDATE produitphamacie SET quantite_produit = '$stock',prix_achat_produit='$prix',gain_produit='$gain' WHERE nom_produit = '$produit' ";
         $result = $conn->query($sql);
@@ -112,7 +136,7 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
         $id = $row["id"];
         $idproduit = $row["idproduit"];
 
-        insertPrix($produit, $prix,$id);
+        insertPrix($produit, $prix,$id,$idproduit);
         insertLots($dateperantion,$id,$idproduit);
     }
     // selection la id dans la table d'achat
@@ -122,14 +146,14 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
 }
 
 // insertion dans la table de prix du produit
-function insertPrix($nom,$prix,$id) {
+function insertPrix($nom,$prix,$id,$idproduit) {
     global $conn;
     $prixvente = $prix + 120;
     // Préparer la requête SQL
     // --------------------------------------------------------------------------------
     // Creation du prix (insertion de donne) 
 
-    $sql = "INSERT INTO prixphamacie  (produit,prixAcaht,prixVente,idachat,iduser,dateprix) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO prixphamacie  (produit,prixAcaht,prixVente,idachat,iduser,dateprix,idproduit) VALUES (?, ?, ?, ?, ?, ?,?)";
 
     // Lier les paramètres
     if (!$stmt = $conn->prepare($sql)) {
@@ -138,7 +162,7 @@ function insertPrix($nom,$prix,$id) {
 
     $date = date("y/m/d");
 
-    $stmt->bind_param('sdddds', $nom , $prix, $prixvente,$id,$_SESSION["id"], $date);
+    $stmt->bind_param('sddddsd', $nom , $prix, $prixvente,$id,$_SESSION["id"], $date,$idproduit);
 
     // Exécuter la requête
     if (!$stmt->execute()) {
