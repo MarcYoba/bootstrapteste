@@ -6,3 +6,4 @@ node_modules/
 php/connexion.php
 # Ajoutez d'autres chemins si nécessaire :
 phpphamacie/connexion.php
+upload/

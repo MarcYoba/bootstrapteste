@@ -4,8 +4,8 @@ session_start();
 require_once("../connexion.php");
 header('Content-Type: application/json');
 
- $json = file_get_contents('php://input');
-    $donnees = json_decode($json,true);
+$json = file_get_contents('php://input');
+$donnees = json_decode($json,true);
     /*
     $reponse = [
         'success' => true,
@@ -13,7 +13,28 @@ header('Content-Type: application/json');
      ];
     echo json_encode($reponse);
      */
+function calcul_somme_prix($prix,$produit,$idproduit){
+    global $conn;
 
+    $sql = "SELECT SUM(prixAcaht) AS prix FROM prix WHERE produit='$produit' ";
+    $result = $conn->query($sql);
+    $sommeprix = mysqli_fetch_assoc($result);
+    $sommeprix = $sommeprix["prix"];
+    $sommeprix = $sommeprix+$prix;
+
+    return $sommeprix;
+}
+function calcul_somme_quantite($quantite,$produit,$idproduit){
+    global $conn;
+
+    $sql = "SELECT SUM(quantite_produit) AS quantite FROM produit WHERE nom_produit='$produit'";
+    $result = $conn->query($sql);
+    $sommequantite = mysqli_fetch_assoc($result);
+    $sommequantite = $sommequantite["quantite"];
+    $sommequantite = $sommequantite+$quantite;
+
+    return $sommequantite;
+}
  // Fonction pour créer un compte utilisateur $nom, $type, $prixvente, $prixachat, $quantite
 function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue) {
     global $conn;
@@ -58,6 +79,7 @@ function insertAchat($idfournissuer,$produit,$quantite, $prix,$Totale,$datevalue
     $stmt->close();
     $stock = $stock + $quantite;
     $gain = $prixvente - $prix;
+    $prix = calcul_somme_prix($prix,$produit,$idproduit)/calcul_somme_quantite($prix,$produit,$idproduit);
     // selection la id dans la table d'achat
     $sql = "UPDATE produit SET quantite_produit = '$stock',prix_achat_produit='$prix',gain_produit='$gain' WHERE nom_produit = '$produit' ";
     $result = $conn->query($sql);

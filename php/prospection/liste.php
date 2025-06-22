@@ -121,7 +121,7 @@
                                                 echo "<button class='btn btn-primary' Onclick=\"EditProspection('". $row["id"]."')\"><i class='fas fa-pencil-alt'></i></button>";
                                             }else{
                                             echo "<button class='btn btn-primary' Onclick=\"EditProspection('". $row["id"]."')\"><i class='fas fa-pencil-alt'></i></button>";
-                                            echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette vente ?\");'><i class='fas fa-trash-alt'></i></a>";
+                                            echo "<a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette Prospection ?\");'><i class='fas fa-trash-alt'></i></a>";
                                             }
                                             echo "</td>";
                                             echo '</tr>';

@@ -265,7 +265,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Employé :</h6>
                 <a class="collapse-item" href="php/prospection/prospection.php">Ajouter Prospection</a>
-                <a class="collapse-item" href="php/prospection/list.php?date=<?php echo date("Y"); ?>">Liste Prospection</a>
+                <a class="collapse-item" href="php/prospection/image.php">Ajouter image</a>
+                <a class="collapse-item" href="php/prospection/liste.php?date=<?php echo date("Y"); ?>">Liste Prospection</a>
             </div>
         </div>
     </li>

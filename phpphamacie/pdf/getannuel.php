@@ -328,14 +328,14 @@ $html .= '
 
 $html .='<br><br><br> <table style="width:100%">
             <thead>';
-            $html .=' <tr><th colspan="2" align="center""> Suivie : </th></tr>
+            $html .=' <tr><th colspan="3" align="center""> Clinique : </th></tr>
             </thead>
             <tbody>';
                 $html .= '<tr>';
-                $html .= '<td colspan="2" align="center"> Suivie Anmale </td>';
+                $html .= '<td colspan="3" align="center"> Suivie Clinique </td>';
                 $html .= '</tr>
                     <tr>
-                    
+                    <th scope="col">Total</th>
                     <th scope="col">Total</th>
                     <th scope="col">M.Total</th>
                     
@@ -433,13 +433,14 @@ $html .='<br><br><br> <table style="width:100%">
 
         $html .='<br><br><br> <table style="width:100%">
             <thead>';
-            $html .=' <tr><th colspan="2" align="center""> Consultation : </th></tr>
+            $html .=' <tr><th colspan="3" align="center""> Consultation : </th></tr>
             </thead>
             <tbody>';
                 $html .= '<tr>';
-                $html .= '<td colspan="2" align="center"> Consultation  </td>';
+                $html .= '<td colspan="3" align="center"> Consultation  </td>';
                 $html .= '</tr>
                     <tr>
+                    <th scope="col">Total</th>
                     <th scope="col">M.Total</th>
                     <th scope="col">Q.Total</th>
                 </tr>';
