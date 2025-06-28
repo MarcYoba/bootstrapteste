@@ -458,7 +458,7 @@
                                     echo '<p class="mt20"><a href="https://www.limegreen-snail-490218.hostingersite.com" class="btn btn-primary btn-red page-scroll">Provenderie la difference</a></p>';   
                                 }
                                 if (($_SESSION["zonetravail"] == "difference") || ($_SESSION['zonetravail'] == "difference") ) {
-                                    echo '<p class="mt20"><a href="limegreen-snail-490218.hostingersite.com" class="btn btn-primary btn-red page-scroll">Provenderie la difference</a></p>';  
+                                    echo '<p class="mt20"><a href="https://www.limegreen-snail-490218.hostingersite.com" class="btn btn-primary btn-red page-scroll">Provenderie la difference</a></p>';  
                                 }
                             ?>
                             <h3 class="section-subheading secondary-font">Bienvenue dans la communauté</h3>
