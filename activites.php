@@ -122,7 +122,7 @@
                                     En offrant une vue d'ensemble et un contrôle accru sur l'infrastructure,
                                     ce type de logiciel vise à améliorer l'efficacité opérationnelle, renforcer la sécurité, réduire les pertes et assurer la conformité réglementaire.</p>
                                 <div class="spacer-180"></div>
-                                <p class="mt30"><a href="https://fayacomputer.wuaze.com" class="btn btn-primary btn-red page-scroll">FAYA COMPUTER</a></p>
+                                
                             </div>
                         </div>
                     </div>
@@ -166,9 +166,7 @@
                                     ce type de logiciel vise à améliorer l'efficacité opérationnelle, renforcer la sécurité, réduire les pertes et assurer la conformité réglementaire.</p>
                                 <div class="spacer-180"></div>
                                 <?php
-                                    if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "fayacomputer") ) {
-                                        echo '<p class="mt30"><a href="https://fayacomputer.wuaze.com" class="btn btn-primary btn-red page-scroll">FAYA COMPUTER</a></p>';  
-                                    }
+                                    
                                 ?>
                                 
                             </div>
@@ -214,9 +212,9 @@
                             <h2 class="section-heading">Information <span class="theme-accent-color">en</span> Pharmacie</h2>
                             
                             <?php           
-                                if (($_SESSION["zonetravail"] == "cabinet") || ($_SESSION["zonetravail"] == "Tous")) {
-                                    echo '<p class="mt20"><a href="homepahamacie.php" class="btn btn-primary btn-red page-scroll">Aller en pharmacie</a></p>';                
-                                }   
+                                // if (($_SESSION["zonetravail"] == "cabinet") || ($_SESSION["zonetravail"] == "Tous")) {
+                                //     echo '<p class="mt20"><a href="homepahamacie.php" class="btn btn-primary btn-red page-scroll">Aller en pharmacie</a></p>';                
+                                // }   
                             ?>
                             <hr class="thin-hr">
                             <h3 class="section-subheading secondary-font">Nous sommes très heureux de te voir.</h3>
@@ -453,12 +451,12 @@
                                     echo '<p class="mt20"><a href="home.php" class="btn btn-primary btn-red page-scroll">Aller a la provenderie</a></p>';           
                                 }
                                 
-                                if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "provenderie douala") ) {
-                                    echo '<p class="mt20"><a href="https://www.provenderiedouala.wuaze.com" class="btn btn-primary btn-red page-scroll">Provenderie Douala</a></p>';  
-                                }
-                                if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "provenderie douala") ) {
-                                    echo '<p class="mt20"><a href="https://www.KATAMGA.wuaze.com" class="btn btn-primary btn-red page-scroll">Provenderie KATAMGA</a></p>';  
-                                }
+                                // if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "provenderie douala") ) {
+                                //     echo '<p class="mt20"><a href="https://www.provenderiedouala.wuaze.com" class="btn btn-primary btn-red page-scroll">Provenderie Douala</a></p>';  
+                                // }
+                                // if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "provenderie douala") ) {
+                                //     echo '<p class="mt20"><a href="https://www.KATAMGA.wuaze.com" class="btn btn-primary btn-red page-scroll">Provenderie KATAMGA</a></p>';  
+                                // }
                             ?>
                             <h3 class="section-subheading secondary-font">Bienvenue dans la communauté</h3>
                         </div>
