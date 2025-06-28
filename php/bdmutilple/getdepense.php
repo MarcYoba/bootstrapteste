@@ -45,9 +45,17 @@ class Depense{
         return $row["montant"]; 
     }
 
-    public function SommeDepenseExerciceAchat(){
+    public function SommeDepenseAchatAnne($anne){
         global $conn;
-        $anne = date("Y");
+        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = '$anne' AND cathegorie='Autres achats'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function SommeDepenseExerciceAchat($anne){
+        global $conn;
+        //$anne = date("Y");
         $anne = $anne - 1;
         $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = $anne AND cathegorie='Autres achats'";
         $result = $conn->query($sql);
@@ -64,11 +72,19 @@ class Depense{
         return $row["montant"]; 
     }
 
-    public function SommeDepenseExerciceVoyages(){
+    public function SommeDepenseVoyagesAnne($anne){
         global $conn;
-        $anne = date("Y");
+        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = '$anne' AND cathegorie='Voyages'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function SommeDepenseExerciceVoyages($anne){
+        global $conn;
+        //$anne = date("Y");
         $anne = $anne - 1;
-        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = $anne AND cathegorie='Voyages'";
+        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = '$anne' AND cathegorie='Voyages'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -82,9 +98,17 @@ class Depense{
         return $row["montant"]; 
     }
 
-    public function SommeDepenseExerciceImpot(){
+    public function SommeDepenseImpotAnne($anne){
         global $conn;
-        $anne = date("Y");
+        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = '$anne' AND cathegorie='impots et taxes'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function SommeDepenseExerciceImpot($anne){
+        global $conn;
+        //$anne = date("Y");
         $anne = $anne - 1;
         $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = $anne AND cathegorie='impots et taxes'";
         $result = $conn->query($sql);
@@ -100,9 +124,17 @@ class Depense{
         return $row["montant"]; 
     }
 
-    public function SommeDepenseExerciceAutreCharge(){
+    public function SommeDepenseAutreChargeAnne($anne){
         global $conn;
-        $anne = date("Y");
+        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = '$anne' AND cathegorie='autre charge'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function SommeDepenseExerciceAutreCharge($anne){
+        global $conn;
+       // $anne = date("Y");
         $anne = $anne - 1;
         $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = $anne AND cathegorie='autre charge'";
         $result = $conn->query($sql);
@@ -118,11 +150,19 @@ class Depense{
         return $row["montant"]; 
     }
 
-    public function SommeDepenseExercicePersonnel(){
+    public function SommeDepensePersonnelAnne($anne){
         global $conn;
-        $anne = date("Y");
+        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = '$anne' AND cathegorie='charge personnel'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function SommeDepenseExercicePersonnel($anne){
+        global $conn;
+        //$anne = date("Y");
         $anne = $anne - 1;
-        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = $anne AND cathegorie='charge personnel'";
+        $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = '$anne' AND cathegorie='charge personnel'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 

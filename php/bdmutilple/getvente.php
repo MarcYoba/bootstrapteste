@@ -46,9 +46,9 @@ class Vente{
         return $row["montant"]; 
     }
 
-    public function SommeVenteAnnePasse(){
+    public function SommeVenteAnnePasse($anne){
         global $conn;
-        $anne = date("Y");
+        //$anne = date("Y");
         $anne = $anne-1;
         $sql = "SELECT ROUND(SUM(prix),2) as montant FROM vente WHERE YEAR(datevente)= '$anne'";
         $result = $conn->query($sql);
