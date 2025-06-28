@@ -452,12 +452,13 @@
                                 if (($_SESSION['zonetravail'] == "provenderie") || ($_SESSION["zonetravail"] == "Tous")) {
                                     echo '<p class="mt20"><a href="home.php" class="btn btn-primary btn-red page-scroll">Aller a la provenderie</a></p>';           
                                 }
-                                
                                 if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "provenderie douala") ) {
                                     echo '<p class="mt20"><a href="https://www.provenderiedouala.wuaze.com" class="btn btn-primary btn-red page-scroll">Provenderie Douala</a></p>';  
+                                    echo '<p class="mt20"><a href="https://www.counting.com" class="btn btn-primary btn-red page-scroll">Provenderie KATAMGA</a></p>';
+                                    echo '<p class="mt20"><a href="https://www.limegreen-snail-490218.hostingersite.com" class="btn btn-primary btn-red page-scroll">Provenderie la difference</a></p>';   
                                 }
-                                if (($_SESSION["roles"] == "administrateur") || ($_SESSION['zonetravail'] == "provenderie douala") ) {
-                                    echo '<p class="mt20"><a href="https://www.KATAMGA.wuaze.com" class="btn btn-primary btn-red page-scroll">Provenderie KATAMGA</a></p>';  
+                                if (($_SESSION["zonetravail"] == "difference") || ($_SESSION['zonetravail'] == "difference") ) {
+                                    echo '<p class="mt20"><a href="https://www.limegreen-snail-490218.hostingersite.com" class="btn btn-primary btn-red page-scroll">Provenderie la difference</a></p>';  
                                 }
                             ?>
                             <h3 class="section-subheading secondary-font">Bienvenue dans la communauté</h3>
