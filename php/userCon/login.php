@@ -53,7 +53,7 @@ if (isset($_POST['emailcon']) && isset($_POST['Passwordcon'])) {
                         if ($row["roles"] == "client") {
                             $_SESSION['id'] = $row["idclient"];
                         }
-                        header("Location: ../../activites.php"); 
+                        header("Location: ../../home.php"); 
                         exit();
                     } else {
                         header("Location: ../../index.php"); 
