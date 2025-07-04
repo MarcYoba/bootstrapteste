@@ -350,9 +350,7 @@
                 <div id="compteresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"> Compte résultat :</h6>
-                        <a class="collapse-item" href="php/compteresultat/compteresultat.php">Compte résultat</a>
-                        <a class="collapse-item" href="php/compteresultat/liste.php">liste  </a>
-                        
+                        <a class="collapse-item" href="php/rapport/rapportComptable.php">Rapport Comptable</a>
                     </div>
                 </div>
             </li>
