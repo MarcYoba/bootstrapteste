@@ -355,12 +355,12 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#compteresultat"
-                    aria-expanded="true" aria-controls="compteresultat">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#video"
+                    aria-expanded="true" aria-controls="video">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Tutoriel Video : </span>
                 </a>
-                <div id="compteresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="video" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"> Tutoriel Video :</h6>
                         <a class="collapse-item" href="php/video/video.php">Tutoriel Video</a>
