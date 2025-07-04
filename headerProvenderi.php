@@ -386,6 +386,19 @@ require_once("php/activesaision.php");
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#compteresultat"
+                    aria-expanded="true" aria-controls="compteresultat">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Tutoriel Video : </span>
+                </a>
+                <div id="compteresultat" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header"> Tutoriel Video :</h6>
+                        <a class="collapse-item" href="../video/video.php">Tutoriel Video</a>
+                    </div>
+                </div>
+            </li>
 
 
     <!-- Nav Item - Tables -->
