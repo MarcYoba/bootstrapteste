@@ -10,8 +10,8 @@ $donnees = json_decode($json,true);
 if (is_array($donnees)){
     $data = 0;
     $quantite = 0;
-            
-            $sql = "SELECT nom_produit as nom, prix_produit_vente as prix, quantite_produit as quantite FROM produit WHERE cathegorie = 'provenderie'";
+    $nom = $donnees["nom"];        
+            $sql = "SELECT nom_produit as nom, prix_produit_vente as prix, quantite_produit as quantite FROM produit WHERE nom_produit = '$nom'";
             $result = $conn->query($sql);
     
             while ($row = mysqli_fetch_assoc($result)) {
