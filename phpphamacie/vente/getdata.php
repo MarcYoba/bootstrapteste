@@ -11,11 +11,8 @@ if (is_array($donnees)){
     $data = 0;
     $quantite = 0;
     $tab = array("provende" => "provenderie");
-    
-    
-         
-            
-            $sql = "SELECT nom_produit as nom, prix_produit_vente as prix, quantite_produit as quantite FROM produitphamacie";
+    $nom = $donnees["nom"];
+            $sql = "SELECT nom_produit as nom, prix_produit_vente as prix, quantite_produit as quantite FROM produitphamacie WHERE nom_produit = '$nom'";
             $result = $conn->query($sql);
     
             while ($row = mysqli_fetch_assoc($result)) {
