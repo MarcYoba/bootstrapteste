@@ -127,7 +127,7 @@
                                         }
                                         require_once("../bdmutilple/getfournisseur.php");
                                         $commande = new Fournisseur(0);
-                                        $sql = "SELECT * FROM commandPoussin WHERE YEAR(datecommande) = '$date'";
+                                        $sql = "SELECT * FROM commandpoussin WHERE YEAR(datecommande) = '$date'";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
