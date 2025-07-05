@@ -170,7 +170,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
-                                        spéculation
+                                        
                                         <select class="form-control form-control-user" id="speculation" name="speculation">
                                             <option value="">ALL</option>
                                             <option value="CHAIRE">CHAIRE</option>
@@ -188,7 +188,43 @@
                                     
                                     <div class="col-sm-4">
                                             <button type="" name="" id="" class="btn btn-primary btn-user btn-block">
-                                            Rapport Client
+                                            Rapport Dette client
+                                            </button> 
+                                    </div>
+                                </div>
+                                <hr>
+                                <hr>
+                            </form>
+                            <form action="../pdf/rapportspeculation.php" method="post">
+                                <div class="form-group row">
+                                    <div class="col-sm-2">
+                                        semestre
+                                        <select class="form-control form-control-user" id="semestre" name="semestre">
+                                            <option value="ALL">ALL</option>
+                                            <option value="1">1er Semestre</option>
+                                            <option value="2">2ème Semestre</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        spéculation
+                                        <select class="form-control form-control-user" id="speculation" name="speculation">
+                                            <option value="ALL">ALL</option>
+                                            <option value="CHAIRE">CHAIRE</option>
+                                            <option value="PONDEUSE">PONDEUSE</option>
+                                            <option value="PORC">PORC</option>
+                                            <option value="LAPIN">LAPIN</option>
+                                            <option value="AUTRE">AUTRE</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        année
+                                        <input type="number" class="form-control form-control-user" id="anne" name="anne" required
+                                            placeholder="Entrez l'année ">
+                                    </div>
+                                    
+                                    <div class="col-sm-4">
+                                            <button type="" name="" id="" class="btn btn-primary btn-user btn-block">
+                                            Rapport spéculation Client
                                             </button> 
                                     </div>
                                 </div>
