@@ -21,13 +21,13 @@ class Facture{
         $this->idvente = 0;
     }
 
-    public function sommeVenteProduitFabriquer(){
+    public function sommeVenteProduitFabriquer($anne){
         global $conn;
         
         $sql = "SELECT ROUND(SUM(v.prix),2) AS montant
                 FROM facture f 
                 INNER JOIN vente v ON v.id = f.idvente 
-                WHERE nomproduit='MACHINE' AND YEAR(F.datefacture) = YEAR(CURRENT_DATE)";
+                WHERE nomproduit='MACHINE' AND YEAR(F.datefacture) = '$anne'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 

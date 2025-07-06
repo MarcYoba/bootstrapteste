@@ -127,14 +127,14 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col" style="color: blue;">'.$xampp.'</th>
             <th scope="col" style="color: blue;">'.$xamppAnnePasse.'</th>
         </tr>';
-        $produitFabrique=0; //$facture->sommeVenteProduitFabriquer($annee);
+        $produitFabrique= $facture->sommeVenteProduitFabriquer($annee);
         $produitFabriqueAnnePasse=0; //$facture->sommeVenteProduitFabriquerPasser($annee);
         $html .= '
         <tr>
             <th scope="col">Ventes de produits fabriqués (B)</th>
             <th scope="col">+</th>
             <th scope="col">1</th>
-            <th scope="col">0</th>
+            <th scope="col">'.$produitFabrique.'</th>
             <th scope="col">0</th>
         </tr>';
         $sommeservice= $service->sommeService($annee);
