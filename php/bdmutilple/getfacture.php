@@ -27,7 +27,7 @@ class Facture{
         $sql = "SELECT ROUND(SUM(v.prix),2) AS montant
                 FROM vente v 
                 INNER JOIN client c ON c.id = v.idclient
-                WHERE YEAR(v.datevente) = '$anne'";
+                WHERE v.idclient= 1 AND   YEAR(v.datevente) = '$anne'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -37,9 +37,9 @@ class Facture{
         global $conn;
         
         $sql = "SELECT ROUND(SUM(v.prix),2) AS montant
-                FROM facture f 
-                INNER JOIN vente v ON v.id = f.idvente 
-                WHERE nomproduit='MACHINE' AND YEAR(F.datefacture) = '$anne'";
+                FROM vente v 
+                INNER JOIN client c ON c.id = v.idclient
+                WHERE v.idclient= 1 AND   YEAR(v.datevente) = '$anne'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
