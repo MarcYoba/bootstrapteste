@@ -8,9 +8,12 @@ Class Service{
         
     }
 
-    public function sommeService() {
+    public function sommeService($anne) {
         global $conn;
-        $sql = "SELECT ROUND(SUM(Montant),2) as montant FROM terrain WHERE YEAR(datejour)= YEAR(CURRENT_DATE)";
+        if ($anne == "") {
+            $anne = date("Y");
+        }
+        $sql = "SELECT ROUND(SUM(Montant),2) as montant FROM terrain WHERE YEAR(datejour)= '$anne'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
@@ -18,6 +21,10 @@ Class Service{
 
     public function sommeServiceAnne($anne) {
         global $conn;
+        if ($anne == "") {
+            $anne = date("Y");
+        }
+        $anne = $anne - 1; // Pour l'année précédente
         $sql = "SELECT ROUND(SUM(Montant),2) as montant FROM terrain WHERE YEAR(datejour)= '$anne'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);

@@ -45,9 +45,13 @@ class Facture{
         return $row["montant"]; 
     }
 
-    public function sommeVenteProduitFabriquerPasser(){
+    public function sommeVenteProduitFabriquerPasser($anne){
         global $conn;
-        $date = date("Y");
+        if ($anne == "") {
+            $date = date("Y");
+        } else {
+            $date = $anne;
+        }
         $date = $date-1;
         $sql = "SELECT ROUND(SUM(v.prix),2) AS montant
                 FROM facture f 

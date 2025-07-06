@@ -127,8 +127,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col" style="color: blue;">'.$xampp.'</th>
             <th scope="col" style="color: blue;">'.$xamppAnnePasse.'</th>
         </tr>';
-        //'.$facture->sommeVenteProduitFabriquer().'
-        //'.$facture->sommeVenteProduitFabriquerPasser().'
+        $produitFabrique=$facture->sommeVenteProduitFabriquer($annee);
+        $produitFabriqueAnnePasse=$facture->sommeVenteProduitFabriquerPasser($annee);
         $html .= '
         <tr>
             <th scope="col">Ventes de produits fabriqués (B)</th>
@@ -137,14 +137,15 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
-        //'.$service->sommeService().'
+        $sommeservice= $service->sommeService($annee);
+        $sommeservicepasse = $service->sommeServiceAnne($annee);
         $html .= '
         <tr>
             <th scope="col">Travaux, services vendus (C)</th>
             <th scope="col">+</th>
             <th scope="col">1</th>
-            <th scope="col">0</th>
-            <th scope="col">0</th>
+            <th scope="col">'.$sommeservice.'</th>
+            <th scope="col">'.$sommeservicepasse.'</th>
         </tr>';
         //'.$comptabilite->SommeCorporelles(date("Y")).'
         $html .= '
@@ -156,13 +157,15 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">0</th>
         </tr>';
         //'.$service->sommeService() + $facture->sommeVenteProduitFabriquer().'
+        $chiffreAffaire = $sommevente + $sommeachat + $produitFabrique + $sommeservice;
+        $chiffreAffaireAnnePasse = $sommeventeAnnePasse + $sommeachatAnnePasse + $produitFabriqueAnnePasse + $sommeservicepasse;
         $html .= '
         <tr>
             <th scope="col" style="color: blue;">CHIFFRE AFFAIRES (A  B  C  D)</th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">0</th>
-            <th scope="col" style="color: blue;">0</th>
+            <th scope="col" style="color: blue;">'.$chiffreAffaire.'</th>
+            <th scope="col" style="color: blue;">'.$chiffreAffaireAnnePasse.'</th>
         </tr>';
         //'.$produit->SommeProduitStocker(date("Y")).'
         $html .= '
@@ -262,7 +265,7 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'. $sommedepensevoyage.'</th>
             <th scope="col">'.$sommedepenseExerciceVoyage.'</th>
         </tr>';
-        $sommeservice = $service->sommeService();
+        $sommeservice = $service->sommeService($annee);
         $html .= '
         <tr>
             <th scope="col">Services extérieurs </th>
