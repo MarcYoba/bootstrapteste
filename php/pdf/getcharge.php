@@ -127,8 +127,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col" style="color: blue;">'.$xampp.'</th>
             <th scope="col" style="color: blue;">'.$xamppAnnePasse.'</th>
         </tr>';
-        $produitFabrique=$facture->sommeVenteProduitFabriquer($annee);
-        $produitFabriqueAnnePasse=$facture->sommeVenteProduitFabriquerPasser($annee);
+        $produitFabrique=0; //$facture->sommeVenteProduitFabriquer($annee);
+        $produitFabriqueAnnePasse=0; //$facture->sommeVenteProduitFabriquerPasser($annee);
         $html .= '
         <tr>
             <th scope="col">Ventes de produits fabriqués (B)</th>
