@@ -127,18 +127,18 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col" style="color: blue;">'.$xampp.'</th>
             <th scope="col" style="color: blue;">'.$xamppAnnePasse.'</th>
         </tr>';
-        $produitFabrique= $facture->sommeVenteProduitFabriquer($annee);
+        $produitFabrique=0; //$facture->sommeVenteProduitFabriquer($annee);
         $produitFabriqueAnnePasse=0; //$facture->sommeVenteProduitFabriquerPasser($annee);
         $html .= '
         <tr>
             <th scope="col">Ventes de produits fabriqués (B)</th>
             <th scope="col">+</th>
             <th scope="col">1</th>
-            <th scope="col">'.$produitFabrique.'</th>
+            <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
-        $sommeservice= $service->sommeService($annee);
-        $sommeservicepasse = $service->sommeServiceAnne($annee);
+        $sommeservice=0; //$service->sommeService($annee);
+        $sommeservicepasse =0; //$service->sommeServiceAnne($annee);
         if (Empty($sommeservicepasse) || Empty($sommeservice)) {
             $sommeservicepasse = 0;
             $sommeservice = 0;
@@ -152,6 +152,7 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'.$sommeservicepasse.'</th>
         </tr>';
         //'.$comptabilite->SommeCorporelles(date("Y")).'
+        
         $html .= '
         <tr>
             <th scope="col">Produits accessoires (D)</th>
@@ -161,8 +162,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">0</th>
         </tr>';
         //'.$service->sommeService() + $facture->sommeVenteProduitFabriquer().'
-        $chiffreAffaire = $sommevente + $sommeachat + $produitFabrique ;
-        $chiffreAffaireAnnePasse = $sommeventeAnnePasse + $sommeachatAnnePasse + $produitFabriqueAnnePasse;
+        $chiffreAffaire = $sommevente  ;
+        $chiffreAffaireAnnePasse = $sommeventeAnnePasse ;
         $html .= '
         <tr>
             <th scope="col" style="color: blue;">CHIFFRE AFFAIRES (A  B  C  D)</th>
