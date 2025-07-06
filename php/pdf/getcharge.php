@@ -139,6 +139,10 @@ $html .='<br><br><br> <table style="width:100%">
         </tr>';
         $sommeservice= $service->sommeService($annee);
         $sommeservicepasse = $service->sommeServiceAnne($annee);
+        if (Empty($sommeservicepasse) || Empty($sommeservice)) {
+            $sommeservicepasse = 0;
+            $sommeservice = 0;
+        }   
         $html .= '
         <tr>
             <th scope="col">Travaux, services vendus (C)</th>
@@ -157,8 +161,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">0</th>
         </tr>';
         //'.$service->sommeService() + $facture->sommeVenteProduitFabriquer().'
-        $chiffreAffaire = $sommevente + $sommeachat + $produitFabrique + $sommeservice;
-        $chiffreAffaireAnnePasse = $sommeventeAnnePasse + $sommeachatAnnePasse + $produitFabriqueAnnePasse + $sommeservicepasse;
+        $chiffreAffaire = $sommevente + $sommeachat + $produitFabrique ;
+        $chiffreAffaireAnnePasse = $sommeventeAnnePasse + $sommeachatAnnePasse + $produitFabriqueAnnePasse;
         $html .= '
         <tr>
             <th scope="col" style="color: blue;">CHIFFRE AFFAIRES (A  B  C  D)</th>
