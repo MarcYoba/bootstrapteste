@@ -37,7 +37,7 @@ if ($semestre == 1) {
 }
 
 // Préparation de la requête SQL avec des paramètres
-$sql = "SELECT `cathegorie`, `montant` 
+$sql = "SELECT `cathegorie`, SUM(montant) AS montant 
 FROM `depensesphamacie` 
 WHERE MONTH(`datedepense`) BETWEEN ? AND ? AND YEAR(`datedepense`) = ?
 GROUP BY `cathegorie`
