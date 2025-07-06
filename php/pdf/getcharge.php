@@ -137,8 +137,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
-        $sommeservice= 0; //$service->sommeService($annee);
-        $sommeservicepasse = 0; //$service->sommeServiceAnne($annee);
+        $sommeservice= $service->sommeService($annee);
+        $sommeservicepasse = $service->sommeServiceAnne($annee);
         if (Empty($sommeservicepasse) || Empty($sommeservice)) {
             $sommeservicepasse = 0;
             $sommeservice = 0;
@@ -269,7 +269,7 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'. $sommedepensevoyage.'</th>
             <th scope="col">'.$sommedepenseExerciceVoyage.'</th>
         </tr>';
-        $sommeservice =0; //$service->sommeService($annee);
+        $sommeservice = $service->sommeService($annee);
         if (Empty($sommeservice)) {
             $sommeservice = 0;
         }
