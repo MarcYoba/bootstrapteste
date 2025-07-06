@@ -132,9 +132,18 @@ class Vente{
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
     }
-    public function SommeVenteAnnePasse(){
+    public function SommeVenteYear($anne){
         global $conn;
-        $anne = date("Y");
+        $sql = "SELECT ROUND(SUM(prix),2) as montant FROM ventephamacie WHERE YEAR(datevente)= '$anne'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+    public function SommeVenteAnnePasse($anne){
+        global $conn;
+        if ($anne == "") {
+            $anne = date("Y");
+        }
         $anne = $anne-1;
         $sql = "SELECT ROUND(SUM(prix),2) as montant FROM ventephamacie WHERE YEAR(datevente)= '$anne'";
         $result = $conn->query($sql);
