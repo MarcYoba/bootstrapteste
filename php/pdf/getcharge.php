@@ -270,6 +270,9 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'.$sommedepenseExerciceVoyage.'</th>
         </tr>';
         $sommeservice = $service->sommeService($annee);
+        if (Empty($sommeservice)) {
+            $sommeservice = 0;
+        }
         $html .= '
         <tr>
             <th scope="col">Services extérieurs </th>
