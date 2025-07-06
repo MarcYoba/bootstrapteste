@@ -88,8 +88,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">Exercice -1 </th>
         </tr>';
         
-        $sommevente = $vente->SommeVente();
-        $sommeventeAnnePasse = $vente->SommeVenteAnnePasse();
+        $sommevente = $vente->SommeVenteYear($annee);
+        $sommeventeAnnePasse = $vente->SommeVenteAnnePasse($annee);
         $html .= '
         <tr>
             <th scope="col">Ventes de marchandises (A)</th>
@@ -98,8 +98,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'.$sommevente.'</th>
             <th scope="col">'.$sommeventeAnnePasse.'</th>
         </tr>';
-        $sommeachat = $achat->SommeAchat();
-        $sommeachatAnnePasse = $achat->SommeAchatAnnePasse();
+        $sommeachat = $achat->SommeAchatAnne($annee);
+        $sommeachatAnnePasse = $achat->SommeAchatAnnePasse($annee);
         $html .= '
         <tr>
             <th scope="col">Achats de marchandises </th>
@@ -161,8 +161,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col" style="color: blue;">CHIFFRE AFFAIRES (A  B  C  D)</th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
-            <th scope="col" style="color: blue;">0</th>
-            <th scope="col" style="color: blue;">0</th>
+            <th scope="col" style="color: blue;">'.$sommevente.'</th>
+            <th scope="col" style="color: blue;">'.$sommeventeAnnePasse.'</th>
         </tr>';
     // //     //'.$produit->SommeProduitStocker(date("Y")).'
         $html .= '
@@ -232,8 +232,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
-        $sommedepenseAchat = $depenses->SommeDepenseAchat();
-        $sommedepenseExerciceAchat = $depenses->SommeDepenseExerciceAchat();
+        $sommedepenseAchat = $depenses->SommeDepenseAchat($annee);
+        $sommedepenseExerciceAchat = $depenses->SommeDepenseExerciceAchat($annee);
         $html .= '
         <tr>
             <th scope="col">Autres achats   </th>
@@ -252,8 +252,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">0</th>
             <th scope="col">0</th>
         </tr>';
-        $sommedepensevoyage = $depenses->SommeDepenseVoyages();
-        $sommedepenseExerciceVoyage = $depenses->SommeDepenseExerciceVoyages();
+        $sommedepensevoyage = $depenses->SommeDepenseVoyages($annee);
+        $sommedepenseExerciceVoyage = $depenses->SommeDepenseExerciceVoyages($annee);
         $html .= '
         <tr>
             <th scope="col">Transports</th>
@@ -262,17 +262,18 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'. $sommedepensevoyage.'</th>
             <th scope="col">'.$sommedepenseExerciceVoyage.'</th>
         </tr>';
-        $sommeservice = $service->sommeService();
+        $sommeservice = $service->sommeServiceAnne($annee);
+        $sommeserviceExercice = $service->sommeServiceAnnepasse($annee);
         $html .= '
         <tr>
             <th scope="col">Services extérieurs </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
             <th scope="col">'.$sommeservice.'</th>
-            <th scope="col">0</th>
+            <th scope="col">'.$sommeserviceExercice.'</th>
         </tr>';
-        $sommeinpot = $depenses->SommeDepenseImpot();
-        $sommeinpotExercice = $depenses->SommeDepenseExerciceImpot();
+        $sommeinpot = $depenses->SommeDepenseImpot($annee);
+        $sommeinpotExercice = $depenses->SommeDepenseExerciceImpot($annee);
         $html .= '
         <tr>
             <th scope="col">Impôts et taxes </th>
@@ -281,8 +282,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'.$sommeinpot.'</th>
             <th scope="col">'.$sommeinpotExercice.'</th>
         </tr>';
-        $sommeautrecharge = $depenses->SommeDepenseAutreCharge();
-        $sommeautrechargeExercice = $depenses->SommeDepenseExerciceAutreCharge();
+        $sommeautrecharge = $depenses->SommeDepenseAutreCharge($annee);
+        $sommeautrechargeExercice = $depenses->SommeDepenseExerciceAutreCharge($annee);
         $html .= '
         <tr>
             <th scope="col">Autres charges  </th>
@@ -301,8 +302,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col" style="color: blue;">'.$xc.'</th>
             <th scope="col" style="color: blue;">'.$xcExercice.'</th>
         </tr>';
-        $sommepersonnel = $depenses->SommeDepensePersonnel();
-        $sommepersonnelexercice = $depenses->SommeDepenseExercicePersonnel();
+        $sommepersonnel = $depenses->SommeDepensePersonnel($annee);
+        $sommepersonnelexercice = $depenses->SommeDepenseExercicePersonnel($annee);
         $html .= '
         <tr>
             <th scope="col">Charges de personnel  </th>

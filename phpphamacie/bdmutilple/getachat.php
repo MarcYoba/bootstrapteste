@@ -51,9 +51,11 @@ class Achat{
         return $row["montant"]; 
     }
 
-    public function SommeAchatAnnePasse(){
+    public function SommeAchatAnnePasse($anne){
         global $conn;
-        $anne = date("Y");
+        if(Empty($anne)){
+            $anne = date("Y");
+        }
         $anne = $anne-1;
         $sql = "SELECT ROUND(SUM(montant),2) as montant FROM achatphamacie WHERE YEAR(dateachat)= '$anne'";
         $result = $conn->query($sql);
