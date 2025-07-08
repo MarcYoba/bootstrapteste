@@ -775,7 +775,7 @@ class Vente{
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)){
             //$id = $row["id"];
-            array_push($this->data,$row);    
+            $this->data=$row;   
         }
         return $this->data;
     }
