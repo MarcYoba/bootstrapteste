@@ -31,7 +31,7 @@ $id =  $_GET["id"];
 
 $facture = $vente->getFactureVente($id);
 $inclient=$client->getClientByIdVente($id);
-
+$donnees_vente = $vente->getVenteDyId($id);
 $tabqrcod  =$facture;
 if (is_array($facture)) {
     $tabqrcod = array_pop($tabqrcod);
@@ -77,7 +77,7 @@ $html = '
 $html .='<br><br><br> <table style="border-collapse: separate; border-spacing: 0px;">
         <thead>';
         
-        $html .=' <tr><th  align="left"">CABINET VETERINAIRE DE SOA <br> '.$date."<br> Client : ".$inclient["firstname"]."<br> Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' 
+        $html .=' <tr><th  align="left"">CABINET VETERINAIRE DE SOA <br> '.$donnees_vente["datevente"]."<br> Client : ".$inclient["firstname"]."<br> Tel: ".$inclient["telephone"]."<br> Formule"." Vente N= ".$id.' 
         <br>  NRCCM:RC/YAE2022/B/2852 
         </th>
         </tr>

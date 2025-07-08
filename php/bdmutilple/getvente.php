@@ -824,6 +824,17 @@ class Vente{
         }
         return $this->data; 
     }
+    public function getVenteDyId($idvente) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT * FROM vente WHERE id= '$idvente'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data;
+    }
 }
 
 
