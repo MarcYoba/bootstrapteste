@@ -768,6 +768,17 @@ class Vente{
             }
         }
     }
+    public function getVenteDyId($idvente) {
+        global $conn;
+        $this->data = [];
+        $sql = "SELECT * FROM ventephamacie WHERE id= '$idvente'";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            //$id = $row["id"];
+            array_push($this->data,$row);    
+        }
+        return $this->data;
+    }
 }
 
 
