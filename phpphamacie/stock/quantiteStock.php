@@ -51,7 +51,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Valeur en Stock</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Quantité en Stock</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
@@ -59,11 +59,11 @@
                         <div class="card-header py-3">
                         <div class="form-group row">
                                 <div class="col-sm-6">
-                                <h6 class="m-0 font-weight-bold text-success">Valeur en Stock</h6>
+                                <h6 class="m-0 font-weight-bold text-success">Quantité en Stock</h6>
                                 </div>
                                 <div class="col-sm-2">
                                     <i class="fa fa-home"></i>
-                                    <a href="../../homepahamacie.php" class="btn btn-success">Home</a> 
+                                    <a href="../../home.php" class="btn btn-success">Home</a> 
                                 </div>
                                 
                                 <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
@@ -95,12 +95,44 @@
                                         } else {
                                             $date = date("Y");
                                         }
-                                        $sql = "SELECT ROUND(SUM(prixAcaht * quantite), 2) as total,Nomproduit  FROM achatphamacie WHERE YEAR(dateachat) = '$date' GROUP BY Nomproduit";
+                                        $date_debut = $date . "-01-02";
+                                        $sql = "SELECT nom_produit,id  FROM produitphamacie ";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
+                                            $id = $row["id"];
+                                            $sql2 = "SELECT quantite FROM historiquestockphamacie WHERE datet = '$date_debut' AND idproduit = '$id'";
+                                            $result2 = $conn->query($sql2);
+                                            $historique = mysqli_fetch_assoc($result2);
+
+                                            if (empty($historique)) {
+                                                $historique = 0;
+                                            } else {
+                                                $historique = $historique["quantite"];
+                                            }
+
+                                            $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM achatphamacie WHERE  idproduit  = '$id' AND YEAR(dateachat) = '$date'";
+                                            $result3 = $conn->query($sql3);
+                                            $achat = mysqli_fetch_assoc($result3);
+
+                                            if (empty($achat)) {
+                                                $achat = 0;
+                                            } else {
+                                                $achat = $achat["total"];
+                                            }
+
+                                            $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM facturephamacie WHERE  idproduit  = '$id' AND YEAR(datefacture) = '$date'";
+                                            $result3 = $conn->query($sql3);
+                                            $facture = mysqli_fetch_assoc($result3);
+
+                                            if (empty($facture)) {
+                                                $facture = 0;
+                                            } else {
+                                                $facture = $facture["total"];
+                                            }
+
                                             echo '<tr>';
-                                            echo '<td>'.$row["Nomproduit"].'</td>';
-                                            echo '<td>'.$row["total"].'</td>';
+                                            echo '<td>'.$row["nom_produit"].'</td>';
+                                            echo '<td>'.$historique + $achat - $facture.'</td>';
                                             echo '<td>'.date("Y-m-d").'</td>';
                                             echo '</tr>';
                                             //var_dump($row);

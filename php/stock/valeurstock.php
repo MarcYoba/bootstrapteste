@@ -95,7 +95,7 @@
                                         } else {
                                             $date = date("Y");
                                         }
-                                        $sql = "SELECT SUM(prixAcaht * quantite) as total,Nomproduit  FROM achat WHERE YEAR(dateachat) = '$date' GROUP BY Nomproduit";
+                                        $sql = "SELECT ROUND(SUM(prixAcaht * quantite),2) as total,Nomproduit  FROM achat WHERE YEAR(dateachat) = '$date' GROUP BY Nomproduit";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
