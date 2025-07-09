@@ -119,6 +119,8 @@ require_once("php/activesaision.php");
                         <a class="collapse-item" href="../achat/liste.php?date=<?php echo date("Y"); ?>">Liste des achats </a>
                         <a class="collapse-item" href="../stock/recaptliste.php?date=<?php echo date("Y"); ?>">Récapitulatif </a>
                         <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire </a>
+                        <a class="collapse-item" href="../stock/valeurstock.php?date=<?php echo date("Y") ?>">Valeurs stocks</a>
+
                 
             </div>
         </div>
