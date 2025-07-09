@@ -374,7 +374,9 @@ require_once("php/activesaision.php");
                         <h6 class="collapse-header">État des résultats:</h6>
                         <a class="collapse-item" href="../comptabilite/etatresultat.php">marge bénéficiaire</a> 
                         <a class="collapse-item" href="../comptabilite/chiffreaffaire.php">Chiffre d'affaires</a>
-                        <a class="collapse-item" href="../comptabilite/ProduitStocks.php">Production et Stocks</a>  
+                        <a class="collapse-item" href="../comptabilite/ProduitStocks.php">Production et Stocks</a>
+                        <a class="collapse-item" href="../stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire</a>
+                        <a class="collapse-item" href="../stock/valeurstock.php?date=<?php echo date("Y") ?>">Valeurs stocks</a>  
                     </div>
                 </div>
             </li>
