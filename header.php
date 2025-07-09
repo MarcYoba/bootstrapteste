@@ -112,6 +112,7 @@
                 <a class="collapse-item" href="php/stock/recaptliste.php?date=<?php echo date("Y") ?>">Récapitulatif</a> 
                 <a class="collapse-item" href="php/stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire</a>
                 <a class="collapse-item" href="php/stock/valeurstock.php?date=<?php echo date("Y") ?>">Valeurs stocks</a>
+                <a class="collapse-item" href="php/stock/quantiteStock.php?date=<?php echo date("Y") ?>">Quantite en stock</a>
             </div>
         </div>
     </li>
