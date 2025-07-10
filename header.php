@@ -113,6 +113,7 @@
                 <a class="collapse-item" href="php/stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire</a>
                 <a class="collapse-item" href="php/stock/valeurstock.php?date=<?php echo date("Y") ?>">Valeurs stocks</a>
                 <a class="collapse-item" href="php/stock/quantiteStock.php?date=<?php echo date("Y") ?>">Quantite en stock</a>
+                <a class="collapse-item" href="php/stock/prixachat.php?date=<?php echo date("Y") ?>">Prix d'achat</a>
             </div>
         </div>
     </li>
