@@ -65,8 +65,21 @@
                                     <i class="fa fa-home"></i>
                                     <a href="../../homepahamacie.php" class="btn btn-success">Home</a> 
                                 </div>
-                                
-                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                                <div class="col-sm-2">
+                                    <label for="annee">récherché par Année</label>
+                                    <select class="form-control" id="annee" onchange="reload()">
+                                        <?php 
+                                            $currentYear = date("Y");
+                                            $currentYear += 10;
+                                            for ($i = 2022; $i <= $currentYear; $i++) {
+                                                echo "<option value='$i' ".($i == $currentYear ? "selected" : "").">$i</option>";
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <span id="quantitetotale" onclick="QuantiteTotal()" class="btn btn-warning"> Calculer valeur Totale</span>
+                                </div>  
                             </div>
                         </div>
                         <div class="card-body">
@@ -76,15 +89,17 @@
                                        
                                         <tr>
                                             <th>Nom produit</th>
-                                            <th>Montant</th>
-                                            <th>Date d'aujourd'hui</th>
+                                            <th>Quantité en stock</th>
+                                            <th>Prix d'achat global</th>
+                                            <th>Valeur en stock</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Nom produit</th>
-                                            <th>Montant</th>
-                                            <th>Date d'aujourd'hui</th>
+                                            <th>Quantité en stock</th>
+                                            <th>Prix d'achat global</th>
+                                            <th>Valeur en stock</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -95,19 +110,71 @@
                                         } else {
                                             $date = date("Y");
                                         }
-                                        $sql = "SELECT ROUND(SUM(prixAcaht * quantite), 2) as total,Nomproduit  FROM achatphamacie WHERE YEAR(dateachat) = '$date' GROUP BY Nomproduit";
+                                        $total = 0;
+                                        $date_debut = $date . "-01-02";
+                                        $sql = "SELECT nom_produit,id  FROM produitphamacie ";
                                         $result = $conn->query($sql);
+                                        
                                         while ($row = mysqli_fetch_assoc($result)){
+                                            $id = $row["id"];
+                                            $sql2 = "SELECT quantite FROM historiquestockphamacie WHERE datet = '$date_debut' AND idproduit = '$id'";
+                                            $result2 = $conn->query($sql2);
+                                            $historique = mysqli_fetch_assoc($result2);
+
+                                            if (empty($historique)) {
+                                                $historique = 0;
+                                            } else {
+                                                $historique = $historique["quantite"];
+                                            }
+
+                                            $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM achatphamacie WHERE  idproduit  = '$id' AND YEAR(dateachat) = '$date'";
+                                            $result3 = $conn->query($sql3);
+                                            $achat = mysqli_fetch_assoc($result3);
+
+                                            if (empty($achat)) {
+                                                $achat = 0;
+                                            } else {
+                                                $achat = $achat["total"];
+                                            }
+
+                                            $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM facturephamacie WHERE  idproduit  = '$id' AND YEAR(datefacture) = '$date'";
+                                            $result3 = $conn->query($sql3);
+                                            $facture = mysqli_fetch_assoc($result3);
+
+                                            if (empty($facture)) {
+                                                $facture = 0;
+                                            } else {
+                                                $facture = $facture["total"];
+                                            }
+
+                                            $sql4 = "SELECT ROUND(SUM(quantite),2) as quantite,ROUND(SUM(montant),2) as montant,Nomproduit  FROM achatphamacie WHERE YEAR(dateachat) = '$date' AND idproduit = '$id'";
+                                            $result4 = $conn->query($sql4);
+                                            $prix_achat = mysqli_fetch_assoc($result4);
+
+                                            if (empty($prix_achat)) {
+                                                $prix_achat = 0;
+                                            } else {
+                                                if ($prix_achat["quantite"] == 0) {
+                                                    $prix_achat["quantite"]  = 1;
+                                                } 
+                                                if ($prix_achat["montant"] == 0) {
+                                                    $prix_achat["montant"] = 0;
+                                                } 
+                                                $prix_achat = $prix_achat["montant"]/ $prix_achat["quantite"];
+                                            }
+
                                             echo '<tr>';
-                                            echo '<td>'.$row["Nomproduit"].'</td>';
-                                            echo '<td>'.$row["total"].'</td>';
-                                            echo '<td>'.date("Y-m-d").'</td>';
+                                            echo '<td>'.$row["nom_produit"].'</td>';
+                                            echo '<td style="color: '.($historique + $achat - $facture <= 0 ? 'red' : 'green').'">'.$historique + $achat - $facture.'</td>';
+                                            echo '<td>'.number_format($prix_achat, 2).'</td>';
+                                            echo '<td>'.number_format((($historique + $achat - $facture) * $prix_achat), 2).'</td>';
                                             echo '</tr>';
-                                            //var_dump($row);
+                                            $total += (($historique + $achat - $facture) * $prix_achat);
                                         }
                                     ?>
                                     </tbody>
                                 </table>
+                                <span style="font-weight: bold;" class="btn btn-primary" id="total" > Valeur Stock : <?php echo number_format($total,2) ?></span>
                             </div>
                         </div>
                     </div>
@@ -122,7 +189,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
+                        <span>Production &copy; <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>
@@ -179,7 +246,11 @@
     <script>
         function reload() {
             var annee = document.getElementById("annee").value;
-            window.location.href = "liste.php?date=" + annee;
+            window.location.href = "valeurstock.php?date=" + annee;
+        }
+        function QuantiteTotal(){
+            var total = document.getElementById("total").innerText;
+            document.getElementById("quantitetotale").innerHTML = '<span style="font-weight: bold;" class="btn btn-primary" id="total" > ' + total + '</span>';
         }
     </script>
 
