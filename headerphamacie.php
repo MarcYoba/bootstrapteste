@@ -107,6 +107,10 @@
                 <a class="collapse-item" href="phpphamacie/achat/liste.php">Stock Achat </a>
                 <a class="collapse-item" href="phpphamacie/stock/recaptliste.php?date=<?php echo date("m"); ?>">Récapitulatif</a>
                 <a class="collapse-item" href="phpphamacie/stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire</a>
+                <a class="collapse-item" href="phpphamacie/stock/valeurstock.php?date=<?php echo date("Y") ?>">Valeurs stocks</a>
+                <a class="collapse-item" href="phpphamacie/stock/quantiteStock.php?date=<?php echo date("Y") ?>">Quantite en stock</a>
+                <a class="collapse-item" href="phpphamacie/stock/prixachat.php?date=<?php echo date("Y") ?>">Prix d'achat</a> 
+
             </div>
         </div>
     </li>

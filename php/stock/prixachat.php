@@ -51,7 +51,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Achat</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Prix d'achat par produits</h1>
                     <p class="mb-4">
 
                     <!-- DataTales Example -->
@@ -59,69 +59,26 @@
                         <div class="card-header py-3">
                         <div class="form-group row">
                                 <div class="col-sm-6">
-                                <h6 class="m-0 font-weight-bold text-primary">Liste des Achats</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Prix d'achat par produits</h6>
                                 </div>
                                 <div class="col-sm-2">
                                     <i class="fa fa-home"></i>
                                     <a href="../../home.php" class="btn btn-primary">Home</a> 
                                 </div>
                                 <div class="col-sm-2">
-                                    <i class="fa fa-plus"></i> 
-                                    <a href="teste.php" class="btn btn-success"> Ajouter</a>
-                                    
+                                    <label for="annee">Année récherché</label>
+                                    <select class="form-control" id="annee" onchange="reload()">
+                                        <?php 
+                                            $currentYear = date("Y");
+                                            $currentYear += 10;
+                                            for ($i = 2022; $i <= $currentYear; $i++) {
+                                                echo "<option value='$i' ".($i == $currentYear ? "selected" : "").">$i</option>";
+                                            }
+                                        ?>
+                                    </select>
                                 </div>
                                 <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div>
-
-                            
-                            <form  action="../pdf/getvaleurachete.php" method="post" class="user row" >
-                                <div class="row">
-                                    <p class="col-md-2" >
-                                        <input type="date" class="form-control form-control-user"
-                                        name="datedette" id="datedette" placeholder="quantité">
-                                    </p>
-                                    <p class="col-md-2" >
-                                        <input type="date" class="form-control form-control-user"
-                                        name="datedett2" id="datedett2" placeholder="quantité">
-                                    </p>
-                                    <p class="col-md-3" >
-                                    <input type="text" class="form-control form-control-user" id="produitname"
-                                        name="produitname" placeholder="Nom produit" onkeyup="recherproduit()" required> 
-                                    <select id="produit"  name="produit"   class="form-control form-select" size="4" multiple aria-label="multiple select">   <!--  -->
-                                        <option value="ALL" selected>ALL</option>             
-                                            <?php 
-                                                global $conn;
-                                                $sql = "SELECT  nom_produit,cathegorie FROM produit ORDER BY nom_produit ASC";
-                                                $result = $conn->query($sql);
-                                                while ($row = mysqli_fetch_assoc($result)){               
-                                                    echo "<option value='".$row["nom_produit"]."'>".$row["nom_produit"]."</option>";
-                                                }
-                                            ?>  
-                                    </select>
-                                    </p>
-
-                                    <p class="col-md-2" >
-                                        <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
-                                    </p>
-                                    <p class="col-md-3" >
-                                        <a href="../bond/bon.php" class="btn btn-info btn-user">
-                                            Bon de Commande
-                                    </a><br>
-                                    <label for="annee">Année récherché</label>
-                                    <select class="form-control" id="annee" name="annee" onchange="reload()">
-                                        <?php
-                                        $currentYear = date('Y');
-                                        $currentYear += 10;
-                                        echo "<option >Recherche a</option>";
-                                        for ($year = 2022; $year <= $currentYear; $year++) {
-                                            echo "<option value=\"$year\">$year</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                    </p> 
-                                     
-                                </div>
-                            </form>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -129,24 +86,18 @@
                                     <thead>
                                        
                                         <tr>
-                                            <th>id</th>
-                                            <th>Nom</th>
-                                            <th>Quantité</th>
-                                            <th>P.Total</th>
-                                            <th>Date</th>
-                                            <th>Opération</th>
-                                            <th>Bon</th>
+                                            <th>Nom produit</th>
+                                            <th>Quantité Total achatée</th>
+                                            <th>Prix Total achaté </th>
+                                            <th>Prix global d'achat</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>id</th>
-                                            <th>Nom</th>
-                                            <th>Quantité</th>
-                                            <th>P.Total</th>
-                                            <th>Date</th>
-                                            <th>Opération</th>
-                                            <th>Bon</th>
+                                            <th>Nom produit</th>
+                                            <th>Quantité Total achatée</th>
+                                            <th>Prix Total achaté </th>
+                                            <th>Prix global d'achat</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -157,29 +108,14 @@
                                         } else {
                                             $date = date("Y");
                                         }
-                                        $sql = "SELECT * FROM achat WHERE YEAR(dateachat) = '$date'";
+                                        $sql = "SELECT ROUND(SUM(quantite),2) as quantite,ROUND(SUM(montant),2) as montant,Nomproduit  FROM achat WHERE YEAR(dateachat) = '$date' GROUP BY Nomproduit";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
                                             echo '<tr>';
-                                            echo '<td>'.$row["id"].'</td>';
                                             echo '<td>'.$row["Nomproduit"].'</td>';
-                                            //echo '<td>'.$row["prixAcaht"].'</td>';
                                             echo '<td>'.$row["quantite"].'</td>';
                                             echo '<td>'.$row["montant"].'</td>';
-                                            echo '<td>'.$row["dateachat"].'</td>';
-                                            if (($_SESSION['roles'] == "Lecture") || ($_SESSION['roles'] == "Ecriture")) {
-                                                echo '<td></td>';
-                                                echo "<td><a href='../bond/liste.php?date=" .$row["dateachat"]. "' class='btn btn-primary' id='modification'><i class='far fa-file-image'></i></a>";
-                                            }else if(($_SESSION['roles'] == "semiadmin")){
-                                                echo "<td><a href='modifie.php?id=" .$row["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
-                                                echo "<td><a href='../bond/liste.php?date=" .$row["dateachat"]. "' class='btn btn-primary' id='modification'><i class='far fa-file-image'></i></a>";
-
-                                            }else{
-                                                echo "<td><a href='modifie.php?id=" .$row["id"]. "' class='btn btn-primary' id='modification'><i class='fas fa-pencil-alt '></i></a>";
-                                                echo "<a href='edite.php?delete=" .$row["id"]. "' class='btn btn-danger' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cet Achat ? si vous suprimer cet achat elle sera supprimer du stock\");' id='suppresioner'><i class='fas fa-trash-alt'></i></a></td>";
-                                                echo "<td><a href='../bond/liste.php?date=" .$row["dateachat"]. "' class='btn btn-primary' id='modification'><i class='far fa-file-image'></i></a>";
-                                            }
-                                            
+                                            echo '<td>'.number_format($row["montant"] / $row["quantite"], 2).'</td>';
                                             echo '</tr>';
                                             //var_dump($row);
                                         }
@@ -257,7 +193,7 @@
     <script>
         function reload() {
             var annee = document.getElementById("annee").value;
-            window.location.href = "liste.php?date=" + annee;
+            window.location.href = "prixachat.php?date=" + annee;
         }
     </script>
 

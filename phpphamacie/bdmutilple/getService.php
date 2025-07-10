@@ -31,6 +31,20 @@
             }
             return $row["montant"]; 
         }
+        public function sommeServiceAnnepasse($anne) {
+            global $conn;
+            if ($anne == null) {
+                $anne = date("Y");
+            }
+            $anne = $anne - 1;
+            $sql = "SELECT ROUND(SUM(Montant),2) as montant FROM terrain WHERE YEAR(datejour)= '$anne'";
+            $result = $conn->query($sql);
+            $row = mysqli_fetch_assoc($result);
+            if (empty($row["montant"])) {
+                $row["montant"] = 0;
+            }
+            return $row["montant"]; 
+        }
     }
 
 ?>
