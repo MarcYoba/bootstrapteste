@@ -77,6 +77,9 @@
                                         ?>
                                     </select>
                                 </div>
+                                <div class="col-sm-2">
+                                    <span id="quantitetotale" onclick="QuantiteTotal()" class="btn btn-success"> Calculer Quantité Totale</span>
+                                </div>
                                 <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div>
                         </div>
@@ -155,13 +158,11 @@
                                             echo '</tr>';
                                             $total += $historique + $achat - $facture;
                                         }
-                                        echo '<tr>';
-                                        echo '<td><strong>Total</strong></td>';
-                                        echo '<td colspan="5" align="center">'.$total.'</td>';
-                                        echo '</tr>';
+                                        
                                     ?>
                                     </tbody>
                                 </table>
+                                <span style="font-weight: bold;" class="btn btn-primary" id="total" > Quantite Total : <?php echo $total ?></span>
                             </div>
                         </div>
                     </div>
@@ -234,6 +235,10 @@
         function reload() {
             var annee = document.getElementById("annee").value;
             window.location.href = "quantiteStock.php?date=" + annee;
+        }
+        function QuantiteTotal(){
+            var total = document.getElementById("total").innerText;
+            document.getElementById("quantitetotale").innerHTML = '<span style="font-weight: bold;" class="btn btn-primary" id="total" > ' + total + '</span>';
         }
     </script>
 
