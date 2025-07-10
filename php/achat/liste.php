@@ -110,9 +110,10 @@
                                     <label for="annee">Année récherché</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
                                         <?php
-                                        $currentYear = 2024;
+                                        $currentYear = date('Y');
+                                        $currentYear += 10;
                                         echo "<option >Recherche a</option>";
-                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                        for ($year = 2022; $year <= $currentYear; $year++) {
                                             echo "<option value=\"$year\">$year</option>";
                                         }
                                         ?>
