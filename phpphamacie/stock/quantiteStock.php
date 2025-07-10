@@ -66,7 +66,7 @@
                                     <a href="../../home.php" class="btn btn-success">Home</a> 
                                 </div>
                                 <div class="col-sm-2">
-                                    <label for="annee">Année récherché</label>
+                                    <label for="annee">récherché par Année </label>
                                     <select class="form-control" id="annee" onchange="reload()">
                                         <?php 
                                             $currentYear = date("Y");
@@ -110,6 +110,7 @@
                                         } else {
                                             $date = date("Y");
                                         }
+                                        $total = 0;
                                         $date_debut = $date . "-01-02";
                                         $sql = "SELECT nom_produit,id  FROM produitphamacie ";
                                         $result = $conn->query($sql);
@@ -152,8 +153,12 @@
                                             echo '<td>'.$facture.'</td>';
                                             echo '<td style="color: '.($historique + $achat - $facture <= 0 ? 'red' : 'green').'">'.$historique + $achat - $facture.'</td>';
                                             echo '</tr>';
-                                            //var_dump($row);
+                                            $total += $historique + $achat - $facture;
                                         }
+                                        echo '<tr>';
+                                        echo '<td><strong>Total</strong></td>';
+                                        echo '<td colspan="5" align="center">'.$total.'</td>';
+                                        echo '</tr>';
                                     ?>
                                     </tbody>
                                 </table>
