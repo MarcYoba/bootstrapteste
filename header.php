@@ -108,7 +108,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Opérations des Stocks</h6>
                 <a class="collapse-item" href="php/stock/sctockVente.php?date=<?php echo date("Y") ?>">Historique</a>
-                <a class="collapse-item" href="php/achat/liste.php?date=<?php echo date("Y") ?>">List des Achats </a>
                 <a class="collapse-item" href="php/stock/recaptliste.php?date=<?php echo date("Y") ?>">Récapitulatif</a> 
                 <a class="collapse-item" href="php/stock/editeStock.php" id="ajouterStock">Stock Initiale / Inventaire</a>
                 <a class="collapse-item" href="php/stock/valeurstock.php?date=<?php echo date("Y") ?>">Valeurs stocks</a>
