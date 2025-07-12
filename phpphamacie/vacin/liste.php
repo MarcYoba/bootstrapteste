@@ -88,6 +88,25 @@ require_once("../bdmutilple/getclient.php");
                                         ?>
                                     </select>
                                 </div>
+                                <div class="col-md-6">
+                                    <form  action="../pdf/getvaccin.php" method="post" class="user row" >
+                                        <div class="row">
+                                            <p class="col-md-3" >
+                                                <input type="date" class="form-control form-control-user"
+                                                name="datedette" id="datedette" placeholder="quantité">
+                                            </p>
+                                            <p class="col-md-3" >
+                                                <input type="date" class="form-control form-control-user"
+                                                name="datedett2" id="datedett2" placeholder="quantité">
+                                            </p>
+
+                                            <p class="col-md-2" >
+                                                <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
+                                            </p>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
