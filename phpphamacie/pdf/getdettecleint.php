@@ -147,7 +147,7 @@ $html .='<br><br><br> <table style="width:100%">
                         $html .= '<td style="color: #FF3300;">client doit comme argent dans cet intervale de temps</td>';
                         $html .= '<td style="color: #FF3300;">'.$somdette-$sommversement.'</td>';
                     } else {
-                        $html .= '<td style="color: #66CC00;">Provenderie doit comme argent dans cet intervale de temps</td>';
+                        $html .= '<td style="color: #66CC00;">Le cabinet doit de l\'argent dans cet intervalle de temps</td>';
                         $html .= '<td style="color: #66CC00;">'.$somdette-$sommversement.'</td>';
                     }
                     
