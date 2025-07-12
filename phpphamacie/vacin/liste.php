@@ -80,9 +80,10 @@ require_once("../bdmutilple/getclient.php");
                                 <label for="annee">Année recherche :</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
                                         <?php
-                                        $currentYear = 2024;
+                                        $currentYear = date("Y");
+                                        $currentYear +=10;
                                         echo "<option >Recherche a</option>";
-                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                        for ($year = 2022; $year <= $currentYear; $year++) {
                                             echo "<option value=\"$year\">$year</option>";
                                         }
                                         ?>
@@ -204,7 +205,7 @@ require_once("../bdmutilple/getclient.php");
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website 2024</span>
+                        <span>Production &copy;</span>
                     </div>
                 </div>
             </footer>

@@ -79,13 +79,33 @@ require_once("../bdmutilple/getclient.php");
                                     <label for="annee">Année recherche :</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
                                         <?php
-                                        $currentYear = 2024;
+                                        $currentYear = date("Y");
+                                        $currentYear +=10;
                                         echo "<option >Recherche a</option>";
-                                        for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
+                                        for ($year = 2022; $year <= $currentYear; $year++) {
                                             echo "<option value=\"$year\">$year</option>";
                                         }
                                         ?>
                                     </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <form  action="../pdf/getconsultation.php" method="post" class="user row" >
+                                        <div class="row">
+                                            <p class="col-md-3" >
+                                                <input type="date" class="form-control form-control-user"
+                                                name="datedette" id="datedette" placeholder="quantité">
+                                            </p>
+                                            <p class="col-md-3" >
+                                                <input type="date" class="form-control form-control-user"
+                                                name="datedett2" id="datedett2" placeholder="quantité">
+                                            </p>
+
+                                            <p class="col-md-2" >
+                                                <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
+                                            </p>
+                                            
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +186,7 @@ require_once("../bdmutilple/getclient.php");
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
+                        <span>Production &copy;  <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>
