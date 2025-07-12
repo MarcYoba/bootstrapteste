@@ -55,7 +55,7 @@ if (isset($_POST['datedette'])) {
     $date = date("Y-m-d");
     $tabledette = $dette->getAllDette();
     $somdette = $dette->getAllSomme();
-    $sommversement = $versement->TotalVersement();
+    $sommversement = $versement->AllVersementYear();
 }
 
 
@@ -135,10 +135,9 @@ $html .='<br><br><br> <table style="width:100%">
             }
                 $html .= '<tr>';
                     $html .= '<td>Total</td>';
-                    $html .= '<td>versement : '.$sommversement.'</td>';
-                    $html .= '<td>'.$somdette.'</td>';
-                    
-                    
+                    $html .= '<td> Total General versement : '.$sommversement.'</td>';
+                    $html .= '<td> Total General dette : '.$somdette.'</td>';
+
                 $html .= '</tr>';
 
                 $html .= '<tr>';
