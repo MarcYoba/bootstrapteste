@@ -66,7 +66,7 @@
                                     <a href="../../home.php" class="btn btn-primary">Home</a> 
                                 </div>
                                 <div class="col-sm-2">
-                                    <label for="annee">Année récherché</label>
+                                    <label for="annee">récherché par Année</label>
                                     <select class="form-control" id="annee" onchange="reload()">
                                         <?php 
                                             $currentYear = date("Y");
@@ -77,7 +77,9 @@
                                         ?>
                                     </select>
                                 </div>
-                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                                <div class="col-sm-2">
+                                    <span id="quantitetotale" onclick="QuantiteTotal()" class="btn btn-warning"> Calculer Quantité Totale</span>
+                                </div>  
                             </div>
                         </div>
                         <div class="card-body">
@@ -110,6 +112,7 @@
                                         } else {
                                             $date = date("Y");
                                         }
+                                        $total = 0;
                                         $date_debut = $date . "-01-02";
                                         $sql = "SELECT nom_produit,id  FROM produit ";
                                         $result = $conn->query($sql);
@@ -153,11 +156,14 @@
                                             echo '<td>'.$facture.'</td>';
                                             echo '<td style="color: '.($historique + $achat - $facture <= 0 ? 'red' : 'green').'">'.$historique + $achat - $facture.'</td>';
                                             echo '</tr>';
-                                            //var_dump($row);
+                                            $total += $historique + $achat - $facture;
                                         }
+
+                                        
                                     ?>
                                     </tbody>
                                 </table>
+                                <span style="font-weight: bold;" class="btn btn-primary" id="total" > Quantite Total : <?php echo $total ?></span>
                             </div>
                         </div>
                     </div>
@@ -230,6 +236,10 @@
         function reload() {
             var annee = document.getElementById("annee").value;
             window.location.href = "quantiteStock.php?date=" + annee;
+        }
+        function QuantiteTotal(){
+            var total = document.getElementById("total").innerText;
+            document.getElementById("quantitetotale").innerHTML = '<span style="font-weight: bold;" class="btn btn-primary" id="total" > ' + total + '</span>';
         }
     </script>
 

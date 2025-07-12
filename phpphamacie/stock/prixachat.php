@@ -77,7 +77,9 @@
                                         ?>
                                     </select>
                                 </div>
-                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                                <div class="col-sm-2">
+                                    <span id="prixtotale" onclick="QuantiteTotal()" class="btn btn-success"> Calculer prix Totale</span>
+                                </div>  
                             </div>
                         </div>
                         <div class="card-body">
@@ -108,6 +110,7 @@
                                         } else {
                                             $date = date("Y");
                                         }
+                                        $total = 0;
                                         $sql = "SELECT ROUND(SUM(quantite),2) as quantite,ROUND(SUM(montant),2) as montant,Nomproduit  FROM achatphamacie WHERE YEAR(dateachat) = '$date' GROUP BY Nomproduit";
                                         $result = $conn->query($sql);
                                         while ($row = mysqli_fetch_assoc($result)){
@@ -117,11 +120,12 @@
                                             echo '<td>'.$row["montant"].'</td>';
                                             echo '<td>'.number_format($row["montant"] / $row["quantite"], 2).'</td>';
                                             echo '</tr>';
-                                            //var_dump($row);
+                                            $total += number_format($row["montant"] / $row["quantite"], 2);
                                         }
                                     ?>
                                     </tbody>
                                 </table>
+                                <span style="font-weight: bold;" class="btn btn-primary" id="total" > Prix Total : <?php echo $total ?></span>
                             </div>
                         </div>
                     </div>
@@ -136,7 +140,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>vestion test &copy; Your Website <?php echo date("Y-m-d") ?></span>
+                        <span> Production &copy;   <?php echo date("Y-m-d") ?></span>
                     </div>
                 </div>
             </footer>
