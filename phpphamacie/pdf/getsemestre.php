@@ -11,6 +11,7 @@ require_once("../bdmutilple/getcaise.php");
 require_once("../bdmutilple/getdette.php");
 require_once("../bdmutilple/getfacture.php");
 require_once("../bdmutilple/getdepense.php");
+require_once("../bdmutilple/getpoussin.php");
 
 require '../../vendor/autoload.php';
 ini_set('memory_limit', '256M');
@@ -23,6 +24,7 @@ $formule = 1;
 $achat = new Achat(0);
 $dette = new Dette();
 $versement = new Versement(1);
+$poussin = new Poussin();
 
 //var_dump($date);
 $anne = $_POST["anne"];
@@ -216,6 +218,48 @@ $html .='<br><br><br> <table style="width:100%">
         <th>Montant</th>
     </tr>';
     $historique = $versement->VersementSemesttre($anne);
+        foreach ($historique as $linefatcture) {
+            $html .= '<tr>';
+            foreach ($linefatcture as $key => $cell) {
+                $html .= '<th>' .$cell.'</th>';
+            }
+            $html .= '</tr>';
+        }
+    $html .= '
+    </tbody>
+</table>';
+
+$html .='<br><br><br> <table style="width:100%">
+    <thead>';
+    $html .=' <tr><th colspan="2" align="center">Montant Versement Poussin : '.$anne.'</th></tr>
+    </thead>
+    <tbody>';
+    $html .= '<tr>
+        <th>Numero de semestre</th>
+        <th>Montant</th>
+    </tr>';
+    $historique = $poussin->PoussinSemesttre($anne);
+        foreach ($historique as $linefatcture) {
+            $html .= '<tr>';
+            foreach ($linefatcture as $key => $cell) {
+                $html .= '<th>' .$cell.'</th>';
+            }
+            $html .= '</tr>';
+        }
+    $html .= '
+    </tbody>
+</table>';
+
+$html .='<br><br><br> <table style="width:100%">
+    <thead>';
+    $html .=' <tr><th colspan="2" align="center">Quantite Versement Poussin : '.$anne.'</th></tr>
+    </thead>
+    <tbody>';
+    $html .= '<tr>
+        <th>Numero de semestre</th>
+        <th>Montant</th>
+    </tr>';
+    $historique = $poussin->QuantiteSemesttre($anne);
         foreach ($historique as $linefatcture) {
             $html .= '<tr>';
             foreach ($linefatcture as $key => $cell) {

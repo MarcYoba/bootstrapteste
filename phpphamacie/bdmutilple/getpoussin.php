@@ -136,5 +136,42 @@ class Poussin{
         $row = mysqli_fetch_assoc($result);
         return $row; 
     }
+    public function PoussinSemesttre($anne)
+    {
+        global $conn;
+        $data =[];
+        $sql = "SELECT 
+        CEILING(MONTH(dateCommande) / 6) AS semestre,
+        ROUND(SUM(montant),2) AS montant
+        FROM 
+            poussin
+        WHERE YEAR(dateCommande) = $anne
+        GROUP BY 
+            semestre";
+
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
+    public function QuantiteSemesttre($anne)
+    {
+        global $conn;
+        $data =[];
+        $sql = "SELECT 
+        CEILING(MONTH(dateCommande) / 6) AS semestre,
+        ROUND(SUM(quantite),2) AS quantite
+        FROM 
+            poussin
+        WHERE YEAR(dateCommande) = $anne
+        GROUP BY 
+            semestre";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_assoc($result)){
+            array_push($data,$row);
+        }
+        return $data; 
+    }
 }
 ?>
