@@ -59,39 +59,53 @@ require_once("../bdmutilple/getclient.php");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <div class="form-group row">
-                                <div class="col-sm-6">
-                                <h6 class="m-0 font-weight-bold text-primary">Tables des Commandes</h6>     
-                                </div>
-                                <div class="col-sm-2">
-                                <i class="fa fa-home"></i>
-                                    <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
-                                </div>
-                                <div class="col-sm-2">
-                                    <i class="fa fa-list"></i> 
-                                    <a href="volaille.php" class="btn btn-success"> Liste</a>             
-                                </div>
-                                <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
+                            <div class="form-group row">
+                                    <div class="col-sm-6">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tables des Commandes</h6>     
+                                    </div>
+                                    <div class="col-sm-2">
+                                    <i class="fa fa-home"></i>
+                                        <a href="../../homepahamacie.php" class="btn btn-primary">Home</a> 
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <i class="fa fa-list"></i> 
+                                        <a href="volaille.php" class="btn btn-success"> Liste</a>             
+                                    </div>
+                                    <!--<div class="btn btn-warning"><i class="fa fa-arrow-left"></i> Retour</div>  -->  
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    
+                                    <form  action="../pdf/getpoussin.php" method="post" class="user row" >
+                                        <div class="row">
+                                            <p class="col-md-3" >
+                                                <input type="date" class="form-control form-control-user"
+                                                name="datedette" id="datedette" placeholder="quantité">
+                                            </p>
+                                            <p class="col-md-3" >
+                                                <input type="date" class="form-control form-control-user"
+                                                name="datedett2" id="datedett2" placeholder="quantité">
+                                            </p>
+
+                                            <p class="col-md-2" >
+                                                <input type="submit" class="btn btn-warning btn-user"  value="Afficher" >  
+                                            </p>
+                                            
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="col-md-6">
-                                
+                                <div class="col-md-3">
                                     <label for="annee">Année recherche :</label>
                                     <select class="form-control" id="annee" name="annee" onchange="reload()">
-                                        <?php
+                                    <?php
                                         $currentYear = 2024;
                                         echo "<option >Recherche a</option>";
                                         for ($year = $currentYear; $year <= $currentYear + 10; $year++) {
-                                            echo "<option value=\"$year\">$year</option>";
+                                             echo "<option value=\"$year\">$year</option>";
                                         }
-                                        ?>
+                                    ?>
                                     </select>
                                 </div>
                             </div>
-                            
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
