@@ -36,8 +36,8 @@ class Versement{
     public function AllVersementYear(){
         global $conn;
         $data = [];
-
-        $sql = "SELECT * FROM versementphamacie WHERE YEAR(dateversement)= YEAR(CURRENT_DATE)";
+        $anne = date("Y");
+        $sql = "SELECT * FROM versementphamacie WHERE YEAR(dateversement)= '$anne'";
         $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result)){
             array_push($data,$row);
