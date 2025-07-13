@@ -270,17 +270,15 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'. $sommedepensevoyage.'</th>
             <th scope="col">'.$sommedepenseExerciceVoyage.'</th>
         </tr>';
-        $sommeservice = $service->sommeService($annee);
-        if (Empty($sommeservice)) {
-            $sommeservice = 0;
-        }
+        $sommeservice = $depenses->SommeServiceExterieux($annee);
+        $sommeserviceExercice = $depenses->SommeServiceExterieuxAnne($annee);
         $html .= '
         <tr>
             <th scope="col">Services extérieurs </th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
             <th scope="col">'.$sommeservice.'</th>
-            <th scope="col">0</th>
+            <th scope="col">'.$sommeserviceExercice.'</th>
         </tr>';
         $sommeinpot = $depenses->SommeDepenseImpotAnne($annee);
         $sommeinpotExercice = $depenses->SommeDepenseExerciceImpot($annee);
