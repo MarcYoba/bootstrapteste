@@ -167,6 +167,7 @@ class Depense{
 
     public function SommeServiceExterieuxAnne($anne){
         global $conn;
+        $anne = $anne - 1;
         $sql = "SELECT SUM(montant) as montant FROM depenses WHERE YEAR(datedepense) = '$anne' AND cathegorie='service exterieur'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
