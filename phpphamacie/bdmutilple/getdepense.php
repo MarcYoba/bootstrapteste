@@ -261,5 +261,20 @@ class Depense{
         $row = mysqli_fetch_assoc($result);
         return $row["montant"]; 
     }
+    public function SommeServiceExterieux($anne){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM depensesphamacie WHERE YEAR(datedepense) = '$anne' AND cathegorie='service exterieur'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
+
+    public function SommeServiceExterieuxAnne($anne){
+        global $conn;
+        $sql = "SELECT SUM(montant) as montant FROM depensesphamacie WHERE YEAR(datedepense) = '$anne' AND cathegorie='service exterieur'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row["montant"]; 
+    }
 }
 ?>
