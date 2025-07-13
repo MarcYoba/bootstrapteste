@@ -262,8 +262,8 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'. $sommedepensevoyage.'</th>
             <th scope="col">'.$sommedepenseExerciceVoyage.'</th>
         </tr>';
-        $sommeservice = $service->sommeServiceAnne($annee);
-        $sommeserviceExercice = $service->sommeServiceAnnepasse($annee);
+        $sommeservice = $depenses->SommeServiceExterieux($annee);
+        $sommeserviceExercice = $depenses->SommeServiceExterieuxAnne($annee);
         $html .= '
         <tr>
             <th scope="col">Services extérieurs </th>
