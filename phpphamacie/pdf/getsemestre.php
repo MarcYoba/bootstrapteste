@@ -12,6 +12,7 @@ require_once("../bdmutilple/getdette.php");
 require_once("../bdmutilple/getfacture.php");
 require_once("../bdmutilple/getdepense.php");
 require_once("../bdmutilple/getpoussin.php");
+require_once("../bdmutilple/getvaccin.php");
 
 require '../../vendor/autoload.php';
 ini_set('memory_limit', '256M');
@@ -25,6 +26,7 @@ $achat = new Achat(0);
 $dette = new Dette();
 $versement = new Versement(1);
 $poussin = new Poussin();
+$vaccin = new Vaccin();
 
 //var_dump($date);
 $anne = $_POST["anne"];
@@ -271,6 +273,69 @@ $html .='<br><br><br> <table style="width:100%">
     </tbody>
 </table>';
 
+$html .='<br><br><br> <table style="width:100%">
+    <thead>';
+    $html .=' <tr><th colspan="2" align="center">Consultations Generales : '.$anne.'</th></tr>
+    </thead>
+    <tbody>';
+    $html .= '<tr>
+        <th>Numero de semestre</th>
+        <th>Montant</th>
+    </tr>';
+    $historique = $vaccin->ConsultationSemesttre($anne);
+        foreach ($historique as $linefatcture) {
+            $html .= '<tr>';
+            foreach ($linefatcture as $key => $cell) {
+                $html .= '<th>' .$cell.'</th>';
+            }
+            $html .= '</tr>';
+        }
+    $html .= '
+    </tbody>
+</table>';
+
+$html .='<br><br><br> <table style="width:100%">
+    <thead>';
+    $html .=' <tr><th colspan="2" align="center">Somme Vaccin : '.$anne.'</th></tr>
+    </thead>
+    <tbody>';
+    $html .= '<tr>
+        <th>Numero de semestre</th>
+        <th>Montant</th>
+    </tr>';
+    $historique = $vaccin->VaccinSemesttre($anne);
+        foreach ($historique as $linefatcture) {
+            $html .= '<tr>';
+            foreach ($linefatcture as $key => $cell) {
+                $html .= '<th>' .$cell.'</th>';
+            }
+            $html .= '</tr>';
+        }
+    $html .= '
+    </tbody>
+</table>';
+
+$html .='<br><br><br> <table style="width:100%">
+    <thead>';
+    $html .=' <tr><th colspan="2" align="center">Quantite Vaccin: '.$anne.'</th></tr>
+    </thead>
+    <tbody>';
+    $html .= '<tr>
+        <th>Numero de semestre</th>
+        <th>Montant</th>
+    </tr>';
+    $historique = $vaccin->QuantiteVaccinSemesttre($anne);
+        foreach ($historique as $linefatcture) {
+            $html .= '<tr>';
+            foreach ($linefatcture as $key => $cell) {
+                $html .= '<th>' .$cell.'</th>';
+            }
+            $html .= '</tr>';
+        }
+    $html .= '
+    </tbody>
+</table>';
+
 
 $html .= '
 </body>
@@ -280,6 +345,6 @@ $html .= '
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-$dompdf->stream("mon_fichier.pdf", array("Attachment" => 0));
+$dompdf->stream("rapport_semestre.pdf", array("Attachment" => 0));
 
 ?>

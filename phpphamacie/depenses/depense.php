@@ -58,7 +58,7 @@
                                     <div class="col-sm-6">
                                         <select id="type" name="type" class="form-control form-select" required>
                                             <option value="Autres achats"> Autres achats ( Tami, marteau, ralonge, etc.)</option>
-                                            <option value="service exterieur"> charges générales ( Loyer, eau, electricite, etc.)</option>
+                                            <option value="service exterieur"> Service Extérieur ( Loyer, eau, électricité, etc.)</option>
                                             <option value="impots et taxes">  impôts et taxes </option>
                                             <option value="charge personnel">  charges de personnel(Salaires)  </option>
                                             <option value="autre charge"> (Heures supplémentaires, primes,Motivation,Miting etc.) </option>

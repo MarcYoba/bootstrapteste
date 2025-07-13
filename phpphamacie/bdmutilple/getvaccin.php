@@ -243,5 +243,81 @@
             }
             return $data;
         }
+        public function ConsultationSemesttre($anne)
+        {
+            global $conn;
+            $data =[];
+            $sql = "SELECT 
+            CEILING(MONTH(dateArrive) / 6) AS semestre,
+            ROUND(SUM(montant),2) AS montant
+            FROM 
+                consultation
+            WHERE YEAR(dateArrive) = $anne
+            GROUP BY 
+                semestre";
+
+            $result = $conn->query($sql);
+            while ($row = mysqli_fetch_assoc($result)){
+                array_push($data,$row);
+            }
+            return $data; 
+        }
+        public function QuantiteConsultationSemesttre($anne)
+        {
+            global $conn;
+            $data =[];
+            $sql = "SELECT 
+            CEILING(MONTH(dateArrive) / 6) AS semestre,
+            COUNT(montant) AS montant
+            FROM 
+                consultation
+            WHERE YEAR(dateArrive) = $anne
+            GROUP BY 
+                semestre";
+
+            $result = $conn->query($sql);
+            while ($row = mysqli_fetch_assoc($result)){
+                array_push($data,$row);
+            }
+            return $data; 
+        }
+        public function VaccinSemesttre($anne)
+        {
+            global $conn;
+            $data =[];
+            $sql = "SELECT 
+            CEILING(MONTH(datevacin) / 6) AS semestre,
+            ROUND(SUM(montant),2) AS montant
+            FROM 
+                animale
+            WHERE YEAR(datevacin) = $anne
+            GROUP BY 
+                semestre";
+
+            $result = $conn->query($sql);
+            while ($row = mysqli_fetch_assoc($result)){
+                array_push($data,$row);
+            }
+            return $data; 
+        }
+        public function QuantiteVaccinSemesttre($anne)
+        {
+            global $conn;
+            $data =[];
+            $sql = "SELECT 
+            CEILING(MONTH(datevacin) / 6) AS semestre,
+            COUNT(montant) AS montant
+            FROM 
+                animale
+            WHERE YEAR(datevacin) = $anne
+            GROUP BY 
+                semestre";
+
+            $result = $conn->query($sql);
+            while ($row = mysqli_fetch_assoc($result)){
+                array_push($data,$row);
+            }
+            return $data; 
+        }
     }
 ?>
