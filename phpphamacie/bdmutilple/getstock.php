@@ -275,6 +275,212 @@ class Stock{
         return $this->data;
     }
 
+    public function getQuantiteEnStock($annee) {
+        global $conn;
+
+        $total = 0;
+            $date_debut = $annee . "-01-02";
+            $sql = "SELECT nom_produit,id  FROM produitphamacie ";
+            $result = $conn->query($sql);
+                while ($row = mysqli_fetch_assoc($result)){
+                    $id = $row["id"];
+                    $sql2 = "SELECT quantite FROM historiquestockphamacie WHERE datet = '$date_debut' AND idproduit = '$id'";
+                    $result2 = $conn->query($sql2);
+                    $historique = mysqli_fetch_assoc($result2);
+
+                        if (empty($historique)) {
+                            $historique = 0;
+                        } else {
+                            $historique = $historique["quantite"];
+                        }
+
+                        $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM achatphamacie WHERE  idproduit  = '$id' AND YEAR(dateachat) = '$annee'";
+                        $result3 = $conn->query($sql3);
+                        $achat = mysqli_fetch_assoc($result3);
+
+                        if (empty($achat)) {
+                            $achat = 0;
+                        } else {
+                            $achat = $achat["total"];
+                        }
+
+                        $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM facturephamacie WHERE  idproduit  = '$id' AND YEAR(datefacture) = '$annee'";
+                        $result3 = $conn->query($sql3);
+                        $facture = mysqli_fetch_assoc($result3);
+
+                        if (empty($facture)) {
+                            $facture = 0;
+                        } else {
+                            $facture = $facture["total"];
+                        }
+                        $total += $historique + $achat - $facture;
+            }
+
+            return $total;
+        
+    }
+
+    public function getQuantiteEnStockAnnePasse($annee) {
+        global $conn;
+
+        $total = 0;
+        $annee -=1;
+            $date_debut = $annee . "-01-02";
+            $sql = "SELECT nom_produit,id  FROM produitphamacie ";
+            $result = $conn->query($sql);
+                while ($row = mysqli_fetch_assoc($result)){
+                    $id = $row["id"];
+                    $sql2 = "SELECT quantite FROM historiquestockphamacie WHERE datet = '$date_debut' AND idproduit = '$id'";
+                    $result2 = $conn->query($sql2);
+                    $historique = mysqli_fetch_assoc($result2);
+
+                        if (empty($historique)) {
+                            $historique = 0;
+                        } else {
+                            $historique = $historique["quantite"];
+                        }
+
+                        $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM achatphamacie WHERE  idproduit  = '$id' AND YEAR(dateachat) = '$annee'";
+                        $result3 = $conn->query($sql3);
+                        $achat = mysqli_fetch_assoc($result3);
+
+                        if (empty($achat)) {
+                            $achat = 0;
+                        } else {
+                            $achat = $achat["total"];
+                        }
+
+                        $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM facturephamacie WHERE  idproduit  = '$id' AND YEAR(datefacture) = '$annee'";
+                        $result3 = $conn->query($sql3);
+                        $facture = mysqli_fetch_assoc($result3);
+
+                        if (empty($facture)) {
+                            $facture = 0;
+                        } else {
+                            $facture = $facture["total"];
+                        }
+                        $total += $historique + $achat - $facture;
+            }
+        return $total;
+    }
+
+    public function getValeurEnStock($anne){
+        global $conn;
+        $total = 0;
+        $date_debut = $anne . "-01-02";
+        $sql = "SELECT nom_produit,id  FROM produitphamacie ";
+        $result = $conn->query($sql);
+
+        while ($row = mysqli_fetch_assoc($result)){
+            $id = $row["id"];
+            $sql2 = "SELECT quantite FROM historiquestockphamacie WHERE datet = '$date_debut' AND idproduit = '$id'";
+            $result2 = $conn->query($sql2);
+            $historique = mysqli_fetch_assoc($result2);
+
+                if (empty($historique)) {
+                    $historique = 0;
+                } else {
+                    $historique = $historique["quantite"];
+                }
+            $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM achatphamacie WHERE  idproduit  = '$id' AND YEAR(dateachat) = '$anne'";
+            $result3 = $conn->query($sql3);
+            $achat = mysqli_fetch_assoc($result3);
+
+            if (empty($achat)) {
+                $achat = 0;
+            } else {
+                $achat = $achat["total"];
+            }
+            $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM facturephamacie WHERE  idproduit  = '$id' AND YEAR(datefacture) = '$anne'";
+            $result3 = $conn->query($sql3);
+            $facture = mysqli_fetch_assoc($result3);
+            if (empty($facture)) {
+                $facture = 0;
+            } else {
+                $facture = $facture["total"];
+            }
+
+            $sql4 = "SELECT ROUND(SUM(quantite),2) as quantite,ROUND(SUM(montant),2) as montant,Nomproduit  FROM achatphamacie WHERE YEAR(dateachat) = '$anne' AND idproduit = '$id'";
+            $result4 = $conn->query($sql4);
+            $prix_achat = mysqli_fetch_assoc($result4);
+
+            if (empty($prix_achat)) {
+                $prix_achat = 0;
+            } else {
+                if ($prix_achat["quantite"] == 0) {
+                    $prix_achat["quantite"]  = 1;
+                } 
+                if ($prix_achat["montant"] == 0) {
+                    $prix_achat["montant"] = 0;
+                } 
+            $prix_achat = $prix_achat["montant"]/ $prix_achat["quantite"];
+            }
+
+            $total += (($historique + $achat - $facture) * $prix_achat);
+        }
+
+        return $total;
+    }
+
+    public function getValeurEnStockAnnePasse($anne){
+        global $conn;
+        $total = 0;
+        $anne -=1;
+        $date_debut = $anne . "-01-02";
+        $sql = "SELECT nom_produit,id  FROM produitphamacie ";
+        $result = $conn->query($sql);
+
+        while ($row = mysqli_fetch_assoc($result)){
+            $id = $row["id"];
+            $sql2 = "SELECT quantite FROM historiquestockphamacie WHERE datet = '$date_debut' AND idproduit = '$id'";
+            $result2 = $conn->query($sql2);
+            $historique = mysqli_fetch_assoc($result2);
+
+                if (empty($historique)) {
+                    $historique = 0;
+                } else {
+                    $historique = $historique["quantite"];
+                }
+            $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM achatphamacie WHERE  idproduit  = '$id' AND YEAR(dateachat) = '$anne'";
+            $result3 = $conn->query($sql3);
+            $achat = mysqli_fetch_assoc($result3);
+
+            if (empty($achat)) {
+                $achat = 0;
+            } else {
+                $achat = $achat["total"];
+            }
+            $sql3 = "SELECT ROUND(SUM(quantite), 2) as total FROM facturephamacie WHERE  idproduit  = '$id' AND YEAR(datefacture) = '$anne'";
+            $result3 = $conn->query($sql3);
+            $facture = mysqli_fetch_assoc($result3);
+            if (empty($facture)) {
+                $facture = 0;
+            } else {
+                $facture = $facture["total"];
+            }
+
+            $sql4 = "SELECT ROUND(SUM(quantite),2) as quantite,ROUND(SUM(montant),2) as montant,Nomproduit  FROM achatphamacie WHERE YEAR(dateachat) = '$anne' AND idproduit = '$id'";
+            $result4 = $conn->query($sql4);
+            $prix_achat = mysqli_fetch_assoc($result4);
+
+            if (empty($prix_achat)) {
+                $prix_achat = 0;
+            } else {
+                if ($prix_achat["quantite"] == 0) {
+                    $prix_achat["quantite"]  = 1;
+                } 
+                if ($prix_achat["montant"] == 0) {
+                    $prix_achat["montant"] = 0;
+                } 
+            $prix_achat = $prix_achat["montant"]/ $prix_achat["quantite"];
+            }
+
+            $total += (($historique + $achat - $facture) * $prix_achat);
+        }
+
+        return $total;
+    }
+
 }
 
 
