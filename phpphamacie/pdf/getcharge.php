@@ -9,7 +9,7 @@ require_once("../bdmutilple/getachat.php");
 // require_once("../bdmutilple/getdette.php");
 // require_once("../bdmutilple/getfacture.php");
 require_once("../bdmutilple/getService.php");
-// require_once("../bdmutilple/getstock.php");
+require_once("../bdmutilple/getstock.php");
 require_once("../bdmutilple/comptabilite.php");
 // require_once("../bdmutilple/getproduit.php");
 
@@ -35,7 +35,7 @@ $achat = new Achat(0);
 // $dette = new Dette();
 $versement = new Versement(1);
 $service = new Service();
-// $stok = new Stock(0,0,0,0);
+$stok = new Stock(0,0,0,0);
 $comptabilite = new Comptabilite();
 // $produit = new Produit();
 //var_dump($date);
@@ -108,14 +108,15 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'.$sommeachat.'</th>
             <th scope="col">'.$sommeachatAnnePasse.'</th>
         </tr>';
-    // //     //$stok->VariationStok()
+        $Quantiteenstock = $stok->getValeurEnStock($annee);
+        $QuantiteenstockAnnePasse = $stok->getValeurEnStockAnnePasse($annee);
         $html .= '
         <tr>
             <th scope="col">Variation de stocks de marchandises</th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">0</th>
-            <th scope="col">0</th>
+            <th scope="col">'.number_format($Quantiteenstock, 2).'</th>
+            <th scope="col">'.number_format($QuantiteenstockAnnePasse, 2).'</th>
         </tr>';
         $xampp = $sommevente - $sommeachat;
         $xamppAnnePasse = $sommeventeAnnePasse - $sommeachatAnnePasse;
@@ -500,6 +501,6 @@ $html .= '
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-$dompdf->stream("mon_fichier.pdf", array("Attachment" => 0));
+$dompdf->stream("compte_de_resultat_cabinet.pdf", array("Attachment" => 0));
 
 ?>

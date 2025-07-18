@@ -108,14 +108,15 @@ $html .='<br><br><br> <table style="width:100%">
             <th scope="col">'.$sommeachat.'</th>
             <th scope="col">'.$sommeachatAnnePasse.'</th>
         </tr>';
-        //$stok->VariationStok()
+            $quantiteenstock = $stok->getValeurStock($annee);
+            $quantiteenstockAnnePasse = $stok->getValeurStockAnnePasse($annee);
         $html .= '
         <tr>
             <th scope="col">Variation de stocks de marchandises</th>
             <th scope="col">-/+</th>
             <th scope="col">-1</th>
-            <th scope="col">0</th>
-            <th scope="col">0</th>
+            <th scope="col">'.number_format($quantiteenstock, 2).'</th>
+            <th scope="col">'.number_format($quantiteenstockAnnePasse, 2).'</th>
         </tr>';
         $xampp = $sommevente - $sommeachat;
         $xamppAnnePasse = $sommeventeAnnePasse - $sommeachatAnnePasse;
@@ -304,7 +305,7 @@ $html .='<br><br><br> <table style="width:100%">
         $xcExercice = $sommeautrechargeExercice + $sommeinpotExercice + $sommeservice + $sommedepenseExerciceVoyage + $sommedepenseExerciceAchat;
         $html .= '
         <tr>
-            <th scope="col">VALEUR AJOUTEE (XB +RA+RB) + (somme TE à RJ)  </th>
+            <th scope="col" style="color: blue;">VALEUR AJOUTEE (XB +RA+RB) + (somme TE à RJ)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
             <th scope="col" style="color: blue;">'.$xc.'</th>
@@ -324,7 +325,7 @@ $html .='<br><br><br> <table style="width:100%">
         $xdExercice = $xcExercice - $sommepersonnelexercice;
         $html .= '
         <tr>
-            <th scope="col">EXCEDENT BRUT EXPLOITATION (XC+RK)   </th>
+            <th scope="col" style="color: blue;">EXCEDENT BRUT EXPLOITATION (XC+RK)   </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
             <th scope="col" style="color: blue;">'.$xd.'</th>
@@ -352,7 +353,7 @@ $html .='<br><br><br> <table style="width:100%">
         $xeExercice = $xdExercice - $comptabilite->SommeExerciceAmortise();
         $html .= '
         <tr>
-            <th scope="col">RESULTAT EXPLOITATION (XD+TJ+ RL)  </th>
+            <th scope="col" style="color: blue;">RESULTAT EXPLOITATION (XD+TJ+ RL)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
             <th scope="col" style="color: blue;">'.$xe.'</th>
@@ -405,7 +406,7 @@ $html .='<br><br><br> <table style="width:100%">
         
         $html .= '
         <tr>
-            <th scope="col">RESULTAT FINANCIER (somme TK à RN)  </th>
+            <th scope="col" style="color: blue;">RESULTAT FINANCIER (somme TK à RN)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
             <th scope="col" style="color: blue;">0</th>
@@ -415,7 +416,7 @@ $html .='<br><br><br> <table style="width:100%">
         $xgExercice = $xeExercice;
         $html .= '
         <tr>
-            <th scope="col">RESULTAT DES ACTIVITES ORDINAIRES (XE+XF)  </th>
+            <th scope="col" style="color: blue;">RESULTAT DES ACTIVITES ORDINAIRES (XE+XF)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
             <th scope="col" style="color: blue;">'.$xg.'</th>
@@ -461,7 +462,7 @@ $html .='<br><br><br> <table style="width:100%">
         $xhExercice = $xgExercice*(26.5/100);
         $html .= '
         <tr>
-            <th scope="col">RESULTAT HORS ACTIVITES ORDINAIRES (somme TN à RP)  </th>
+            <th scope="col" style="color: blue;">RESULTAT HORS ACTIVITES ORDINAIRES (somme TN à RP)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
             <th scope="col" style="color: blue;">'.$xh.'</th>
@@ -489,7 +490,7 @@ $html .='<br><br><br> <table style="width:100%">
         $xiExercice = $xgExercice - $xhExercice;
         $html .= '
         <tr>
-            <th scope="col">RESULTAT NET (XG+XH+RQ+RS)  </th>
+            <th scope="col" style="color: blue;">RESULTAT NET (XG+XH+RQ+RS)  </th>
             <th scope="col" style="color: blue;">-/+</th>
             <th scope="col" style="color: blue;">-1</th>
             <th scope="col" style="color: blue;">'.$xi.'</th>
@@ -508,6 +509,6 @@ $html .= '
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-$dompdf->stream("mon_fichier.pdf", array("Attachment" => 0));
+$dompdf->stream("compte_de_resultat.pdf", array("Attachment" => 0));
 
 ?>
